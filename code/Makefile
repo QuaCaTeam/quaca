@@ -1,5 +1,5 @@
 #
-# Makefile for testing
+# Makefile 
 #
 
 # options
@@ -10,7 +10,7 @@ LDFLAGS = -L/usr/lib -lgsl -lgslcblas -lm -lflint-arb -lflint -lmpfr # libraries
 # file
 SRC = tester.c
 OBJ = ${SRC:.c=.o}
-PROG = tester
+PROG = ${SRC:.c=}
 
 all: $(PROG) clean
 

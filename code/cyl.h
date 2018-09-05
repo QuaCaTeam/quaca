@@ -11,12 +11,9 @@
 
 // predefine functions
 const double complex hankel1(double complex n, double complex x);
-const double complex hankalt0(double complex x);
-const double complex hankalt1(double complex x);
 const double complex hankaltn(int n, double complex x);
-const double complex bessalt0(double complex x);
-const double complex bessalt1(double complex x);
 const double complex bessaltn(int n, double complex x);
+const double complex ac_besselj_diff(int n, double complex x);
 
 const double complex epsilon(double complex omega, double omega_p, double gamma);
 const double complex kappa(double complex omega, double c, double h);
@@ -27,16 +24,12 @@ const double complex bmm(int n, double complex omega, double omega_p, double gam
 const double complex bnn(int n, double complex omega, double omega_p, double gamma, double c, double h, double R);
 const double complex bmn(int n, double complex omega, double omega_p, double gamma, double c, double h, double R);
 const double complex cdenom(int n, double complex omega, double omega_p, double gamma, double c, double h, double R);
-const double complex rMNn(int n, double complex omega, double omega_p, double gamma, double c, double h, double R);
 const double complex refCoeffn(int sig, int n, double complex omega, double omega_p, double gamma, double c, double h, double R);
 
-const double complex rNN0(double complex omega, double omega_p, double gamma, double c, double h, double R);
-const double complex rNN1(double complex omega, double omega_p, double gamma, double c, double h, double R);
-const double complex rMM1(double complex omega, double omega_p, double gamma, double c, double h, double R);
-const double complex rMN1(double complex omega, double omega_p, double gamma, double c, double h, double R);
 const double complex rNN0SF(double complex omega, double omega_p, double gamma, double c, double x);
 const double complex rNN1SF(double complex omega, double omega_p, double gamma, double c, double x);
 
+void greenfull(int N, double complex omega, double omega_p, double gamma, double c, double h, double R, double eps0, double rho, double complex g[2][2]);
 void greencent(double complex omega, double omega_p, double gamma, double c, double h, double R, double eps0, double complex g[2][2]);
 void greencentNF(double complex omega, double omega_p, double gamma, double c, double h, double R, double eps0, double complex g[2][2]);
 
@@ -48,28 +41,8 @@ const double complex hankel1(double complex n, double complex x) {
     return result;
 };
 
-const double complex hankalt0(double complex x) {
-    double complex result = -hankel1(1,x)/hankel1(0,x);
-    return result;
-};
-
-const double complex hankalt1(double complex x) {
-    double complex result = 1.0/2.0*(hankel1(0,x)-hankel1(2,x))/hankel1(1,x);
-    return result;
-};
-
 const double complex hankaltn(int n, double complex x) {
     double complex result = (n/x*hankel1(n,x) - hankel1(n+1,x))/hankel1(n,x);
-    return result;
-};
-
-const double complex bessalt0(double complex x) {
-    double complex result = -ac_besselj(1,x)/ac_besselj(0,x);
-    return result;
-};
-
-const double complex bessalt1(double complex x) {
-    double complex result = 1.0/2.0*(ac_besselj(0,x)-ac_besselj(2,x))/ac_besselj(1,x);
     return result;
 };
 
@@ -78,6 +51,10 @@ const double complex bessaltn(int n, double complex x) {
     return result;
 };
 
+const double complex ac_besselj_diff(int n, double complex x) {
+    double complex result = n/x*ac_besselj(n,x) - ac_besselj(n+1,x);
+    return result;
+};
 
 /*
  * physical helping functions
@@ -155,26 +132,6 @@ const double complex refCoeffn(int sig, int n, double complex omega, double omeg
  * specific reflection coefficients
  */
 
-const double complex rNN0(double complex omega, double omega_p, double gamma, double c, double h, double R) {
-    double complex result = -(hankel1(0,R*kappa(omega,c,h))*(hankalt0(R*kappa(omega,c,h))*bessalt0(R*kappa(omega,c,h))*eta(omega,omega_p,gamma,c,h)*eta(omega,omega_p,gamma,c,h) - hankalt0(R*eta(omega,omega_p,gamma,c,h))*(hankalt0(R*kappa(omega,c,h)) + bessalt0(R*kappa(omega,c,h))*epsilon(omega,omega_p,gamma))*eta(omega,omega_p,gamma,c,h)*kappa(omega,c,h) + hankalt0(R*eta(omega,omega_p,gamma,c,h))*hankalt0(R*eta(omega,omega_p,gamma,c,h))*epsilon(omega,omega_p,gamma)*kappa(omega,c,h)*kappa(omega,c,h)))/(ac_besselj(0,R*kappa(omega,c,h))*(bessalt0(R*kappa(omega,c,h))*bessalt0(R*kappa(omega,c,h))*eta(omega,omega_p,gamma,c,h)*eta(omega,omega_p,gamma,c,h) - hankalt0(R*eta(omega,omega_p,gamma,c,h))*bessalt0(R*kappa(omega,c,h))*(1 + epsilon(omega,omega_p,gamma))*eta(omega,omega_p,gamma,c,h)*kappa(omega,c,h) + hankalt0(R*eta(omega,omega_p,gamma,c,h))*hankalt0(R*eta(omega,omega_p,gamma,c,h))*epsilon(omega,omega_p,gamma)*kappa(omega,c,h)*kappa(omega,c,h)));
-    return result;
-};
-
-const double complex rNN1(double complex omega, double omega_p, double gamma, double c, double h, double R) {
-    double complex result = -(hankel1(1,R*kappa(omega,c,h))*(hankalt1(R*kappa(omega,c,h))*bessalt1(R*kappa(omega,c,h))*eta(omega,omega_p,gamma,c,h)*eta(omega,omega_p,gamma,c,h) - (h*h*omega*omega*(-1 + epsilon(omega,omega_p,gamma))*(-1 + epsilon(omega,omega_p,gamma)))/(c*c*R*R*eta(omega,omega_p,gamma,c,h)*eta(omega,omega_p,gamma,c,h)*kappa(omega,c,h)*kappa(omega,c,h)) - hankalt1(R*eta(omega,omega_p,gamma,c,h))*(hankalt1(R*kappa(omega,c,h)) + bessalt1(R*kappa(omega,c,h))*epsilon(omega,omega_p,gamma))*eta(omega,omega_p,gamma,c,h)*kappa(omega,c,h) + hankalt1(R*eta(omega,omega_p,gamma,c,h))*hankalt1(R*eta(omega,omega_p,gamma,c,h))*epsilon(omega,omega_p,gamma)*kappa(omega,c,h)*kappa(omega,c,h)))/(ac_besselj(1,R*kappa(omega,c,h))*(bessalt1(R*kappa(omega,c,h))*bessalt1(R*kappa(omega,c,h))*eta(omega,omega_p,gamma,c,h)*eta(omega,omega_p,gamma,c,h) - (h*h*omega*omega*(-1 + epsilon(omega,omega_p,gamma))*(-1 + epsilon(omega,omega_p,gamma)))/(c*c*R*R*eta(omega,omega_p,gamma,c,h)*eta(omega,omega_p,gamma,c,h)*kappa(omega,c,h)*kappa(omega,c,h)) - hankalt1(R*eta(omega,omega_p,gamma,c,h))*bessalt1(R*kappa(omega,c,h))*(1 + epsilon(omega,omega_p,gamma))*eta(omega,omega_p,gamma,c,h)*kappa(omega,c,h) + hankalt1(R*eta(omega,omega_p,gamma,c,h))*hankalt1(R*eta(omega,omega_p,gamma,c,h))*epsilon(omega,omega_p,gamma)*kappa(omega,c,h)*kappa(omega,c,h)));
-    return result;
-};
-
-const double complex rMM1(double complex omega, double omega_p, double gamma, double c, double h, double R) {
-    double complex result = -(hankel1(1,R*kappa(omega,c,h))*(hankalt1(R*kappa(omega,c,h))*bessalt1(R*kappa(omega,c,h))*eta(omega,omega_p,gamma,c,h)*eta(omega,omega_p,gamma,c,h) - (h*h*omega*omega*(-1 + epsilon(omega,omega_p,gamma))*(-1 + epsilon(omega,omega_p,gamma)))/(c*c*R*R*eta(omega,omega_p,gamma,c,h)*eta(omega,omega_p,gamma,c,h)*kappa(omega,c,h)*kappa(omega,c,h)) - hankalt1(R*eta(omega,omega_p,gamma,c,h))*(bessalt1(R*kappa(omega,c,h)) + hankalt1(R*kappa(omega,c,h))*epsilon(omega,omega_p,gamma))*eta(omega,omega_p,gamma,c,h)*kappa(omega,c,h) + hankalt1(R*eta(omega,omega_p,gamma,c,h))*hankalt1(R*eta(omega,omega_p,gamma,c,h))*epsilon(omega,omega_p,gamma)*kappa(omega,c,h)*kappa(omega,c,h)))/(ac_besselj(1,R*kappa(omega,c,h))*(bessalt1(R*kappa(omega,c,h))*bessalt1(R*kappa(omega,c,h))*eta(omega,omega_p,gamma,c,h)*eta(omega,omega_p,gamma,c,h) - (h*h*omega*omega*(-1 + epsilon(omega,omega_p,gamma))*(-1 + epsilon(omega,omega_p,gamma)))/(c*c*R*R*eta(omega,omega_p,gamma,c,h)*eta(omega,omega_p,gamma,c,h)*kappa(omega,c,h)*kappa(omega,c,h)) - hankalt1(R*eta(omega,omega_p,gamma,c,h))*bessalt1(R*kappa(omega,c,h))*(1 + epsilon(omega,omega_p,gamma))*eta(omega,omega_p,gamma,c,h)*kappa(omega,c,h) + hankalt1(R*eta(omega,omega_p,gamma,c,h))*hankalt1(R*eta(omega,omega_p,gamma,c,h))*epsilon(omega,omega_p,gamma)*kappa(omega,c,h)*kappa(omega,c,h)));
-    return result;
-};
-
-const double complex rMN1(double complex omega, double omega_p, double gamma, double c, double h, double R) {
-    double complex result = -(hankel1(1,R*kappa(omega,c,h))*I*h*omega/(R*c*kappa(omega,c,h))*(1-epsilon(omega,omega_p,gamma))*(hankalt1(R*eta(omega,omega_p,gamma,c,h))- bessalt1(R*eta(omega,omega_p,gamma,c,h))))/(ac_besselj(1,R*kappa(omega,c,h))*((bessalt1(R*kappa(omega,c,h))*bessalt1(R*kappa(omega,c,h))*eta(omega,omega_p,gamma,c,h)*eta(omega,omega_p,gamma,c,h) - (h*h*omega*omega*(-1 + epsilon(omega,omega_p,gamma))*(-1 + epsilon(omega,omega_p,gamma)))/(c*c*R*R*eta(omega,omega_p,gamma,c,h)*eta(omega,omega_p,gamma,c,h)*kappa(omega,c,h)*kappa(omega,c,h)) - hankalt1(R*eta(omega,omega_p,gamma,c,h))*bessalt1(R*kappa(omega,c,h))*(1 + epsilon(omega,omega_p,gamma))*eta(omega,omega_p,gamma,c,h)*kappa(omega,c,h) + hankalt1(R*eta(omega,omega_p,gamma,c,h))*hankalt1(R*eta(omega,omega_p,gamma,c,h))*epsilon(omega,omega_p,gamma)*kappa(omega,c,h)*kappa(omega,c,h))));
-    return result;
-};
-
 const double complex rNN0SF(double complex omega, double omega_p, double gamma, double c, double x) {
     double complex result = -(hankel1(0,I*x)/ac_besselj(0,I*x)) + (2*I*omega*gamma*hankel1(0,I*x))/(PI*omega_p*omega_p*x*ac_besselj(0,I*x)*ac_besselj(0,I*x)*hankel1(1,I*x));
     return result;
@@ -185,14 +142,56 @@ const double complex rNN1SF(double complex omega, double omega_p, double gamma, 
     return result;
 };
 
+
 /*
  * Green's tensor
  */
+
+void greenfull(int N, double complex omega, double omega_p, double gamma, double c, double h, double R, double eps0, double rho, double complex g[2][2]) {
+
+    // fill tensor with zeros
+    int i,j;
+    for (i = 0; i <= 2; i++) {
+        for (j = 0; j <= 2; j++) {
+            g[i][j] = 0;
+        }
+    };
+
+    // define non zero entries
+    double complex g11, g22, g33, g13, g31 = 0 + 0*I;
+
+    // sum over n upto N
+    int n;
+    for (n = 0; n <= N; n++) {
+        g11 += I/2*(n*n/(kappa(omega,c,h)*rho*kappa(omega,c,h)*rho)*ac_besselj(n,kappa(omega,c,h)*rho)*refCoeffn(1,n,omega,omega_p,gamma,c,h,R) + c*c*h*h/(omega*omega)*ac_besselj_diff(n,kappa(omega,c,h)*rho)*ac_besselj_diff(n,kappa(omega,c,h)*rho)*refCoeffn(2,n,omega,omega_p,gamma,c,h,R) - 2*I*c*h*n/(omega*rho*kappa(omega,c,h))*ac_besselj(n,kappa(omega,c,h)*rho)*ac_besselj_diff(n,kappa(omega,c,h)*rho)*refCoeffn(3,n,omega,omega_p,gamma,c,h,R));
+
+        g22 += I/2*(ac_besselj_diff(n,kappa(omega,c,h)*rho)*ac_besselj_diff(n,kappa(omega,c,h)*rho)*refCoeffn(1,n,omega,omega_p,gamma,c,h,R) + c*c*h*h*n*n/(omega*omega*rho*rho*kappa(omega,c,h)*kappa(omega,c,h))*ac_besselj(n,kappa(omega,c,h)*rho)*ac_besselj(n,kappa(omega,c,h)*rho)*refCoeffn(2,n,omega,omega_p,gamma,c,h,R) - 2*I*c*h*n/(omega*rho*kappa(omega,c,h))*ac_besselj(n,kappa(omega,c,h)*rho)*ac_besselj_diff(n,kappa(omega,c,h)*rho)*refCoeffn(3,n,omega,omega_p,gamma,c,h,R));
+        
+        g33 += I/2*(c*c/(omega*omega)*kappa(omega,c,h)*kappa(omega,c,h)*ac_besselj(n,kappa(omega,c,h)*rho)*ac_besselj(n,kappa(omega,c,h)*rho)*refCoeffn(2,n,omega,omega_p,gamma,c,h,R));
+        
+        // prime in the sum means the 0 term has to be multiplied by 1/2 
+        if (n == 0) {
+            g11 = 0.5*g11; 
+            g22 = 0.5*g22; 
+            g33 = 0.5*g33; 
+            g13 = 0.5*g13; 
+            g31 = 0.5*g31; 
+        }
+    };
+
+    // fill in non zero entries and add additional factor
+    g[0][0] = omega*omega/(c*c*eps0)*g11;
+    g[1][1] = omega*omega/(c*c*eps0)*g22;
+    g[2][2] = omega*omega/(c*c*eps0)*g33;
+    g[0][2] = omega*omega/(c*c*eps0)*g13;
+    g[2][0] = omega*omega/(c*c*eps0)*g31;
+};
+
 void greencent(double complex omega, double omega_p, double gamma, double c, double h, double R, double eps0, double complex g[2][2]) {
 
     // define non zero entries
-    double complex gorth = I/(8*eps0)*(omega*omega/(c*c)*rMM1(omega,omega_p,gamma,c,h,R) + h*h*rNN1(omega,omega_p,gamma,c,h,R) - 2*I*omega*h/c*rMN1(omega,omega_p,gamma,c,h,R));
-    double complex gzz = 2*kappa(omega,c,h)*kappa(omega,c,h)*rNN0(omega,omega_p,gamma,c,h,R);
+    double complex gorth = I/(8*eps0)*(omega*omega/(c*c)*refCoeffn(1,1,omega,omega_p,gamma,c,h,R) + h*h*refCoeffn(2,1,omega,omega_p,gamma,c,h,R) - 2*I*omega*h/c*refCoeffn(3,1,omega,omega_p,gamma,c,h,R));
+    double complex gzz = I/(8*eps0)*2*kappa(omega,c,h)*kappa(omega,c,h)*refCoeffn(2,0,omega,omega_p,gamma,c,h,R);
 
     // fill tensor with zeros
     int i,j;
@@ -208,12 +207,12 @@ void greencent(double complex omega, double omega_p, double gamma, double c, dou
     g[2][2] = gzz;
 };
 
-// near field limit
+// near field limit YOU FORGOT TO NEAR FIELD THE REFLECTION COEFFICIENTS
 void greencentNF(double complex omega, double omega_p, double gamma, double c, double h, double R, double eps0, double complex g[2][2]) {
 
     // define non zero entries
-    double complex gorth = I*h*h/(8*eps0)*rNN1(omega,omega_p,gamma,c,h,R);
-    double complex gzz = I*h*h/(8*eps0)*(-2)*rNN0(omega,omega_p,gamma,c,h,R);
+    double complex gorth = I*h*h/(8*eps0)*refCoeffn(2,1,omega,omega_p,gamma,c,h,R);
+    double complex gzz = I*h*h/(8*eps0)*(-2)*refCoeffn(2,0,omega,omega_p,gamma,c,h,R);
 
     // fill tensor with zeros
     int i,j;
