@@ -8,9 +8,9 @@ int main(void) {
      */
 
     double complex omega =0.001;
-    double omega_p = 1;
+    double omega_p = 1.;
     double gamma = 0.01;
-    double c = 1;
+    double c = 2.;
     double h = 0.000001;
     double R = 1;
     //double complex x = 2+4*I;
