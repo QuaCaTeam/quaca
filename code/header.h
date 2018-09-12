@@ -27,7 +27,7 @@ double wp1, wsp1;
 double g1;
 double einf;
 double beta;
-double relerr, recerr;
+double relerr, recerr, absr;
 int transroll;                      // flag for translational or rolling part
 
 // This function multiplies mat1[][] and mat2[][],
@@ -86,7 +86,7 @@ double complex tr(double complex mat[N][N])
 //==============================================================================
 /* INTEGRATION */
 // Finite integration int_a^b dx f(x) with a given relative error
-double integ ( double my_f() , double a , double b, double relerr)
+double integ ( double my_f() , double a , double b, double relerr, double epsabs)
 {
     gsl_function f;
     gsl_integration_cquad_workspace *ws = NULL;
@@ -104,7 +104,7 @@ double integ ( double my_f() , double a , double b, double relerr)
         }
 
     /* Call the integrator. */
-    if ( gsl_integration_cquad( &f, a , b , 0.e-200 , relerr , ws , &res , &abserr , &neval ) != 0 ) {
+    if ( gsl_integration_cquad( &f, a , b , epsabs , relerr , ws , &res , &abserr , &neval ) != 0 ) {
         printf( "call to gsl_integration_cquad failed.\n" );
         abort();
         }
@@ -200,9 +200,9 @@ double wrapphi(double phi)
       }
     }
   }
-    resphi = pre*integ(wrapk, lim1, lim2, relerr*recerr*recerr);
+    resphi = pre*integ(wrapk, lim1, lim2, relerr*recerr*recerr, absr*recerr*recerr);
   if (T == 1 && caseT == 1){
-    resphi = resphi + pre*integ(wrapk, lim2, kcut/(2*za), relerr*recerr*recerr);
+    resphi = resphi + pre*integ(wrapk, lim2, kcut/(2*za), relerr*recerr*recerr, absr*recerr*recerr);
   }
 
   return resphi/(eps0*pow(2*PI,2));
@@ -211,16 +211,16 @@ double wrapphi(double phi)
 pphi = 0;
 // ... the (1,1) component with cos^2(phi) as prefactor
  sig = 0;
- Gsigma[0] = integ( wrapphi, 0., PI, relerr*recerr);
+ Gsigma[0] = integ( wrapphi, 0., PI, relerr*recerr, absr*recerr);
 // ... the (2,2) component with sin^2(phi) as prefactor
   sig = 1;
- Gsigma[1] = integ( wrapphi, 0., PI, relerr*recerr);
+ Gsigma[1] = integ( wrapphi, 0., PI, relerr*recerr, absr*recerr);
 // and the (2,2) component as sin^2 = 1 - cos^2
  Gsigma[2] = Gsigma[0] + Gsigma[1];
 
 // Second, we calculate Gphi
 pphi = 1;
- Gphi = integ( wrapphi, 0., PI, relerr*recerr);
+ Gphi = integ( wrapphi, 0., PI, relerr*recerr, absr*recerr);
 // Now we can assemble the full Green tensor
 Gten[0][0] = Gsigma[0];
 Gten[1][1] = Gsigma[1];

@@ -53,7 +53,7 @@ einf = 3.7;                   // background permittivity
 wp1  = 1.30077;               // plasma frequency in eV
 wsp1 = wp1/sqrt(1.+einf);     // plasma frequency in eV
 g1   = 0.12;                   // damping of the material in eV
-kcut = 70.;                   // Integration cut-off of the k-integration
+kcut = 50.;                   // Integration cut-off of the k-integration
 relerr = 1e-2;                // aimed relative error of the integration
 recerr = 1e-2;                // increase of relerr per layer of integration
 beta   = 1./((3e0)/1.16e4);       // inverse temperature in eV
@@ -75,16 +75,21 @@ for (l=0; l<=maxi; ++l){
    /* Performing calculations */
    /* translational contribution */
    transroll = 0;
-   QFt = integ(IntQF,0.,100*wa,relerr);// + integ(IntQF,0.5*wa,100*wa,relerr);
+   absr = 1E-200;
+   QFt = integ(IntQF,0.,0.9*wa,relerr, absr);
+   QFt = QFt + integ(IntQF,0.5*wa,1.5*wa,relerr, abs(QFt));
+   QFt = QFt + integ(IntQF,1.5*wa,100*wa,relerr, abs(QFt));
    /* rolling contribution */
    transroll = 1;
-   QFr =integ(IntQF,0.,100*wa,relerr);// + integ(IntQF,0.5*wa,100*wa,relerr);
-  // QFr = QFr + integ(IntQF,wa,100*wa,relerr);   //+integ(IntQF,wa,10*wa,relerr);
-   /* Calculate normalization constant */
+   QFr = integ(IntQF,0.,wa,relerr, absr);
+//   QFr = QFr + integ(IntQF,wa,100*wa,relerr, absr);
+      /* Calculate normalization constant */
    F0 = -3*hbar*pow(wsp1,5)*a0/(2*PI*eps0*pow(c,4));
    /* Calculating analytical approximation for small velocities */
    Fanat = -63*hbar*a0*a0*pow(g1/(eps0*wp1*wp1),2)*pow(v,3)/(pow(PI,3)*pow(2*za,10));
    Fanar = -45*Fanat/63.;
+   Fanat = Fanat - a0*a0*pow(g1/(eps0*wp1*wp1),2)*6*v/(PI*beta*beta*hbar*pow(2*za,8));
+   Fanar = Fanar + 3*a0*a0*pow(g1/(eps0*wp1*wp1),2)*v/(PI*beta*beta*hbar*pow(2*za,8));
    /* Print result to the screen */
    printf("v= %.5e\n", v);
    printf("F= %.5e\n", (QFt+QFr)/F0 );
