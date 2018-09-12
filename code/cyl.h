@@ -1,4 +1,16 @@
-// include libraries
+/*! 
+ * \file cyl.h
+ * \brief Header file for quantum friction in a cylinder.
+ * \author C. H. Egerland
+ * \bug No known bugs.
+ *
+ * Defines mathematical operations involving matrices, helping functions to define the reflection coefficients, reflection coefficients themselves and the Greens's tensor.
+ */
+
+/* --------- */
+/* Libraries */
+/* --------- */
+
 #include <stdio.h>
 #include <math.h>
 #include <complex.h>
@@ -6,46 +18,300 @@
 #include "arb.h"
 #include "arbcmath.h"
 
-// constants
+
+/* ---------------- */
+/* Fixed Parameters */
+/* ---------------- */
+
+// mathematical constants
+
+/*! 
+ * \def PI 
+ * Constant Pi.
+ */
 #define PI 3.14159265358979323846
 
+/*! 
+ * \def Ndim 
+ * Matrix dimension.
+ */
+#define Ndim 3
+
 // material constants
-double omega_p;
-double gamma_p;
+
+/*!
+ * \var omega_p
+ * Plasma frequency in eV.
+ *
+ * \var gamma_p
+ * Plasma resistivity in eV.
+ */
+double omega_p, gamma_p;
 
 // universal constants
+
+/*!
+ * \var c
+ * Speed of light in vacuum.
+ *
+ * \var eps0
+ * Vacuum permittivity.
+ */
 double c, eps0;
 
-// geometrics
+// geometry
+
+/*!
+ * \var R
+ * Radius of the cylinder.
+ */
 double R;
 
-// predefine functions
+
+/* ------------------- */
+/* Predefine functions */
+/* ------------------- */
+
+/*!
+ * \fn void multiply(double complex mat1[Ndim][Ndim], double complex mat2[Ndim][Ndim], double complex res[Ndim][Ndim])
+ * \brief Multiplies to square matrices of dimension Ndim.
+ * \param mat1[Ndim][Ndim] First square matrix of dimension Ndim.
+ * \param mat2[Ndim][Ndim] Second matrix of dimension Ndim.
+ * \param res[Ndim][Ndim] Resulting matrix of dimension Ndim.
+ * \return void
+ */
+void multiply(double complex mat1[Ndim][Ndim], double complex mat2[Ndim][Ndim], double complex res[Ndim][Ndim]);
+
+/*!
+ * \fn void dagger(double complex mat[Ndim][Ndim], double complex res[Ndim][Ndim])
+ * \brief Calculates the conjugate transpose of a square matrix of dimension Ndim.
+ * \param mat[Ndim][Ndim] Square matrix of dimension Ndim.
+ * \param res[Ndim][Ndim] Resulting matrix of dimension Ndim.
+ * \return void
+ */
+void dagger(double complex mat[Ndim][Ndim], double complex res[Ndim][Ndim]);
+
+/*!
+ * \fn void fancy(double complex mat[Ndim][Ndim], double complex res[Ndim][Ndim], int mode)
+ * \brief Calculates fancy R or fancy I of a matrix.
+ * \param mat[Ndim][Ndim] Square matrix of dimension Ndim.
+ * \param res[Ndim][Ndim] Resulting matrix of dimension Ndim.
+ * \param mode Option for R or I, mode = 1 equals R and mode = -1 equals I.
+ * \return void
+ */
+void fancy(double complex mat[Ndim][Ndim], double complex res[Ndim][Ndim], int mode);
+
+/*!
+ * \fn const double complex tr(double complex mat[Ndim][Ndim])
+ * \brief Computes the trace of a square matrix.
+ * \param mat[Ndim][Ndim] Square matrix of dimension Ndim.
+ * \return Trace of the matrix.
+ */
+const double complex tr(double complex mat[Ndim][Ndim]);
+
+/*!
+ * \fn const double complex hankel1(double complex n, double complex x)
+ * \brief Computes the Hankel function of first kind.
+ * \param n Order.
+ * \param x Argument.
+ */
 const double complex hankel1(double complex n, double complex x);
+
+/*!
+ * \fn const double complex hankaltn(int n, double complex x)
+ * \brief Computes derivative of hankel1 devided by hankel1.
+ * \param n Order.
+ * \param x Argument.
+ */
 const double complex hankaltn(int n, double complex x);
+
+/*!
+ * \fn const double complex bessaltn(int n, double complex x)
+ * \brief Computes derivative of besselJ devided by besselJ.
+ * \param n Order.
+ * \param x Argument.
+ */
 const double complex bessaltn(int n, double complex x);
+
+/*!
+ * \fn const double complex ac_besselj_diff(int n, double complex x)
+ * \brief Computes derivative of besselJ.
+ * \param n Order.
+ * \param x Argument.
+ */
 const double complex ac_besselj_diff(int n, double complex x);
 
+/*!
+ * \fn const double complex epsilon(double complex omega)
+ * \brief Computes the permittivity resulting from the Drude model.
+ * \param omega Frequency.
+ */
 const double complex epsilon(double complex omega);
+
+/*!
+ * \fn const double complex kappa(double complex omega, double h)
+ * \brief Computes kappa.
+ * \param omega Frequency.
+ * \param h Wave vector (Fourier variable of z).
+ */
 const double complex kappa(double complex omega, double h);
+
+/*!
+ * \fn const double complex eta(double complex omega, double h)
+ * \brief Computes eta.
+ * \param omega Frequency.
+ * \param h Wave vector (Fourier variable of z).
+ */
 const double complex eta(double complex omega, double h);
 
+/*!
+ * \fn const double complex anum(int n, double complex omega, double h)
+ * \brief Computes helping function for reflection coefficients.
+ * \param n Order.
+ * \param omega Frequency.
+ * \param h Wave vector (Fourier variable of z).
+ */
 const double complex anum(int n, double complex omega, double h);
+
+/*!
+ * \fn const double complex bmm(int n, double complex omega, double h)
+ * \brief Computes helping function for reflection coefficients.
+ * \param n Order.
+ * \param omega Frequency.
+ * \param h Wave vector (Fourier variable of z).
+ */
 const double complex bmm(int n, double complex omega, double h);
+
+/*!
+ * \fn const double complex bnn(int n, double complex omega, double h)
+ * \brief Computes helping function for reflection coefficients.
+ * \param n Order.
+ * \param omega Frequency.
+ * \param h Wave vector (Fourier variable of z).
+ */
 const double complex bnn(int n, double complex omega, double h);
+
+/*!
+ * \fn const double complex bmn(int n, double complex omega, double h)
+ * \brief Computes helping function for reflection coefficients.
+ * \param n Order.
+ * \param omega Frequency.
+ * \param h Wave vector (Fourier variable of z).
+ */
 const double complex bmn(int n, double complex omega, double h);
+
+/*!
+ * \fn const double complex cdenom(int n, double complex omega, double h)
+ * \brief Computes helping function for reflection coefficients.
+ * \param n Order.
+ * \param omega Frequency.
+ * \param h Wave vector (Fourier variable of z).
+ */
 const double complex cdenom(int n, double complex omega, double h);
+
+/*!
+ * \fn const double complex refCoeffn(int sig, int n, double complex omega, double h)
+ * \brief Computes the reflection coefficients in a cylinder.
+ * \param sig Mode.
+ * \param n Order.
+ * \param omega Frequency.
+ * \param h Wave vector (Fourier variable of z).
+ *
+ * Choose sig = 1 for MM, sig = 2 for NN or sig = 3 for MN.
+ */
 const double complex refCoeffn(int sig, int n, double complex omega, double h);
 
+/*!
+ * \fn const double complex rNN0SF(double complex omega, double h)
+ * \brief Computes the reflection coefficient rNN0 in the small frequency limit.
+ * \param omega Frequency.
+ * \param h Wave vector (Fourier variable of z).
+ */
 const double complex rNN0SF(double complex omega, double x);
+
+/*!
+ * \fn const double complex rNN1SF(double complex omega, double h)
+ * \brief Computes the reflection coefficient rNN0 in the small frequency limit.
+ * \param omega Frequency.
+ * \param h Wave vector (Fourier variable of z).
+ */
 const double complex rNN1SF(double complex omega, double x);
 
-void greenfull(int N, double complex omega, double h, double rho, double complex g[3][3]);
+/*!
+ * \fn void greenfull(int n, double complex omega, double h, double rho, double complex g[3][3])
+ * \brief Computes the full Green's tensor of the cylinder.
+ * \param n Order.
+ * \param omega Frequency.
+ * \param h Wave vector (Fourier variable of z).
+ * \param rho Coordinate rho (Radius).
+ * \param g[Ndim][Ndim] Resulting tensor.
+ */
+void greenfull(int n, double complex omega, double h, double rho, double complex g[3][3]);
+
+/*!
+ * \fn void greencent(double complex omega, double h, double complex g[3][3])
+ * \brief Computes the Green's tensor on the coaxial line of the cylinder.
+ * \param omega Frequency.
+ * \param h Wave vector (Fourier variable of z).
+ * \param g[Ndim][Ndim] Resulting tensor.
+ */
 void greencent(double complex omega, double h, double complex g[3][3]);
+
+/*!
+ * \fn void greencentNF(double complex omega, double h, double complex g[3][3])
+ * \brief Computes the Green's tensor on the coaxial line of the cylinder in the near field limit.
+ * \param omega Frequency.
+ * \param h Wave vector (Fourier variable of z).
+ * \param g[Ndim][Ndim] Resulting tensor.
+ */
 void greencentNF(double complex omega, double h, double complex g[3][3]);
 
-/* 
- * mathematical helping functions
- */
+
+/* --------- */
+/* Functions */
+/* --------- */
+
+void multiply(double complex mat1[Ndim][Ndim], double complex mat2[Ndim][Ndim], double complex res[Ndim][Ndim]) {
+    int i, j, k;
+    for (i = 0; i < Ndim; i++) {
+        for (j = 0; j < Ndim; j++) {
+            res[i][j] = 0.;
+            for (k = 0; k < Ndim; k++) {
+                res[i][j] += mat1[i][k]*mat2[k][j]; 
+            }
+        }
+    }
+
+};
+
+void dagger(double complex mat[Ndim][Ndim], double complex res[Ndim][Ndim]) {
+    int i, j;
+    for (i = 0; i < Ndim; i++) {
+        for (j = 0; j < Ndim; j++) {
+            res[j][i] = conj(mat[i][j]); 
+        }
+    }
+};
+
+void fancy(double complex mat[Ndim][Ndim], double complex res[Ndim][Ndim], int mode) {
+    int i, j;
+    for (i = 0; i < Ndim; i++) {
+        for (j = 0; j < Ndim; j++) {
+            res[i][j] = -0.5*I*( mat[i][j] + mode*conj(mat[j][i]) );
+        }
+    }
+};
+
+const double complex tr(double complex mat[Ndim][Ndim]) {
+    int i;
+    double complex res;
+    res = 0.;
+    for (i = 0; i < Ndim; i++) {
+        res += mat[i][i]; 
+    }
+    return res;
+};
+
 const double complex hankel1(double complex n, double complex x) {
     double complex result = ac_besselj(n,x) + I*ac_bessely(n,x);
     return result;
@@ -66,10 +332,6 @@ const double complex ac_besselj_diff(int n, double complex x) {
     return result;
 };
 
-/*
- * physical helping functions
- */
-
 const double complex epsilon(double complex omega) {
     double complex result = 1.0 - omega_p*omega_p/(omega*omega + I*omega*gamma_p);
     return result;
@@ -84,11 +346,6 @@ const double complex eta(double complex omega, double h) {
     double complex result = csqrt(omega*omega/(c*c)*epsilon(omega) - h*h);
     return result;
 };
-
-
-/*
- * general reflection coefficients
- */
 
 const double complex anum(int n, double complex omega, double h) {
     double complex result = -n*n*omega*omega*h*h*pow(R,4)/(c*c)*(epsilon(omega)-1)*(epsilon(omega)-1);
@@ -137,11 +394,6 @@ const double complex refCoeffn(int sig, int n, double complex omega, double h) {
     return result; 
 }; 
 
-
-/*
- * specific reflection coefficients
- */
-
 const double complex rNN0SF(double complex omega, double x) {
     double complex result = -(hankel1(0,I*x)/ac_besselj(0,I*x)) + (2*I*omega*gamma_p*hankel1(0,I*x))/(PI*omega_p*omega_p*x*ac_besselj(0,I*x)*ac_besselj(0,I*x)*hankel1(1,I*x));
     return result;
@@ -151,11 +403,6 @@ const double complex rNN1SF(double complex omega, double x) {
     double complex result = -(hankel1(1,I*x)/ac_besselj(1,I*x)) - (2*omega*gamma_p*hankel1(1,I*x))/(PI*omega_p*omega_p*ac_besselj(1,I*x)*ac_besselj(1,I*x)*(hankel1(1,I*x)-I*x*hankel1(0,I*x)));
     return result;
 };
-
-
-/*
- * Green's tensor
- */
 
 void greenfull(int N, double complex omega, double h, double rho, double complex g[3][3]) {
 
