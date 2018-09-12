@@ -2,7 +2,7 @@
  * \file cyl.h
  * \brief Header file for quantum friction in a cylinder.
  * \author C. H. Egerland
- * \bug No known bugs.
+ * \bug greencentNF is still not write, since the reflection coefficients used are not in the NEAR FIELD limit.
  *
  * Defines mathematical operations involving matrices, helping functions to define the reflection coefficients, reflection coefficients themselves and the Greens's tensor.
  */
@@ -266,6 +266,10 @@ void greencent(double complex omega, double h, double complex g[3][3]);
  */
 void greencentNF(double complex omega, double h, double complex g[3][3]);
 
+/*!
+ */
+void Greenint(double complex g[Ndim][Ndim], double omega, int RorI, int hornoh, int theta);
+
 
 /* --------- */
 /* Functions */
@@ -464,7 +468,6 @@ void greencent(double complex omega, double h, double complex g[3][3]) {
     g[2][2] = gzz;
 };
 
-// near field limit YOU FORGOT TO NEAR FIELD THE REFLECTION COEFFICIENTS
 void greencentNF(double complex omega, double h, double complex g[3][3]) {
 
     // define non zero entries
@@ -483,4 +486,22 @@ void greencentNF(double complex omega, double h, double complex g[3][3]) {
     g[0][0] = gorth;
     g[1][1] = gorth;
     g[2][2] = gzz;
+};
+
+void Greenint(double complex g[Ndim][Ndim], double omega, int RorI, int horNoh, int theta) {
+
+    double lim1, lim2; // integration limits
+
+    double wraph(double h) {
+        double resh; // dummy result
+       
+        // make Green's tensor fancy R or I
+        if (RorI == 0) {
+            fancy(g,1);
+        } else if (RorI == 1) {
+            fancy(g,-1); 
+        }
+
+    } 
+
 };
