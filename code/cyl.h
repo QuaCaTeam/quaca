@@ -2,7 +2,7 @@
  * \file cyl.h
  * \brief Header file for quantum friction in a cylinder.
  * \author C. H. Egerland
- * \bug greencentNF is still not write, since the reflection coefficients used are not in the NEAR FIELD limit.
+ * \bug greencentNF is still not right, since the reflection coefficients used are not in the NEAR FIELD limit.
  *
  * Defines mathematical operations involving matrices, helping functions to define the reflection coefficients, reflection coefficients themselves and the Greens's tensor.
  */
@@ -15,6 +15,7 @@
 #include <math.h>
 #include <complex.h>
 #include <gsl/gsl_sf_bessel.h>
+#include <gsl/gsl_integration.h>
 #include "arb.h"
 #include "arbcmath.h"
 
@@ -27,13 +28,13 @@
 
 /*! 
  * \def PI 
- * Constant Pi.
+ * \brief Constant Pi.
  */
 #define PI 3.14159265358979323846
 
 /*! 
  * \def Ndim 
- * Matrix dimension.
+ * \brief Matrix dimension.
  */
 #define Ndim 3
 
@@ -41,10 +42,10 @@
 
 /*!
  * \var omega_p
- * Plasma frequency in eV.
+ * \brief Plasma frequency in eV.
  *
  * \var gamma_p
- * Plasma resistivity in eV.
+ * \brief Plasma resistivity in eV.
  */
 double omega_p, gamma_p;
 
@@ -52,21 +53,32 @@ double omega_p, gamma_p;
 
 /*!
  * \var c
- * Speed of light in vacuum.
+ * \brief Speed of light in vacuum.
  *
  * \var eps0
- * Vacuum permittivity.
+ * \brief Vacuum permittivity.
  */
 double c, eps0;
 
-// geometry
+// miscellaneous
 
 /*!
  * \var R
- * Radius of the cylinder.
+ * \brief Radius of the cylinder.
  */
 double R;
 
+/*!
+ * \var hcut
+ * \brief Cutoff for h integration.
+ */
+double hcut;
+
+/*!
+ * \var relerr
+ * \brief Relative error of the integration routine.
+ */
+double relerr;
 
 /* ------------------- */
 /* Predefine functions */
@@ -267,8 +279,27 @@ void greencent(double complex omega, double h, double complex g[3][3]);
 void greencentNF(double complex omega, double h, double complex g[3][3]);
 
 /*!
+ * \fn double integ(double my_f(), double a, double b, double relerr)
+ * \brief Integration wrapper for finite integrations.
+ * \param my_f() Function of one argument that shall be integrated.
+ * \param a Lower integral bound.
+ * \param b Upper integral bound.
+ * \param relerr Desired relative error.
+ *
+ * Uses the cquad routine of the gsl library. https://www.gnu.org/software/gsl/manual/html_node/CQUAD-doubly_002dadaptive-integration.html
  */
-void Greenint(double complex g[Ndim][Ndim], double omega, int RorI, int hornoh, int theta);
+double integ(double my_f(), double a, double b, double relerr);
+
+/*!
+ * \fn void Greenint(double complex gres[Ndim][Ndim], double omega, int RorI, int horNoh, int theta)
+ * \brief Computes the integral of greencent over h.
+ * \param gres[Ndim][Ndim] Resulting tensor.
+ * \param omega Frequency.
+ * \param RorI Flag for fancy R or I.
+ * \param horNoh Flag for additional prefactor h.
+ * \param theta Flag for theta function.
+ */
+void Greenint(double complex gres[Ndim][Ndim], double omega, int RorI, int horNoh, int theta);
 
 
 /* --------- */
@@ -391,6 +422,7 @@ const double complex refCoeffn(int sig, int n, double complex omega, double h) {
             break;
         default:
             printf("Please choose a reflection coefficient!\n 1 = mm, 2 = nn, 3 = mn\n");
+            exit(0);
             break;
     };
 
@@ -488,20 +520,115 @@ void greencentNF(double complex omega, double h, double complex g[3][3]) {
     g[2][2] = gzz;
 };
 
-void Greenint(double complex g[Ndim][Ndim], double omega, int RorI, int horNoh, int theta) {
+double integ(double my_f(), double a, double b, double relerr) {
+    
+    gsl_function f;
+    gsl_integration_cquad_workspace *ws = NULL;
+    double res, abserr;
+    size_t neval;
+    
+    /* Prepare the function. */
+    f.function = my_f;
+    f.params = NULL;
+    
+    /* Initialize the workspace. */
+    if ( ( ws = gsl_integration_cquad_workspace_alloc( 100 ) ) == NULL ) {
+        printf( "call to gsl_integration_cquad_workspace_alloc failed.\n" );
+        abort();
+        }
+    
+    /* Call the integrator. */
+    if ( gsl_integration_cquad( &f, a , b , 0.e-200 , relerr , ws , &res , &abserr , &neval ) != 0 ) {
+        printf( "call to gsl_integration_cquad failed.\n" );
+        abort();
+        }
+    
+    /* Free the workspace. */
+    gsl_integration_cquad_workspace_free( ws );
+    
+    return res;
+ 
+};
 
-    double lim1, lim2; // integration limits
+void Greenint(double complex gres[Ndim][Ndim], double omega, int RorI, int horNoh, int theta) {
+    
+    // dummies
+    double lim1, lim2;
+    int i, j, sig;
+    double complex gint[Ndim][Ndim], g[Ndim][Ndim];
+    
+    // integration limits
+    lim1 = 0.;
+    lim2 = hcut/(2*R);
 
-    double wraph(double h) {
-        double resh; // dummy result
-       
+    double wraph (double h) {
+    
+        // dummy integrand tensor
+        double resh;
+        int i, j;
+
+        // initialize Green's tensor in g
+        greencent(omega, h, g);
+
+        /* Modify g -> gint */
         // make Green's tensor fancy R or I
         if (RorI == 0) {
-            fancy(g,1);
+            fancy(g, gint, 1);
         } else if (RorI == 1) {
-            fancy(g,-1); 
+            fancy(g, gint, -1); 
+        } else {
+            printf("Wrong RorI!\n");
+            exit(0);
+        }
+        
+        // add additional prefactor h in front
+        if (horNoh == 0) {
+        } else if (horNoh == 1) {
+            for (i = 0; i < Ndim; i++) {
+                for (j = 0; j < Ndim; j++) {
+                    gint[i][j] = h*gint[i][j]; 
+                }
+            }
+        } else {
+            printf("Wrong horNoh!\n");
+            exit(0);
+        } 
+
+        // add theta function
+        if (theta == 0) {
+        } else if (theta == 1) {
+        } else {
+            printf("Wrong theta!\n");
+            exit(0);
         }
 
-    } 
+        // return the indice of interest
+        if (sig == 1) {
+            resh = gint[0][0];
+        } else if (sig == 2) {
+            resh = gint[1][1];
+        } else if (sig == 3) {
+            resh = gint[2][2];
+        } else {
+            printf("Wrong sig!\n");
+            exit(0);
+        } 
 
+        return resh;
+    };
+
+    // flush tensor
+    for (i = 0; i < Ndim; i++) {
+        for (j = 0; j < Ndim; j++) {
+            gres[i][j] = 0;
+        }
+    };
+
+    // non zero entries
+    sig = 1;
+    gres[0][0] = integ(wraph, lim1, lim2, relerr);
+    sig = 2;
+    gres[1][1] = integ(wraph, lim1, lim2, relerr);
+    sig = 3;
+    gres[2][2] = integ(wraph, lim1, lim2, relerr);
 };

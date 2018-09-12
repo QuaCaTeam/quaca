@@ -9,6 +9,7 @@ Header file for quantum friction in a cylinder.
 {\ttfamily \#include $<$math.\+h$>$}\newline
 {\ttfamily \#include $<$complex.\+h$>$}\newline
 {\ttfamily \#include $<$gsl/gsl\+\_\+sf\+\_\+bessel.\+h$>$}\newline
+{\ttfamily \#include $<$gsl/gsl\+\_\+integration.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}arb.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}arbcmath.\+h\char`\"{}}\newline
 Include dependency graph for cyl.\+h\+:\nopagebreak
@@ -21,10 +22,12 @@ Include dependency graph for cyl.\+h\+:\nopagebreak
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\Hypertarget{cyl_8h_a598a3330b3c21701223ee0ca14316eca}\label{cyl_8h_a598a3330b3c21701223ee0ca14316eca}} 
 \#define \hyperlink{cyl_8h_a598a3330b3c21701223ee0ca14316eca}{PI}~3.\+14159265358979323846
-\item 
+\begin{DoxyCompactList}\small\item\em Constant Pi. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{cyl_8h_a15e44f7107b71dcfed14d11f87047d07}\label{cyl_8h_a15e44f7107b71dcfed14d11f87047d07}} 
 \#define \hyperlink{cyl_8h_a15e44f7107b71dcfed14d11f87047d07}{Ndim}~3
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Matrix dimension. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -71,20 +74,35 @@ void \hyperlink{cyl_8h_afe8f14e730c11332a8635dc58d11698d}{greenfull} (int n, dou
 void \hyperlink{cyl_8h_ab8d9d9a5a829f050539844c376106ffb}{greencent} (double complex omega, double h, double complex g\mbox{[}3\mbox{]}\mbox{[}3\mbox{]})
 \begin{DoxyCompactList}\small\item\em Computes the Green\textquotesingle{}s tensor on the coaxial line of the cylinder. \end{DoxyCompactList}\item 
 void \hyperlink{cyl_8h_afb9b74726f4deda487b5a4470bd7e4fb}{greencent\+NF} (double complex omega, double h, double complex g\mbox{[}3\mbox{]}\mbox{[}3\mbox{]})
-\begin{DoxyCompactList}\small\item\em Computes the Green\textquotesingle{}s tensor on the coaxial line of the cylinder in the near field limit. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Computes the Green\textquotesingle{}s tensor on the coaxial line of the cylinder in the near field limit. \end{DoxyCompactList}\item 
+double \hyperlink{cyl_8h_a58ba3fb89c3f2e83c6ad0df914f480b3}{integ} (double my\+\_\+f(), double a, double b, double \hyperlink{cyl_8h_a58e575eb8ae7d2899e8977a983786af7}{relerr})
+\begin{DoxyCompactList}\small\item\em Integration wrapper for finite integrations. \end{DoxyCompactList}\item 
+void \hyperlink{cyl_8h_a9a0912f06fb9c61732c1fd2bb3a8b8b6}{Greenint} (double complex gres\mbox{[}\hyperlink{cyl_8h_a15e44f7107b71dcfed14d11f87047d07}{Ndim}\mbox{]}\mbox{[}\hyperlink{cyl_8h_a15e44f7107b71dcfed14d11f87047d07}{Ndim}\mbox{]}, double omega, int RorI, int hor\+Noh, int theta)
+\begin{DoxyCompactList}\small\item\em Computes the integral of greencent over h. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\Hypertarget{cyl_8h_a863d2cc72d6111f6795451993b4f2fa9}\label{cyl_8h_a863d2cc72d6111f6795451993b4f2fa9}} 
 double \hyperlink{cyl_8h_a863d2cc72d6111f6795451993b4f2fa9}{omega\+\_\+p}
-\item 
+\begin{DoxyCompactList}\small\item\em Plasma frequency in eV. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{cyl_8h_a5a275740976607da47c838d341024553}\label{cyl_8h_a5a275740976607da47c838d341024553}} 
 double \hyperlink{cyl_8h_a5a275740976607da47c838d341024553}{gamma\+\_\+p}
-\item 
+\begin{DoxyCompactList}\small\item\em Plasma resistivity in eV. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{cyl_8h_ae0323a9039add2978bf5b49550572c7c}\label{cyl_8h_ae0323a9039add2978bf5b49550572c7c}} 
 double \hyperlink{cyl_8h_ae0323a9039add2978bf5b49550572c7c}{c}
-\item 
+\begin{DoxyCompactList}\small\item\em Speed of light in vacuum. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{cyl_8h_a4924cd3ae7bba1e4d6c6b2381f8efe61}\label{cyl_8h_a4924cd3ae7bba1e4d6c6b2381f8efe61}} 
 double \hyperlink{cyl_8h_a4924cd3ae7bba1e4d6c6b2381f8efe61}{eps0}
-\item 
+\begin{DoxyCompactList}\small\item\em Vacuum permittivity. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{cyl_8h_acb95449a94688af33f6e9bb090cf2936}\label{cyl_8h_acb95449a94688af33f6e9bb090cf2936}} 
 double \hyperlink{cyl_8h_acb95449a94688af33f6e9bb090cf2936}{R}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Radius of the cylinder. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{cyl_8h_a46a25458d32cf614e91ba007724ca156}\label{cyl_8h_a46a25458d32cf614e91ba007724ca156}} 
+double \hyperlink{cyl_8h_a46a25458d32cf614e91ba007724ca156}{hcut}
+\begin{DoxyCompactList}\small\item\em Cutoff for h integration. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{cyl_8h_a58e575eb8ae7d2899e8977a983786af7}\label{cyl_8h_a58e575eb8ae7d2899e8977a983786af7}} 
+double \hyperlink{cyl_8h_a58e575eb8ae7d2899e8977a983786af7}{relerr}
+\begin{DoxyCompactList}\small\item\em Relative error of the integration routine. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -94,25 +112,10 @@ Header file for quantum friction in a cylinder.
 C. H. Egerland 
 \end{DoxyAuthor}
 \begin{DoxyRefDesc}{Bug}
-\item[\hyperlink{bug__bug000001}{Bug}]No known bugs.\end{DoxyRefDesc}
+\item[\hyperlink{bug__bug000001}{Bug}]greencent\+NF is still not right, since the reflection coefficients used are not in the N\+E\+AR F\+I\+E\+LD limit.\end{DoxyRefDesc}
 
 
 Defines mathematical operations involving matrices, helping functions to define the reflection coefficients, reflection coefficients themselves and the Greens\textquotesingle{}s tensor. 
-
-\subsection{Macro Definition Documentation}
-\mbox{\Hypertarget{cyl_8h_a15e44f7107b71dcfed14d11f87047d07}\label{cyl_8h_a15e44f7107b71dcfed14d11f87047d07}} 
-\index{cyl.\+h@{cyl.\+h}!Ndim@{Ndim}}
-\index{Ndim@{Ndim}!cyl.\+h@{cyl.\+h}}
-\subsubsection{\texorpdfstring{Ndim}{Ndim}}
-{\footnotesize\ttfamily \#define Ndim~3}
-
-Matrix dimension. \mbox{\Hypertarget{cyl_8h_a598a3330b3c21701223ee0ca14316eca}\label{cyl_8h_a598a3330b3c21701223ee0ca14316eca}} 
-\index{cyl.\+h@{cyl.\+h}!PI@{PI}}
-\index{PI@{PI}!cyl.\+h@{cyl.\+h}}
-\subsubsection{\texorpdfstring{PI}{PI}}
-{\footnotesize\ttfamily \#define PI~3.\+14159265358979323846}
-
-Constant Pi. 
 
 \subsection{Function Documentation}
 \mbox{\Hypertarget{cyl_8h_a6e02103401b846478cada888dd3c629c}\label{cyl_8h_a6e02103401b846478cada888dd3c629c}} 
@@ -379,6 +382,29 @@ Computes the full Green\textquotesingle{}s tensor of the cylinder.
 {\em g\mbox{[}\+Ndim\mbox{]}\mbox{[}\+Ndim\mbox{]}} & Resulting tensor. \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{cyl_8h_a9a0912f06fb9c61732c1fd2bb3a8b8b6}\label{cyl_8h_a9a0912f06fb9c61732c1fd2bb3a8b8b6}} 
+\index{cyl.\+h@{cyl.\+h}!Greenint@{Greenint}}
+\index{Greenint@{Greenint}!cyl.\+h@{cyl.\+h}}
+\subsubsection{\texorpdfstring{Greenint()}{Greenint()}}
+{\footnotesize\ttfamily void Greenint (\begin{DoxyParamCaption}\item[{double complex}]{gres\mbox{[}\+Ndim\mbox{]}\mbox{[}\+Ndim\mbox{]},  }\item[{double}]{omega,  }\item[{int}]{RorI,  }\item[{int}]{hor\+Noh,  }\item[{int}]{theta }\end{DoxyParamCaption})}
+
+
+
+Computes the integral of greencent over h. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gres\mbox{[}\+Ndim\mbox{]}\mbox{[}\+Ndim\mbox{]}} & Resulting tensor. \\
+\hline
+{\em omega} & Frequency. \\
+\hline
+{\em RorI} & Flag for fancy R or I. \\
+\hline
+{\em hor\+Noh} & Flag for additional prefactor h. \\
+\hline
+{\em theta} & Flag for theta function. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{cyl_8h_ad6c4a924034b8b02decc986895650333}\label{cyl_8h_ad6c4a924034b8b02decc986895650333}} 
 \index{cyl.\+h@{cyl.\+h}!hankaltn@{hankaltn}}
 \index{hankaltn@{hankaltn}!cyl.\+h@{cyl.\+h}}
@@ -413,7 +439,28 @@ Computes the Hankel function of first kind.
 {\em x} & Argument. \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{cyl_8h_ad22584e9c5f7b5fc6b3853947a75ff9f}\label{cyl_8h_ad22584e9c5f7b5fc6b3853947a75ff9f}} 
+\mbox{\Hypertarget{cyl_8h_a58ba3fb89c3f2e83c6ad0df914f480b3}\label{cyl_8h_a58ba3fb89c3f2e83c6ad0df914f480b3}} 
+\index{cyl.\+h@{cyl.\+h}!integ@{integ}}
+\index{integ@{integ}!cyl.\+h@{cyl.\+h}}
+\subsubsection{\texorpdfstring{integ()}{integ()}}
+{\footnotesize\ttfamily double integ (\begin{DoxyParamCaption}\item[{double }]{my\+\_\+f(),  }\item[{double}]{a,  }\item[{double}]{b,  }\item[{double}]{relerr }\end{DoxyParamCaption})}
+
+
+
+Integration wrapper for finite integrations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em my\+\_\+f()} & Function of one argument that shall be integrated. \\
+\hline
+{\em a} & Lower integral bound. \\
+\hline
+{\em b} & Upper integral bound. \\
+\hline
+{\em relerr} & Desired relative error.\\
+\hline
+\end{DoxyParams}
+Uses the cquad routine of the gsl library. \href{https://www.gnu.org/software/gsl/manual/html_node/CQUAD-doubly_002dadaptive-integration.html}{\tt https\+://www.\+gnu.\+org/software/gsl/manual/html\+\_\+node/\+C\+Q\+U\+A\+D-\/doubly\+\_\+002dadaptive-\/integration.\+html} \mbox{\Hypertarget{cyl_8h_ad22584e9c5f7b5fc6b3853947a75ff9f}\label{cyl_8h_ad22584e9c5f7b5fc6b3853947a75ff9f}} 
 \index{cyl.\+h@{cyl.\+h}!kappa@{kappa}}
 \index{kappa@{kappa}!cyl.\+h@{cyl.\+h}}
 \subsubsection{\texorpdfstring{kappa()}{kappa()}}
@@ -525,37 +572,3 @@ Computes the trace of a square matrix.
 \begin{DoxyReturn}{Returns}
 Trace of the matrix. 
 \end{DoxyReturn}
-
-
-\subsection{Variable Documentation}
-\mbox{\Hypertarget{cyl_8h_ae0323a9039add2978bf5b49550572c7c}\label{cyl_8h_ae0323a9039add2978bf5b49550572c7c}} 
-\index{cyl.\+h@{cyl.\+h}!c@{c}}
-\index{c@{c}!cyl.\+h@{cyl.\+h}}
-\subsubsection{\texorpdfstring{c}{c}}
-{\footnotesize\ttfamily c}
-
-Speed of light in vacuum. \mbox{\Hypertarget{cyl_8h_a4924cd3ae7bba1e4d6c6b2381f8efe61}\label{cyl_8h_a4924cd3ae7bba1e4d6c6b2381f8efe61}} 
-\index{cyl.\+h@{cyl.\+h}!eps0@{eps0}}
-\index{eps0@{eps0}!cyl.\+h@{cyl.\+h}}
-\subsubsection{\texorpdfstring{eps0}{eps0}}
-{\footnotesize\ttfamily eps0}
-
-Vacuum permittivity. \mbox{\Hypertarget{cyl_8h_a5a275740976607da47c838d341024553}\label{cyl_8h_a5a275740976607da47c838d341024553}} 
-\index{cyl.\+h@{cyl.\+h}!gamma\+\_\+p@{gamma\+\_\+p}}
-\index{gamma\+\_\+p@{gamma\+\_\+p}!cyl.\+h@{cyl.\+h}}
-\subsubsection{\texorpdfstring{gamma\+\_\+p}{gamma\_p}}
-{\footnotesize\ttfamily gamma\+\_\+p}
-
-Plasma resistivity in eV. \mbox{\Hypertarget{cyl_8h_a863d2cc72d6111f6795451993b4f2fa9}\label{cyl_8h_a863d2cc72d6111f6795451993b4f2fa9}} 
-\index{cyl.\+h@{cyl.\+h}!omega\+\_\+p@{omega\+\_\+p}}
-\index{omega\+\_\+p@{omega\+\_\+p}!cyl.\+h@{cyl.\+h}}
-\subsubsection{\texorpdfstring{omega\+\_\+p}{omega\_p}}
-{\footnotesize\ttfamily omega\+\_\+p}
-
-Plasma frequency in eV. \mbox{\Hypertarget{cyl_8h_acb95449a94688af33f6e9bb090cf2936}\label{cyl_8h_acb95449a94688af33f6e9bb090cf2936}} 
-\index{cyl.\+h@{cyl.\+h}!R@{R}}
-\index{R@{R}!cyl.\+h@{cyl.\+h}}
-\subsubsection{\texorpdfstring{R}{R}}
-{\footnotesize\ttfamily R}
-
-Radius of the cylinder. 
