@@ -1,4 +1,5 @@
 /* Include the needed libraries */
+#include <time.h>
 #include <stdio.h>
 #include <math.h>
 #include <gsl/gsl_integration.h>
@@ -20,10 +21,14 @@ double complex Ly2[3][3] = {
    {0.   , 0., 1.  }     /*  initializers for row indexed by 2 */
 };
 double  kcut;
-double v, za, QF;
-double eps0, a0, wa, hbar;
-double wp1;
+double v, za, QFt, QFr;
+double eps0, a0, wa, hbar, c;
+double wp1, wsp1;
 double g1;
+double einf;
+double beta;
+double relerr, recerr;
+int transroll;                      // flag for translational or rolling part
 
 // This function multiplies mat1[][] and mat2[][],
 // and stores the result in res[][]
@@ -60,7 +65,7 @@ void fancyI(double complex mat[N][N], double complex matI[N][N])
   {
       for (j = 0; j < N; j++)
       {
-        matI[i][j] = -0.5*I*( mat[i][j] - conj(mat[j][i]) );
+        matI[i][j] = -0.5*_Complex_I*( mat[i][j] - conj(mat[j][i]) );
        }
     }
 }
@@ -93,7 +98,7 @@ double integ ( double my_f() , double a , double b, double relerr)
     f.params = NULL;
 
     /* Initialize the workspace. */
-    if ( ( ws = gsl_integration_cquad_workspace_alloc( 200 ) ) == NULL ) {
+    if ( ( ws = gsl_integration_cquad_workspace_alloc( 100 ) ) == NULL ) {
         printf( "call to gsl_integration_cquad_workspace_alloc failed.\n" );
         abort();
         }
@@ -107,48 +112,50 @@ double integ ( double my_f() , double a , double b, double relerr)
     /* Free the workspace. */
     gsl_integration_cquad_workspace_free( ws );
 
-    /* Bye. */
     return res;
 }
 
 //==============================================================================
 /*  FUNCTIONS  */
-// Real part of the reflection coefficient r( w , k )
+// Real part of the  reflection coefficient r( w , k )
 double rR (double w, double k)
 {
   double complex rp;
-  double complex eps;
-  //Z0 = csqrt(cpow(w,2) -cpow(k,2))/w;
-  eps = 1. - wp1*wp1/(w*w+w*g1*_Complex_I);
-  //Zp = csqrt(epsw*w -cpow(k,2))/(epsw);
+  double complex epsw/*, Z0, Zp*/;
+//  Z0 = csqrt(cpow(w,2) -cpow(k,2))/w;
+  epsw = einf*w - wp1*wp1/(w+g1*_Complex_I);
+//  Zp = csqrt(epsw*w -cpow(k,2))/(epsw);
 
-rp = (eps  -  1. ) / ( eps + 1. );
-return 1.;//creal(rp);
+//rp = (Z0  -  Zp ) / ( Z0 + Zp );
+rp = (epsw - w)/(epsw + w);
+return creal(rp);
 }
 
 // Imaginary part of the reflection coefficient r( w , k )
 double rI (double w, double k)
 {
-double complex rp;
-double complex eps;
-//Z0 = csqrt(cpow(w,2) -cpow(k,2))/w;
-  eps = 1. - wp1*wp1/(w*w+w*g1*_Complex_I);
-//Zp = csqrt(epsw*w -cpow(k,2))/(epsw);
+  double complex rp;
+  double complex epsw/*, Z0, Zp*/;
+//  Z0 = csqrt(cpow(w,2) -cpow(k,2))/w;
+  epsw = einf*w - wp1*wp1/(w+g1*_Complex_I);
+//  Zp = csqrt(epsw*w -cpow(k,2))/(epsw);
 
-rp = (eps  -  1. ) / ( eps + 1. );
-return w*g1/(wp1*wp1);//cimag(rp);
+//rp = (Z0  -  Zp ) / ( Z0 + Zp );
+rp = (epsw - w)/(epsw + w);
+return cimag(rp);
 }
 
 
 // Integral over the Green tensor with several options:
-void Gint(double complex Gten[N][N], double w, int RorI, int kx, int theta)
+void Gint(double complex Gten[N][N], double w, int RorI, int kx, int theta, int T)
 {
 double Gphi;
 double Gsigma[3];
 int sig, pphi;
 double wrapphi(double phi)
 {
-  double pre, lim1, lim2, cosp;
+  double pre, lim1, lim2, cosp, resphi;
+  int caseT=0;
   // Defining the integrand of the k integration
    double wrapk (double k)
    {
@@ -164,7 +171,11 @@ double wrapphi(double phi)
     if (kx == 1) {
      resk = resk*k*cosp;
     }
-    return 2*resk/(2*eps0*pow(2*PI,2));
+    if (T == 1) {
+      resk = resk/(1.-exp(-beta*hbar*wpl));
+    }
+
+    return resk;
   }
   // Performing the k integration
   cosp = cos(phi);
@@ -179,30 +190,37 @@ double wrapphi(double phi)
   }
   lim1 = 0.;
   lim2 = kcut/(2*za);
+          caseT = 0;
   if (theta == 1) {
     if (cosp < 0) {
       if (-w/(v*cosp)<= kcut/(2*za)) {
         lim2 =-w/(v*cosp);
+        caseT = 1;
     //    printf("here\n");
       }
     }
   }
-  return pre*integ(wrapk, lim1, lim2, 1e-6);
+    resphi = pre*integ(wrapk, lim1, lim2, relerr*recerr*recerr);
+  if (T == 1 && caseT == 1){
+    resphi = resphi + pre*integ(wrapk, lim2, kcut/(2*za), relerr*recerr*recerr);
+  }
+
+  return resphi/(eps0*pow(2*PI,2));
 }
 // First, we calculate Gsigma
 pphi = 0;
 // ... the (1,1) component with cos^2(phi) as prefactor
  sig = 0;
- Gsigma[0] = integ( wrapphi, 0., PI, 1e-4);
+ Gsigma[0] = integ( wrapphi, 0., PI, relerr*recerr);
 // ... the (2,2) component with sin^2(phi) as prefactor
   sig = 1;
- Gsigma[1] = integ( wrapphi, 0., PI, 1e-4);
+ Gsigma[1] = integ( wrapphi, 0., PI, relerr*recerr);
 // and the (2,2) component as sin^2 = 1 - cos^2
  Gsigma[2] = Gsigma[0] + Gsigma[1];
 
 // Second, we calculate Gphi
 pphi = 1;
- Gphi = integ( wrapphi, 0., PI, 1e-4);
+ Gphi = integ( wrapphi, 0., PI, relerr*recerr);
 // Now we can assemble the full Green tensor
 Gten[0][0] = Gsigma[0];
 Gten[1][1] = Gsigma[1];
@@ -222,12 +240,12 @@ double complex a,b,c,d;
 double complex alpinv[3][3];
 double complex GI[3][3], GR[3][3];
 
-alpinv[0][0] = pow(wa,2)-pow(w,2);
-alpinv[1][1] = pow(wa,2)-pow(w,2);
-alpinv[2][2] = pow(wa,2)-pow(w,2);
+alpinv[0][0] = wa*wa-pow(w,2);
+alpinv[1][1] = alpinv[0][0];
+alpinv[2][2] = alpinv[0][0];
 
-Gint(GI, w, 0, 0, 0);
-Gint(GR, w, 1, 0, 0);
+Gint(GI, w, 1, 0, 0, 0);
+Gint(GR, w, 0, 0, 0, 0);
 
 alpinv[0][0] += -a0*pow(wa,2)*(GR[0][0]+_Complex_I*GI[0][0]);
 alpinv[1][1] += -a0*pow(wa,2)*(GR[1][1]+_Complex_I*GI[1][1]);
@@ -251,6 +269,32 @@ alpinv[0][2] = -alpinv[2][0];
  alp[2][1] = 0.;
 }
 
+void AngIner(double w, double anginer[2]){
+  double complex GIth[3][3];
+  double complex alp[3][3], S[3][3], temp1[3][3], temp2[3][3];
+  double complex alpdag[3][3];
+
+
+  /* Creating all needed matrices */
+  alpha(alp,w);
+  dagger(alp,alpdag);
+  Gint(GIth , w, 1, 0, 1, 1);
+
+  /* Building the power spectrum S */
+  multiply(alp,GIth,temp1);
+  multiply(temp1,alpdag,S);
+
+  /* Building the angular momentum and the moment of inertia */
+  multiply(S,Ly,temp1);
+  multiply(S,Ly2,temp2);
+
+  /* Returning the angular momentum and the moment of inertia */
+  anginer[0] = w*creal(tr(temp1))/(PI*a0*wa*wa);
+  anginer[1] = creal(tr(temp2))/(PI*a0*wa*wa);
+
+}
+
+
 double IntQF( double w)
 {
 double complex GIth[3][3], GIk[3][3], GIkth[3][3];
@@ -262,15 +306,30 @@ double complex alpdag[3][3];
 alpha(alp,w);
 dagger(alp,alpdag);
 fancyI(alp, alpI);
-Gint(GIth , w, 0, 0, 1);
-Gint(GIk  , w, 0, 1, 0);
-Gint(GIkth, w, 0, 1, 1);
+Gint(GIth , w, 1, 0, 1, 1);
+Gint(GIk  , w, 1, 1, 0, 0);
+Gint(GIkth, w, 1, 1, 1, 1);
 
 /* Building the power spectrum S */
 multiply(alp,GIth,temp1);
 multiply(temp1,alpdag,S);
 
 /* Calculating the trace and return */
+/* We split the calcualtion in translational and rolling friction */
+if (transroll == 0){
+GIk[2][0] = 0.;
+GIk[0][2] = 0.;
+GIkth[2][0] = 0.;
+GIkth[0][2] = 0.;
+}
+if (transroll == 1){
+GIk[0][0] = 0.;
+GIk[1][1] = 0.;
+GIk[2][2] = 0.;
+GIkth[0][0] = 0.;
+GIkth[1][1] = 0.;
+GIkth[2][2] = 0.;
+}
 multiply(S,GIk,temp1);
 multiply(alpI,GIkth,temp2);
 //printf("%.10e\n",w );

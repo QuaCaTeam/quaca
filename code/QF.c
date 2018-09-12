@@ -24,41 +24,42 @@
 // Polarizability          : alpha(alp,w)
 #include "header.h"
 /******************************************************************************/
- 
+
 
 /******************************************************************************/
 // Main program
 int main () {
 
 /* Plot parameters */
-int maxi=1000;                        // plot points
+int maxi=100;                        // plot points
 double sta = 1E-6 ;                 // start value of the calculation,
-double sto = 7E0 ;                 // final value of the calculation
-double spac = (sto-sta)/maxi;      // and the respective spacing
-double w;
-double anginer[2];
+double sto = 1E-2 ;                 // final value of the calculation
+double spac = pow(sto/sta,1./maxi); // and the respective spacing
+double F0 ;                         // normalization constant for QF
+double Fanat;                        // analytical approximation (translation)
+double Fanar;                        // analytical approximation (rotation)
 FILE *fp;                           // output file
 int l;                              // dummy index
 
 /* System parameters (input routine is not implemented yet) */
-v    = 1E-3;                   // velocity in c
-za   = 10E-9/(1.9732705e-7);   // height of the dipole in 1/eV
+v    = 1E-4;
+za   = 5E-9/(1.9732705e-7);  // height of the dipole in 1/eV
 eps0 = 1./(4*PI);             // vacuum permittivity
 hbar = 1.;                    // reduced Planck's constant
 c    = 1.;                    // speed of light
 a0   = 6e-9;                  // static polarizability
 wa   = 1.3e0;                 // dipole resonance frequency in eV
 einf = 3.7;                   // background permittivity
-wp1  = 9.;               // plasma frequency in eV
+wp1  = 1.30077;               // plasma frequency in eV
 wsp1 = wp1/sqrt(1.+einf);     // plasma frequency in eV
-g1   = 0.1;                   // damping of the material in eV
-kcut = 100.;                   // Integration cut-off of the k-integration
-relerr = 1e-8;                // aimed relative error of the integration
+g1   = 0.12;                   // damping of the material in eV
+kcut = 70.;                   // Integration cut-off of the k-integration
+relerr = 1e-2;                // aimed relative error of the integration
 recerr = 1e-2;                // increase of relerr per layer of integration
-beta   = 1./((1e-6)/1.16e4);       // temperature in eV
+beta   = 1./((3e0)/1.16e4);       // inverse temperature in eV
 
 /* open the file */
-fp = fopen("../output/resultsOm.dat", "w");
+fp = fopen("../output/resultsT.dat", "w");
 if (fp == NULL) {
    printf("I couldn't open results.dat for writing.\n");
    exit(0);
@@ -68,16 +69,31 @@ if (fp == NULL) {
 /* Starting calculations */
 for (l=0; l<=maxi; ++l){
    printf("progress %3.2f\n",l*100./maxi );
+   clock_t c0 = clock();
    /* Point of evaluation */
-   w = sta+spac*l;
-   AngIner(w, anginer);
-     printf("%.5e, %.5e\n",anginer[0],anginer[1] );
+   v = sta*pow(spac,l);
+   /* Performing calculations */
+   /* translational contribution */
+   transroll = 0;
+   QFt = integ(IntQF,0.,100*wa,relerr);// + integ(IntQF,0.5*wa,100*wa,relerr);
+   /* rolling contribution */
+   transroll = 1;
+   QFr =integ(IntQF,0.,100*wa,relerr);// + integ(IntQF,0.5*wa,100*wa,relerr);
+  // QFr = QFr + integ(IntQF,wa,100*wa,relerr);   //+integ(IntQF,wa,10*wa,relerr);
+   /* Calculate normalization constant */
+   F0 = -3*hbar*pow(wsp1,5)*a0/(2*PI*eps0*pow(c,4));
+   /* Calculating analytical approximation for small velocities */
+   Fanat = -63*hbar*a0*a0*pow(g1/(eps0*wp1*wp1),2)*pow(v,3)/(pow(PI,3)*pow(2*za,10));
+   Fanar = -45*Fanat/63.;
    /* Print result to the screen */
-   printf("w= %.5e\n", w);
+   printf("v= %.5e\n", v);
+   printf("F= %.5e\n", (QFt+QFr)/F0 );
    /* write to the file */
-   fprintf(fp, "%.10e, %.10e, %.10e\n", w,anginer[0],anginer[1]);
+   fprintf(fp, "%.10e, %.10e, %.10e, %.10e, %.10e\n", v, QFt/F0, QFr/F0,Fanat/F0, Fanar/F0);
    /* buffer data for interative writing process */
    fflush(fp);
+   clock_t c1 = clock();
+   printf("time in sec: %3.2f\n",(c1 - c0) / 1000000. );
    printf ("%s \n", " ");
  }
 
