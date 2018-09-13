@@ -1,3 +1,3 @@
 # exclude docs since they can easily be generated
-/docs/html
-/docs/tex
+docs/*
+!docs/doxconf
