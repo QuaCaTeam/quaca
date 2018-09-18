@@ -87,9 +87,9 @@ double relerr;
 /*!
  * \fn void multiply(double complex mat1[Ndim][Ndim], double complex mat2[Ndim][Ndim], double complex res[Ndim][Ndim])
  * \brief Multiplies to square matrices of dimension Ndim.
- * \param mat1[Ndim][Ndim] First square matrix of dimension Ndim.
- * \param mat2[Ndim][Ndim] Second matrix of dimension Ndim.
- * \param res[Ndim][Ndim] Resulting matrix of dimension Ndim.
+ * \param mat1 First square matrix of dimension Ndim.
+ * \param mat2 Second matrix of dimension Ndim.
+ * \param res Resulting matrix of dimension Ndim.
  * \return void
  */
 void multiply(double complex mat1[Ndim][Ndim], double complex mat2[Ndim][Ndim], double complex res[Ndim][Ndim]);
@@ -97,8 +97,8 @@ void multiply(double complex mat1[Ndim][Ndim], double complex mat2[Ndim][Ndim], 
 /*!
  * \fn void dagger(double complex mat[Ndim][Ndim], double complex res[Ndim][Ndim])
  * \brief Calculates the conjugate transpose of a square matrix of dimension Ndim.
- * \param mat[Ndim][Ndim] Square matrix of dimension Ndim.
- * \param res[Ndim][Ndim] Resulting matrix of dimension Ndim.
+ * \param mat Square matrix of dimension Ndim.
+ * \param res Resulting matrix of dimension Ndim.
  * \return void
  */
 void dagger(double complex mat[Ndim][Ndim], double complex res[Ndim][Ndim]);
@@ -106,8 +106,8 @@ void dagger(double complex mat[Ndim][Ndim], double complex res[Ndim][Ndim]);
 /*!
  * \fn void fancy(double complex mat[Ndim][Ndim], double complex res[Ndim][Ndim], int mode)
  * \brief Calculates fancy R or fancy I of a matrix.
- * \param mat[Ndim][Ndim] Square matrix of dimension Ndim.
- * \param res[Ndim][Ndim] Resulting matrix of dimension Ndim.
+ * \param mat Square matrix of dimension Ndim.
+ * \param res Resulting matrix of dimension Ndim.
  * \param mode Option for R or I, mode = 1 equals R and mode = -1 equals I.
  * \return void
  */
@@ -116,7 +116,7 @@ void fancy(double complex mat[Ndim][Ndim], double complex res[Ndim][Ndim], int m
 /*!
  * \fn const double complex tr(double complex mat[Ndim][Ndim])
  * \brief Computes the trace of a square matrix.
- * \param mat[Ndim][Ndim] Square matrix of dimension Ndim.
+ * \param mat Square matrix of dimension Ndim.
  * \return Trace of the matrix.
  */
 const double complex tr(double complex mat[Ndim][Ndim]);
@@ -250,33 +250,33 @@ const double complex rNN0SF(double complex omega, double x);
 const double complex rNN1SF(double complex omega, double x);
 
 /*!
- * \fn void greenfull(int n, double complex omega, double h, double rho, double complex g[3][3])
+ * \fn void greenfull(int n, double complex omega, double h, double rho, double complex g[Ndim][Ndim])
  * \brief Computes the full Green's tensor of the cylinder.
  * \param n Order.
  * \param omega Frequency.
  * \param h Wave vector (Fourier variable of z).
  * \param rho Coordinate rho (Radius).
- * \param g[Ndim][Ndim] Resulting tensor.
+ * \param g Resulting tensor.
  */
-void greenfull(int n, double complex omega, double h, double rho, double complex g[3][3]);
+void greenfull(int n, double complex omega, double h, double rho, double complex g[Ndim][Ndim]);
 
 /*!
- * \fn void greencent(double complex omega, double h, double complex g[3][3])
+ * \fn void greencent(double complex omega, double h, double complex g[Ndim][Ndim])
  * \brief Computes the Green's tensor on the coaxial line of the cylinder.
  * \param omega Frequency.
  * \param h Wave vector (Fourier variable of z).
- * \param g[Ndim][Ndim] Resulting tensor.
+ * \param g Resulting tensor.
  */
-void greencent(double complex omega, double h, double complex g[3][3]);
+void greencent(double complex omega, double h, double complex g[Ndim][Ndim]);
 
 /*!
- * \fn void greencentNF(double complex omega, double h, double complex g[3][3])
+ * \fn void greencentNF(double complex omega, double h, double complex g[Ndim][Ndim])
  * \brief Computes the Green's tensor on the coaxial line of the cylinder in the near field limit.
  * \param omega Frequency.
  * \param h Wave vector (Fourier variable of z).
- * \param g[Ndim][Ndim] Resulting tensor.
+ * \param g Resulting tensor.
  */
-void greencentNF(double complex omega, double h, double complex g[3][3]);
+void greencentNF(double complex omega, double h, double complex g[Ndim][Ndim]);
 
 /*!
  * \fn double integ(double my_f(), double a, double b, double relerr)
@@ -293,7 +293,7 @@ double integ(double my_f(), double a, double b, double relerr);
 /*!
  * \fn void Greenint(double complex gres[Ndim][Ndim], double omega, int RorI, int horNoh, int theta)
  * \brief Computes the integral of greencent over h.
- * \param gres[Ndim][Ndim] Resulting tensor.
+ * \param gres Resulting tensor.
  * \param omega Frequency.
  * \param RorI Flag for fancy R or I.
  * \param horNoh Flag for additional prefactor h.
@@ -440,7 +440,7 @@ const double complex rNN1SF(double complex omega, double x) {
     return result;
 };
 
-void greenfull(int N, double complex omega, double h, double rho, double complex g[3][3]) {
+void greenfull(int N, double complex omega, double h, double rho, double complex g[Ndim][Ndim]) {
 
     // fill tensor with zeros
     int i,j;
@@ -480,7 +480,7 @@ void greenfull(int N, double complex omega, double h, double rho, double complex
     g[2][0] = omega*omega/(c*c*eps0)*g31;
 };
 
-void greencent(double complex omega, double h, double complex g[3][3]) {
+void greencent(double complex omega, double h, double complex g[Ndim][Ndim]) {
 
     // define non zero entries
     double complex gorth = I/(8*eps0)*(omega*omega/(c*c)*refCoeffn(1,1,omega,h) + h*h*refCoeffn(2,1,omega,h) - 2*I*omega*h/c*refCoeffn(3,1,omega,h));
@@ -500,7 +500,7 @@ void greencent(double complex omega, double h, double complex g[3][3]) {
     g[2][2] = gzz;
 };
 
-void greencentNF(double complex omega, double h, double complex g[3][3]) {
+void greencentNF(double complex omega, double h, double complex g[Ndim][Ndim]) {
 
     // define non zero entries
     double complex gorth = I*h*h/(8*eps0)*refCoeffn(2,1,omega,h);

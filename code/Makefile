@@ -27,6 +27,6 @@ docs:
 	@cd ../docs && doxygen doxconf
 
 clean:
-	rm *.o
+	rm *.o *.bak
 
 .PHONY: all clean tester
