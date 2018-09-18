@@ -5,7 +5,11 @@
 # options
 CC = gcc
 CFLAGS = -Wall -I/usr/include # show warnings and include
-LDFLAGS = -L/usr/lib -lgsl -lgslcblas -lm -lflint-arb -lflint -lmpfr # libraries (gsl and arb), on arch -larb on debian -lflint-arb
+LIBS = -L/usr/lib -lgsl -lgslcblas -lm -lflint-arb -lflint -lmpfr # libraries (gsl and arb), on arch -larb on debian -lflint-arb
+
+# directories
+SRCDIR = src
+HEADDIR = /header
 
 # file
 SRC = tester.c ref.c QF.c Omega.c IntOmega.c
@@ -20,11 +24,11 @@ all: $(PROG) clean
 
 # link object files, create executable
 $(PROG): %: %.o
-	$(CC) -o $@ $< $(LDFLAGS)
+	$(CC) -o $@ $< $(LIBS)
 
 # make docs
 docs:
-	@cd ../docs && doxygen doxconf
+	@doxygen doc/doxconf
 
 clean:
 	rm *.o *.bak

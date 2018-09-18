@@ -1,143 +1,21 @@
-/* Include the needed libraries */
-#include <time.h>
-#include <stdio.h>
-#include <math.h>
-#include <gsl/gsl_integration.h>
-#include <complex.h>
-#include <string.h>
-/* Defining fixed parameters */
-#define PI 3.14159265358979323846  // just pi
-#define N 3                        // matrix dimension
+/*! 
+ * \file plate.c
+ * \brief Functions for quantum friction of a plate.
+ * \author M. O.
+ *
+ * Functions, for more explicit documentation see header.
+ */
 
-
-double complex Ly[3][3] = {
-   {0.   , 0., 1.*_Complex_I} ,   /*  initializers for row indexed by 0 */
-   {0.   , 0., 0.  } ,   /*  initializers for row indexed by 1 */
-   {-1.*_Complex_I, 0., 0.  }     /*  initializers for row indexed by 2 */
-};
-double complex Ly2[3][3] = {
-   {1.   , 0., 0.  } ,   /*  initializers for row indexed by 0 */
-   {0.   , 0., 0.  } ,   /*  initializers for row indexed by 1 */
-   {0.   , 0., 1.  }     /*  initializers for row indexed by 2 */
-};
-double  kcut;
-double v, za, QFt, QFr;
-double eps0, a0, wa, hbar, c;
-double wp1, wsp1;
-double g1;
-double einf;
-double beta;
-double delta;
-double relerr, recerr, absr=1e-200;
-int transroll;                      // flag for translational or rolling part
-
-// This function multiplies mat1[][] and mat2[][],
-// and stores the result in res[][]
-void multiply(double complex mat1[N][N], double complex mat2[N][N], double complex res[][N]){
-    int i, j, k;
-    for (i = 0; i < N; i++)
-    {
-        for (j = 0; j < N; j++)
-        {
-            res[i][j] = 0.;
-            for (k = 0; k < N; k++)
-                res[i][j] += mat1[i][k]*mat2[k][j];
-        }
-    }
-}
-
-// Yields the transposed of a 3x3 matrix
-void dagger(double complex mat1[N][N], double complex mat2[N][N])
-{
-int i,j;
-for (i = 0; i < N; i++)
-{
-    for (j = 0; j < N; j++)
-    {
-      mat2[j][i] = conj(mat1[i][j]);
-     }
-  }
-}
-
-void fancyI(double complex mat[N][N], double complex matI[N][N])
+void fancyI(double complex mat[Ndim][Ndim], double complex matI[Ndim][Ndim])
 {
   int i,j;
-  for (i = 0; i < N; i++)
+  for (i = 0; i < Ndim; i++)
   {
-      for (j = 0; j < N; j++)
+      for (j = 0; j < Ndim; j++)
       {
         matI[i][j] = -0.5*_Complex_I*( mat[i][j] - conj(mat[j][i]) );
        }
     }
-}
-
-
-// This function yields the trace of a matrix mat
-double complex tr(double complex mat[N][N])
-{
-    int i;
-    double complex res;
-    res = 0.;
-    for (i = 0; i < N; i++)
-    {
-    res += mat[i][i];
-  }
-    return res;
-}
-//==============================================================================
-/* INTEGRATION */
-// Finite integration int_a^b dx f(x) with a given relative error
-double integ ( double my_f() , double a , double b, double relerr, double epsabs)
-{
-    gsl_function f;
-    gsl_integration_cquad_workspace *ws = NULL;
-    double res, abserr;
-    size_t neval;
-
-    /* Prepare the function. */
-    f.function = my_f;
-    f.params = NULL;
-
-    /* Initialize the workspace. */
-    if ( ( ws = gsl_integration_cquad_workspace_alloc( 100 ) ) == NULL ) {
-        printf( "call to gsl_integration_cquad_workspace_alloc failed.\n" );
-        abort();
-        }
-
-    /* Call the integrator. */
-    if ( gsl_integration_cquad( &f, a , b , epsabs , relerr , ws , &res , &abserr , &neval ) != 0 ) {
-        printf( "call to gsl_integration_cquad failed.\n" );
-        abort();
-        }
-
-    /* Free the workspace. */
-    gsl_integration_cquad_workspace_free( ws );
-
-    return res;
-}
-
-double integinf ( double my_f() , double a ,  double relerr, double epsabs)
-{
-    gsl_function f;
-    gsl_integration_workspace *work_ptr =
-      gsl_integration_workspace_alloc (1000);
-    double res, abserr;
-
-    /* Prepare the function. */
-    f.function = my_f;
-    f.params = NULL;
-
-
-    /* Call the integrator. */
-    if ( gsl_integration_qagiu( &f, a , epsabs , relerr , 1000, work_ptr , &res , &abserr) != 0 ) {
-        printf( "call to gsl_integration_qagiu failed.\n" );
-        abort();
-        }
-
-    /* Free the workspace. */
-    gsl_integration_workspace_free( work_ptr );
-
-    return res;
 }
 
 //==============================================================================
@@ -172,7 +50,7 @@ return w*g1/(wp1*wp1);//cimag(rp);
 
 
 // Integral over the Green tensor with several options:
-void Gint(double complex Gten[N][N], double w, int RorI, int kx, int theta, int T)
+void Gint(double complex Gten[Ndim][Ndim], double w, int RorI, int kx, int theta, int T)
 {
 double Gphi;
 double Gsigma[3];
@@ -259,7 +137,7 @@ Gten[1][2] = 0.;
 }
 
 // The polarizability
-void alpha(double complex alp[N][N], double w)
+void alpha(double complex alp[Ndim][Ndim], double w)
 {
 double complex a,b,c,d;
 double complex alpinv[3][3];
@@ -400,7 +278,7 @@ double Iner(double w){
 }
 
 
-double IntQF( double w)
+double IntQF(double w)
 {
 double complex GIth[3][3], GIk[3][3], GIkth[3][3];
 double complex alp[3][3], alpI[3][3], S[3][3],  temp1[3][3], temp2[3][3];
