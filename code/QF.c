@@ -76,12 +76,12 @@ for (l=0; l<=maxi; ++l){
    /* translational contribution */
    transroll = 0;
    absr = 1E-200;
-   QFt = integ(IntQF,0.,0.9*wa,relerr, absr);
-   QFt = QFt + integ(IntQF,0.5*wa,1.5*wa,relerr, abs(QFt));
-   QFt = QFt + integ(IntQF,1.5*wa,100*wa,relerr, abs(QFt));
+   QFt = integ(IntQF,0.,100*wa,relerr, absr);
+//   QFt = QFt + integinf(IntQF,wa,relerr, absr);
    /* rolling contribution */
    transroll = 1;
-   QFr = integ(IntQF,0.,wa,relerr, absr);
+   QFr = integ(IntQF,0.,100*wa,relerr, absr);
+//      QFr = QFr + integinf(IntQF,wa,relerr, absr);
 //   QFr = QFr + integ(IntQF,wa,100*wa,relerr, absr);
       /* Calculate normalization constant */
    F0 = -3*hbar*pow(wsp1,5)*a0/(2*PI*eps0*pow(c,4));

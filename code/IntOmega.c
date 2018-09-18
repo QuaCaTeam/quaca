@@ -31,15 +31,15 @@
 int main () {
 
 /* Plot parameters */
-int maxi=100;                        // plot points
-double sta = 1E-9/(1.9732705e-7) ;                 // start value of the calculation,
-double sto = 100E-9/(1.9732705e-7) ;                 // final value of the calculation
-double spac = pow(sto/sta,1./maxi);      // and the respective spacing
+int maxi=1000;                        // plot points
+double sta = 1.29999953 ;                 // start value of the calculation,
+double sto = 1.299999533;                 // final value of the calculation
+double spac =(sto-sta)/maxi;      // and the respective spacing
 FILE *fp;                           // output file
 int l;                              // dummy index
-double resAngL, resIner;
+double resAngL, resIner, w;
 /* System parameters (input routine is not implemented yet) */
-v    = 1E-4;                   // velocity in c
+v    = 1E-3;                   // velocity in c
 za   = 20E-9/(1.9732705e-7);   // height of the dipole in 1/eV
 eps0 = 1./(4*PI);             // vacuum permittivity
 hbar = 1.;                    // reduced Planck's constant
@@ -47,17 +47,17 @@ c    = 1.;                    // speed of light
 a0   = 6e-9;                  // static polarizability
 wa   = 1.3e0;                 // dipole resonance frequency in eV
 einf = 1.;                   // background permittivity
-wp1  = 9.;               // plasma frequency in eV
+wp1  = 12.;               // plasma frequency in eV
 wsp1 = wp1/sqrt(1.+einf);     // plasma frequency in eV
 g1   = 0.1;                   // damping of the material in eV
-kcut = 70.;                   // Integration cut-off of the k-integration
-relerr = 1e-4;                // aimed relative error of the integration
-recerr = 1e-2;                // increase of relerr per layer of integration
-beta   = 1./((1e-9)/1.16e4);       // temperature in eV
+kcut = 100.;                   // Integration cut-off of the k-integration
+relerr = 1e-8;                // aimed relative error of the integration
+recerr = 1e-3;                // increase of relerr per layer of integration
+beta   = 1./((1e-3)/1.16e4);       // temperature in eV
 delta  = a0*wa*wa/(4*PI*eps0*pow(2*za,3));
 
 /* open the file */
-fp = fopen("../output/resultsOm.dat", "w");
+fp = fopen("../output/resultsOmInt.dat", "w");
 if (fp == NULL) {
    printf("I couldn't open results.dat for writing.\n");
    exit(0);
@@ -69,25 +69,11 @@ for (l=0; l<=maxi; ++l){
       clock_t c0 = clock();
    printf("progress %3.2f\n",l*100./maxi );
    /* Point of evaluation */
-   za = sta*pow(spac,l);
+   w = sta+spac*l;
    /* Print result to the screen */
-   printf("za= %.10e, %.10e, %.10e\n", za, sqrt(wa*wa-2*delta), sqrt(wa*wa-delta));
+   printf("w= %.10e\n", w);
    /* write to the file */
-   resAngL = integ(AngL,0,sqrt(wa*wa-2*delta),relerr,absr);
-    printf("L1= %.10e, %.10e\n",resAngL,anaAngL(v));
-   resAngL = resAngL+integ(AngL,sqrt(wa*wa-2*delta),sqrt(wa*wa-delta),relerr,absr);
-    printf("L2= %.10e, %.10e\n",resAngL,anaAngL(v));
-   resAngL = resAngL+ integ(AngL,sqrt(wa*wa-delta),wa,relerr,absr);
-    printf("L3= %.10e, %.10e\n",resAngL,anaAngL(v));
-   resAngL = resAngL+ integ(AngL,wa,wsp1,relerr,absr);
-    printf("L4= %.10e, %.10e\n",resAngL,anaAngL(v));
-   resAngL = resAngL+ integ(AngL,wsp1,wsp1*100,relerr,absr);
-    printf("Lf= %.10e, %.10e\n",resAngL,anaAngL(v));
-//   resIner = integ(Iner,0.,wa-2*delta,relerr,absr);
-//   resIner += integ(Iner,wa-2*delta,wa-delta,relerr,absr);
-//   resIner += integ(Iner,wa-delta,wsp1,relerr,absr);
-//   resIner += integ(Iner,wsp1,wsp1*100,relerr,absr);
-   fprintf(fp, "%.10e, %.10e, %.10e, %.10e\n", za,resAngL,anaAngL(v),resIner);
+   fprintf(fp, "%.10e, %.10e, %.10e\n", w,AngL(w),Iner(w));
 
   // fprintf(fp, "%.10e, %.10e, %.10e\n", w,AngL(w),Iner(w));
    /* buffer data for interative writing process */
