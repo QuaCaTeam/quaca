@@ -8,7 +8,7 @@ CFLAGS = -Wall -I/usr/include # show warnings and include
 LDFLAGS = -L/usr/lib -lgsl -lgslcblas -lm -lflint-arb -lflint -lmpfr # libraries (gsl and arb), on arch -larb on debian -lflint-arb
 
 # file
-SRC = tester.c ref.c QF.c Omega.c
+SRC = tester.c ref.c QF.c Omega.c IntOmega.c
 OBJ = ${SRC:.c=.o}
 PROG = ${SRC:.c=}
 
