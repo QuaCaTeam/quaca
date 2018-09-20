@@ -11,7 +11,7 @@ CC = gcc
 CFLAGS = -Wall # show warnings 
 INCLUDES = -I/usr/include -I$(INCDIR) # include headers
 LFLAGS = -L/usr/lib 
-LIBS = -lgsl -lgslcblas -lm -lflint-arb -lflint -lmpfr # libraries (gsl and arb), on arch -larb on debian -lflint-arb
+LIBS = -lgsl -lgslcblas -lm -larb -lflint -lmpfr # libraries (gsl and arb), on arch -larb on debian -lflint-arb
 
 # file
 SRC = qfPlate.c cyl.c plate.c qfhelp.c
@@ -31,6 +31,6 @@ docs:
 	@doxygen doc/doxconf
 
 clean:
-	rm *.o *.bak
+	rm *.o
 
-.PHONY: all clean tester
+.PHONY: all clean

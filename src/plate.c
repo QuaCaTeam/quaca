@@ -17,6 +17,9 @@
 /* Functions */
 /* --------- */
 
+double complex Ly[3][3] = { {0.   , 0., 1.*_Complex_I} ,   /*  initializers for row indexed by 0 */ {0.   , 0., 0.  } ,   /*  initializers for row indexed by 1 */ {-1.*_Complex_I, 0., 0.  }     /*  initializers for row indexed by 2 */ };
+double complex Ly2[3][3] = { {1.   , 0., 0.  } ,   /*  initializers for row indexed by 0 */ {0.   , 0., 0.  } ,   /*  initializers for row indexed by 1 */ {0.   , 0., 1.  }     /*  initializers for row indexed by 2 */ };
+
 // Real part of the  reflection coefficient r( w , k )
 double rR (double w, double k)
 {

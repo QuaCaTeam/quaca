@@ -53,11 +53,13 @@ g1   = 0.1;                   // damping of the material in eV
 kcut = 100.;                   // Integration cut-off of the k-integration
 relerr = 1e-8;                // aimed relative error of the integration
 recerr = 1e-3;                // increase of relerr per layer of integration
+absr = 1e-200;
 beta   = 1./((1e-3)/1.16e4);       // temperature in eV
 delta  = a0*wa*wa/(4*PI*eps0*pow(2*za,3));
 
+
 /* open the file */
-fp = fopen("../output/resultsOmInt.dat", "w");
+fp = fopen("../data/test.dat", "w");
 if (fp == NULL) {
    printf("I couldn't open results.dat for writing.\n");
    exit(0);
