@@ -23,8 +23,18 @@
 // Integrated Green tensor : Gint(Gten,w,RorI,T,kx)
 // Polarizability          : alpha(alp,w)
 #include "h/plate.h"
-/******************************************************************************/
 
+#define PBSTR "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+#define PBWIDTH 60
+/******************************************************************************/
+void printProg(double percentage);
+
+void printProg(double percentage) {
+    int val = (int) (percentage * 100);
+    int lpad = (int) (percentage * PBWIDTH);
+    int rpad = PBWIDTH - lpad;
+    printf("\rProgress: %3d%% [%.*s%*s]", val, lpad, PBSTR, rpad, "");
+};
 
 /******************************************************************************/
 // Main program
@@ -38,6 +48,7 @@ double spac =(sto-sta)/maxi;      // and the respective spacing
 FILE *fp;                           // output file
 int l;                              // dummy index
 double w;
+double prog;
 /* System parameters (input routine is not implemented yet) */
 v    = 1E-3;                   // velocity in c
 za   = 20E-9/(1.9732705e-7);   // height of the dipole in 1/eV
@@ -66,25 +77,26 @@ if (fp == NULL) {
 }
 
 
+clock_t c0 = clock();
 /* Starting calculations */
 for (l=0; l<=maxi; ++l){
-      clock_t c0 = clock();
-   printf("progress %3.2f\n",l*100./maxi );
-   /* Point of evaluation */
+   //clock_t c0 = clock();
+   
+    /* Evaluation */
    w = sta+spac*l;
-   /* Print result to the screen */
-   printf("w= %.10e\n", w);
-   /* write to the file */
    fprintf(fp, "%.10e, %.10e, %.10e\n", w,AngL(w),Iner(w));
-
-  // fprintf(fp, "%.10e, %.10e, %.10e\n", w,AngL(w),Iner(w));
-   /* buffer data for interative writing process */
    fflush(fp);
-   clock_t c1 = clock();
-   printf("time in sec: %3.2f\n",(c1 - c0) / 1000000. );
-   printf ("%s \n", " ");
+
+   //clock_t c1 = clock();
+   prog = l/(double)maxi;
+   printProg(prog);
  }
 
+clock_t c1 = clock();
+printf("\n");
+printf("Finished calculating %d points in %3.2f sec. \n", maxi, (c1-c0)/1.e6);
+
 return 0;
-}
+};
+
 ////////////////////////////////////////////////////////////////////////////////
