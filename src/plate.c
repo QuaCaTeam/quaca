@@ -6,20 +6,17 @@
  * Functions, for more explicit documentation see header.
  */
 
-void fancyI(double complex mat[Ndim][Ndim], double complex matI[Ndim][Ndim])
-{
-  int i,j;
-  for (i = 0; i < Ndim; i++)
-  {
-      for (j = 0; j < Ndim; j++)
-      {
-        matI[i][j] = -0.5*_Complex_I*( mat[i][j] - conj(mat[j][i]) );
-       }
-    }
-}
+/* --------- */
+/* Libraries */
+/* --------- */
 
-//==============================================================================
-/*  FUNCTIONS  */
+#include "h/qfhelp.h"
+#include "h/plate.h"
+
+/* --------- */
+/* Functions */
+/* --------- */
+
 // Real part of the  reflection coefficient r( w , k )
 double rR (double w, double k)
 {
@@ -30,8 +27,8 @@ double rR (double w, double k)
 //  Zp = csqrt(epsw*w -cpow(k,2))/(epsw);
 
 //rp = (Z0  -  Zp ) / ( Z0 + Zp );
-rp = (epsw - w)/(epsw + w);
-return 1.;//creal(rp);
+    rp = (epsw - w)/(epsw + w);
+    return 1.;//creal(rp);
 }
 
 // Imaginary part of the reflection coefficient r( w , k )
@@ -211,7 +208,7 @@ double AngL(double w){
   }
   /* Creating all needed matrices */
   alpha(alp,w);
-  fancyI(alp,alpI);
+  fancy(alp,alpI,-1);
   dagger(alp,alpdag);
   Gint(GIth , w, 1, 0, 1, 1);
 
@@ -251,7 +248,7 @@ double Iner(double w){
   }
   /* Creating all needed matrices */
   alpha(alp,w);
-  fancyI(alp,alpI);
+  fancy(alp,alpI,-1);
   dagger(alp,alpdag);
   Gint(GIth , w, 1, 0, 1, 1);
 
@@ -288,7 +285,7 @@ double complex alpdag[3][3];
 /* Creating all needed matrices */
 alpha(alp,w);
 dagger(alp,alpdag);
-fancyI(alp, alpI);
+fancy(alp, alpI, -1);
 Gint(GIth , w, 1, 0, 1, 1);
 Gint(GIk  , w, 1, 1, 0, 0);
 Gint(GIkth, w, 1, 1, 1, 1);

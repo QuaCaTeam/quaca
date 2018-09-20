@@ -27,7 +27,7 @@
  * \var gamma_p
  * \brief Plasma resistivity in eV.
  */
-double omega_p, gamma_p;
+extern double omega_p, gamma_p;
 
 // universal constants
 
@@ -41,7 +41,7 @@ double omega_p, gamma_p;
  * \var hbar
  * \brief Reduced Plancks constant.
  */
-double c, eps0, hbar;
+extern double c, eps0, hbar;
 
 // miscellaneous
 
@@ -49,19 +49,19 @@ double c, eps0, hbar;
  * \var R
  * \brief Radius of the cylinder.
  */
-double R;
+extern double R;
 
 /*!
  * \var hcut
  * \brief Cutoff for h integration.
  */
-double hcut;
+extern double hcut;
 
 /*!
  * \var relerr
  * \brief Relative error of the integration routine.
  */
-double relerr;
+extern double relerr, absr=1e-200;
 
 /* ------------------- */
 /* Predefine functions */

@@ -10,7 +10,7 @@
 /* Libraries */
 /* --------- */
 
-#include "qfhelp.h"
+#include "h/qfhelp.h"
 
 
 /* --------- */

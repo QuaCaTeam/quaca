@@ -11,8 +11,8 @@
 /* Libraries */
 /* --------- */
 
-#include "cyl.h"
-#include "qfhelp.h"
+#include "h/cyl.h"
+#include "h/qfhelp.h"
 
 
 /* --------- */
@@ -268,9 +268,9 @@ void Greenint(double complex gres[Ndim][Ndim], double omega, int RorI, int horNo
 
     // non zero entries
     sig = 1;
-    gres[0][0] = integ(wraph, lim1, lim2, relerr);
+    gres[0][0] = integ(wraph, lim1, lim2, relerr, absr);
     sig = 2;
-    gres[1][1] = integ(wraph, lim1, lim2, relerr);
+    gres[1][1] = integ(wraph, lim1, lim2, relerr, absr);
     sig = 3;
-    gres[2][2] = integ(wraph, lim1, lim2, relerr);
+    gres[2][2] = integ(wraph, lim1, lim2, relerr, absr);
 };

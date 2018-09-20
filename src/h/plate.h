@@ -17,12 +17,12 @@
 /* ---------- */
 
 
-double complex Ly[3][3] = {
+extern double complex Ly[3][3] = {
    {0.   , 0., 1.*_Complex_I} ,   /*  initializers for row indexed by 0 */
    {0.   , 0., 0.  } ,   /*  initializers for row indexed by 1 */
    {-1.*_Complex_I, 0., 0.  }     /*  initializers for row indexed by 2 */
 };
-double complex Ly2[3][3] = {
+extern double complex Ly2[3][3] = {
    {1.   , 0., 0.  } ,   /*  initializers for row indexed by 0 */
    {0.   , 0., 0.  } ,   /*  initializers for row indexed by 1 */
    {0.   , 0., 1.  }     /*  initializers for row indexed by 2 */
@@ -44,7 +44,7 @@ double complex Ly2[3][3] = {
  * \var a0
  * \brief Static polarizability.
  */
-double c, hbar, eps0, a0;
+extern double c, hbar, eps0, a0;
 
 // material and system parameters
 
@@ -70,13 +70,13 @@ double c, hbar, eps0, a0;
  * \var einf
  * \brief Background permittivity.
  */
-double wp1, wsp1, wa, g1, beta, delta, einf;
+extern double wp1, wsp1, wa, g1, beta, delta, einf;
 
 /*!
  * \var kcut
  * \brief Cut-off for k integration.
  */
-double  kcut;
+extern double  kcut;
 
 /*!
  * \var v
@@ -91,7 +91,7 @@ double  kcut;
  * \var QFr
  * \brief dont know.
  */
-double v, za, QFt, QFr;
+extern double v, za, QFt, QFr;
 
 /*!
  * \var relerr
@@ -103,7 +103,7 @@ double v, za, QFt, QFr;
  * \var absr
  * \brief Absolute error.
  */
-double relerr, recerr, absr=1e-200;
+extern double relerr, recerr, absr=1e-200;
 
 /*! 
  * \var transroll
@@ -115,8 +115,6 @@ int transroll;
 /* --------- */
 /* Functions */
 /* --------- */
-
-void fancyI(double complex mat[Ndim][Ndim], double complex matI[Ndim][Ndim]);
 
 double rI (double w, double k);
 double rR (double w, double k);
