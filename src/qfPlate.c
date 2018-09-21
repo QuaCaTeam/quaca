@@ -70,7 +70,7 @@ delta  = a0*wa*wa/(4*PI*eps0*pow(2*za,3));
 
 
 /* open the file */
-fp = fopen("../data/test.dat", "w");
+fp = fopen("../data/output/test.dat", "w");
 if (fp == NULL) {
    printf("I couldn't open results.dat for writing.\n");
    exit(0);
