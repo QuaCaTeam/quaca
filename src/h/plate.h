@@ -2,7 +2,6 @@
  * \file plate.h
  * \brief Header file for quantum friction of a plate.
  * \author M. O.
- *
  */
 
 /* --------- */
@@ -10,12 +9,6 @@
 /* --------- */
 
 #include "qfhelp.h"
-
-
-/* ---------- */
-/* Parameters */
-/* ---------- */
-
 
 // universal constants
 
@@ -112,12 +105,74 @@ int transroll;
  */
 void input(char file[]);
 
+/*!
+ * \fn double rI (double w, double k)
+ * \brief
+ * \param w
+ * \param k
+ * \return
+ */
 double rI (double w, double k);
+
+/*!
+ * \fn double rR (double w, double k)
+ * \brief
+ * \param w
+ * \param k
+ * \return
+ */
 double rR (double w, double k);
 
+/*!
+ * \fn void Gint(double complex Gten[Ndim][Ndim], double w, int RorI, int kx, int theta, int T)
+ * \brief
+ * \param Gten
+ * \param w
+ * \param RorI
+ * \param kx
+ * \param theta
+ * \param T
+ * \return
+ */
 void Gint(double complex Gten[Ndim][Ndim], double w, int RorI, int kx, int theta, int T);
+
+/*!
+ * \fn void alpha(double complex alp[Ndim][Ndim], double w)
+ * \brief
+ * \param alp
+ * \param w
+ * \return
+ */
 void alpha(double complex alp[Ndim][Ndim], double w);
+
+/*!
+ * \fn double anaAngL(double v)
+ * \brief
+ * \param v
+ * \return
+ */
 double anaAngL(double v);
+
+/*!
+ * \fn double AngL(double w)
+ * \brief
+ * \param w
+ * \return
+ */
 double AngL(double w);
+
+/*!
+ * \fn double Iner(double w)
+ * \brief
+ * \param w
+ * \return
+ */
 double Iner(double w);
+
+/*!
+ * \fn double IntQF(double w)
+ * \brief
+ * \param w
+ * \return
+ */
 double IntQF(double w);

@@ -110,7 +110,7 @@ const double complex tr(double complex mat[Ndim][Ndim]);
 double integ(double my_f(), double a, double b, double relerr, double epsabs);
 
 /*!
- * \fn double integ(double my_f(), double a, double relerr, double epsabs)
+ * \fn double integinf(double my_f(), double a, double relerr, double epsabs)
  * \brief Integration wrapper for semi infinite integration. 
  * \param my_f() Function of one argument that shall be integrated.
  * \param a Lower integral bound.
