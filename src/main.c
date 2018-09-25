@@ -24,18 +24,6 @@
 // Polarizability          : alpha(alp,w)
 #include "h/plate.h"
 
-#define PBSTR "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
-#define PBWIDTH 60
-/******************************************************************************/
-void printProg(double percentage);
-
-void printProg(double percentage) {
-    int val = (int) (percentage * 100);
-    int lpad = (int) (percentage * PBWIDTH);
-    int rpad = PBWIDTH - lpad;
-    printf("\rProgress: %3d%% [%.*s%*s]", val, lpad, PBSTR, rpad, "");
-};
-
 /******************************************************************************/
 // Main program
 int main () {
@@ -45,56 +33,51 @@ int maxi=1000;                        // plot points
 double sta = 1.29999953 ;                 // start value of the calculation,
 double sto = 1.299999533;                 // final value of the calculation
 double spac =(sto-sta)/maxi;      // and the respective spacing
-FILE *fp;                           // output file
-int l;                              // dummy index
+
+/* Dummies */
+int l;
 double w;
 double prog;
-/* System parameters (input routine is not implemented yet) */
-v    = 1E-3;                   // velocity in c
-za   = 20E-9/(1.9732705e-7);   // height of the dipole in 1/eV
-eps0 = 1./(4*PI);             // vacuum permittivity
-hbar = 1.;                    // reduced Planck's constant
-c    = 1.;                    // speed of light
-a0   = 6e-9;                  // static polarizability
-wa   = 1.3e0;                 // dipole resonance frequency in eV
-einf = 1.;                   // background permittivity
-wp1  = 12.;               // plasma frequency in eV
-wsp1 = wp1/sqrt(1.+einf);     // plasma frequency in eV
-g1   = 0.1;                   // damping of the material in eV
-kcut = 100.;                   // Integration cut-off of the k-integration
-relerr = 1e-8;                // aimed relative error of the integration
-recerr = 1e-3;                // increase of relerr per layer of integration
-absr = 1e-200;
-beta   = 1./((1e-3)/1.16e4);       // temperature in eV
-delta  = a0*wa*wa/(4*PI*eps0*pow(2*za,3));
 
+/* Greetings */
+printf("===========================================\n");
+printf("QFNUM STARTED!\n\n");
+
+/* System parameters (input routine is not implemented yet) */
+input("../data/input/paratest.dat");
 
 /* open the file */
-fp = fopen("../data/test.dat", "w");
+FILE *fp; // output file
+fp = fopen("../data/output/paratestout.dat", "w");
 if (fp == NULL) {
-   printf("I couldn't open results.dat for writing.\n");
-   exit(0);
+    printf("I couldn't open results.dat for writing.\n");
+    exit(0);
 }
 
 
-clock_t c0 = clock();
 /* Starting calculations */
+printf("\n------------------------------\n");
+printf("STARTING CALCULATION\n");
+
+clock_t c0 = clock();
 for (l=0; l<=maxi; ++l){
-   //clock_t c0 = clock();
-   
     /* Evaluation */
-   w = sta+spac*l;
-   fprintf(fp, "%.10e, %.10e, %.10e\n", w,AngL(w),Iner(w));
-   fflush(fp);
-
-   //clock_t c1 = clock();
-   prog = l/(double)maxi;
-   printProg(prog);
- }
-
+    w = sta+spac*l;
+    fprintf(fp, "%.10e, %.10e, %.10e\n", w,AngL(w),Iner(w));
+    fflush(fp);
+   
+    /* Progress bar */ 
+    prog = l/(double)maxi;
+    printProg(prog);
+}
 clock_t c1 = clock();
+printf("\n------------------------------\n");
+
+/* Bye! */
 printf("\n");
 printf("Finished calculating %d points in %3.2f sec. \n", maxi, (c1-c0)/1.e6);
+printf("\nBYE!\n");
+printf("===========================================\n");
 
 return 0;
 };

@@ -17,6 +17,111 @@
 /* Functions */
 /* --------- */
 
+// input routine
+void input(char file[]){
+    FILE * fr = fopen(file, "rt");
+    if(fr == NULL){printf("file %s not found", "../input/paratest.dat");}
+    
+    char tmpstr1[16];
+    char tmpstr2[16];
+    double T;
+    char tempbuff[100];
+    while(!feof(fr)) {
+         if (fgets(tempbuff,100,fr)) {
+            sscanf(tempbuff, "%15s : %15s", tmpstr1, tmpstr2);
+            if (strcmp(tmpstr1,"wp1")==0) {
+                 wp1 = atof(tmpstr2);
+            }
+            else if (strcmp(tmpstr1,"g1")==0) {
+                 g1 = atof(tmpstr2);
+            }
+            else if (strcmp(tmpstr1,"einf")==0) {
+                 einf = atof(tmpstr2);
+            }
+            else if (strcmp(tmpstr1,"v")==0) {
+                 v = atof(tmpstr2);
+            }
+            else if (strcmp(tmpstr1,"za")==0) {
+                 za = atof(tmpstr2);
+            }
+            else if (strcmp(tmpstr1,"T")==0) {
+                 T = atof(tmpstr2);
+            }
+            else if (strcmp(tmpstr1,"a0")==0) {
+                 a0 = atof(tmpstr2);
+            }
+            else if (strcmp(tmpstr1,"kcut")==0) {
+                 kcut = atof(tmpstr2);
+            }
+            else if (strcmp(tmpstr1,"eps0")==0) {
+                 eps0 = atof(tmpstr2);
+            }
+            else if (strcmp(tmpstr1,"c")==0) {
+                 c = atof(tmpstr2);
+            }
+            else if (strcmp(tmpstr1,"hbar")==0) {
+                 hbar = atof(tmpstr2);
+            }
+            else if (strcmp(tmpstr1,"relerr")==0) {
+                 relerr = atof(tmpstr2);
+            }
+            else if (strcmp(tmpstr1,"recerr")==0) {
+                 recerr = atof(tmpstr2);
+            }
+            else if (strcmp(tmpstr1,"absr")==0) {
+                 absr = atof(tmpstr2);
+            }
+            else if (strcmp(tmpstr1,"wa")==0) {
+                 wa = atof(tmpstr2);
+            }
+            else if (strcmp(tmpstr1,"//")==0) {
+                 /* skip */
+            }
+            else{
+                printf("Unrecongized parameter : \"%s\"\n", tmpstr1);
+            }
+         }
+    }
+    fclose(fr);
+
+    // Recall the read parameters and print to screen
+    printf("------------------------------\n");
+    printf("INPUT PARAMETERS FROM %s\n", file);
+    printf("// atomic constants\n");
+    printf("v   : %.5e in c\n",v);
+    printf("za  : %.5e in nm\n",za);
+    printf("wa  : %.5e in eV\n",wa);
+    printf("a0  : %.5e\n",a0);
+
+    printf("\n");
+    printf("// material parameters\n");
+    printf("einf : %.5e\n",einf);
+    printf("wp1  : %.5e in eV\n",wp1);
+    printf("g1   : %.5e in eV\n",g1);
+    printf("T    : %.5e in K\n",T);
+
+    printf("\n");
+    printf("// numerical specifications\n");
+    printf("kcut   : %.5e\n",kcut);
+    printf("relerr : %.5e\n",relerr);
+    printf("recerr : %.5e\n",recerr);
+    printf("absr : %.5e\n",absr);
+
+    printf("\n");
+    printf("// natural constants (in natural units)\n");
+    printf("c    : %.5e\n",c);
+    printf("eps0 : %.5e = 1/(4*pi)\n",eps0);
+    printf("hbar : %.5e\n",hbar);
+    printf("------------------------------\n");
+
+    // transforming the remaining SI units to natural units
+    // or other convenient forms
+    za   = za/(1.9732705e-7);
+    beta = 1./(T/1.16e4);
+    wsp1 = wp1/sqrt(1.+einf);
+}
+
+
 double complex Ly[3][3] = { {0.   , 0., 1.*_Complex_I} ,   /*  initializers for row indexed by 0 */ {0.   , 0., 0.  } ,   /*  initializers for row indexed by 1 */ {-1.*_Complex_I, 0., 0.  }     /*  initializers for row indexed by 2 */ };
 double complex Ly2[3][3] = { {1.   , 0., 0.  } ,   /*  initializers for row indexed by 0 */ {0.   , 0., 0.  } ,   /*  initializers for row indexed by 1 */ {0.   , 0., 1.  }     /*  initializers for row indexed by 2 */ };
 

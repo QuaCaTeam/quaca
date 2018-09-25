@@ -36,10 +36,28 @@
  */
 #define Ndim 3
 
+/*!
+ * \def PBSTR
+ * \brief String for progress bar.
+ *
+ * \def PBWIDTH
+ * \brief Width of progress bar.
+ */
+#define PBSTR "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+#define PBWIDTH 60
+
 
 /* --------- */
 /* Functions */
 /* --------- */
+
+/*!
+ * \fn void printProg(double percentage);
+ * \brief Prints progress bar.
+ * \param percentage Percentage to display.
+ * \return void
+ */
+void printProg(double percentage);
 
 /*!
  * \fn void multiply(double complex mat1[Ndim][Ndim], double complex mat2[Ndim][Ndim], double complex res[Ndim][Ndim])

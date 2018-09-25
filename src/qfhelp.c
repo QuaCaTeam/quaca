@@ -17,6 +17,14 @@
 /* Functions */
 /* --------- */
 
+// progress bar
+void printProg(double percentage) {
+    int val = (int) (percentage * 100);
+    int lpad = (int) (percentage * PBWIDTH);
+    int rpad = PBWIDTH - lpad;
+    printf("\rProgress: %3d%% [%.*s%*s]", val, lpad, PBSTR, rpad, "");
+};
+
 // matrix multiplication
 void multiply(double complex mat1[Ndim][Ndim], double complex mat2[Ndim][Ndim], double complex res[Ndim][Ndim]) {
     int i, j, k;

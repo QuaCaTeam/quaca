@@ -104,6 +104,14 @@ int transroll;
 /* Functions */
 /* --------- */
 
+/*!
+ * \fn void input(char file[]);
+ * \brief Parses file for variables.
+ * \param file File to parse.
+ * \return void
+ */
+void input(char file[]);
+
 double rI (double w, double k);
 double rR (double w, double k);
 

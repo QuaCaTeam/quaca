@@ -12,7 +12,7 @@ LIBS = -lgsl -lgslcblas -lm -larb -lflint -lmpfr # libraries (gsl and arb), on a
 # file
 SRC = $(wildcard src/*c) 
 OBJS = ${SRC:.c=.o}
-PROG = bin/qfPlate
+PROG = bin/qfnum
 
 all: $(PROG) clean
 
