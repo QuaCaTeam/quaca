@@ -1,4 +1,4 @@
-/*! 
+/*!
  * \file plate.h
  * \brief Header file for quantum friction of a plate.
  * \author M. O.
@@ -30,10 +30,10 @@ double c, hbar, eps0, a0;
 // material and system parameters
 
 /*!
- * \var wp1 
+ * \var wp1
  * \brief Plasma frequency in eV.
  *
- * \var wsp1 
+ * \var wsp1
  * \brief Surface plasmon frequency in eV.
  *
  * \var wa
@@ -84,9 +84,9 @@ double v, za, QFt, QFr;
  * \var absr
  * \brief Absolute error.
  */
-double relerr, recerr, absr;
+double relerr, recerr, abserr;
 
-/*! 
+/*!
  * \var transroll
  * \brief Flag for translational or rolling part.
  */
@@ -103,25 +103,18 @@ int transroll;
  * \param file File to parse.
  * \return void
  */
-void input(char file[]);
+void input();
 
 /*!
- * \fn double rI (double w, double k)
+ * \fn void refl(double complex r[2] ,double k, double w, double complex kap)
  * \brief
- * \param w
+ * \param r
  * \param k
+ * \param w
+ * \param kap
  * \return
  */
-double rI (double w, double k);
-
-/*!
- * \fn double rR (double w, double k)
- * \brief
- * \param w
- * \param k
- * \return
- */
-double rR (double w, double k);
+void refl(double complex r[2] ,double k, double w, double complex kap);
 
 /*!
  * \fn void Gint(double complex Gten[Ndim][Ndim], double w, int RorI, int kx, int theta, int T)
@@ -144,30 +137,6 @@ void Gint(double complex Gten[Ndim][Ndim], double w, int RorI, int kx, int theta
  * \return
  */
 void alpha(double complex alp[Ndim][Ndim], double w);
-
-/*!
- * \fn double anaAngL(double v)
- * \brief
- * \param v
- * \return
- */
-double anaAngL(double v);
-
-/*!
- * \fn double AngL(double w)
- * \brief
- * \param w
- * \return
- */
-double AngL(double w);
-
-/*!
- * \fn double Iner(double w)
- * \brief
- * \param w
- * \return
- */
-double Iner(double w);
 
 /*!
  * \fn double IntQF(double w)

@@ -1,11 +1,11 @@
-/*! 
+/*!
  * \file qfhelp.c
  * \brief Common functions for quantum friction in a cylinder.
  * \author C. H. Egerland
  *
  * Functions and parameters, for more explicit documentation see the header.
  */
- 
+
 /* --------- */
 /* Libraries */
 /* --------- */
@@ -38,7 +38,7 @@ void multiply(double complex mat1[Ndim][Ndim], double complex mat2[Ndim][Ndim], 
     }
 };
 
-// complex transpose 
+// complex transpose
 void dagger(double complex mat[Ndim][Ndim], double complex res[Ndim][Ndim]) {
     int i, j;
     for (i = 0; i < Ndim; i++) {

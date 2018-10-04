@@ -24,14 +24,14 @@
 
 // mathematical constants
 
-/*! 
- * \def PI 
+/*!
+ * \def PI
  * \brief Constant Pi.
  */
 #define PI 3.14159265358979323846
 
-/*! 
- * \def Ndim 
+/*!
+ * \def Ndim
  * \brief Matrix dimension.
  */
 #define Ndim 3
@@ -111,7 +111,7 @@ double integ(double my_f(), double a, double b, double relerr, double epsabs);
 
 /*!
  * \fn double integinf(double my_f(), double a, double relerr, double epsabs)
- * \brief Integration wrapper for semi infinite integration. 
+ * \brief Integration wrapper for semi infinite integration.
  * \param my_f() Function of one argument that shall be integrated.
  * \param a Lower integral bound.
  * \param relerr Relative error.

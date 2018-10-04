@@ -30,13 +30,14 @@ int main () {
 
 /* Plot parameters */
 int maxi=1000;                        // plot points
-double sta = 1.29999953 ;                 // start value of the calculation,
-double sto = 1.299999533;                 // final value of the calculation
-double spac =(sto-sta)/maxi;      // and the respective spacing
+double sta = 1E-6 ;                 // start value of the calculation,
+double sto = 1E2  ;                 // final value of the calculation
+double spac = pow(sto/sta,1./maxi);      // and the respective spacing
 
 /* Dummies */
 int l;
 double w;
+double complex GI[3][3];
 double prog;
 
 /* Greetings */
@@ -44,7 +45,7 @@ printf("===========================================\n");
 printf("QFNUM STARTED!\n\n");
 
 /* System parameters (input routine is not implemented yet) */
-input("../data/input/paratest.dat");
+input();
 
 /* open the file */
 FILE *fp; // output file
@@ -62,11 +63,12 @@ printf("STARTING CALCULATION\n");
 clock_t c0 = clock();
 for (l=0; l<=maxi; ++l){
     /* Evaluation */
-    w = sta+spac*l;
-    fprintf(fp, "%.10e, %.10e, %.10e\n", w,AngL(w),Iner(w));
+    w =  sta*pow(spac,l);
+    Gint(GI, w, 1, 0, 0, 0);
+    fprintf(fp, "%.10e, %.10e, %.10e\n", w,creal(GI[2][0]),cimag(GI[2][0]));
     fflush(fp);
-   
-    /* Progress bar */ 
+
+    /* Progress bar */
     prog = l/(double)maxi;
     printProg(prog);
 }

@@ -7,7 +7,7 @@ CC = gcc
 CFLAGS = -Wall # show warnings 
 INCLUDES = -I/usr/include -Isrc/h # include headers
 LFLAGS = -L/usr/lib
-LIBS = -lgsl -lgslcblas -lm -larb -lflint -lmpfr # libraries (gsl and arb), on arch -larb on debian -lflint-arb
+LIBS = -lgsl -lgslcblas -lm -lflint-arb -lmpfr # libraries (gsl and arb), on arch -larb on debian -lflint-arb
 
 # file
 SRC = $(wildcard src/*c) 
