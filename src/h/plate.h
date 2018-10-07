@@ -109,12 +109,11 @@ void input();
  * \fn void refl(double complex r[2] ,double k, double w, double complex kap)
  * \brief
  * \param r
- * \param k
  * \param w
  * \param kap
  * \return
  */
-void refl(double complex r[2] ,double k, double w, double complex kap);
+void refl(double complex r[2], double w, double complex kap);
 
 /*!
  * \fn void Gint(double complex Gten[Ndim][Ndim], double w, int RorI, int kx, int theta, int T)
@@ -145,3 +144,11 @@ void alpha(double complex alp[Ndim][Ndim], double w);
  * \return
  */
 double IntQF(double w);
+
+/*!
+ * \fn double IntQFfree(double w)
+ * \brief
+ * \param w
+ * \return
+ */
+double IntQFfree( double w);

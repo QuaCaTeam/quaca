@@ -53,7 +53,7 @@ void fancy(double complex mat[Ndim][Ndim], double complex res[Ndim][Ndim], int m
     int i, j;
     for (i = 0; i < Ndim; i++) {
         for (j = 0; j < Ndim; j++) {
-            res[i][j] = -0.5*I*( mat[i][j] + mode*conj(mat[j][i]) );
+            res[i][j] = -0.5E0*I*( mat[i][j] + mode*conj(mat[j][i]) );
         }
     }
 };
@@ -80,7 +80,7 @@ double integ(double my_f() , double a , double b, double relerr, double epsabs) 
     f.params = NULL;
 
     /* Initialize the workspace. */
-    if ( ( ws = gsl_integration_cquad_workspace_alloc( 100 ) ) == NULL ) {
+    if ( ( ws = gsl_integration_cquad_workspace_alloc( 200 ) ) == NULL ) {
         printf( "call to gsl_integration_cquad_workspace_alloc failed.\n" );
         abort();
     }

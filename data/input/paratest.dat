@@ -1,7 +1,7 @@
 // atomic constants
 
-v   : 1E-4   in c
-za  : 5E-9   in nm
+v   : 1E-5   in c
+za  : 1E-9   in nm
 wa  : 1.3E0  in eV
 a0  : 6E-9   
 
@@ -10,11 +10,11 @@ a0  : 6E-9
 einf : 1.   
 wp1  : 9.  in eV
 g1   : 0.1200  in eV 
-T    : 1E-6    in K
+T    : 1E0    in K
 
 // numerical specifications
 
-kcut   : 70.
+kcut   : 50.
 relerr : 1E-2
 recerr : 1E-2
 abserr : 1e-200

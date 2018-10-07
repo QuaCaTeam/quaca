@@ -120,7 +120,7 @@ wsp1 = wp1/sqrt(1.+einf);
 }
 
 
-void refl(double complex r[2] ,double k, double w, double complex kap)
+void refl(double complex r[2] , double w, double complex kap)
 {
  double complex epsw, kaplc, wabs;
  // Calculating the dielectric function (times w due to numerical convenience)
@@ -128,14 +128,14 @@ void refl(double complex r[2] ,double k, double w, double complex kap)
  epsw = einf*wabs - wp1*wp1/(wabs+g1*_Complex_I);
 
  // Calculating the wavevector in z direction...
- kaplc   = csqrt(k*k-epsw*wabs);
+ kaplc   = csqrt(kap*kap-(epsw-wabs)*wabs);
  // ... and fixing the signs
  kaplc   = fabs(creal(kaplc)) - fabs(cimag(kaplc))*_Complex_I;
 
 // Calculating r^s
- r[1]   = -(kaplc  -  kap ) / ( kaplc + kap );
+ r[1]   =  -(kaplc  -  kap ) / ( kaplc + kap );
 // Calculating r^p
- r[0]   =  (epsw*kap  -  wabs*kaplc ) / ( epsw*kap + wabs*kaplc );
+ r[0]   = (epsw*kap  -  wabs*kaplc ) / ( epsw*kap + wabs*kaplc );
  if (w<0) {
    r[0] = conj(r[0]);
    r[1] = conj(r[1]);
@@ -163,7 +163,8 @@ double wrapphi(double phi)
    double resk, k;
    double complex kapc, r[2], resc, rppre, rspre;
    double v2 = v*v ;
-   double prefac, kapc2;
+   double kapc2;
+   double complex prefac;
    if (kap < 0) {
      kapc = _Complex_I*kap + 0.;
    }
@@ -171,11 +172,11 @@ double wrapphi(double phi)
      kapc = kap + _Complex_I*0.;
    }
    kapc2 = creal(kapc*kapc);
-   k   = ((csqrt(kapc2*(1.-v2*cosp2) +w*w) +v*w*cosp)/(1.-v2*cosp2) );
+   k   = ((sqrt(kapc2*(1.-v2*cosp2) +w*w) +v*w*cosp)/(1.-v2*cosp2) );
    wpl =  w+cosp*k*v;
-   refl(r,k,wpl,kapc);
+   refl(r,wpl,kapc);
 
-   prefac = cexp(-2*za*kapc)/csqrt(kapc2*(1.-v2*cosp2) +w*w);
+   prefac = cexp(-2*za*kapc)/(double complex)(1.-cosp*v*wpl/k);
 
    rppre = r[0]*prefac;
    rspre = r[1]*prefac;
@@ -202,13 +203,13 @@ double wrapphi(double phi)
      resk = creal(resc);
    }
    if (RorI == 1) {
-     resk = creal(resc);
+     resk = cimag(resc);
     }
     if (kx == 1) {
      resk = resk*k*cosp;
     }
     if (T == 1) {
-      resk = resk/(1.-cexp(-beta*wpl));
+      resk = resk/(1E0-exp(-beta*wpl));
     }
     return resk;
   }
@@ -226,13 +227,12 @@ double wrapphi(double phi)
       }
     }
   }
+  resphi = integ(wrapkap,limI1, lim2, relerr*recerr*recerr, abserr*recerr*recerr);
 
   if (T == 1 && caseT == 1){
-    resphi =  integ(wrapkap, limI1, kcut/(2*za), relerr*recerr*recerr, abserr*recerr*recerr);
+    resphi += integ(wrapkap, lim2,kcut/(2*za), relerr*recerr*recerr, abserr*recerr*recerr);
   }
-  else {
-   resphi = integ(wrapkap, limI1, lim2, relerr*recerr*recerr, abserr*recerr*recerr);
-  }
+
   return resphi/PI;
 }
 // First, we calculate Gsigma
@@ -275,21 +275,21 @@ alpinv22 = alpinv00;
 Gint(GI, w, 1, 0, 0, 0);
 Gint(GR, w, 0, 0, 0, 0);
 
-alpinv00 += -(GR[0][0]+_Complex_I*GI[0][0]);
-alpinv11 += -(GR[1][1]+_Complex_I*GI[1][1]);
-alpinv22 += -(GR[2][2]+_Complex_I*GI[2][2]);
-alpinv20 =  -(GR[2][0]+_Complex_I*GI[2][0]);
+alpinv00 = alpinv00 - ( GR[0][0] + I * GI[0][0] );
+alpinv11 = alpinv11 - ( GR[1][1] + I * GI[1][1] );
+alpinv22 = alpinv22 - ( GR[2][2] + I * GI[2][2] );
+alpinv20 = -( GR[2][0] + I * GI[2][0] );
 
 det = alpinv20*alpinv20 + alpinv00*alpinv22;
 alp[0][0] = alpinv22/det;
-alp[1][1] = 1./alpinv11;
+alp[1][1] = (double complex)1./alpinv11;
 alp[2][2] = alpinv00/det;
 alp[0][2] = alpinv20/det;
 alp[2][0] = -alp[0][2];
-alp[1][0] =0.;
-alp[0][1] =0.;
-alp[2][1] =0.;
-alp[1][2] =0.;
+alp[1][0] =(double complex) 0.;
+alp[0][1] =(double complex) 0.;
+alp[2][1] =(double complex) 0.;
+alp[1][2] =(double complex) 0.;
 }
 
 
@@ -314,6 +314,7 @@ multiply(temp1,alpdag,S);
 
 /* Calculating the trace and return */
 /* We split the calcualtion in translational and rolling friction */
+
 if (transroll == 0){
 GIk[2][0] = 0.;
 GIk[0][2] = 0.;
@@ -328,10 +329,42 @@ GIkth[0][0] = 0.;
 GIkth[1][1] = 0.;
 GIkth[2][2] = 0.;
 }
+
 multiply(S,GIk,temp1);
 multiply(alpI,GIkth,temp2);
-printf("%.10e\n",w );
-printf("%.10e\n",cimag( alp[2][0] ) );
-printf("%.10e\n",creal(  + tr(temp2)) );
-return (2./PI)*creal( -tr(temp1) + tr(temp2));
+
+return (2./PI)*creal( -tr(temp1) + tr(temp2) );
+}
+
+
+double IntQFfree( double w)
+{
+double complex GIkth[3][3], GIkthT[3][3];
+double complex alp[3][3], alpI[3][3],  temp1[3][3], temp2[3][3];
+/* Creating all needed matrices */
+alpha(alp,w);
+fancy(alp, alpI,-1);
+Gint(GIkth , w, 1, 1, 1, 0);
+Gint(GIkthT, w, 1, 1, 1, 1);
+
+/* Calculating the trace and return */
+/* We split the calcualtion in translational and rolling friction */
+if (transroll == 0){
+GIkth[2][0] = 0.;
+GIkth[0][2] = 0.;
+GIkthT[2][0] = 0.;
+GIkthT[0][2] = 0.;
+}
+if (transroll == 1){
+GIkth[0][0] = 0.;
+GIkth[1][1] = 0.;
+GIkth[2][2] = 0.;
+GIkthT[0][0] = 0.;
+GIkthT[1][1] = 0.;
+GIkthT[2][2] = 0.;
+}
+
+multiply(alpI,GIkthT,temp1);
+multiply(alpI,GIkth,temp2);
+return (2./PI)*creal( tr(temp1) - tr(temp2) );
 }
