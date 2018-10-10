@@ -42,16 +42,31 @@ double c, hbar, eps0, a0;
  * \var g1
  * \brief Damping of material in eV.
  *
+ * \var bet1
+ * \brief sound velocity of the hydrodynamic model proportional to vF.
+ *
  * \var beta
  * \brief Temperature in eV.
- *
- * \var delta
- * \brief I don't know.
  *
  * \var einf
  * \brief Background permittivity.
  */
-double wp1, wsp1, wa, g1, beta, delta, einf;
+double wp1, wsp1, wa, g1, bet1, einf, beta;
+
+/*!
+ * \var vF
+ * \brief Fermi velocity.
+ *
+ * \var aF
+ * \brief Fine structure constant.
+ *
+ * \var Delt
+ * \brief Band gap.
+ *
+ * \var OmD
+ * \brief Respective band gap frequency.
+ */
+double vF, aF, Delt, OmD;
 
 /*!
  * \var kcut
@@ -114,6 +129,26 @@ void input();
  * \return
  */
 void refl(double complex r[2], double w, double complex kap);
+
+/*!
+ * \fn void refl(double complex r[2] ,double k, double w, double complex kap)
+ * \brief
+ * \param r
+ * \param w
+ * \param kap
+ * \return
+ */
+void reflhydro(double complex r[2] , double w, double complex kap);
+
+/*!
+ * \fn void reflGraph(double complex r[2] ,double k, double w, double complex kap)
+ * \brief
+ * \param r
+ * \param w
+ * \param kap
+ * \return
+ */
+void reflGraph(double complex r[2] , double w, double complex kap);
 
 /*!
  * \fn void Gint(double complex Gten[Ndim][Ndim], double w, int RorI, int kx, int theta, int T)

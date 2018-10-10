@@ -43,6 +43,9 @@ double T;
             else if (strcmp(tmpstr1,"g1")==0) {
                  g1 = atof(tmpstr2);
             }
+            else if (strcmp(tmpstr1,"bet1")==0) {
+                 bet1 = atof(tmpstr2);
+            }
             else if (strcmp(tmpstr1,"einf")==0) {
                  einf = atof(tmpstr2);
             }
@@ -73,6 +76,15 @@ double T;
             else if (strcmp(tmpstr1,"wa")==0) {
                  wa = atof(tmpstr2);
             }
+               else if (strcmp(tmpstr1,"vF")==0) {
+                    vF = atof(tmpstr2);
+            }
+               else if (strcmp(tmpstr1,"aF")==0) {
+                    aF = atof(tmpstr2);
+            }
+               else if (strcmp(tmpstr1,"Delt")==0) {
+                    Delt = atof(tmpstr2);
+            }
             else if (strcmp(tmpstr1,"//")==0) {
                  /* skip */
             }
@@ -99,6 +111,7 @@ double T;
     printf("\neinf : %.5e",einf);
     printf("\nwp1  : %.5e in eV",wp1);
     printf("\ng1   : %.5e in eV",g1);
+    printf("\nbet1 : %.5e      ",bet1);
     printf("\nT    : %.5e in K",T);
 
     printf("\n");
@@ -109,12 +122,19 @@ double T;
     printf("\nabserr : %.5e",abserr);
 
     printf("\n");
+    printf("\n// graphene specifications\n");
+    printf("\nvF   : %.5e",vF);
+    printf("\naF   : %.5e",aF);
+    printf("\nDelt : %.5e",Delt);
+
+    printf("\n");
     printf("\n===========================================\n");
 // transforming the remaining SI units to natural units
 // or other convenient forms
 za   = za/(1.9732705e-7);
 beta = 1./(T/1.16e4);
 wsp1 = wp1/sqrt(1.+einf);
+OmD  = 2*Delt;
 //
 
 }
@@ -142,6 +162,63 @@ void refl(double complex r[2] , double w, double complex kap)
  }
 }
 
+void reflhydro(double complex r[2] , double w, double complex kap)
+{
+ double complex epsw, kapD, kapL, k2, kapDLw;
+ double wabs;
+ // Calculating the dielectric function (times w due to numerical convenience)
+ wabs = fabs(w);
+ k2 = kap*kap+w*w;
+ epsw = einf*wabs - wp1*wp1/(wabs+g1*_Complex_I);
+
+ // Calculating the wavevector in z direction...
+ kapD   = csqrt(kap*kap-(epsw-wabs)*wabs);
+ // ... and fixing the signs
+ kapD   = fabs(creal(kapD)) - fabs(cimag(kapD))*_Complex_I;
+
+ kapL   = csqrt(kap*kap+wabs*wabs+(wp1*wp1-wabs*(wabs+_Complex_I*g1))/(bet1*bet1*vF*vF) );
+ kapL   = fabs(creal(kapL)) - fabs(cimag(kapL))*_Complex_I;
+ kapDLw = kapD*wabs + (epsw-wabs)*k2/kapL;
+// Calculating r^s
+ r[1]   =  -(kapD  -  kap ) / ( kapD + kap );
+// Calculating r^p
+ r[0]   = (epsw*kap  -  kapDLw ) / ( epsw*kap + kapDLw );
+ if (w<0) {
+   r[0] = conj(r[0]);
+   r[1] = conj(r[1]);
+ }
+}
+
+void reflGraph(double complex r[2] , double w, double complex kap)
+{
+ double complex kapF, wabs;
+ double complex kapFOm, PP00, PPtr, Phi;
+ double k2, kapF2, kap2;
+ // Calculating the dielectric function (times w due to numerical convenience)
+ wabs = fabs(w);
+ kap2 = creal(kap*kap);
+ k2 = creal(kap*kap) + wabs*wabs ;
+ // Calculating the wavevector in z direction...
+ kapF   = csqrt(vF*vF*k2-wabs*wabs);
+ // ... and fixing the signs
+ kapF  = fabs(creal(kapF)) - fabs(cimag(kapF))*_Complex_I;
+ kapF2 = creal(kapF*kapF);
+
+ kapFOm = kapF/OmD;
+
+ Phi = 2*OmD*(1.+( kapFOm - 1./kapFOm )*catan(kapFOm)  );
+ PP00 = Phi*aF*k2/kapF2;
+ PPtr = Phi*aF*(kap2+kapF2)/kapF2;
+
+// Calculating r^s
+ r[1]   =  - (k2*PPtr-kap2*PP00)/(k2*(PPtr+2*kap)-kap2*PP00);
+// Calculating r^p
+ r[0]   = kap*PP00/(kap*PP00+2*k2);
+ if (w<0) {
+   r[0] = conj(r[0]);
+   r[1] = conj(r[1]);
+ }
+}
 
 // Integral over the Green tensor with several options:
 void Gint(double complex Gten[Ndim][Ndim], double w, int RorI, int kx, int theta, int T)
@@ -152,7 +229,7 @@ int sig, pphi;
 double wrapphi(double phi)
 {
   double lim2, cosp, sinp, resphi;
-  double limI1;
+  double limI1, limgraph;
   int caseT=0;
   // Defining the integrand of the k integration
    double wrapkap (double kap)
@@ -160,7 +237,7 @@ double wrapphi(double phi)
    double wpl;
    double cosp2 = cosp*cosp;
    double sinp2 = sinp*sinp;
-   double resk, k;
+   double resk=0., k;
    double complex kapc, r[2], resc, rppre, rspre;
    double v2 = v*v ;
    double kapc2;
@@ -176,7 +253,7 @@ double wrapphi(double phi)
    wpl =  w+cosp*k*v;
    refl(r,wpl,kapc);
 
-   prefac = cexp(-2*za*kapc)/(double complex)(1.-cosp*v*wpl/k);
+   prefac = cexp(-2*za*kapc)/(1.-cosp*v*wpl/k);
 
    rppre = r[0]*prefac;
    rspre = r[1]*prefac;
@@ -208,14 +285,15 @@ double wrapphi(double phi)
     if (kx == 1) {
      resk = resk*k*cosp;
     }
-    if (T == 1) {
-      resk = resk/(1E0-exp(-beta*wpl));
-    }
+//    if (T == 1) {
+//      resk = resk/(1E0-exp(-beta*wpl));
+//    }
     return resk;
   }
   // Performing the k integration
   cosp = cos(phi);
   sinp = sin(phi);
+//  limgraph = sqrt(OmD*OmD +(1.-vF*vF)*k*k);
   limI1 = -w;
   lim2 = kcut/(2*za);
           caseT = 0;
@@ -227,11 +305,14 @@ double wrapphi(double phi)
       }
     }
   }
-  resphi = integ(wrapkap,limI1, lim2, relerr*recerr*recerr, abserr*recerr*recerr);
 
-  if (T == 1 && caseT == 1){
-    resphi += integ(wrapkap, lim2,kcut/(2*za), relerr*recerr*recerr, abserr*recerr*recerr);
-  }
+    resphi = integ(wrapkap,limI1, lim2, relerr*recerr*recerr, abserr*recerr*recerr);
+
+
+
+//  if (T == 1 && caseT == 1){
+//    resphi += integ(wrapkap, lim2,kcut/(2*za), relerr*recerr*recerr, abserr*recerr*recerr);
+//  }
 
   return resphi/PI;
 }
