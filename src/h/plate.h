@@ -149,13 +149,12 @@ void refl(double complex r[2], double w, double complex kap);
 void reflhydro(double complex r[2] , double w, double complex kap);
 
 /*!
- * \fn double mu( double w, int RorI)
+ * \fn double complex mu( double w)
  * \brief 
  * \param w
- * \param RorI
  * \return
  */
-double mu( double w, int RorI);
+double complex mu( double w);
 
 
 /*!

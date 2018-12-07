@@ -104,6 +104,8 @@ double T;
     printf("\nv   : %.5e in c",v);
     printf("\nza  : %.5e in nm",za);
     printf("\nwa  : %.5e in eV",wa);
+    printf("\nga  : %.5e in eV",gamMu);
+    printf("\nmu? : %i",muquest);
     printf("\na0  : %.5e",a0);
 
     printf("\n");
@@ -322,7 +324,12 @@ void alpha(double complex alp[Ndim][Ndim], double w)
 double complex alpinv00,alpinv11,alpinv22,alpinv20, det;
 double complex GI[3][3], GR[3][3];
 
-alpinv00 = (wa*wa-w*w)/(a0*wa*wa);
+alpinv00 =  wa*wa - w*w ;
+ if (muquest == 1) {
+	alpinv00 = alpinv00 - w*I*mu(w);
+ }
+alpinv00 = alpinv00/(a0*wa*wa);
+
 alpinv11 = alpinv00;
 alpinv22 = alpinv00;
 
@@ -346,17 +353,12 @@ alp[2][1] =(double complex) 0.;
 alp[1][2] =(double complex) 0.;
 }
 
-double mu( double w, int RorI)
+double complex mu( double w)
 {
 double complex muresC;
-muresC = gamMu;
+muresC = gamMu +I*0E0;
 
- if(RorI == 0){
-	return creal(muresC);
- }
- else {
-	return cimag(muresC);
- }
+return muresC;
 }	
 
 double IntQF( double w)
@@ -364,6 +366,7 @@ double IntQF( double w)
 double complex GIth[3][3], GIk[3][3], GIkth[3][3];
 double complex alp[3][3], alpI[3][3], S[3][3],  temp1[3][3], temp2[3][3];
 double complex alpdag[3][3];
+double mur = w*creal(mu(w))/( a0*wa*wa*(1E0-exp(-beta*w)) );
 
 /* Creating all needed matrices */
 alpha(alp,w);
@@ -372,6 +375,11 @@ fancy(alp, alpI, -1);
 Gint(GIth , w, 1, 0, 1, 1);
 Gint(GIk  , w, 1, 1, 0, 0);
 Gint(GIkth, w, 1, 1, 1, 1);
+if ( muquest == 1 ){
+	GIth[0][0] += mur;
+	GIth[1][1] += mur;
+	GIth[2][2] += mur;
+}
 
 /* Building the power spectrum S */
 multiply(alp,GIth,temp1);
@@ -397,7 +405,7 @@ GIkth[2][2] = 0.;
 
 multiply(S,GIk,temp1);
 multiply(alpI,GIkth,temp2);
-
+printf("\n tr(S)=%.5e",creal(tr(temp1)));
 return (2E0/PI)*creal( -tr(temp1)  + tr(temp2) );
 }
 
