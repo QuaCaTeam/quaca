@@ -46,7 +46,7 @@ double prog;
 /* Greetings */
 printf("===========================================\n");
 printf("QFNUM STARTED!\n\n");
-    sta = 1E-3; 
+    sta = 1E-4; 
     //printf("Start velocity [in c]: ");
     //scanf("%.10e",&sta);  
     //printf("Read sta = %.10e",sta);

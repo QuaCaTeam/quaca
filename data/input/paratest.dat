@@ -1,9 +1,11 @@
 // atomic constants
 
-v   : 5E-4   in c
-za  : 5E-9   in nm
-wa  : 1.3E0  in eV
-a0  : 6E-9   
+v       : 5E-4   in c
+za      : 5E-9   in nm
+wa      : 1.3E0  in eV
+muquest : 1      if 1 internal bath is included
+gamMu   : 0.9E0  in eV 
+a0      : 6E-9   
 
 // material parameters
 

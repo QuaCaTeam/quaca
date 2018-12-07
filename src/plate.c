@@ -73,6 +73,12 @@ double T;
             else if (strcmp(tmpstr1,"wa")==0) {
                  wa = atof(tmpstr2);
             }
+            else if (strcmp(tmpstr1,"gamMu")==0) {
+                 gamMu = atof(tmpstr2);
+            }
+	    else if (strcmp(tmpstr1,"muquest")==0) {
+                 muquest = atoi(tmpstr2);
+            }
                else if (strcmp(tmpstr1,"vF")==0) {
                     vF = atof(tmpstr2);
             }
@@ -340,6 +346,18 @@ alp[2][1] =(double complex) 0.;
 alp[1][2] =(double complex) 0.;
 }
 
+double mu( double w, int RorI)
+{
+double complex muresC;
+muresC = gamMu;
+
+ if(RorI == 0){
+	return creal(muresC);
+ }
+ else {
+	return cimag(muresC);
+ }
+}	
 
 double IntQF( double w)
 {

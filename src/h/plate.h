@@ -41,6 +41,9 @@ double c, hbar, eps0, a0;
  *
  * \var wa
  * \brief Dipole resonance frequency in eV.
+ * 
+ * \var gamMu
+ * \brief Damping of the internal bath of the particle.
  *
  * \var g1
  * \brief Damping of material in eV.
@@ -51,7 +54,7 @@ double c, hbar, eps0, a0;
  * \var einf
  * \brief Background permittivity.
  */
-double wp1, wsp1, wa, g1, einf, beta;
+double wp1, wsp1, wa, gamMu, g1, einf, beta;
 
 /*!
  * \var vF
@@ -101,6 +104,13 @@ double relerr, recerr, abserr;
 int transroll;
 
 /*!
+ * \var muquest 
+ * \brief Flag for including or excluding an internal bath mu(w).
+ */
+int muquest;
+
+
+/*!
  * \var omsgn
  * \brief Flag for Omega calculation. Yields r_I( w )*sgn( w ) = r_I ( abs(w) ).
  */
@@ -120,7 +130,7 @@ void input();
 
 /*!
  * \fn void refl(double complex r[2] ,double k, double w, double complex kap)
- * \brief
+ * \brief reflection coefficient
  * \param r
  * \param w
  * \param kap
@@ -129,7 +139,7 @@ void input();
 void refl(double complex r[2], double w, double complex kap);
 
 /*!
- * \fn void refl(double complex r[2] ,double k, double w, double complex kap)
+ * \fn void reflhydro(double complex r[2] ,double k, double w, double complex kap)
  * \brief
  * \param r
  * \param w
@@ -137,6 +147,15 @@ void refl(double complex r[2], double w, double complex kap);
  * \return
  */
 void reflhydro(double complex r[2] , double w, double complex kap);
+
+/*!
+ * \fn double mu( double w, int RorI)
+ * \brief 
+ * \param w
+ * \param RorI
+ * \return
+ */
+double mu( double w, int RorI);
 
 
 /*!
