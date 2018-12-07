@@ -380,7 +380,7 @@ GIkth[2][2] = 0.;
 multiply(S,GIk,temp1);
 multiply(alpI,GIkth,temp2);
 
-return (2./PI)*creal( -tr(temp1)  + tr(temp2) );
+return (2E0/PI)*creal( -tr(temp1)  + tr(temp2) );
 }
 
 
