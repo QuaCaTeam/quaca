@@ -1,0 +1,94 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ADAPTIVE_REFINEMENT	h/arbcmath.h	31;"	d
+ARBCMATH_H	h/arbcmath.h	2;"	d
+CHECK_FINITE	h/arbcmath.h	13;"	d
+COMPLEX_NAN	h/arbcmath.h	11;"	d
+DEF_FUNCTION_1	h/arbcmath.h	45;"	d
+DEF_FUNCTION_2	h/arbcmath.h	60;"	d
+DEF_FUNCTION_3	h/arbcmath.h	78;"	d
+DEF_FUNCTION_4	h/arbcmath.h	99;"	d
+Gint	plate.c	/^void Gint(double complex Gten[Ndim][Ndim], double w, int RorI, int kx, int theta, int T)$/;"	f
+Greenint	cyl.c	/^void Greenint(double complex gres[Ndim][Ndim], double omega, int RorI, int horNoh, int theta) {$/;"	f
+IntQF	plate.c	/^double IntQF( double w)$/;"	f
+IntQFfree	plate.c	/^double IntQFfree( double w)$/;"	f
+MAKE_COMPLEX	h/arbcmath.h	10;"	d
+Ndim	h/qfhelp.h	37;"	d
+Omega	plate.c	/^double Omega( double w)$/;"	f
+PBSTR	h/qfhelp.h	46;"	d
+PBWIDTH	h/qfhelp.h	47;"	d
+PI	h/qfhelp.h	31;"	d
+QFr	h/plate.h	/^double v, za, QFt, QFr;$/;"	v
+QFt	h/plate.h	/^double v, za, QFt, QFr;$/;"	v
+R	h/cyl.h	/^double R;$/;"	v
+_acb_expm1	h/arbcmath.h	/^_acb_expm1(acb_t res, const acb_t z, slong prec)$/;"	f
+_acb_get_c	h/arbcmath.h	/^static __inline__ double complex _acb_get_c(const acb_t z)$/;"	f
+_acb_init_set_c	h/arbcmath.h	/^static __inline__ void _acb_init_set_c(acb_t z, double complex v)$/;"	f
+_acb_theta1	h/arbcmath.h	/^_acb_theta1(acb_t res, const acb_t z, const acb_t tau, slong prec)$/;"	f
+_acb_theta2	h/arbcmath.h	/^_acb_theta2(acb_t res, const acb_t z, const acb_t tau, slong prec)$/;"	f
+_acb_theta3	h/arbcmath.h	/^_acb_theta3(acb_t res, const acb_t z, const acb_t tau, slong prec)$/;"	f
+_acb_theta4	h/arbcmath.h	/^_acb_theta4(acb_t res, const acb_t z, const acb_t tau, slong prec)$/;"	f
+a0	h/plate.h	/^double c, hbar, eps0, a0;$/;"	v
+aF	h/plate.h	/^double vF, aF;$/;"	v
+abserr	h/plate.h	/^double relerr, recerr, abserr;$/;"	v
+absr	h/cyl.h	/^double relerr, absr;$/;"	v
+ac_besselj_diff	cyl.c	/^const double complex ac_besselj_diff(int n, double complex x) {$/;"	f
+alpha	plate.c	/^void alpha(double complex alp[Ndim][Ndim], double w)$/;"	f
+anum	cyl.c	/^const double complex anum(int n, double complex omega, double h) {$/;"	f
+bessaltn	cyl.c	/^const double complex bessaltn(int n, double complex x) {$/;"	f
+beta	h/plate.h	/^double wp1, wsp1, wa, g1, einf, beta;$/;"	v
+bmm	cyl.c	/^const double complex bmm(int n, double complex omega, double h) {$/;"	f
+bmn	cyl.c	/^const double complex bmn(int n, double complex omega, double h) {$/;"	f
+bnn	cyl.c	/^const double complex bnn(int n, double complex omega, double h) {$/;"	f
+c	h/cyl.h	/^double c, eps0, hbar;$/;"	v
+c	h/plate.h	/^double c, hbar, eps0, a0;$/;"	v
+cdenom	cyl.c	/^const double complex cdenom(int n, double complex omega, double h) {$/;"	f
+dagger	qfhelp.c	/^void dagger(double complex mat[Ndim][Ndim], double complex res[Ndim][Ndim]) {$/;"	f
+einf	h/plate.h	/^double wp1, wsp1, wa, g1, einf, beta;$/;"	v
+eps0	h/cyl.h	/^double c, eps0, hbar;$/;"	v
+eps0	h/plate.h	/^double c, hbar, eps0, a0;$/;"	v
+epsilon	cyl.c	/^const double complex epsilon(double complex omega) {$/;"	f
+eta	cyl.c	/^const double complex eta(double complex omega, double h) {$/;"	f
+fancy	qfhelp.c	/^void fancy(double complex mat[Ndim][Ndim], double complex res[Ndim][Ndim], int mode) {$/;"	f
+g1	h/plate.h	/^double wp1, wsp1, wa, g1, einf, beta;$/;"	v
+gamma_p	h/cyl.h	/^double omega_p, gamma_p;$/;"	v
+greencent	cyl.c	/^void greencent(double complex omega, double h, double complex g[Ndim][Ndim]) {$/;"	f
+greencentNF	cyl.c	/^void greencentNF(double complex omega, double h, double complex g[Ndim][Ndim]) {$/;"	f
+greenfull	cyl.c	/^void greenfull(int N, double complex omega, double h, double rho, double complex g[Ndim][Ndim]) {$/;"	f
+hankaltn	cyl.c	/^const double complex hankaltn(int n, double complex x) {$/;"	f
+hankel1	cyl.c	/^const double complex hankel1(double complex n, double complex x) {$/;"	f
+hbar	h/cyl.h	/^double c, eps0, hbar;$/;"	v
+hbar	h/plate.h	/^double c, hbar, eps0, a0;$/;"	v
+hcut	h/cyl.h	/^double hcut;$/;"	v
+input	plate.c	/^void input()$/;"	f
+integ	qfhelp.c	/^double integ(double my_f() , double a , double b, double relerr, double epsabs) {$/;"	f
+integinf	qfhelp.c	/^double integinf(double my_f(), double a, double relerr, double epsabs) {$/;"	f
+kappa	cyl.c	/^const double complex kappa(double complex omega, double h) {$/;"	f
+kcut	h/plate.h	/^double  kcut;$/;"	v
+main	main.c	/^int main () {$/;"	f
+multiply	qfhelp.c	/^void multiply(double complex mat1[Ndim][Ndim], double complex mat2[Ndim][Ndim], double complex res[Ndim][Ndim]) {$/;"	f
+omega_p	h/cyl.h	/^double omega_p, gamma_p;$/;"	v
+omsgn	h/plate.h	/^int omsgn;$/;"	v
+printProg	qfhelp.c	/^void printProg(double percentage) {$/;"	f
+rNN0SF	cyl.c	/^const double complex rNN0SF(double complex omega, double x) {$/;"	f
+rNN1SF	cyl.c	/^const double complex rNN1SF(double complex omega, double x) {$/;"	f
+recerr	h/plate.h	/^double relerr, recerr, abserr;$/;"	v
+refCoeffn	cyl.c	/^const double complex refCoeffn(int sig, int n, double complex omega, double h) {$/;"	f
+refl	plate.c	/^void refl(double complex r[2] , double w, double complex kap)$/;"	f
+reflhydro	plate.c	/^void reflhydro(double complex r[2] , double w, double complex kap)$/;"	f
+relerr	h/cyl.h	/^double relerr, absr;$/;"	v
+relerr	h/plate.h	/^double relerr, recerr, abserr;$/;"	v
+retard	h/plate.h	/^int retard;$/;"	v
+tr	qfhelp.c	/^const double complex tr(double complex mat[Ndim][Ndim]) {$/;"	f
+transpose	qfhelp.c	/^void transpose(double complex mat[Ndim][Ndim], double complex res[Ndim][Ndim]) {$/;"	f
+transroll	h/plate.h	/^int transroll;$/;"	v
+v	h/plate.h	/^double v, za, QFt, QFr;$/;"	v
+vF	h/plate.h	/^double vF, aF;$/;"	v
+wa	h/plate.h	/^double wp1, wsp1, wa, g1, einf, beta;$/;"	v
+wp1	h/plate.h	/^double wp1, wsp1, wa, g1, einf, beta;$/;"	v
+wsp1	h/plate.h	/^double wp1, wsp1, wa, g1, einf, beta;$/;"	v
+za	h/plate.h	/^double v, za, QFt, QFr;$/;"	v

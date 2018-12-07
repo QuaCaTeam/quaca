@@ -39,6 +39,16 @@ void multiply(double complex mat1[Ndim][Ndim], double complex mat2[Ndim][Ndim], 
 };
 
 // complex transpose
+void transpose(double complex mat[Ndim][Ndim], double complex res[Ndim][Ndim]) {
+    int i, j;
+    for (i = 0; i < Ndim; i++) {
+        for (j = 0; j < Ndim; j++) {
+            res[j][i] = mat[i][j]; // transpose
+        }
+    }
+};
+
+//  transpose and complex conjugate
 void dagger(double complex mat[Ndim][Ndim], double complex res[Ndim][Ndim]) {
     int i, j;
     for (i = 0; i < Ndim; i++) {

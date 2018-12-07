@@ -12,6 +12,9 @@
 
 // universal constants
 
+
+int retard;
+
 /*!
  * \var c
  * \brief Speed of light in vacuum.
@@ -42,16 +45,13 @@ double c, hbar, eps0, a0;
  * \var g1
  * \brief Damping of material in eV.
  *
- * \var bet1
- * \brief sound velocity of the hydrodynamic model proportional to vF.
- *
  * \var beta
  * \brief Temperature in eV.
  *
  * \var einf
  * \brief Background permittivity.
  */
-double wp1, wsp1, wa, g1, bet1, einf, beta;
+double wp1, wsp1, wa, g1, einf, beta;
 
 /*!
  * \var vF
@@ -59,15 +59,8 @@ double wp1, wsp1, wa, g1, bet1, einf, beta;
  *
  * \var aF
  * \brief Fine structure constant.
- *
- * \var Delt
- * \brief Band gap.
- *
- * \var OmD
- * \brief Respective band gap frequency.
  */
-double vF, aF, Delt, OmD;
-
+double vF, aF;
 /*!
  * \var kcut
  * \brief Cut-off for k integration.
@@ -107,6 +100,11 @@ double relerr, recerr, abserr;
  */
 int transroll;
 
+/*!
+ * \var omsgn
+ * \brief Flag for Omega calculation. Yields r_I( w )*sgn( w ) = r_I ( abs(w) ).
+ */
+int omsgn;
 
 /* --------- */
 /* Functions */
@@ -140,15 +138,6 @@ void refl(double complex r[2], double w, double complex kap);
  */
 void reflhydro(double complex r[2] , double w, double complex kap);
 
-/*!
- * \fn void reflGraph(double complex r[2] ,double k, double w, double complex kap)
- * \brief
- * \param r
- * \param w
- * \param kap
- * \return
- */
-void reflGraph(double complex r[2] , double w, double complex kap);
 
 /*!
  * \fn void Gint(double complex Gten[Ndim][Ndim], double w, int RorI, int kx, int theta, int T)
@@ -162,6 +151,19 @@ void reflGraph(double complex r[2] , double w, double complex kap);
  * \return
  */
 void Gint(double complex Gten[Ndim][Ndim], double w, int RorI, int kx, int theta, int T);
+
+/*!
+ * \fn void Gint(double complex Gten[Ndim][Ndim], double w, int RorI, int kx, int theta, int T)
+ * \brief
+ * \param Gten
+ * \param w
+ * \param RorI
+ * \param kx
+ * \param theta
+ * \param T
+ * \return
+ */
+void Gintnew(double complex Gten[Ndim][Ndim], double w, int RorI, int kx, int theta, int T);
 
 /*!
  * \fn void alpha(double complex alp[Ndim][Ndim], double w)
@@ -179,6 +181,8 @@ void alpha(double complex alp[Ndim][Ndim], double w);
  * \return
  */
 double IntQF(double w);
+
+double IntQFnew( double w);
 
 /*!
  * \fn double IntQFfree(double w)

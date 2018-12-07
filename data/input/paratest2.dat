@@ -14,7 +14,11 @@ T    : 1E-6    in K
 
 // numerical specifications
 
-kcut   : 30.
-relerr : 1E-2
+kcut   : 100.
+relerr : 1E-3
 recerr : 1E-2
 abserr : 1e-200
+
+// graphene specifications
+vF     : 0.00333333333
+aF     : 0.00729735252

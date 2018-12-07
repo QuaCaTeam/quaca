@@ -29,10 +29,12 @@
 int main () {
 
 /* Plot parameters */
-int maxi=100;                        // plot points
-double sta = 1E-5 ;                 // start value of the calculation,
-double sto = 1E-2  ;                 // final value of the calculation
-double spac = pow(sto/sta,1./maxi);      // and the respective spacing
+int maxi;                        // plot points
+double sta;                      // start value of the calculation,
+double sto;                      // final value of the calculation
+double spac;                     // and the respective spacing
+
+/* Flag */
 
 /* Dummies */
 int l;
@@ -40,9 +42,28 @@ double QFt, QFr;// QFtfree, QFrfree;
 double F0, Fanar, Fanat, Ffreet, Ffreer;
 double eps0= 1./(4*PI);
 double prog;
+
 /* Greetings */
 printf("===========================================\n");
 printf("QFNUM STARTED!\n\n");
+    sta = 1E-3; 
+    //printf("Start velocity [in c]: ");
+    //scanf("%.10e",&sta);  
+    //printf("Read sta = %.10e",sta);
+    
+    sto = 1E-2;
+    //printf("Stop velocity [in c]: ");
+    //scanf("%.10e",&sto);  
+    //printf("Read sto = %.10e",sto);
+ 
+    maxi = 50;
+    //printf("Number of point: ");
+    //scanf("%d",&maxi);  
+    //printf("Read maxi = %d",maxi);
+
+    spac = pow(sto/sta,1./maxi);
+
+retard = 0;
 
 /* System parameters (input routine is not implemented yet) */
 input();
@@ -70,23 +91,14 @@ for (l=0; l<=maxi; ++l){
   /* Performing calculations */
   /* translational contribution */
   transroll = 0;
-  QFt =  integ(IntQF,0.,wa,relerr, abserr);
-//  abserr = fabs(QFt)*1E-3;
-  QFt += integinf(IntQF,wa,relerr, fabs(QFt)*1E-3);
-//  abserr = 1E-200;
-//   QFtfree = integ(IntQFfree,0.,100*wa,relerr, absr);
-//   QFtLTE = integ(IntQFLTE,0.,100*wa,relerr, absr);
-//   QFt = QFt + integinf(IntQF,wa,relerr, absr);
+  QFt =  integ(IntQF,0E0,0.9E0*wa,relerr, abserr);
+  QFt += integ(IntQF,0.9E0*wa,wa,relerr, abserr);
+  QFt += integinf(IntQF,wa,relerr, abserr);
   /* rolling contribution */
   transroll = 1;
-  QFr = integ(IntQF,0.,wa,relerr, abserr);
-//  abserr = fabs(QFr)*1E-3;
-  QFr += integinf(IntQF,wa,relerr,fabs(QFr)*1E-3);
-//  abserr = 1E-200;
-//   QFrfree = integ(IntQFfree,0.,100*wa,relerr, absr);
-//   QFrLTE = integ(IntQFLTE,0.,100*wa,relerr, absr);
-//      QFr = QFr + integinf(IntQF,wa,relerr, absr);
-//   QFr = QFr + integ(IntQF,wa,10*wa,relerr, abserr);
+  QFr =  integ(IntQF,0E0,0.9E0*wa,relerr, abserr);
+  QFr += integ(IntQF,0.9E0*wa,wa,relerr,abserr);
+  QFr += integinf(IntQF,wa,relerr, abserr);
      /* Calculate normalization constant */
   F0 = -3*pow(wsp1,5)*a0/(2*PI*eps0);
   /* Calculating analytical approximation for small velocities */
@@ -103,10 +115,7 @@ for (l=0; l<=maxi; ++l){
   fprintf(fp, "%.10e, %.10e, %.10e, %.10e, %.10e, %.10e, %.10e\n",
              v, QFt/F0, QFr/F0,Fanat/F0, Fanar/F0,
              Ffreet/F0, Ffreer/F0);
-  /*fprintf(fp, "%.10e, %.10e, %.10e, %.10e, %.10e, %.10e, %.10e, %.10e, %.10e\n",
-             v, QFt/F0, QFr/F0,Fanat/F0, Fanar/F0,
-             QFtfree/F0, QFrfree/F0, Ffreet/F0, Ffreer/F0);*/
- fflush(fp);
+  fflush(fp);
     /* Progress bar */
     prog = l/(double)maxi;
     printProg(prog);

@@ -43,9 +43,6 @@ double T;
             else if (strcmp(tmpstr1,"g1")==0) {
                  g1 = atof(tmpstr2);
             }
-            else if (strcmp(tmpstr1,"bet1")==0) {
-                 bet1 = atof(tmpstr2);
-            }
             else if (strcmp(tmpstr1,"einf")==0) {
                  einf = atof(tmpstr2);
             }
@@ -82,9 +79,6 @@ double T;
                else if (strcmp(tmpstr1,"aF")==0) {
                     aF = atof(tmpstr2);
             }
-               else if (strcmp(tmpstr1,"Delt")==0) {
-                    Delt = atof(tmpstr2);
-            }
             else if (strcmp(tmpstr1,"//")==0) {
                  /* skip */
             }
@@ -111,7 +105,8 @@ double T;
     printf("\neinf : %.5e",einf);
     printf("\nwp1  : %.5e in eV",wp1);
     printf("\ng1   : %.5e in eV",g1);
-    printf("\nbet1 : %.5e      ",bet1);
+    printf("\nvF   : %.5e",vF);
+    printf("\naF   : %.5e",aF);
     printf("\nT    : %.5e in K",T);
 
     printf("\n");
@@ -121,11 +116,6 @@ double T;
     printf("\nrecerr : %.5e",recerr);
     printf("\nabserr : %.5e",abserr);
 
-    printf("\n");
-    printf("\n// graphene specifications\n");
-    printf("\nvF   : %.5e",vF);
-    printf("\naF   : %.5e",aF);
-    printf("\nDelt : %.5e",Delt);
 
     printf("\n");
     printf("\n===========================================\n");
@@ -134,7 +124,6 @@ double T;
 za   = za/(1.9732705e-7);
 beta = 1./(T/1.16e4);
 wsp1 = wp1/sqrt(1.+einf);
-OmD  = 2*Delt;
 //
 
 }
@@ -156,6 +145,7 @@ void refl(double complex r[2] , double w, double complex kap)
  r[1]   =  -(kaplc  -  kap ) / ( kaplc + kap );
 // Calculating r^p
  r[0]   = (epsw*kap  -  wabs*kaplc ) / ( epsw*kap + wabs*kaplc );
+//  r[0]   = (epsw  -  wabs ) / ( epsw + wabs );
  if (w<0) {
    r[0] = conj(r[0]);
    r[1] = conj(r[1]);
@@ -164,61 +154,36 @@ void refl(double complex r[2] , double w, double complex kap)
 
 void reflhydro(double complex r[2] , double w, double complex kap)
 {
- double complex epsw, kapD, kapL, k2, kapDLw;
+ double complex epsw, kapD, kapL, k2, kapDLw, bet2, kap2;
  double wabs;
  // Calculating the dielectric function (times w due to numerical convenience)
  wabs = fabs(w);
- k2 = kap*kap+w*w;
+ bet2 =( (3./5.)*wabs+(1./3.)*g1*_Complex_I )/(wabs+g1*_Complex_I);
+ kap2 = kap*kap;
+ k2 = kap2+w*w;
+
  epsw = einf*wabs - wp1*wp1/(wabs+g1*_Complex_I);
 
  // Calculating the wavevector in z direction...
- kapD   = csqrt(kap*kap-(epsw-wabs)*wabs);
+ kapD   = csqrt(kap2-(epsw-wabs)*wabs);
  // ... and fixing the signs
  kapD   = fabs(creal(kapD)) - fabs(cimag(kapD))*_Complex_I;
 
- kapL   = csqrt(kap*kap+wabs*wabs+(wp1*wp1-wabs*(wabs+_Complex_I*g1))/(bet1*bet1*vF*vF) );
+ kapL   = csqrt(kap2+wabs*wabs+(wp1*wp1-wabs*(wabs+_Complex_I*g1))/bet2 );
  kapL   = fabs(creal(kapL)) - fabs(cimag(kapL))*_Complex_I;
  kapDLw = kapD*wabs + (epsw-wabs)*k2/kapL;
 // Calculating r^s
  r[1]   =  -(kapD  -  kap ) / ( kapD + kap );
 // Calculating r^p
  r[0]   = (epsw*kap  -  kapDLw ) / ( epsw*kap + kapDLw );
- if (w<0) {
+ if ( w < 0 && omsgn == 0) {
+   // For the Omega calcualtion, we need a integration of the Green tensor with
+   // an additional sgn( kx*v + w ). This is equivalent with calculating
+   // r_I( abs(w) ).
    r[0] = conj(r[0]);
-   r[1] = conj(r[1]);
  }
 }
 
-void reflGraph(double complex r[2] , double w, double complex kap)
-{
- double complex kapF, wabs;
- double complex kapFOm, PP00, PPtr, Phi;
- double k2, kapF2, kap2;
- // Calculating the dielectric function (times w due to numerical convenience)
- wabs = fabs(w);
- kap2 = creal(kap*kap);
- k2 = creal(kap*kap) + wabs*wabs ;
- // Calculating the wavevector in z direction...
- kapF   = csqrt(vF*vF*k2-wabs*wabs);
- // ... and fixing the signs
- kapF  = fabs(creal(kapF)) - fabs(cimag(kapF))*_Complex_I;
- kapF2 = creal(kapF*kapF);
-
- kapFOm = kapF/OmD;
-
- Phi = 2*OmD*(1.+( kapFOm - 1./kapFOm )*catan(kapFOm)  );
- PP00 = Phi*aF*k2/kapF2;
- PPtr = Phi*aF*(kap2+kapF2)/kapF2;
-
-// Calculating r^s
- r[1]   =  - (k2*PPtr-kap2*PP00)/(k2*(PPtr+2*kap)-kap2*PP00);
-// Calculating r^p
- r[0]   = kap*PP00/(kap*PP00+2*k2);
- if (w<0) {
-   r[0] = conj(r[0]);
-   r[1] = conj(r[1]);
- }
-}
 
 // Integral over the Green tensor with several options:
 void Gint(double complex Gten[Ndim][Ndim], double w, int RorI, int kx, int theta, int T)
@@ -229,47 +194,47 @@ int sig, pphi;
 double wrapphi(double phi)
 {
   double lim2, cosp, sinp, resphi;
-  double limI1, limgraph;
+  double limI1;
   int caseT=0;
+
   // Defining the integrand of the k integration
    double wrapkap (double kap)
    {
    double wpl;
    double cosp2 = cosp*cosp;
    double sinp2 = sinp*sinp;
-   double resk=0., k;
-   double complex kapc, r[2], resc, rppre, rspre;
-   double v2 = v*v ;
-   double kapc2;
+   double resk=0.;
+   double complex kapc=0., re[2], resc=0., rppre, rspre;
+   double v2 = v*v, k ;
+   double kap2 = kap*fabs(kap);
    double complex prefac;
-   if (kap < 0) {
-     kapc = _Complex_I*kap + 0.;
+   if (kap >= 0E0) {
+     kapc = kap + I*0E0;
+   }else {
+     kapc = 0E0 + I*kap;
    }
-   else if (kap >= 0) {
-     kapc = kap + _Complex_I*0.;
-   }
-   kapc2 = creal(kapc*kapc);
-   k   = ((sqrt(kapc2*(1.-v2*cosp2) +w*w) +v*w*cosp)/(1.-v2*cosp2) );
+   k = (sqrt(kap2*(1E0-v2*cosp2) + w*w) + v*w*cosp)/(1E0-v2*cosp2);
    wpl =  w+cosp*k*v;
-   refl(r,wpl,kapc);
+   re[0] = 0E0;
+   re[1] = 0E0;
+   refl(re,wpl,kapc);
+   prefac = cexp(-2*za*kapc)/(1E0-cosp*v*wpl/k);
 
-   prefac = cexp(-2*za*kapc)/(1.-cosp*v*wpl/k);
-
-   rppre = r[0]*prefac;
-   rspre = r[1]*prefac;
+   rppre = re[0]*prefac;
+   rspre = re[1]*prefac;
 
    // Here we are calculating the phi(k,wpl)
    if (pphi == 1) {
-    resc = rppre*k*kapc*cosp;
+    resc = rppre*cosp*k*kapc;
    }
    // Here we are calculating the different sigma(k,wpl) components
    if (pphi == 0) {
-    rspre = rspre*wpl*wpl;
+      rspre = rspre*wpl*wpl;
     if (sig == 0) {
-      resc = (rppre*cosp2*kapc2 + rspre*sinp2);
+      resc = (rppre*cosp2*kap2 + rspre*sinp2);
     }
     if (sig == 1) {
-      resc = (rppre*sinp2*kapc2 + rspre*cosp2);
+      resc = (rppre*sinp2*kap2 + rspre*cosp2);
     }
     if (sig == 2) {
       resc = rppre*k*k;
@@ -285,15 +250,15 @@ double wrapphi(double phi)
     if (kx == 1) {
      resk = resk*k*cosp;
     }
-//    if (T == 1) {
-//      resk = resk/(1E0-exp(-beta*wpl));
-//    }
+    if (T == 1) {
+      resk = resk*(1E0/(1E0-exp(-beta*wpl)) - 1E0/(1E0-exp(-beta*w)) );
+    }
     return resk;
   }
-  // Performing the k integration
+  // Performing the kappa integration
   cosp = cos(phi);
   sinp = sin(phi);
-//  limgraph = sqrt(OmD*OmD +(1.-vF*vF)*k*k);
+
   limI1 = -w;
   lim2 = kcut/(2*za);
           caseT = 0;
@@ -308,29 +273,30 @@ double wrapphi(double phi)
 
     resphi = integ(wrapkap,limI1, lim2, relerr*recerr*recerr, abserr*recerr*recerr);
 
-
-
-//  if (T == 1 && caseT == 1){
-//    resphi += integ(wrapkap, lim2,kcut/(2*za), relerr*recerr*recerr, abserr*recerr*recerr);
-//  }
-
+  if (T == 1 && caseT == 1){
+    resphi += integ(wrapkap, lim2,kcut/(2*za), relerr*recerr*recerr, abserr*recerr*recerr);
+  }
   return resphi/PI;
 }
 // First, we calculate Gsigma
 pphi = 0;
 // ... the (1,1) component with cos^2(phi) as prefactor
   sig = 0;
-  Gsigma[0] = integ( wrapphi, 0., PI, relerr*recerr, abserr*recerr);
+  Gsigma[0] = integ( wrapphi, 0., PI*0.5, relerr*recerr, abserr*recerr);
+  Gsigma[0] += integ( wrapphi, PI*0.5, PI, relerr*recerr, abserr*recerr);
 // ... the (2,2) component with sin^2(phi) as prefactor
   sig = 1;
-  Gsigma[1] = integ( wrapphi, 0., PI, relerr*recerr, abserr*recerr);
+  Gsigma[1] = integ( wrapphi, 0., PI*0.5, relerr*recerr, abserr*recerr);
+  Gsigma[1] += integ( wrapphi, PI*0.5, PI, relerr*recerr, abserr*recerr);
 // and the (2,2) component as sin^2 = 1 - cos^2
   sig = 2;
-  Gsigma[2] = integ( wrapphi, 0., PI, relerr*recerr, abserr*recerr);
+  Gsigma[2] = integ( wrapphi, 0., PI*0.5, relerr*recerr, abserr*recerr);
+  Gsigma[2] += integ( wrapphi, PI*0.5, PI, relerr*recerr, abserr*recerr);
 
 // Second, we calculate Gphi
 pphi = 1;
- Gphi = integ( wrapphi, 0., PI, relerr*recerr, abserr*recerr);
+ Gphi = integ( wrapphi, 0., PI*0.5, relerr*recerr, abserr*recerr);
+ Gphi += integ( wrapphi, PI*0.5, PI, relerr*recerr, abserr*recerr);
 // Now we can assemble the full Green tensor
 Gten[0][0] = Gsigma[0];
 Gten[1][1] = Gsigma[1];
@@ -342,6 +308,7 @@ Gten[1][0] = 0.;
 Gten[2][1] = 0.;
 Gten[1][2] = 0.;
 }
+
 
 // The polarizability
 void alpha(double complex alp[Ndim][Ndim], double w)
@@ -380,7 +347,6 @@ double complex GIth[3][3], GIk[3][3], GIkth[3][3];
 double complex alp[3][3], alpI[3][3], S[3][3],  temp1[3][3], temp2[3][3];
 double complex alpdag[3][3];
 
-
 /* Creating all needed matrices */
 alpha(alp,w);
 dagger(alp,alpdag);
@@ -414,8 +380,15 @@ GIkth[2][2] = 0.;
 multiply(S,GIk,temp1);
 multiply(alpI,GIkth,temp2);
 
-return (2./PI)*creal( -tr(temp1) + tr(temp2) );
+return (2./PI)*creal( -tr(temp1)  + tr(temp2) );
 }
+
+
+double Omega( double w)
+{
+
+}
+
 
 
 double IntQFfree( double w)

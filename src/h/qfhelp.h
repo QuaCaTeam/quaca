@@ -1,4 +1,4 @@
-/*! 
+/*!
  * \file qfhelp.h
  * \brief Common functions and parameters among the numerical calculation of quantum friction.
  * \author C. H. E. && M. O.
@@ -68,6 +68,15 @@ void printProg(double percentage);
  * \return void
  */
 void multiply(double complex mat1[Ndim][Ndim], double complex mat2[Ndim][Ndim], double complex res[Ndim][Ndim]);
+
+/*!
+ * \fn void transpose(double complex mat[Ndim][Ndim], double complex res[Ndim][Ndim])
+ * \brief Calculates the transpose of a square matrix of dimension Ndim.
+ * \param mat Square matrix of dimension Ndim.
+ * \param res Resulting matrix of dimension Ndim.
+ * \return void
+ */
+void transpose(double complex mat[Ndim][Ndim], double complex res[Ndim][Ndim]);
 
 /*!
  * \fn void dagger(double complex mat[Ndim][Ndim], double complex res[Ndim][Ndim])
