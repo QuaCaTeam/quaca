@@ -56,7 +56,7 @@ printf("QFNUM STARTED!\n\n");
     //scanf("%.10e",&sto);  
     //printf("Read sto = %.10e",sto);
  
-    maxi = 50;
+    maxi = 100;
     //printf("Number of point: ");
     //scanf("%d",&maxi);  
     //printf("Read maxi = %d",maxi);
@@ -92,13 +92,23 @@ for (l=0; l<=maxi; ++l){
   /* translational contribution */
   transroll = 0;
   QFt =  integ(IntQF,0E0,0.9E0*wa,relerr, abserr);
+  abserr = fabs(QFt)*1E-2;
   QFt += integ(IntQF,0.9E0*wa,wa,relerr, abserr);
-  QFt += integinf(IntQF,wa,relerr, abserr);
+  abserr = fabs(QFt)*1E-2;
+  QFt += integ(IntQF,wa,wsp1,relerr, abserr);
+  abserr = fabs(QFt)*1E-2;
+  QFt += integinf(IntQF,wsp1,relerr, abserr);
+  abserr = 1E-200;
   /* rolling contribution */
   transroll = 1;
   QFr =  integ(IntQF,0E0,0.9E0*wa,relerr, abserr);
-  QFr += integ(IntQF,0.9E0*wa,wa,relerr,abserr);
-  QFr += integinf(IntQF,wa,relerr, abserr);
+  abserr = fabs(QFr)*1E-2;
+  QFr += integ(IntQF,0.9E0*wa,wa,relerr, abserr);
+  abserr = fabs(QFr)*1E-2;
+  QFr += integ(IntQF,wa,wsp1,relerr, abserr);
+  abserr = fabs(QFr)*1E-2;
+  QFr += integinf(IntQF,wsp1,relerr, abserr);
+  abserr = 1E-200;
      /* Calculate normalization constant */
   F0 = -3*pow(wsp1,5)*a0/(2*PI*eps0);
   /* Calculating analytical approximation for small velocities */

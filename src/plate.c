@@ -375,11 +375,12 @@ fancy(alp, alpI, -1);
 Gint(GIth , w, 1, 0, 1, 1);
 Gint(GIk  , w, 1, 1, 0, 0);
 Gint(GIkth, w, 1, 1, 1, 1);
-if ( muquest == 1 ){
+
+/*if ( muquest == 1 ){
 	GIth[0][0] += mur;
 	GIth[1][1] += mur;
 	GIth[2][2] += mur;
-}
+}*/
 
 /* Building the power spectrum S */
 multiply(alp,GIth,temp1);
@@ -405,7 +406,7 @@ GIkth[2][2] = 0.;
 
 multiply(S,GIk,temp1);
 multiply(alpI,GIkth,temp2);
-printf("\n tr(S)=%.5e",creal(tr(temp1)));
+/* printf("\nIntQF=%.5e, w=%.5e",(2E0/PI)*creal( -tr(temp1)  + tr(temp2) ),w);*/
 return (2E0/PI)*creal( -tr(temp1)  + tr(temp2) );
 }
 
