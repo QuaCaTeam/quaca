@@ -114,6 +114,9 @@ for (l=0; l<=maxi; ++l){
   /* Calculating analytical approximation for small velocities */
   Fanat = -63*a0*a0*pow(g1/(eps0*wp1*wp1),2)*pow(v,3)/(pow(PI,3)*pow(2*za,10));
   Fanar = -45*Fanat/63.;
+  if (muquest == 1){
+   Fanat += -45*creal(mu(0E0))*a0*g1*pow(v,3)*pow(2*za,-7)*4*PI/(pow(PI*wa*wp1,2));
+  }
   Fanat = Fanat - a0*a0*pow(g1/(eps0*wp1*wp1),2)*6*v/(PI*beta*beta*pow(2*za,8));
   Fanar = Fanar + 3*a0*a0*pow(g1/(eps0*wp1*wp1),2)*v/(PI*beta*beta*pow(2*za,8));
   Ffreet= - a0*a0*pow(g1*4*PI/(eps0*wp1*wp1),2)*3*v/(PI*beta*beta*pow(2*za,8));
