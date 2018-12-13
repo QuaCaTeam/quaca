@@ -1,7 +1,7 @@
 // atomic constants
 
 v       : 5E-4   in c
-za      : 5E-9   in nm
+za      : 10E-9   in nm
 wa      : 1.3E0  in eV
 muquest : 1      if 1 internal bath is included
 gamMu   : 0.1E0  in eV 
@@ -12,7 +12,7 @@ a0      : 6E-9
 einf : 1.   
 wp1  : 9.  in eV
 g1   : 0.035E0  in eV 
-T    : 1E-6    in K
+T    : 3E2    in K
 
 // numerical specifications
 
