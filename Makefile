@@ -22,9 +22,9 @@ $(PROG): $(OBJS)
 .c.o:
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-# make docs
-docs:
-	@doxygen doc/doxconf
+# make doc
+doc:
+	cd doc && make html	
 
 clean:
 	rm src/*.o
