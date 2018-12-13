@@ -1,6 +1,2 @@
-# exclude docs since they can easily be generated
-/doc/*
-!/doc/doxconf
-
 # exclude .bak
 *.bak
