@@ -2,7 +2,10 @@
 # Makefile 
 #
 
-# options
+# directory to install qfnum to
+PREFIX=/usr/local
+
+# options for compiling
 CC = gcc
 CFLAGS = -Wall -O3 # show warnings 
 INCLUDES = -I/usr/include -Isrc/h # include headers
@@ -25,6 +28,12 @@ $(PROG): $(OBJS)
 # make doc
 doc:
 	cd doc && make html	
+
+install:
+	echo Installing executable to $(PREFIX)/bin
+	mkdir -p $(PREFIX)/bin
+	cp -f bin/qfnum $(PREFIX)/bin
+	chmod 755 $(PREFIX)/bin/qfnum
 
 clean:
 	rm src/*.o
