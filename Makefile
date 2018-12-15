@@ -7,21 +7,23 @@ PREFIX=/usr/local
 
 # options for compiling
 CC = gcc
-CFLAGS = -Wall -O3 # show warnings 
+CFLAGS = -Wall -Werror -O2 # show warnings as erros, optimize level 2
 INCLUDES = -I/usr/include -Isrc/h # include headers
 LFLAGS = -L/usr/lib
-LIBS = -lgsl -lgslcblas -lm -larb -lmpfr # libraries (gsl and arb), on arch -larb on debian -lflint-arb
+LIBS = -lgsl -lgslcblas -lm # gsl, gscblas, math library
 
-# file
+# files
 SRC = $(wildcard src/*c) 
 OBJS = ${SRC:.c=.o}
 PROG = bin/qfnum
 
 all: $(PROG) clean
 
+# link .o's to program (qfnum)
 $(PROG): $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDES) -o $(PROG) $(OBJS) $(LFLAGS) $(LIBS)
+	$(CC) $(CFLAGS) $(INCLUDES) $(LFLAGS) $(LIBS) -o $(PROG) $(OBJS) 
 
+# make every .c to .o
 .c.o:
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
@@ -29,12 +31,14 @@ $(PROG): $(OBJS)
 doc:
 	cd doc && make html	
 
+# install binary
 install:
 	echo Installing executable to $(PREFIX)/bin
 	mkdir -p $(PREFIX)/bin
 	cp -f bin/qfnum $(PREFIX)/bin
 	chmod 755 $(PREFIX)/bin/qfnum
 
+# clean directory
 clean:
 	rm src/*.o
 

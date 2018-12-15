@@ -17,116 +17,79 @@
 /* Functions */
 /* --------- */
 
-void input(char file[], int verbose) {
-    FILE * fr = fopen(file, "rt");
+void input(int verbose) {
 
-    if(fr == NULL){
-        printf("file %s not found", file);
-    }
+    // dummies
+    char s[100];
+    double i;
 
-    char tmpstr1[16];
-    char tmpstr2[16];
+    // read lines till end of stream
+    while(!feof(stdin)) {
 
-    double T;
-
-    char tempbuff[100];
-
-    while(!feof(fr))
-    {
-        if (fgets(tempbuff,100,fr)) {
-            sscanf(tempbuff, "%15s : %15s", tmpstr1, tmpstr2);
-
-            if (strcmp(tmpstr1,"wp1")==0) {
-                wp1 = atof(tmpstr2);
-            }
-            else if (strcmp(tmpstr1,"g1")==0) {
-                g1 = atof(tmpstr2);
-            }
-            else if (strcmp(tmpstr1,"einf")==0) {
-                einf = atof(tmpstr2);
-            }
-            else if (strcmp(tmpstr1,"v")==0) {
-                v = atof(tmpstr2);
-            }
-            else if (strcmp(tmpstr1,"za")==0) {
-                za = atof(tmpstr2);
-            }
-            else if (strcmp(tmpstr1,"T")==0) {
-                T = atof(tmpstr2);
-            }
-            else if (strcmp(tmpstr1,"a0")==0) {
-                a0 = atof(tmpstr2);
-            }
-            else if (strcmp(tmpstr1,"kcut")==0) {
-                kcut = atof(tmpstr2);
-            }
-            else if (strcmp(tmpstr1,"relerr")==0) {
-                relerr = atof(tmpstr2);
-            }
-            else if (strcmp(tmpstr1,"abserr")==0) {
-                abserr = atof(tmpstr2);
-            }
-            else if (strcmp(tmpstr1,"recerr")==0) {
-                recerr = atof(tmpstr2);
-            }
-            else if (strcmp(tmpstr1,"wa")==0) {
-                wa = atof(tmpstr2);
-            }
-            else if (strcmp(tmpstr1,"vF")==0) {
-                vF = atof(tmpstr2);
-            }
-            else if (strcmp(tmpstr1,"aF")==0) {
-                aF = atof(tmpstr2);
-            }
-            else if (strcmp(tmpstr1,"//")==0) {
-                /* skip */
-            }
-            else{
-                printf("Unrecongized parameter : \"%s\"\n", tmpstr1);
+        // if it scans a string (the variable) AND a double after that do ...
+        // else do nothing (i.e. ignore comments)
+        if ( scanf("%s %lf", s, &i) == 2) {
+            if (strcmp(s,"wp1")==0) {
+                wp1 = i;
+            } else if (strcmp(s,"g1")==0) {
+                g1 = i;
+            } else if (strcmp(s,"einf")==0) {
+                einf = i;
+            } else if (strcmp(s,"v")==0) {
+                v = i;
+            } else if (strcmp(s,"za")==0) {
+                za = i;
+            } else if (strcmp(s,"T")==0) {
+                T = i;
+            } else if (strcmp(s,"a0")==0) {
+                a0 = i;
+            } else if (strcmp(s,"kcut")==0) {
+                kcut = i;
+            } else if (strcmp(s,"relerr")==0) {
+                relerr = i;
+            } else if (strcmp(s,"abserr")==0) {
+                abserr = i;
+            } else if (strcmp(s,"recerr")==0) {
+                recerr = i;
+            } else if (strcmp(s,"wa")==0) {
+                wa = i;
+            } else if (strcmp(s,"vF")==0) {
+                vF = i;
+            } else if (strcmp(s,"aF")==0) {
+                aF = i;
+            } else{
+                printf("Unrecognized parameter : \"%s\"\n", s);
             }
         }
     }
-    fclose(fr);
 
+    // transforming the remaining SI units to natural units
+    // or other convenient forms
+    za   = za/(1.9732705e-7);
+    beta = 1./(T/1.16e4);
+    wsp1 = wp1/sqrt(1.+einf);
+
+    // recall the read parameters
     if (verbose == 1) {
-        // Recall the read parameters and print to screen
-        printf("\n===========================================\n");
-        printf("\nINPUT PARAMETERS:");
-        printf("\n`````````````````\n");
-        printf("\n");
+        printf("INPUT PARAMETERS:\n");
         printf("// atomic constants\n");
-        printf("\nv   : %.5e in c",v);
-        printf("\nza  : %.5e in nm",za);
-        printf("\nwa  : %.5e in eV",wa);
-        printf("\na0  : %.5e",a0);
-
-        printf("\n");
-        printf("\n// material parameters\n");
-        printf("\neinf : %.5e",einf);
-        printf("\nwp1  : %.5e in eV",wp1);
-        printf("\ng1   : %.5e in eV",g1);
-        printf("\nvF   : %.5e",vF);
-        printf("\naF   : %.5e",aF);
-        printf("\nT    : %.5e in K",T);
-
-        printf("\n");
-        printf("\n// numerical specifications\n");
-        printf("\nkcut   : %.5e",kcut);
-        printf("\nrelerr : %.5e",relerr);
-        printf("\nrecerr : %.5e",recerr);
-        printf("\nabserr : %.5e",abserr);
-
-
-        printf("\n");
-        printf("\n===========================================\n");
-        // transforming the remaining SI units to natural units
-        // or other convenient forms
-        za   = za/(1.9732705e-7);
-        beta = 1./(T/1.16e4);
-        wsp1 = wp1/sqrt(1.+einf);
-        //
+        printf("v   = %.5e\n",v);
+        printf("za  = %.5e\n",za);
+        printf("wa  = %.5e\n",wa);
+        printf("a0  = %.5e\n",a0);
+        printf("// material parameters\n");
+        printf("einf = %.5e\n",einf);
+        printf("wp1  = %.5e\n",wp1);
+        printf("g1   = %.5e\n",g1);
+        printf("vF   = %.5e\n",vF);
+        printf("aF   = %.5e\n",aF);
+        printf("T    = %.5e\n",T);
+        printf("// numerical specifications\n");
+        printf("kcut   : %.5e\n",kcut);
+        printf("relerr : %.5e\n",relerr);
+        printf("recerr : %.5e\n",recerr);
+        printf("abserr : %.5e\n",abserr);
     }
-
 }
 
 
@@ -385,10 +348,10 @@ double IntQF( double w)
 }
 
 
-double Omega( double w)
-{
-
-}
+//double Omega( double w)
+//{
+//
+//}
 
 
 

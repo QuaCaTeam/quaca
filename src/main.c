@@ -41,33 +41,18 @@ int main (int argc, char *argv[]) {
     double QFt, QFr;// QFtfree, QFrfree;
     double F0, Fanar, Fanat, Ffreet, Ffreer;
     double eps0= 1./(4*PI);
-    double prog;
 
-    // check input file 
-    if (argc == 1) {
-        printf("No file passed!\n");
-        exit(0);
-    } else {
-        input(argv[1], 1);
-    }
+    // greetings
+    printf("===========================================\n");
+    printf("WELCOME TO QFNUM!\n");
+    printf("===========================================\n");
 
-    // create output file
-    char outfile[strlen(argv[1])+1];
-    memset(outfile, '\0', sizeof(outfile)); //clear memory location
-    strncpy(outfile, argv[1], strlen(argv[1])-3);
-    strcat(outfile, ".out");
-
-    FILE *fp; // output file
-    fp = fopen(outfile, "w");
-    if (fp == NULL) {
-        printf("I couldn't open %s for writing.\n", outfile);
-        exit(0);
-    }
-
+    // input parameters
+    input(1);    
 
     /* Greetings */
     printf("===========================================\n");
-    printf("QFNUM STARTED!\n\n");
+    printf("CALCULATING...\n");
     sta = 1E-3; 
     //printf("Start velocity [in c]: ");
     //scanf("%.10e",&sta);  
@@ -84,17 +69,16 @@ int main (int argc, char *argv[]) {
     //printf("Read maxi = %d",maxi);
 
     spac = pow(sto/sta,1./maxi);
-
     retard = 0;
 
-
     /* print evaluation regime */
-    printf("\n");
-    printf("v= %.5e to %.5e c\n",sta,sto );
-    printf("with %5i points\n",maxi );
+    printf("v= %.5e to %.5e\n", sta, sto);
+    printf("with %5i points\n", maxi);
+
     /* Starting calculations */
-    printf("\n------------------------------\n");
-    printf("STARTING CALCULATION\n");
+    printf("===========================================\n");
+    printf("CALCULATION STARTED!\n");
+    printf("v               | QFt/F0          | QFr/F0           | Fanat/F0        | Fanar/F0         | Ffreet/F0       | Ffreer/F0\n");
 
     clock_t c0 = clock();
     for (l=0; l<=maxi; ++l){
@@ -106,13 +90,16 @@ int main (int argc, char *argv[]) {
         QFt =  integ(IntQF,0E0,0.9E0*wa,relerr, abserr);
         QFt += integ(IntQF,0.9E0*wa,wa,relerr, abserr);
         QFt += integinf(IntQF,wa,relerr, abserr);
+
         /* rolling contribution */
         transroll = 1;
         QFr =  integ(IntQF,0E0,0.9E0*wa,relerr, abserr);
         QFr += integ(IntQF,0.9E0*wa,wa,relerr,abserr);
         QFr += integinf(IntQF,wa,relerr, abserr);
+
         /* Calculate normalization constant */
         F0 = -3*pow(wsp1,5)*a0/(2*PI*eps0);
+
         /* Calculating analytical approximation for small velocities */
         Fanat = -63*a0*a0*pow(g1/(eps0*wp1*wp1),2)*pow(v,3)/(pow(PI,3)*pow(2*za,10));
         Fanar = -45*Fanat/63.;
@@ -120,17 +107,11 @@ int main (int argc, char *argv[]) {
         Fanar = Fanar + 3*a0*a0*pow(g1/(eps0*wp1*wp1),2)*v/(PI*beta*beta*pow(2*za,8));
         Ffreet= - a0*a0*pow(g1*4*PI/(eps0*wp1*wp1),2)*3*v/(PI*beta*beta*pow(2*za,8));
         Ffreer= -Ffreet/2.;
+
         /* Print result to the screen */
-        printf("v= %.5e\n", v);
-        printf("F= %.5e\n", (QFt+QFr)/F0 );
-        /* write to the file */
-        fprintf(fp, "%.10e, %.10e, %.10e, %.10e, %.10e, %.10e, %.10e\n",
+        printf("%.10e, %.10e, %.10e, %.10e, %.10e, %.10e, %.10e\n",
                 v, QFt/F0, QFr/F0,Fanat/F0, Fanar/F0,
                 Ffreet/F0, Ffreer/F0);
-        fflush(fp);
-        /* Progress bar */
-        prog = l/(double)maxi;
-        printProg(prog);
     }
     clock_t c1 = clock();
     printf("\n------------------------------\n");

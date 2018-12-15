@@ -51,7 +51,7 @@ double c, hbar, eps0, a0;
  * \var einf
  * \brief Background permittivity.
  */
-double wp1, wsp1, wa, g1, einf, beta;
+double wp1, wsp1, wa, g1, einf, beta, T;
 
 /*!
  * \var vF
@@ -116,7 +116,7 @@ int omsgn;
  * \param file File to parse.
  * \return void
  */
-void input();
+void input(int verbose);
 
 /*!
  * \fn void refl(double complex r[2] ,double k, double w, double complex kap)
