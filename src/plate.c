@@ -366,7 +366,6 @@ double IntQF( double w)
 double complex GIth[3][3], GIk[3][3], GIkth[3][3];
 double complex alp[3][3], alpI[3][3], S[3][3],  temp1[3][3], temp2[3][3];
 double complex alpdag[3][3];
-double mur = w*creal(mu(w))/( a0*wa*wa*(1E0-exp(-beta*w)) );
 
 /* Creating all needed matrices */
 alpha(alp,w);
@@ -375,12 +374,6 @@ fancy(alp, alpI, -1);
 Gint(GIth , w, 1, 0, 1, 1);
 Gint(GIk  , w, 1, 1, 0, 0);
 Gint(GIkth, w, 1, 1, 1, 1);
-
-/*if ( muquest == 1 ){
-	GIth[0][0] += mur;
-	GIth[1][1] += mur;
-	GIth[2][2] += mur;
-}*/
 
 /* Building the power spectrum S */
 multiply(alp,GIth,temp1);
