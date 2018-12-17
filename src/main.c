@@ -26,6 +26,7 @@
 
 /******************************************************************************/
 // Main program
+
 int main (int argc, char *argv[]) {
 
     /* Plot parameters */
@@ -50,9 +51,6 @@ int main (int argc, char *argv[]) {
     // input parameters
     input(1);    
 
-    /* Greetings */
-    printf("===========================================\n");
-    printf("CALCULATING...\n");
     sta = 1E-3; 
     //printf("Start velocity [in c]: ");
     //scanf("%.10e",&sta);  
@@ -62,14 +60,13 @@ int main (int argc, char *argv[]) {
     //printf("Stop velocity [in c]: ");
     //scanf("%.10e",&sto);  
     //printf("Read sto = %.10e",sto);
-
-    maxi = 50;
+ 
+    maxi = 100;
     //printf("Number of point: ");
     //scanf("%d",&maxi);  
     //printf("Read maxi = %d",maxi);
 
     spac = pow(sto/sta,1./maxi);
-    retard = 0;
 
     /* print evaluation regime */
     printf("v= %.5e to %.5e\n", sta, sto);
@@ -84,45 +81,64 @@ int main (int argc, char *argv[]) {
     for (l=0; l<=maxi; ++l){
         v = sta*pow(spac,l);
 
-        /* Performing calculations */
-        /* translational contribution */
-        transroll = 0;
-        QFt =  integ(IntQF,0E0,0.9E0*wa,relerr, abserr);
-        QFt += integ(IntQF,0.9E0*wa,wa,relerr, abserr);
-        QFt += integinf(IntQF,wa,relerr, abserr);
+    /* Performing calculations */
+	 /* translational contribution */
+ 	 transroll = 0;
+  		QFt =  integ(IntQF,0E0,0.9E0*wa,relerr, abserr);
+  		abserr = fabs(QFt)*1E-2;
+  		QFt += integ(IntQF,0.9E0*wa,wa,relerr, abserr);
+  		abserr = fabs(QFt)*1E-2;
+  		QFt += integ(IntQF,wa,wsp1,relerr, abserr);
+		abserr = fabs(QFt)*1E-2;
+ 		QFt += integinf(IntQF,wsp1,relerr, abserr);
+  		abserr = 1E-200;
+  	/* rolling contribution */
+  	transroll = 1;
+  		QFr =  integ(IntQF,0E0,0.9E0*wa,relerr, abserr);
+  		abserr = fabs(QFr)*1E-2;
+ 		QFr += integ(IntQF,0.9E0*wa,wa,relerr, abserr);
+		abserr = fabs(QFr)*1E-2;
+		QFr += integ(IntQF,wa,wsp1,relerr, abserr);
+		abserr = fabs(QFr)*1E-2;
+		QFr += integinf(IntQF,wsp1,relerr, abserr);
+		abserr = 1E-200;
+  /* Calculate normalization constant */
+  	F0 = -3*pow(wsp1,5)*a0/(2*PI*eps0);
+  /* Calculating analytical approximation for small velocities */
+  	Fanat = -63*a0*a0*pow(g1/(eps0*wp1*wp1),2)*pow(v,3)/(pow(PI,3)*pow(2*za,10));
+  	Fanar = -45*Fanat/63.;
+  	if (muquest == 1){
+   	 Fanat += -45*creal(mu(0E0))*a0*g1*pow(v,3)*pow(2*za,-7)*4*PI/(pow(PI*wa*wp1,2));
+   	 Fanat += -8*v*a0*g1*creal(mu(0E0))*4*PI/(pow(wp1*beta*wa,2)*pow(2*za,5));
+  	}
+  	Fanat = Fanat - a0*a0*pow(g1/(eps0*wp1*wp1),2)*6*v/(PI*beta*beta*pow(2*za,8));
+  	Fanar = Fanar + 3*a0*a0*pow(g1/(eps0*wp1*wp1),2)*v/(PI*beta*beta*pow(2*za,8));
+  	Ffreet= - a0*a0*pow(g1*4*PI/(eps0*wp1*wp1),2)*3*v/(PI*beta*beta*pow(2*za,8));
+  	Ffreer= -Ffreet/2.;
+  
+  /* Print result to the screen */
+   printf("\n");
+   printf("v= %.5e\n", v);
+   printf("F= %.5e\n", (QFt+QFr)/F0 );
+  /* write to the file */
+   fprintf(fp, "%.10e, %.10e, %.10e, %.10e, %.10e, %.10e, %.10e\n",
+             v, QFt/F0, QFr/F0,Fanat/F0, Fanar/F0,
+             Ffreet/F0, Ffreer/F0);
+   fflush(fp);
+  /* Progress bar */
+   prog = l/(double)maxi;
+   printProg(prog);
+  }
+clock_t c1 = clock();
+printf("\n------------------------------\n");
 
-        /* rolling contribution */
-        transroll = 1;
-        QFr =  integ(IntQF,0E0,0.9E0*wa,relerr, abserr);
-        QFr += integ(IntQF,0.9E0*wa,wa,relerr,abserr);
-        QFr += integinf(IntQF,wa,relerr, abserr);
+/* Bye! */
+printf("\n");
+printf("Finished calculating %d points in %3.2f sec. \n", maxi, (c1-c0)/1.e6);
+printf("\nBYE!\n");
+printf("===========================================\n");
 
-        /* Calculate normalization constant */
-        F0 = -3*pow(wsp1,5)*a0/(2*PI*eps0);
-
-        /* Calculating analytical approximation for small velocities */
-        Fanat = -63*a0*a0*pow(g1/(eps0*wp1*wp1),2)*pow(v,3)/(pow(PI,3)*pow(2*za,10));
-        Fanar = -45*Fanat/63.;
-        Fanat = Fanat - a0*a0*pow(g1/(eps0*wp1*wp1),2)*6*v/(PI*beta*beta*pow(2*za,8));
-        Fanar = Fanar + 3*a0*a0*pow(g1/(eps0*wp1*wp1),2)*v/(PI*beta*beta*pow(2*za,8));
-        Ffreet= - a0*a0*pow(g1*4*PI/(eps0*wp1*wp1),2)*3*v/(PI*beta*beta*pow(2*za,8));
-        Ffreer= -Ffreet/2.;
-
-        /* Print result to the screen */
-        printf("%.10e, %.10e, %.10e, %.10e, %.10e, %.10e, %.10e\n",
-                v, QFt/F0, QFr/F0,Fanat/F0, Fanar/F0,
-                Ffreet/F0, Ffreer/F0);
-    }
-    clock_t c1 = clock();
-    printf("\n------------------------------\n");
-
-    /* Bye! */
-    printf("\n");
-    printf("Finished calculating %d points in %3.2f sec. \n", maxi, (c1-c0)/1.e6);
-    printf("\nBYE!\n");
-    printf("===========================================\n");
-
-    return 0;
+return 0;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
