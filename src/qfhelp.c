@@ -1,20 +1,12 @@
-/*!
- * \file qfhelp.c
- * \brief Common functions for quantum friction in a cylinder.
- * \author C. H. Egerland
- *
- * Functions and parameters, for more explicit documentation see the header.
- */
-
 /* --------- */
-/* Libraries */
+/* LIBRARIES */
 /* --------- */
 
 #include "h/qfhelp.h"
 
 
 /* --------- */
-/* Functions */
+/* FUNCTIONS */
 /* --------- */
 
 // progress bar

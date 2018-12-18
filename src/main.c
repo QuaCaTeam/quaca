@@ -51,21 +51,10 @@ int main (int argc, char *argv[]) {
     // input parameters
     input(1);    
 
+    // start stop, spacing
     sta = 1E-3; 
-    //printf("Start velocity [in c]: ");
-    //scanf("%.10e",&sta);  
-    //printf("Read sta = %.10e",sta);
-
     sto = 1E-2;
-    //printf("Stop velocity [in c]: ");
-    //scanf("%.10e",&sto);  
-    //printf("Read sto = %.10e",sto);
- 
     maxi = 100;
-    //printf("Number of point: ");
-    //scanf("%d",&maxi);  
-    //printf("Read maxi = %d",maxi);
-
     spac = pow(sto/sta,1./maxi);
 
     /* print evaluation regime */
@@ -121,13 +110,9 @@ int main (int argc, char *argv[]) {
    printf("v= %.5e\n", v);
    printf("F= %.5e\n", (QFt+QFr)/F0 );
   /* write to the file */
-   fprintf(fp, "%.10e, %.10e, %.10e, %.10e, %.10e, %.10e, %.10e\n",
+   printf("%.10e, %.10e, %.10e, %.10e, %.10e, %.10e, %.10e\n",
              v, QFt/F0, QFr/F0,Fanat/F0, Fanar/F0,
              Ffreet/F0, Ffreer/F0);
-   fflush(fp);
-  /* Progress bar */
-   prog = l/(double)maxi;
-   printProg(prog);
   }
 clock_t c1 = clock();
 printf("\n------------------------------\n");
