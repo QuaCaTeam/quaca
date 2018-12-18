@@ -1,33 +1,25 @@
-/*!
- * \file plate.c
- * \brief Functions for quantum friction of a plate.
- * \author M. O.
- *
- * Functions, for more explicit documentation see header.
- */
-
 /* --------- */
-/* Libraries */
+/* LIBRARIES */
 /* --------- */
 
 #include "h/qfhelp.h"
 #include "h/plate.h"
 
 /* --------- */
-/* Functions */
+/* FUNCTIONS */
 /* --------- */
 
 void input(int verbose) {
 
-    // dummies
+    /* dummies */
     char s[100];
     double i;
 
-    // read lines till end of stream
+    /* read lines till end of stream */
     while(!feof(stdin)) {
 
-        // if it scans a string (the variable) AND a double after that do ...
-        // else do nothing (i.e. ignore comments)
+        /* if it scans a string (the variable) AND a double after that do ...
+           else do nothing (i.e. ignore comments) */
         if ( scanf("%s %lf", s, &i) == 2) {
             if (strcmp(s,"wp1")==0) {
                 wp1 = i;
@@ -57,57 +49,23 @@ void input(int verbose) {
                 vF = i;
             } else if (strcmp(s,"aF")==0) {
                 aF = i;
-            } else if (strcmp(tmpstr1,"gamMu")==0) {
+            } else if (strcmp(s,"gamMu")==0) {
                 gamMu = i;
-            } else if (strcmp(tmpstr1,"muquest")==0) {
+            } else if (strcmp(s,"muquest")==0) {
                 muquest = (int) i;
             } else{
                 printf("Unrecongized parameter : \"%s\"\n", s);
             }
-         }
+        }
     }
-    fclose(fr);
 
-// Recall the read parameters and print to screen
-    printf("\n===========================================\n");
-    printf("\nINPUT PARAMETERS:");
-    printf("\n`````````````````\n");
-    printf("\n");
-    printf("// atomic constants\n");
-    printf("\nv   : %.5e in c",v);
-    printf("\nza  : %.5e in nm",za);
-    printf("\nwa  : %.5e in eV",wa);
-    printf("\nga  : %.5e in eV",gamMu);
-    printf("\nmu? : %i",muquest);
-    printf("\na0  : %.5e",a0);
-
-    printf("\n");
-    printf("\n// material parameters\n");
-    printf("\neinf : %.5e",einf);
-    printf("\nwp1  : %.5e in eV",wp1);
-    printf("\ng1   : %.5e in eV",g1);
-    printf("\nvF   : %.5e",vF);
-    printf("\naF   : %.5e",aF);
-    printf("\nT    : %.5e in K",T);
-
-    printf("\n");
-    printf("\n// numerical specifications\n");
-    printf("\nkcut   : %.5e",kcut);
-    printf("\nrelerr : %.5e",relerr);
-    printf("\nrecerr : %.5e",recerr);
-    printf("\nabserr : %.5e",abserr);
-
-
-    printf("\n");
-    printf("\n===========================================\n");
-
-    // transforming the remaining SI units to natural units
-    // or other convenient forms
+    /* transforming the remaining SI units to natural units
+       or other convenient forms */ 
     za   = za/(1.9732705e-7);
     beta = 1./(T/1.16e4);
     wsp1 = wp1/sqrt(1.+einf);
 
-    // recall the read parameters
+    /* recall the read parameters */
     if (verbose == 1) {
         printf("INPUT PARAMETERS:\n");
         printf("// atomic constants\n");
@@ -315,44 +273,44 @@ void Gint(double complex Gten[Ndim][Ndim], double w, int RorI, int kx, int theta
 // The polarizability
 void alpha(double complex alp[Ndim][Ndim], double w)
 {
-double complex alpinv00,alpinv11,alpinv22,alpinv20, det;
-double complex GI[3][3], GR[3][3];
+    double complex alpinv00,alpinv11,alpinv22,alpinv20, det;
+    double complex GI[3][3], GR[3][3];
 
-alpinv00 =  wa*wa - w*w ;
- if (muquest == 1) {
-	alpinv00 = alpinv00 - w*I*mu(w);
- }
-alpinv00 = alpinv00/(a0*wa*wa);
+    alpinv00 =  wa*wa - w*w ;
+    if (muquest == 1) {
+        alpinv00 = alpinv00 - w*I*mu(w);
+    }
+    alpinv00 = alpinv00/(a0*wa*wa);
 
-alpinv11 = alpinv00;
-alpinv22 = alpinv00;
+    alpinv11 = alpinv00;
+    alpinv22 = alpinv00;
 
-Gint(GI, w, 1, 0, 0, 0);
-Gint(GR, w, 0, 0, 0, 0);
+    Gint(GI, w, 1, 0, 0, 0);
+    Gint(GR, w, 0, 0, 0, 0);
 
-alpinv00 = alpinv00 - ( GR[0][0] + I * GI[0][0] );
-alpinv11 = alpinv11 - ( GR[1][1] + I * GI[1][1] );
-alpinv22 = alpinv22 - ( GR[2][2] + I * GI[2][2] );
-alpinv20 = -( GR[2][0] + I * GI[2][0] );
+    alpinv00 = alpinv00 - ( GR[0][0] + I * GI[0][0] );
+    alpinv11 = alpinv11 - ( GR[1][1] + I * GI[1][1] );
+    alpinv22 = alpinv22 - ( GR[2][2] + I * GI[2][2] );
+    alpinv20 = -( GR[2][0] + I * GI[2][0] );
 
-det = alpinv20*alpinv20 + alpinv00*alpinv22;
-alp[0][0] = alpinv22/det;
-alp[1][1] = (double complex)1./alpinv11;
-alp[2][2] = alpinv00/det;
-alp[0][2] = alpinv20/det;
-alp[2][0] = -alp[0][2];
-alp[1][0] =(double complex) 0.;
-alp[0][1] =(double complex) 0.;
-alp[2][1] =(double complex) 0.;
-alp[1][2] =(double complex) 0.;
+    det = alpinv20*alpinv20 + alpinv00*alpinv22;
+    alp[0][0] = alpinv22/det;
+    alp[1][1] = (double complex)1./alpinv11;
+    alp[2][2] = alpinv00/det;
+    alp[0][2] = alpinv20/det;
+    alp[2][0] = -alp[0][2];
+    alp[1][0] =(double complex) 0.;
+    alp[0][1] =(double complex) 0.;
+    alp[2][1] =(double complex) 0.;
+    alp[1][2] =(double complex) 0.;
 }
 
 double complex mu( double w)
 {
-double complex muresC;
-muresC = gamMu +I*0E0;
+    double complex muresC;
+    muresC = gamMu +I*0E0;
 
-return muresC;
+    return muresC;
 }	
 
 double IntQF( double w)
@@ -391,10 +349,10 @@ double IntQF( double w)
         GIkth[2][2] = 0.;
     }
 
-multiply(S,GIk,temp1);
-multiply(alpI,GIkth,temp2);
-/* printf("\nIntQF=%.5e, w=%.5e",(2E0/PI)*creal( -tr(temp1)  + tr(temp2) ),w);*/
-return (2E0/PI)*creal( -tr(temp1)  + tr(temp2) );
+    multiply(S,GIk,temp1);
+    multiply(alpI,GIkth,temp2);
+    /* printf("\nIntQF=%.5e, w=%.5e",(2E0/PI)*creal( -tr(temp1)  + tr(temp2) ),w);*/
+    return (2E0/PI)*creal( -tr(temp1)  + tr(temp2) );
 }
 
 
