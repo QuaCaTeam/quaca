@@ -40,7 +40,7 @@ void input(int verbose) {
             } else if (strcmp(s,"za")==0) {
                 za = i;
             } else if (strcmp(s,"T")==0) {
-                T = i;
+                beta = 1E0/(i/1.16e4);
             } else if (strcmp(s,"a0")==0) {
                 a0 = i;
             } else if (strcmp(s,"kcut")==0) {
@@ -57,56 +57,16 @@ void input(int verbose) {
                 vF = i;
             } else if (strcmp(s,"aF")==0) {
                 aF = i;
-            } else if (strcmp(tmpstr1,"gamMu")==0) {
+            } else if (strcmp(s,"gamMu")==0) {
                 gamMu = i;
-            } else if (strcmp(tmpstr1,"muquest")==0) {
+            } else if (strcmp(s,"muquest")==0) {
                 muquest = (int) i;
             } else{
                 printf("Unrecongized parameter : \"%s\"\n", s);
             }
          }
     }
-    fclose(fr);
-
-// Recall the read parameters and print to screen
-    printf("\n===========================================\n");
-    printf("\nINPUT PARAMETERS:");
-    printf("\n`````````````````\n");
-    printf("\n");
-    printf("// atomic constants\n");
-    printf("\nv   : %.5e in c",v);
-    printf("\nza  : %.5e in nm",za);
-    printf("\nwa  : %.5e in eV",wa);
-    printf("\nga  : %.5e in eV",gamMu);
-    printf("\nmu? : %i",muquest);
-    printf("\na0  : %.5e",a0);
-
-    printf("\n");
-    printf("\n// material parameters\n");
-    printf("\neinf : %.5e",einf);
-    printf("\nwp1  : %.5e in eV",wp1);
-    printf("\ng1   : %.5e in eV",g1);
-    printf("\nvF   : %.5e",vF);
-    printf("\naF   : %.5e",aF);
-    printf("\nT    : %.5e in K",T);
-
-    printf("\n");
-    printf("\n// numerical specifications\n");
-    printf("\nkcut   : %.5e",kcut);
-    printf("\nrelerr : %.5e",relerr);
-    printf("\nrecerr : %.5e",recerr);
-    printf("\nabserr : %.5e",abserr);
-
-
-    printf("\n");
-    printf("\n===========================================\n");
-
-    // transforming the remaining SI units to natural units
-    // or other convenient forms
-    za   = za/(1.9732705e-7);
-    beta = 1./(T/1.16e4);
-    wsp1 = wp1/sqrt(1.+einf);
-
+  
     // recall the read parameters
     if (verbose == 1) {
         printf("INPUT PARAMETERS:\n");
@@ -121,13 +81,18 @@ void input(int verbose) {
         printf("g1   = %.5e\n",g1);
         printf("vF   = %.5e\n",vF);
         printf("aF   = %.5e\n",aF);
-        printf("T    = %.5e\n",T);
+        printf("T    = %.5e\n",1.16e4/beta);
         printf("// numerical specifications\n");
         printf("kcut   : %.5e\n",kcut);
         printf("relerr : %.5e\n",relerr);
         printf("recerr : %.5e\n",recerr);
         printf("abserr : %.5e\n",abserr);
     }
+    // transforming the remaining SI units to natural units
+    // or other convenient forms
+    za   = za/(1.9732705e-7);
+    wsp1 = wp1/sqrt(1.+einf);
+
 }
 
 
