@@ -21,7 +21,7 @@ all: $(PROG) clean
 
 # link .o's to program (qfnum)
 $(PROG): $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDES) $(LFLAGS) $(LIBS) -o $(PROG) $(OBJS) 
+	$(CC) $(CFLAGS) $(INCLUDES) -o $(PROG) $(OBJS) $(LFLAGS) $(LIBS)  
 
 # make every .c to .o
 .c.o:
