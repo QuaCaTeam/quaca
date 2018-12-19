@@ -19,9 +19,9 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'QFNUM'
-copyright = '2018, Marty Oelschläger'
-author = 'Marty Oelschläger'
+project = 'QuaCa'
+copyright = '2018, Marty Oelschlager'
+author = 'Marty Oelschlager'
 
 # The short X.Y version
 version = ''
@@ -105,7 +105,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'QFNUMdoc'
+htmlhelp_basename = 'QuaCadoc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -132,8 +132,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'QFNUM.tex', 'QFNUM Documentation',
-     'Marty Oelschläger', 'manual'),
+    (master_doc, 'QuaCa.tex', 'QuaCa Documentation',
+     'Marty Oelschlager', 'manual'),
 ]
 
 
@@ -142,7 +142,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'qfnum', 'QFNUM Documentation',
+    (master_doc, 'qfnum', 'QuaCa Documentation',
      [author], 1)
 ]
 
@@ -153,8 +153,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'QFNUM', 'QFNUM Documentation',
-     author, 'QFNUM', 'One line description of project.',
+    (master_doc, 'QuaCa', 'QuaCa Documentation',
+     author, 'QuaCa', 'One line description of project.',
      'Miscellaneous'),
 ]
 

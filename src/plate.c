@@ -9,8 +9,8 @@
 /* FUNCTIONS */
 /* --------- */
 
-void input(char file[], int verbose) {
-
+// input routine
+void input(char file[], unsigned int verbose) {
     FILE * fr = fopen(file, "rt");
 
     if (fr == NULL) {
@@ -20,16 +20,14 @@ void input(char file[], int verbose) {
 
 
     /* dummies */
-    int linelength = 200;
     char s[100];
-    char line[linelength];
+    char line[200];
     double i;
 
     /* read lines till end of stream */
     while(!feof(fr)) {
-
         /* if line is read */ 
-        if (fgets(line, linelength, fr)) {
+        if (fgets(line, 200, fr)) {
 
             /* if string and number immediately after are read */    
             if ( sscanf(line, "%s %lf", s, &i) == 2) {
@@ -116,9 +114,8 @@ void input(char file[], int verbose) {
     wsp1 = wp1/sqrt(1.+einf);
 }
 
-
-void refl(double complex r[2] , double w, double complex kap)
-{
+// reflection coefficient
+void refl(double complex r[2] , double w, double complex kap) {
     double complex epsw, kaplc, wabs;
     // Calculating the dielectric function (times w due to numerical convenience)
     wabs = fabs(w);
@@ -140,8 +137,7 @@ void refl(double complex r[2] , double w, double complex kap)
     }
 }
 
-void reflhydro(double complex r[2] , double w, double complex kap)
-{
+void reflhydro(double complex r[2] , double w, double complex kap) {
     double complex epsw, kapD, kapL, k2, kapDLw, bet2, kap2;
     double wabs;
     // Calculating the dielectric function (times w due to numerical convenience)
@@ -172,22 +168,20 @@ void reflhydro(double complex r[2] , double w, double complex kap)
     }
 }
 
-
 // Integral over the Green tensor with several options:
-void Gint(double complex Gten[Ndim][Ndim], double w, int RorI, int kx, int theta, int T)
-{
+void Gint(double complex Gten[Ndim][Ndim], double w, unsigned int RorI, unsigned int kx, unsigned int theta, unsigned int T) {
     double Gphi;
     double Gsigma[3];
-    int sig, pphi;
-    double wrapphi(double phi)
-    {
+    register unsigned int sig, pphi;
+    double wrapphi(double phi) {
+
         double lim2, cosp, sinp, resphi;
         double limI1;
-        int caseT=0;
+        register unsigned int caseT=0;
 
         // Defining the integrand of the k integration
-        double wrapkap (double kap)
-        {
+        double wrapkap (double kap) {
+
             double wpl;
             double cosp2 = cosp*cosp;
             double sinp2 = sinp*sinp;
@@ -198,7 +192,7 @@ void Gint(double complex Gten[Ndim][Ndim], double w, int RorI, int kx, int theta
             double complex prefac;
             if (kap >= 0E0) {
                 kapc = kap + I*0E0;
-            }else {
+            } else {
                 kapc = 0E0 + I*kap;
             }
             k = (sqrt(kap2*(1E0-v2*cosp2) + w*w) + v*w*cosp)/(1E0-v2*cosp2);
@@ -215,17 +209,21 @@ void Gint(double complex Gten[Ndim][Ndim], double w, int RorI, int kx, int theta
             if (pphi == 1) {
                 resc = rppre*cosp*k*kapc;
             }
+
             // Here we are calculating the different sigma(k,wpl) components
             if (pphi == 0) {
                 rspre = rspre*wpl*wpl;
-                if (sig == 0) {
-                    resc = (rppre*cosp2*kap2 + rspre*sinp2);
-                }
-                if (sig == 1) {
-                    resc = (rppre*sinp2*kap2 + rspre*cosp2);
-                }
-                if (sig == 2) {
-                    resc = rppre*k*k;
+
+                switch (sig) {
+                    case 0:
+                        resc = (rppre*cosp2*kap2 + rspre*sinp2);
+                        break;
+                    case 1:
+                        resc = (rppre*sinp2*kap2 + rspre*cosp2);
+                        break;
+                    case 2:
+                        resc = rppre*k*k;
+                        break;
                 }
             }
 
@@ -243,6 +241,7 @@ void Gint(double complex Gten[Ndim][Ndim], double w, int RorI, int kx, int theta
             }
             return resk;
         }
+
         // Performing the kappa integration
         cosp = cos(phi);
         sinp = sin(phi);
@@ -266,6 +265,7 @@ void Gint(double complex Gten[Ndim][Ndim], double w, int RorI, int kx, int theta
         }
         return resphi/PI;
     }
+
     // First, we calculate Gsigma
     pphi = 0;
     // ... the (1,1) component with cos^2(phi) as prefactor
@@ -285,6 +285,7 @@ void Gint(double complex Gten[Ndim][Ndim], double w, int RorI, int kx, int theta
     pphi = 1;
     Gphi = integ( wrapphi, 0., PI*0.5, relerr*recerr, abserr*recerr);
     Gphi += integ( wrapphi, PI*0.5, PI, relerr*recerr, abserr*recerr);
+
     // Now we can assemble the full Green tensor
     Gten[0][0] = Gsigma[0];
     Gten[1][1] = Gsigma[1];
@@ -297,10 +298,8 @@ void Gint(double complex Gten[Ndim][Ndim], double w, int RorI, int kx, int theta
     Gten[1][2] = 0.;
 }
 
-
 // The polarizability
-void alpha(double complex alp[Ndim][Ndim], double w)
-{
+void alpha(double complex alp[Ndim][Ndim], double w) {
     double complex alpinv00,alpinv11,alpinv22,alpinv20, det;
     double complex GI[3][3], GR[3][3];
 
@@ -333,16 +332,15 @@ void alpha(double complex alp[Ndim][Ndim], double w)
     alp[1][2] =(double complex) 0.;
 }
 
-double complex mu( double w)
-{
+double complex mu( double w) {
     double complex muresC;
     muresC = gamMu +I*0E0;
 
     return muresC;
 }	
 
-double IntQF( double w)
-{
+// quantum friction integrand
+double IntQF( double w) {
     double complex GIth[3][3], GIk[3][3], GIkth[3][3];
     double complex alp[3][3], alpI[3][3], S[3][3],  temp1[3][3], temp2[3][3];
     double complex alpdag[3][3];
@@ -383,16 +381,12 @@ double IntQF( double w)
     return (2E0/PI)*creal( -tr(temp1)  + tr(temp2) );
 }
 
-
 //double Omega( double w)
 //{
 //
 //}
 
-
-
-double IntQFfree( double w)
-{
+double IntQFfree( double w) {
     double complex GIkth[3][3], GIkthT[3][3];
     double complex alp[3][3], alpI[3][3],  temp1[3][3], temp2[3][3];
     /* Creating all needed matrices */

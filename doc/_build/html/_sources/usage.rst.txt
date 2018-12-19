@@ -1,4 +1,12 @@
 Usage
 =====
 
-We give an overview of the API that is used in QFNUM.
+To use QuaCa type into the command line::
+    
+    $ quaca INPUTFILE
+
+So if you have an input file called ``params.in`` in a folder called ``data`` you would for example type into the terminal::
+    
+    $ quaca data/params.in
+
+QuaCa then calculates its stuff and puts the values into an according .out file.

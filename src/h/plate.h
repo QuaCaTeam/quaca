@@ -34,14 +34,14 @@ unsigned int steps;
 /* FUNCTIONS */
 /* --------- */
 
-void input(char file[], int verbose);
+void input(char file[], unsigned int verbose);
 
 void refl(double complex r[2], double w, double complex kap);
 void reflhydro(double complex r[2] , double w, double complex kap);
 
 double complex mu( double w);
 
-void Gint(double complex Gten[Ndim][Ndim], double w, int RorI, int kx, int theta, int T);
+void Gint(double complex Gten[Ndim][Ndim], double w, unsigned int RorI, unsigned int kx, unsigned int theta, unsigned int T);
 void Gintnew(double complex Gten[Ndim][Ndim], double w, int RorI, int kx, int theta, int T);
 
 void alpha(double complex alp[Ndim][Ndim], double w);

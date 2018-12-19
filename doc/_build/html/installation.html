@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation &mdash; QFNUM  documentation</title>
+  <title>Installation &mdash; QuaCa  documentation</title>
   
 
   
@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Usage" href="usage.html" />
-    <link rel="prev" title="Welcome to QFNUM’s documentation!" href="index.html" /> 
+    <link rel="prev" title="Welcome to QuaCa’s documentation!" href="index.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -48,7 +48,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> QFNUM
+            <a href="index.html" class="icon icon-home"> QuaCa
           
 
           
@@ -80,7 +80,10 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="todo.html">To Do</a></li>
 </ul>
@@ -97,7 +100,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">QFNUM</a>
+          <a href="index.html">QuaCa</a>
         
       </nav>
 
@@ -149,9 +152,21 @@
             
   <div class="section" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<p>To install QFNUM, simply clone the git repository by typing</p>
-<p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">git</span> <span class="pre">clone</span> <span class="pre">git&#64;git.physik.hu-berlin.de:egerlanc/qfnum.git</span></code></p>
-<p>into your terminal.</p>
+<p>To build QuaCa from source simply clone the git repository via:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone git@git.physik.hu-berlin.de:egerlanc/qfnum.git
+</pre></div>
+</div>
+<p>Note that this repository is not public, so for now you need to ask the developers for access.
+To build the project type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make
+$ sudo make install
+</pre></div>
+</div>
+<p>The default directory for installation is <code class="docutils literal notranslate"><span class="pre">/usr/local/bin</span></code> and can be changed in the makefile.</p>
+<div class="section" id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p>QuaCa largely depends on standard libraries and uses GCC to compile the project.</p>
+</div>
 </div>
 
 
@@ -165,7 +180,7 @@
         <a href="usage.html" class="btn btn-neutral float-right" title="Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Welcome to QFNUM’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="Welcome to QuaCa’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -174,7 +189,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Marty Oelschläger.
+        &copy; Copyright 2018, Marty Oelschlager
 
     </p>
   </div>
@@ -193,21 +208,13 @@
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
 
   
 

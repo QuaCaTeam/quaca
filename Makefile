@@ -29,10 +29,10 @@ $(PROG): $(OBJS)
 
 # make doc
 doc:
-	cd doc && make html	
+	cd doc && make html	&& cd ..
 
 # install binary
-install:
+install: $(PROG)
 	echo Installing executable to $(PREFIX)/bin
 	mkdir -p $(PREFIX)/bin
 	cp -f bin/qfnum $(PREFIX)/bin
