@@ -8,7 +8,7 @@
 double c, hbar, eps0, a0;
 
 /* material and system parameters */
-double wp1, wsp1, wa, gamMu, g1, einf, beta, T;
+double wp1, wsp1, wa, gamMu, g1, einf, beta;
 double vF, aF;
 double v, za, QFt, QFr;
 
@@ -17,16 +17,24 @@ double relerr, recerr, abserr;
 double kcut;
 
 /* flags */
-int transroll;
-int muquest;
-int omsgn;
-int retard;
+unsigned int transroll;
+unsigned int muquest;
+unsigned int omsgn;
+unsigned int retard;
+
+/* running variable */
+char runvar[100];
+char scale[100];
+double start;
+double stop;
+unsigned int steps;
+
 
 /* --------- */
 /* FUNCTIONS */
 /* --------- */
 
-void input(int verbose);
+void input(char file[], int verbose);
 
 void refl(double complex r[2], double w, double complex kap);
 void reflhydro(double complex r[2] , double w, double complex kap);

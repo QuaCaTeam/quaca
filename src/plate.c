@@ -9,55 +9,84 @@
 /* FUNCTIONS */
 /* --------- */
 
-void input(int verbose) {
+void input(char file[], int verbose) {
+
+    FILE * fr = fopen(file, "rt");
+
+    if (fr == NULL) {
+        printf("file %s not found", file);
+        exit(0);
+    }
+
 
     /* dummies */
+    int linelength = 200;
     char s[100];
+    char line[linelength];
     double i;
 
     /* read lines till end of stream */
-    while(!feof(stdin)) {
+    while(!feof(fr)) {
 
-        /* if it scans a string (the variable) AND a double after that do ...
-           else do nothing (i.e. ignore comments) */
-        if ( scanf("%s %lf", s, &i) == 2) {
-            if (strcmp(s,"wp1")==0) {
-                wp1 = i;
-            } else if (strcmp(s,"g1")==0) {
-                g1 = i;
-            } else if (strcmp(s,"einf")==0) {
-                einf = i;
-            } else if (strcmp(s,"v")==0) {
-                v = i;
-            } else if (strcmp(s,"za")==0) {
-                za = i;
-            } else if (strcmp(s,"T")==0) {
-                beta = 1E0/(i/1.16e4);
-            } else if (strcmp(s,"a0")==0) {
-                a0 = i;
-            } else if (strcmp(s,"kcut")==0) {
-                kcut = i;
-            } else if (strcmp(s,"relerr")==0) {
-                relerr = i;
-            } else if (strcmp(s,"abserr")==0) {
-                abserr = i;
-            } else if (strcmp(s,"recerr")==0) {
-                recerr = i;
-            } else if (strcmp(s,"wa")==0) {
-                wa = i;
-            } else if (strcmp(s,"vF")==0) {
-                vF = i;
-            } else if (strcmp(s,"aF")==0) {
-                aF = i;
-            } else if (strcmp(s,"gamMu")==0) {
-                gamMu = i;
-            } else if (strcmp(s,"muquest")==0) {
-                muquest = (int) i;
-            } else{
-                printf("Unrecongized parameter : \"%s\"\n", s);
+        /* if line is read */ 
+        if (fgets(line, linelength, fr)) {
+
+            /* if string and number immediately after are read */    
+            if ( sscanf(line, "%s %lf", s, &i) == 2) {
+                if (strcmp(s,"wp1")==0) {
+                    wp1 = i;
+                } else if (strcmp(s,"g1")==0) {
+                    g1 = i;
+                } else if (strcmp(s,"einf")==0) {
+                    einf = i;
+                } else if (strcmp(s,"v")==0) {
+                    v = i;
+                } else if (strcmp(s,"za")==0) {
+                    za = i;
+                } else if (strcmp(s,"T")==0) {
+                    beta = 1E0/(i/1.16e4);
+                } else if (strcmp(s,"a0")==0) {
+                    a0 = i;
+                } else if (strcmp(s,"kcut")==0) {
+                    kcut = i;
+                } else if (strcmp(s,"relerr")==0) {
+                    relerr = i;
+                } else if (strcmp(s,"abserr")==0) {
+                    abserr = i;
+                } else if (strcmp(s,"recerr")==0) {
+                    recerr = i;
+                } else if (strcmp(s,"wa")==0) {
+                    wa = i;
+                } else if (strcmp(s,"vF")==0) {
+                    vF = i;
+                } else if (strcmp(s,"aF")==0) {
+                    aF = i;
+                } else if (strcmp(s,"gamMu")==0) {
+                    gamMu = i;
+                } else if (strcmp(s,"muquest")==0) {
+                    muquest = (int) i;
+                } else if (strcmp(s,"start")==0) {
+                    start = i;
+                } else if (strcmp(s,"stop")==0) {
+                    stop = i;
+                } else if (strcmp(s,"steps")==0) {
+                    steps = (int) i;
+                } else {
+                    printf("Unrecongized parameter : \"%s\"\n", s);
+                }
             }
+
+            if ( sscanf(line, "runvar %s", s) == 1 ) {
+                strcpy(runvar, s); 
+            } 
+
+            if ( sscanf(line, "scale %s", s) == 1 ) {
+                strcpy(scale, s); 
+            } 
         }
     }
+
+
     // recall the read parameters
     if (verbose == 1) {
         printf("INPUT PARAMETERS:\n");
@@ -66,24 +95,25 @@ void input(int verbose) {
         printf("za  = %.5e\n",za);
         printf("wa  = %.5e\n",wa);
         printf("a0  = %.5e\n",a0);
-        printf("// material parameters\n");
+        printf("\n// material parameters\n");
         printf("einf = %.5e\n",einf);
         printf("wp1  = %.5e\n",wp1);
         printf("g1   = %.5e\n",g1);
         printf("vF   = %.5e\n",vF);
         printf("aF   = %.5e\n",aF);
         printf("T    = %.5e\n",1.16e4/beta);
-        printf("// numerical specifications\n");
-        printf("kcut   : %.5e\n",kcut);
-        printf("relerr : %.5e\n",relerr);
-        printf("recerr : %.5e\n",recerr);
-        printf("abserr : %.5e\n",abserr);
+        printf("\n// numerical specifications\n");
+        printf("kcut   = %.5e\n",kcut);
+        printf("relerr = %.5e\n",relerr);
+        printf("recerr = %.5e\n",recerr);
+        printf("abserr = %.5e\n",abserr);
+        printf("\n\nCalculating %s from %.5e to %.5e with %d points on %s scale.\n", runvar, start, stop, steps, scale);
     }
+
     // transforming the remaining SI units to natural units
     // or other convenient forms
     za   = za/(1.9732705e-7);
     wsp1 = wp1/sqrt(1.+einf);
-
 }
 
 
