@@ -49,3 +49,12 @@ void alpha(double complex alp[Ndim][Ndim], double w);
 double IntQF(double w);
 double IntQFnew( double w);
 double IntQFfree( double w);
+
+double QF(double IntQF());
+
+/* analytics */
+double F0(double wsp1, double a0, double eps0);
+double Fanat(unsigned int muquest, double a0, double g1, double eps0, double wp1, double v, double za, double beta);
+double Fanar(double a0, double g1, double eps0, double wp1, double v, double za, double beta);
+double Ffreet(double a0, double g1, double eps0, double wp1, double v, double za, double beta);
+double Ffreer(double a0, double g1, double eps0, double wp1, double v, double za, double beta);

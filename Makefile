@@ -7,7 +7,7 @@ PREFIX=/usr/local
 
 # options for compiling
 CC = gcc
-CFLAGS = -Wall -Werror -O2 # show warnings as erros, optimize level 2
+CFLAGS = -Wall -O2 # show warnings as erros, optimize level 2
 INCLUDES = -I/usr/include -Isrc/h # include headers
 LFLAGS = -L/usr/lib
 LIBS = -lgsl -lgslcblas -lm # gsl, gscblas, math library
@@ -32,7 +32,7 @@ doc:
 	cd doc && make html	&& cd ..
 
 # install binary
-install: $(PROG)
+install: $(PROG) clean
 	echo Installing executable to $(PREFIX)/bin
 	mkdir -p $(PREFIX)/bin
 	cp -f bin/qfnum $(PREFIX)/bin

@@ -20,7 +20,7 @@ abserr  1e-200
 
 # Range
 runvar v
-start  5E-3
+start  1E-4
 stop   1E-2
 steps  50 
 scale  log

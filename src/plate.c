@@ -416,3 +416,64 @@ double IntQFfree( double w) {
     multiply(alpI,GIkth,temp2);
     return (2./PI)*creal( tr(temp1) - tr(temp2) );
 }
+
+
+double QF(double IntQF()) {
+    double result;
+    double abserrloc = abserr;
+    
+    result = integ(IntQF, 0E0, 0.9E0*wa, relerr, abserrloc);
+
+    abserrloc = fabs(result)*1E-2;
+    result += integ(IntQF, 0.9E0*wa, wa, relerr, abserrloc);
+    
+    abserrloc = fabs(result)*1E-2;
+    result += integ(IntQF, wa, wsp1, relerr, abserrloc);
+
+    abserrloc = fabs(result)*1E-2;
+    result += integinf(IntQF, wsp1, relerr, abserrloc);
+
+    return result;
+}
+
+/* analytics */
+double F0(double wsp1, double a0, double eps0) {
+    return -3*pow(wsp1,5)*a0/(2*PI*eps0);
+}
+
+double Fanat(unsigned int muquest, double a0, double g1, double eps0, double wp1, double v, double za, double beta) {
+    double result;
+    
+    result = -63*a0*a0*pow(g1/(eps0*wp1*wp1),2)*pow(v,3)/(pow(PI,3)*pow(2*za,10));
+
+    switch (muquest) {
+        case 0:
+            break;
+        case 1:
+            result += -45*creal(mu(0E0))*a0*g1*pow(v,3)*pow(2*za,-7)*4*PI/(pow(PI*wa*wp1,2));
+            result += -8*v*a0*g1*creal(mu(0E0))*4*PI/(pow(wp1*beta*wa,2)*pow(2*za,5));
+            break;
+    }
+
+    result -= a0*a0*pow(g1/(eps0*wp1*wp1),2)*6*v/(PI*beta*beta*pow(2*za,8));
+
+    return result;
+}
+
+double Fanar(double a0, double g1, double eps0, double wp1, double v, double za, double beta) {
+    double result;
+    result = 45*a0*a0*pow(g1/(eps0*wp1*wp1),2)*pow(v,3)/(pow(PI,3)*pow(2*za,10));
+    result += 3*a0*a0*pow(g1/(eps0*wp1*wp1),2)*v/(PI*beta*beta*pow(2*za,8));
+    
+    return result;
+}
+
+double Ffreet(double a0, double g1, double eps0, double wp1, double v, double za, double beta) {
+    double result = - a0*a0*pow(g1*4*PI/(eps0*wp1*wp1),2)*3*v/(PI*beta*beta*pow(2*za,8));
+    return result;
+}
+
+double Ffreer(double a0, double g1, double eps0, double wp1, double v, double za, double beta) {
+    double result = -1./2.*Ffreet(a0,  g1,  eps0,  wp1,  v,  za,  beta);
+    return result;
+}
