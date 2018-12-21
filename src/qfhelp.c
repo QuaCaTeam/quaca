@@ -71,15 +71,16 @@ const double complex tr(double complex mat[Ndim][Ndim]) {
     return res;
 };
 
-double integ(double my_f() , double a , double b, double relerr, double epsabs) {
+double integ(double my_f(), void * p, double a , double b, double relerr, double epsabs) {
     gsl_function f;
     gsl_integration_cquad_workspace *ws = NULL;
+    struct parameters * params = (struct parameters *)p;
     double res, abserr;
     size_t neval;
 
     /* Prepare the function. */
     f.function = my_f;
-    f.params = NULL;
+    f.params = params;
 
     /* Initialize the workspace. */
     if ( ( ws = gsl_integration_cquad_workspace_alloc( 200 ) ) == NULL ) {
@@ -99,14 +100,15 @@ double integ(double my_f() , double a , double b, double relerr, double epsabs) 
     return res;
 };
 
-double integinf(double my_f(), double a, double relerr, double epsabs) {
+double integinf(double my_f(), void * p, double a, double relerr, double epsabs) {
     gsl_function f;
     gsl_integration_workspace *work_ptr = gsl_integration_workspace_alloc (1000);
+    struct parameters * params = (struct parameters *)p;
     double res, abserr;
 
     /* Prepare the function. */
     f.function = my_f;
-    f.params = NULL;
+    f.params = params;
 
 
     /* Call the integrator. */

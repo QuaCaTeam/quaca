@@ -36,7 +36,7 @@ int main (int argc, char *argv[]) {
     register unsigned int l;
     double QFt, QFr; // QFtfree, QFrfree;
     double F0val, Fanarval, Fanatval, Ffreetval, Ffreerval;
-    double eps0= 1./(4*PI);
+    inputparams.eps0= 1./(4*PI);
 
     /* Greetings */
     printf("===========================================\n");
@@ -65,7 +65,7 @@ int main (int argc, char *argv[]) {
     };
 
     /* calculate spacing */
-    spac = pow(stop/start,1./steps);
+    spac = pow(inputparams.stop/inputparams.start,1./inputparams.steps);
 
     /* Starting calculations */
     printf("\n===========================================\n");
@@ -73,48 +73,44 @@ int main (int argc, char *argv[]) {
 
     clock_t c0 = clock();
     clock_t cl0, cl1;
-    for (l=0; l<=steps; ++l){
+    for (l=0; l<=inputparams.steps; ++l){
 
-        v = start*pow(spac,l);
+        inputparams.v = inputparams.start*pow(spac,l);
 
         /* Performing calculations */
 
         /* translational contribution */
-        transroll = 0;
+        inputparams.transroll = 0;
 
         cl0 = clock();
-        QFt = QF(IntQF);
+        QFt = QF(IntQF, &inputparams);
         cl1 = clock();
-        printf("Time elapsed for QFt: %3.2f sec\n", (cl1-cl0)/1.e6);
+        printf("Time elapsed QFt: %3.2f sec, ", (double)(cl1-cl0)/CLOCKS_PER_SEC);
 
         /* rolling contribution */
-        transroll = 1;
+        inputparams.transroll = 1;
 
         cl0 = clock();
-        QFr = QF(IntQF);
+        QFr = QF(IntQF, &inputparams);
         cl1 = clock();
-        printf("Time elapsed for QFr: %3.2f sec\n", (cl1-cl0)/1.e6);
+        printf("Time elapsed QFr: %3.2f sec\n", (double)(cl1-cl0)/CLOCKS_PER_SEC);
 
         /* analytics */ 
-        cl0 = clock();
-        F0val = F0(wsp1, a0, eps0);
-        Fanatval = Fanat(muquest,  a0,  g1,  eps0,  wp1,  v,  za,  beta);
-        Fanarval = Fanar(a0,  g1,  eps0,  wp1,  v,  za,  beta);
-        Ffreetval = Ffreet(a0,  g1,  eps0,  wp1,  v,  za,  beta);
-        Ffreerval = Ffreer(a0,  g1,  eps0,  wp1,  v,  za,  beta);
-
-        cl1 = clock();
-        printf("Time elapsed for F0, Fanat, Fanar, Ffreet, Ffreer: %3.5f sec\n", (cl1-cl0)/1.e6);
+        F0val = F0(&inputparams);
+        Fanatval = Fanat(&inputparams);
+        Fanarval = Fanar(&inputparams);
+        Ffreetval = Ffreet(&inputparams);
+        Ffreerval = Ffreer(&inputparams);
 
         /* Print result to the screen */
         printf("v        | QFt/F0   | QFr/F0    | Fanat/F0 | Fanar/F0  | Ffreet/F0| Ffreer/F0\n");
-        printf("%.2e | %.2e | %.2e | %.2e | %.2e | %.2e | %.2e\n",
-                v, QFt/F0val, QFr/F0val,Fanatval/F0val, Fanarval/F0val,
+        printf("%.2e | %.2e | %.2e | %.2e | %.2e | %.2e | %.2e\n\n",
+                inputparams.v, QFt/F0val, QFr/F0val,Fanatval/F0val, Fanarval/F0val,
                 Ffreetval/F0val, Ffreerval/F0val);
 
         /* write to the file */
         fprintf(fp, "%.10e, %.10e, %.10e, %.10e, %.10e, %.10e, %.10e\n",
-                v, QFt/F0val, QFr/F0val,Fanatval/F0val, Fanarval/F0val,
+                inputparams.v, QFt/F0val, QFr/F0val,Fanatval/F0val, Fanarval/F0val,
                 Ffreetval/F0val, Ffreerval/F0val);
         fflush(fp);
     };
@@ -124,7 +120,7 @@ int main (int argc, char *argv[]) {
 
     /* Bye! */
     printf("\n");
-    printf("Finished calculating %d points in %3.2f sec. \n", steps, (c1-c0)/1.e6);
+    printf("Finished calculating %d points in %3.2f sec. \n", inputparams.steps, (c1-c0)/1.e6);
     printf("\nBYE!\n");
     printf("===========================================\n");
 

@@ -34,5 +34,5 @@ void dagger(double complex mat[Ndim][Ndim], double complex res[Ndim][Ndim]);
 void fancy(double complex mat[Ndim][Ndim], double complex res[Ndim][Ndim], int mode);
 const double complex tr(double complex mat[Ndim][Ndim]);
 
-double integ(double my_f(), double a, double b, double relerr, double epsabs);
-double integinf(double my_f(), double a, double relerr, double epsabs);
+double integ(double my_f(), void * p, double a, double b, double relerr, double epsabs);
+double integinf(double my_f(), void * p, double a, double relerr, double epsabs);
