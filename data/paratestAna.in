@@ -22,5 +22,5 @@ abserr  1e-200
 runvar v
 start  1E-4
 stop   1E-2
-steps  50 
+steps  5
 scale  log

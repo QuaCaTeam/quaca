@@ -27,6 +27,10 @@ $(PROG): $(OBJS)
 .c.o:
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
+# option for profiling
+profile: $(OBJS)
+	$(CC) $(CFLAGS) $(INCLUDES) -o $(PROG) $(OBJS) $(LFLAGS) $(LIBS) -pg
+
 # make doc
 doc:
 	cd doc && make html	&& cd ..

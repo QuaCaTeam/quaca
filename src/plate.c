@@ -236,7 +236,7 @@ void Gint(double complex Gten[Ndim][Ndim], double w, void * p, unsigned int RorI
         sinp = sin(phi);
 
         limI1 = -w;
-        lim2 = kcut/(2*za);
+        lim2 = kcut/(2.*za);
         caseT = 0;
         if (theta == 1 && cosp < 0 && (-w/(v*cosp)< kcut/(2*za)) ) {
             lim2 =-w/(v*cosp);
@@ -246,7 +246,7 @@ void Gint(double complex Gten[Ndim][Ndim], double w, void * p, unsigned int RorI
         resphi = integ(wrapkap, params, limI1, lim2, relerr*recerr*recerr, abserr*recerr*recerr);
 
         if (T == 1 && caseT == 1){
-            resphi += integ(wrapkap, params, lim2,kcut/(2*za), relerr*recerr*recerr, abserr*recerr*recerr);
+            resphi += integ(wrapkap, params, lim2,kcut/(2.*za), relerr*recerr*recerr, abserr*recerr*recerr);
         }
         return resphi/PI;
     }
@@ -324,7 +324,6 @@ void alpha(double complex alp[Ndim][Ndim], double w, void * p) {
 }
 
 double complex mu(double w, void *p) {
-    
     /* give parameters needed */
     struct parameters * params = (struct parameters *)p;
     double gamMu = (params->gamMu);
