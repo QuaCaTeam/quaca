@@ -122,8 +122,8 @@ void refl(double complex r[2], double w, double complex kap, void * p) {
     double wp1 = (params->wp1);
     double g1 = (params->g1);
 
-    
-    double complex epsw, kaplc, wabs;
+    double complex epsw, kaplc;
+    double wabs;
     // Calculating the dielectric function (times w due to numerical convenience)
     wabs = fabs(w);
     epsw = einf*wabs - wp1*wp1/(wabs+g1*_Complex_I);
@@ -159,21 +159,30 @@ void Gint(double complex Gten[Ndim][Ndim], double w, void * p, unsigned int RorI
     double Gphi;
     double Gsigma[3];
     register unsigned int sig, pphi;
-    double wrapphi(double phi) {
 
-        double lim2, cosp, sinp, resphi;
-        double limI1;
+    double lim2, limI1;
+    limI1 = -w;
+    lim2 = kcut/(2.*za);
+
+    double v2 = v*v;
+
+    double wrapphi(double phi) {
+        double cosp, sinp, resphi;
         register unsigned int caseT=0;
+        
+        // Performing the kappa integration
+        cosp = cos(phi);
+        sinp = sin(phi);
+
+        double cosp2 = cosp*cosp;
+        double sinp2 = sinp*sinp;
 
         // Defining the integrand of the k integration
         double wrapkap (double kap) {
-
             double wpl;
-            double cosp2 = cosp*cosp;
-            double sinp2 = sinp*sinp;
             double resk=0.;
             double complex kapc=0., re[2], resc=0., rppre, rspre;
-            double v2 = v*v, k ;
+            double k;
             double kap2 = kap*fabs(kap);
             double complex prefac;
             if (kap >= 0E0) {
@@ -192,25 +201,25 @@ void Gint(double complex Gten[Ndim][Ndim], double w, void * p, unsigned int RorI
             rspre = re[1]*prefac;
 
             // Here we are calculating the phi(k,wpl)
-            if (pphi == 1) {
-                resc = rppre*cosp*k*kapc;
-            }
+            switch(pphi){
+                case 0:
+                    rspre = rspre*wpl*wpl;
 
-            // Here we are calculating the different sigma(k,wpl) components
-            if (pphi == 0) {
-                rspre = rspre*wpl*wpl;
-
-                switch (sig) {
-                    case 0:
-                        resc = (rppre*cosp2*kap2 + rspre*sinp2);
-                        break;
-                    case 1:
-                        resc = (rppre*sinp2*kap2 + rspre*cosp2);
-                        break;
-                    case 2:
-                        resc = rppre*k*k;
-                        break;
-                }
+                    switch (sig) {
+                        case 0:
+                            resc = (rppre*cosp2*kap2 + rspre*sinp2);
+                            break;
+                        case 1:
+                            resc = (rppre*sinp2*kap2 + rspre*cosp2);
+                            break;
+                        case 2:
+                            resc = rppre*k*k;
+                            break;
+                    }
+                    break;
+                case 1:
+                    resc = rppre*cosp*k*kapc;
+                    break;
             }
 
             switch(RorI) {
@@ -225,18 +234,14 @@ void Gint(double complex Gten[Ndim][Ndim], double w, void * p, unsigned int RorI
             if (kx == 1) {
                 resk = resk*k*cosp;
             }
+
             if (T == 1) {
                 resk = resk*(1E0/(1E0-exp(-beta*wpl)) - 1E0/(1E0-exp(-beta*w)) );
             }
             return resk;
         }
 
-        // Performing the kappa integration
-        cosp = cos(phi);
-        sinp = sin(phi);
 
-        limI1 = -w;
-        lim2 = kcut/(2.*za);
         caseT = 0;
         if (theta == 1 && cosp < 0 && (-w/(v*cosp)< kcut/(2*za)) ) {
             lim2 =-w/(v*cosp);

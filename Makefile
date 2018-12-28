@@ -7,7 +7,7 @@ PREFIX=/usr/local
 
 # options for compiling
 CC = gcc
-CFLAGS = -Wall -O2 # show warnings as erros, optimize level 2
+CFLAGS = -Wall -Ofast # show warnings as erros, optimize level 2
 INCLUDES = -I/usr/include -Isrc/h # include headers
 LFLAGS = -L/usr/lib
 LIBS = -lgsl -lgslcblas -lm # gsl, gscblas, math library
