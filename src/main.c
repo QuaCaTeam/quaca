@@ -1,42 +1,10 @@
-////////////////////////////////////////////////////////////////////////////////
-// This program is designed to calculate nonequilibrium quantum friction
-// as well as the angular momentum and moment of inertia of a dipole hovering
-// at a constartnt distartnce and velocity above a macroscopic surface described by
-// a local dielectric function.
-// For the calculation of the quantum friction we use the form:
-//
-// F_fric = \int_{0}^\infty dw (
-//         -2Tr[S(w) \int d^2k/(2pi)^2 kx G_I(k,kx v + w)]
-//         +2 hbar/pi Tr[alpI(w)\int d^2k/(2pi)^2 kx G_I(k,kx v + w)]]
-//          *H(kx v + w) )
-/******************************************************************************/
-// The header.h contains all functions and subroutines needed for those
-// calculations, as well as all needed parameters. Here a brief overview over
-// the functions and subroutines contained:
-//
-// Finite integration      : integ(f,a,b,relerr)
-// Matrix multiplication   : multiply(mat1,mat2,res)
-// Trace of a matrix       : tr(mat)
-// Complex-transposed      : dagger(mat,dagmat)
-// 1/(2i)(A - A^+)         : fancyI(mat, matI)
-// Reflection coefficient  : rR(w,k) and rI(w,k)
-// Integrated Green tensor : Gint(Gten,w,RorI,T,kx)
-// Polarizability          : alpha(alp,w)
 #include "h/plate.h"
 
-/******************************************************************************/
-// Main program
-
 int main (int argc, char *argv[]) {
-
-    /* Plot parameters */
-    double spac;                     // and the respective spacing
-
     /* Dummies */
-    register unsigned int l;
-    double QFt, QFr; // QFtfree, QFrfree;
-    double F0val, Fanarval, Fanatval, Ffreetval, Ffreerval;
-    inputparams.eps0= 1./(4*PI);
+    register unsigned int l; // loop runner
+    double spacing, step; // plot parameters
+    double QFt, QFr, F0val, Fanarval, Fanatval, Ffreetval, Ffreerval; // dummies
 
     /* Greetings */
     printf("===========================================\n");
@@ -52,11 +20,13 @@ int main (int argc, char *argv[]) {
     }
 
     /* create output file */
+    // name
     char outfile[strlen(argv[1])+1];
     memset(outfile, '\0', sizeof(outfile)); //clear memory location
     strncpy(outfile, argv[1], strlen(argv[1])-3);
     strcat(outfile, ".out");
 
+    // create file 
     FILE *fp;
     fp = fopen(outfile, "w");
     if (fp == NULL) {
@@ -65,7 +35,12 @@ int main (int argc, char *argv[]) {
     };
 
     /* calculate spacing */
-    spac = pow(inputparams.stop/inputparams.start,1./inputparams.steps);
+    if (strcmp(inputparams.scale, "log") == 0) {
+        spacing = pow(inputparams.stop/inputparams.start,1./inputparams.steps);
+    } else {
+        printf("Enter valid scaling! (log)\n");
+        exit(0);
+    };
 
     /* Starting calculations */
     printf("\n===========================================\n");
@@ -75,11 +50,24 @@ int main (int argc, char *argv[]) {
     clock_t cl0, cl1;
     for (l=0; l<=inputparams.steps; ++l){
 
-        inputparams.v = inputparams.start*pow(spac,l);
+        // calculate step
+        step = inputparams.start*pow(spacing,l);
+
+        // update running variable
+        if (strcmp(inputparams.runvar, "v") == 0) {
+            inputparams.v = step;
+        } else if (strcmp(inputparams.runvar, "za") == 0) {
+            inputparams.za = step;
+        } else if (strcmp(inputparams.runvar, "T") == 0) {
+            inputparams.beta = 1E0/(step/1.16E4);
+        } else {
+            printf("Enter valid running variable! (v)\n");
+            exit(0);
+        }
 
         /* Performing calculations */
 
-        /* translational contribution */
+        // translational contribution
         inputparams.transroll = 0;
 
         cl0 = clock();
@@ -87,7 +75,7 @@ int main (int argc, char *argv[]) {
         cl1 = clock();
         printf("Time elapsed QFt: %3.2f sec, ", (double)(cl1-cl0)/CLOCKS_PER_SEC);
 
-        /* rolling contribution */
+        // rolling contribution
         inputparams.transroll = 1;
 
         cl0 = clock();
@@ -95,20 +83,20 @@ int main (int argc, char *argv[]) {
         cl1 = clock();
         printf("Time elapsed QFr: %3.2f sec\n", (double)(cl1-cl0)/CLOCKS_PER_SEC);
 
-        /* analytics */ 
+        // analytical limits
         F0val = F0(&inputparams);
         Fanatval = Fanat(&inputparams);
         Fanarval = Fanar(&inputparams);
         Ffreetval = Ffreet(&inputparams);
         Ffreerval = Ffreer(&inputparams);
 
-        /* Print result to the screen */
+        /* print results to the screen */
         printf("v        | QFt/F0   | QFr/F0    | Fanat/F0 | Fanar/F0  | Ffreet/F0| Ffreer/F0\n");
         printf("%.2e | %.2e | %.2e | %.2e | %.2e | %.2e | %.2e\n\n",
                 inputparams.v, QFt/F0val, QFr/F0val,Fanatval/F0val, Fanarval/F0val,
                 Ffreetval/F0val, Ffreerval/F0val);
 
-        /* write to the file */
+        /* write results to the file */
         fprintf(fp, "%.10e, %.10e, %.10e, %.10e, %.10e, %.10e, %.10e\n",
                 inputparams.v, QFt/F0val, QFr/F0val,Fanatval/F0val, Fanarval/F0val,
                 Ffreetval/F0val, Ffreerval/F0val);
@@ -126,5 +114,3 @@ int main (int argc, char *argv[]) {
 
     return 0;
 };
-
-////////////////////////////////////////////////////////////////////////////////

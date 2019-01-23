@@ -112,15 +112,16 @@ void input(char file[], unsigned int verbose) {
     // or other convenient forms
     inputparams.za   = inputparams.za/(1.9732705e-7);
     inputparams.wsp1 = inputparams.wp1/sqrt(1.+inputparams.einf);
+    inputparams.eps0= 1./(4*PI);
 }
 
 // reflection coefficient
 void refl(double complex r[2], double w, double complex kap, void * p) {
     /* give parameters needed */
     struct parameters * params = (struct parameters *)p;
-    double einf = (params->einf);
-    double wp1 = (params->wp1);
-    double g1 = (params->g1);
+    const double einf = (params->einf);
+    const double wp1 = (params->wp1);
+    const double g1 = (params->g1);
 
     double complex epsw, kaplc;
     double wabs;
@@ -148,16 +149,17 @@ void refl(double complex r[2], double w, double complex kap, void * p) {
 void Gint(double complex Gten[Ndim][Ndim], double w, void * p, unsigned int RorI, unsigned int kx, unsigned int theta, unsigned int T) {
     /* give parameters needed */
     struct parameters * params = (struct parameters *)p;
-    double v = (params->v);
-    double za = (params->za);
-    double beta = (params->beta);
-    double relerr = (params->relerr);
-    double recerr = (params->recerr);
-    double abserr = (params->abserr);
-    double kcut = (params->kcut);
+    const double v = (params->v);
+    const double za = (params->za);
+    const double beta = (params->beta);
+    const double relerr = (params->relerr);
+    const double recerr = (params->recerr);
+    const double abserr = (params->abserr);
+    const double kcut = (params->kcut);
 
     double Gphi;
     double Gsigma[3];
+    double complex re[2];
     register unsigned int sig, pphi;
 
     double lim2, limI1;
@@ -181,7 +183,7 @@ void Gint(double complex Gten[Ndim][Ndim], double w, void * p, unsigned int RorI
         double wrapkap (double kap) {
             double wpl;
             double resk=0.;
-            double complex kapc=0., re[2], resc=0., rppre, rspre;
+            double complex kapc=0., resc=0., rppre, rspre;
             double k;
             double kap2 = kap*fabs(kap);
             double complex prefac;
@@ -192,8 +194,6 @@ void Gint(double complex Gten[Ndim][Ndim], double w, void * p, unsigned int RorI
             }
             k = (sqrt(kap2*(1E0-v2*cosp2) + w*w) + v*w*cosp)/(1E0-v2*cosp2);
             wpl =  w+cosp*k*v;
-            re[0] = 0E0;
-            re[1] = 0E0;
             refl(re,wpl,kapc,params);
             prefac = cexp(-2*za*kapc)/(1E0-cosp*v*wpl/k);
 
@@ -248,10 +248,10 @@ void Gint(double complex Gten[Ndim][Ndim], double w, void * p, unsigned int RorI
             caseT = 1;
         }
 
-        resphi = integ(wrapkap, params, limI1, lim2, relerr*recerr*recerr, abserr*recerr*recerr);
+        resphi = cquad(wrapkap, params, limI1, lim2, relerr*recerr*recerr, abserr*recerr*recerr);
 
         if (T == 1 && caseT == 1){
-            resphi += integ(wrapkap, params, lim2,kcut/(2.*za), relerr*recerr*recerr, abserr*recerr*recerr);
+            resphi += cquad(wrapkap, params, lim2, kcut/(2.*za), relerr*recerr*recerr, abserr*recerr*recerr);
         }
         return resphi/PI;
     }
@@ -260,21 +260,21 @@ void Gint(double complex Gten[Ndim][Ndim], double w, void * p, unsigned int RorI
     pphi = 0;
     // ... the (1,1) component with cos^2(phi) as prefactor
     sig = 0;
-    Gsigma[0] = integ( wrapphi, params, 0., PI*0.5, relerr*recerr, abserr*recerr);
-    Gsigma[0] += integ( wrapphi, params, PI*0.5, PI, relerr*recerr, abserr*recerr);
+    Gsigma[0] = cquad( wrapphi, params, 0., PI*0.5, relerr*recerr, abserr*recerr);
+    Gsigma[0] += cquad( wrapphi, params, PI*0.5, PI, relerr*recerr, abserr*recerr);
     // ... the (2,2) component with sin^2(phi) as prefactor
     sig = 1;
-    Gsigma[1] = integ( wrapphi, params, 0., PI*0.5, relerr*recerr, abserr*recerr);
-    Gsigma[1] += integ( wrapphi, params, PI*0.5, PI, relerr*recerr, abserr*recerr);
+    Gsigma[1] = cquad( wrapphi, params, 0., PI*0.5, relerr*recerr, abserr*recerr);
+    Gsigma[1] += cquad( wrapphi, params, PI*0.5, PI, relerr*recerr, abserr*recerr);
     // and the (2,2) component as sin^2 = 1 - cos^2
     sig = 2;
-    Gsigma[2] = integ( wrapphi, params, 0., PI*0.5, relerr*recerr, abserr*recerr);
-    Gsigma[2] += integ( wrapphi, params, PI*0.5, PI, relerr*recerr, abserr*recerr);
+    Gsigma[2] = cquad( wrapphi, params, 0., PI*0.5, relerr*recerr, abserr*recerr);
+    Gsigma[2] += cquad( wrapphi, params, PI*0.5, PI, relerr*recerr, abserr*recerr);
 
     // Second, we calculate Gphi
     pphi = 1;
-    Gphi = integ( wrapphi, params, 0., PI*0.5, relerr*recerr, abserr*recerr);
-    Gphi += integ( wrapphi, params, PI*0.5, PI, relerr*recerr, abserr*recerr);
+    Gphi = cquad( wrapphi, params, 0., PI*0.5, relerr*recerr, abserr*recerr);
+    Gphi += cquad( wrapphi, params, PI*0.5, PI, relerr*recerr, abserr*recerr);
 
     // Now we can assemble the full Green tensor
     Gten[0][0] = Gsigma[0];
@@ -292,9 +292,9 @@ void Gint(double complex Gten[Ndim][Ndim], double w, void * p, unsigned int RorI
 void alpha(double complex alp[Ndim][Ndim], double w, void * p) {
     /* give parameters needed */
     struct parameters * params = (struct parameters *)p;
-    double wa = (params->wa);
-    double a0 = (params->a0);
-    int muquest = (params->muquest);
+    const double wa = (params->wa);
+    const double a0 = (params->a0);
+    const int muquest = (params->muquest);
 
     double complex alpinv00,alpinv11,alpinv22,alpinv20, det;
     double complex GI[3][3], GR[3][3];
@@ -331,7 +331,7 @@ void alpha(double complex alp[Ndim][Ndim], double w, void * p) {
 double complex mu(double w, void *p) {
     /* give parameters needed */
     struct parameters * params = (struct parameters *)p;
-    double gamMu = (params->gamMu);
+    const double gamMu = (params->gamMu);
     
     double complex muresC;
     muresC = gamMu +I*0E0;
@@ -343,7 +343,7 @@ double complex mu(double w, void *p) {
 double IntQF(double w, void * p) {
     /* give parameters needed */
     struct parameters * params = (struct parameters *)p;
-    int transroll = (params->transroll);
+    const int transroll = (params->transroll);
 
     double complex GIth[3][3], GIk[3][3], GIkth[3][3];
     double complex alp[3][3], alpI[3][3], S[3][3],  temp1[3][3], temp2[3][3];
@@ -390,23 +390,23 @@ double IntQF(double w, void * p) {
 double QF(double IntQF(), void * p) {
     /* give parameters needed */
     struct parameters * params = (struct parameters *)p;
-    double abserr = (params->abserr);
-    double relerr = (params->relerr);
-    double wa = (params->wa);
-    double wsp1 = (params->wsp1);
+    const double abserr = (params->abserr);
+    const double relerr = (params->relerr);
+    const double wa = (params->wa);
+    const double wsp1 = (params->wsp1);
     
-    double result;
+    double result, abserr2;
     
-    result = integ(IntQF, params, 0E0, 0.9E0*wa, relerr, abserr);
+    result = cquad(IntQF, params, 0E0, 0.9E0*wa, relerr, abserr);
 
-    abserr = fabs(result)*1E-2;
-    result += integ(IntQF, params, 0.9E0*wa, wa, relerr, abserr);
+    abserr2 = fabs(result)*1E-2;
+    result += cquad(IntQF, params, 0.9E0*wa, wa, relerr, abserr2);
     
-    abserr = fabs(result)*1E-2;
-    result += integ(IntQF, params, wa, wsp1, relerr, abserr);
+    abserr2 = fabs(result)*1E-2;
+    result += cquad(IntQF, params, wa, wsp1, relerr, abserr2);
 
-    abserr = fabs(result)*1E-2;
-    result += integinf(IntQF, params, wsp1, relerr, abserr);
+    abserr2 = fabs(result)*1E-2;
+    result += integinf(IntQF, params, wsp1, relerr, abserr2);
 
     return result;
 }
@@ -415,9 +415,9 @@ double QF(double IntQF(), void * p) {
 double F0(void * p) {
     /* give parameters needed */
     struct parameters * params = (struct parameters *)p;
-    double wsp1 = (params->wsp1);
-    double a0 = (params->a0);
-    double eps0 = (params->eps0);
+    const double wsp1 = (params->wsp1);
+    const double a0 = (params->a0);
+    const double eps0 = (params->eps0);
 
     return -3*pow(wsp1,5)*a0/(2*PI*eps0);
 }
@@ -426,15 +426,15 @@ double Fanat(void * p) {
 
     /* give parameters needed */
     struct parameters * params = (struct parameters *)p;
-    double a0 = (params->a0);
-    double g1 = (params->g1);
-    double eps0 = (params->eps0);
-    double wp1 = (params->wp1);
-    double v = (params->v);
-    double za = (params->za);
-    int muquest = (params->muquest);
-    double wa = (params->wa);
-    double beta = (params->beta);
+    const double a0 = (params->a0);
+    const double g1 = (params->g1);
+    const double eps0 = (params->eps0);
+    const double wp1 = (params->wp1);
+    const double v = (params->v);
+    const double za = (params->za);
+    const int muquest = (params->muquest);
+    const double wa = (params->wa);
+    const double beta = (params->beta);
 
     double result;
     
@@ -457,13 +457,13 @@ double Fanat(void * p) {
 double Fanar(void * p) {
     /* give parameters needed */
     struct parameters * params = (struct parameters *)p;
-    double a0 = (params->a0);
-    double g1 = (params->g1);
-    double eps0 = (params->eps0);
-    double wp1 = (params->wp1);
-    double v = (params->v);
-    double za = (params->za);
-    double beta = (params->beta);
+    const double a0 = (params->a0);
+    const double g1 = (params->g1);
+    const double eps0 = (params->eps0);
+    const double wp1 = (params->wp1);
+    const double v = (params->v);
+    const double za = (params->za);
+    const double beta = (params->beta);
 
     double result;
     result = 45*a0*a0*pow(g1/(eps0*wp1*wp1),2)*pow(v,3)/(pow(PI,3)*pow(2*za,10));
@@ -475,13 +475,13 @@ double Fanar(void * p) {
 double Ffreet(void * p) {
     /* give parameters needed */
     struct parameters * params = (struct parameters *)p;
-    double a0 = (params->a0);
-    double g1 = (params->g1);
-    double eps0 = (params->eps0);
-    double wp1 = (params->wp1);
-    double v = (params->v);
-    double za = (params->za);
-    double beta = (params->beta);
+    const double a0 = (params->a0);
+    const double g1 = (params->g1);
+    const double eps0 = (params->eps0);
+    const double wp1 = (params->wp1);
+    const double v = (params->v);
+    const double za = (params->za);
+    const double beta = (params->beta);
 
     double result = - a0*a0*pow(g1*4*PI/(eps0*wp1*wp1),2)*3*v/(PI*beta*beta*pow(2*za,8));
     return result;
@@ -490,6 +490,7 @@ double Ffreet(void * p) {
 double Ffreer(void * p) {
     /* give parameters needed */
     struct parameters * params = (struct parameters *)p;
+
     double result = -1./2.*Ffreet(params);
     return result;
 }

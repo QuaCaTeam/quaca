@@ -9,14 +9,6 @@
 /* FUNCTIONS */
 /* --------- */
 
-// progress bar
-void printProg(double percentage) {
-    int val = (int) (percentage * 100);
-    int lpad = (int) (percentage * PBWIDTH);
-    int rpad = PBWIDTH - lpad;
-    printf("\rProgress: %3d%% [%.*s%*s]", val, lpad, PBSTR, rpad, "");
-};
-
 // matrix multiplication
 void multiply(double complex mat1[Ndim][Ndim], double complex mat2[Ndim][Ndim], double complex res[Ndim][Ndim]) {
     int i, j, k;
@@ -71,7 +63,7 @@ const double complex tr(double complex mat[Ndim][Ndim]) {
     return res;
 };
 
-double integ(double my_f(), void * p, double a , double b, double relerr, double epsabs) {
+double cquad(double my_f(), void * p, double a , double b, double relerr, double epsabs) {
     gsl_function f;
     gsl_integration_cquad_workspace *ws = NULL;
     struct parameters * params = (struct parameters *)p;
@@ -96,6 +88,35 @@ double integ(double my_f(), void * p, double a , double b, double relerr, double
 
     /* Free the workspace. */
     gsl_integration_cquad_workspace_free( ws );
+
+    return res;
+};
+
+double qags(double my_f(), void * p, double a , double b, double relerr, double epsabs) {
+    gsl_function f;
+    gsl_integration_workspace *ws = NULL;
+    struct parameters * params = (struct parameters *)p;
+    double res, abserr;
+    size_t limit = 1000;
+
+    /* Prepare the function. */
+    f.function = my_f;
+    f.params = params;
+
+    /* Initialize the workspace. */
+    if ( ( ws = gsl_integration_workspace_alloc( 1000 ) ) == NULL ) {
+        printf( "call to gsl_integration_cquad_workspace_alloc failed.\n" );
+        abort();
+    }
+
+    /* Call the integrator. */
+    if ( gsl_integration_qags( &f, a , b , epsabs , relerr , limit, ws , &res , &abserr ) != 0 ) {
+        printf( "call to gsl_integration_cquad failed.\n" );
+        abort();
+    }
+
+    /* Free the workspace. */
+    gsl_integration_workspace_free( ws );
 
     return res;
 };

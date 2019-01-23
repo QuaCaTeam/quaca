@@ -7,7 +7,7 @@ PREFIX=/usr/local
 
 # options for compiling
 CC = gcc
-CFLAGS = -Wall -Ofast # show warnings as erros, optimize level 2
+CFLAGS = -Wall -Ofast # show warnings as erros, optimize with fast-math
 INCLUDES = -I/usr/include -Isrc/h # include headers
 LFLAGS = -L/usr/lib
 LIBS = -lgsl -lgslcblas -lm # gsl, gscblas, math library
@@ -15,7 +15,12 @@ LIBS = -lgsl -lgslcblas -lm # gsl, gscblas, math library
 # files
 SRC = $(wildcard src/*c) 
 OBJS = ${SRC:.c=.o}
-PROG = bin/qfnum
+PROG = bin/quaca
+
+# documentation
+SPHINXBUILD = sphinx-build
+SOURCEDIR = doc
+BUILDDIR = doc/_build
 
 all: $(PROG) clean
 
@@ -27,13 +32,9 @@ $(PROG): $(OBJS)
 .c.o:
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-# option for profiling
-profile: $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDES) -o $(PROG) $(OBJS) $(LFLAGS) $(LIBS) -pg
-
 # make doc
 doc:
-	cd doc && make html	&& cd ..
+	$(SPHINXBUILD) -M html $(SOURCEDIR) $(BUILDDIR)
 
 # install binary
 install: $(PROG) clean

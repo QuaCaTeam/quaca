@@ -1,5 +1,8 @@
+Documentation
+=============
+
 Usage
-=====
+-----
 
 To use QuaCa type into the command line::
     
@@ -10,3 +13,14 @@ So if you have an input file called ``params.in`` in a folder called ``data`` yo
     $ quaca data/params.in
 
 QuaCa then calculates its stuff and puts the values into an according .out file.
+
+Tutorial
+--------
+
+Let's suppose we want to do the following.
+
+
+Functions
+---------
+
+Here we document the functions of QuaCa.
