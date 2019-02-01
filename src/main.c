@@ -57,7 +57,7 @@ int main (int argc, char *argv[]) {
         if (strcmp(inputparams.runvar, "v") == 0) {
             inputparams.v = step;
         } else if (strcmp(inputparams.runvar, "za") == 0) {
-            inputparams.za = step;
+            inputparams.za = step/(1.9732705e-7); 
         } else if (strcmp(inputparams.runvar, "T") == 0) {
             inputparams.beta = 1E0/(step/1.16E4);
         } else {
