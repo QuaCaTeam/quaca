@@ -42,7 +42,7 @@ void input(char file[], unsigned int verbose) {
                 } else if (strcmp(s,"za")==0) {
                     inputparams.za = i;
                 } else if (strcmp(s,"T")==0) {
-                    inputparams.beta = 1E0/(i/1.16e4);
+                    inputparams.beta = 1E0/(i*kB);
                 } else if (strcmp(s,"a0")==0) {
                     inputparams.a0 = i;
                 } else if (strcmp(s,"kcut")==0) {
@@ -110,7 +110,7 @@ void input(char file[], unsigned int verbose) {
 
     // transforming the remaining SI units to natural units
     // or other convenient forms
-    inputparams.za   = inputparams.za/(1.9732705e-7);
+    inputparams.za   = inputparams.za/(hbar*c);
     inputparams.wsp1 = inputparams.wp1/sqrt(1.+inputparams.einf);
     inputparams.eps0= 1./(4*PI);
 }

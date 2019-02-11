@@ -57,9 +57,9 @@ int main (int argc, char *argv[]) {
         if (strcmp(inputparams.runvar, "v") == 0) {
             inputparams.v = step;
         } else if (strcmp(inputparams.runvar, "za") == 0) {
-            inputparams.za = step/(1.9732705e-7); 
+            inputparams.za = step/(hbar*c); 
         } else if (strcmp(inputparams.runvar, "T") == 0) {
-            inputparams.beta = 1E0/(step/1.16E4);
+            inputparams.beta = 1E0/(step*kB);
         } else {
             printf("Enter valid running variable! (v)\n");
             exit(0);
@@ -91,16 +91,42 @@ int main (int argc, char *argv[]) {
         Ffreerval = Ffreer(&inputparams);
 
         /* print results to the screen */
-        printf("v        | QFt/F0   | QFr/F0    | Fanat/F0 | Fanar/F0  | Ffreet/F0| Ffreer/F0\n");
-        printf("%.2e | %.2e | %.2e | %.2e | %.2e | %.2e | %.2e\n\n",
-                inputparams.v, QFt/F0val, QFr/F0val,Fanatval/F0val, Fanarval/F0val,
-                Ffreetval/F0val, Ffreerval/F0val);
-
         /* write results to the file */
-        fprintf(fp, "%.10e, %.10e, %.10e, %.10e, %.10e, %.10e, %.10e\n",
-                inputparams.v, QFt/F0val, QFr/F0val,Fanatval/F0val, Fanarval/F0val,
-                Ffreetval/F0val, Ffreerval/F0val);
-        fflush(fp);
+        if (strcmp(inputparams.runvar, "v") == 0) {
+            printf("v        | QFt/F0   | QFr/F0    | Fanat/F0 | Fanar/F0  | Ffreet/F0| Ffreer/F0\n");
+            printf("%.2e | %.2e | %.2e | %.2e | %.2e | %.2e | %.2e\n\n",
+                    inputparams.v, QFt/F0val, QFr/F0val,Fanatval/F0val, Fanarval/F0val,
+                    Ffreetval/F0val, Ffreerval/F0val);
+
+            fprintf(fp, "%.10e, %.10e, %.10e, %.10e, %.10e, %.10e, %.10e\n",
+                    inputparams.v, QFt/F0val, QFr/F0val,Fanatval/F0val, Fanarval/F0val,
+                    Ffreetval/F0val, Ffreerval/F0val);
+            fflush(fp);
+        } else if (strcmp(inputparams.runvar, "za") == 0) {
+            printf("za       | QFt/F0   | QFr/F0    | Fanat/F0 | Fanar/F0  | Ffreet/F0| Ffreer/F0\n");
+            printf("%.2e | %.2e | %.2e | %.2e | %.2e | %.2e | %.2e\n\n",
+                    inputparams.za, QFt/F0val, QFr/F0val,Fanatval/F0val, Fanarval/F0val,
+                    Ffreetval/F0val, Ffreerval/F0val);
+
+            fprintf(fp, "%.10e, %.10e, %.10e, %.10e, %.10e, %.10e, %.10e\n",
+                    inputparams.za, QFt/F0val, QFr/F0val,Fanatval/F0val, Fanarval/F0val,
+                    Ffreetval/F0val, Ffreerval/F0val);
+            fflush(fp);
+        } else if (strcmp(inputparams.runvar, "T") == 0) {
+            printf("beta     | QFt/F0   | QFr/F0    | Fanat/F0 | Fanar/F0  | Ffreet/F0| Ffreer/F0\n");
+            printf("%.2e | %.2e | %.2e | %.2e | %.2e | %.2e | %.2e\n\n",
+                    inputparams.beta, QFt/F0val, QFr/F0val,Fanatval/F0val, Fanarval/F0val,
+                    Ffreetval/F0val, Ffreerval/F0val);
+
+            fprintf(fp, "%.10e, %.10e, %.10e, %.10e, %.10e, %.10e, %.10e\n",
+                    inputparams.beta, QFt/F0val, QFr/F0val,Fanatval/F0val, Fanarval/F0val,
+                    Ffreetval/F0val, Ffreerval/F0val);
+            fflush(fp);
+        } else {
+            printf("Enter valid running variable! (v)\n");
+            exit(0);
+        }
+
     };
 
     clock_t c1 = clock();

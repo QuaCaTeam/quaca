@@ -6,7 +6,7 @@
 
 struct parameters {
     /* universal constants */
-    double c, hbar, eps0, a0;
+    double eps0, a0;
 
     /* material and system parameters */
     double wp1, wsp1, wa, gamMu, g1, einf, beta;

@@ -18,6 +18,11 @@
 #define PI 3.14159265358979323846
 #define Ndim 3
 
+/* physical constants */
+#define kB 8.6173303E-5
+#define hbar 6.582119514E-16
+#define c 2.99792458E8
+
 /* --------- */
 /* FUNCTIONS */
 /* --------- */
