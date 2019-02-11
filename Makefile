@@ -40,8 +40,8 @@ doc:
 install: $(PROG) clean
 	echo Installing executable to $(PREFIX)/bin
 	mkdir -p $(PREFIX)/bin
-	cp -f bin/qfnum $(PREFIX)/bin
-	chmod 755 $(PREFIX)/bin/qfnum
+	cp -f bin/quaca $(PREFIX)/bin
+	chmod 755 $(PREFIX)/bin/quaca
 
 # clean directory
 clean:
