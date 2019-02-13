@@ -105,11 +105,11 @@ int main (int argc, char *argv[]) {
         } else if (strcmp(inputparams.runvar, "za") == 0) {
             printf("za       | QFt/F0   | QFr/F0    | Fanat/F0 | Fanar/F0  | Ffreet/F0| Ffreer/F0\n");
             printf("%.2e | %.2e | %.2e | %.2e | %.2e | %.2e | %.2e\n\n",
-                    inputparams.za, QFt/F0val, QFr/F0val,Fanatval/F0val, Fanarval/F0val,
+                    inputparams.za*(hbar*c), QFt/F0val, QFr/F0val,Fanatval/F0val, Fanarval/F0val,
                     Ffreetval/F0val, Ffreerval/F0val);
 
             fprintf(fp, "%.10e, %.10e, %.10e, %.10e, %.10e, %.10e, %.10e\n",
-                    inputparams.za, QFt/F0val, QFr/F0val,Fanatval/F0val, Fanarval/F0val,
+                    inputparams.za*(hbar*c), QFt/F0val, QFr/F0val,Fanatval/F0val, Fanarval/F0val,
                     Ffreetval/F0val, Ffreerval/F0val);
             fflush(fp);
         } else if (strcmp(inputparams.runvar, "T") == 0) {
