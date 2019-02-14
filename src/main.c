@@ -1,6 +1,6 @@
 #include "h/plate.h"
 
-int main (int argc, char *argv[]) {
+void quacaPlate(int argc, char *argv[]) {
     /* Dummies */
     register unsigned int l; // loop runner
     double spacing, step; // plot parameters
@@ -137,6 +137,10 @@ int main (int argc, char *argv[]) {
     printf("Finished calculating %d points in %3.2f sec. \n", inputparams.steps, (c1-c0)/1.e6);
     printf("\nBYE!\n");
     printf("===========================================\n");
+};
 
+
+int main (int argc, char *argv[]) {
+    quacaPlate(argc, argv);
     return 0;
 };
