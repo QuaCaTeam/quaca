@@ -83,8 +83,7 @@
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tutorial">Tutorial</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#analytics">Analytics</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="todo.html">To Do</a></li>
@@ -165,14 +164,69 @@
 </pre></div>
 </div>
 <p>QuaCa then calculates its stuff and puts the values into an according .out file.</p>
+<p>A sample .in file is depicted here</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># atomic constants</span>
+v       5E-4   <span class="c1"># in c</span>
+za      5E-9   <span class="c1"># in nm</span>
+muquest <span class="m">1</span>      <span class="c1"># if 1, the internal bath is included</span>
+gamMu   1E-1   <span class="c1"># in eV</span>
+wa      <span class="m">1</span>.3E0  <span class="c1"># in eV</span>
+a0      6E-9
+
+<span class="c1"># material parameters</span>
+einf  <span class="m">1</span>.
+wp1   <span class="m">9</span>.       <span class="c1"># in eV</span>
+g1    <span class="m">0</span>.035E0  <span class="c1"># in eV</span>
+T     1E-6      <span class="c1"># in K</span>
+
+<span class="c1"># numerical specifications</span>
+kcut    <span class="m">30</span>.
+relerr  1E-2
+recerr  1E-2
+abserr  1e-200
+
+<span class="c1"># Range</span>
+runvar v
+start  1E-4
+stop   1E-2
+steps  <span class="m">5</span>
+scale  log
+</pre></div>
 </div>
-<div class="section" id="tutorial">
-<h2>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h2>
-<p>Let’s suppose we want to do the following.</p>
 </div>
-<div class="section" id="functions">
-<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
-<p>Here we document the functions of QuaCa.</p>
+<div class="section" id="analytics">
+<h2>Analytics<a class="headerlink" href="#analytics" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt>
+<code class="descname">double F0(void *p)</code></dt>
+<dd><p>Given a parameter struct this function computes the normalization constant</p>
+<div class="math notranslate nohighlight">
+\[F_0 = -3 \frac{\omega_{\mathrm{sp}}^5 \alpha_0}{2 \pi \varepsilon_0}\]</div>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">double Fanat(void *p)</code></dt>
+<dd><p>Given a parameter struct this function computes the analytic limit of the translational contribution to quantum friction for small velocities of the atom.
+Notice that there are different results for different <span class="math notranslate nohighlight">\(\mu\)</span>!</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">double Fanar(void *p)</code></dt>
+<dd><p>Given a parameter struct this function computes the analytic limit of the rolling contribution to quantum friction for small velocities of the atom.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">double Ffreet(void *p)</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">double Ffreer(void *p)</code></dt>
+<dd></dd></dl>
+
 </div>
 </div>
 

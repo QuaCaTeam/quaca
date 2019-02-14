@@ -26,6 +26,3 @@ QuaCa is currently developed in a private git repository, by main developer and 
    installation
    documentation
    todo
-
-
-
