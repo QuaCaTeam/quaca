@@ -236,8 +236,11 @@ void Gint(double complex Gten[Ndim][Ndim], double w, void * p, unsigned int RorI
             }
 
             if (T == 1) {
-                resk = resk*(1E0/(1E0-exp(-beta*wpl)) - 1E0/(1E0-exp(-beta*w)) );
-            }
+
+		    resk = resk*(
+			1E0/(1E0-exp(-beta*wpl)) - 1E0/(1E0-exp(-beta*w)) 
+			     	);
+	    }     
             return resk;
         }
 
@@ -249,10 +252,12 @@ void Gint(double complex Gten[Ndim][Ndim], double w, void * p, unsigned int RorI
         }
 
         resphi = cquad(wrapkap, params, limI1, lim2, relerr*recerr*recerr, abserr*recerr*recerr);
-
-        if (T == 1 && caseT == 1){
-            resphi += cquad(wrapkap, params, lim2, kcut/(2.*za), relerr*recerr*recerr, abserr*recerr*recerr);
-        }
+	
+	if (T == 1 && caseT == 1){
+        
+	    	resphi += cquad(wrapkap, params, lim2, kcut/(2.*za), relerr*recerr*recerr, abserr*recerr*recerr);
+       
+       	}
         return resphi/PI;
     }
 
@@ -356,7 +361,6 @@ double IntQF(double w, void * p) {
     Gint(GIth , w, params, 1, 0, 1, 1);
     Gint(GIk  , w, params, 1, 1, 0, 0);
     Gint(GIkth, w, params, 1, 1, 1, 1);
-
     /* Building the power spectrum S */
     multiply(alp,GIth,temp1);
     multiply(temp1,alpdag,S);
@@ -395,9 +399,21 @@ double QF(double IntQF(), void * p) {
     const double wa = (params->wa);
     const double wsp1 = (params->wsp1);
     
+    const double v = (params->v);
+    const double za = (params->za);
+    const double kcut = (params->kcut);
+    
+    double wcut = kcut*v/(2*za);
     double result, abserr2;
     
-    result = cquad(IntQF, params, 0E0, 0.9E0*wa, relerr, abserr);
+    if (wcut < wa*0.9E0) {
+	    result = cquad(IntQF, params, 0E0, wcut, relerr, abserr);
+             abserr2 = fabs(result)*1E-2;
+	    result += cquad(IntQF, params, wcut, 0.9E0*wa, relerr, abserr);
+    }
+    else {
+	    result = cquad(IntQF, params, 0E0, 0.9E0*wa, relerr, abserr);
+    }
 
     abserr2 = fabs(result)*1E-2;
     result += cquad(IntQF, params, 0.9E0*wa, wa, relerr, abserr2);

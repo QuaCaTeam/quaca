@@ -10,17 +10,17 @@ a0      6E-9
 einf  1.   
 wp1   9.        # in eV
 g1    0.035E0   # in eV 
-T     1E-9      # in K
+T     1E-6      # in K
 
 # numerical specifications
 kcut    30.
-relerr  1E-2
-recerr  1E-2
+relerr  1E-1
+recerr  1E-1
 abserr  1e-200
 
 # Range
 runvar za
-start  1E-9
-stop   1E-6
-steps  50 
+start  1E-7
+stop   1E-3
+steps  10
 scale  log
