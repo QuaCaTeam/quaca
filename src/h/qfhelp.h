@@ -21,7 +21,7 @@
 /* physical constants */
 #define kB 8.6173303E-5
 #define hbar 6.582119514E-16
-#define c 2.99792458E8
+#define cvac 2.99792458E8
 
 /* --------- */
 /* FUNCTIONS */

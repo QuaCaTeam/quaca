@@ -10,7 +10,7 @@ CC = gcc
 CFLAGS = -Wall -Ofast # show warnings as erros, optimize with fast-math
 INCLUDES = -I/usr/include -Isrc/h # include headers
 LFLAGS = -L/usr/lib
-LIBS = -lgsl -lgslcblas -lm # gsl, gscblas, math library
+LIBS = -lgsl -lgslcblas -lm -lflint-arb# gsl, gscblas, math library
 
 # files
 SRC = $(wildcard src/*c) 

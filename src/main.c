@@ -1,4 +1,5 @@
 #include "h/plate.h"
+#include "h/cyl.h"
 
 void quacaPlate(int argc, char *argv[]) {
     /* Dummies */
@@ -57,7 +58,7 @@ void quacaPlate(int argc, char *argv[]) {
         if (strcmp(inputparams.runvar, "v") == 0) {
             inputparams.v = step;
         } else if (strcmp(inputparams.runvar, "za") == 0) {
-            inputparams.za = step/(hbar*c); 
+            inputparams.za = step/(hbar*cvac); 
         } else if (strcmp(inputparams.runvar, "T") == 0) {
             inputparams.beta = 1E0/(step*kB);
         } else {
@@ -105,11 +106,11 @@ void quacaPlate(int argc, char *argv[]) {
         } else if (strcmp(inputparams.runvar, "za") == 0) {
             printf("za       | QFt/F0   | QFr/F0    | Fanat/F0 | Fanar/F0  | Ffreet/F0| Ffreer/F0\n");
             printf("%.2e | %.2e | %.2e | %.2e | %.2e | %.2e | %.2e\n\n",
-                    inputparams.za*(hbar*c), QFt/F0val, QFr/F0val,Fanatval/F0val, Fanarval/F0val,
+                    inputparams.za*(hbar*cvac), QFt/F0val, QFr/F0val,Fanatval/F0val, Fanarval/F0val,
                     Ffreetval/F0val, Ffreerval/F0val);
 
             fprintf(fp, "%.10e, %.10e, %.10e, %.10e, %.10e, %.10e, %.10e\n",
-                    inputparams.za*(hbar*c), QFt/F0val, QFr/F0val,Fanatval/F0val, Fanarval/F0val,
+                    inputparams.za*(hbar*cvac), QFt/F0val, QFr/F0val,Fanatval/F0val, Fanarval/F0val,
                     Ffreetval/F0val, Ffreerval/F0val);
             fflush(fp);
         } else if (strcmp(inputparams.runvar, "T") == 0) {
@@ -140,7 +141,35 @@ void quacaPlate(int argc, char *argv[]) {
 };
 
 
+void quacaCyl(int argc, char *argv[]) {
+    /* Greetings */
+    printf("===========================================\n");
+    printf("WELCOME TO QFNUM!\n");
+    printf("===========================================\n");
+
+    /* read input file */
+    if (argc == 1) {
+        printf("No file passed!\n");
+        exit(0);
+    } else {
+        inputCyl(argv[1], 1);
+    }
+};
+
+
 int main (int argc, char *argv[]) {
-    quacaPlate(argc, argv);
+    quacaCyl(argc, argv);
+
+
+    double GRCNF[3][3], GRC[3][3];
+    double w = 1E-1;
+
+    GCNFint(GRCNF, w, &inputparamsCyl, 0); 
+    printf("%.8e\n", GRCNF[0][0]);
+
+    GCint(GRC, w, &inputparamsCyl, 0); 
+    printf("%.8e\n", GRC[0][0]);
+
+    
     return 0;
 };
