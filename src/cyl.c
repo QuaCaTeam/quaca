@@ -14,7 +14,7 @@ void inputCyl(char file[], unsigned int verbose) {
     FILE * fr = fopen(file, "rt");
 
     if (fr == NULL) {
-        printf("file %s not found", file);
+        printf("file %s not found\n", file);
         exit(0);
     }
 
@@ -228,7 +228,7 @@ double complex rNNNF(int n, double w, double h, void * p) {
     return result;
 };
 
-void GCNFint(double Gten[Ndim][Ndim], double w, void * p, int RorI) {
+void GCNFint(double complex Gten[Ndim][Ndim], double w, void * p, int RorI) {
     /* give parameters needed */
     struct parametersCyl * params = (struct parametersCyl *)p;
     const double v = (params->v);
@@ -237,7 +237,7 @@ void GCNFint(double Gten[Ndim][Ndim], double w, void * p, int RorI) {
     const double kcut = (params->kcut);
     const double abserr = (params->abserr);
 
-    double Gten1, Gten2;
+    double complex Gten1, Gten2;
     register unsigned int comp;
     
     double wraph(double h) {
@@ -284,8 +284,7 @@ void GCNFint(double Gten[Ndim][Ndim], double w, void * p, int RorI) {
     Gten[1][2] = 0.;
 };
 
-
-void GCint(double Gten[Ndim][Ndim], double w, void * p, int RorI) {
+void GCint(double complex Gten[Ndim][Ndim], double w, void * p, int RorI, int kx) {
     /* give parameters needed */
     struct parametersCyl * params = (struct parametersCyl *)p;
     const double v = (params->v);
@@ -294,39 +293,43 @@ void GCint(double Gten[Ndim][Ndim], double w, void * p, int RorI) {
     const double abserr = (params->abserr);
     const double kcut = (params->kcut);
 
-    double Gten1, Gten2;
+    double complex Gten1, Gten2;
     register unsigned int comp;
-    
+
     double wraph(double h) {
-       double complex res = 0;
-       double resh = 0;
-       double wdopl = w+v*h;
+        double complex res = 0;
+        double resh = 0;
+        double wdopl = w+v*h;
 
-       switch(comp) {
-           case 0:
-               res = I/(8*eps0)*(wdopl*wdopl*rMM(1,wdopl,h,params) + h*h*rNN(1,wdopl,h,params) - 2*I*wdopl*h*rMN(1,wdopl,h,params));
-               break;
-           case 1:
-               res = I/(4*eps0)*csqrt(wdopl*wdopl - h*h)*rNN(0,wdopl,h,params);
-               break;
-       }
+        switch(comp) {
+            case 0:
+                res = I/(8*eps0)*(wdopl*wdopl*rMM(1,wdopl,h,params) + h*h*rNN(1,wdopl,h,params) - 2*I*wdopl*h*rMN(1,wdopl,h,params));
+                break;
+            case 1:
+                res = I/(4*eps0)*csqrt(wdopl*wdopl - h*h)*rNN(0,wdopl,h,params);
+                break;
+        }
 
+
+        switch(RorI) {
+            case 0:
+                resh = creal(res);
+                break;
+            case 1:
+                resh = cimag(res);
+                break;
+        }
         
-       switch(RorI) {
-           case 0:
-               resh = creal(res);
-               break;
-           case 1:
-               resh = cimag(res);
-               break;
-       }
+        if (kx == 1) {
+            resh = resh*h;
+        }
 
-       return resh;
+        return resh;
     };
 
     comp = 0;
     Gten1 = cquad(wraph, params, 0, kcut, relerr, abserr);
-    
+
     comp = 1;
     Gten2 = cquad(wraph, params, 0, kcut, relerr, abserr);
 
@@ -340,3 +343,128 @@ void GCint(double Gten[Ndim][Ndim], double w, void * p, int RorI) {
     Gten[2][1] = 0.;
     Gten[1][2] = 0.;
 };
+
+double complex muCyl(double w, void *p) {
+    /* give parameters needed */
+    struct parametersCyl * params = (struct parametersCyl *)p;
+    const double gamMu = (params->gamMu);
+    
+    double complex muresC;
+    muresC = gamMu +I*0E0;
+
+    return muresC;
+};	
+
+// The polarizability
+void alphaCyl(double complex alp[Ndim][Ndim], double w, void * p) {
+    /* give parameters needed */
+    struct parametersCyl * params = (struct parametersCyl *)p;
+    const double wa = (params->wa);
+    const double a0 = (params->a0);
+    const int muquest = (params->muquest);
+
+    double complex alpinv00,alpinv11,alpinv22,alpinv20, det;
+    double complex GI[3][3], GR[3][3];
+
+    alpinv00 =  wa*wa - w*w ;
+    if (muquest == 1) {
+        alpinv00 = alpinv00 - w*I*muCyl(w, params);
+    }
+    alpinv00 = alpinv00/(a0*wa*wa);
+
+    alpinv11 = alpinv00;
+    alpinv22 = alpinv00;
+
+    GCint(GI, w, params, 1, 0);
+    GCint(GR, w, params, 0, 0);
+
+    alpinv00 = alpinv00 - ( GR[0][0] + I * GI[0][0] );
+    alpinv11 = alpinv11 - ( GR[1][1] + I * GI[1][1] );
+    alpinv22 = alpinv22 - ( GR[2][2] + I * GI[2][2] );
+    alpinv20 = -( GR[2][0] + I * GI[2][0] );
+
+    det = alpinv20*alpinv20 + alpinv00*alpinv22;
+    alp[0][0] = alpinv22/det;
+    alp[1][1] = (double complex)1./alpinv11;
+    alp[2][2] = alpinv00/det;
+    alp[0][2] = alpinv20/det;
+    alp[2][0] = -alp[0][2];
+    alp[1][0] =(double complex) 0.;
+    alp[0][1] =(double complex) 0.;
+    alp[2][1] =(double complex) 0.;
+    alp[1][2] =(double complex) 0.;
+};
+
+
+// quantum friction integrand
+double IntQFCyl(double w, void * p) {
+    /* give parameters needed */
+    struct parametersCyl * params = (struct parametersCyl *)p;
+    const int transroll = (params->transroll);
+
+    double complex GIth[3][3], GIk[3][3], GIkth[3][3];
+    double complex alp[3][3], alpI[3][3], S[3][3],  temp1[3][3], temp2[3][3];
+    double complex alpdag[3][3];
+
+    /* Creating all needed matrices */
+    alphaCyl(alp, w, params);
+    dagger(alp, alpdag);
+    fancy(alp, alpI, -1);
+    GCint(GIth , w, params, 1, 0);
+    GCint(GIk  , w, params, 1, 1);
+    GCint(GIkth, w, params, 1, 1);
+
+    /* Building the power spectrum S */
+    multiply(alp,GIth,temp1);
+    multiply(temp1,alpdag,S);
+
+    /* Calculating the trace and return */
+    /* We split the calcualtion in translational and rolling friction */
+    switch(transroll) {
+        case 0:
+            GIk[2][0] = 0.;
+            GIk[0][2] = 0.;
+            GIkth[2][0] = 0.;
+            GIkth[0][2] = 0.;
+            break;
+
+        case 1:
+            GIk[0][0] = 0.;
+            GIk[1][1] = 0.;
+            GIk[2][2] = 0.;
+            GIkth[0][0] = 0.;
+            GIkth[1][1] = 0.;
+            GIkth[2][2] = 0.;
+            break;
+    }
+
+    multiply(S,GIk,temp1);
+    multiply(alpI,GIkth,temp2);
+    /* printf("\nIntQF=%.5e, w=%.5e",(2E0/PI)*creal( -tr(temp1)  + tr(temp2) ),w);*/
+    return (2E0/PI)*creal( -tr(temp1)  + tr(temp2) );
+}
+
+
+double QFCyl(double IntQFCyl(), void * p) {
+    /* give parameters needed */
+    struct parametersCyl * params = (struct parametersCyl *)p;
+    const double abserr = (params->abserr);
+    const double relerr = (params->relerr);
+    const double wa = (params->wa);
+    const double wsp1 = (params->wsp1);
+    
+    double result, abserr2;
+    
+    result = cquad(IntQFCyl, params, 0E0, 0.9E0*wa, relerr, abserr);
+
+    abserr2 = fabs(result)*1E-2;
+    result += cquad(IntQFCyl, params, 0.9E0*wa, wa, relerr, abserr2);
+    
+    abserr2 = fabs(result)*1E-2;
+    result += cquad(IntQFCyl, params, wa, wsp1, relerr, abserr2);
+
+    abserr2 = fabs(result)*1E-2;
+    result += integinf(IntQFCyl, params, wsp1, relerr, abserr2);
+
+    return result;
+}

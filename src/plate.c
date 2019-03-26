@@ -10,11 +10,11 @@
 /* --------- */
 
 // input routine
-void input(char file[], unsigned int verbose) {
+void inputPlate(char file[], unsigned int verbose) {
     FILE * fr = fopen(file, "rt");
 
     if (fr == NULL) {
-        printf("file %s not found", file);
+        printf("file %s not found\n", file);
         exit(0);
     }
 

@@ -1,24 +1,35 @@
 #include "h/plate.h"
 #include "h/cyl.h"
 
+
+void input(int argc, char *argv[], char *type) {
+    /* check input file */
+    if (argc == 1) {
+        printf("No file passed!\n");
+        exit(0);
+    } else {
+        if (strcmp(type, "plate") == 0) {
+            inputPlate(argv[1], 1);
+        } else if (strcmp(type, "cylinder") == 0) {
+            inputCyl(argv[1], 1);
+        };
+    };
+};
+
 void quacaPlate(int argc, char *argv[]) {
     /* Dummies */
     register unsigned int l; // loop runner
     double spacing, step; // plot parameters
     double QFt, QFr, F0val, Fanarval, Fanatval, Ffreetval, Ffreerval; // dummies
+    clock_t cl0, cl1; // clocks
 
     /* Greetings */
     printf("===========================================\n");
     printf("WELCOME TO QFNUM!\n");
     printf("===========================================\n");
 
-    /* check input file */
-    if (argc == 1) {
-        printf("No file passed!\n");
-        exit(0);
-    } else {
-        input(argv[1], 1);
-    }
+    /* read input file */
+    input(argc, argv, "plate");
 
     /* create output file */
     // name
@@ -48,9 +59,7 @@ void quacaPlate(int argc, char *argv[]) {
     printf("CALCULATION STARTED!\n");
 
     clock_t c0 = clock();
-    clock_t cl0, cl1;
     for (l=0; l<=inputparams.steps; ++l){
-
         // calculate step
         step = inputparams.start*pow(spacing,l);
 
@@ -127,9 +136,7 @@ void quacaPlate(int argc, char *argv[]) {
             printf("Enter valid running variable! (v)\n");
             exit(0);
         }
-
     };
-
     clock_t c1 = clock();
     printf("\n------------------------------\n");
 
@@ -140,36 +147,21 @@ void quacaPlate(int argc, char *argv[]) {
     printf("===========================================\n");
 };
 
-
-void quacaCyl(int argc, char *argv[]) {
-    /* Greetings */
-    printf("===========================================\n");
-    printf("WELCOME TO QFNUM!\n");
-    printf("===========================================\n");
-
-    /* read input file */
-    if (argc == 1) {
-        printf("No file passed!\n");
-        exit(0);
-    } else {
-        inputCyl(argv[1], 1);
-    }
-};
-
-
 int main (int argc, char *argv[]) {
-    quacaCyl(argc, argv);
+    input(argc, argv, "cylinder");
+
+    //double complex GRCNF[3][3], GRC[3][3];
+    //double w = 1E-1;
+
+    //GCNFint(GRCNF, w, &inputparamsCyl, 0); 
+    //printf("%.8e\n", creal(GRCNF[0][0]));
+
+    //GCint(GRC, w, &inputparamsCyl, 0, 0); 
+    //printf("%.8e\n", creal(GRC[0][0]));
+    double qf;
+    qf = QFCyl(IntQFCyl, &inputparamsCyl);
+    printf("%.2e\n", qf);
 
 
-    double GRCNF[3][3], GRC[3][3];
-    double w = 1E-1;
-
-    GCNFint(GRCNF, w, &inputparamsCyl, 0); 
-    printf("%.8e\n", GRCNF[0][0]);
-
-    GCint(GRC, w, &inputparamsCyl, 0); 
-    printf("%.8e\n", GRC[0][0]);
-
-    
     return 0;
 };

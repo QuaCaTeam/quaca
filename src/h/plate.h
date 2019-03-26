@@ -37,7 +37,7 @@ struct parameters inputparams;
 /* FUNCTIONS */
 /* --------- */
 
-void input(char file[], unsigned int verbose);
+void inputPlate(char file[], unsigned int verbose);
 
 void refl(double complex r[2], double w, double complex kap, void * p);
 

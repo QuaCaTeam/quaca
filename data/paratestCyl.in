@@ -1,6 +1,6 @@
 # atomic constants
 v       5E-2   # in c
-R       1   # in nm
+R       5E-9   # in nm
 muquest 1      # if 1, the internal bath is included
 gamMu   1E-1   # in eV
 wa      1.3E0  # in eV

@@ -51,6 +51,12 @@ double complex rMN(int n, double w, double h, void * p);
 
 double complex rNNNF(int n, double w, double h, void * p);
 
-void GCNFint(double Gten[Ndim][Ndim], double w, void * p, int RorI);
-void GCint(double Gten[Ndim][Ndim], double w, void * p, int RorI);
+void GCint(double complex Gten[Ndim][Ndim], double w, void * p, int RorI, int kx);
+void GCNFint(double complex Gten[Ndim][Ndim], double w, void * p, int RorI);
 
+void alphaCyl(double complex alp[Ndim][Ndim], double w, void * p);
+double complex muCyl(double w, void * p);
+
+double IntQFCyl(double w, void * p);
+
+double QFCyl(double IntQFCyl(), void * p);
