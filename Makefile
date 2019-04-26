@@ -1,28 +1,27 @@
-#
-# Makefile 
-#
+# DIRECTORIES
+INSTALLDIR=/usr/local
+TESTDIR=test
+SOURCEDIR = doc
+BUILDDIR = doc/_build
 
-# directory to install qfnum to
-PREFIX=/usr/local
-
-# options for compiling
+# OPTIONS 
 CC = gcc
 CFLAGS = -Wall -Ofast # show warnings as erros, optimize with fast-math
-INCLUDES = -I/usr/include -Isrc/h # include headers
+INCLUDES = -I/usr/include # include headers
 LFLAGS = -L/usr/lib
 LIBS = -lgsl -lgslcblas -lm -lflint-arb# gsl, gscblas, math library
+CHECKLIBS = -lcheck -lpthread -lrt -lsubunit
 
-# files
+# FILES
 SRC = $(wildcard src/*c) 
 OBJS = ${SRC:.c=.o}
 PROG = bin/quaca
 
 # documentation
 SPHINXBUILD = sphinx-build
-SOURCEDIR = doc
-BUILDDIR = doc/_build
 
-all: $(PROG) clean
+
+all: $(PROG)
 
 # link .o's to program (qfnum)
 $(PROG): $(OBJS)
@@ -32,19 +31,25 @@ $(PROG): $(OBJS)
 .c.o:
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
+# TEST
+bin/check_plate_test:  src/plate.o src/qfhelp.o test/check_plate.o
+	$(CC) src/plate.o src/qfhelp.o test/check_plate.o -o bin/check_plate_test $(LIBS) $(CHECKLIBS) 
+
+test: bin/check_plate_test
+
 # make doc
 doc:
 	$(SPHINXBUILD) -M html $(SOURCEDIR) $(BUILDDIR)
 
 # install binary
 install: $(PROG) clean
-	echo Installing executable to $(PREFIX)/bin
-	mkdir -p $(PREFIX)/bin
-	cp -f bin/quaca $(PREFIX)/bin
-	chmod 755 $(PREFIX)/bin/quaca
+	echo Installing executable to $(INSTALLDIR)/bin
+	mkdir -p $(INSTALLDIR)/bin
+	cp -f bin/quaca $(INSTALLDIR)/bin
+	chmod 755 $(INSTALLDIR)/bin/quaca
 
 # clean directory
 clean:
 	rm src/*.o
 
-.PHONY: all clean tester
+.PHONY: all clean

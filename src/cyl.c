@@ -2,8 +2,8 @@
 /* LIBRARIES */
 /* --------- */
 
-#include "h/qfhelp.h"
-#include "h/cyl.h"
+#include "qfhelp.h"
+#include "cyl.h"
 
 /* --------- */
 /* FUNCTIONS */

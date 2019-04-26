@@ -1,3 +1,6 @@
+#ifndef QFHELP_H
+#define QFHELP_H
+
 /* --------- */
 /* LIBRARIES */
 /* --------- */
@@ -36,3 +39,5 @@ const double complex tr(double complex mat[Ndim][Ndim]);
 double cquad(double my_f(), void * p, double a, double b, double relerr, double epsabs);
 double qags(double my_f(), void * p, double a, double b, double relerr, double epsabs);
 double integinf(double my_f(), void * p, double a, double relerr, double epsabs);
+
+#endif /* QFHELP_H */

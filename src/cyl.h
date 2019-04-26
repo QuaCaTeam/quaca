@@ -1,3 +1,6 @@
+#ifndef CYL_H
+#define CYL_H
+
 /* --------- */
 /* LIBRARIES */
 /* --------- */
@@ -60,3 +63,5 @@ double complex muCyl(double w, void * p);
 double IntQFCyl(double w, void * p);
 
 double QFCyl(double IntQFCyl(), void * p);
+
+#endif /* CYL_H */

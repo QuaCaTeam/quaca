@@ -1,5 +1,5 @@
-#include "h/plate.h"
-#include "h/cyl.h"
+#include "plate.h"
+#include "cyl.h"
 
 
 void input(int argc, char *argv[], char *type) {

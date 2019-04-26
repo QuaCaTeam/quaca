@@ -2,8 +2,8 @@
 /* LIBRARIES */
 /* --------- */
 
-#include "h/qfhelp.h"
-#include "h/plate.h"
+#include "qfhelp.h"
+#include "plate.h"
 
 /* --------- */
 /* FUNCTIONS */

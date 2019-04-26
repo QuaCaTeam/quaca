@@ -1,3 +1,6 @@
+#ifndef PLATE_H
+#define PLATE_H
+
 /* --------- */
 /* LIBRARIES */
 /* --------- */
@@ -56,3 +59,5 @@ double Fanat(void * p);
 double Fanar(void * p);
 double Ffreet(void * p);
 double Ffreer(void * p);
+
+#endif /* PLATE_H */

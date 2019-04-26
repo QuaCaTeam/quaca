@@ -2,7 +2,7 @@
 /* LIBRARIES */
 /* --------- */
 
-#include "h/qfhelp.h"
+#include "qfhelp.h"
 
 
 /* --------- */
