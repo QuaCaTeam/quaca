@@ -10,15 +10,14 @@
 #include <string.h>
 
 /* General Tests */
-START_TEST(test_trivial) {
+START_TEST(trivial) {
   struct parameters inputparams;
   inputparams.gamMu = 3.0;
   double complex test = mu(3.0, &inputparams);
   ck_assert_double_eq(3.0, creal(test));
 } END_TEST
 
-
-START_TEST(test_trivial_two) {
+START_TEST(trivial_two) {
   struct parameters inputparams;
   inputparams.gamMu = 3.0;
   double complex test = mu(3.0, &inputparams);
@@ -33,18 +32,18 @@ Suite *trivial_suite(void) {
   s = suite_create("Trivial Suite");
 
   tc_core = tcase_create("First");
-  tcase_add_test(tc_core, test_trivial_two);
+  tcase_add_test(tc_core, trivial);
   suite_add_tcase(s, tc_core);
 
   tc_second = tcase_create("Second");
-  tcase_add_test(tc_second, test_trivial);
+  tcase_add_test(tc_second, trivial_two);
   suite_add_tcase(s, tc_second);
 
   return s;
 }
 
 /* reflection coefficients */
-START_TEST(ref_coeff_test) {
+START_TEST(ref_coeffs) {
   struct parameters inputparams;
   inputparams.einf = 1.0;
   inputparams.wp1 = 9;
@@ -64,7 +63,7 @@ Suite *ref_suite(void) {
   s = suite_create("Reflection Coefficients");
   tc_core = tcase_create("Number check");
 
-  tcase_add_test(tc_core, ref_coeff_test);
+  tcase_add_test(tc_core, ref_coeffs);
   suite_add_tcase(s, tc_core);
 
   return s;
@@ -114,7 +113,6 @@ Suite *polar_suite(void) {
 
 
 int main(void) {
-
     int no_failed = 0;
    
     // create Suites 

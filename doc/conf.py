@@ -20,7 +20,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'QuaCa'
-copyright = '2018, Marty Oelschlager'
+copyright = '2019, Marty Oelschlager'
 author = 'Marty Oelschlager'
 
 # The short X.Y version

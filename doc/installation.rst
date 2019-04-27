@@ -12,10 +12,14 @@ To build the project type::
     $ make
     $ sudo make install
 
-The default directory for installation is ``/usr/local/bin`` and can be changed in the makefile.
+The default directory for installation is ``/usr/local/bin`` and can be changed in the *Makefile*.
 
 
 Dependencies
 ============
 
-QuaCa largely depends on standard libraries and uses GCC to compile the project.
+GCC for compilation, GSL library for integration routines, Check for testing.
+
+To install all dependencies run::
+
+   $ sudo apt-get install gcc build-essential libgsl-dev check 

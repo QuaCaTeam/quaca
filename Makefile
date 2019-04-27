@@ -32,10 +32,10 @@ $(PROG): $(OBJS)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 # TEST
-bin/check_plate_test:  src/plate.o src/qfhelp.o test/check_plate.o
-	$(CC) src/plate.o src/qfhelp.o test/check_plate.o -o bin/check_plate_test $(LIBS) $(CHECKLIBS) 
+bin/check_quaca:  src/plate.o src/qfhelp.o test/check_quaca.o
+	$(CC) src/plate.o src/qfhelp.o test/check_quaca.o -o bin/check_quaca $(LIBS) $(CHECKLIBS) 
 
-test: bin/check_plate_test
+test: bin/check_quaca
 
 # make doc
 doc:

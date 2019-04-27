@@ -1,9 +1,9 @@
 Running suite Trivial Suite
-test/check_plate.c:25:F:First:test_trivial_two:0: Assertion '3.001 == creal(test)' failed: 3.001 == 3.001, creal(test) == 3
-test/check_plate.c:17:P:Second:test_trivial:0: Passed
+test/check_quaca.c:17:P:First:trivial:0: Passed
+test/check_quaca.c:24:F:Second:trivial_two:0: Assertion '3.001 == creal(test)' failed: 3.001 == 3.001, creal(test) == 3
 Running suite Reflection Coefficients
-test/check_plate.c:58:P:Number check:ref_coeff_test:0: Passed
+test/check_quaca.c:56:P:Number check:ref_coeffs:0: Passed
 Running suite Polarizability
-test/check_plate.c:100:P:Number check:polar_test:0: Passed
+test/check_quaca.c:98:P:Number check:polar_test:0: Passed
 Results for all suites run:
 75%: Checks: 4, Failures: 1, Errors: 0

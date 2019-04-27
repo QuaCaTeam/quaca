@@ -1,0 +1,276 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Development &mdash; QuaCa  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Usage" href="usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> QuaCa
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#structure">Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#documentation">Documentation</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">QuaCa</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Development</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/development.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="development">
+<h1>Development<a class="headerlink" href="#development" title="Permalink to this headline">¶</a></h1>
+<p>The project is currently developed in a private git repository.
+The master branch should at all times be functional, which is why currently merges shall only be made in the presence of all developers.
+To gain access to the code, contact the maintainer.</p>
+<div class="section" id="structure">
+<h2>Structure<a class="headerlink" href="#structure" title="Permalink to this headline">¶</a></h2>
+<p>The project is organized as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>QuaCa/
+├── bin
+├── data
+├── doc
+├── src
+├── test
+├── Makefile
+└── README.md
+</pre></div>
+</div>
+<p>In <em>bin</em> we store the binaries.
+In <em>data</em> lie the input as well as the output files.
+In <em>doc</em> we store the <code class="docutils literal notranslate"><span class="pre">.rst</span></code>-files to make the documentation as well as the documentation itself.
+For more information see <a class="reference internal" href="#documentation">Documentation</a>.
+In <em>src</em> are the source files, i.e. the <code class="docutils literal notranslate"><span class="pre">.c</span></code> as well as the <code class="docutils literal notranslate"><span class="pre">.h</span></code> files.
+In <em>test</em> we store the tests.
+Finally the <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> controls the whole project and the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> is for information when you see the git repository.</p>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>For testing we use <a class="reference external" href="https://libcheck.github.io/check/">Check</a>.
+A nice introduction can be found <a class="reference external" href="http://www.ccs.neu.edu/home/skotthe/classes/cs5600/fall/2015/labs/intro-check.html">here</a>.</p>
+<p>To test Quaca, just run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make test &amp;&amp; ./bin/check_quaca
+</pre></div>
+</div>
+<p>Each time you run <code class="docutils literal notranslate"><span class="pre">check_quaca</span></code> there is an extended test log generated, which is stored in <code class="docutils literal notranslate"><span class="pre">test/test.log</span></code>.</p>
+</div>
+<div class="section" id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<p>You probably need to install sphinx and the read-the-docs-theme with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ apt-get install python3-sphinx
+$ pip install sphinx_rtd_theme
+</pre></div>
+</div>
+<p>The documentation is organized like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>doc/
+├── _build
+│   ├── doctrees
+│   └── html
+├── conf.py
+├── development.rst
+├── img
+│   ├── quaca_medium.png
+│   ├── quaca.png
+│   └── quaca_small.png
+├── index.rst
+├── installation.rst
+├── Makefile
+└── usage.rst
+</pre></div>
+</div>
+<p>The documentation is written in all the <code class="docutils literal notranslate"><span class="pre">.rst</span></code>-files.
+There is a useful <a class="reference external" href="https://github.com/ralsina/rst-cheatsheet/blob/master/rst-cheatsheet.rst">cheat sheet</a> for the syntax.
+See also the <a class="reference external" href="http://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">Sphinx documentation</a>.</p>
+<p>Then you run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make html
+</pre></div>
+</div>
+<p>to build the documentation, which is then build into <code class="docutils literal notranslate"><span class="pre">_build/html</span></code>.
+You can also build a lot of other targets like <em>latex</em> or <em>latexpdf</em>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="usage.html" class="btn btn-neutral float-left" title="Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Marty Oelschlager
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
