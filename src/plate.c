@@ -2,19 +2,19 @@
 /* LIBRARIES */
 /* --------- */
 
-#include "h/qfhelp.h"
-#include "h/plate.h"
+#include "qfhelp.h"
+#include "plate.h"
 
 /* --------- */
 /* FUNCTIONS */
 /* --------- */
 
 // input routine
-void input(char file[], unsigned int verbose) {
+void inputPlate(char file[], unsigned int verbose) {
     FILE * fr = fopen(file, "rt");
 
     if (fr == NULL) {
-        printf("file %s not found", file);
+        printf("file %s not found\n", file);
         exit(0);
     }
 
@@ -110,7 +110,7 @@ void input(char file[], unsigned int verbose) {
 
     // transforming the remaining SI units to natural units
     // or other convenient forms
-    inputparams.za   = inputparams.za/(hbar*c);
+    inputparams.za   = inputparams.za/(hbar*cvac);
     inputparams.wsp1 = inputparams.wp1/sqrt(1.+inputparams.einf);
     inputparams.eps0= 1./(4*PI);
 }

@@ -17,34 +17,37 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Documentation" href="documentation.html" />
+    <link rel="next" title="Usage" href="usage.html" />
     <link rel="prev" title="Welcome to QuaCa’s documentation!" href="index.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -84,8 +87,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="todo.html">To Do</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
 </ul>
 
             
@@ -153,19 +156,29 @@
   <div class="section" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
 <p>To build QuaCa from source simply clone the git repository via:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone git@git.physik.hu-berlin.de:egerlanc/qfnum.git
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone git@git.physik.hu-berlin.de:egerlanc/quaca.git
 </pre></div>
 </div>
 <p>Note that this repository is not public, so for now you need to ask the developers for access.
 To build the project type:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make quaca
 $ sudo make install
 </pre></div>
 </div>
-<p>The default directory for installation is <code class="docutils literal notranslate"><span class="pre">/usr/local/bin</span></code> and can be changed in the makefile.</p>
+<p>The default directory for installation is <code class="docutils literal notranslate"><span class="pre">/usr/local/bin</span></code> and can be changed in the <em>Makefile</em>.</p>
 <div class="section" id="dependencies">
 <h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
-<p>QuaCa largely depends on standard libraries and uses GCC to compile the project.</p>
+<p>GCC for compilation, GSL library for integration routines, Check for testing.</p>
+<p>To install all dependencies run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install gcc build-essential libgsl-dev check
+</pre></div>
+</div>
+<p>For the quantum friction in a cylinder we need to compute Bessel functions of a complex argument, which the GSL unfortunately does not provide.
+We choose to use <a class="reference external" href="http://arblib.org/">Arb</a> for this.
+To install Arb run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install libflint-arb-dev
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -177,10 +190,10 @@ $ sudo make install
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="documentation.html" class="btn btn-neutral float-right" title="Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="usage.html" class="btn btn-neutral float-right" title="Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Welcome to QuaCa’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to QuaCa’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -189,7 +202,7 @@ $ sudo make install
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Marty Oelschlager
+        &copy; Copyright 2019, Marty Oelschlager
 
     </p>
   </div>
@@ -206,26 +219,16 @@ $ sudo make install
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

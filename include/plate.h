@@ -1,3 +1,6 @@
+#ifndef PLATE_H
+#define PLATE_H
+
 /* --------- */
 /* LIBRARIES */
 /* --------- */
@@ -37,7 +40,7 @@ struct parameters inputparams;
 /* FUNCTIONS */
 /* --------- */
 
-void input(char file[], unsigned int verbose);
+void inputPlate(char file[], unsigned int verbose);
 
 void refl(double complex r[2], double w, double complex kap, void * p);
 
@@ -56,3 +59,5 @@ double Fanat(void * p);
 double Fanar(void * p);
 double Ffreet(void * p);
 double Ffreer(void * p);
+
+#endif /* PLATE_H */

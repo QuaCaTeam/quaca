@@ -1,15 +1,11 @@
-# qfnum
-Numerical implementation.
-Authors M.O. & C.H.E.
+# QuaCa
+**QuaCa** stands for Quantum / Casimir Friction and is a numerical framework to calculate just that.
+With QuaCa you can calculate quantum friction at finite temperatures, with atoms or nanoparticles, rolling or non-rolling, etc.
 
-## Organization
-In general the code has the following structure:
-It is written down in .c files in which we comment how the code works. 
-Variables and functions along with their parameters are predefined and fully commented in the according header.
+QuaCa is currently developed in a private git repository, by main developer and maintainer Marty Oelschlager (marty@mbi-berlin.de) with help of co-developer Christoph Egerland.
 
-Qfnum consists of general functions that are useful, when calculating quantum friction numerically and modules for certain geometries. 
-General stuff can be found in qfhelp.c (and the according header), whereas we have (for now) two geometries in cyl.c and plate.c.
-With main.c we can then calculate quantum friction. 
-
-The aim is to provide the program with a flag for the geometry and a file in which a lenghty list of parameters is given, like this:
-$ qfnum cyl cylparams.dat.
+## Install
+To get the code simply type
+```
+git clone git@git.physik.hu-berlin.de:egerlanc/quaca.git QuaCa
+```

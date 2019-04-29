@@ -22,7 +22,7 @@ QuaCa is currently developed in a private git repository, by main developer and 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-
+   
    installation
-   documentation
-   todo
+   usage
+   development
