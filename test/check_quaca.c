@@ -1,6 +1,6 @@
 #include <check.h>
-#include "../src/plate.h"
-#include "../src/qfhelp.h"
+#include "plate.h"
+#include "qfhelp.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>

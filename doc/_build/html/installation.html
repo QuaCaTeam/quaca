@@ -161,7 +161,7 @@
 </div>
 <p>Note that this repository is not public, so for now you need to ask the developers for access.
 To build the project type:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make quaca
 $ sudo make install
 </pre></div>
 </div>
@@ -171,6 +171,12 @@ $ sudo make install
 <p>GCC for compilation, GSL library for integration routines, Check for testing.</p>
 <p>To install all dependencies run:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install gcc build-essential libgsl-dev check
+</pre></div>
+</div>
+<p>For the quantum friction in a cylinder we need to compute Bessel functions of a complex argument, which the GSL unfortunately does not provide.
+We choose to use <a class="reference external" href="http://arblib.org/">Arb</a> for this.
+To install Arb run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install libflint-arb-dev
 </pre></div>
 </div>
 </div>

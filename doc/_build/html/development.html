@@ -166,6 +166,7 @@ To gain access to the code, contact the maintainer.</p>
 ├── bin
 ├── data
 ├── doc
+├── include
 ├── src
 ├── test
 ├── Makefile
@@ -218,11 +219,11 @@ $ pip install sphinx_rtd_theme
 There is a useful <a class="reference external" href="https://github.com/ralsina/rst-cheatsheet/blob/master/rst-cheatsheet.rst">cheat sheet</a> for the syntax.
 See also the <a class="reference external" href="http://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">Sphinx documentation</a>.</p>
 <p>Then you run:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make html
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make doc
 </pre></div>
 </div>
 <p>to build the documentation, which is then build into <code class="docutils literal notranslate"><span class="pre">_build/html</span></code>.
-You can also build a lot of other targets like <em>latex</em> or <em>latexpdf</em>.</p>
+The documentation is build as html by default, this can be changed in the Makefile.</p>
 </div>
 </div>
 

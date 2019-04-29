@@ -148,20 +148,7 @@ void quacaPlate(int argc, char *argv[]) {
 };
 
 int main (int argc, char *argv[]) {
-    input(argc, argv, "cylinder");
-
-    //double complex GRCNF[3][3], GRC[3][3];
-    //double w = 1E-1;
-
-    //GCNFint(GRCNF, w, &inputparamsCyl, 0); 
-    //printf("%.8e\n", creal(GRCNF[0][0]));
-
-    //GCint(GRC, w, &inputparamsCyl, 0, 0); 
-    //printf("%.8e\n", creal(GRC[0][0]));
-    double qf;
-    qf = QFCyl(IntQFCyl, &inputparamsCyl);
-    printf("%.2e\n", qf);
-
+    quacaPlate(argc, argv);
 
     return 0;
 };

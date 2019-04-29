@@ -76,8 +76,8 @@ Performance
 
 On the notebooks of the developers (i.e. Thinkpad X1 Carbon 3rd Gen, Dell XPS 13) the calculation of a point (i.e. QFt and QFr) in the small velocity regime usually never takes longer than a minute, for relativistic speeds it can take up to two or three minutes per data point.
 
-Analytics
-=========
+Function index
+==============
 
 .. function:: double F0(void *p)
 

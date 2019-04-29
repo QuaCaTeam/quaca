@@ -16,6 +16,7 @@ The project is organized as follows::
    ├── bin
    ├── data
    ├── doc
+   ├── include
    ├── src
    ├── test
    ├── Makefile
@@ -73,7 +74,7 @@ See also the `Sphinx documentation <http://www.sphinx-doc.org/en/master/usage/re
 
 Then you run::
    
-   $ make html
+   $ make doc
 
 to build the documentation, which is then build into ``_build/html``.
-You can also build a lot of other targets like *latex* or *latexpdf*.
+The documentation is build as html by default, this can be changed in the Makefile.

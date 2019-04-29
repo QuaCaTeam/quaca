@@ -64,24 +64,25 @@ const double complex tr(double complex mat[Ndim][Ndim]) {
 };
 
 double cquad(double my_f(), void * p, double a , double b, double relerr, double epsabs) {
-    gsl_function f;
-    gsl_integration_cquad_workspace *ws = NULL;
     struct parameters * params = (struct parameters *)p;
-    double res, abserr;
-    size_t neval;
+    double res;
 
     /* Prepare the function. */
+    gsl_function f;
     f.function = my_f;
     f.params = params;
 
     /* Initialize the workspace. */
-    if ( ( ws = gsl_integration_cquad_workspace_alloc( 200 ) ) == NULL ) {
+    gsl_integration_cquad_workspace *ws = gsl_integration_cquad_workspace_alloc(200);
+    if ( ws == NULL ) {
         printf( "call to gsl_integration_cquad_workspace_alloc failed.\n" );
         abort();
     }
 
     /* Call the integrator. */
-    if ( gsl_integration_cquad( &f, a , b , epsabs , relerr , ws , &res , &abserr , &neval ) != 0 ) {
+    /* set nevals and abserr pointer to NULL, we are only interested in result */
+    int success = gsl_integration_cquad( &f, a , b , epsabs , relerr , ws , &res , NULL , NULL );
+    if ( success != 0 ) {
         printf( "call to gsl_integration_cquad failed.\n" );
         abort();
     }
