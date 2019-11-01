@@ -1,4 +1,4 @@
-#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
 
 #IncludeRegexScan: ^.*$
 
@@ -10,11 +10,23 @@
 ../src/Polarizability/Polarizability.h
 ../src/Polarizability/Polarizability.h
 
-../src/Polarizability/Polarizability.h
+../src/Polarizability/MemoryKernel.h
+complex
+-
+cmath
+-
 
-/home/coelschl/PhD/code/cpp/quaca/app/Friction/friction.cpp
+../src/Polarizability/Polarizability.h
+complex
+-
+cmath
+-
+MemoryKernel.h
+../src/Polarizability/MemoryKernel.h
+
+/users/stud/egerlanc/Repos/SHK/QuaCa/app/Friction/friction.cpp
 Quaca.h
-/home/coelschl/PhD/code/cpp/quaca/app/Friction/Quaca.h
+/users/stud/egerlanc/Repos/SHK/QuaCa/app/Friction/Quaca.h
 iostream
 -
 

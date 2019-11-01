@@ -1,4 +1,4 @@
-#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
 
 #IncludeRegexScan: ^.*$
 
@@ -578,11 +578,27 @@ algorithm
 cassert
 -
 
-../src/Polarizability/Polarizability.h
+../src/Polarizability/MemoryKernel.h
+complex
+-
+cmath
+-
 
-/home/coelschl/PhD/code/cpp/quaca/test/Polarizability/test_Polarizability.cpp
+../src/Polarizability/Polarizability.h
+complex
+-
+cmath
+-
+MemoryKernel.h
+../src/Polarizability/MemoryKernel.h
+
+/users/stud/egerlanc/Repos/SHK/QuaCa/test/Polarizability/test_Polarizability.cpp
 catch.hpp
-/home/coelschl/PhD/code/cpp/quaca/test/Polarizability/catch.hpp
+/users/stud/egerlanc/Repos/SHK/QuaCa/test/Polarizability/catch.hpp
 Quaca.h
-/home/coelschl/PhD/code/cpp/quaca/test/Polarizability/Quaca.h
+/users/stud/egerlanc/Repos/SHK/QuaCa/test/Polarizability/Quaca.h
+
+/users/stud/egerlanc/Repos/SHK/QuaCa/test/test_main.cpp
+catch.hpp
+/users/stud/egerlanc/Repos/SHK/QuaCa/test/catch.hpp
 

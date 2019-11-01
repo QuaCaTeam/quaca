@@ -1,1 +1,1 @@
-/usr/bin/c++   -std=c++1z -Ofast   CMakeFiles/test_quaca.dir/Polarizability/test_Polarizability.cpp.o CMakeFiles/test_quaca.dir/test_main.cpp.o  -o ../../bin/test_quaca -Wl,-rpath,/home/coelschl/PhD/code/cpp/quaca/lib ../../lib/libquaca.so 
+/usr/bin/c++    -std=c++1z -Ofast   CMakeFiles/test_quaca.dir/Polarizability/test_Polarizability.cpp.o CMakeFiles/test_quaca.dir/test_main.cpp.o  -o ../../bin/test_quaca -Wl,-rpath,/users/stud/egerlanc/Repos/SHK/QuaCa/lib ../../lib/libquaca.so 
