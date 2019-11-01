@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/coelschl/PhD/code/cpp/quaca/src/Polarizability/Polarizability.cpp
+Polarizability.h
+/home/coelschl/PhD/code/cpp/quaca/src/Polarizability/Polarizability.h
+
+/home/coelschl/PhD/code/cpp/quaca/src/Polarizability/Polarizability.h
+

@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++1z -Ofast   CMakeFiles/Friction.dir/friction.cpp.o  -o ../../../bin/Friction -Wl,-rpath,/home/coelschl/PhD/code/cpp/quaca/lib ../../../lib/libquaca.so 

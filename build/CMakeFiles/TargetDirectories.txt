@@ -1,0 +1,13 @@
+/home/coelschl/PhD/code/cpp/quaca/build/CMakeFiles/rebuild_cache.dir
+/home/coelschl/PhD/code/cpp/quaca/build/CMakeFiles/edit_cache.dir
+/home/coelschl/PhD/code/cpp/quaca/build/src/CMakeFiles/rebuild_cache.dir
+/home/coelschl/PhD/code/cpp/quaca/build/src/CMakeFiles/quaca.dir
+/home/coelschl/PhD/code/cpp/quaca/build/src/CMakeFiles/edit_cache.dir
+/home/coelschl/PhD/code/cpp/quaca/build/app/CMakeFiles/rebuild_cache.dir
+/home/coelschl/PhD/code/cpp/quaca/build/app/CMakeFiles/edit_cache.dir
+/home/coelschl/PhD/code/cpp/quaca/build/app/Friction/CMakeFiles/rebuild_cache.dir
+/home/coelschl/PhD/code/cpp/quaca/build/app/Friction/CMakeFiles/Friction.dir
+/home/coelschl/PhD/code/cpp/quaca/build/app/Friction/CMakeFiles/edit_cache.dir
+/home/coelschl/PhD/code/cpp/quaca/build/test/CMakeFiles/rebuild_cache.dir
+/home/coelschl/PhD/code/cpp/quaca/build/test/CMakeFiles/test_quaca.dir
+/home/coelschl/PhD/code/cpp/quaca/build/test/CMakeFiles/edit_cache.dir
