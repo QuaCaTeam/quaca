@@ -3,27 +3,29 @@
 
 #include <complex>
 #include <cmath>
+#include <armadillo>
 
 #include "MemoryKernel.h"
 
+using namespace arma;
+
 class Polarizability
 {
-private:
-
+protected:
     // parameters
     double omega_a;
     double alpha_zero;
 
-    // memory kernel and greens tensor needed to calculate alpha
-    MemoryKernel *mu;
-
     // array where alpha is actually stored
-    std::complex<double> alpha[3][3];
+    cx_mat::fixed<3,3> alpha;
 
 public:
 
-    Polarizability(double a, double b, MemoryKernel *mu);
+    virtual cx_mat::fixed<3,3> calculate(double omega) =0;
 
+    // getter methods
+    double get_omega_a();
+    double get_alpha_zero();
 };
 
 

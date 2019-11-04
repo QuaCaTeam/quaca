@@ -1,5 +1,5 @@
-bin/*
-build/*
+bin/
+build/
 CMakeCache.txt
 CMakeFiles
 cmake_install.cmake

@@ -10,6 +10,15 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
+# find boost package
+set(Boost_NO_BOOST_CMAKE ON)
+find_package(Boost COMPONENTS filesystem system REQUIRED)
+
+# use armadillo without runtimelibrary, wrap blas and lapack
+include_directories("${PROJECT_SOURCE_DIR}/lib/armadillo-9.800.2/include")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DARMA_DONT_USE_WRAPPER -lblas -llapack")
+
+# include directories
 include_directories(
   ${PROJECT_SOURCE_DIR}/include
   ${PROJECT_BINARY_DIR}/include
