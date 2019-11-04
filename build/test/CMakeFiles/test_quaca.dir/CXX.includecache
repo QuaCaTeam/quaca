@@ -1,4 +1,4 @@
-#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
 
 #IncludeRegexScan: ^.*$
 
@@ -9,6 +9,10 @@
 ../include/Quaca.h
 ../src/Polarizability/Polarizability.h
 ../src/Polarizability/Polarizability.h
+../src/Polarizability/MemoryKernel.h
+../src/Polarizability/MemoryKernel.h
+../src/Polarizability/OhmicMemoryKernel.h
+../src/Polarizability/OhmicMemoryKernel.h
 
 ../include/catch.hpp
 TargetConditionals.h
@@ -584,6 +588,14 @@ complex
 cmath
 -
 
+../src/Polarizability/OhmicMemoryKernel.h
+complex
+-
+cmath
+-
+MemoryKernel.h
+../src/Polarizability/MemoryKernel.h
+
 ../src/Polarizability/Polarizability.h
 complex
 -
@@ -592,13 +604,15 @@ cmath
 MemoryKernel.h
 ../src/Polarizability/MemoryKernel.h
 
-/users/stud/egerlanc/Repos/SHK/QuaCa/test/Polarizability/test_Polarizability.cpp
+/home/coelschl/PhD/code/cpp/quaca/test/Polarizability/test_OhmicMemoryKernel.cpp
 catch.hpp
-/users/stud/egerlanc/Repos/SHK/QuaCa/test/Polarizability/catch.hpp
+/home/coelschl/PhD/code/cpp/quaca/test/Polarizability/catch.hpp
 Quaca.h
-/users/stud/egerlanc/Repos/SHK/QuaCa/test/Polarizability/Quaca.h
+/home/coelschl/PhD/code/cpp/quaca/test/Polarizability/Quaca.h
 
-/users/stud/egerlanc/Repos/SHK/QuaCa/test/test_main.cpp
+/home/coelschl/PhD/code/cpp/quaca/test/Polarizability/test_Polarizability.cpp
 catch.hpp
-/users/stud/egerlanc/Repos/SHK/QuaCa/test/catch.hpp
+/home/coelschl/PhD/code/cpp/quaca/test/Polarizability/catch.hpp
+Quaca.h
+/home/coelschl/PhD/code/cpp/quaca/test/Polarizability/Quaca.h
 

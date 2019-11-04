@@ -24,7 +24,6 @@ public:
 
     Polarizability(double a, double b, MemoryKernel *mu);
 
-
 };
 
 

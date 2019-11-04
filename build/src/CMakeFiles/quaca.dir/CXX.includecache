@@ -1,4 +1,4 @@
-#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
 
 #IncludeRegexScan: ^.*$
 
@@ -6,25 +6,21 @@
 
 #IncludeRegexTransform: 
 
-/users/stud/egerlanc/Repos/SHK/QuaCa/src/Polarizability/MemoryKernel.cpp
-MemoryKernel.h
-/users/stud/egerlanc/Repos/SHK/QuaCa/src/Polarizability/MemoryKernel.h
-
-/users/stud/egerlanc/Repos/SHK/QuaCa/src/Polarizability/MemoryKernel.h
+/home/coelschl/PhD/code/cpp/quaca/src/Polarizability/MemoryKernel.h
 complex
 -
 cmath
 -
 
-/users/stud/egerlanc/Repos/SHK/QuaCa/src/Polarizability/Polarizability.cpp
-Polarizability.h
-/users/stud/egerlanc/Repos/SHK/QuaCa/src/Polarizability/Polarizability.h
+/home/coelschl/PhD/code/cpp/quaca/src/Polarizability/OhmicMemoryKernel.cpp
+OhmicMemoryKernel.h
+/home/coelschl/PhD/code/cpp/quaca/src/Polarizability/OhmicMemoryKernel.h
 
-/users/stud/egerlanc/Repos/SHK/QuaCa/src/Polarizability/Polarizability.h
+/home/coelschl/PhD/code/cpp/quaca/src/Polarizability/OhmicMemoryKernel.h
 complex
 -
 cmath
 -
 MemoryKernel.h
-/users/stud/egerlanc/Repos/SHK/QuaCa/src/Polarizability/MemoryKernel.h
+/home/coelschl/PhD/code/cpp/quaca/src/Polarizability/MemoryKernel.h
 

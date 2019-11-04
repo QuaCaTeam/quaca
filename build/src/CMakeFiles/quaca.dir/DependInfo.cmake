@@ -4,8 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/users/stud/egerlanc/Repos/SHK/QuaCa/src/Polarizability/MemoryKernel.cpp" "/users/stud/egerlanc/Repos/SHK/QuaCa/build/src/CMakeFiles/quaca.dir/Polarizability/MemoryKernel.cpp.o"
-  "/users/stud/egerlanc/Repos/SHK/QuaCa/src/Polarizability/Polarizability.cpp" "/users/stud/egerlanc/Repos/SHK/QuaCa/build/src/CMakeFiles/quaca.dir/Polarizability/Polarizability.cpp.o"
+  "/home/coelschl/PhD/code/cpp/quaca/src/Polarizability/MemoryKernel.cpp" "/home/coelschl/PhD/code/cpp/quaca/build/src/CMakeFiles/quaca.dir/Polarizability/MemoryKernel.cpp.o"
+  "/home/coelschl/PhD/code/cpp/quaca/src/Polarizability/OhmicMemoryKernel.cpp" "/home/coelschl/PhD/code/cpp/quaca/build/src/CMakeFiles/quaca.dir/Polarizability/OhmicMemoryKernel.cpp.o"
+  "/home/coelschl/PhD/code/cpp/quaca/src/Polarizability/Polarizability.cpp" "/home/coelschl/PhD/code/cpp/quaca/build/src/CMakeFiles/quaca.dir/Polarizability/Polarizability.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

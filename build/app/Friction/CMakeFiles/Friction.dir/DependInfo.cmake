@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/users/stud/egerlanc/Repos/SHK/QuaCa/app/Friction/friction.cpp" "/users/stud/egerlanc/Repos/SHK/QuaCa/build/app/Friction/CMakeFiles/Friction.dir/friction.cpp.o"
+  "/home/coelschl/PhD/code/cpp/quaca/app/Friction/friction.cpp" "/home/coelschl/PhD/code/cpp/quaca/build/app/Friction/CMakeFiles/Friction.dir/friction.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -17,7 +17,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/users/stud/egerlanc/Repos/SHK/QuaCa/build/src/CMakeFiles/quaca.dir/DependInfo.cmake"
+  "/home/coelschl/PhD/code/cpp/quaca/build/src/CMakeFiles/quaca.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

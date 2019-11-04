@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/test_quaca.dir/Polarizability/test_OhmicMemoryKernel.cpp.o"
   "CMakeFiles/test_quaca.dir/Polarizability/test_Polarizability.cpp.o"
   "CMakeFiles/test_quaca.dir/test_main.cpp.o"
   "../../bin/test_quaca.pdb"
