@@ -11,4 +11,5 @@ target_include_directories(test_quaca PRIVATE ../include)
 target_link_libraries(test_quaca PRIVATE
   catch2
   quaca
+  gsl
   )

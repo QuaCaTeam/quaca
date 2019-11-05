@@ -17,6 +17,8 @@ find_package(Boost COMPONENTS filesystem system REQUIRED)
 # use armadillo without runtimelibrary, wrap blas and lapack
 include_directories("${PROJECT_SOURCE_DIR}/lib/armadillo-9.800.2/include")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DARMA_DONT_USE_WRAPPER -lblas -llapack")
+# link gsl
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lgsl -lgslcblas -lm")
 
 # include directories
 include_directories(
