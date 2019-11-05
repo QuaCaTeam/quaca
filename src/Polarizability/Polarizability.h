@@ -5,7 +5,7 @@
 #include <cmath>
 #include <armadillo>
 
-#include "MemoryKernel.h"
+#include "MemoryKernel/MemoryKernel.h"
 
 using namespace arma;
 

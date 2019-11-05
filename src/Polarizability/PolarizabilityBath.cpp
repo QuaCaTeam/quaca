@@ -4,7 +4,7 @@
 namespace pt = boost::property_tree;
 
 #include "PolarizabilityBath.h"
-#include "MemoryKernelFactory.h"
+#include "MemoryKernel/MemoryKernelFactory.h"
 
 PolarizabilityBath::PolarizabilityBath(std::string input_file)
 {

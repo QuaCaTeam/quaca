@@ -4,7 +4,6 @@
 #include <complex>
 #include <cmath>
 
-#include "MemoryKernel.h"
 #include "Polarizability.h"
 
 class PolarizabilityBath : public Polarizability
