@@ -8,6 +8,7 @@ namespace pt = boost::property_tree;
 #include "MemoryKernelFactory.h"
 #include "OhmicMemoryKernel.h"
 
+// memory kernel factory
 MemoryKernel * MemoryKernelFactory::create(std::string input_file)
 {
     // set return pointer to NULL
@@ -19,7 +20,7 @@ MemoryKernel * MemoryKernelFactory::create(std::string input_file)
     // Load the ini file in this ptree
     pt::read_ini(input_file, root);
 
-    // read simulation data into simulation variables
+    // read the type of the kernel
     std::string type = root.get<std::string>("MemoryKernel.type");
 
     // set the right pointer, show error if type is unknown

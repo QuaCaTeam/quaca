@@ -9,22 +9,43 @@
 
 using namespace arma;
 
+//! An abstract polarizability class
+/*!
+* This is an abstract polarizability class.
+* All polarizabilities should return a 3 by 3 matrix, given a real frequency as input.
+* The only two child class of this will be 1) a polarizability where the particle
+* has no interval bath 2) a polarizability where the particle has an internal bath
+*/
 class Polarizability
 {
 protected:
-    // parameters
+
+    /*! resonance frequency */
     double omega_a;
+
+    /*! static polarizability */
     double alpha_zero;
 
-    // array where alpha is actually stored
+    /*! array containing the values */
     cx_mat::fixed<3,3> alpha;
 
 public:
 
+    /*!
+    * Returns the polarizability tensor as a 3x3 matrix when given a real frequency
+    * as input.
+    * @param omega Frequency
+    */
     virtual cx_mat::fixed<3,3> calculate(double omega) =0;
 
-    // getter methods
+    /*!
+    * Getter method for the resonance frequency.
+    */
     double get_omega_a();
+
+    /*!
+    * Getter method for the static polarizability.
+    */
     double get_alpha_zero();
 };
 

@@ -6,6 +6,20 @@ namespace pt = boost::property_tree;
 #include "PolarizabilityBath.h"
 #include "MemoryKernel/MemoryKernelFactory.h"
 
+PolarizabilityBath::PolarizabilityBath(double a, double b, MemoryKernel *mu)
+{
+  // set parameters
+  this->omega_a = a;
+  this->alpha_zero = b;
+
+  // set memory kernel
+  this->memorykernel = mu;
+  
+  // initialize matrix
+  this->alpha = cx_mat(3, 3, fill::zeros);
+}
+
+
 PolarizabilityBath::PolarizabilityBath(std::string input_file)
 {
   // Create a root

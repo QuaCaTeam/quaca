@@ -14,7 +14,9 @@ private:
 
 public:
 
+    PolarizabilityBath(double a, double b, MemoryKernel *mu);
     PolarizabilityBath(std::string input_file);
+    
     std::complex<double> get_mu(double omega);
 
     cx_mat::fixed<3,3> calculate(double omega);
