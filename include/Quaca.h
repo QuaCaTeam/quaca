@@ -3,6 +3,7 @@
 
 #include "../src/GreensTensor/GreensTensor.h"
 #include "../src/GreensTensor/GreensTensorPlate.h"
+#include "../src/GreensTensor/GreensTensorVacuum.h"
 #include "../src/GreensTensor/Permittivity/Permittivity.h"
 #include "../src/GreensTensor/Permittivity/PermittivityDrude.h"
 #include "../src/Polarizability/Polarizability.h"
