@@ -6,13 +6,12 @@ class GreensTensorPlate : public GreensTensor
 protected:
   cx_mat::fixed<3,3> greens;
   double v, za;
-  Permittivity *permittivity;
 
 public:
 
   GreensTensorPlate(std::string input_file);
-  cx_mat::fixed<3,3> calculate_pure(double k_v, double omega);
-  cx_mat::fixed<3,3> calculate_integrated(int flags, double omega);
+  void calculate_pure(cx_mat::fixed<3,3> GT, vec::fixed<2> kvec, double omega);
+  void calculate_integrated(cx_mat::fixed<3,3> GT, double omega, std::vector<std::string> options);
 
 };
 

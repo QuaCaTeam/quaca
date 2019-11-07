@@ -14,9 +14,6 @@ PolarizabilityBath::PolarizabilityBath(double a, double b, MemoryKernel *mu)
 
   // set memory kernel
   this->memorykernel = mu;
-  
-  // initialize matrix
-  this->alpha = cx_mat(3, 3, fill::zeros);
 }
 
 
@@ -34,9 +31,6 @@ PolarizabilityBath::PolarizabilityBath(std::string input_file)
 
   // read memory kernel
   this->memorykernel = MemoryKernelFactory::create(input_file);
-
-  // initialize matrix
-  this->alpha = cx_mat(3, 3, fill::zeros);
 };
 
 std::complex<double> PolarizabilityBath::get_mu(double omega)
@@ -45,7 +39,7 @@ std::complex<double> PolarizabilityBath::get_mu(double omega)
 };
 
 
-cx_mat::fixed<3,3> PolarizabilityBath::calculate(double omega)
+void PolarizabilityBath::calculate(cx_mat::fixed<3,3>& alpha, double omega)
 {
   // calculate entries
   std::complex<double> diag;
@@ -53,10 +47,7 @@ cx_mat::fixed<3,3> PolarizabilityBath::calculate(double omega)
   diag = 1.0/ (omega_a*omega_a - omega*omega - I * omega * memorykernel->mu(omega));
 
   // set alpha matrix entries
-  this->alpha(0,0) = diag;
-  this->alpha(1,1) = diag;
-  this->alpha(2,2) = diag;
-
-  // return alpha matrix
-  return this->alpha;
+  alpha(0,0) = diag;
+  alpha(1,1) = diag;
+  alpha(2,2) = diag;
 };

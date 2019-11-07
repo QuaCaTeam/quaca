@@ -15,8 +15,8 @@ protected:
   double v, za;
 
 public:
-  virtual cx_mat::fixed<3,3> calculate_pure(double k_v, double omega) =0;
-  virtual cx_mat::fixed<3,3> calculate_integrated(int flags, double omega) =0;
+  virtual void calculate_pure(cx_mat::fixed<3,3> GT, vec::fixed<2> kvec, double omega) =0;
+  virtual void calculate_integrated(cx_mat::fixed<3,3> GT, double omega, std::vector<std::string> options) =0;
 
 };
 

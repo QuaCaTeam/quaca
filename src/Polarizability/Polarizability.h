@@ -26,9 +26,6 @@ protected:
     /*! static polarizability */
     double alpha_zero;
 
-    /*! array containing the values */
-    cx_mat::fixed<3,3> alpha;
-
 public:
 
     /*!
@@ -36,7 +33,7 @@ public:
     * as input.
     * @param omega Frequency
     */
-    virtual cx_mat::fixed<3,3> calculate(double omega) =0;
+    virtual void calculate(cx_mat::fixed<3,3>& alpha,double omega) =0;
 
     /*!
     * Getter method for the resonance frequency.
