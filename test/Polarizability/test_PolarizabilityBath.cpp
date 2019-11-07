@@ -32,7 +32,7 @@ TEST_CASE("Polarizability with bath can be constructed in different ways", "[Pol
 TEST_CASE("PolarizabilityBath returns a diagonal matrix", "[PolarizabilityBath]")
 {
   PolarizabilityBath *pol = new PolarizabilityBath("../data/test_files/PolarizabilityBath.ini");
-  cx_mat test(3,3, fill::zeros);
+  cx_mat::fixed<3,3> test(fill::zeros);
   pol->calculate(test, 3.0);
   std::cout << test << std::endl;
   REQUIRE( 0 == 0 );
