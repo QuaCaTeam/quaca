@@ -37,5 +37,9 @@ void GreensTensorVacuum::calculate_integrated(cx_mat::fixed<3,3>& GT, double ome
 void GreensTensorVacuum::calculate_integrated(cx_mat::fixed<3,3>& GT, double omega, std::vector<std::string> options)
 {
  // ONLY FOR TEST PURPOSE
-  GreensTensorVacuum::calculate_pure(GT, vec(2,fill::zeros) ,omega);
+ double fint(double kv, void *){
+  cx_mat::fixed<3,3>& GVI;
+  GT.zeros();
+  GreensTensorVacuum::calculate_integrated(GVI, omega, kv, );
+ };
 };
