@@ -6,9 +6,14 @@
 
 TEST_CASE("Vacuum Greens Tensor works properly")
 {
-  GreensTensorVacuum *gre = new GreensTensorVacuum(1.0);
+  struct Options opts;
+  opts.fancy_I=true;
+
+  GreensTensorVacuum *gre = new GreensTensorVacuum(0.01,1e3);
   cx_mat::fixed<3,3> test(fill::zeros);
-  gre->calculate_pure(test, vec(2,fill::ones),3.0);
+
+  gre->calculate_integrated(test, 3.0, opts);
+
   std::cout << test << std::endl;
   REQUIRE( 0 == 0 );
 
