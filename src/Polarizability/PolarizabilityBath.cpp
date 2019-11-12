@@ -41,13 +41,26 @@ std::complex<double> PolarizabilityBath::get_mu(double omega)
 
 void PolarizabilityBath::calculate(cx_mat::fixed<3,3>& alpha, double omega)
 {
-  // calculate entries
-  std::complex<double> diag;
+  // imaginary unit
   std::complex<double> I(0.0, 1.0);
-  diag = 1.0/ (omega_a*omega_a - omega*omega - I * omega * memorykernel->mu(omega));
 
-  // set alpha matrix entries
-  alpha(0,0) = diag;
-  alpha(1,1) = diag;
-  alpha(2,2) = diag;
+  // calculate diagonal entries
+  cx_mat::fixed<3,3> diag;
+  diag.zeros();
+  diag(0,0) = diag(1,1) = diag(2,2) = omega_a*omega_a - omega*omega - I * omega * memorykernel->mu(omega);
+
+  // calculate integral over green's tensor with fancy R
+  cx_mat::fixed<3,3> greens_R;
+  struct Options opts_R;
+  opts_R.fancy_R = true;
+  this->greens_tensor->calculate_integrated(greens_R, omega, opts_R);
+
+  // calculate integral over green's tensor with fancy I
+  cx_mat::fixed<3,3> greens_I;
+  struct Options opts_I;
+  opts_I.fancy_I = true;
+  this->greens_tensor->calculate_integrated(greens_I, omega, opts_I);
+
+  // put everything together
+  alpha = alpha_zero * omega_a * omega_a * inv(diag - alpha_zero * omega_a * omega_a * (greens_R + I*greens_I));
 };

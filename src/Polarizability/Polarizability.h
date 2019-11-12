@@ -5,6 +5,7 @@
 #include <cmath>
 #include <armadillo>
 
+#include "../GreensTensor/GreensTensor.h"
 #include "MemoryKernel/MemoryKernel.h"
 
 using namespace arma;
@@ -25,6 +26,9 @@ protected:
 
     /*! static polarizability */
     double alpha_zero;
+
+    /*! green's tensor */
+    GreensTensor *greens_tensor;
 
 public:
 
