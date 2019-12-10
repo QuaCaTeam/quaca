@@ -4,13 +4,14 @@
 #include <gsl/gsl_integration.h>
 
 // wrapper to cquad routine
-double cquad(double my_f(double, void *), double a , double b, double relerr, double epsabs)
+double cquad(double my_f(double, void *), void* params, double a , double b, double relerr, double epsabs)
 {
   double res;
 
   /* Prepare the function. */
   gsl_function f;
   f.function = my_f;
+  f.params = params;
 
   /* Initialize the workspace. */
   gsl_integration_cquad_workspace *ws = gsl_integration_cquad_workspace_alloc(100);
@@ -34,7 +35,7 @@ double cquad(double my_f(double, void *), double a , double b, double relerr, do
 };
 
 // wrapper to qags routine
-double qags(double my_f(double, void *), double a , double b, double relerr, double epsabs)
+double qags(double my_f(double, void *), void* params, double a , double b, double relerr, double epsabs)
 {
   double res;
   double abserr;
@@ -42,6 +43,7 @@ double qags(double my_f(double, void *), double a , double b, double relerr, dou
   /* Prepare the function. */
   gsl_function f;
   f.function = my_f;
+  f.params = params;
 
   /* Initialize the workspace. */
   gsl_integration_workspace *ws = gsl_integration_workspace_alloc(1000);
@@ -66,7 +68,7 @@ double qags(double my_f(double, void *), double a , double b, double relerr, dou
 };
 
 // wrapper to qagiu routine
-double qagiu(double my_f(double, void *), double a , double relerr, double epsabs)
+double qagiu(double my_f(double, void *), void* params, double a , double relerr, double epsabs)
 {
   double res;
   double abserr;
@@ -74,7 +76,7 @@ double qagiu(double my_f(double, void *), double a , double relerr, double epsab
   /* Prepare the function. */
   gsl_function f;
   f.function = my_f;
-
+  f.params = params;
   /* Initialize the workspace. */
   gsl_integration_workspace *ws = gsl_integration_workspace_alloc(1000);
   if ( ws == NULL ) {
@@ -96,3 +98,5 @@ double qagiu(double my_f(double, void *), double a , double relerr, double epsab
   gsl_integration_workspace_free( ws );
 
 };
+
+

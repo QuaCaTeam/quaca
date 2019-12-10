@@ -6,10 +6,8 @@ namespace pt = boost::property_tree;
 #include "OhmicMemoryKernel.h"
 
 // constructor for ohmic memory kernel
-OhmicMemoryKernel::OhmicMemoryKernel(double a)
+OhmicMemoryKernel::OhmicMemoryKernel(double gamma): gamma(gamma)
 {
-  // set damping coefficient
-  this->gamma = a;
 };
 
 // constructor for ohmic memory kernel from .ini file

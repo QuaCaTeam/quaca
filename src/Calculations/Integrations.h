@@ -2,6 +2,7 @@
 #define INTEGRATIONS_H
 #include <iostream>
 #include <cmath>
+#include <armadillo>
 
 /*!
 * Wrapper function for the cquad integration routine of the gsl.
@@ -11,7 +12,7 @@
 * @param relerr relative error
 * @param relerr absolute error
 */
-double cquad(double my_f(double, void *), double a , double b, double relerr, double epsabs);
+double cquad(double my_f(double, void *), void* params, double a , double b, double relerr, double epsabs);
 
 /*!
 * Wrapper function for the qags integration routine of the gsl.
@@ -21,7 +22,7 @@ double cquad(double my_f(double, void *), double a , double b, double relerr, do
 * @param relerr relative error
 * @param relerr absolute error
 */
-double qags(double my_f(double, void *), double a , double b, double relerr, double epsabs);
+double qags(double my_f(double, void *), void* params, double a , double b, double relerr, double epsabs);
 
 /*!
 * Wrapper function for the qagiu integration routine of the gsl.
@@ -30,6 +31,6 @@ double qags(double my_f(double, void *), double a , double b, double relerr, dou
 * @param relerr relative error
 * @param relerr absolute error
 */
-double qagiu(double my_f(double, void *), double a , double relerr, double epsabs);
+double qagiu(double my_f(double, void *), void* params, double a , double relerr, double epsabs);
 
 #endif //INTEGRATIONS_H

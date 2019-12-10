@@ -17,6 +17,7 @@ PolarizabilityBath::PolarizabilityBath(double a, double b, MemoryKernel *mu)
 }
 
 
+
 PolarizabilityBath::PolarizabilityBath(std::string input_file)
 {
   // Create a root
@@ -33,10 +34,12 @@ PolarizabilityBath::PolarizabilityBath(std::string input_file)
   this->memorykernel = MemoryKernelFactory::create(input_file);
 };
 
+
 std::complex<double> PolarizabilityBath::get_mu(double omega)
 {
     return this->memorykernel->mu(omega);
 };
+
 
 
 void PolarizabilityBath::calculate(cx_mat::fixed<3,3>& alpha, double omega)
@@ -53,13 +56,15 @@ void PolarizabilityBath::calculate(cx_mat::fixed<3,3>& alpha, double omega)
   cx_mat::fixed<3,3> greens_R;
   struct Options opts_R;
   opts_R.fancy_R = true;
-  this->greens_tensor->calculate_integrated(greens_R, omega, opts_R);
+  opts_R.class_pt = this->greens_tensor;
+  this->greens_tensor->integrate_k_1d(greens_R, omega, opts_R);
 
   // calculate integral over green's tensor with fancy I
   cx_mat::fixed<3,3> greens_I;
   struct Options opts_I;
   opts_I.fancy_I = true;
-  this->greens_tensor->calculate_integrated(greens_I, omega, opts_I);
+  opts_I.class_pt = this->greens_tensor;
+  this->greens_tensor->integrate_k_1d(greens_I, omega, opts_I);
 
   // put everything together
   alpha = alpha_zero * omega_a * omega_a * inv(diag - alpha_zero * omega_a * omega_a * (greens_R + I*greens_I));

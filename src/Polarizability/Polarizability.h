@@ -50,5 +50,4 @@ public:
     double get_alpha_zero();
 };
 
-
 #endif //POLARIZABILITY_H
