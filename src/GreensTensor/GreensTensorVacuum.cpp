@@ -25,19 +25,22 @@ void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> 
   GT(1,1) = pre*(omega2 - ky*ky);
   GT(2,2) = pre*k2;
 };
-void GreensTensorVacuum::integrate_k_2d(cx_mat::fixed<3,3>& GT, double omega, double kv, Options opts)
+
+void GreensTensorVacuum::integrate_k_2d(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)
 {
+  double k = opts.kvec(0);
+  double omega = opts.omega;
   if(opts.fancy_I_kv)
   {
     // calculating the solely the imaginary part of the free Green tensor with Doppler shift in the frequency argument G(k, kx*v + omega)
-    double pre, xi2, omegapl2;
-    omegapl2 = (omega+kv*this->v)*(omega+kv*this->v);
-    xi2 = omegapl2 - kv*kv;
-    pre = 0.5;
+    double xi_quad, omega_pl_quad, omega_quad;
+    omega_quad = omega*omega;
+    omega_pl_quad = (omega+k*this->v)*(omega+k*this->v);
+    xi_quad = omega_pl_quad - k*k;
     GT.zeros();
-    GT(0,0) = pre*xi2;
-    GT(1,1) = pre*(omegapl2 - xi2*0.5);
-    GT(2,2) = pre*(omegapl2 - xi2*0.5);
+    GT(0,0) = 0.5*xi_quad;
+    GT(1,1) = 0.5*(omega_pl_quad - xi_quad*0.5);
+    GT(2,2) = 0.5*(omega_pl_quad - xi_quad*0.5);
   }
   else
    {
@@ -48,11 +51,10 @@ void GreensTensorVacuum::integrate_k_2d(cx_mat::fixed<3,3>& GT, double omega, do
 };
 
 
-void GreensTensorVacuum::integrate_k_1d(cx_mat::fixed<3,3>& GT, double omega, Options opts)
+void GreensTensorVacuum::integrate_k_1d(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)
 {
+  double omega = opts.omega;
   GT.zeros();
-  opts.omega = omega;
-  ////opts.class_pt = this;
 
   if (opts.fancy_R)
   {
@@ -72,12 +74,13 @@ void GreensTensorVacuum::integrate_k_1d(cx_mat::fixed<3,3>& GT, double omega, Op
 double GreensTensorVacuum::integrand_k_1d(double kv, void *opts)
 {
   //Units: c=1, 4 pi epsilon_0 = 1, hbar = 1
-  Options* opts_pt = static_cast<Options*>(opts);
+  Options_GreensTensor* opts_pt = static_cast<Options_GreensTensor*>(opts);
   GreensTensorVacuum* pt = static_cast<GreensTensorVacuum*>(opts_pt->class_pt);
+
   double omega = opts_pt->omega;
-  double result;
-  double xi_quad, omega_pl, omega_pl_quad;
   double beta = pt->beta;
+  double result, xi_quad, omega_pl, omega_pl_quad;
+
   omega_pl = (omega+kv*pt->v);
   omega_pl_quad = omega_pl*omega_pl;
   xi_quad = omega_pl_quad - kv*kv;
