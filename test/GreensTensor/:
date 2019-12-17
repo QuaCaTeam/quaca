@@ -1,0 +1,34 @@
+class my_class
+{
+  private:
+    double y;
+  public:
+  my_class(double y):y(y) {};
+  static double my_integrand(double x, void* p);
+  void print_func(double (*func_pt)(double, void*),double x, void* p);
+};
+
+struct Options
+{
+  my_class* class_pt;
+};
+
+double my_class::my_integrand(double x, void* p)
+{
+  Option* opts = static_cast<Option*> p;
+  return x+opts->class_pt->y;
+}
+
+void my_class::print_func(double (*func_pt)(double, void*), double x, void* p)
+{
+  std::cout << (*func_pt)(x,p) << std::endl;
+}
+
+int main()
+{
+  my_class A(2);
+  Options opts;
+  opts.class_pt = &A;
+  A.print_func(my_class::my_func,3,&opts);
+} 
+
