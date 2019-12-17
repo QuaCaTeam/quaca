@@ -5,6 +5,7 @@ namespace pt = boost::property_tree;
 
 #include "PolarizabilityBath.h"
 #include "MemoryKernel/MemoryKernelFactory.h"
+#include "../GreensTensor/GreensTensorFactory.h"
 
 PolarizabilityBath::PolarizabilityBath(double omega_a, double alpha_zero, MemoryKernel *mu, GreensTensor *green)
 {
@@ -18,7 +19,6 @@ PolarizabilityBath::PolarizabilityBath(double omega_a, double alpha_zero, Memory
   // set green's function
   this->greens_tensor = green;
 }
-
 
 
 PolarizabilityBath::PolarizabilityBath(std::string input_file)
@@ -35,6 +35,9 @@ PolarizabilityBath::PolarizabilityBath(std::string input_file)
 
   // read memory kernel
   this->mu = MemoryKernelFactory::create(input_file);
+
+  // read greens tensor
+  this->greens_tensor = GreensTensorFactory::create(input_file);
 };
 
 

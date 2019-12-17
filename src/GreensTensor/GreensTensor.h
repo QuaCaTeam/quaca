@@ -30,7 +30,7 @@ public:
 // A struct for integration options
 struct Options_GreensTensor
 {
- // Different options for the integrand 
+ // Different options for the integrand
   bool fancy_R = false;
   bool fancy_I = false;
   bool fancy_I_kv = false;

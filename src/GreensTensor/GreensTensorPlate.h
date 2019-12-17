@@ -3,9 +3,6 @@
 
 class GreensTensorPlate : public GreensTensor
 {
-protected:
-  double v, za;
-
 public:
 
   GreensTensorPlate(std::string input_file);
