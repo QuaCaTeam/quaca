@@ -9,8 +9,21 @@ GreensTensorVacuum::GreensTensorVacuum(double v, double beta)
   this->v = v;
   // set inverse temperature
   this->beta = beta;
-
 };
+
+GreensTensorVacuum::GreensTensorVacuum(std::string input_file)
+{
+  // Create a root
+  pt::ptree root;
+
+  // Load the ini file in this ptree
+  pt::read_ini(input_file, root);
+
+  // read parameters
+  this->v = root.get<double>("GreensTensor.v");
+  this->beta = root.get<double>("GreensTensor.beta");
+};
+
 void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega)
 {
   // calculating the solely the imaginary part of the free Green tensor

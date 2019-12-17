@@ -6,14 +6,17 @@ namespace pt = boost::property_tree;
 #include "PolarizabilityBath.h"
 #include "MemoryKernel/MemoryKernelFactory.h"
 
-PolarizabilityBath::PolarizabilityBath(double a, double b, MemoryKernel *mu)
+PolarizabilityBath::PolarizabilityBath(double omega_a, double alpha_zero, MemoryKernel *mu, GreensTensor *green)
 {
   // set parameters
-  this->omega_a = a;
-  this->alpha_zero = b;
+  this->omega_a = omega_a;
+  this->alpha_zero = alpha_zero;
 
   // set memory kernel
-  this->memorykernel = mu;
+  this->mu = mu;
+
+  // set green's function
+  this->greens_tensor = green;
 }
 
 
@@ -31,13 +34,13 @@ PolarizabilityBath::PolarizabilityBath(std::string input_file)
   this->alpha_zero = root.get<double>("Polarizability.alpha_zero");
 
   // read memory kernel
-  this->memorykernel = MemoryKernelFactory::create(input_file);
+  this->mu = MemoryKernelFactory::create(input_file);
 };
 
 
 std::complex<double> PolarizabilityBath::get_mu(double omega)
 {
-    return this->memorykernel->mu(omega);
+    return this->mu->mu(omega);
 };
 
 
@@ -50,7 +53,7 @@ void PolarizabilityBath::calculate(cx_mat::fixed<3,3>& alpha, double omega)
   // calculate diagonal entries
   cx_mat::fixed<3,3> diag;
   diag.zeros();
-  diag(0,0) = diag(1,1) = diag(2,2) = omega_a*omega_a - omega*omega - I * omega * memorykernel->mu(omega);
+  diag(0,0) = diag(1,1) = diag(2,2) = omega_a*omega_a - omega*omega - I * omega * mu->mu(omega);
 
   // calculate integral over green's tensor with fancy R
   cx_mat::fixed<3,3> greens_R;

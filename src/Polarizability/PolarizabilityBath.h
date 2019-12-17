@@ -9,11 +9,11 @@ class PolarizabilityBath : public Polarizability
 {
 private:
     // memory kernel and greens tensor needed to calculate alpha
-    MemoryKernel *memorykernel;
+    MemoryKernel *mu;
 
 public:
 
-    PolarizabilityBath(double a, double b, MemoryKernel *mu);
+    PolarizabilityBath(double omega_a, double alpha_zero, MemoryKernel *mu, GreensTensor *green);
     PolarizabilityBath(std::string input_file);
 
     std::complex<double> get_mu(double omega);
