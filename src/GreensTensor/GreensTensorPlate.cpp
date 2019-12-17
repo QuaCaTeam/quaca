@@ -5,6 +5,16 @@ namespace pt = boost::property_tree;
 
 #include "GreensTensorPlate.h"
 
+GreensTensorPlate::GreensTensorPlate(double v, double za, double beta)
+{
+  // set velocity
+  this->v = v;
+  // set za
+  this->za = za;
+  // set inverse temperature
+  this->beta = beta;
+};
+
 GreensTensorPlate::GreensTensorPlate(std::string input_file)
 {
   // Create a root
@@ -15,6 +25,23 @@ GreensTensorPlate::GreensTensorPlate(std::string input_file)
 
   // read parameters
   this->v = root.get<double>("GreensTensor.v");
-  this->z_a = root.get<double>("GreensTensor.z_a");
+  this->za = root.get<double>("GreensTensor.za");
   this->beta = root.get<double>("GreensTensor.beta");
-}
+};
+
+
+void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega)
+{
+  double a = 0;
+};
+
+void GreensTensorPlate::integrate_k_2d(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)
+{
+  double a = 0;
+};
+
+
+void GreensTensorPlate::integrate_k_1d(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)
+{
+  double a = 0;
+};

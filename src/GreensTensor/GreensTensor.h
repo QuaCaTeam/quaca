@@ -37,7 +37,7 @@ struct Options_GreensTensor
   bool fancy_I_temp = false;
   bool fancy_I_kv_temp = false;
   //Indices of the 3x3 GreensTensor
-  arma::vec::fixed<2> indices = {-1,-1};
+  vec::fixed<2> indices = {-1,-1};
   //Value of omega for the integration of the k-Variables
   double omega = NAN;
   //k-vector for the omega integration
