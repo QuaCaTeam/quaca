@@ -1,3 +1,5 @@
+#include <assert.h>
+
 // ini parser
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
@@ -36,6 +38,9 @@ void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> 
   ky = kvec(1);
   k2 = kx*kx + ky*ky;
   omega2 = omega*omega;
+
+  assert(omega2 < k2);
+
   pre = 1.0/(2*M_PI*sqrt(omega2 - k2));
   GT.zeros();
   GT(0,0) = pre*(omega2 - kx*kx);
