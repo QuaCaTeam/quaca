@@ -77,6 +77,7 @@ double qagiu(double my_f(double, void *), void* params, double a , double relerr
   gsl_function f;
   f.function = my_f;
   f.params = params;
+  
   /* Initialize the workspace. */
   gsl_integration_workspace *ws = gsl_integration_workspace_alloc(1000);
   if ( ws == NULL ) {
@@ -98,5 +99,3 @@ double qagiu(double my_f(double, void *), void* params, double a , double relerr
   gsl_integration_workspace_free( ws );
 
 };
-
-

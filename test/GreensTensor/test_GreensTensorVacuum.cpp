@@ -14,8 +14,8 @@ TEST_CASE("Vacuum Greens Tensor works properly")
   opts.class_pt = &Greens;
 
   cx_mat::fixed<3,3> test(fill::zeros);
- 
-  Greens.integrate_k_1d(test, opts);
+
+  Greens.integrate_1d_k(test, opts);
 
   double analytic_result_prefactor = 2./3.*pow(opts.omega,3)/pow(1-pow(Greens.get_v(),2),2);
 

@@ -29,10 +29,10 @@ GreensTensor * GreensTensorFactory::create(std::string input_file)
     {
       greenstensor = new GreensTensorVacuum(input_file);
     }
-//    else if ( type == "plate" )
-//    {
-//      greenstensor = new GreensTensorPlate(input_file);
-//    }
+    else if ( type == "plate" )
+    {
+      greenstensor = new GreensTensorPlate(input_file);
+    }
     else
     {
         std::cerr << "Error: Unknown Green's tensor type (" << type << ")!" <<std::endl;

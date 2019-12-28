@@ -24,33 +24,22 @@ class Polarizability
 {
 protected:
 
-    /*! resonance frequency */
-    double omega_a;
-
-    /*! static polarizability */
-    double alpha_zero;
-
-    /*! green's tensor */
+    double omega_a, alpha_zero;
     GreensTensor *greens_tensor;
 
 public:
 
-    /*!
-    * Returns the polarizability tensor as a 3x3 matrix when given a real frequency
-    * as input.
-    * @param omega Frequency
-    */
+    // constructor
+    Polarizability(double omega_a, double alpha_zero, GreensTensor *greens_tensor): omega_a(omega_a), alpha_zero(alpha_zero), greens_tensor(greens_tensor) {};
+    Polarizability(std::string input_file);
+
+    // calculate the polarizability tensor
     virtual void calculate(cx_mat::fixed<3,3>& alpha,double omega) =0;
 
-    /*!
-    * Getter method for the resonance frequency.
-    */
-    double get_omega_a();
+    // getter functions
+    double get_omega_a(){return this->omega_a;};
+    double get_alpha_zero(){return this->alpha_zero;};
 
-    /*!
-    * Getter method for the static polarizability.
-    */
-    double get_alpha_zero();
 };
 
 // A struct for integration options
