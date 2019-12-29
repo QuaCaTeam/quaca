@@ -50,7 +50,7 @@ quaca/bin $ ./test_quaca
 ```
 
 ### Contributing
-Please read [CONTRIBUTING.md] for details on how you can become a part of this project.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on how you can become a part of this project.
 
 ### Authors
 - Marty Oelschläger

@@ -1,4 +1,4 @@
-# Project structure
+# Development
 
 ## Folder structure
 
@@ -28,7 +28,13 @@ The directory contains ...
 - `src/`: source files for the quaca library
 - `test/`: unit tests
 
-# Current tasks
+## Status
+!> QuaCa is still under development.
+
+?> For more recent updates, visit the developers. :100:
+
+
+### Current tasks
 
 ```mermaid
 gantt
@@ -47,3 +53,21 @@ gantt
        Dokumentation aufsetzen  :done,    des1, 01-12-19, 17-12-19
        Polarisierbarkeit        :active,  des1, 17-12-19, 3w
 ```
+
+## Features
+
+<!-- tabs:start -->
+
+#### ** English **
+
+Hello!
+
+#### ** French **
+
+Bonjour!
+
+#### ** Italian **
+
+Ciao!
+
+<!-- tabs:end -->
