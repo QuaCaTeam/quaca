@@ -24,12 +24,13 @@ class Polarizability
 {
 protected:
 
-    double omega_a, alpha_zero;
-    GreensTensor *greens_tensor;
+    double omega_a;              // resonance frequency
+    double alpha_zero;           // vacuum polarizability
+    GreensTensor *greens_tensor; // Green's tensor
 
 public:
 
-    // constructor
+    // constructors
     Polarizability(double omega_a, double alpha_zero, GreensTensor *greens_tensor): omega_a(omega_a), alpha_zero(alpha_zero), greens_tensor(greens_tensor) {};
     Polarizability(std::string input_file);
 

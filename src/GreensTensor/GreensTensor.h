@@ -35,8 +35,8 @@ public:
 
   // getter functions
   double get_v() const {return this->v;}
-  double get_za()const {return this->za;}
-  double get_beta()const {return this->beta;}
+  double get_za() const {return this->za;}
+  double get_beta() const {return this->beta;}
 
 };
 
