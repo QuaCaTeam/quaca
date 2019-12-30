@@ -1,8 +1,8 @@
 # Polarizability
 This abstract class serves as a container for two different polarizabilities: one of a particle with an internal heat bath and one without such a bath.
 We expect the polarizability to be of the form
-$$  \underline{\alpha}(\omega) = \alpha_0 \left( \omega_a^2 - \omega - i \omega \mu(\omega) + \int \frac{d^2 \mathbf{k}}{(2 \pi)^2} \underline{G}(\mathbf{k}, \omega) \right)^{-1}, $$
-where we set $\mu = 0$ for the particle without an internal heat bath.
+$$  \underline{\alpha}(\omega) = \alpha_0 \omega_a^2 \left( \omega_a^2 - \omega^2 - i \omega \mu(\omega) - \alpha_0 \omega_a^2 \int \frac{d^2 \mathbf{k}}{(2 \pi)^2} \underline{G}(\mathbf{k}, \omega + \mathbf{k}^{\mathrm{T}}\mathbf{v}) \right)^{-1}, $$
+where we set $\mu(\omega) = 0$ for the particle without an internal heat bath.
 
 ```cpp
 class Polarizability
@@ -20,7 +20,7 @@ public:
     Polarizability(std::string input_file);
 
     // calculate the polarizability tensor
-    virtual void calculate(cx_mat::fixed<3,3>& alpha,double omega) =0;
+    virtual void calculate(cx_mat::fixed<3,3>& alpha, double omega) =0;
 
     // getter functions
     double get_omega_a();
@@ -34,7 +34,8 @@ public:
 # PolarizabilityBath
 Implements a polarizability with an internal bath.
 Obeys the equation
-$ \underline{\alpha}(\omega) = \alpha_0 \left( \omega_a^2 - \omega - i \omega \mu(\omega) + \int \frac{d^2 \mathbf{k}}{(2 \pi)^2} \underline{G}(\mathbf{k}, \omega) \right)^{-1}$, where $\alpha_0$ is the vacuum polarizability, $\omega_a$ is the dipole resonance frequency, $\mu(\omega)$ is the memory kernel in Fourier space and $\underline{G}$ is the Green's tensor.
+$  \underline{\alpha}(\omega) = \alpha_0 \omega_a^2 \left( \omega_a^2 - \omega^2 - i \omega \mu(\omega) - \alpha_0 \omega_a^2 \int \frac{d^2 \mathbf{k}}{(2 \pi)^2} \underline{G}(\mathbf{k}, \omega + \mathbf{k}^{\mathrm{T}}\mathbf{v}) \right)^{-1}$,
+where $\alpha_0$ is the vacuum polarizability, $\omega_a$ is the dipole resonance frequency, $\mu(\omega)$ is the memory kernel in Fourier space and $\underline{G}$ is the Green's tensor.
 
 ```cpp
 class PolarizabilityBath : public Polarizability
@@ -49,8 +50,8 @@ public:
     PolarizabilityBath(double omega_a, double alpha_zero, MemoryKernel *mu, GreensTensor *greens_tensor);
     PolarizabilityBath(std::string input_file);
 
-    // getter function for mu 
-    std::complex<double> get_mu(double omega){return this->mu->mu(omega);};
+    // getter function for mu
+    std::complex<double> get_mu(double omega);
 
     // calculate the polarizability tensor
     void calculate(cx_mat::fixed<3,3>& alpha, double omega);
@@ -60,9 +61,23 @@ public:
 # PolarizabilityNoBath
 Implements a polarizability with no internal bath.
 Obeys the equation
-$ \underline{\alpha}(\omega) = \alpha_0 \left( \omega_a^2 - \omega + \int \frac{d^2 \mathbf{k}}{(2 \pi)^2} \underline{G}(\mathbf{k}, \omega) \right)^{-1}$, where $\alpha_0$ is the vacuum polarizability, $\omega_a$ is the dipole resonance frequency and $\underline{G}$ is the Green's tensor.
+$  \underline{\alpha}(\omega) = \alpha_0 \omega_a^2 \left( \omega_a^2 - \omega^2 - \alpha_0 \omega_a^2 \int \frac{d^2 \mathbf{k}}{(2 \pi)^2} \underline{G}(\mathbf{k}, \omega + \mathbf{k}^{\mathrm{T}}\mathbf{v}) \right)^{-1}$,
+where $\alpha_0$ is the vacuum polarizability, $\omega_a$ is the dipole resonance frequency and $\underline{G}$ is the Green's tensor.
+```cpp
+class PolarizabilityNoBath : public Polarizability
+{
+public:
 
+  // constructors
+  PolarizabilityNoBath(double omega_a, double alpha_zero, GreensTensor *greens_tensor);
+  PolarizabilityNoBath(std::string input_file);
 
+  // calculate the polarizability tensor
+  void calculate(cx_mat::fixed<3,3>& alpha, double omega);
+
+};
+```
+# Examples
 <!-- tabs:start -->
 
 #### ** Example 1 **
@@ -73,7 +88,7 @@ First let's define the ohmic memory kernel
 double gamma = 3.0;
 OhmicMemoryKernel mu(gamma);
 ```
-Now let's define the Green's tensor 
+Now let's define the Green's tensor
 ```cpp
 double v = 0.1;
 double z_a = 10;
@@ -124,8 +139,3 @@ pol.calculate(alpha, 3.0);
 
 
 <!-- tabs:end -->
-
-
-
-
-

@@ -1,6 +1,4 @@
-# Development
-
-## Folder structure
+# Folder structure
 
 The project is organized as follows:
 
@@ -28,13 +26,13 @@ The directory contains ...
 - `src/`: source files for the quaca library
 - `test/`: unit tests
 
-## Status
+# Status
 !> QuaCa is still under development.
 
 ?> For more recent updates, visit the developers. :100:
 
 
-### Current tasks
+# Current tasks
 
 ```mermaid
 gantt
@@ -44,30 +42,16 @@ gantt
        section Marty
        Testliste            :done,    des1, 01-12-19, 17-12-19
        Asymptoten ausrechnen :active,  des1, 17-12-19, 3w
-       
+
        section Simon
        Integrationsroutine            :done,    des1, 01-12-19, 17-12-19
        Tests fuer Greenstensor        :active,  des1, 17-12-19, 3w
-       
+
        section Christoph
        Dokumentation aufsetzen  :done,    des1, 01-12-19, 17-12-19
        Polarisierbarkeit        :active,  des1, 17-12-19, 3w
 ```
 
-## Features
+# Ideas
 
-<!-- tabs:start -->
-
-#### ** English **
-
-Hello!
-
-#### ** French **
-
-Bonjour!
-
-#### ** Italian **
-
-Ciao!
-
-<!-- tabs:end -->
+* make an applet where the user enters systems parameters in unit of their choice (e.g. the height $z_a$ in nanometers) and gets a ready to use `.ini` file with the right units for QuaCa
