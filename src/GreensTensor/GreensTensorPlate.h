@@ -22,7 +22,8 @@ public:
 
   std::complex<double> get_epsilon(double omega);
 
-  static double integrand_k_1d(double k, void* opts);
+  static double integrand_k_1d(double kx, void* opts);
+  static double integrand_k_2d(double ky, void* opts);
 
 };
 

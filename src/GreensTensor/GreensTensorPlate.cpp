@@ -37,8 +37,7 @@ std::complex<double> GreensTensorPlate::get_epsilon(double omega)
 
 void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega)
 {
-  // calculating the solely the imaginary part of the free Green tensor
-  double pre, kx, ky, k2, omega2;
+  double pre, kx, ky, k_quad, omega_quad;
   // imaginary unit
   std::complex<double> I(0.0, 1.0);
 
@@ -49,18 +48,18 @@ void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> k
 
   kx = kvec(0);
   ky = kvec(1);
-  k2 = kx*kx + ky*ky;
-  omega2 = omega*omega;
+  k_quad = kx*kx + ky*ky;
+  omega_quad = omega*omega;
   eps = permittivity->epsilon(omega);
 
   // kapppa as well as kappa_epsilon are defined to have either a purely
   // positive real part or purely negatively imaginary part
 
-  kappa = sqrt(k2 - omega2);
+  kappa = sqrt(k_quad - omega_quad);
   kappa = ( std::abs(kappa.real()) ,
            -std::abs(kappa.imag()) );
 
-  kappa_epsilon = sqrt(k2 - eps*omega2);
+  kappa_epsilon = sqrt(k_quad - eps*omega_quad);
   kappa_epsilon = ( std::abs(kappa_epsilon.real()) ,
                    -std::abs(kappa_epsilon.imag()) );
 
@@ -77,32 +76,179 @@ void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> k
   // of the p and s polarization separately
 
   prefactor_p = 2 * M_PI * kappa * std::exp(-2 * za * kappa);
-  prefactor_s =  prefactor_p * r_s * omega2/(k2-omega2);
+  prefactor_s =  prefactor_p * r_s * omega_quad/(k_quad-omega_quad);
   prefactor_p = prefactor_p * r_p;
 
   // In the following, we already omit odd orders of ky, as we use that the
   // investigated system is symmetric in y and thus those terms vanish
 
   GT.zeros();
-  GT(0,0) = prefactor_p * kx * kx / k2 + prefactor_s * ky * ky / k2;
-  GT(1,1) = prefactor_p * ky * ky / k2 + prefactor_s * kx * kx / k2;
-  GT(2,2) = prefactor_p * k2 / (k2 - omega2);
-  GT(2,0) = I * prefactor_p * kx / (k2 - omega2);
+  GT(0,0) = prefactor_p * kx * kx / k_quad + prefactor_s * kx * kx / k_quad;
+  GT(1,1) = prefactor_p * ky * ky / k_quad + prefactor_s * kx * kx / k_quad;
+  GT(2,2) = prefactor_p * k_quad / kappa;
+  GT(2,0) = I * prefactor_p * kx / kappa;
   GT(0,2) = - GT(2,0);
 };
 
-void GreensTensorPlate::integrate_k_2d(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)
-{
-};
 
 
 void GreensTensorPlate::integrate_k_1d(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)
 {
 };
 
-double GreensTensorPlate::integrand_k_1d(double kv, void *opts)
+double GreensTensorPlate::integrand_k_1d(double kx, void *opts)
 {
-double result;
+//Units: c=1, 4 pi epsilon_0 = 1, hbar = 1
+Options_GreensTensor* opts_pt = static_cast<Options_GreensTensor*>(opts);
+GreensTensorPlate* pt = static_cast<GreensTensorPlate*>(opts_pt->class_pt);
 
+double omega = opts_pt->omega;
+
+double beta = pt->beta;
+double v = pt->v;
+double za = pt->za;
+
+double result, omega_pl, omega_pl_quad;
+omega_pl = (omega+kx * v);
+omega_pl_quad = omega_pl*omega_pl;
+
+if(opts_pt->indices(0) == 0 && opts_pt->indices(1) == 0)
+{
+  result = 0;
+}
+else if(opts_pt->indices(0) == opts_pt->indices(1))
+{
+  result = 0;
+}
+else
+{
+  return 0;
+}
+if(opts_pt->fancy_I)
+{
+  return result;
+}
+if (opts_pt->fancy_I_kv)
+{
+  result *= kx;
+}
+else if(opts_pt->fancy_I_temp)
+{
+  result /= (1.0-exp(-beta*omega_pl));
+}
+else if (opts_pt->fancy_I_kv_temp)
+{
+  result *= kx/(1.0-exp(-beta*omega_pl));
+}
 return result;
+};
+
+void GreensTensorPlate::integrate_k_2d(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)
+{
+};
+double GreensTensorPlate::integrand_k_2d(double ky, void *opts)
+{
+  //Units: c=1, 4 pi epsilon_0 = 1, hbar = 1
+  Options_GreensTensor* opts_pt = static_cast<Options_GreensTensor*>(opts);
+  GreensTensorPlate* pt = static_cast<GreensTensorPlate*>(opts_pt->class_pt);
+
+  // read omega and kx from the option struct
+  double omega = opts_pt->omega;
+  double kx = opts_pt->kvec(1);
+
+  // read general input parameters
+  double beta = pt->beta;
+  double v = pt->v;
+  double za = pt->za;
+
+  // Before we can calculate the real or imaginary part of the chosen matrix
+  // element, we need to store the complex result in result_complex.
+  std::complex<double> result_complex;
+
+  double result, omega_pl, omega_pl_quad, k_quad;
+
+  // imaginary unit
+  std::complex<double> I(0.0, 1.0);
+
+  // permittivity and propagation through vacuum (kappa) and material (kappa_epsilon)
+  std::complex<double> eps, kappa, kappa_epsilon;
+
+  // reflection coefficients and pre-factors of the corresponding polarization
+  std::complex<double> r_p, r_s;
+  std::complex<double> prefactor_p, prefactor_s;
+
+  k_quad = kx*kx + ky*ky;
+  omega_pl = (omega+kx * v);
+  omega_pl_quad = omega_pl*omega_pl;
+
+  eps = pt->get_epsilon(omega_pl);
+
+  // kapppa as well as kappa_epsilon are defined to have either a purely
+  // positive real part or purely negatively imaginary part
+
+  kappa = sqrt(k_quad - omega_pl_quad);
+  kappa = ( std::abs(kappa.real()) ,-std::abs(kappa.imag()) );
+
+  kappa_epsilon = sqrt(k_quad - eps*omega_pl_quad);
+  kappa_epsilon = ( std::abs(kappa_epsilon.real()) ,-std::abs(kappa_epsilon.imag()) );
+
+  // Defining the reflection coefficients in transverse magnetice polarization (p)
+  // and in transverse electric polarization (s)
+
+  r_p = (eps*kappa - kappa_epsilon)/
+  (eps*kappa + kappa_epsilon);
+
+  r_s = (kappa - kappa_epsilon)/
+  (kappa + kappa_epsilon);
+
+  // For an better overview and a efficient calculation, we collect the pre-factors
+  // of the p and s polarization separately
+
+  prefactor_p = 2 * M_PI * kappa * std::exp(-2 * za * kappa);
+  prefactor_s =  prefactor_p * r_s * omega_pl_quad/(k_quad-omega_pl_quad);
+  prefactor_p = prefactor_p * r_p;
+
+  // Calculate the G_xx element
+  if(opts_pt->indices(0) == 0 && opts_pt->indices(1) == 0)
+  {
+    result_complex = prefactor_p * kx * kx / k_quad
+                   + prefactor_s * ky * ky / k_quad;
+  }
+  // Calculate the G_yy element
+  else if(opts_pt->indices(0) == 1 && opts_pt->indices(1) == 1){
+    result_complex = prefactor_p * ky * ky / k_quad
+                   + prefactor_s * kx * kx / k_quad;
+  }
+  // Calculate the G_zx element
+  else if(opts_pt->indices(0) == 2 && opts_pt->indices(1) == 0){
+    result_complex = I * prefactor_p * kx / kappa;
+  }
+  //
+  // All other elements are either 0 or can be calculated by the above elements.
+  //
+  // Calculate fancy real part of the given matrix element
+  if(opts_pt->fancy_R)
+  {
+    if (opts_pt->indices(0) == 2 && opts_pt->indices(1) == 0){
+     // Mind the missing leading I! This must be added after the double integration!
+     result = result_complex.imag();
+    }
+    else
+    {
+      result = result_complex.real();
+    }
+  }
+  // Calculate fancy imaginary part of the given matrix element
+  else
+  {
+    if (opts_pt->indices(0) == 2 && opts_pt->indices(1) == 0){
+     // Mind the missing leading I! This must be added after the double integration!
+     result = -result_complex.real();
+    }
+    else
+    {
+      result = result_complex.imag();
+    }
+  }
+  return result;
 };
