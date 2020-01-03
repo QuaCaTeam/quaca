@@ -98,49 +98,39 @@ void GreensTensorPlate::integrate_k_1d(cx_mat::fixed<3,3>& GT, Options_GreensTen
 
 double GreensTensorPlate::integrand_k_1d(double kx, void *opts)
 {
-//Units: c=1, 4 pi epsilon_0 = 1, hbar = 1
-Options_GreensTensor* opts_pt = static_cast<Options_GreensTensor*>(opts);
-GreensTensorPlate* pt = static_cast<GreensTensorPlate*>(opts_pt->class_pt);
+  //Units: c=1, 4 pi epsilon_0 = 1, hbar = 1
+  Options_GreensTensor* opts_pt = static_cast<Options_GreensTensor*>(opts);
+  GreensTensorPlate* pt = static_cast<GreensTensorPlate*>(opts_pt->class_pt);
 
-double omega = opts_pt->omega;
+  double omega = opts_pt->omega;
 
-double beta = pt->beta;
-double v = pt->v;
-double za = pt->za;
+  double beta = pt->beta;
+  double v = pt->v;
+  double za = pt->za;
 
-double result, omega_pl, omega_pl_quad;
-omega_pl = (omega+kx * v);
-omega_pl_quad = omega_pl*omega_pl;
+  double result, omega_pl, omega_pl_quad;
+  omega_pl = (omega+kx * v);
+  omega_pl_quad = omega_pl*omega_pl;
 
-if(opts_pt->indices(0) == 0 && opts_pt->indices(1) == 0)
-{
-  result = 0;
-}
-else if(opts_pt->indices(0) == opts_pt->indices(1))
-{
-  result = 0;
-}
-else
-{
-  return 0;
-}
-if(opts_pt->fancy_I)
-{
+  // Write the integration variable into the options struct
+  opts_pt->kvec(0) = kx;
+
+  // Calculate the integrand corresponding to the given options
+  result = qagiu(&integrand_k_2d,&opts, 0 ,1E-7,0) / M_PI;
+
+  if (opts_pt->fancy_I_kv)
+  {
+    result *= kx;
+  }
+  else if(opts_pt->fancy_I_temp)
+  {
+    result /= (1.0-exp(-beta*omega_pl));
+  }
+  else if (opts_pt->fancy_I_kv_temp)
+  {
+    result *= kx/(1.0-exp(-beta*omega_pl));
+  }
   return result;
-}
-if (opts_pt->fancy_I_kv)
-{
-  result *= kx;
-}
-else if(opts_pt->fancy_I_temp)
-{
-  result /= (1.0-exp(-beta*omega_pl));
-}
-else if (opts_pt->fancy_I_kv_temp)
-{
-  result *= kx/(1.0-exp(-beta*omega_pl));
-}
-return result;
 };
 
 void GreensTensorPlate::integrate_k_2d(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)
