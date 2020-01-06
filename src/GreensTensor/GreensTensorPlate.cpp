@@ -115,9 +115,12 @@ double GreensTensorPlate::integrand_k_1d(double kx, void *opts)
   // Write the integration variable into the options struct
   opts_pt->kvec(0) = kx;
 
-  // Calculate the integrand corresponding to the given options
-  result = qagiu(&integrand_k_2d,&opts, 0 ,1E-7,0) / M_PI;
+  std::cout << "AFTER" << std::endl;
 
+    std::cout << opts_pt->kvec(0) << std::endl;
+
+  // Calculate the integrand corresponding to the given options
+  result = cquad(&integrand_k_2d,&opts, 0, 1 ,1E-7,0) / M_PI;
   if (opts_pt->fancy_I_kv)
   {
     result *= kx;
@@ -138,19 +141,24 @@ void GreensTensorPlate::integrate_k_2d(cx_mat::fixed<3,3>& GT, Options_GreensTen
 };
 double GreensTensorPlate::integrand_k_2d(double ky, void *opts)
 {
+
+  std::cout << "AFTER" << std::endl;
   //Units: c=1, 4 pi epsilon_0 = 1, hbar = 1
   Options_GreensTensor* opts_pt = static_cast<Options_GreensTensor*>(opts);
   GreensTensorPlate* pt = static_cast<GreensTensorPlate*>(opts_pt->class_pt);
 
+  std::cout << "AFTER" << std::endl;
   // read omega and kx from the option struct
   double omega = opts_pt->omega;
   double kx = opts_pt->kvec(1);
 
+  std::cout << kx << std::endl;
   // read general input parameters
   double beta = pt->beta;
   double v = pt->v;
   double za = pt->za;
 
+  std::cout << "AFddTER100" << std::endl;
   // Before we can calculate the real or imaginary part of the chosen matrix
   // element, we need to store the complex result in result_complex.
   std::complex<double> result_complex;
