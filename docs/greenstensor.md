@@ -5,13 +5,12 @@ class GreensTensor
 protected:
 
   double v;    // velocity of the particle
-  double za;   // distance of the particle
   double beta; // inverse temperature
 
 public:
 
   // constructors
-  GreensTensor(double v, double za, double beta);
+  GreensTensor(double v, double beta);
   GreensTensor(std::string input_file);
 
   // calculate the whole Green's tensor
@@ -25,7 +24,6 @@ public:
 
   // getter functions
   double get_v();
-  double get_za();
   double get_beta();
 ```
 
@@ -50,5 +48,29 @@ public:
 
   // integrand for integration over one-dimensional k space
   static double integrand_1d_k(double k, void* opts);
+};
+```
+
+# GreensTensorPlate
+```cpp
+class GreensTensorPlate : public GreensTensor
+{
+private:
+  double z_a; // distance from plate
+
+public:
+
+  // constructors
+  GreensTensorPlate(std::string input_file);
+  GreensTensorPlate(double v, double z_a, double beta);
+
+  // calculate full tensor
+  void calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega);
+
+  // integrate over a two-dimensional k space
+  void integrate_2d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts);
+
+  // integrate over a one-dimensional k space
+  void integrate_1d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts);
 };
 ```
