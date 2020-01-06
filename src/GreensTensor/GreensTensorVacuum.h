@@ -10,7 +10,7 @@ class GreensTensorVacuum : public GreensTensor
 public:
 
   // constructors
-  GreensTensorVacuum(double v, double beta): GreensTensor(v, 0, beta) {};
+  GreensTensorVacuum(double v, double beta): GreensTensor(v, beta) {};
   GreensTensorVacuum(std::string input_file): GreensTensor(input_file) {};
 
   // calculate the whole Green's tensor

@@ -1,8 +1,3 @@
-// ini parser
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/ini_parser.hpp>
-namespace pt = boost::property_tree;
-
 #include "GreensTensorPlate.h"
 
 void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega)

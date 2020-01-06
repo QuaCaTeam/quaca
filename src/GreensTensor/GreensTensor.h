@@ -3,6 +3,7 @@
 
 #include <string>
 #include <armadillo>
+#include <cassert>
 #include "../Calculations/Integrations.h"
 using namespace arma;
 
@@ -18,14 +19,17 @@ class GreensTensor
 protected:
 
   double v;    // velocity of the particle
-  double za;   // distance of the particle
   double beta; // inverse temperature
 
 public:
 
   // constructors
-  GreensTensor(double v, double za, double beta):v(v), za(za), beta(beta) {};
   GreensTensor(std::string input_file);
+  GreensTensor(double v, double beta): v(v), beta(beta)
+  {
+    assert(v > 0 && v < 1);
+    assert(beta > 0);
+  };
 
   // calculate the whole Green's tensor
   virtual void calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega) =0;
@@ -38,7 +42,6 @@ public:
 
   // getter functions
   double get_v() const {return this->v;}
-  double get_za() const {return this->za;}
   double get_beta() const {return this->beta;}
 };
 

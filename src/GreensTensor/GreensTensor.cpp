@@ -15,6 +15,5 @@ GreensTensor::GreensTensor(std::string input_file)
 
   // read parameters
   this->v = root.get<double>("GreensTensor.v");
-  this->za = root.get<double>("GreensTensor.za");
   this->beta = root.get<double>("GreensTensor.beta");
 };

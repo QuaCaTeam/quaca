@@ -1,15 +1,32 @@
 #ifndef GREENSTENSORPLATE_H
 #define GREENSTENSORPLATE_H
 
+// ini parser
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/ini_parser.hpp>
+namespace pt = boost::property_tree;
+
 #include "GreensTensor.h"
 
 class GreensTensorPlate : public GreensTensor
 {
+private:
+  double z_a; // distance from plate
+
 public:
 
   // constructors
-  GreensTensorPlate(double v, double za, double beta): GreensTensor(v, za, beta) {};
-  GreensTensorPlate(std::string input_file): GreensTensor(input_file) {};
+  GreensTensorPlate(std::string input_file): GreensTensor(input_file)
+  {
+    pt::ptree root;
+    pt::read_ini(input_file, root);
+    this->z_a = root.get<double>("GreensTensor.z_a");
+  };
+
+  GreensTensorPlate(double v, double z_a, double beta): GreensTensor(v, beta), z_a(z_a)
+  {
+    assert(z_a > 0);
+  };
 
   // calculate full tensor
   void calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega);
