@@ -1,7 +1,12 @@
+#include <assert.h>
+
+// ini parser
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/ini_parser.hpp>
+namespace pt = boost::property_tree;
+
 #include "GreensTensorVacuum.h"
 #include "../Calculations/Integrations.h"
-
-
 
 GreensTensorVacuum::GreensTensorVacuum(double v, double beta):GreensTensor(v,beta), za(za)
 {

@@ -5,11 +5,6 @@ namespace pt = boost::property_tree;
 
 #include "OhmicMemoryKernel.h"
 
-// constructor for ohmic memory kernel
-OhmicMemoryKernel::OhmicMemoryKernel(double gamma): gamma(gamma)
-{
-};
-
 // constructor for ohmic memory kernel from .ini file
 OhmicMemoryKernel::OhmicMemoryKernel(std::string input_file)
 {
@@ -28,10 +23,4 @@ std::complex<double> OhmicMemoryKernel::mu(double omega)
 {
     const std::complex<double> gammac(this->gamma,0E0);
     return gammac;
-};
-
-// getter method for damping kernel
-double OhmicMemoryKernel::get_gamma()
-{
-    return this->gamma;
 };
