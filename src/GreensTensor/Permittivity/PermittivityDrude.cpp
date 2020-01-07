@@ -5,14 +5,6 @@ namespace pt = boost::property_tree;
 
 #include "PermittivityDrude.h"
 
-// direct constructor
-PermittivityDrude::PermittivityDrude(double a, double b)
-{
-    // set parameters
-    this->gamma = a;
-    this->omega_p = b;
-};
-
 // constructor for drude model from .ini file
 PermittivityDrude::PermittivityDrude(std::string input_file)
 {
@@ -39,15 +31,3 @@ std::complex<double> PermittivityDrude::epsilon (double omega)
 
   return result;
 };
-
-// getter method for damping coefficient
-double PermittivityDrude::get_gamma()
-{
-  return this->gamma;
-};
-
-// getter method for plasma frequency
-double PermittivityDrude::get_omega_p()
-{
-  return this->omega_p;
-}

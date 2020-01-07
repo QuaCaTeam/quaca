@@ -1,11 +1,21 @@
+#include <assert.h>
+
+// ini parser
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/ini_parser.hpp>
+namespace pt = boost::property_tree;
+
 #include "GreensTensorVacuum.h"
 #include "../Calculations/Integrations.h"
-
-
 
 GreensTensorVacuum::GreensTensorVacuum(double v, double beta):GreensTensor(v,beta), za(za)
 {
 };
+
+GreensTensorVacuum::GreensTensorVacuum(std::string input_file):GreensTensor(input_file)
+{
+};
+
 void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3,3>& GT,Options_GreensTensor opts)
 {
   // calculating the solely the imaginary part of the free Green tensor
