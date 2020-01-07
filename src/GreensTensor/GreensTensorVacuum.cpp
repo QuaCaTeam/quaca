@@ -3,20 +3,16 @@
 
 
 
-GreensTensorVacuum::GreensTensorVacuum(double v, double beta)
+GreensTensorVacuum::GreensTensorVacuum(double v, double beta):GreensTensor(v,beta), za(za)
 {
-  // set velocity
-  this->v = v;
-  // set inverse temperature
-  this->beta = beta;
-
 };
-void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega)
+void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3,3>& GT,Options_GreensTensor opts)
 {
   // calculating the solely the imaginary part of the free Green tensor
-  double pre, k_x, k_y, k_quad, omega_quad;
-  k_x = kvec(0);
-  k_y = kvec(1);
+  double pre, k_x, k_y, k_quad, omega, omega_quad;
+  k_x = opts.kvec(0);
+  k_y = opts.kvec(1);
+  omega = opts.omega;
   k_quad = k_x*k_x + k_y*k_y;
   omega_quad = omega*omega;
   pre = 1.0/(2*M_PI*sqrt(omega_quad - k_quad));
@@ -26,7 +22,7 @@ void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> 
   GT(2,2) = pre*k_quad;
 };
 
-void GreensTensorVacuum::integrate_k_2d(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)
+void GreensTensorVacuum::integrate_2d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)
 {
   double k = opts.kvec(0);
   double omega = opts.omega;
@@ -51,7 +47,7 @@ void GreensTensorVacuum::integrate_k_2d(cx_mat::fixed<3,3>& GT, Options_GreensTe
 };
 
 
-void GreensTensorVacuum::integrate_k_1d(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)
+void GreensTensorVacuum::integrate_1d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)
 {
   double omega = opts.omega;
   GT.zeros();
@@ -64,14 +60,14 @@ void GreensTensorVacuum::integrate_k_1d(cx_mat::fixed<3,3>& GT, Options_GreensTe
 
   opts.indices(0) = 0;
   opts.indices(1) = 0;
-  GT(0,0) = cquad(&integrand_k_1d,&opts,-omega/(1.0+this->v),omega/(1.0-this->v),1E-7,0);
+  GT(0,0) = cquad(&integrand_1d_k,&opts,-omega/(1.0+this->v),omega/(1.0-this->v),1E-7,0);
   opts.indices(0) = 1;
   opts.indices(1) = 1;
-  GT(1,1) = cquad(&integrand_k_1d,&opts, -omega/(1.0+this->v),omega/(1.0-this->v),1E-7,0);
+  GT(1,1) = cquad(&integrand_1d_k,&opts, -omega/(1.0+this->v),omega/(1.0-this->v),1E-7,0);
   GT(2,2) = GT(1,1);
 };
 
-double GreensTensorVacuum::integrand_k_1d(double kv, void *opts)
+double GreensTensorVacuum::integrand_1d_k(double kv, void *opts)
 {
   //Units: c=1, 4 pi epsilon_0 = 1, hbar = 1
   Options_GreensTensor* opts_pt = static_cast<Options_GreensTensor*>(opts);
