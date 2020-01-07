@@ -7,14 +7,18 @@
 
 class GreensTensorVacuum : public GreensTensor
 {
+  private:
+    double za;
 
 public:
 
   GreensTensorVacuum(double v, double beta);
-  void calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega);
-  void integrate_k_2d(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts);
-  void integrate_k_1d(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts);
-  static double integrand_k_1d(double k, void* opts);
+  void calculate_tensor(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts);
+  void integrate_2d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts);
+  void integrate_1d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts);
+  static double integrand_1d_k(double k, void* opts);
+  double get_za(){return this->za;};
+  void set_za(double za){this->za = za;};
 
 };
 

@@ -15,15 +15,17 @@ struct Options_GreensTensor;
 class GreensTensor
 {
 protected:
-  double v, za, beta;
+  double v, beta;
 
 public:
-  virtual void calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega) =0;
-  virtual void integrate_k_2d(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)  =0;
-  virtual void integrate_k_1d(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts) =0;
+  GreensTensor(double v, double beta): v(v), beta(beta) {};
+  virtual void calculate_tensor(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts) =0;
+  virtual void integrate_2d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)  =0;
+  virtual void integrate_1d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts) =0;
   double get_v(){return this->v;}
-  double get_za(){return this->za;}
   double get_beta(){return this->beta;}
+  void set_v(double v){this->v = v;}
+  void set_beta(double beta){this->beta = beta;}
 
 };
 
