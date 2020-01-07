@@ -102,12 +102,15 @@ double GreensTensorPlate::integrand_k_1d(double kx, void *opts)
   Options_GreensTensor* opts_pt = static_cast<Options_GreensTensor*>(opts);
   GreensTensorPlate* pt = static_cast<GreensTensorPlate*>(opts_pt->class_pt);
 
+  std::cout << "Zero" << std::endl;
   double omega = opts_pt->omega;
 
+  std::cout << "One" << std::endl;
   double beta = pt->beta;
   double v = pt->v;
   double za = pt->za;
 
+  std::cout << "Two" << std::endl;
   double result, omega_pl, omega_pl_quad;
   omega_pl = (omega+kx * v);
   omega_pl_quad = omega_pl*omega_pl;
@@ -115,12 +118,11 @@ double GreensTensorPlate::integrand_k_1d(double kx, void *opts)
   // Write the integration variable into the options struct
   opts_pt->kvec(0) = kx;
 
-  std::cout << "AFTER" << std::endl;
 
     std::cout << opts_pt->kvec(0) << std::endl;
 
   // Calculate the integrand corresponding to the given options
-  result = cquad(&integrand_k_2d,&opts, 0, 1 ,1E-7,0) / M_PI;
+  result = cquad(&integrand_k_2d, opts, 0, 1 ,1E-7,0) / M_PI;
   if (opts_pt->fancy_I_kv)
   {
     result *= kx;
@@ -150,7 +152,7 @@ double GreensTensorPlate::integrand_k_2d(double ky, void *opts)
   std::cout << "AFTER" << std::endl;
   // read omega and kx from the option struct
   double omega = opts_pt->omega;
-  double kx = opts_pt->kvec(1);
+  double kx = opts_pt->kvec(0);
 
   std::cout << kx << std::endl;
   // read general input parameters
