@@ -12,7 +12,7 @@
 class Permittivity
 {
 public:
-  
+
   /*!
   * Return the permittivity given at frequency omega
   * @param omega Frequency

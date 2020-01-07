@@ -20,7 +20,7 @@ TEST_CASE("Polarizability with bath can be constructed in different ways", "[Pol
   SECTION("Constructor with direct input")
   {
     OhmicMemoryKernel mu(0.69420);
-    PolarizabilityBath pol(1.3, 6E-9,&mu);
+    PolarizabilityBath pol(1.3, 6E-9, &mu, NULL);
     REQUIRE( pol.get_omega_a() == 1.3 );
     REQUIRE( pol.get_alpha_zero() == 6E-9 );
 
