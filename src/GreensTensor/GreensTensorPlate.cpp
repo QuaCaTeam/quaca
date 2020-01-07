@@ -118,11 +118,9 @@ double GreensTensorPlate::integrand_k_1d(double kx, void *opts)
   // Write the integration variable into the options struct
   opts_pt->kvec(0) = kx;
 
-
-    std::cout << opts_pt->kvec(0) << std::endl;
-
   // Calculate the integrand corresponding to the given options
   result = cquad(&integrand_k_2d, opts, 0, 1 ,1E-7,0) / M_PI;
+
   if (opts_pt->fancy_I_kv)
   {
     result *= kx;
@@ -160,7 +158,6 @@ double GreensTensorPlate::integrand_k_2d(double ky, void *opts)
   double v = pt->v;
   double za = pt->za;
 
-  std::cout << "AFddTER100" << std::endl;
   // Before we can calculate the real or imaginary part of the chosen matrix
   // element, we need to store the complex result in result_complex.
   std::complex<double> result_complex;
@@ -215,17 +212,32 @@ double GreensTensorPlate::integrand_k_2d(double ky, void *opts)
                    + prefactor_s * ky * ky / k_quad;
   }
   // Calculate the G_yy element
-  else if(opts_pt->indices(0) == 1 && opts_pt->indices(1) == 1){
+  else if(opts_pt->indices(0) == 1 && opts_pt->indices(1) == 1)
+  {
     result_complex = prefactor_p * ky * ky / k_quad
                    + prefactor_s * kx * kx / k_quad;
   }
+  // Calculate the G_zz element
+  else if(opts_pt->indices(0) == 2 && opts_pt->indices(1) == 2)
+  {
+    result_complex = prefactor_p *  k_quad / kappa;
+  }
   // Calculate the G_zx element
-  else if(opts_pt->indices(0) == 2 && opts_pt->indices(1) == 0){
+  else if(opts_pt->indices(0) == 2 && opts_pt->indices(1) == 0)
+  {
     result_complex = I * prefactor_p * kx / kappa;
   }
-  //
-  // All other elements are either 0 or can be calculated by the above elements.
-  //
+  // Calculate the G_xz element
+  else if(opts_pt->indices(0) == 0 && opts_pt->indices(1) == 2)
+  {
+    result_complex = - I * prefactor_p * kx / kappa;
+  }
+  else
+  {
+    result_complex = (0,0);
+  }
+
+
   // Calculate fancy real part of the given matrix element
   if(opts_pt->fancy_R)
   {
