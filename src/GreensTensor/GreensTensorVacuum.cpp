@@ -14,16 +14,16 @@ GreensTensorVacuum::GreensTensorVacuum(double v, double beta)
 void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega)
 {
   // calculating the solely the imaginary part of the free Green tensor
-  double pre, kx, ky, k2, omega2;
-  kx = kvec(0);
-  ky = kvec(1);
-  k2 = kx*kx + ky*ky;
-  omega2 = omega*omega;
-  pre = 1.0/(2*M_PI*sqrt(omega2 - k2));
+  double pre, k_x, k_y, k_quad, omega_quad;
+  k_x = kvec(0);
+  k_y = kvec(1);
+  k_quad = k_x*k_x + k_y*k_y;
+  omega_quad = omega*omega;
+  pre = 1.0/(2*M_PI*sqrt(omega_quad - k_quad));
   GT.zeros();
-  GT(0,0) = pre*(omega2 - kx*kx);
-  GT(1,1) = pre*(omega2 - ky*ky);
-  GT(2,2) = pre*k2;
+  GT(0,0) = pre*(omega_quad - k_x*k_x);
+  GT(1,1) = pre*(omega_quad - k_y*k_y);
+  GT(2,2) = pre*k_quad;
 };
 
 void GreensTensorVacuum::integrate_k_2d(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)
