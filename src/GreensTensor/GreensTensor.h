@@ -18,7 +18,11 @@ protected:
   double v, beta;
 
 public:
+  /*!
+   * Constructors
+   */
   GreensTensor(double v, double beta): v(v), beta(beta) {};
+
   virtual void calculate_tensor(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts) =0;
   virtual void integrate_2d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)  =0;
   virtual void integrate_1d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts) =0;
