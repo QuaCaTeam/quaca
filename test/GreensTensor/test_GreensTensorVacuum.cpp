@@ -7,14 +7,36 @@
 TEST_CASE("Vacuum Greens Tensor works properly")
 {
 
-  GreensTensorVacuum Greens(0.01,1e3);
-  struct Options_GreensTensor opts;
-  opts.fancy_I=true;
-  opts.class_pt = &Greens;
+  SECTION("Constructor with argument list works")
+  {
+    auto v = GENERATE(take(2,random(0.,1.)));
+    auto beta = GENERATE(take(2,random(1e-3, 1e3)));
+    GreensTensorVacuum Greens(v, beta);
+
+    REQUIRE(Approx(Greens.get_v()).epsilon(1E-6) == v);
+    REQUIRE(Approx(Greens.get_beta()).epsilon(1E-6) == beta);
+  }
+
+  SECTION("Constructor with ini file works")
+  {
+    double v = 0.1;
+    double beta = 5;
+
+    GreensTensorVacuum Greens("../data/test_files/GreensTensorVacuum.ini");
+
+    REQUIRE(Approx(Greens.get_v()).epsilon(1E-6) == v);
+    REQUIRE(Approx(Greens.get_beta()).epsilon(1E-6) == beta);
+  }
+
   /*!
    * Some basic relations any Green's tensor should fulfill which can
    * be found in docs under: Relations_and_tests.pdf
    */
+
+  GreensTensorVacuum Greens(0.01,1e3);
+  struct Options_GreensTensor opts;
+  opts.fancy_I=true;
+  opts.class_pt = &Greens;
   cx_mat::fixed<3,3> Greens_lhs(fill::zeros);
   cx_mat::fixed<3,3> Greens_rhs(fill::zeros);
 
@@ -75,6 +97,7 @@ TEST_CASE("Vacuum Greens Tensor works properly")
   } 
   SECTION("Test the integration routine")
   {
+
   /*!
    * Test the integration routine of the vacuums Green's tensor, the analytical results
    * can be found in the docs under: VacuumGreen.pdf, see eq. [21]

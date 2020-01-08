@@ -8,8 +8,11 @@ namespace pt = boost::property_tree;
 #include "GreensTensorVacuum.h"
 #include "../Calculations/Integrations.h"
 
-GreensTensorVacuum::GreensTensorVacuum(double v, double beta):GreensTensor(v,beta), za(za)
+GreensTensorVacuum::GreensTensorVacuum(double v, double beta):GreensTensor(v,beta)
 {
+  assert(beta > 0.);
+  assert(v >= 0.);
+  
 };
 
 GreensTensorVacuum::GreensTensorVacuum(std::string input_file):GreensTensor(input_file)
@@ -18,6 +21,8 @@ GreensTensorVacuum::GreensTensorVacuum(std::string input_file):GreensTensor(inpu
 
 void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3,3>& GT,Options_GreensTensor opts)
 {
+  if(opts.fancy_I)
+  {
   // calculating the solely the imaginary part of the free Green tensor
   double pre, k_x, k_y, k_quad, omega, omega_quad;
   k_x = opts.kvec(0);
@@ -30,6 +35,13 @@ void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3,3>& GT,Options_GreensT
   GT(0,0) = pre*(omega_quad - k_x*k_x);
   GT(1,1) = pre*(omega_quad - k_y*k_y);
   GT(2,2) = pre*k_quad;
+  }
+  else
+  {
+     std::cerr << "Only the imaginary part of the Green tensor with Doppler shift in the frequency argument is implemented" << std::endl;
+     exit(0);
+  }
+ 
 };
 
 void GreensTensorVacuum::integrate_2d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)

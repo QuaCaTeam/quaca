@@ -7,9 +7,6 @@
 
 class GreensTensorVacuum : public GreensTensor
 {
-  private:
-    double za;
-
 public:
 
   //Constructors
@@ -18,9 +15,6 @@ public:
 
   //Calculate the vacuums Green's tensor in frequency and momentum space
   void calculate_tensor(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts);
-
-  double get_za(){return this->za;};
-  void set_za(double za){this->za = za;};
 
   // integrate over a two-dimensional k space
   void integrate_2d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts);

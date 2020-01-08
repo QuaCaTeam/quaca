@@ -27,7 +27,7 @@ public:
   GreensTensor(std::string input_file);
   GreensTensor(double v, double beta): v(v), beta(beta)
   {
-    assert(v > 0 && v < 1);
+    assert(v >= 0 && v < 1);
     assert(beta > 0);
   };
 
