@@ -9,12 +9,12 @@ class GreensTensorVacuum : public GreensTensor
 {
 public:
 
-  // constructors
-  GreensTensorVacuum(double v, double beta): GreensTensor(v, beta) {};
-  GreensTensorVacuum(std::string input_file): GreensTensor(input_file) {};
+  //Constructors
+  GreensTensorVacuum(double v, double beta);
+  GreensTensorVacuum(std::string input_file);
 
-  // calculate the whole Green's tensor
-  void calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega);
+  //Calculate the vacuums Green's tensor in frequency and momentum space
+  void calculate_tensor(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts);
 
   // integrate over a two-dimensional k space
   void integrate_2d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts);

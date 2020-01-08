@@ -27,12 +27,12 @@ public:
   GreensTensor(std::string input_file);
   GreensTensor(double v, double beta): v(v), beta(beta)
   {
-    assert(v > 0 && v < 1);
+    assert(v >= 0 && v < 1);
     assert(beta > 0);
   };
 
   // calculate the whole Green's tensor
-  virtual void calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega) =0;
+  virtual void calculate_tensor(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts) =0;
 
   // integrate over a two-dimensional k space
   virtual void integrate_2d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)  =0;

@@ -1,6 +1,6 @@
 #include "GreensTensorPlate.h"
 
-void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega)
+void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)
 {
   double a = 0;
 };
