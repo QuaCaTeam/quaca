@@ -43,6 +43,10 @@ public:
   // getter functions
   double get_v() const {return this->v;}
   double get_beta() const {return this->beta;}
+  
+  // setter functions
+  void set_v(double v) {this->v = v;}
+  void set_beta(double beta) {this->beta = beta;}
 };
 
 // A struct for integration options

@@ -48,7 +48,7 @@ void GreensTensorVacuum::integrate_2d_k(cx_mat::fixed<3,3>& GT, Options_GreensTe
 {
   double k = opts.kvec(0);
   double omega = opts.omega;
-  if(opts.fancy_I_kv)
+  if(opts.fancy_I)
   {
     // calculating the solely the imaginary part of the free Green tensor with Doppler shift in the frequency argument G(k, kx*v + omega)
     double xi_quad, omega_pl_quad, omega_quad;
@@ -71,22 +71,26 @@ void GreensTensorVacuum::integrate_2d_k(cx_mat::fixed<3,3>& GT, Options_GreensTe
 
 void GreensTensorVacuum::integrate_1d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)
 {
-  double omega = opts.omega;
-  GT.zeros();
-
   if (opts.fancy_R)
   {
+    GT.zeros();
+    /*
     std::cerr<< "Real part of the vacuum Green's is divergent and already included within the omega_a" << std::endl;
     exit(0);
+    */
   }
-
-  opts.indices(0) = 0;
-  opts.indices(1) = 0;
-  GT(0,0) = cquad(&integrand_1d_k,&opts,-omega/(1.0+this->v),omega/(1.0-this->v),1E-7,0);
-  opts.indices(0) = 1;
-  opts.indices(1) = 1;
-  GT(1,1) = cquad(&integrand_1d_k,&opts, -omega/(1.0+this->v),omega/(1.0-this->v),1E-7,0);
-  GT(2,2) = GT(1,1);
+  else
+  {
+    double omega = opts.omega;
+    GT.zeros();
+    opts.indices(0) = 0;
+    opts.indices(1) = 0;
+    GT(0,0) = cquad(&integrand_1d_k,&opts,-omega/(1.0+this->v),omega/(1.0-this->v),1E-7,0);
+    opts.indices(0) = 1;
+    opts.indices(1) = 1;
+    GT(1,1) = cquad(&integrand_1d_k,&opts, -omega/(1.0+this->v),omega/(1.0-this->v),1E-7,0);
+    GT(2,2) = GT(1,1);
+  }
 };
 
 double GreensTensorVacuum::integrand_1d_k(double kv, void *opts)
@@ -102,6 +106,7 @@ double GreensTensorVacuum::integrand_1d_k(double kv, void *opts)
   omega_pl = (omega+kv*pt->v);
   omega_pl_quad = omega_pl*omega_pl;
   xi_quad = omega_pl_quad - kv*kv;
+  result = 0;
 
   if(opts_pt->indices(0) == 0 && opts_pt->indices(1) == 0)
   {
@@ -119,7 +124,7 @@ double GreensTensorVacuum::integrand_1d_k(double kv, void *opts)
   {
     return result;
   }
-  if (opts_pt->fancy_I_kv)
+  else if (opts_pt->fancy_I_kv)
   {
     result *= kv;
   }

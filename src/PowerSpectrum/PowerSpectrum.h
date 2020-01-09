@@ -10,10 +10,9 @@
 
 class PowerSpectrum
 {
-  protected:
+  public:
     GreensTensor* greens_tensor; // Green's tensor of describing the geometry of the system
     Polarizability* polarizability; // Polarizability describing the linear response of the microscopic particle
-  public:
     //Constructors
     PowerSpectrum(std::string input_file);
     PowerSpectrum(GreensTensor* greens_tensor, Polarizability* polarizability);

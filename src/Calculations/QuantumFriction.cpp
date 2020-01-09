@@ -29,7 +29,7 @@ QuantumFriction::QuantumFriction(GreensTensor* greens_tensor, Polarizability* po
 {
 };
 
-double QuantumFriction::compute_friction(Options_Friction opts, double omega_min, double omega_max, double relerr, double epsabs)
+double QuantumFriction::calculate(Options_Friction opts, double omega_min, double omega_max, double relerr, double epsabs)
 {
   return cquad(&friction_integrand, &opts, omega_min, omega_max,relerr, epsabs);
 };
@@ -45,14 +45,24 @@ double QuantumFriction::friction_integrand(double omega, void* opts)
 
   Options_GreensTensor opts_g;
   opts_g.omega = omega;
+  opts_g.class_pt = opts_pt->class_pt->greens_tensor;
+
   opts_g.fancy_I_kv = true;
   opts_pt->class_pt->greens_tensor->integrate_1d_k(green_kv, opts_g);
+
   opts_g.fancy_I_kv = false;
-  opts_g.fancy_I_temp = true;
+  opts_g.fancy_I_kv_temp = true;
   opts_pt->class_pt->greens_tensor->integrate_1d_k(green_temp_kv, opts_g);
+  
+  //std::cout << "Greens tensor temp" << std::endl << green_temp_kv;
+  //std::cout << "Greens tensor kv" << std::endl << green_kv;
 
   opts_pt->class_pt->polarizability->calculate(alpha, omega);
+ // std::cout << "Polarizability" << std::endl << alpha;
+
   opts_pt->class_pt->powerspectrum->calculate(powerspectrum, omega);
+//  std::cout << "Power spectrum" << std::endl << powerspectrum;
+
   return real(2.*trace(-powerspectrum*green_kv + alpha*green_temp_kv));
 };
 

@@ -21,8 +21,9 @@ void PowerSpectrumHarmOsc::calculate(cx_mat::fixed<3,3>& powerspectrum, double o
   Options_GreensTensor opts;
   opts.fancy_I_kv_temp = true;
   opts.omega = omega;
-  this->greens_tensor->integrate_1d_k(powerspectrum, opts);
-  this->polarizability->calculate( alpha, omega);
+  opts.class_pt = this->greens_tensor;
+  this->greens_tensor->integrate_1d_k(green, opts);
+  this->polarizability->calculate(alpha, omega);
   powerspectrum = alpha*green*conj(trans(alpha));
 };
 

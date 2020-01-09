@@ -24,7 +24,7 @@ PowerSpectrum * PowerSpectrumFactory::create(std::string input_file)
     std::string type = root.get<std::string>("PowerSpectrum.type");
 
     // set the right pointer, show error if type is unknown
-    if ( type == "vacuum" )
+    if ( type == "harmonic oscillator" )
     {
       powerspectrum = new PowerSpectrumHarmOsc(input_file);
     }
