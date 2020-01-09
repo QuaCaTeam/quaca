@@ -11,8 +11,8 @@ class GreensTensorPlate : public GreensTensor
 private:
     // permittivity is needed to describe the surface's response
     Permittivity *permittivity;
-
-
+    // kappa_cut defines the numerical cut-off of the kappa integration
+    double delta_cut;
 public:
 
   GreensTensorPlate(double v, double za, double beta, std::string input_file);
