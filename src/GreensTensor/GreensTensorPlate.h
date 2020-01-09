@@ -29,7 +29,7 @@ public:
   };
 
   // calculate full tensor
-  void calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega);
+  void calculate_tensor(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts);
 
   // integrate over a two-dimensional k space
   void integrate_2d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts);

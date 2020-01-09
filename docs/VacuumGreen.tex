@@ -1,0 +1,252 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc} 
+\usepackage[top=1cm, bottom=2.0cm, left=1.0cm, right=1.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{bbold}
+\usepackage{amsmath,amssymb}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{cite}
+\usepackage{algpseudocode,algorithm,algorithmicx}
+\usepackage{empheq}
+\usepackage{lscape}
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+\newcommand{\vv}[1]{\mathbf{#1}}
+\newcommand{\ii}[0]{\mathrm{i}}
+\newcommand{\dd}[0]{\mathrm{d}}
+\DeclareMathOperator\arctanh{arctanh}
+% define citation style
+\bibliographystyle{unsrt}
+\title{Free (Vacuum) Green's Tensor at finite Temperatures}
+\author{Marty Oelschläger}
+\begin{document}
+\maketitle
+%\tableofcontents
+\section{Pure Green Tensor}
+As neatly derived in \cite{amorim2017} the free Green tensor can be written as
+\footnote{The Green's tensor definition in \cite{amorim2017} differs from the displayed one by the factor $\frac{\omega^2}{\epsilon_0c^2}$. This is due to the different definitions of the Green's tensor.}
+\begin{align}
+  \underline{G}_0(\vv k, z,z',\omega) &=
+  \frac{\omega^2}{\epsilon_0c^2}
+  \mathcal{P}\left[
+    \mathbb{1}-\frac{c^2}{\omega^2}
+    \begin{bmatrix}
+      \vv k \\ \pm\ii \kappa
+    \end{bmatrix}
+    \left[ \vv k^\intercal ,\,\pm\ii\kappa\right]
+  \right]
+  \frac{e^{-\kappa|z-z'|}}{2\kappa}
+  -\frac{\vv e_z\otimes\vv e_z}{\omega^2/c^2}\delta(z-z')
+  .
+\end{align}
+Here the case $\pm$ relates to $z\gtrless z'$ and $\kappa=\sqrt{k^2-\omega^2/c^2}$ with $\mathrm{Re}\{\kappa\}\geq0$ and $\mathrm{Im}\{\kappa\}<0$. Especially, we focus on the case $z=z'$. Despite the real part of this Green's tensor being divergent for this case, we can continue calculating the imaginary part. Here we also eliminated odd orders of $k_y$, since we solely consider symmetric integration over $k_y$
+%
+\begin{align}
+  \mathrm{Im}\left\{\underline{G}_0(\vv k, z\to z',\omega)\right\} &=
+  \frac{
+  \theta(\frac{\omega^2}{c^2}-k^2)
+}{2\epsilon_0\sqrt{\omega^2/c^2-k^2}}
+  \left(
+    \mathbb{1}\frac{\omega^2}{c^2} -
+    \mathrm{diag}\left[
+      k_x^2,\,k_y^2,\,\frac{\omega^2}{c^2}-k^2
+    \right]
+  \right)
+  .
+\end{align}
+The Heaviside function is needed to prohibit the $\omega^2/c^2 -k^2 <0$. Otherwise the term would be purely real and thus would not contribute to the imaginary part of the free Green's tensor. To show, that we can obtain the same result as e.g. given in \cite{buhmann2012b} or \cite{intravaia2016b}, we quickly calculate the integration over polar coordinates (assuming $\omega>0$). First, we perform the integration over $\varphi$ and find
+%
+\begin{align}
+  \int \frac{\dd^2\vv k}{(2\pi)^2} 
+  \mathrm{Im}\left\{\underline{G}_0(\vv k, z\to z',\omega)\right\} &=
+  \frac{1}{4\pi\epsilon_0}
+  \int_0^{\omega/c} \dd k \,k
+  \frac{1
+}{\sqrt{\omega^2/c^2-k^2}}
+    \mathrm{diag}\left[
+     \frac{\omega^2}{c^2}-  \frac{k^2}{2},\,\frac{\omega^2}{c^2}-\frac{k^2}{2},\,k^2
+    \right]
+  .
+\end{align}
+%
+In order to perform the $k$ integration, we use the known integrals
+\begin{align}
+  \int_0^y \dd x \frac{x}{\sqrt{y^2-x^2}}=y,
+ \quad \quad
+  \int_0^y \dd x \frac{x^3}{\sqrt{y^2-x^2}}=\frac{2y^3}{3},
+  \end{align}
+  and find
+\begin{align}
+  \int \frac{\dd^2\vv k}{(2\pi)^2} 
+  \mathrm{Im}\left\{\underline{G}_0(\vv k, z\to z',\omega)\right\} &=
+     \frac{\omega^3}{6\pi\epsilon_0 c^3}
+     \mathbb{1}
+     .
+\end{align}
+In general, when considering a constant motion of the source with $\vv r = \vv v t +\vv r_0$, we can shift the motion into the frequency dependence, which manifests as a Doppler shift $\omega\to\omega_+=\omega+k_x v$. Since we need several different integrals concerning the $k_x$ integration, we want restrict us here to the $k_y$ integration. The inequality from the Heaviside function then reads $\omega_+^2/c^2-k_x^2\geq k_y^2$. However, when employing this inequality for the upper $k_y$ bound we still have to fulfil the $\omega_+^2/c^2-k_x^2\geq 0$ bound with respect to the $k_x$ integration. In the following we perform the $k_y$ integration
+
+\begin{align}
+  \int\frac{\dd^2\vv k}{(2\pi)^2}  \mathrm{Im}\left\{\underline{G}_0(\vv k, z\to z',\omega_+)\right\} &=
+  \int\frac{\dd k_x}{4\pi\epsilon_0} 
+  \theta(\frac{\omega_+^2}{c^2}-k_x^2)
+  \int_0^{\xi} \frac{\dd k_y}{\pi}
+  \frac{1
+}{\sqrt{\xi^2-k_y^2}}
+  \left(
+  \mathbb{1}\frac{\omega_+^2}{c^2} -
+    \mathrm{diag}\left[
+      k_x^2,\,k_y^2,\,\xi^2-k_y^2
+    \right]
+  \right)
+  ,
+\end{align}
+where we introduced $\xi=\sqrt{\omega_+^2/c^2-k_x^2}$. Again we take advantage from the following known integrations
+\begin{align}
+  \int_0^y \dd x \frac{1}{\sqrt{y^2-x^2}}=\frac{\pi}{2},
+ \quad \quad
+  \int_0^y \dd x \frac{x^2}{\sqrt{y^2-x^2}}=\frac{\pi y^2}{4},
+  \end{align}
+  and find
+
+\begin{align}
+  \int\frac{\dd^2\vv k}{(2\pi)^2}  \mathrm{Im}\left\{\underline{G}_0(\vv k, z\to z',\omega_+)\right\}f(\omega,k_x) &=
+  \int\frac{\dd k_x}{8\pi\epsilon_0} 
+  \theta(\xi^2)
+  \left(
+  \mathbb{1}\frac{\omega_+^2}{c^2} -
+    \mathrm{diag}\left[
+      k_x^2,\,\frac{\xi^2}{2},\,\xi^2-\frac{\xi^2}{2}
+    \right]
+  \right)f(\omega,k_x)
+  \\
+&=
+  \int\frac{\dd k_x}{8\pi\epsilon_0} 
+  \theta(\xi^2)
+    \mathrm{diag}\left[
+      \xi^2,\,\frac{\omega_+^2}{c^2}-\frac{\xi^2}{2},\,\frac{\omega_+^2}{c^2}-\frac{\xi^2}{2}    \right]f(\omega,k_x)
+  \\
+&=
+\int_{-\frac{\omega}{c+v}}^{\frac{\omega}{c-v}}\frac{\dd k_x}{8\pi\epsilon_0} 
+    \mathrm{diag}\left[
+      \xi^2,\,\frac{\omega_+^2}{c^2}-\frac{\xi^2}{2},\,\frac{\omega_+^2}{c^2}-\frac{\xi^2}{2}    \right]f(\omega,k_x)
+      .
+\end{align}
+Here the $f(\omega,k_x)$ indicates potential weight functions. In the context of non-contact friction the weight function can take several forms
+\begin{align}
+  f(\omega,k_x) &= 
+  \begin{cases}
+  1
+  \\
+  k_x
+  \\
+  \frac{1}{1-\exp(-\beta\hbar[\omega+k_xv])}
+  \\
+  \frac{k_x}{1-\exp(-\beta\hbar[\omega+k_xv])}
+  \end{cases}
+\end{align}
+While the first two cases lead to simple polynomial expressions, the last two cases can be solved with the aid of the undetermined integrals
+\begin{align}
+  \int \dd k_x \frac{1}{1-\exp(-\hbar\beta[\omega+k_x v])} &= \frac{\ln\left(e^{\hbar\beta(\omega+k_xv)}-1\right)}{\hbar\beta v}
+  ,\\
+  \int \dd k_x \frac{k_x}{1-\exp(-\hbar\beta[\omega+k_x v])} &= \frac{\hbar\beta k_x v\ln\left(1-e^{\hbar\beta(\omega+k_xv)}\right) + \mathrm{Li}_2(e^{\hbar\beta(k_xv+\omega)})}{(\hbar\beta v)^2}
+  ,\\
+  \int \dd k_x \frac{k_x^2}{1-\exp(-\hbar\beta[\omega+k_x v])} &=\frac{k_x^2 v^2 \hbar \beta ^2 \log \left(1-e^{\hbar \beta  (k_x v+\omega )}\right)+2 k_x v \hbar \beta  \text{Li}_2\left(e^{(k_x v+\omega ) \hbar \beta }\right)-2 \text{Li}_3\left(e^{(k_x v+\omega ) \hbar \beta }\right)}{v^3 \hbar \beta ^3} 
+  ,\\
+  \int \dd k_x \frac{k_x^3}{1-\exp(-\hbar\beta[\omega+k_x v])} &=\frac{k_x^3 v^3 \hbar \beta ^3 \log \left(1-e^{\hbar \beta  (k_x v+\omega )}\right)+3 k_x^2 v^2 \hbar \beta ^2 \text{Li}_2\left(e^{(k_x v+\omega ) \hbar \beta }\right)}{v^4 \hbar \beta ^4} 
+\\
+&+
+\frac{-6 k_x v \hbar \beta  \text{Li}_3\left(e^{(k_x v+\omega ) \hbar \beta }\right)+6 \text{Li}_4\left(e^{(k_x v+\omega ) \hbar \beta }\right)}{v^4 \hbar \beta ^4} 
+\end{align}
+where $\mathrm{Li}_n(x)=\sum_{k=1}^\infty \frac{x^k}{k^n}$ is the polylogarithm (maybe we can use the library presented by Kirchner \cite{kirchner2016}?).	
+
+\begin{align}
+  \int\frac{\dd^2\vv k}{(2\pi)^2}  \mathrm{Im}\left\{\underline{G}_0(\vv k, z\to z',\omega_+)\right\}k_x 
+  &=
+\frac{\omega^4}{6\pi\epsilon_0} 
+ \frac{ v c }{(c^2-v^2)^3}   
+\mathrm{diag}\left[
+    1,\,
+  \frac{  2 c^2+v^2}{ c^2-v^2}
+  ,\,
+  \frac{ 2 c^2+v^2}{ c^2-v^2}
+\right]
+\\
+&\stackrel{c\gg v}=
+\frac{v/c }{6\pi\epsilon_0} 
+ \frac{ \omega^4 }{c^4}   
+\mathrm{diag}\left[
+    1,\,
+    2
+    ,\,
+     2\right]
+.
+\end{align}
+
+
+\begin{align}
+  \int\frac{\dd^2\vv k}{(2\pi)^2}  \mathrm{Im}\left\{\underline{G}_0(\vv k, z\to z',\omega_+)\right\}\frac{1}{\hbar\beta\omega_+} 
+  &=
+  \frac{1}{8\pi\epsilon_0}
+  \frac{\omega^2}{v^3\hbar\beta}
+  \mathrm{diag}
+  \begin{bmatrix}
+  \frac{2c v}{c^2-v^2}-2\arctanh\left(\frac{v}{c}\right)
+  \\
+  \frac{3 c v^3-c^3 v}{\left(c^2-v^2\right)^2}+\arctanh\left(\frac{v}{c}\right)
+  \\
+  \frac{3 c v^3-c^3 v}{\left(c^2-v^2\right)^2}+\arctanh\left(\frac{v}{c}\right)
+  \end{bmatrix}
+  \\
+  &\stackrel{c\gg v}=
+  \mathbb{1}\frac{1}{8\pi\epsilon_0}\frac{4\omega^2}{3\hbar\beta c^3}
+  =
+  \mathbb{1}\frac{(2\pi)^2}{\epsilon_0}\frac{1}{3\lambda_\mathrm{th}\lambda^2}
+\end{align}
+where we used that $\frac{2\pi}{\lambda}=\frac{\omega}{c}$ and $\hbar\beta=\omega_\mathrm{th}$.
+
+
+\begin{align}
+  \int\frac{\dd^2\vv k}{(2\pi)^2}  \mathrm{Im}\left\{\underline{G}_0(\vv k, z\to z',\omega_+)\right\} 
+  &=
+  \frac{1}{8\pi\epsilon_0}\mathrm{diag}\left[
+  \frac{4 c \omega ^3}{3 \left(c^2-v^2\right)^2}
+    ,\,
+    \frac{4 c \omega ^3 \left(c^2+v^2\right)}{3 \left(c^2-v^2\right)^3}
+  ,\,
+\frac{4 c \omega ^3 \left(c^2+v^2\right)}{3 \left(c^2-v^2\right)^3}  
+\right]
+  \\
+  &\stackrel{c\gg v}=
+  \mathbb{1}
+\frac{\omega^3}{6\pi \epsilon_0 c^3}
+\end{align}
+In the zero temperature limit $1+n(\omega+k_xv)\to \theta(\omega+k_xv)$. However, the Heaviside distribution does not influence the integration since $-\omega/(c+v)\geq -\omega/v$ for $\omega>0$.
+
+
+\begin{align}
+  \int\frac{\dd^2\vv k}{(2\pi)^2}  \mathrm{Im}\left\{\underline{G}_0(\vv k, z\to z',\omega_+)\right\}\frac{k_x}{\hbar\beta\omega_+} 
+  &=
+  \frac{1}{8\pi\epsilon_0}
+  \frac{\omega^3}{3v^4\hbar\beta}
+  \mathrm{diag}
+  \begin{bmatrix}
+    2\frac{5 c v^3-3 c^3 v}{\left(c^2-v^2\right)^2}+6 \arctanh\left(\frac{v}{c}\right)
+    \\
+    \frac{8 c^3 v^3-3 c^5 v-13c v^5}{\left(v^2-c^2\right)^3}+3 \arctanh\left(\frac{v}{c}\right)
+    \\
+    \frac{8 c^3 v^3-3 c^5 v-13c v^5}{\left(v^2-c^2\right)^3}+3 \arctanh\left(\frac{v}{c}\right)
+  \end{bmatrix}
+  \\
+  &\stackrel{c\gg v}=
+  \frac{1}{\pi\epsilon_0}
+  \frac{2 v \omega^3}{15 \hbar\beta c^5}
+  \mathrm{diag}\left[1,\,2,\,2\right]
+\end{align}
+The respective power spectrum in the classic limit then reads
+\begin{align}
+  \underline{S}(\omega)\approx\mathbb{1}
+  \frac{ \alpha_0 \omega_a^2}{\beta\omega}\delta(\omega_a^2-\omega^2)=\mathbb{1}\frac{k_\mathrm{B}T\alpha_0}{2}\left[\delta(\omega-\omega_a)+\delta(\omega+\omega_a)\right]
+\end{align}
+\bibliography{lib}
+\end{document}

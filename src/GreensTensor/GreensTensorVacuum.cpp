@@ -8,30 +8,47 @@ namespace pt = boost::property_tree;
 #include "GreensTensorVacuum.h"
 #include "../Calculations/Integrations.h"
 
-
-void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega)
+GreensTensorVacuum::GreensTensorVacuum(double v, double beta):GreensTensor(v,beta)
 {
+  assert(beta > 0.);
+  assert(v >= 0.);
+  
+};
+
+GreensTensorVacuum::GreensTensorVacuum(std::string input_file):GreensTensor(input_file)
+{
+};
+
+void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3,3>& GT,Options_GreensTensor opts)
+{
+  if(opts.fancy_I)
+  {
   // calculating the solely the imaginary part of the free Green tensor
-  double pre, kx, ky, k2, omega2;
-  kx = kvec(0);
-  ky = kvec(1);
-  k2 = kx*kx + ky*ky;
-  omega2 = omega*omega;
-
-  assert(omega2 < k2);
-
-  pre = 1.0/(2*M_PI*sqrt(omega2 - k2));
+  double pre, k_x, k_y, k_quad, omega, omega_quad;
+  k_x = opts.kvec(0);
+  k_y = opts.kvec(1);
+  omega = opts.omega;
+  k_quad = k_x*k_x + k_y*k_y;
+  omega_quad = omega*omega;
+  pre = 1.0/(2*M_PI*sqrt(omega_quad - k_quad));
   GT.zeros();
-  GT(0,0) = pre*(omega2 - kx*kx);
-  GT(1,1) = pre*(omega2 - ky*ky);
-  GT(2,2) = pre*k2;
+  GT(0,0) = pre*(omega_quad - k_x*k_x);
+  GT(1,1) = pre*(omega_quad - k_y*k_y);
+  GT(2,2) = pre*k_quad;
+  }
+  else
+  {
+     std::cerr << "Only the imaginary part of the Green tensor with Doppler shift in the frequency argument is implemented" << std::endl;
+     exit(0);
+  }
+ 
 };
 
 void GreensTensorVacuum::integrate_2d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)
 {
   double k = opts.kvec(0);
   double omega = opts.omega;
-  if(opts.fancy_I_kv)
+  if(opts.fancy_I)
   {
     // calculating the solely the imaginary part of the free Green tensor with Doppler shift in the frequency argument G(k, kx*v + omega)
     double xi_quad, omega_pl_quad, omega_quad;
@@ -54,22 +71,26 @@ void GreensTensorVacuum::integrate_2d_k(cx_mat::fixed<3,3>& GT, Options_GreensTe
 
 void GreensTensorVacuum::integrate_1d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)
 {
-  double omega = opts.omega;
-  GT.zeros();
-
   if (opts.fancy_R)
   {
+    GT.zeros();
+    /*
     std::cerr<< "Real part of the vacuum Green's is divergent and already included within the omega_a" << std::endl;
     exit(0);
+    */
   }
-
-  opts.indices(0) = 0;
-  opts.indices(1) = 0;
-  GT(0,0) = cquad(&integrand_1d_k,&opts,-omega/(1.0+this->v),omega/(1.0-this->v),1E-7,0);
-  opts.indices(0) = 1;
-  opts.indices(1) = 1;
-  GT(1,1) = cquad(&integrand_1d_k,&opts, -omega/(1.0+this->v),omega/(1.0-this->v),1E-7,0);
-  GT(2,2) = GT(1,1);
+  else
+  {
+    double omega = opts.omega;
+    GT.zeros();
+    opts.indices(0) = 0;
+    opts.indices(1) = 0;
+    GT(0,0) = cquad(&integrand_1d_k,&opts,-omega/(1.0+this->v),omega/(1.0-this->v),1E-7,0);
+    opts.indices(0) = 1;
+    opts.indices(1) = 1;
+    GT(1,1) = cquad(&integrand_1d_k,&opts, -omega/(1.0+this->v),omega/(1.0-this->v),1E-7,0);
+    GT(2,2) = GT(1,1);
+  }
 };
 
 double GreensTensorVacuum::integrand_1d_k(double kv, void *opts)
@@ -85,6 +106,7 @@ double GreensTensorVacuum::integrand_1d_k(double kv, void *opts)
   omega_pl = (omega+kv*pt->v);
   omega_pl_quad = omega_pl*omega_pl;
   xi_quad = omega_pl_quad - kv*kv;
+  result = 0;
 
   if(opts_pt->indices(0) == 0 && opts_pt->indices(1) == 0)
   {
@@ -102,7 +124,7 @@ double GreensTensorVacuum::integrand_1d_k(double kv, void *opts)
   {
     return result;
   }
-  if (opts_pt->fancy_I_kv)
+  else if (opts_pt->fancy_I_kv)
   {
     result *= kv;
   }
