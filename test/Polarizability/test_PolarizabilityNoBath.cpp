@@ -84,13 +84,13 @@ TEST_CASE("Test integration for omega_cut much smaller than omega_a for no bath"
 TEST_CASE("Test integration for omega_cut much larger than omega_a for no bath", "[PolarizabilityNoBath]")
 {
   // define greens tensor
-  double v = 1e-5;
+  double v = 0.4;
   double beta = 1e-1;
   GreensTensorVacuum greens(v, beta);
 
   // define polarizability
   double omega_a = 4.0;
-  double alpha_zero = 1e-5;
+  double alpha_zero = 1e-6;
   PolarizabilityNoBath pol(omega_a, alpha_zero, &greens);
 
   Options_Polarizability opts;
@@ -100,8 +100,8 @@ TEST_CASE("Test integration for omega_cut much larger than omega_a for no bath",
   opts.class_pt = &pol;
 
   double omega_min = 0.0;
-  double omega_max = omega_a*1e2;
-  double relerr = 1e-12;
+  double omega_max = omega_a*1e4;
+  double relerr = 1e-15;
   double abserr = 0;
 
   double result = pol.integrate_omega(opts, omega_min, omega_a, relerr, abserr);
@@ -111,5 +111,5 @@ TEST_CASE("Test integration for omega_cut much larger than omega_a for no bath",
   //std::cout << result << std::endl;
   //std::cout << asymp << std::endl;
 
-  REQUIRE(Approx(result).margin(relerr) == asymp);
+  REQUIRE(Approx(result).margin(1e-7) == asymp);
 };

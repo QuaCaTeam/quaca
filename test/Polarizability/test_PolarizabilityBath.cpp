@@ -101,26 +101,26 @@ TEST_CASE("Test integration for omega_cut much smaller than omega_a", "[Polariza
   double abserr = 0;
 
   double result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
-  double asymp = alpha_zero*alpha_zero*pow(omega_max,4)/2.0*1.0/(3*(1.0 - v*v)*(1.0 - v*v));
+  double asymp = alpha_zero*alpha_zero*pow(omega_max,4)/2.0*1.0/(3*(1.0 - v*v)*(1.0 - v*v)) + alpha_zero*gamma*omega_max*omega_max/(2.0*omega_a*omega_a);
 
   //std::cout << result << std::endl;
   //std::cout << asymp << std::endl;
 
   // I think this test is just for polarizability without bath
-  //REQUIRE(Approx(result).margin(relerr) == asymp);
+  REQUIRE(Approx(result).margin(relerr) == asymp);
 };
 
 
-TEST_CASE("Test integration for omega_cut much larger than omega_a", "[PolarizabilityNoBath]")
+TEST_CASE("Test integration for omega_cut much larger than omega_a", "[PolarizabilityBath]")
 {
   // define greens tensor
-  double v = 1e-4;
-  double beta = 1e-1;
+  double v = 1e-1;
+  double beta = 1e3;
   GreensTensorVacuum greens(v, beta);
 
   // define polarizability
   double omega_a = 4.0;
-  double alpha_zero = 1e-5;
+  double alpha_zero = 1e-4;
   double gamma = 2.0;
   OhmicMemoryKernel mu(gamma);
   PolarizabilityBath pol(omega_a, alpha_zero, &mu, &greens);
@@ -132,12 +132,13 @@ TEST_CASE("Test integration for omega_cut much larger than omega_a", "[Polarizab
   opts.class_pt = &pol;
 
   double omega_min = 0.0;
-  double omega_max = omega_a*1e2;
-  double relerr = 1e-12;
+  double omega_max = omega_a*1e4;
+  double relerr = 1e-15;
   double abserr = 0;
 
-  double result = pol.integrate_omega(opts, omega_min, omega_a, relerr, abserr);
-  result += pol.integrate_omega(opts, omega_a, omega_max, relerr, abserr);
+  double result = pol.integrate_omega(opts, omega_min, omega_a-1e-2, relerr, abserr);
+  result += pol.integrate_omega(opts, omega_a-1e-2, omega_a+1e-2, relerr, abserr);
+  result += pol.integrate_omega(opts, omega_a+1e-2, omega_max, relerr, abserr);
   double asymp = alpha_zero*omega_a*M_PI/2.0;
 
   //std::cout << result << std::endl;
