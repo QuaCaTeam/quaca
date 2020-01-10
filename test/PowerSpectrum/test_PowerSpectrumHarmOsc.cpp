@@ -5,7 +5,7 @@
 
 TEST_CASE("Power spectrum of harmonic oscillator works properly")
 {
-  
+
   SECTION("Constructor with initialisation list works")
   {
     auto v = GENERATE(take(1, random(0.,1.)));
@@ -39,7 +39,7 @@ TEST_CASE("Power spectrum of harmonic oscillator works properly")
     REQUIRE(Approx(powerspectrum.polarizability->get_alpha_zero()).epsilon(1e-6) == alpha_zero);
   }
 
-  
+
 
   SECTION("Power spectrum is hermitian")
   {
@@ -51,11 +51,11 @@ TEST_CASE("Power spectrum of harmonic oscillator works properly")
     cx_mat::fixed<3,3> rhs(fill::zeros);
     powerspectrum.calculate(lhs, omega);
     powerspectrum.calculate(rhs, omega);
-    cout << "Power spectrum" <<lhs << rhs << endl;
+    //cout << "Power spectrum" <<lhs << rhs << endl;
 
     REQUIRE(approx_equal(lhs, trans(conj(rhs)), "absdiff", 1e-5));
   }
-  
+
   SECTION("Power spectrum reduces to polarizability in the static case")
   {
     PowerSpectrumHarmOsc powerspectrum("../data/test_files/PowerSpectrumHarmOsc.ini");
@@ -65,9 +65,11 @@ TEST_CASE("Power spectrum of harmonic oscillator works properly")
     cx_mat::fixed<3,3> rhs(fill::zeros);
     auto omega = GENERATE(take(5, random(-1e3,1e3)));
     powerspectrum.calculate(lhs, omega);
-    alpha.calculate(rhs, omega);
-    cout << "Power spectrum" <<lhs << rhs << endl;
+
+    Options_Polarizability opts;
+    opts.omega = omega;
+    alpha.calculate_tensor(rhs, opts);
+    //cout << "Power spectrum" <<lhs << rhs << endl;
     REQUIRE(approx_equal(lhs, rhs, "absdiff", 10e-5));
   }
 }
-

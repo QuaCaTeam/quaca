@@ -21,3 +21,23 @@ Polarizability::Polarizability(std::string input_file)
   // read greens tensor
   this->greens_tensor = GreensTensorFactory::create(input_file);
 };
+
+
+double Polarizability::integrand_omega(double omega, void *opts)
+{
+  Options_Polarizability* opts_pt = static_cast<Options_Polarizability*>(opts);
+  cx_mat::fixed<3,3> alpha;
+
+  opts_pt->omega = omega;
+  opts_pt->class_pt->calculate_tensor(alpha, *opts_pt);
+
+  assert( imag(alpha(opts_pt->indices(0), opts_pt->indices(1))) == 0 );
+  double result = real(alpha(opts_pt->indices(0), opts_pt->indices(1)));
+
+  return result;
+};
+
+double Polarizability::integrate_omega(Options_Polarizability opts, double omega_min, double omega_max, double relerr, double abserr)
+{
+  return cquad(&integrand_omega, &opts, omega_min, omega_max, relerr, abserr);
+}

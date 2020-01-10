@@ -53,11 +53,13 @@ double QuantumFriction::friction_integrand(double omega, void* opts)
   opts_g.fancy_I_kv = false;
   opts_g.fancy_I_kv_temp = true;
   opts_pt->class_pt->greens_tensor->integrate_1d_k(green_temp_kv, opts_g);
-  
+
   //std::cout << "Greens tensor temp" << std::endl << green_temp_kv;
   //std::cout << "Greens tensor kv" << std::endl << green_kv;
 
-  opts_pt->class_pt->polarizability->calculate(alpha, omega);
+  Options_Polarizability opts_alpha;
+  opts_alpha.omega = omega;
+  opts_pt->class_pt->polarizability->calculate_tensor(alpha, opts_alpha);
  // std::cout << "Polarizability" << std::endl << alpha;
 
   opts_pt->class_pt->powerspectrum->calculate(powerspectrum, omega);
@@ -65,7 +67,3 @@ double QuantumFriction::friction_integrand(double omega, void* opts)
 
   return real(2.*trace(-powerspectrum*green_kv + alpha*green_temp_kv));
 };
-
- 
-
- 

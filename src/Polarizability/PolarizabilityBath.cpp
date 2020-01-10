@@ -1,9 +1,11 @@
 #include "PolarizabilityBath.h"
 
-void PolarizabilityBath::calculate(cx_mat::fixed<3,3>& alpha, double omega)
+void PolarizabilityBath::calculate_tensor(cx_mat::fixed<3,3>& alpha, Options_Polarizability opts)
 {
   // imaginary unit
   std::complex<double> I(0.0, 1.0);
+
+  double omega = opts.omega;
 
   // calculate diagonal entries
   cx_mat::fixed<3,3> diag;
@@ -29,4 +31,13 @@ void PolarizabilityBath::calculate(cx_mat::fixed<3,3>& alpha, double omega)
 
   // put everything together
   alpha = alpha_zero * omega_a * omega_a * inv(diag - alpha_zero * omega_a * omega_a * (greens_R + I*greens_I));
+
+  if(opts.fancy_I)
+  {
+    alpha = (alpha - trans(alpha))/(2.0*I); // trans is hermitean conjugation in armadillo
+  }
+  else if (opts.fancy_R)
+  {
+    alpha = (alpha + trans(alpha))/(2.0); // trans is hermitean conjugation in armadillo
+  }
 };

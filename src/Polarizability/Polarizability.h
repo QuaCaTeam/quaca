@@ -11,7 +11,7 @@
 using namespace arma;
 
 //! a struct with the integration options
-struct Options_Polarizabiliy;
+struct Options_Polarizability;
 
 //! An abstract polarizability class
 class Polarizability
@@ -29,7 +29,11 @@ public:
     Polarizability(std::string input_file);
 
     // calculate the polarizability tensor
-    virtual void calculate(cx_mat::fixed<3,3>& alpha, double omega) =0;
+    virtual void calculate_tensor(cx_mat::fixed<3,3>& alpha, Options_Polarizability opts) =0;
+
+    // integration over omega
+    double integrate_omega(Options_Polarizability opts, double omega_min, double omega_max, double relerr, double abserr);
+    static double integrand_omega(double omega, void *opts);
 
     // getter functions
     double get_omega_a(){return this->omega_a;};
@@ -42,15 +46,11 @@ struct Options_Polarizability
   // Different options for the integrand
   bool fancy_R = false;
   bool fancy_I = false;
-  bool fancy_I_kv = false;
-  bool fancy_I_temp = false;
-  bool fancy_I_kv_temp = false;
+
+  double omega = NAN;
 
   //Indices of the 3x3 polarizability tensor
   vec::fixed<2> indices = {-1,-1};
-
-  //Value of omega for the integration of the k-Variables
-  double omega = NAN;
 
   //Pointer to the Polarizability to be able to access the attributes of the class eventhough the integrand is static
   Polarizability* class_pt;

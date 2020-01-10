@@ -4,32 +4,7 @@
 #include "catch.hpp"
 #include "Quaca.h"
 
-TEST_CASE("Polarizability with bath can be constructed in different ways", "[PolarizabilityBath]")
-{
-  SECTION("Constructor from .ini file")
-  {
-    PolarizabilityBath pol("../data/test_files/PolarizabilityBath.ini");
-    REQUIRE( pol.get_omega_a() == 1.3 );
-    REQUIRE( pol.get_alpha_zero() == 6E-9 );
-
-    // test if we read memory kernel correctly
-    std::complex<double> test = pol.get_mu(3.0);
-    REQUIRE( test.real() == 0.69420 );
-  };
-
-  SECTION("Constructor with direct input")
-  {
-    OhmicMemoryKernel mu(0.69420);
-    PolarizabilityBath pol(1.3, 6E-9, &mu, NULL);
-    REQUIRE( pol.get_omega_a() == 1.3 );
-    REQUIRE( pol.get_alpha_zero() == 6E-9 );
-
-    std::complex<double> test = pol.get_mu(3.0);
-    REQUIRE( test.real() == 0.69420 );
-  };
-};
-
-TEST_CASE("Check if integrand works", "[PolarizabilityBath]")
+TEST_CASE("Check if integrand works for no bath", "[PolarizabilityNoBath]")
 {
   // define greens tensor
   double v = 0.1;
@@ -39,9 +14,7 @@ TEST_CASE("Check if integrand works", "[PolarizabilityBath]")
   // define polarizability
   double omega_a = 3.0;
   double alpha_zero = 2.4;
-  double gamma = 2.0;
-  OhmicMemoryKernel mu(gamma);
-  PolarizabilityBath pol(omega_a, alpha_zero, &mu, &greens);
+  PolarizabilityNoBath pol(omega_a, alpha_zero, &greens);
 
   // frequency to evaluate
   double omega = 3.0;
@@ -75,7 +48,7 @@ TEST_CASE("Check if integrand works", "[PolarizabilityBath]")
 
 };
 
-TEST_CASE("Test integration for omega_cut much smaller than omega_a", "[PolarizabilityNoBath]")
+TEST_CASE("Test integration for omega_cut much smaller than omega_a for no bath", "[PolarizabilityNoBath]")
 {
   // define greens tensor
   double v = 0.4;
@@ -84,10 +57,8 @@ TEST_CASE("Test integration for omega_cut much smaller than omega_a", "[Polariza
 
   // define polarizability
   double omega_a = 4.0;
-  double alpha_zero = 0.1;
-  double gamma = 2.0;
-  OhmicMemoryKernel mu(gamma);
-  PolarizabilityBath pol(omega_a, alpha_zero, &mu, &greens);
+  double alpha_zero = 2.4;
+  PolarizabilityNoBath pol(omega_a, alpha_zero, &greens);
 
   Options_Polarizability opts;
   opts.fancy_I = true;
@@ -106,24 +77,21 @@ TEST_CASE("Test integration for omega_cut much smaller than omega_a", "[Polariza
   //std::cout << result << std::endl;
   //std::cout << asymp << std::endl;
 
-  // I think this test is just for polarizability without bath
-  //REQUIRE(Approx(result).margin(relerr) == asymp);
+  REQUIRE(Approx(result).margin(relerr) == asymp);
 };
 
 
-TEST_CASE("Test integration for omega_cut much larger than omega_a", "[PolarizabilityNoBath]")
+TEST_CASE("Test integration for omega_cut much larger than omega_a for no bath", "[PolarizabilityNoBath]")
 {
   // define greens tensor
-  double v = 1e-4;
+  double v = 1e-5;
   double beta = 1e-1;
   GreensTensorVacuum greens(v, beta);
 
   // define polarizability
   double omega_a = 4.0;
   double alpha_zero = 1e-5;
-  double gamma = 2.0;
-  OhmicMemoryKernel mu(gamma);
-  PolarizabilityBath pol(omega_a, alpha_zero, &mu, &greens);
+  PolarizabilityNoBath pol(omega_a, alpha_zero, &greens);
 
   Options_Polarizability opts;
   opts.fancy_I = true;

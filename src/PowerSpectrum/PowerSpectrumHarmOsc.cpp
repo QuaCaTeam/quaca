@@ -17,13 +17,18 @@ PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(GreensTensor* greens_tensor, Polariza
 void PowerSpectrumHarmOsc::calculate(cx_mat::fixed<3,3>& powerspectrum, double omega)
 {
   cx_mat::fixed<3,3> green(fill::zeros);
+  Options_GreensTensor opts_g;
+  opts_g.fancy_I_kv_temp = true;
+  opts_g.omega = omega;
+  opts_g.class_pt = this->greens_tensor;
+  this->greens_tensor->integrate_1d_k(green, opts_g);
+
+
   cx_mat::fixed<3,3> alpha(fill::zeros);
-  Options_GreensTensor opts;
-  opts.fancy_I_kv_temp = true;
-  opts.omega = omega;
-  opts.class_pt = this->greens_tensor;
-  this->greens_tensor->integrate_1d_k(green, opts);
-  this->polarizability->calculate(alpha, omega);
+  Options_Polarizability opts_alpha;
+  opts_alpha.omega = omega;
+  this->polarizability->calculate_tensor(alpha, opts_alpha);
+
+
   powerspectrum = alpha*green*conj(trans(alpha));
 };
-
