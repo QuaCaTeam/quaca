@@ -106,7 +106,6 @@ TEST_CASE("Test integration for omega_cut much smaller than omega_a", "[Polariza
   //std::cout << result << std::endl;
   //std::cout << asymp << std::endl;
 
-  // I think this test is just for polarizability without bath
   REQUIRE(Approx(result).margin(relerr) == asymp);
 };
 
@@ -121,7 +120,7 @@ TEST_CASE("Test integration for omega_cut much larger than omega_a", "[Polarizab
   // define polarizability
   double omega_a = 4.0;
   double alpha_zero = 1e-4;
-  double gamma = 2.0;
+  double gamma = 1.0;
   OhmicMemoryKernel mu(gamma);
   PolarizabilityBath pol(omega_a, alpha_zero, &mu, &greens);
 

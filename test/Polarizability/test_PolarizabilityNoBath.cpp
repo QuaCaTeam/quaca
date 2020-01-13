@@ -62,8 +62,6 @@ TEST_CASE("Test integration for omega_cut much smaller than omega_a for no bath"
 
   Options_Polarizability opts;
   opts.fancy_I = true;
-  opts.indices(0) = 0;
-  opts.indices(1) = 0;
   opts.class_pt = &pol;
 
   double omega_min = 0.0;
@@ -71,13 +69,56 @@ TEST_CASE("Test integration for omega_cut much smaller than omega_a for no bath"
   double relerr = 1e-12;
   double abserr = 0;
 
+  /* test diagonal entries */
+  opts.indices(0) = 0;
+  opts.indices(1) = 0;
   double result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
   double asymp = alpha_zero*alpha_zero*pow(omega_max,4)/2.0*1.0/(3*(1.0 - v*v)*(1.0 - v*v));
-
-  //std::cout << result << std::endl;
-  //std::cout << asymp << std::endl;
-
   REQUIRE(Approx(result).margin(relerr) == asymp);
+
+  opts.indices(0) = 1;
+  opts.indices(1) = 1;
+  result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
+  asymp = alpha_zero*alpha_zero*pow(omega_max,4)/2.0*(1.0+v*v)/(3*pow((1.0 - v*v),3));
+  REQUIRE(Approx(result).margin(relerr) == asymp);
+
+  opts.indices(0) = 2;
+  opts.indices(1) = 2;
+  result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
+  asymp = alpha_zero*alpha_zero*pow(omega_max,4)/2.0*(1.0+v*v)/(3*pow((1.0 - v*v),3));
+  REQUIRE(Approx(result).margin(relerr) == asymp);
+
+  /* test off diagonal entries */
+  opts.indices(0) = 0;
+  opts.indices(1) = 1;
+  result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
+  REQUIRE(result == 0);
+  
+  opts.indices(0) = 1;
+  opts.indices(1) = 0;
+  result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
+  REQUIRE(result == 0);
+
+  opts.indices(0) = 2;
+  opts.indices(1) = 0;
+  result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
+  REQUIRE(result == 0);
+
+  opts.indices(0) = 0;
+  opts.indices(1) = 2;
+  result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
+  REQUIRE(result == 0);
+
+  opts.indices(0) = 1;
+  opts.indices(1) = 2;
+  result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
+  REQUIRE(result == 0);
+
+  opts.indices(0) = 2;
+  opts.indices(1) = 1;
+  result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
+  REQUIRE(result == 0);
+
 };
 
 
