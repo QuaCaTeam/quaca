@@ -78,35 +78,60 @@ TEST_CASE("Check if integrand works", "[PolarizabilityBath]")
 TEST_CASE("Test integration for omega_cut much smaller than omega_a", "[PolarizabilityNoBath]")
 {
   // define greens tensor
-  double v = 0.4;
-  double beta = 1e2;
+  auto v = GENERATE(take(5, random(0.0, 1.0)));
+  auto beta = GENERATE(take(5, random(0.0, 1e4)));
   GreensTensorVacuum greens(v, beta);
 
   // define polarizability
-  double omega_a = 4.0;
-  double alpha_zero = 0.1;
-  double gamma = 2.0;
+  auto omega_a = GENERATE(take(5, random(1.0, 1e3)));
+  auto alpha_zero = GENERATE(take(5, random(0.0, 0.1)));
+  auto gamma = GENERATE(take(5, random(0.0, 1e2)));
   OhmicMemoryKernel mu(gamma);
   PolarizabilityBath pol(omega_a, alpha_zero, &mu, &greens);
 
   Options_Polarizability opts;
   opts.fancy_I = true;
-  opts.indices(0) = 0;
-  opts.indices(1) = 0;
   opts.class_pt = &pol;
 
   double omega_min = 0.0;
-  double omega_max = 1e-2;
+  double fact = 1e-5;
+  double omega_max = fact*omega_a;
   double relerr = 1e-12;
   double abserr = 0;
 
-  double result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
-  double asymp = alpha_zero*alpha_zero*pow(omega_max,4)/2.0*1.0/(3*(1.0 - v*v)*(1.0 - v*v)) + alpha_zero*gamma*omega_max*omega_max/(2.0*omega_a*omega_a);
+  double result, asymp; // double for result and asymptotic value
 
-  //std::cout << result << std::endl;
-  //std::cout << asymp << std::endl;
+  // loop over indices
+  for (int i = 0; i < 3; i++)
+  {
+    for (int j = 0; j < 3; j++)
+    {
+      opts.indices(0) = i;
+      opts.indices(1) = j;
+      result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
 
-  REQUIRE(Approx(result).margin(relerr) == asymp);
+      // check diagonal entries
+      if (i == j)
+      {
+        if (i == 0)
+        {
+          asymp = alpha_zero*alpha_zero*pow(omega_max,4)/2.0*1.0/(3*(1.0 - v*v)*(1.0 - v*v)) + alpha_zero*gamma*fact*fact/(2.0);
+          REQUIRE(Approx(result).margin(relerr) == asymp);
+        }
+        else
+        {
+          asymp = alpha_zero*alpha_zero*pow(omega_max,4)/2.0*(1.0+v*v)/(3*pow((1.0 - v*v),3)) + alpha_zero*gamma*fact*fact/(2.0);
+          REQUIRE(Approx(result).margin(relerr) == asymp);
+        };
+      }
+      else
+      {
+        REQUIRE(result == 0); // off-diagonals are zero
+      };
+
+    };
+  };
+
 };
 
 

@@ -51,13 +51,13 @@ TEST_CASE("Check if integrand works for no bath", "[PolarizabilityNoBath]")
 TEST_CASE("Test integration for omega_cut much smaller than omega_a for no bath", "[PolarizabilityNoBath]")
 {
   // define greens tensor
-  double v = 0.4;
-  double beta = 1e2;
+  auto v = GENERATE(take(5, random(0.0, 1.0)));
+  auto beta = GENERATE(take(5, random(0.0, 1e4)));
   GreensTensorVacuum greens(v, beta);
 
   // define polarizability
-  double omega_a = 4.0;
-  double alpha_zero = 2.4;
+  auto omega_a = GENERATE(take(5, random(1e-1, 1e3)));
+  auto alpha_zero = GENERATE(take(5, random(0.0, 0.1)));
   PolarizabilityNoBath pol(omega_a, alpha_zero, &greens);
 
   Options_Polarizability opts;
@@ -65,59 +65,42 @@ TEST_CASE("Test integration for omega_cut much smaller than omega_a for no bath"
   opts.class_pt = &pol;
 
   double omega_min = 0.0;
-  double omega_max = 1e-2;
-  double relerr = 1e-12;
+  double omega_max = 1e-5*omega_a; // omega_max much smaller than omega_a
+  double relerr = 1e-13;
   double abserr = 0;
 
-  /* test diagonal entries */
-  opts.indices(0) = 0;
-  opts.indices(1) = 0;
-  double result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
-  double asymp = alpha_zero*alpha_zero*pow(omega_max,4)/2.0*1.0/(3*(1.0 - v*v)*(1.0 - v*v));
-  REQUIRE(Approx(result).margin(relerr) == asymp);
+  double result, asymp; // double for result and asymptotic value
 
-  opts.indices(0) = 1;
-  opts.indices(1) = 1;
-  result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
-  asymp = alpha_zero*alpha_zero*pow(omega_max,4)/2.0*(1.0+v*v)/(3*pow((1.0 - v*v),3));
-  REQUIRE(Approx(result).margin(relerr) == asymp);
+  // loop over indices
+  for (int i = 0; i < 3; i++)
+  {
+    for (int j = 0; j < 3; j++)
+    {
+      opts.indices(0) = i;
+      opts.indices(1) = j;
+      result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
 
-  opts.indices(0) = 2;
-  opts.indices(1) = 2;
-  result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
-  asymp = alpha_zero*alpha_zero*pow(omega_max,4)/2.0*(1.0+v*v)/(3*pow((1.0 - v*v),3));
-  REQUIRE(Approx(result).margin(relerr) == asymp);
+      // check diagonal entries
+      if (i == j)
+      {
+        if (i == 0)
+        {
+          asymp = alpha_zero*alpha_zero*pow(omega_max,4)/2.0*1.0/(3*(1.0 - v*v)*(1.0 - v*v));
+          REQUIRE(Approx(result).margin(relerr) == asymp);
+        }
+        else
+        {
+          asymp = alpha_zero*alpha_zero*pow(omega_max,4)/2.0*(1.0+v*v)/(3*pow((1.0 - v*v),3));
+          REQUIRE(Approx(result).margin(relerr) == asymp);
+        };
+      }
+      else
+      {
+        REQUIRE(result == 0); // off-diagonals are zero
+      };
 
-  /* test off diagonal entries */
-  opts.indices(0) = 0;
-  opts.indices(1) = 1;
-  result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
-  REQUIRE(result == 0);
-  
-  opts.indices(0) = 1;
-  opts.indices(1) = 0;
-  result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
-  REQUIRE(result == 0);
-
-  opts.indices(0) = 2;
-  opts.indices(1) = 0;
-  result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
-  REQUIRE(result == 0);
-
-  opts.indices(0) = 0;
-  opts.indices(1) = 2;
-  result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
-  REQUIRE(result == 0);
-
-  opts.indices(0) = 1;
-  opts.indices(1) = 2;
-  result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
-  REQUIRE(result == 0);
-
-  opts.indices(0) = 2;
-  opts.indices(1) = 1;
-  result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
-  REQUIRE(result == 0);
+    };
+  };
 
 };
 
@@ -125,7 +108,7 @@ TEST_CASE("Test integration for omega_cut much smaller than omega_a for no bath"
 TEST_CASE("Test integration for omega_cut much larger than omega_a for no bath", "[PolarizabilityNoBath]")
 {
   // define greens tensor
-  double v = 0.4;
+  auto v = GENERATE(take(5, random(0.0, 1.0)));
   double beta = 1e-1;
   GreensTensorVacuum greens(v, beta);
 
@@ -136,8 +119,6 @@ TEST_CASE("Test integration for omega_cut much larger than omega_a for no bath",
 
   Options_Polarizability opts;
   opts.fancy_I = true;
-  opts.indices(0) = 0;
-  opts.indices(1) = 0;
   opts.class_pt = &pol;
 
   double omega_min = 0.0;
@@ -145,12 +126,28 @@ TEST_CASE("Test integration for omega_cut much larger than omega_a for no bath",
   double relerr = 1e-15;
   double abserr = 0;
 
-  double result = pol.integrate_omega(opts, omega_min, omega_a, relerr, abserr);
-  result += pol.integrate_omega(opts, omega_a, omega_max, relerr, abserr);
+  double result;
   double asymp = alpha_zero*omega_a*M_PI/2.0;
 
-  //std::cout << result << std::endl;
-  //std::cout << asymp << std::endl;
+  // loop over indices
+  for (int i = 0; i < 3; i++)
+  {
+    for (int j = 0; j < 3; j++)
+    {
+      opts.indices(0) = i;
+      opts.indices(1) = j;
+      result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
 
-  REQUIRE(Approx(result).margin(1e-7) == asymp);
+      // check diagonal entries
+      if (i == j)
+      {
+        REQUIRE(Approx(result).margin(1e-8) == asymp);
+      }
+      else
+      {
+        REQUIRE(result == 0); // off-diagonals are zero
+      };
+
+    };
+  };
 };
