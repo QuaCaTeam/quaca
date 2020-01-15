@@ -175,7 +175,7 @@ double GreensTensorPlate::integrand_k_2d(double kappa_double, void *opts)
 
   // Transfer kappa to the correct complex value
   if (kappa_double < 0.0) {
-    kappa_complex = (0.0 , - kappa_double);
+    kappa_complex = (0.0 , kappa_double);
     kappa_quad = - kappa_double * kappa_double ;
   }
   else
