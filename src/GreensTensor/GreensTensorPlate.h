@@ -5,6 +5,10 @@
 #include <cmath>
 #include "GreensTensor.h"
 #include "Permittivity/PermittivityFactory.h"
+// ini parser
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/ini_parser.hpp>
+namespace pt = boost::property_tree;
 
 class GreensTensorPlate : public GreensTensor
 {
@@ -19,7 +23,20 @@ public:
   GreensTensor(v, beta) {this->za = za; this->delta_cut = delta_cut; this->permittivity = permittivity;};
 
 
-  GreensTensorPlate(std::string input_file): GreensTensor(input_file) {this->permittivity = PermittivityFactory::create(input_file);};
+  GreensTensorPlate(std::string input_file):
+  GreensTensor(input_file){
+  this->permittivity = PermittivityFactory::create(input_file);
+
+  // Create a root
+  pt::ptree root;
+
+  // Load the ini file in this ptree
+  pt::read_ini(input_file, root);
+
+  // read parameters
+  this->za = root.get<double>("GreensTensor.za");
+  this->delta_cut = root.get<double>("GreensTensor.delta_cut");
+  };
 
   void calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega);
   void integrate_k_2d(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts);

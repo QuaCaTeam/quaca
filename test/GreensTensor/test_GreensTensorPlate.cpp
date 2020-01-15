@@ -4,7 +4,7 @@
 #include "catch.hpp"
 #include "Quaca.h"
 
-TEST_CASE("Construction of Plate Greens Tensor works properly", "[GreensTensorPlate]")
+TEST_CASE("Construction of Green's tensor works properly", "[GreensTensorPlate]")
 {
   SECTION("Construction with direct input")
   {
@@ -21,13 +21,23 @@ TEST_CASE("Construction of Plate Greens Tensor works properly", "[GreensTensorPl
   REQUIRE(Greens.get_za() == za);
   REQUIRE(Greens.get_delta_cut() == delta_cut);
   };
-  
+
   SECTION("Construction from .ini file")
+  {
   GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.ini");
+  REQUIRE(Greens.get_za() == 0.1);
+  REQUIRE(Greens.get_delta_cut() == 10);
+  };
+};
+TEST_CASE("The operations calculate_tensor and the integrand_k_2d coincide", "[GreensTensorPlate]")
+{
 
 };
 
+TEST_CASE("Scattered Green's tensor works properly", "[GreensTensorPlate]")
+{
 
+};
 
 //  struct Options_GreensTensor opts;
 //  opts.fancy_R=true;

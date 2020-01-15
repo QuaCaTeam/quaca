@@ -1,28 +1,10 @@
 // integration routine
 #include "../Calculations/Integrations.h"
 
-// ini parser
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/ini_parser.hpp>
-namespace pt = boost::property_tree;
 
 #include "GreensTensorPlate.h"
 #include "Permittivity/PermittivityFactory.h"
 
-GreensTensorPlate(std::string input_file)
-{
-  // Create a root
-  pt::ptree root;
-
-  // Load the ini file in this ptree
-  pt::read_ini(input_file, root);
-
-  // read parameters
-  this->gamma = root.get<double>("Permittivity.gamma");
-  this->omega_p = root.get<double>("Permittivity.omega_p");
-
-  this->permittivity = PermittivityFactory::create(input_file);
-};
 
 void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega)
 {
