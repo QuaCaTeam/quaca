@@ -9,33 +9,19 @@ namespace pt = boost::property_tree;
 #include "GreensTensorPlate.h"
 #include "Permittivity/PermittivityFactory.h"
 
-
-GreensTensorPlate::GreensTensorPlate(double v, double za, double beta, std::string input_file)
+GreensTensorPlate(std::string input_file)
 {
-  // set velocity
-  this->v  = v;
-  // set distance from the surface
-  this->za = za;
-  // set inverse temperature
-  this->beta = beta;
-
   // Create a root
   pt::ptree root;
 
   // Load the ini file in this ptree
   pt::read_ini(input_file, root);
 
-  // read permittivity
-  this->permittivity = PermittivityFactory::create(input_file);
   // read parameters
-  this->delta_cut = root.get<double>("Plate_Setup.delta_cut");
+  this->gamma = root.get<double>("Permittivity.gamma");
+  this->omega_p = root.get<double>("Permittivity.omega_p");
 
-};
-
-
-std::complex<double> GreensTensorPlate::get_epsilon(double omega)
-{
-    return this->permittivity->epsilon(omega);
+  this->permittivity = PermittivityFactory::create(input_file);
 };
 
 void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega)

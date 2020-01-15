@@ -1,16 +1,6 @@
 #include "GreensTensorVacuum.h"
 #include "../Calculations/Integrations.h"
 
-
-
-GreensTensorVacuum::GreensTensorVacuum(double v, double beta)
-{
-  // set velocity
-  this->v = v;
-  // set inverse temperature
-  this->beta = beta;
-
-};
 void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega)
 {
   // calculating the solely the imaginary part of the free Green tensor
