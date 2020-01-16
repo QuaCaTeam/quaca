@@ -23,7 +23,7 @@ public:
   GreensTensor(double v, double beta): v(v), beta(beta) {};
   GreensTensor(std::string input_file);
 
-  virtual void calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega) =0;
+  virtual void calculate_tensor(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts) =0;
   virtual void integrate_k_2d(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)  =0;
   virtual void integrate_k_1d(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts) =0;
   double get_v(){return this->v;}

@@ -1,14 +1,14 @@
 #include "GreensTensorVacuum.h"
 #include "../Calculations/Integrations.h"
 
-void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega)
+void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)
 {
   // calculating the solely the imaginary part of the free Green tensor
   double pre, kx, ky, k2, omega2;
-  kx = kvec(0);
-  ky = kvec(1);
+  kx = opts.kvec(0);
+  ky = opts.kvec(1);
   k2 = kx*kx + ky*ky;
-  omega2 = omega*omega;
+  omega2 = opts.omega*opts.omega;
   pre = 1.0/(2*M_PI*sqrt(omega2 - k2));
   GT.zeros();
   GT(0,0) = pre*(omega2 - kx*kx);

@@ -6,9 +6,9 @@
 #include "Permittivity/PermittivityFactory.h"
 
 
-void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega)
+void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)
 {
-  double pre, kx, ky, k_quad, omega_quad;
+  double pre, kx, ky, omega, k_quad, omega_quad;
   // imaginary unit
   std::complex<double> I(0.0, 1.0);
 
@@ -16,24 +16,40 @@ void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> k
   std::complex<double> r_p, r_s;
   std::complex<double> prefactor_p, prefactor_s;
 
-
-  kx = kvec(0);
-  ky = kvec(1);
+  omega = opts.omega;
+  kx = opts.kvec(0);
+  ky = opts.kvec(1);
   k_quad = kx*kx + ky*ky;
   omega_quad = omega*omega;
   eps = permittivity->epsilon(omega);
 
+  std::cout << "k_quad=" << std::endl;
+  std::cout << k_quad << std::endl;
+  std::cout << "omega=" << std::endl;
+  std::cout << omega << std::endl;
+  std::cout << "epsilon=" << std::endl;
+  std::cout << eps << std::endl;
   // kapppa as well as kappa_epsilon are defined to have either a purely
   // positive real part or purely negatively imaginary part
 
-  kappa = sqrt(k_quad - omega_quad);
-  kappa = ( std::abs(kappa.real()) ,
-           -std::abs(kappa.imag()) );
+  kappa = std::sqrt(k_quad - omega_quad);
 
-  kappa_epsilon = sqrt(k_quad - eps*omega_quad);
-  kappa_epsilon = ( std::abs(kappa_epsilon.real()) ,
-                   -std::abs(kappa_epsilon.imag()) );
+  std::cout << "kappa=" << std::endl;
+  std::cout << kappa << std::endl;
+  std::cout << kappa.real() << std::endl;
+  std::cout << kappa.imag() << std::endl;
 
+  kappa = ( abs ( kappa.real()) ,
+           -abs ( kappa.imag()) );
+
+  std::cout << "kappa=" << std::endl;
+  std::cout << kappa << std::endl;
+  kappa_epsilon = std::sqrt(k_quad - eps*omega_quad);
+  kappa_epsilon = ( std::abs (kappa_epsilon.real()) ,
+                   -std::abs (kappa_epsilon.imag()) );
+
+  std::cout << "kappa_e=" << std::endl;
+  std::cout << kappa_epsilon << std::endl;
   // Defining the reflection coefficients in transverse magnetice polarization (p)
   // and in transverse electric polarization (s)
 
@@ -43,6 +59,10 @@ void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> k
   r_s = (kappa - kappa_epsilon)/
         (kappa + kappa_epsilon);
 
+  std::cout << "r_p=" << std::endl;
+  std::cout << r_p << std::endl;
+  std::cout << "r_s=" << std::endl;
+  std::cout << r_s << std::endl;
   // For an better overview and a efficient calculation, we collect the pre-factors
   // of the p and s polarization separately
 
@@ -54,7 +74,7 @@ void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> k
   // investigated system is symmetric in y and thus those terms vanish
 
   GT.zeros();
-  GT(0,0) = prefactor_p * kx * kx / k_quad + prefactor_s * kx * kx / k_quad;
+  GT(0,0) = prefactor_p * kx * kx / k_quad + prefactor_s * ky * ky / k_quad;
   GT(1,1) = prefactor_p * ky * ky / k_quad + prefactor_s * kx * kx / k_quad;
   GT(2,2) = prefactor_p * k_quad / kappa;
   GT(2,0) = I * prefactor_p * kx / kappa;
