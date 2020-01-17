@@ -12,61 +12,51 @@ void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3,3>& GT, Options_GreensT
   // imaginary unit
   std::complex<double> I(0.0, 1.0);
 
-  std::complex<double> eps, kappa, kappa_epsilon;
+  std::complex<double> eps, eps_omega ,kappa, kappa_epsilon;
   std::complex<double> r_p, r_s;
   std::complex<double> prefactor_p, prefactor_s;
 
-  omega = opts.omega;
+  omega = abs(opts.omega);
   kx = opts.kvec(0);
   ky = opts.kvec(1);
   k_quad = kx*kx + ky*ky;
   omega_quad = omega*omega;
   eps = permittivity->epsilon(omega);
-
-  std::cout << "k_quad=" << std::endl;
-  std::cout << k_quad << std::endl;
-  std::cout << "omega=" << std::endl;
-  std::cout << omega << std::endl;
-  std::cout << "epsilon=" << std::endl;
-  std::cout << eps << std::endl;
+  eps_omega = permittivity->epsilon_omega(omega);
   // kapppa as well as kappa_epsilon are defined to have either a purely
   // positive real part or purely negatively imaginary part
 
-  kappa = std::sqrt(k_quad - omega_quad);
+  kappa = std::sqrt(std::complex<double>(k_quad - omega_quad,0.));
+  if (kappa.imag() > 0.0)
+  {
+    kappa = std::conj(kappa);
+  };
 
-  std::cout << "kappa=" << std::endl;
+  kappa_epsilon = std::sqrt(k_quad - eps_omega*omega);
+  if (kappa_epsilon.imag() > 0.0)
+  {
+    kappa_epsilon = std::conj(kappa_epsilon);
+  };
   std::cout << kappa << std::endl;
-  std::cout << kappa.real() << std::endl;
-  std::cout << kappa.imag() << std::endl;
-
-  kappa = ( abs ( kappa.real()) ,
-           -abs ( kappa.imag()) );
-
-  std::cout << "kappa=" << std::endl;
-  std::cout << kappa << std::endl;
-  kappa_epsilon = std::sqrt(k_quad - eps*omega_quad);
-  kappa_epsilon = ( std::abs (kappa_epsilon.real()) ,
-                   -std::abs (kappa_epsilon.imag()) );
-
-  std::cout << "kappa_e=" << std::endl;
   std::cout << kappa_epsilon << std::endl;
   // Defining the reflection coefficients in transverse magnetice polarization (p)
   // and in transverse electric polarization (s)
-
-  r_p = (eps*kappa - kappa_epsilon)/
-        (eps*kappa + kappa_epsilon);
+  r_p = (kappa*eps - kappa_epsilon)/
+        (kappa*eps + kappa_epsilon);
 
   r_s = (kappa - kappa_epsilon)/
         (kappa + kappa_epsilon);
+  if (opts.omega < 0.0 ) {
+    r_p = std::conj(r_p);
+    r_s = std::conj(r_s);
+  }
 
-  std::cout << "r_p=" << std::endl;
   std::cout << r_p << std::endl;
-  std::cout << "r_s=" << std::endl;
   std::cout << r_s << std::endl;
   // For an better overview and a efficient calculation, we collect the pre-factors
   // of the p and s polarization separately
 
-  prefactor_p = 2 * M_PI * kappa * std::exp(-2 * za * kappa);
+  prefactor_p = 2.0 * M_PI * kappa * std::exp(-(2.0 * za) * kappa);
   prefactor_s =  prefactor_p * r_s * omega_quad/(k_quad-omega_quad);
   prefactor_p = prefactor_p * r_p;
 
@@ -163,12 +153,12 @@ double GreensTensorPlate::integrand_k_2d(double kappa_double, void *opts)
 
   // Transfer kappa to the correct complex value
   if (kappa_double < 0.0) {
-    kappa_complex = (0.0 , kappa_double);
+    kappa_complex = std::complex<double>(0.0 , kappa_double);
     kappa_quad = - kappa_double * kappa_double ;
   }
   else
   {
-    kappa_complex = (kappa_double , 0.0);
+    kappa_complex = std::complex<double>(kappa_double , 0.0);
     kappa_quad =  kappa_double * kappa_double ;
   }
 
@@ -184,7 +174,7 @@ double GreensTensorPlate::integrand_k_2d(double kappa_double, void *opts)
   // kapppa as well as kappa_epsilon are defined to have either a purely
   // positive real part or purely negatively imaginary part
   kappa_epsilon = sqrt(k_quad - eps*omega_pl_quad);
-  kappa_epsilon = ( std::abs(kappa_epsilon.real()) ,-std::abs(kappa_epsilon.imag()) );
+  kappa_epsilon = std::complex<double>( std::abs(kappa_epsilon.real()) ,-std::abs(kappa_epsilon.imag()) );
 
   // Defining the reflection coefficients in transverse magnetice polarization (p)
   // and in transverse electric polarization (s)

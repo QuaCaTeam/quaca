@@ -35,11 +35,23 @@ std::complex<double> PermittivityDrude::epsilon (double omega)
   std::complex<double> I(0.0, 1.0);
 
   // calculate the result
-  result = 1.0 - omega_p*omega_p / (omega * (omega + I * gamma));
+  result = 1.0 - omega_p*omega_p / std::complex<double>(omega*omega , gamma*omega) ;
 
   return result;
 };
 
+// calculate the permittivity scaled by omega
+std::complex<double> PermittivityDrude::epsilon_omega (double omega)
+{
+  // dummies for result and complex unit
+  std::complex<double> result;
+  std::complex<double> I(0.0, 1.0);
+
+  // calculate the result
+  result = omega - omega_p*omega_p / (omega + I * gamma);
+
+  return result;
+};
 // getter method for damping coefficient
 double PermittivityDrude::get_gamma()
 {

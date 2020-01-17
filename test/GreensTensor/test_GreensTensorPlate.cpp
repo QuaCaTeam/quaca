@@ -39,29 +39,28 @@ TEST_CASE("Scattered Green's tensor works properly", "[GreensTensorPlate]")
 
 SECTION("Reality condition in frequency domain is fulfilled")
   {
-  auto omega = GENERATE(take(5,random(-1e3, 1e3)));
-  auto k_x = GENERATE(take(5,random(-1e3, 1e3)));
-  auto k_y = GENERATE(take(5,random(-1e3, 1e3)));
+  auto omega = GENERATE(take(5,random(0., 1e2)));
+  auto k_x = GENERATE(take(5,random(0., 1e2)));
+  auto k_y = GENERATE(take(5,random(0., 1e2)));
   GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.ini");
   struct Options_GreensTensor opts;
-  opts.fancy_I=true;
   opts.class_pt = &Greens;
   cx_mat::fixed<3,3> Greens_lhs(fill::zeros);
   cx_mat::fixed<3,3> Greens_rhs(fill::zeros);
 
-  opts.omega = -omega;
-  opts.kvec(0) = -k_x;
-  opts.kvec(1) = -k_y;
-  Greens.calculate_tensor(Greens_lhs, opts);
-
-  std::cout << Greens_lhs << std::endl;
   opts.omega = omega;
   opts.kvec(0) = k_x;
   opts.kvec(1) = k_y;
+  Greens.calculate_tensor(Greens_lhs, opts);
+
+  std::cout << Greens_lhs << std::endl;
+  opts.omega = -omega;
+  opts.kvec(0) = -k_x;
+  opts.kvec(1) = -k_y;
   Greens.calculate_tensor(Greens_rhs, opts);
 
   std::cout << Greens_rhs << std::endl;
-  REQUIRE(approx_equal(Greens_lhs, trans(conj(Greens_rhs)),"absdiff", 10E-5));
+  REQUIRE(approx_equal(Greens_lhs, conj(Greens_rhs),"absdiff", 10E-5));
 };
 
 };
