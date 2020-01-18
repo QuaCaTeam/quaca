@@ -20,7 +20,11 @@ public:
     Polarizability(std::string input_file);
 
     // calculate the polarizability tensor
-    virtual void calculate(cx_mat::fixed<3,3>& alpha, double omega) =0;
+    virtual void calculate_tensor(cx_mat::fixed<3,3>& alpha, double omega) =0;
+
+    // integration over omega
+    double integrate_omega(Options_Polarizability opts, double omega_min, double omega_max, double relerr, double abserr);
+    static double integrand_omega(double omega, void *opts);
 
     // getter functions
     double get_omega_a();
@@ -50,11 +54,11 @@ public:
     PolarizabilityBath(double omega_a, double alpha_zero, MemoryKernel *mu, GreensTensor *greens_tensor);
     PolarizabilityBath(std::string input_file);
 
+    // calculate the polarizability tensor
+    void calculate_tensor(cx_mat::fixed<3,3>& alpha, double omega);
+
     // getter function for mu
     std::complex<double> get_mu(double omega);
-
-    // calculate the polarizability tensor
-    void calculate(cx_mat::fixed<3,3>& alpha, double omega);
 };
 ```
 
@@ -73,7 +77,7 @@ public:
   PolarizabilityNoBath(std::string input_file);
 
   // calculate the polarizability tensor
-  void calculate(cx_mat::fixed<3,3>& alpha, double omega);
+  void calculate_tensor(cx_mat::fixed<3,3>& alpha, double omega);
 
 };
 ```
@@ -104,7 +108,7 @@ PolarizabilityBath pol(omega_a, alpha_zero, &mu, &greens_tensor);
 To calculate $\underline{\alpha}(3.0)$ we then do
 ```cpp
 cx_mat::fixed<3,3> alpha(fill::zeros);
-pol.calculate(alpha, 3.0);
+pol.calculate_tensor(alpha, 3.0);
 ```
 The matrix `alpha` now contains the correctly calculated polarizability tensor.
 
@@ -133,7 +137,7 @@ Now we can easily define and calculate the polarizability as such
 PolarizabilityBath pol("parameters.ini");
 
 cx_mat::fixed<3,3> alpha(fill::zeros);
-pol.calculate(alpha, 3.0);
+pol.calculate_tensor(alpha, 3.0);
 ```
 
 

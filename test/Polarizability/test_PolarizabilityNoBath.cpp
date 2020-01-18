@@ -4,32 +4,7 @@
 #include "catch.hpp"
 #include "Quaca.h"
 
-TEST_CASE("Polarizability with bath can be constructed in different ways", "[PolarizabilityBath]")
-{
-  SECTION("Constructor from .ini file")
-  {
-    PolarizabilityBath pol("../data/test_files/PolarizabilityBath.ini");
-    REQUIRE( pol.get_omega_a() == 1.3 );
-    REQUIRE( pol.get_alpha_zero() == 6E-9 );
-
-    // test if we read memory kernel correctly
-    std::complex<double> test = pol.get_mu(3.0);
-    REQUIRE( test.real() == 0.69420 );
-  };
-
-  SECTION("Constructor with direct input")
-  {
-    OhmicMemoryKernel mu(0.69420);
-    PolarizabilityBath pol(1.3, 6E-9, &mu, NULL);
-    REQUIRE( pol.get_omega_a() == 1.3 );
-    REQUIRE( pol.get_alpha_zero() == 6E-9 );
-
-    std::complex<double> test = pol.get_mu(3.0);
-    REQUIRE( test.real() == 0.69420 );
-  };
-};
-
-TEST_CASE("Check if integrand works", "[PolarizabilityBath]")
+TEST_CASE("Check if integrand works for no bath", "[PolarizabilityNoBath]")
 {
   // define greens tensor
   double v = 0.1;
@@ -39,9 +14,7 @@ TEST_CASE("Check if integrand works", "[PolarizabilityBath]")
   // define polarizability
   double omega_a = 3.0;
   double alpha_zero = 2.4;
-  double gamma = 2.0;
-  OhmicMemoryKernel mu(gamma);
-  PolarizabilityBath pol(omega_a, alpha_zero, &mu, &greens);
+  PolarizabilityNoBath pol(omega_a, alpha_zero, &greens);
 
   // frequency to evaluate
   double omega = 3.0;
@@ -75,7 +48,7 @@ TEST_CASE("Check if integrand works", "[PolarizabilityBath]")
 
 };
 
-TEST_CASE("Test integration for omega_cut much smaller than omega_a", "[PolarizabilityNoBath]")
+TEST_CASE("Test integration for omega_cut much smaller than omega_a for no bath", "[PolarizabilityNoBath]")
 {
   // define greens tensor
   auto v = GENERATE(take(3, random(0.0, 1.0)));
@@ -85,18 +58,15 @@ TEST_CASE("Test integration for omega_cut much smaller than omega_a", "[Polariza
   // define polarizability
   auto omega_a = GENERATE(take(3, random(1e-1, 1e1)));
   auto alpha_zero = GENERATE(take(3, random(0.0, 0.1)));
-  auto gamma = GENERATE(take(3, random(0.0, 1e2)));
-  OhmicMemoryKernel mu(gamma);
-  PolarizabilityBath pol(omega_a, alpha_zero, &mu, &greens);
+  PolarizabilityNoBath pol(omega_a, alpha_zero, &greens);
 
   Options_Polarizability opts;
   opts.fancy_I = true;
   opts.class_pt = &pol;
 
   double omega_min = 0.0;
-  double fact = 1e-3;
-  double omega_max = fact*omega_a;
-  double relerr = 1e-12;
+  double omega_max = 1e-3*omega_a; // omega_max much smaller than omega_a
+  double relerr = 1e-13;
   double abserr = 0;
 
   double result, asymp; // double for result and asymptotic value
@@ -118,17 +88,18 @@ TEST_CASE("Test integration for omega_cut much smaller than omega_a", "[Polariza
       */
       toterr = result*relerr + omega_max*omega_max;
 
+
       // check diagonal entries
       if (i == j)
       {
         if (i == 0)
         {
-          asymp = alpha_zero*alpha_zero*pow(omega_max,4)/2.0*1.0/(3*(1.0 - v*v)*(1.0 - v*v)) + alpha_zero*gamma*fact*fact/(2.0);
+          asymp = alpha_zero*alpha_zero*pow(omega_max,4)/2.0*1.0/(3*(1.0 - v*v)*(1.0 - v*v));
           REQUIRE(Approx(result).margin(toterr) == asymp);
         }
         else
         {
-          asymp = alpha_zero*alpha_zero*pow(omega_max,4)/2.0*(1.0+v*v)/(3*pow((1.0 - v*v),3)) + alpha_zero*gamma*fact*fact/(2.0);
+          asymp = alpha_zero*alpha_zero*pow(omega_max,4)/2.0*(1.0+v*v)/(3*pow((1.0 - v*v),3));
           REQUIRE(Approx(result).margin(toterr) == asymp);
         };
       }
@@ -143,33 +114,32 @@ TEST_CASE("Test integration for omega_cut much smaller than omega_a", "[Polariza
 };
 
 
-TEST_CASE("Test integration for omega_cut much larger than omega_a", "[PolarizabilityBath]")
+TEST_CASE("Test integration for omega_cut much larger than omega_a for no bath", "[PolarizabilityNoBath]")
 {
   // define greens tensor
-  double v = 1e-1;
-  double beta = 1e3;
+  auto v = GENERATE(take(3, random(0.0, 1.0)));
+  double beta = 1e5;
   GreensTensorVacuum greens(v, beta);
 
   // define polarizability
-  double omega_a = 4.0;
-  double alpha_zero = 1e-4;
-  double gamma = 1.0;
-  OhmicMemoryKernel mu(gamma);
-  PolarizabilityBath pol(omega_a, alpha_zero, &mu, &greens);
+  auto omega_a = GENERATE(take(3, random(1e-1, 1e1)));
+  double alpha_zero = 1e-10;
+  PolarizabilityNoBath pol(omega_a, alpha_zero, &greens);
 
   Options_Polarizability opts;
   opts.fancy_I = true;
-  opts.indices(0) = 0;
-  opts.indices(1) = 0;
   opts.class_pt = &pol;
 
   double omega_min = 0.0;
-  double omega_max = omega_a*1e4;
-  double relerr = 1e-15;
-  double abserr = 0;
+  double omega_max = omega_a*1e5;
+  double relerr = 1e-13;
+  double abserr = 0.;
 
-  double asymp = alpha_zero*omega_a*M_PI/2.0 * (M_PI - 2.0* atan((gamma*gamma - 2.0*omega_a*omega_a)/(gamma*sqrt(4.0*omega_a*omega_a - gamma*gamma))))/sqrt(4*omega_a*omega_a - gamma*gamma);
-  double result, toterr;
+  double result;
+  double asymp = alpha_zero*omega_a*M_PI/2.0;
+
+  double toterr;
+
 
   // loop over indices
   for (int i = 0; i < 3; i++)
