@@ -25,7 +25,7 @@ protected:
 public:
 
     // constructors
-    Polarizability(double omega_a, double alpha_zero, GreensTensor *greens_tensor): omega_a(omega_a), alpha_zero(alpha_zero), greens_tensor(greens_tensor) {};
+    Polarizability(double omega_a, double alpha_zero, GreensTensor *greens_tensor);
     Polarizability(std::string input_file);
 
     // calculate the polarizability tensor

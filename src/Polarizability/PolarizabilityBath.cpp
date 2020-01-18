@@ -1,5 +1,15 @@
 #include "PolarizabilityBath.h"
 
+PolarizabilityBath::PolarizabilityBath(double omega_a, double alpha_zero, MemoryKernel *mu, GreensTensor *greens_tensor): Polarizability(omega_a, alpha_zero, greens_tensor)
+{
+  this->mu = mu;
+};
+
+PolarizabilityBath::PolarizabilityBath(std::string input_file): Polarizability(input_file)
+{
+  this->mu = MemoryKernelFactory::create(input_file);
+};
+
 void PolarizabilityBath::calculate_tensor(cx_mat::fixed<3,3>& alpha, Options_Polarizability opts)
 {
   // imaginary unit

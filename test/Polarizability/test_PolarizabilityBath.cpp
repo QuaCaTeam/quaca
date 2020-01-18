@@ -184,13 +184,14 @@ TEST_CASE("Test integration for omega_cut much larger than omega_a", "[Polarizab
 
       /*
       * error tolerance includes absolute error from integration, which is result*relerr
+      * we estimate the truncation error to sqrt(alpha_zero)
       */
       toterr = result*relerr + sqrt(alpha_zero);
 
       // check diagonal entries
       if (i == j)
       {
-        //REQUIRE(Approx(result).margin(toterr) == asymp);
+        REQUIRE(Approx(result).margin(toterr) == asymp);
       }
       else
       {

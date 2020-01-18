@@ -6,6 +6,10 @@ namespace pt = boost::property_tree;
 #include "../GreensTensor/GreensTensorFactory.h"
 #include "Polarizability.h"
 
+Polarizability::Polarizability(double omega_a, double alpha_zero, GreensTensor *greens_tensor): omega_a(omega_a), alpha_zero(alpha_zero), greens_tensor(greens_tensor)
+{
+};
+
 Polarizability::Polarizability(std::string input_file)
 {
   // Create a root

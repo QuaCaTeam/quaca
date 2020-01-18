@@ -154,16 +154,14 @@ TEST_CASE("Test integration for omega_cut much larger than omega_a for no bath",
 
       /*
       * error tolerance includes absolute error from integration, which is result*relerr
+      * we estimate the truncation error to sqrt(alpha_zero)
       */
-      toterr = result*relerr + alpha_zero*alpha_zero;
+      toterr = result*relerr + sqrt(alpha_zero);
 
       // check diagonal entries
       if (i == j)
       {
         REQUIRE(Approx(result).margin(toterr) == asymp);
-        std::cout << std::scientific;
-        std::cout << result << std::endl;
-        std::cout << asymp << std::endl;
       }
       else
       {

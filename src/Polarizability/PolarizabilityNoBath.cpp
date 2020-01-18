@@ -1,5 +1,13 @@
 #include "PolarizabilityNoBath.h"
 
+PolarizabilityNoBath::PolarizabilityNoBath(double omega_a, double alpha_zero, GreensTensor *greens_tensor): Polarizability(omega_a, alpha_zero, greens_tensor)
+{
+};
+
+PolarizabilityNoBath::PolarizabilityNoBath(std::string input_file): Polarizability(input_file)
+{
+};
+
 void PolarizabilityNoBath::calculate_tensor(cx_mat::fixed<3,3>& alpha, Options_Polarizability opts)
 {
   // imaginary unit
