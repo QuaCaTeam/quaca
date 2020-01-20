@@ -1,26 +1,25 @@
 // ini parser
-#include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
 namespace pt = boost::property_tree;
 
 #include "OhmicMemoryKernel.h"
 
-// constructor for ohmic memory kernel from .ini file
-OhmicMemoryKernel::OhmicMemoryKernel(std::string input_file)
-{
-    // Create a root
-    pt::ptree root;
+OhmicMemoryKernel::OhmicMemoryKernel(double gamma) : gamma(gamma){};
 
-    // Load the ini file in this ptree
-    pt::read_ini(input_file, root);
+OhmicMemoryKernel::OhmicMemoryKernel(std::string input_file) {
+  // Create a root
+  pt::ptree root;
 
-    // read damping coefficient
-    this->gamma = root.get<double>("MemoryKernel.gamma");
+  // Load the ini file in this ptree
+  pt::read_ini(input_file, root);
+
+  // read damping coefficient
+  this->gamma = root.get<double>("MemoryKernel.gamma");
 };
 
 // return mu(omega) for defined memory kernel
-std::complex<double> OhmicMemoryKernel::mu(double omega)
-{
-    const std::complex<double> gammac(this->gamma,0E0);
-    return gammac;
+std::complex<double> OhmicMemoryKernel::mu(double omega) {
+  const std::complex<double> gammac(this->gamma, 0E0);
+  return gammac;
 };
