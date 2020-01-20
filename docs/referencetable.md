@@ -20,9 +20,9 @@ Below you'll find a table which matches each parameter to it's LaTeX expressions
     <th>Code</th>
   </tr>
   <tr>
-    <td>$\omega_a$ = <input type="text" placeholder="frequency" oninput="frequencyConverter(this.value)" onchange="frequencyConverter(this.value)" size="10"></td>
+    <td>$\omega_a$ = <input type="text" placeholder="frequency" oninput="frequencyConverter()" onchange="frequencyConverter()" size="10" id="inputFrequency"></td>
     <td>
-    <select>
+    <select id="inputFrequencyUnit" onchange="frequencyConverter()">
     <option value="eV">eV</option>
     <option value="nm">nm</option>
     </select>
