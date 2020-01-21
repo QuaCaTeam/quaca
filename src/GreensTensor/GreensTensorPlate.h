@@ -3,6 +3,7 @@
 
 #include <complex>
 #include <cmath>
+#include <armadillo>
 #include "GreensTensor.h"
 #include "Permittivity/PermittivityFactory.h"
 // ini parser
