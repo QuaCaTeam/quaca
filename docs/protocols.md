@@ -25,3 +25,22 @@ Protocols
         * add the &omega;<sub>a</sub> << &omega;<sub>cut</sub> case for an object with internal bath
         * test the GreensPlate class
         * investigate physical domains of each input parameter
+
+### Meeting 2: Christoph, Simon and Marty (21.01.2020)
+
+- Christoph introduced clang format
+
+- Simon reported on testing issues (power spectrum is too much zero, and random() produces always the same values)
+
+- Marty presented code progress on GreensTensorPlate
+
+- Notes one testing relations have been discussed. Improvement is needed
+
+- Next week's goal: Calculate Friction
+
+- Christoph presented Travis for future move of the project
+
+- Discussed the handing over to Francescos:
+    * Francesco will be responsible for the survival of the code
+    * It is a very easy possibility to produce publications and generate projects for students
+    * Christoph, Simon and Marty continue to assure the quality of the code for a transition period
