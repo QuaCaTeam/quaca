@@ -73,13 +73,13 @@ void GreensTensorPlate::integrate_k_1d(cx_mat::fixed<3, 3> &GT,
 
   GT.zeros();
   opts.indices = {0, 0};
-  GT(0, 0) = cquad(&integrand_k_1d, &opts, 0, M_PI, 1E-4, 0) / M_PI;
+  GT(0, 0) = cquad(&integrand_k_1d, &opts, 0, M_PI, 1E-10, 0) / M_PI;
   opts.indices = {1, 1};
-  GT(1, 1) = cquad(&integrand_k_1d, &opts, 0, M_PI, 1E-4, 0) / M_PI;
+  GT(1, 1) = cquad(&integrand_k_1d, &opts, 0, M_PI, 1E-10, 0) / M_PI;
   opts.indices = {2, 2};
-  GT(2, 2) = cquad(&integrand_k_1d, &opts, 0, M_PI, 1E-4, 0) / M_PI;
+  GT(2, 2) = cquad(&integrand_k_1d, &opts, 0, M_PI, 1E-10, 0) / M_PI;
   opts.indices = {2, 0};
-  GT(2, 0) = I * cquad(&integrand_k_1d, &opts, 0, M_PI, 1E-4, 0) / M_PI;
+  GT(2, 0) = I * cquad(&integrand_k_1d, &opts, 0, M_PI, 1E-10, 0) / M_PI;
   GT(0, 2) = -GT(2, 0);
 };
 
@@ -95,12 +95,21 @@ double GreensTensorPlate::integrand_k_1d(double phi, void *opts) {
   double za = pt->za;
   double kappa_cut = pt->delta_cut / (2 * za);
   double result;
-
+  double cos_phi = std::cos(phi);
   // Write the integration variable into the options struct
   opts_pt->kvec(0) = phi;
 
   // Calculate the integrand corresponding to the given options
-  result = cquad(&integrand_k_2d, opts, -omega, kappa_cut, 1E-6, 0);
+  if (kappa_cut > std::abs(omega / (v * cos_phi))) {
+    result = cquad(&integrand_k_2d, opts, -std::abs(omega), 0, 1E-12, 0);
+    result += cquad(&integrand_k_2d, opts, 0, std::abs(omega / (v * cos_phi)),
+                    1E-12, 0);
+    result += cquad(&integrand_k_2d, opts, std::abs(omega / (v * cos_phi)),
+                    kappa_cut, 1E-12, 0);
+  } else {
+    result =
+        cquad(&integrand_k_2d, opts, -std::abs(omega), kappa_cut, 1E-12, 0);
+  }
   return result;
 };
 
@@ -139,7 +148,7 @@ double GreensTensorPlate::integrand_k_2d(double kappa_double, void *opts) {
 
   // reflection coefficients and pre-factors of the corresponding polarization
   std::complex<double> r_p, r_s;
-  std::complex<double> prefactor_p, prefactor_s;
+  std::complex<double> prefactor_p, prefactor_s, prefactor_off;
 
   // Transfer kappa to the correct complex value
   if (kappa_double < 0.0) {
@@ -156,9 +165,14 @@ double GreensTensorPlate::integrand_k_2d(double kappa_double, void *opts) {
 
   k_quad = k * k;
   omega_pl = (omega + k * cos_phi * v);
+
   omega_pl_quad = omega_pl * omega_pl;
 
-  eps = pt->get_epsilon(omega_pl);
+  // In order to obey reality in time, we use a positive omega_pl for the actual
+  // calculation and perform the corresponding symmetry operation afterwards
+  double omega_pl_abs = std::abs(omega_pl);
+
+  eps = pt->get_epsilon(omega_pl_abs);
 
   // kapppa as well as kappa_epsilon are defined to have either a purely
   // positive real part or purely negatively imaginary part
@@ -173,7 +187,6 @@ double GreensTensorPlate::integrand_k_2d(double kappa_double, void *opts) {
         (eps * kappa_complex + kappa_epsilon);
 
   r_s = (kappa_complex - kappa_epsilon) / (kappa_complex + kappa_epsilon);
-
   // For an better overview and a efficient calculation, we collect the
   // pre-factors of the p and s polarization separately
 
@@ -181,6 +194,13 @@ double GreensTensorPlate::integrand_k_2d(double kappa_double, void *opts) {
       exp(-2 * za * kappa_complex) / (1. - cos_phi * v * omega_pl / k);
   prefactor_s = prefactor_p * r_s * omega_pl_quad;
   prefactor_p = prefactor_p * r_p * kappa_quad;
+  prefactor_off = prefactor_p * k * cos_phi / kappa_complex;
+  // Impose reality in time
+  if (omega_pl < 0) {
+    prefactor_s = conj(prefactor_s);
+    prefactor_p = conj(prefactor_p);
+    prefactor_off = conj(prefactor_off);
+  }
 
   // Calculate the G_xx element
   if (opts_pt->indices(0) == 0 && opts_pt->indices(1) == 0) {
@@ -196,22 +216,22 @@ double GreensTensorPlate::integrand_k_2d(double kappa_double, void *opts) {
   }
   // Calculate the G_zx element
   else if (opts_pt->indices(0) == 2 && opts_pt->indices(1) == 0) {
-    result_complex = I * prefactor_p * k * cos_phi / kappa_complex;
+    result_complex = I * prefactor_off;
   }
   // Calculate the G_xz element
   else if (opts_pt->indices(0) == 0 && opts_pt->indices(1) == 2) {
-    result_complex = -I * prefactor_p * k * cos_phi / kappa_complex;
+    result_complex = -I * prefactor_off;
   } else {
     result_complex = (0, 0);
   }
 
   // Add weighting function if demanded
   if (opts_pt->fancy_I_kv) {
-    result *= k * cos_phi;
+    result_complex *= k * cos_phi;
   } else if (opts_pt->fancy_I_temp) {
-    result /= (1.0 - exp(-beta * omega_pl));
+    result_complex /= (1.0 - exp(-beta * omega_pl));
   } else if (opts_pt->fancy_I_kv_temp) {
-    result *= k * cos_phi / (1.0 - exp(-beta * omega_pl));
+    result_complex *= k * cos_phi / (1.0 - exp(-beta * omega_pl));
   }
 
   // Calculate fancy real part of the given matrix element
