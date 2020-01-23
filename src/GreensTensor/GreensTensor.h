@@ -56,7 +56,7 @@ struct Options_GreensTensor {
   bool fancy_I_kv_temp = false;
 
   // Indices of the 3x3 GreensTensor
-  vec::fixed<2> indices = {-1, -1};
+  vec::fixed<2> indices = {NAN, NAN};
 
   // Value of omega for the integration of the k-Variables
   double omega = NAN;

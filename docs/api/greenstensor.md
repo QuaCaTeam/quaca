@@ -27,6 +27,33 @@ public:
   double get_beta();
 ```
 
+# Options_GreensTensor
+
+```cpp
+struct Options_GreensTensor {
+  // Different options for the integrand
+  bool fancy_R = false;
+  bool fancy_I = false;
+  bool fancy_I_kv = false;
+  bool fancy_I_temp = false;
+  bool fancy_I_kv_temp = false;
+
+  // Indices of the 3x3 GreensTensor
+  vec::fixed<2> indices = {NAN, NAN};
+
+  // Value of omega for the integration of the k-Variables
+  double omega = NAN;
+
+  // k-vector for the omega integration
+  vec::fixed<2> kvec = {NAN, NAN};
+
+  // Pointer to the GreensTensor to be able to access the attributes of the
+  // class eventhough the integrand is static
+  GreensTensor *class_pt;
+};
+```
+
+
 # GreensTensorVacuum
 ```cpp
 class GreensTensorVacuum : public GreensTensor

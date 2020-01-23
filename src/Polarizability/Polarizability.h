@@ -49,7 +49,7 @@ struct Options_Polarizability {
   double omega = NAN;
 
   // Indices of the 3x3 polarizability tensor
-  vec::fixed<2> indices = {-1, -1};
+  vec::fixed<2> indices = {NAN, NAN};
 
   // Pointer to the Polarizability to be able to access the attributes of the
   // class eventhough the integrand is static

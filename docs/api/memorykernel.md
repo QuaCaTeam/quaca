@@ -1,11 +1,15 @@
-#ifndef OHMICMEMORYKERNEL_H
-#define OHMICMEMORYKERNEL_H
+# MemoryKernel
 
-#include "MemoryKernel.h"
-#include <cmath>
-#include <complex>
+```cpp
+class MemoryKernel {
+public:
+  // Returns the memory kernel given a frequency omega.
+  virtual std::complex<double> mu(double omega) = 0;
+};
+```
 
-//! An ohmic memory kernel
+# OhmicMemoryKernel
+```cpp
 class OhmicMemoryKernel : public MemoryKernel {
 private:
   double gamma; // damping coefficient
@@ -21,5 +25,4 @@ public:
   // getter functions
   double get_gamma() { return this->gamma; };
 };
-
-#endif // OHMICMEMORYKERNEL_H
+```

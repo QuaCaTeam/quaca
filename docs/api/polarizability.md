@@ -1,3 +1,5 @@
+?> We try to use the same variable names for the same physical quantities, which resemble the LaTeX writing. Please have a look at the [reference table](documentation/units)
+
 # Polarizability
 This abstract class serves as a container for two different polarizabilities: one of a particle with an internal heat bath and one without such a bath.
 We expect the polarizability to be of the form
@@ -5,34 +7,52 @@ $$  \underline{\alpha}(\omega) = \alpha_0 \omega_a^2 \left( \omega_a^2 - \omega^
 where we set $\mu(\omega) = 0$ for the particle without an internal heat bath.
 
 ```cpp
-class Polarizability
-{
+class Polarizability {
 protected:
-
-    double omega_a;              // resonance frequency
-    double alpha_zero;           // vacuum polarizability
-    GreensTensor *greens_tensor; // Green's tensor
+  double omega_a;              // resonance frequency
+  double alpha_zero;           // vacuum polarizability
+  GreensTensor *greens_tensor; // Green's tensor
 
 public:
+  // constructors
+  Polarizability(double omega_a, double alpha_zero,
+                 GreensTensor *greens_tensor);
+  Polarizability(std::string input_file);
 
-    // constructors
-    Polarizability(double omega_a, double alpha_zero, GreensTensor *greens_tensor);
-    Polarizability(std::string input_file);
+  // calculate the polarizability tensor
+  virtual void calculate_tensor(cx_mat::fixed<3, 3> &alpha,
+                                Options_Polarizability opts) = 0;
 
-    // calculate the polarizability tensor
-    virtual void calculate_tensor(cx_mat::fixed<3,3>& alpha, double omega) =0;
+  // integration over omega
+  double integrate_omega(Options_Polarizability opts, double omega_min,
+                         double omega_max, double relerr, double abserr);
+  static double integrand_omega(double omega, void *opts);
 
-    // integration over omega
-    double integrate_omega(Options_Polarizability opts, double omega_min, double omega_max, double relerr, double abserr);
-    static double integrand_omega(double omega, void *opts);
-
-    // getter functions
-    double get_omega_a();
-    double get_alpha_zero();
+  // getter functions
+  double get_omega_a();
+  double get_alpha_zero();
 };
 ```
 
-?> We try to use the same variable names for the same physical quantities, which resemble the LaTeX writing. Please have a look at the [reference table](referencetable.md)
+# Options_Polarizability
+This struct is given to the functions in the `Polarizability` class to specify what is being calculated.
+
+```cpp
+struct Options_Polarizability {
+  // Different options for the integrand
+  bool fancy_R = false;
+  bool fancy_I = false;
+
+  double omega = NAN;
+
+  // Indices of the 3x3 polarizability tensor
+  vec::fixed<2> indices = {NAN, NAN};
+
+  // Pointer to the Polarizability to be able to access the attributes of the
+  // class eventhough the integrand is static
+  Polarizability *class_pt;
+};
+```
 
 
 # PolarizabilityBath
