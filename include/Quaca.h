@@ -7,6 +7,7 @@
 #include "../src/GreensTensor/Permittivity/Permittivity.h"
 #include "../src/GreensTensor/Permittivity/PermittivityDrude.h"
 #include "../src/GreensTensor/GreensTensorFactory.h"
+#include "../src/Options/Options.h"
 #include "../src/Polarizability/Polarizability.h"
 #include "../src/Polarizability/PolarizabilityBath.h"
 #include "../src/Polarizability/PolarizabilityNoBath.h"
