@@ -101,8 +101,7 @@ TEST_CASE("The operations calculate_tensor and the integrand_k_2d coincide",
   // Green_fancy_I_ik2d.raw_print();
   // std::cout << '\n';
 
-  //  REQUIRE(approx_equal(Green_fancy_I_ct, Green_fancy_I_ik2d, "reldiff",
-  //  10E-4));
+  REQUIRE(approx_equal(Green_fancy_I_ct, Green_fancy_I_ik2d, "reldiff", 10E-4));
 };
 
 TEST_CASE("Scattered Green's tensor works properly", "[GreensTensorPlate]") {
@@ -192,6 +191,7 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
   };
   SECTION("Integral over Green_fancy_I_kv obeys the crossing relation") {
     auto omega = GENERATE(take(1, random(0., 1e2)));
+    GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.ini");
     struct Options_GreensTensor opts;
     opts.class_pt = &Greens;
     cx_mat::fixed<3, 3> Greens_lhs(fill::zeros);
@@ -203,9 +203,6 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
 
     opts.omega = -omega;
     Greens.integrate_k_1d(Greens_rhs, opts);
-    //  std::cout << "RHS=" << Greens_rhs << '\n';
-    //  std::cout << "LHS=" << strans(Greens_lhs) << '\n';
-    GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.ini");
     REQUIRE(approx_equal(Greens_lhs, strans(Greens_rhs), "reldiff", 10E-4));
   };
   SECTION("Integral over Green_fancy_I_temp obeys the crossing relation") {
@@ -262,7 +259,29 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
 
 TEST_CASE("Integrated Green's tensor matches asymptotes",
           "[GreensTensorPlate]") {
-  SECTION("Low-frequency asymptote"){
-      // \omega << \omega_p and \omega << v/z_a
+  SECTION("Low-frequency asymptote") {
+    // \omega << \omega_p and \omega << v/z_a
+    std::complex<double> I(0.0, 1.0);
+    double omega_p = 9;
+    double gamma = 0.1;
+    double v = 1e-5;
+    double za = 0.1;
+    auto omega = GENERATE(take(1, random(-0.1 * 1e-6, 0.1 * 1e-6)));
+    double delta_cut = 30;
+    PermittivityDrude perm(gamma, omega_p);
+    GreensTensorPlate Greens(v, za, NAN, &perm, delta_cut);
+    struct Options_GreensTensor opts;
+    opts.class_pt = &Greens;
+    cx_mat::fixed<3, 3> GT_Ana(fill::zeros);
+    cx_mat::fixed<3, 3> GT_Num(fill::zeros);
+    GT_Ana(0, 0) = 2 * omega * gamma / pow(omega_p, 2) / pow(2 * za, 3);
+    GT_Ana(1, 1) = GT_Ana(0, 0);
+    GT_Ana(2, 2) = 2. * GT_Ana(0, 0);
+    GT_Ana(0, 2) = (2 * 3 * v * gamma / (pow(omega_p, 2) * pow(2 * za, 4))) / I;
+    GT_Ana(2, 0) = -GT_Ana(0, 2);
+    opts.fancy_I = true;
+    opts.omega = omega;
+    Greens.integrate_k_1d(GT_Num, opts);
+    REQUIRE(approx_equal(GT_Ana, GT_Num, "reldiff", 10E-4));
   };
 };

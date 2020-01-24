@@ -73,13 +73,13 @@ void GreensTensorPlate::integrate_k_1d(cx_mat::fixed<3, 3> &GT,
 
   GT.zeros();
   opts.indices = {0, 0};
-  GT(0, 0) = cquad(&integrand_k_1d, &opts, 0, M_PI, 1E-10, 0) / M_PI;
+  GT(0, 0) = cquad(&integrand_k_1d, &opts, 0, M_PI, 1E-6, 0) / M_PI;
   opts.indices = {1, 1};
-  GT(1, 1) = cquad(&integrand_k_1d, &opts, 0, M_PI, 1E-10, 0) / M_PI;
+  GT(1, 1) = cquad(&integrand_k_1d, &opts, 0, M_PI, 1E-6, 0) / M_PI;
   opts.indices = {2, 2};
-  GT(2, 2) = cquad(&integrand_k_1d, &opts, 0, M_PI, 1E-10, 0) / M_PI;
+  GT(2, 2) = cquad(&integrand_k_1d, &opts, 0, M_PI, 1E-6, 0) / M_PI;
   opts.indices = {2, 0};
-  GT(2, 0) = I * cquad(&integrand_k_1d, &opts, 0, M_PI, 1E-10, 0) / M_PI;
+  GT(2, 0) = I * cquad(&integrand_k_1d, &opts, 0, M_PI, 1E-6, 0) / M_PI;
   GT(0, 2) = -GT(2, 0);
 };
 
@@ -101,11 +101,11 @@ double GreensTensorPlate::integrand_k_1d(double phi, void *opts) {
 
   // Calculate the integrand corresponding to the given options
   if (kappa_cut > std::abs(omega / (v * cos_phi))) {
-    result = cquad(&integrand_k_2d, opts, -std::abs(omega), 0, 1E-12, 0);
+    result = cquad(&integrand_k_2d, opts, -std::abs(omega), 0, 1E-9, 0);
     result += cquad(&integrand_k_2d, opts, 0, std::abs(omega / (v * cos_phi)),
-                    1E-12, 0);
+                    1E-9, 0);
     result += cquad(&integrand_k_2d, opts, std::abs(omega / (v * cos_phi)),
-                    kappa_cut, 1E-12, 0);
+                    kappa_cut, 1E-9, 0);
   } else {
     result =
         cquad(&integrand_k_2d, opts, -std::abs(omega), kappa_cut, 1E-12, 0);
