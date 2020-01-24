@@ -266,7 +266,7 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     double gamma = 0.1;
     double v = 1e-5;
     double za = 0.1;
-    auto omega = GENERATE(take(1, random(-0.1 * 1e-6, 0.1 * 1e-6)));
+    auto omega = GENERATE(take(10, random(-0.1 * 1e-6, 0.1 * 1e-6)));
     double delta_cut = 30;
     PermittivityDrude perm(gamma, omega_p);
     GreensTensorPlate Greens(v, za, NAN, &perm, delta_cut);
