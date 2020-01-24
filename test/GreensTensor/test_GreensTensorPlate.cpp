@@ -1,8 +1,7 @@
-#include <armadillo>
-#include <complex>
-
 #include "Quaca.h"
 #include "catch.hpp"
+#include <armadillo>
+#include <complex>
 #include <iomanip> // std::setprecision
 
 TEST_CASE("Construction of Green's tensor works properly",
@@ -259,7 +258,7 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
 
 TEST_CASE("Integrated Green's tensor matches asymptotes",
           "[GreensTensorPlate]") {
-  SECTION("Low-frequency asymptote") {
+  SECTION("Low-frequency asymptote of fancy_I") {
     // \omega << \omega_p and \omega << v/z_a
     std::complex<double> I(0.0, 1.0);
     double omega_p = 9;
@@ -283,5 +282,98 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     opts.omega = omega;
     Greens.integrate_k_1d(GT_Num, opts);
     REQUIRE(approx_equal(GT_Ana, GT_Num, "reldiff", 10E-4));
+  };
+  SECTION("Low-frequency and low temperature asymptote of fancy_I_temp") {
+    // \omega << \omega_p and \omega << v/z_a
+    std::complex<double> I(0.0, 1.0);
+    double omega_p = 9;
+    double gamma = 0.1;
+    double v = 1e-5;
+    double za = 0.1;
+    double beta = 1e12;
+    double eta, rho;
+    auto omega = GENERATE(take(1, random(0., 1e-6)));
+    double delta_cut = 30;
+    PermittivityDrude perm(gamma, omega_p);
+    GreensTensorPlate Greens(v, za, beta, &perm, delta_cut);
+    struct Options_GreensTensor opts;
+    opts.class_pt = &Greens;
+    cx_mat::fixed<3, 3> GT_Ana(fill::zeros);
+    cx_mat::fixed<3, 3> GT_Num(fill::zeros);
+    eta = omega * 2 * za / v;
+    rho = gamma / pow(omega_p, 2);
+    GT_Ana(0, 0) =
+        (v * rho * 2. / (pow(2 * za, 4) * M_PI)) * (0.5 * M_PI * eta + 4.);
+    GT_Ana(1, 1) =
+        (v * rho * 2. / (pow(2 * za, 4) * M_PI)) * (0.5 * M_PI * eta + 2.);
+    GT_Ana(2, 2) = (v * rho * 2. / (pow(2 * za, 4) * M_PI)) * (M_PI * eta + 6.);
+    GT_Ana(2, 0) = I * (v * rho * 2. / (pow(2 * za, 4) * M_PI)) *
+                   (3. / 2. * M_PI + 2. * eta);
+    GT_Ana(0, 2) = -GT_Ana(2, 0);
+    opts.fancy_I_temp = true;
+    opts.omega = omega;
+    Greens.integrate_k_1d(GT_Num, opts);
+    REQUIRE(approx_equal(GT_Ana, GT_Num, "reldiff", 10E-4));
+  };
+  SECTION("Low-frequency and low temperature asymptote of fancy_I_temp_kv") {
+    // \omega << \omega_p and \omega << v/z_a
+    std::complex<double> I(0.0, 1.0);
+    double omega_p = 9;
+    double gamma = 0.1;
+    double v = 1e-5;
+    double za = 0.1;
+    double beta = 1e12;
+    double eta, rho;
+    auto omega = GENERATE(take(1, random(0., 1e-6)));
+    double delta_cut = 30;
+    PermittivityDrude perm(gamma, omega_p);
+    GreensTensorPlate Greens(v, za, beta, &perm, delta_cut);
+    struct Options_GreensTensor opts;
+    opts.class_pt = &Greens;
+    cx_mat::fixed<3, 3> GT_Ana(fill::zeros);
+    cx_mat::fixed<3, 3> GT_Num(fill::zeros);
+    eta = omega * 2 * za / v;
+    rho = gamma / pow(omega_p, 2);
+    GT_Ana(0, 0) =
+        (v * rho * 2. / (pow(2 * za, 5) * M_PI)) * (0.5 * M_PI * 9 + 4. * eta);
+    GT_Ana(1, 1) =
+        (v * rho * 2. / (pow(2 * za, 5) * M_PI)) * (0.5 * M_PI * 3 + 2. * eta);
+    GT_Ana(2, 2) = GT_Ana(0, 0) + GT_Ana(1, 1);
+    GT_Ana(2, 0) = I * (v * rho * 2. / (pow(2 * za, 5) * M_PI)) *
+                   (3. / 2. * M_PI * eta + 16.);
+    GT_Ana(0, 2) = -GT_Ana(2, 0);
+    opts.fancy_I_kv_temp = true;
+    opts.omega = omega;
+    Greens.integrate_k_1d(GT_Num, opts);
+    REQUIRE(approx_equal(GT_Ana, GT_Num, "reldiff", 10E-4));
+  };
+  SECTION("Low-frequency and high temperature asymptote of fancy_I_temp") {
+    // \omega << \omega_p and \omega << v/z_a
+    std::complex<double> I(0.0, 1.0);
+    double omega_p = 9;
+    double gamma = 0.1;
+    double v = 1e-5;
+    double za = 0.1;
+    double beta = 1e-1;
+    auto omega = GENERATE(take(1, random(1e-6, 1e-5)));
+    double delta_cut = 30;
+    PermittivityDrude perm(gamma, omega_p);
+    GreensTensorPlate Greens(v, za, beta, &perm, delta_cut);
+    struct Options_GreensTensor opts;
+    opts.class_pt = &Greens;
+    cx_mat::fixed<3, 3> GT_lhs(fill::zeros);
+    cx_mat::fixed<3, 3> GT_rhs(fill::zeros);
+    opts.fancy_I_temp = true;
+    opts.omega = omega;
+    Greens.integrate_k_1d(GT_lhs, opts);
+    // Since the off-diagonal elements are higher order in beta, they shall not
+    // be considered here
+    GT_lhs(2, 0) = 0.;
+    GT_lhs(0, 2) = 0.;
+
+    GT_rhs(0, 0) = 2 * gamma / (pow(omega_p, 2) * pow(2 * za, 3) * beta);
+    GT_rhs(1, 1) = GT_rhs(0, 0);
+    GT_rhs(2, 2) = GT_rhs(1, 1) + GT_rhs(0, 0);
+    REQUIRE(approx_equal(GT_lhs, GT_rhs, "reldiff", 10E-4));
   };
 };

@@ -101,14 +101,13 @@ double GreensTensorPlate::integrand_k_1d(double phi, void *opts) {
 
   // Calculate the integrand corresponding to the given options
   if (kappa_cut > std::abs(omega / (v * cos_phi))) {
-    result = cquad(&integrand_k_2d, opts, -std::abs(omega), 0, 1E-9, 0);
+    result = cquad(&integrand_k_2d, opts, -std::abs(omega), 0, 1E-8, 0);
     result += cquad(&integrand_k_2d, opts, 0, std::abs(omega / (v * cos_phi)),
-                    1E-9, 0);
+                    1E-8, 0);
     result += cquad(&integrand_k_2d, opts, std::abs(omega / (v * cos_phi)),
-                    kappa_cut, 1E-9, 0);
+                    kappa_cut, 1E-8, 0);
   } else {
-    result =
-        cquad(&integrand_k_2d, opts, -std::abs(omega), kappa_cut, 1E-12, 0);
+    result = cquad(&integrand_k_2d, opts, -std::abs(omega), kappa_cut, 1E-8, 0);
   }
   return result;
 };
