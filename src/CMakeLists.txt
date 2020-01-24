@@ -10,6 +10,7 @@ target_link_libraries(quaca
     ${LAPACK_LIBRARIES}
     ${Boost_FILESYSTEM_LIBRARY}
     ${Boost_SYSTEM_LIBRARY}
+    ${Boost_PROGRAM_OPTIONS_LIBRARY}
 )
 
 # set global header
