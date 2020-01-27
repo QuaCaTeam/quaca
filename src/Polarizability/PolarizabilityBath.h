@@ -8,8 +8,7 @@
 
 class PolarizabilityBath : public Polarizability {
 private:
-  // memory kernel needed to calculate alpha
-  MemoryKernel *mu;
+  MemoryKernel *mu; // memory kernel needed to calculate alpha
 
 public:
   PolarizabilityBath(double omega_a, double alpha_zero, MemoryKernel *mu,

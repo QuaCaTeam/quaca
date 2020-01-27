@@ -1,10 +1,12 @@
-# Your first calculation
+!> TODO: fill in values and finish writing
+
+# First QuaCa calculation
 
 We assume that you have QuaCa installed and are ready to go.
 In this tutorial we will show you how to setup your system and how QuaCa generally works.
 A calculation always consists of the following steps:
 
-1. Plan you physical system and check whether what you are calculating can actually be calculated with QuaCa
+1. Plan your physical system and check whether what you are calculating can actually be calculated with QuaCa
 2. Convert the parameters you need into appropriate units and populate the input file
 3. Run QuaCa and check your results
 
