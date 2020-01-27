@@ -5,9 +5,15 @@ namespace pt = boost::property_tree;
 
 #include "OhmicMemoryKernel.h"
 
-OhmicMemoryKernel::OhmicMemoryKernel(double gamma) : gamma(gamma){};
+OhmicMemoryKernel::OhmicMemoryKernel(double gamma) : gamma(gamma) {
+  this->type = "ohmic";
+};
 
-OhmicMemoryKernel::OhmicMemoryKernel(std::string input_file) {
+OhmicMemoryKernel::OhmicMemoryKernel(std::string input_file)
+    : MemoryKernel(input_file) {
+  // check if type is right
+  assert(this->type == "ohmic");
+
   // Create a root
   pt::ptree root;
 

@@ -4,11 +4,13 @@ PolarizabilityBath::PolarizabilityBath(double omega_a, double alpha_zero,
                                        MemoryKernel *mu,
                                        GreensTensor *greens_tensor)
     : Polarizability(omega_a, alpha_zero, greens_tensor) {
+  this->type = "bath";
   this->mu = mu;
 };
 
 PolarizabilityBath::PolarizabilityBath(std::string input_file)
     : Polarizability(input_file) {
+  assert(this->type == "bath"); // check if type is right
   this->mu = MemoryKernelFactory::create(input_file);
 };
 

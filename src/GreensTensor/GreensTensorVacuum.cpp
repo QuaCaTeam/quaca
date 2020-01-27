@@ -12,7 +12,10 @@ GreensTensorVacuum::GreensTensorVacuum(double v, double beta)
     : GreensTensor(v, beta){};
 
 GreensTensorVacuum::GreensTensorVacuum(std::string input_file)
-    : GreensTensor(input_file){};
+    : GreensTensor(input_file) {
+  // check if type is right
+  assert(this->type == "vacuum");
+};
 
 void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3, 3> &GT,
                                           Options_GreensTensor opts) {

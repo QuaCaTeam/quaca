@@ -6,10 +6,17 @@ namespace pt = boost::property_tree;
 #include "PermittivityDrude.h"
 
 PermittivityDrude::PermittivityDrude(double omega_p, double gamma)
-    : omega_p(omega_p), gamma(gamma){};
+    : omega_p(omega_p), gamma(gamma) {
+  this->type == "drude";
+};
 
 // constructor for drude model from .ini file
-PermittivityDrude::PermittivityDrude(std::string input_file) {
+PermittivityDrude::PermittivityDrude(std::string input_file)
+    : Permittivity(input_file) {
+
+  // check if type is right
+  assert(this->type == "drude");
+
   // Create a root
   pt::ptree root;
 

@@ -23,6 +23,9 @@ Polarizability::Polarizability(std::string input_file) {
 
   // read greens tensor
   this->greens_tensor = GreensTensorFactory::create(input_file);
+
+  // read type
+  this->type = root.get<std::string>("Polarizability.type");
 };
 
 double Polarizability::integrand_omega(double omega, void *opts) {
