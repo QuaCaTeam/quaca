@@ -1,31 +1,41 @@
 // integration routine
-#include "../Calculations/Integrations.h"
-
 #include "GreensTensorPlate.h"
+#include "../Calculations/Integrations.h"
 #include "Permittivity/PermittivityFactory.h"
-#include <iomanip> // std::setprecision
 
 void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3, 3> &GT,
                                          Options_GreensTensor opts) {
-  double kx, ky, k_quad, omega_quad, omega_abs;
+  // wavevectors
+  double kx, ky, k_quad;
+  // squared and absolute value of the frequency
+  double omega_quad, omega_abs;
   // imaginary unit
   std::complex<double> I(0.0, 1.0);
-  std::complex<double> eps, eps_omega, kappa, kappa_epsilon;
+  // permittivity and permittivity scaled with omega
+  std::complex<double> eps, eps_omega;
+  // propagation in free space and within the surface material
+  std::complex<double> kappa, kappa_epsilon;
+  // polarization dependent reflection coefficients
   std::complex<double> r_p, r_s;
-  std::complex<double> prefactor_p, prefactor_s;
-  std::complex<double> pre;
-  // The tensor is calculated for positive \omega
-  // and afterwards transformed with respect to the sign of \omega
+  // some prefactors for a better overview
+  std::complex<double> pre, prefactor_p, prefactor_s;
+
+  // load wavevectors from the struct into the corresponding variables
   kx = opts.kvec(0);
   ky = opts.kvec(1);
   k_quad = kx * kx + ky * ky;
+
+  // The tensor is calculated for a positive frequency omega
+  // and afterwards transformed with respect to the sign of omega
   omega_abs = std::abs(opts.omega);
   omega_quad = omega_abs * omega_abs;
+
+  // calling the permittivity and scaled permittivity
   eps = permittivity->epsilon(omega_abs);
   eps_omega = permittivity->epsilon_omega(omega_abs);
+
   // kapppa as well as kappa_epsilon are defined to have either a purely
   // positive real part or purely negatively imaginary part
-
   kappa = sqrt(std::complex<double>(k_quad - omega_quad, 0.));
   kappa = std::complex<double>(std::abs(kappa.real()), -std::abs(kappa.imag()));
 
@@ -39,16 +49,13 @@ void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3, 3> &GT,
 
   r_s = (kappa - kappa_epsilon) / (kappa + kappa_epsilon);
 
-  // For an better overview and a efficient calculation, we collect the
-  // pre-factors of the p and s polarization separately
+  // For an better overview and a efficient calculation, the
+  // pre-factors of the p and s polarization are collected separately
   pre = (2 * M_PI) * exp(-(2 * za) * kappa);
-
   prefactor_s = pre * r_s * omega_quad / (k_quad - omega_quad);
   prefactor_p = pre * r_p;
 
-  // In the following, we already omit odd orders of ky, as we use that the
-  // investigated system is symmetric in y and thus those terms vanish
-
+  // In the following, odd orders in ky are already omitted
   GT.zeros();
   GT(0, 0) = (prefactor_p * kx * kx + prefactor_s * ky * ky) * kappa / k_quad;
   GT(1, 1) = (prefactor_p * ky * ky + prefactor_s * kx * kx) * kappa / k_quad;
@@ -56,12 +63,9 @@ void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3, 3> &GT,
   GT(2, 0) = I * prefactor_p * kx;
   GT(0, 2) = -GT(2, 0);
 
-  // In case of negative frequencies, the tensor has to hermitian transposed
+  // In case of negative frequencies, the tensor has to be hermitian transposed
   if (opts.omega < 0) {
     GT = trans(GT);
-    // the operation trans() of the armadillo library calculates the
-    // conjugated transposed of a complex matrix or solely the transposed
-    // of a real matrix.
   }
 };
 
@@ -70,83 +74,117 @@ void GreensTensorPlate::integrate_k_1d(cx_mat::fixed<3, 3> &GT,
 
   // imaginary unit
   std::complex<double> I(0.0, 1.0);
-
+  // importing error vector to set accuracy of the integration
+  vec::fixed<2> rel_err = this->rel_err;
+  // intialize Green's tensor
   GT.zeros();
+
+  // calculate the five non-zero elements of the Green's tensor. Here, the
+  // symmetry in y direction was already applied. Thus, the integration only
+  // consideres twice the domain from 0 to pi.
+
+  // the xx element
   opts.indices = {0, 0};
-  GT(0, 0) = cquad(&integrand_k_1d, &opts, 0, M_PI, 1E-6, 0) / M_PI;
+  GT(0, 0) = cquad(&integrand_k_1d, &opts, 0, M_PI, rel_err(1), 0) / M_PI;
+  // the yy element
   opts.indices = {1, 1};
-  GT(1, 1) = cquad(&integrand_k_1d, &opts, 0, M_PI, 1E-6, 0) / M_PI;
+  GT(1, 1) = cquad(&integrand_k_1d, &opts, 0, M_PI, rel_err(1), 0) / M_PI;
+  // the zz element
   opts.indices = {2, 2};
-  GT(2, 2) = cquad(&integrand_k_1d, &opts, 0, M_PI, 1E-6, 0) / M_PI;
+  GT(2, 2) = cquad(&integrand_k_1d, &opts, 0, M_PI, rel_err(1), 0) / M_PI;
+  // the zx element
   opts.indices = {2, 0};
-  GT(2, 0) = I * cquad(&integrand_k_1d, &opts, 0, M_PI, 1E-6, 0) / M_PI;
+  GT(2, 0) = I * cquad(&integrand_k_1d, &opts, 0, M_PI, rel_err(1), 0) / M_PI;
+  // the xz element
   GT(0, 2) = -GT(2, 0);
 };
 
 double GreensTensorPlate::integrand_k_1d(double phi, void *opts) {
-  // Units: c=1, 4 pi epsilon_0 = 1, hbar = 1
+  // The needed parameters for the integration are encoded in the void pointer.
+  // This void pointer is casted the options struct given in GreensTensor.h.
   Options_GreensTensor *opts_pt = static_cast<Options_GreensTensor *>(opts);
+  // To access attributes of the GreensTensorPlate class, the class pointer
+  // within the struct is casted.
   GreensTensorPlate *pt = static_cast<GreensTensorPlate *>(opts_pt->class_pt);
 
+  double result;
+  // import parameters
   double omega = opts_pt->omega;
-
   double beta = pt->beta;
   double v = pt->v;
   double za = pt->za;
+  // The cut-off parameters acts as upper bound of the kappa integration.
   double kappa_cut = pt->delta_cut / (2 * za);
-  double result;
+  // import demande relative accuracy of the integration
+  vec::fixed<2> rel_err = pt->rel_err;
+  // read integration variable phi
   double cos_phi = std::cos(phi);
+
   // Write the integration variable into the options struct
   opts_pt->kvec(0) = phi;
 
-  // Calculate the integrand corresponding to the given options
+  // Calculate the integrand corresponding to the given options. To resolve the
+  // probably sharp edge of the Bose-Einstein distribution, the integration is
+  // split at the edge, if the edged lies below the cut-off kappa_cut.
   if (kappa_cut > std::abs(omega / (v * cos_phi))) {
-    result = cquad(&integrand_k_2d, opts, -std::abs(omega), 0, 1E-8, 0);
+    result = cquad(&integrand_k_2d, opts, -std::abs(omega), 0, rel_err(0), 0);
     result += cquad(&integrand_k_2d, opts, 0, std::abs(omega / (v * cos_phi)),
-                    1E-8, 0);
+                    rel_err(0), 0);
     result += cquad(&integrand_k_2d, opts, std::abs(omega / (v * cos_phi)),
-                    kappa_cut, 1E-8, 0);
+                    kappa_cut, rel_err(0), 0);
   } else {
-    result = cquad(&integrand_k_2d, opts, -std::abs(omega), kappa_cut, 1E-8, 0);
+    result = cquad(&integrand_k_2d, opts, -std::abs(omega), kappa_cut,
+                   rel_err(0), 0);
   }
   return result;
 };
 
 void GreensTensorPlate::integrate_k_2d(cx_mat::fixed<3, 3> &GT,
-                                       Options_GreensTensor opts){};
+                                       Options_GreensTensor opts) {
+  std::cerr << "Currently, this routine is not implemented." << std::endl;
+  exit(0);
+};
+
 double GreensTensorPlate::integrand_k_2d(double kappa_double, void *opts) {
-  // This function calculates the integration with respect to kappa
+  // The needed parameters for the integration are encoded in the void pointer.
+  // This void pointer is casted the options struct given in GreensTensor.h.
   Options_GreensTensor *opts_pt = static_cast<Options_GreensTensor *>(opts);
+  // To access attributes of the GreensTensorPlate class, the class pointer
+  // within the struct is casted.
   GreensTensorPlate *pt = static_cast<GreensTensorPlate *>(opts_pt->class_pt);
 
-  // read omega and phi from the option struct
-  double omega = opts_pt->omega;
-  double cos_phi = cos(opts_pt->kvec(0));
   // read general input parameters
   double beta = pt->beta;
   double v = pt->v;
+  double v_quad = v * v;
   double za = pt->za;
-
-  // Before we can calculate the real or imaginary part of the chosen matrix
-  // element, we need to store the complex result in result_complex.
-  std::complex<double> result_complex;
-
-  double result, omega_pl, omega_pl_quad, k_quad, kappa_quad;
+  // read omega and phi from the option struct
+  double omega = opts_pt->omega;
   double omega_quad = omega * omega;
-  double cos_phi_quad, sin_phi_quad, v_quad, k;
-  cos_phi_quad = cos_phi * cos_phi;
-  sin_phi_quad = 1.0 - cos_phi_quad;
-  v_quad = v * v;
+  double cos_phi = cos(opts_pt->kvec(0));
+  double cos_phi_quad = cos_phi * cos_phi;
+  double sin_phi_quad = 1.0 - cos_phi_quad;
+
+  // Before the real or imaginary part of the chosen matrix element can be
+  // calculated, the complex result is stored in result_complex.
+  std::complex<double> result_complex;
+  double result;
+  // Doppler-shifted frequency
+  double omega_pl, omega_pl_quad;
+  // wavevector
+  double k, k_quad;
 
   // imaginary unit
   std::complex<double> I(0.0, 1.0);
 
-  // permittivity and propagation through vacuum (kappa) and material
-  // (kappa_epsilon)
+  // permittivity and propagation through vacuum (kappa) and surface material
   std::complex<double> eps, kappa_complex, kappa_epsilon;
+  double kappa_quad;
 
   // reflection coefficients and pre-factors of the corresponding polarization
   std::complex<double> r_p, r_s;
+
+  // helpful prefactors
   std::complex<double> prefactor_p, prefactor_s, prefactor_off;
 
   // Transfer kappa to the correct complex value
@@ -158,17 +196,19 @@ double GreensTensorPlate::integrand_k_2d(double kappa_double, void *opts) {
     kappa_quad = kappa_double * kappa_double;
   }
 
+  // Express kappa via frequency and kappa
   k = (sqrt(kappa_quad * (1.0 - v_quad * cos_phi_quad) + omega_quad) +
        v * omega * cos_phi) /
       (1 - v_quad * cos_phi_quad);
-
   k_quad = k * k;
-  omega_pl = (omega + k * cos_phi * v);
 
+  // Define the Doppler-shifted frequency
+  omega_pl = (omega + k * cos_phi * v);
   omega_pl_quad = omega_pl * omega_pl;
 
-  // In order to obey reality in time, we use a positive omega_pl for the actual
-  // calculation and perform the corresponding symmetry operation afterwards
+  // In order to obey reality in time, a positive omega_pl is used for the
+  // actual calculation. Afterwards, the corresponding symmetry operation is
+  // performed if the sign of omega_pl is negative.
   double omega_pl_abs = std::abs(omega_pl);
 
   eps = pt->get_epsilon(omega_pl_abs);
@@ -181,19 +221,19 @@ double GreensTensorPlate::integrand_k_2d(double kappa_double, void *opts) {
 
   // Defining the reflection coefficients in transverse magnetice polarization
   // (p) and in transverse electric polarization (s)
-
   r_p = (eps * kappa_complex - kappa_epsilon) /
         (eps * kappa_complex + kappa_epsilon);
 
   r_s = (kappa_complex - kappa_epsilon) / (kappa_complex + kappa_epsilon);
+
   // For an better overview and a efficient calculation, we collect the
   // pre-factors of the p and s polarization separately
-
   prefactor_p =
       exp(-2 * za * kappa_complex) / (1. - cos_phi * v * omega_pl / k);
   prefactor_s = prefactor_p * r_s * omega_pl_quad;
   prefactor_p = prefactor_p * r_p * kappa_quad;
   prefactor_off = prefactor_p * k * cos_phi / kappa_complex;
+
   // Impose reality in time
   if (omega_pl < 0) {
     prefactor_s = conj(prefactor_s);

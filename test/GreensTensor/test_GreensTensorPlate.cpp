@@ -15,7 +15,7 @@ TEST_CASE("Construction of Green's tensor works properly",
     double za = 0.1;
     double beta = 1E4;
     double delta_cut = 20;
-    vec::fixed<2> rel_err = {1E-9, 1E-7};
+    vec::fixed<2> rel_err = {1E-8, 1E-6};
 
     PermittivityDrude perm(gamma, omega_p);
     GreensTensorPlate Greens(v, za, beta, &perm, delta_cut, rel_err);
@@ -28,8 +28,8 @@ TEST_CASE("Construction of Green's tensor works properly",
     GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.ini");
     REQUIRE(Greens.get_za() == 0.1);
     REQUIRE(Greens.get_delta_cut() == 20);
-    REQUIRE(Greens.get_rel_err_0() == 1E-9);
-    REQUIRE(Greens.get_rel_err_1() == 1E-7);
+    REQUIRE(Greens.get_rel_err_0() == 1E-8);
+    REQUIRE(Greens.get_rel_err_1() == 1E-6);
   };
 };
 
@@ -97,14 +97,6 @@ TEST_CASE("The operations calculate_tensor and the integrand_k_2d coincide",
       }
     }
   }
-  // std::cout << "omega=" << omega << '\n';
-  // std::cout << "kx*v=" << k_x * v << '\n';
-  // std::cout << "k=" << k << '\n';
-  // Green_fancy_I_ct.raw_print();
-  // std::cout << '\n';
-  // Green_fancy_I_ik2d.raw_print();
-  // std::cout << '\n';
-
   REQUIRE(approx_equal(Green_fancy_I_ct, Green_fancy_I_ik2d, "reldiff", 10E-4));
 };
 
@@ -272,7 +264,7 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     double za = 0.1;
     auto omega = GENERATE(take(10, random(-0.1 * 1e-6, 0.1 * 1e-6)));
     double delta_cut = 30;
-    vec::fixed<2> rel_err = {1E-9, 1E-7};
+    vec::fixed<2> rel_err = {1E-8, 1E-6};
     PermittivityDrude perm(gamma, omega_p);
     GreensTensorPlate Greens(v, za, NAN, &perm, delta_cut, rel_err);
     struct Options_GreensTensor opts;
@@ -300,7 +292,7 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     double eta, rho;
     auto omega = GENERATE(take(1, random(0., 1e-6)));
     double delta_cut = 30;
-    vec::fixed<2> rel_err = {1E-9, 1E-7};
+    vec::fixed<2> rel_err = {1E-8, 1E-6};
     PermittivityDrude perm(gamma, omega_p);
     GreensTensorPlate Greens(v, za, beta, &perm, delta_cut, rel_err);
     struct Options_GreensTensor opts;
@@ -333,7 +325,7 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     double eta, rho;
     auto omega = GENERATE(take(1, random(0., 1e-6)));
     double delta_cut = 30;
-    vec::fixed<2> rel_err = {1E-9, 1E-7};
+    vec::fixed<2> rel_err = {1E-8, 1E-6};
     PermittivityDrude perm(gamma, omega_p);
     GreensTensorPlate Greens(v, za, beta, &perm, delta_cut, rel_err);
     struct Options_GreensTensor opts;
@@ -365,7 +357,7 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     double beta = 1e-1;
     auto omega = GENERATE(take(1, random(1e-8, 1e-7)));
     double delta_cut = 30;
-    vec::fixed<2> rel_err = {1E-9, 1E-7};
+    vec::fixed<2> rel_err = {1E-8, 1E-6};
     PermittivityDrude perm(gamma, omega_p);
     GreensTensorPlate Greens(v, za, beta, &perm, delta_cut, rel_err);
     struct Options_GreensTensor opts;
@@ -375,10 +367,6 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     opts.fancy_I_temp = true;
     opts.omega = omega;
     Greens.integrate_k_1d(GT_lhs, opts);
-    // Since the off-diagonal elements are higher order in beta, they shall not
-    // be considered here
-    //  GT_lhs(2, 0) = 0.;
-    //  GT_lhs(0, 2) = 0.;
 
     GT_rhs(0, 0) = 2 * gamma / (pow(omega_p, 2) * pow(2 * za, 3) * beta);
     GT_rhs(1, 1) = GT_rhs(0, 0);
@@ -386,8 +374,6 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     GT_rhs(0, 2) =
         0.5 * (2 * 3 * v * gamma / (pow(omega_p, 2) * pow(2 * za, 4))) / I;
     GT_rhs(2, 0) = -GT_rhs(0, 2);
-    GT_lhs.raw_print();
-    GT_rhs.raw_print();
 
     REQUIRE(approx_equal(GT_lhs, GT_rhs, "reldiff", 10E-4));
   };

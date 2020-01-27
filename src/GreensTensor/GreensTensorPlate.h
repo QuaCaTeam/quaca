@@ -4,6 +4,7 @@
 #include "GreensTensor.h"
 #include "Permittivity/PermittivityFactory.h"
 #include <armadillo>
+#include <assert.h>
 #include <cmath>
 #include <complex>
 // ini parser
@@ -11,6 +12,7 @@
 #include <boost/property_tree/ptree.hpp>
 namespace pt = boost::property_tree;
 
+//! The class of the Green's tensor above a flat macroscopic surface
 class GreensTensorPlate : public GreensTensor {
 private:
   // permittivity is needed to describe the surface's response
@@ -21,6 +23,7 @@ private:
   double za;
 
 public:
+  // constructor with direct input
   GreensTensorPlate(double v, double za, double beta,
                     Permittivity *permittivity, double delta_cut,
                     vec::fixed<2> rel_err)
@@ -31,6 +34,7 @@ public:
     this->permittivity = permittivity;
   };
 
+  // constructor with .ini file
   GreensTensorPlate(std::string input_file) : GreensTensor(input_file) {
     this->permittivity = PermittivityFactory::create(input_file);
 
@@ -46,11 +50,17 @@ public:
     this->rel_err(0) = root.get<double>("GreensTensor.rel_err_0");
     this->rel_err(1) = root.get<double>("GreensTensor.rel_err_1");
   };
-
+  // calculate the pure Green's tensor of this class
   void calculate_tensor(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
+  // integrates the Green's tensor with respect to kappa
   void integrate_k_2d(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
+  // integrates the Green's tensor with respect to phi and kappa
   void integrate_k_1d(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
-
+  // integrand of Green's tensor element with respect to the phi integration
+  static double integrand_k_1d(double kx, void *opts);
+  // integrand of Green's tensor element with respect to the kappa integration
+  static double integrand_k_2d(double ky, void *opts);
+  // getter functions
   std::complex<double> get_epsilon(double omega) {
     return this->permittivity->epsilon(omega);
   };
@@ -58,8 +68,6 @@ public:
   double get_delta_cut() { return this->delta_cut; }
   double get_rel_err_0() { return this->rel_err(0); }
   double get_rel_err_1() { return this->rel_err(1); }
-  static double integrand_k_1d(double kx, void *opts);
-  static double integrand_k_2d(double ky, void *opts);
 };
 
 #endif // GREENSTENSORPLATE_H
