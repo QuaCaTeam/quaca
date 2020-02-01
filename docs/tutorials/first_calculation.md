@@ -6,13 +6,14 @@ We assume that you have QuaCa installed and are ready to go.
 In this tutorial we will show you how to setup your system and how QuaCa generally works.
 A calculation always consists of the following steps:
 
-1. Plan your physical system and check whether what you are calculating can actually be calculated with QuaCa
-2. Convert the parameters you need into appropriate units and populate the input file
-3. Run QuaCa and check your results
+1. Plan the physical system
+2. Populate the input file
+3. Run QuaCa
+4. Check the results
 
 Let us adhere to this outline and start by planing our setup.
 
-## The setup
+## 1. Plan the physical system
 In this tutorial we want to calculate *describe calculation* , which has already been done in *give reference to publication*.
 So essentially we want to reproduce the plot *blabla on page blublu*.
 
@@ -23,7 +24,7 @@ Our setup consists of:
 
 Furthermore we assume that ...
 
-## The input file
+## 2. Populate the input file
 There are lots of things we could change in the above setup without changing the formula we have to use.
 For example, imagine we want to calculate the exact same situation as above, but with a *blabla* atom.
 Because of this inherent modularity QuaCa reads an input file that contains all these parameters, so that the program does not have to be recompiled on each change.
@@ -96,7 +97,7 @@ alpha_zero =
 ```
 We have created our input file and are now ready to start our first calculation.
 
-## Calculation
+## 3. Run QuaCa
 After installing and building QuaCa you should find an executable called `QuaCa` in the `bin/` directory.
 Change into this directory and type into the command line
 ```bash
@@ -107,5 +108,5 @@ Notice that since we are in the `bin/` directory we first had to go one director
 QuaCa now produces a file in the same directory as the input file and with the same name, but of the file type `.csv`.
 It contains ...
 
-## Check the results
+## 4. Check the results
 Let us now plot the data we obtained from our calculation and compare it to *plot in paper*.
