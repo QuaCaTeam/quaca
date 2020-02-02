@@ -1,48 +1,29 @@
-// ini parser
-#include <boost/property_tree/ini_parser.hpp>
-#include <boost/property_tree/ptree.hpp>
-namespace pt = boost::property_tree;
-
-#include "MemoryKernel/MemoryKernelFactory.h"
 #include "PolarizabilityBath.h"
 
-PolarizabilityBath::PolarizabilityBath(double a, double b, MemoryKernel *mu) {
-  // set parameters
-  this->omega_a = a;
-  this->alpha_zero = b;
-
-  // set memory kernel
-  this->memorykernel = mu;
-}
-
-PolarizabilityBath::PolarizabilityBath(std::string input_file) {
-  // Create a root
-  pt::ptree root;
-
-  // Load the ini file in this ptree
-  pt::read_ini(input_file, root);
-
-  // read parameters
-  this->omega_a = root.get<double>("Polarizability.omega_a");
-  this->alpha_zero = root.get<double>("Polarizability.alpha_zero");
-
-  // read memory kernel
-  this->memorykernel = MemoryKernelFactory::create(input_file);
+PolarizabilityBath::PolarizabilityBath(double omega_a, double alpha_zero,
+                                       MemoryKernel *mu,
+                                       GreensTensor *greens_tensor)
+    : Polarizability(omega_a, alpha_zero, greens_tensor) {
+  this->mu = mu;
 };
 
-std::complex<double> PolarizabilityBath::get_mu(double omega) {
-  return this->memorykernel->mu(omega);
+PolarizabilityBath::PolarizabilityBath(std::string input_file)
+    : Polarizability(input_file) {
+  this->mu = MemoryKernelFactory::create(input_file);
 };
 
-void PolarizabilityBath::calculate(cx_mat::fixed<3, 3> &alpha, double omega) {
+void PolarizabilityBath::calculate_tensor(cx_mat::fixed<3, 3> &alpha,
+                                          Options_Polarizability opts) {
   // imaginary unit
   std::complex<double> I(0.0, 1.0);
+
+  double omega = opts.omega;
 
   // calculate diagonal entries
   cx_mat::fixed<3, 3> diag;
   diag.zeros();
   diag(0, 0) = diag(1, 1) = diag(2, 2) =
-      omega_a * omega_a - omega * omega - I * omega * memorykernel->mu(omega);
+      omega_a * omega_a - omega * omega - I * omega * mu->mu(omega);
 
   // calculate integral over green's tensor with fancy R
   cx_mat::fixed<3, 3> greens_R;
@@ -65,4 +46,12 @@ void PolarizabilityBath::calculate(cx_mat::fixed<3, 3> &alpha, double omega) {
   alpha =
       alpha_zero * omega_a * omega_a *
       inv(diag - alpha_zero * omega_a * omega_a * (greens_R + I * greens_I));
+
+  if (opts.fancy_I) {
+    alpha = (alpha - trans(alpha)) /
+            (2.0 * I); // trans is hermitean conjugation in armadillo
+  } else if (opts.fancy_R) {
+    alpha = (alpha + trans(alpha)) /
+            (2.0); // trans is hermitean conjugation in armadillo
+  }
 };
