@@ -25,9 +25,9 @@ public:
 
   virtual void calculate_tensor(cx_mat::fixed<3, 3> &GT,
                                 Options_GreensTensor opts) = 0;
-  virtual void integrate_k_2d(cx_mat::fixed<3, 3> &GT,
+  virtual void integrate_2d_k(cx_mat::fixed<3, 3> &GT,
                               Options_GreensTensor opts) = 0;
-  virtual void integrate_k_1d(cx_mat::fixed<3, 3> &GT,
+  virtual void integrate_1d_k(cx_mat::fixed<3, 3> &GT,
                               Options_GreensTensor opts) = 0;
   double get_v() { return this->v; }
   double get_beta() { return this->beta; }
@@ -40,7 +40,9 @@ struct Options_GreensTensor {
   bool fancy_I = false;
   bool fancy_I_kv = false;
   bool fancy_I_temp = false;
+  bool fancy_I_non_LTE = false;
   bool fancy_I_kv_temp = false;
+  bool fancy_I_kv_non_LTE = false;
   // Indices of the 3x3 GreensTensor
   arma::vec::fixed<2> indices = {-1, -1};
   // Value of omega for the integration of the k-Variables

@@ -33,7 +33,7 @@ TEST_CASE("Construction of Green's tensor works properly",
   };
 };
 
-TEST_CASE("The operations calculate_tensor and the integrand_k_2d coincide",
+TEST_CASE("The operations calculate_tensor and the integrand_2d_k coincide",
           "[GreensTensorPlate]") {
   // Here we considered also the volume element from the integration.
   std::complex<double> I(0.0, 1.0);
@@ -73,7 +73,7 @@ TEST_CASE("The operations calculate_tensor and the integrand_k_2d coincide",
   Green *= volume_element;
   Green_fancy_I_ct = (Green - trans(Green)) / (2. * I);
 
-  // Second, the integrand_k_2d operation is used
+  // Second, the integrand_2d_k operation is used
   cx_mat::fixed<3, 3> Green_fancy_I_ik2d(fill::zeros);
   if (kappa.real() == 0.) {
     kappa_double = kappa.imag();
@@ -89,10 +89,10 @@ TEST_CASE("The operations calculate_tensor and the integrand_k_2d coincide",
       opts.indices(0) = i;
       opts.indices(1) = j;
       Green_fancy_I_ik2d(i, j) =
-          (2 * M_PI) * Greens.integrand_k_2d(kappa_double, &opts);
+          (2 * M_PI) * Greens.integrand_2d_k(kappa_double, &opts);
       if (i != j) {
         // As the prefactor I can not be evaluated in a purely real integration
-        // routine, it was dropped in integrate_k_2d and has to be inserted here
+        // routine, it was dropped in integrate_2d_k and has to be inserted here
         Green_fancy_I_ik2d(i, j) *= I;
       }
     }
@@ -160,10 +160,10 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
     // Test of fancy_I
     opts.omega = omega;
     opts.fancy_I = true;
-    Greens.integrate_k_1d(Greens_lhs, opts);
+    Greens.integrate_1d_k(Greens_lhs, opts);
 
     opts.omega = -omega;
-    Greens.integrate_k_1d(Greens_rhs, opts);
+    Greens.integrate_1d_k(Greens_rhs, opts);
 
     REQUIRE(approx_equal(Greens_lhs, -strans(Greens_rhs), "reldiff", 10E-4));
   };
@@ -177,10 +177,10 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
     // Test of fancy_R
     opts.omega = omega;
     opts.fancy_R = true;
-    Greens.integrate_k_1d(Greens_lhs, opts);
+    Greens.integrate_1d_k(Greens_lhs, opts);
 
     opts.omega = -omega;
-    Greens.integrate_k_1d(Greens_rhs, opts);
+    Greens.integrate_1d_k(Greens_rhs, opts);
 
     REQUIRE(approx_equal(Greens_lhs, strans(Greens_rhs), "reldiff", 10E-4));
     opts.fancy_R = false;
@@ -195,10 +195,10 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
     // Test of fancy_I_kv
     opts.omega = omega;
     opts.fancy_I_kv = true;
-    Greens.integrate_k_1d(Greens_lhs, opts);
+    Greens.integrate_1d_k(Greens_lhs, opts);
 
     opts.omega = -omega;
-    Greens.integrate_k_1d(Greens_rhs, opts);
+    Greens.integrate_1d_k(Greens_rhs, opts);
     REQUIRE(approx_equal(Greens_lhs, strans(Greens_rhs), "reldiff", 10E-4));
   };
   SECTION("Integral over Green_fancy_I_temp obeys the crossing relation") {
@@ -213,15 +213,15 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
     // Test of fancy_I_kv
     opts.omega = -omega;
     opts.fancy_I_temp = true;
-    Greens.integrate_k_1d(Greens_lhs, opts);
+    Greens.integrate_1d_k(Greens_lhs, opts);
 
     opts.omega = omega;
     opts.fancy_I_temp = false;
     opts.fancy_I = true;
-    Greens.integrate_k_1d(Greens_rhs1, opts);
+    Greens.integrate_1d_k(Greens_rhs1, opts);
     opts.fancy_I = false;
     opts.fancy_I_temp = true;
-    Greens.integrate_k_1d(Greens_rhs2, opts);
+    Greens.integrate_1d_k(Greens_rhs2, opts);
     Greens_rhs = -Greens_rhs1 + Greens_rhs2;
     REQUIRE(approx_equal(Greens_lhs, strans(Greens_rhs), "reldiff", 10E-4));
   };
@@ -238,16 +238,16 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
     // Test of fancy_I_kv
     opts.omega = -omega;
     opts.fancy_I_kv_temp = true;
-    Greens.integrate_k_1d(Greens_lhs, opts);
+    Greens.integrate_1d_k(Greens_lhs, opts);
 
     opts.omega = omega;
     opts.fancy_I_kv_temp = false;
     opts.fancy_I_kv = true;
-    Greens.integrate_k_1d(Greens_rhs1, opts);
+    Greens.integrate_1d_k(Greens_rhs1, opts);
     opts.fancy_I_kv = false;
     opts.fancy_I_kv_temp = true;
 
-    Greens.integrate_k_1d(Greens_rhs2, opts);
+    Greens.integrate_1d_k(Greens_rhs2, opts);
     Greens_rhs = -Greens_rhs1 + Greens_rhs2;
     REQUIRE(approx_equal(Greens_lhs, -strans(Greens_rhs), "reldiff", 10E-4));
   };
@@ -278,7 +278,7 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     GT_Ana(2, 0) = -GT_Ana(0, 2);
     opts.fancy_I = true;
     opts.omega = omega;
-    Greens.integrate_k_1d(GT_Num, opts);
+    Greens.integrate_1d_k(GT_Num, opts);
     REQUIRE(approx_equal(GT_Ana, GT_Num, "reldiff", 10E-4));
   };
   SECTION("Low-frequency and low temperature asymptote of fancy_I_temp") {
@@ -311,7 +311,7 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     GT_Ana(0, 2) = -GT_Ana(2, 0);
     opts.fancy_I_temp = true;
     opts.omega = omega;
-    Greens.integrate_k_1d(GT_Num, opts);
+    Greens.integrate_1d_k(GT_Num, opts);
     REQUIRE(approx_equal(GT_Ana, GT_Num, "reldiff", 10E-4));
   };
   SECTION("Low-frequency and low temperature asymptote of fancy_I_temp_kv") {
@@ -344,7 +344,7 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     GT_Ana(0, 2) = -GT_Ana(2, 0);
     opts.fancy_I_kv_temp = true;
     opts.omega = omega;
-    Greens.integrate_k_1d(GT_Num, opts);
+    Greens.integrate_1d_k(GT_Num, opts);
     REQUIRE(approx_equal(GT_Ana, GT_Num, "reldiff", 10E-4));
   };
   SECTION("Low-frequency and high temperature asymptote of fancy_I_temp") {
@@ -366,7 +366,7 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     cx_mat::fixed<3, 3> GT_rhs(fill::zeros);
     opts.fancy_I_temp = true;
     opts.omega = omega;
-    Greens.integrate_k_1d(GT_lhs, opts);
+    Greens.integrate_1d_k(GT_lhs, opts);
 
     GT_rhs(0, 0) = 2 * gamma / (pow(omega_p, 2) * pow(2 * za, 3) * beta);
     GT_rhs(1, 1) = GT_rhs(0, 0);

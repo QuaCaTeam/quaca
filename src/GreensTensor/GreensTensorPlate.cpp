@@ -69,7 +69,7 @@ void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3, 3> &GT,
   }
 };
 
-void GreensTensorPlate::integrate_k_1d(cx_mat::fixed<3, 3> &GT,
+void GreensTensorPlate::integrate_1d_k(cx_mat::fixed<3, 3> &GT,
                                        Options_GreensTensor opts) {
 
   // imaginary unit
@@ -85,21 +85,21 @@ void GreensTensorPlate::integrate_k_1d(cx_mat::fixed<3, 3> &GT,
 
   // the xx element
   opts.indices = {0, 0};
-  GT(0, 0) = cquad(&integrand_k_1d, &opts, 0, M_PI, rel_err(1), 0) / M_PI;
+  GT(0, 0) = cquad(&integrand_1d_k, &opts, 0, M_PI, rel_err(1), 0) / M_PI;
   // the yy element
   opts.indices = {1, 1};
-  GT(1, 1) = cquad(&integrand_k_1d, &opts, 0, M_PI, rel_err(1), 0) / M_PI;
+  GT(1, 1) = cquad(&integrand_1d_k, &opts, 0, M_PI, rel_err(1), 0) / M_PI;
   // the zz element
   opts.indices = {2, 2};
-  GT(2, 2) = cquad(&integrand_k_1d, &opts, 0, M_PI, rel_err(1), 0) / M_PI;
+  GT(2, 2) = cquad(&integrand_1d_k, &opts, 0, M_PI, rel_err(1), 0) / M_PI;
   // the zx element
   opts.indices = {2, 0};
-  GT(2, 0) = I * cquad(&integrand_k_1d, &opts, 0, M_PI, rel_err(1), 0) / M_PI;
+  GT(2, 0) = I * cquad(&integrand_1d_k, &opts, 0, M_PI, rel_err(1), 0) / M_PI;
   // the xz element
   GT(0, 2) = -GT(2, 0);
 };
 
-double GreensTensorPlate::integrand_k_1d(double phi, void *opts) {
+double GreensTensorPlate::integrand_1d_k(double phi, void *opts) {
   // The needed parameters for the integration are encoded in the void pointer.
   // This void pointer is casted the options struct given in GreensTensor.h.
   Options_GreensTensor *opts_pt = static_cast<Options_GreensTensor *>(opts);
@@ -127,25 +127,25 @@ double GreensTensorPlate::integrand_k_1d(double phi, void *opts) {
   // probably sharp edge of the Bose-Einstein distribution, the integration is
   // split at the edge, if the edged lies below the cut-off kappa_cut.
   if (kappa_cut > std::abs(omega / (v * cos_phi))) {
-    result = cquad(&integrand_k_2d, opts, -std::abs(omega), 0, rel_err(0), 0);
-    result += cquad(&integrand_k_2d, opts, 0, std::abs(omega / (v * cos_phi)),
+    result = cquad(&integrand_2d_k, opts, -std::abs(omega), 0, rel_err(0), 0);
+    result += cquad(&integrand_2d_k, opts, 0, std::abs(omega / (v * cos_phi)),
                     rel_err(0), 0);
-    result += cquad(&integrand_k_2d, opts, std::abs(omega / (v * cos_phi)),
+    result += cquad(&integrand_2d_k, opts, std::abs(omega / (v * cos_phi)),
                     kappa_cut, rel_err(0), 0);
   } else {
-    result = cquad(&integrand_k_2d, opts, -std::abs(omega), kappa_cut,
+    result = cquad(&integrand_2d_k, opts, -std::abs(omega), kappa_cut,
                    rel_err(0), 0);
   }
   return result;
 };
 
-void GreensTensorPlate::integrate_k_2d(cx_mat::fixed<3, 3> &GT,
+void GreensTensorPlate::integrate_2d_k(cx_mat::fixed<3, 3> &GT,
                                        Options_GreensTensor opts) {
   std::cerr << "Currently, this routine is not implemented." << std::endl;
   exit(0);
 };
 
-double GreensTensorPlate::integrand_k_2d(double kappa_double, void *opts) {
+double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
   // The needed parameters for the integration are encoded in the void pointer.
   // This void pointer is casted the options struct given in GreensTensor.h.
   Options_GreensTensor *opts_pt = static_cast<Options_GreensTensor *>(opts);
