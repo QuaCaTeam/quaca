@@ -36,7 +36,7 @@ For our situation the section for the Green's tensor would look like this:
 ```ini
 [GreensTensor]
 type = plate
-v = 0.1
+v = 5e-4
 beta = 1e-4
 ```
 
@@ -79,20 +79,21 @@ If we convert the units for our system appropriately the input file `tutorial.in
 ```ini
 [Permittivity]
 type = drude
-omega_p =
-gamma =
+omega_p = 9.0
+gamma = 35e-3
 
 [GreensTensor]
 type = plate
-v =
-beta =
-z_a =
+v = 5e-4
+beta = 1.16e13
+z_a = 5e-9
 
 [Polarizability]
-type = nobath
-omega_a =
-alpha_zero =
+type = bath
+omega_a = 1.3
+alpha_zero = 6e-9
 ```
+
 We have created our input file and are now ready to start our first calculation.
 
 ## 3. Run QuaCa
