@@ -19,8 +19,8 @@ So essentially we want to reproduce the plot *blabla on page blublu*.
 
 Our setup consists of:
 
-1. a particle, described by
-2. a material filling the lower halfspace with
+* a particle, described by
+* a material filling the lower halfspace with
 
 Furthermore we assume that ...
 
@@ -28,10 +28,10 @@ Furthermore we assume that ...
 There are lots of things we could change in the above setup without changing the formula we have to use.
 For example, imagine we want to calculate the exact same situation as above, but with a *blabla* atom.
 Because of this inherent modularity QuaCa reads an input file that contains all these parameters, so that the program does not have to be recompiled on each change.
+
 The parameters are written in  a `.ini` file.
-It consists of sections (e.g. GreensTensor, Polarizability) and keys (i.e. properties such as v, beta, ...).
-Usually the sections correspond to the so called classes in the QuaCa code.
-These are abstract units that resemble a larger term in the formula for quantum friction such as the polarizability, the power spectrum or the Green's tensor.
+It consists of sections, which are named after the classes (e.g. GreensTensor, Polarizability) and keys which are named after the properties they represent (e.g. the velocity v, the inverse temperature beta, etc.).
+Classes are abstract units that resemble a larger term in the formula for quantum friction such as the polarizability, the power spectrum or the Green's tensor.
 For our situation the section for the Green's tensor would look like this:
 ```ini
 [GreensTensor]
@@ -43,17 +43,16 @@ beta = 1e-4
 ?> To see which keys are available in a certain section, look into the [API documentation](api) of the relevant class.
 
 Let us now create an input file in the `data/` directory and call it `tutorial.ini`.
-List all classes that we have to define in the input file
+Let us now list all classes that we have to define in the input file
 ```ini
 [Permittivity]
 
 [GreensTensor]
 
 [Polarizability]
-
 ```
 
-Now these classes need the following parameters
+According to our setup these classes need the following parameters
 ```ini
 [Permittivity]
 type = drude
@@ -71,7 +70,6 @@ type = nobath
 omega_a =
 alpha_zero =
 ```
-The parameters in the section can change depending on the *type* of the class, e.g. if you instead of a Drude model consider a *blabla* model, your parameters are *blabla*.
 
 We are now ready to enter some values into our input file, but wait.
 What are the units that QuaCa requires?
@@ -106,7 +104,7 @@ quaca/bin> ./QuaCa --file ../data/tutorial.ini
 The flag `--file` specifies the input file, whose path is specified behind it.
 Notice that since we are in the `bin/` directory we first had to go one directory up and then to `data/tutorial.ini`.
 QuaCa now produces a file in the same directory as the input file and with the same name, but of the file type `.csv`.
-It contains ...
+It contains in the first column that variable that we have looped over (which in this case is XXX) and in the second column the calculated value of the quantum friction.
 
 ## 4. Check the results
 Let us now plot the data we obtained from our calculation and compare it to *plot in paper*.

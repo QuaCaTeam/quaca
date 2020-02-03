@@ -25,3 +25,4 @@
   - [Documentation](dev/documentation)
   - [Project Organization](dev/organization)
   - [Protocols](dev/protocols)
+  - [On numerical integration in C++](dev/integration)
