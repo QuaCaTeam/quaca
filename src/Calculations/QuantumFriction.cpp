@@ -31,17 +31,18 @@ QuantumFriction::QuantumFriction(GreensTensor *greens_tensor,
 
 double QuantumFriction::calculate(Options_Friction opts, double relerr,
                                   double epsabs) {
-  std::cout << "Lets start" << std::endl;
-  double result =
-      cquad(&friction_integrand, &opts, 0,
-            0.999 * this->polarizability->get_omega_a(), relerr, epsabs);
-  std::cout << "getting here" << std::endl;
-  result = cquad(&friction_integrand, &opts,
-                 0.999 * this->polarizability->get_omega_a(),
-                 2 * this->polarizability->get_omega_a(), relerr, epsabs);
-  std::cout << "and here" << std::endl;
-  result += qagiu(&friction_integrand, &opts,
-                  2 * this->polarizability->get_omega_a(), relerr, epsabs);
+  double result;
+  double wcut = 1.e-3 * 30 / (2 * 0.01);
+  result = cquad(&friction_integrand, &opts, 0., wcut, relerr, epsabs);
+  result += cquad(&friction_integrand, &opts, wcut,
+                  0.999 * this->polarizability->get_omega_a(), relerr,
+                  std::abs(result) * 1E-2);
+  result += cquad(
+      &friction_integrand, &opts, 0.999 * this->polarizability->get_omega_a(),
+      2 * this->polarizability->get_omega_a(), relerr, std::abs(result) * 1E-2);
+  result +=
+      qagiu(&friction_integrand, &opts, 2 * this->polarizability->get_omega_a(),
+            relerr, std::abs(result) * 1E-2);
   return result;
 };
 
@@ -80,7 +81,6 @@ double QuantumFriction::friction_integrand(double omega, void *opts) {
     opts_S.omega = omega;
     opts_S.full_spectrum = true;
     opts_pt->class_pt->powerspectrum->calculate(powerspectrum, opts_S);
-
     return real(2. * trace(-powerspectrum * green_kv +
                            1. / M_PI * alpha_I * green_temp_kv));
     // return real(2.*trace(-powerspectrum*green_kv));
@@ -105,7 +105,7 @@ double QuantumFriction::friction_integrand(double omega, void *opts) {
                                                      opts_g);
 
     Options_PowerSpectrum opts_J;
-    opts_J.non_LTE = false;
+    opts_J.non_LTE = true;
     opts_J.omega = omega;
     opts_pt->class_pt->powerspectrum->calculate(J, opts_J);
 
@@ -114,7 +114,6 @@ double QuantumFriction::friction_integrand(double omega, void *opts) {
     opts_alpha.omega = omega;
     opts_pt->class_pt->polarizability->calculate_tensor(alpha_fancy_I,
                                                         opts_alpha);
-
     return real(
         trace(2. / M_PI *
               (-J * green_kv + alpha_fancy_I * green_fancy_I_kv_non_LTE)));

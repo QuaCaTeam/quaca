@@ -82,12 +82,43 @@ TEST_CASE("Analytical results with vacuum Green's tensor gets reproduced",
   opts.non_LTE = true;
   // opts.full_spectrum = true;
   double num_result = quant_fric.calculate(opts, relerr, epsabs);
-  std::cout << std::setprecision(9) << "prop"
-            << beta * pow(3. / (2 * alpha_zero), 1. / 3.) << std::endl;
-  std::cout << std::setprecision(9) << "Num " << num_result << std::endl;
-  std::cout << std::setprecision(9) << "Ana: " << analytical_result
-            << std::endl;
-  std::cout << std::setprecision(9) << analytical_result / num_result
-            << std::endl;
   REQUIRE(Approx(num_result).epsilon(1e-4) == analytical_result);
+}
+TEST_CASE("Analytical results with scattered Green's tensor gets reproduced",
+          "[QuantumFriction]") {
+  // Units: c=1, 4 pi epsilon_0 = 1, hbar = 1
+  double omega_a = 1.3;
+  double alpha_zero = 6e-9;
+  double za = 0.01;
+  double omega_p = 9.;
+  double gamma = 0.1;
+  double rho;
+  rho = gamma * M_PI * 4. / pow(omega_p, 2);
+  double beta = 1e6;
+  double v = 1e-4;
+  double delta_cut = 30;
+  double analytical_result = -(63. - 45.) * pow(alpha_zero * rho, 2) *
+                             pow(v / M_PI, 3) / pow(2 * za, 10);
+  analytical_result += -(6. - 3.) * pow(alpha_zero * rho / beta, 2) *
+                       (v / M_PI) / pow(2 * za, 8);
+
+  vec::fixed<2> rel_err = {1E-6, 1E-4};
+  double relerr_omega = 1e-2;
+  double epsabs = 0;
+
+  PermittivityDrude perm(gamma, omega_p);
+  GreensTensorPlate green(v, za, beta, &perm, delta_cut, rel_err);
+  PolarizabilityNoBath alpha(omega_a, alpha_zero, &green);
+  PowerSpectrumHarmOsc powerspectrum(&green, &alpha);
+  QuantumFriction quant_fric(&green, &alpha, &powerspectrum);
+
+  Options_Friction opts;
+  opts.class_pt = &quant_fric;
+  opts.non_LTE = true;
+  // opts.full_spectrum = true;
+  double num_result = quant_fric.calculate(opts, relerr_omega, epsabs);
+  std::cout << "ana=" << analytical_result << std::endl;
+  std::cout << "num=" << num_result << std::endl;
+  std::cout << "num/ana=" << num_result / analytical_result << std::endl;
+  REQUIRE(Approx(num_result).epsilon(1e-2) == analytical_result);
 }

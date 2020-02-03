@@ -85,16 +85,20 @@ void GreensTensorPlate::integrate_1d_k(cx_mat::fixed<3, 3> &GT,
 
   // the xx element
   opts.indices = {0, 0};
-  GT(0, 0) = cquad(&integrand_1d_k, &opts, 0, M_PI, rel_err(1), 0) / M_PI;
+  GT(0, 0) = cquad(&integrand_1d_k, &opts, 0, 0.5*M_PI, rel_err(1), 0) / M_PI;
+  GT(0, 0) += cquad(&integrand_1d_k, &opts, 0.5*M_PI, M_PI, rel_err(1), 0) / M_PI;
   // the yy element
   opts.indices = {1, 1};
-  GT(1, 1) = cquad(&integrand_1d_k, &opts, 0, M_PI, rel_err(1), 0) / M_PI;
+  GT(1, 1) = cquad(&integrand_1d_k, &opts, 0,0.5* M_PI, rel_err(1), 0) / M_PI;
+  GT(1, 1) += cquad(&integrand_1d_k, &opts, 0.5*M_PI, M_PI, rel_err(1), 0) / M_PI;
   // the zz element
   opts.indices = {2, 2};
-  GT(2, 2) = cquad(&integrand_1d_k, &opts, 0, M_PI, rel_err(1), 0) / M_PI;
+  GT(2, 2) = cquad(&integrand_1d_k, &opts, 0, 0.5*M_PI, rel_err(1), 0) / M_PI;
+  GT(2, 2) += cquad(&integrand_1d_k, &opts, 0.5*M_PI, M_PI, rel_err(1), 0) / M_PI;
   // the zx element
   opts.indices = {2, 0};
-  GT(2, 0) = I * cquad(&integrand_1d_k, &opts, 0, M_PI, rel_err(1), 0) / M_PI;
+  GT(2, 0) = I * cquad(&integrand_1d_k, &opts, 0, 0.5*M_PI, rel_err(1), 0) / M_PI;
+  GT(2, 0) += I * cquad(&integrand_1d_k, &opts, 0.5*M_PI, M_PI, rel_err(1), 0) / M_PI;
   // the xz element
   GT(0, 2) = -GT(2, 0);
 };
@@ -269,8 +273,12 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
     result_complex *= k * cos_phi;
   } else if (opts_pt->fancy_I_temp) {
     result_complex /= (1.0 - exp(-beta * omega_pl));
+  } else if (opts_pt->fancy_I_non_LTE) {
+    result_complex *=1./(1.0 - exp(-beta * omega_pl)) - 1./(1.0 - exp(-beta * omega));
   } else if (opts_pt->fancy_I_kv_temp) {
     result_complex *= k * cos_phi / (1.0 - exp(-beta * omega_pl));
+  } else if (opts_pt->fancy_I_kv_non_LTE) {
+    result_complex *= k * cos_phi*(1./(1.0 - exp(-beta * omega_pl)) - 1./(1.0 - exp(-beta * omega)));
   }
 
   // Calculate fancy real part of the given matrix element
