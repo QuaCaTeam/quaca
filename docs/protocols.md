@@ -44,3 +44,12 @@ Protocols
     * Francesco will be responsible for the survival of the code
     * It is a very easy possibility to produce publications and generate projects for students
     * Christoph, Simon and Marty continue to assure the quality of the code for a transition period
+
+### Meeting 3: Marty and Christoph (04.02.2020)
+
+- all showed their code progress
+- we need a class for summing Green's tensors
+- quantumfriction should be an abstract class
+- marty keeps working on the reflection coefficients
+- quantum friction with plate setup works and will soon be pushed into the master
+- optimization and code profiling should be made a standing issue
