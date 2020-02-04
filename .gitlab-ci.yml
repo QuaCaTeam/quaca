@@ -2,7 +2,7 @@ image: debian:stable
 
 before_script:
    - apt-get update
-   - apt-get -y install cmake make g++ libboost-filesystem-dev libgsl-dev liblapack-dev
+   - apt-get -y install cmake make g++ libboost-filesystem-dev libgsl-dev liblapack-dev libboost-program-options-dev
 
 stages:
   - build

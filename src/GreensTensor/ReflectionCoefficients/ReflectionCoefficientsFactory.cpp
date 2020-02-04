@@ -21,8 +21,8 @@ ReflectionCoefficientsFactory::create(std::string input_file) {
   // Load the ini file in this ptree
   pt::read_ini(input_file, root);
 
-  // read the type of surface
-  std::string type = root.get<std::string>("Surface.type");
+  // read the type of reflection coefficient
+  std::string type = root.get<std::string>("Reflection.type");
 
   // set the right pointer, show error if type is unknown
   if (type == "local bulk") {

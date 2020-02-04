@@ -6,6 +6,8 @@
 #include "../src/GreensTensor/GreensTensorVacuum.h"
 #include "../src/GreensTensor/Permittivity/Permittivity.h"
 #include "../src/GreensTensor/Permittivity/PermittivityDrude.h"
+#include "../src/GreensTensor/ReflectionCoefficients/ReflectionCoefficients.h"
+#include "../src/GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.h"
 #include "../src/Polarizability/Polarizability.h"
 #include "../src/Polarizability/PolarizabilityBath.h"
 #include "../src/Polarizability/PolarizabilityNoBath.h"
