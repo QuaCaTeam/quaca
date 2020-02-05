@@ -26,8 +26,8 @@ private:
 public:
   // constructors
   GreensTensorPlate(double v, double za, double beta,
-                    Permittivity *permittivity, double delta_cut,
-                    vec::fixed<2> rel_err);
+                    ReflectionCoefficients *reflection_coefficients,
+                    double delta_cut, vec::fixed<2> rel_err);
   GreensTensorPlate(std::string input_file);
 
   // calculate the tensor in frequency and momentum space
@@ -46,10 +46,10 @@ public:
   // getter functions
   std::complex<double> get_r_p(double omega, double k);
   std::complex<double> get_r_s(double omega, double k);
-  double get_za() { return this->za; }
-  double get_delta_cut() { return this->delta_cut; }
-  double get_rel_err_0() { return this->rel_err(0); }
-  double get_rel_err_1() { return this->rel_err(1); }
+  double get_za() { return this->za; };
+  double get_delta_cut() { return this->delta_cut; };
+  double get_rel_err_0() { return this->rel_err(0); };
+  double get_rel_err_1() { return this->rel_err(1); };
 };
 
 #endif // GREENSTENSORPLATE_H

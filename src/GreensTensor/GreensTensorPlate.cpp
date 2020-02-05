@@ -3,19 +3,21 @@
 #include "../Calculations/Integrations.h"
 #include "Permittivity/PermittivityFactory.h"
 
-GreensTensorPlate::GreensTensorPlate(double v, double za, double beta,
-                                     Permittivity *permittivity,
-                                     double delta_cut, vec::fixed<2> rel_err)
+GreensTensorPlate::GreensTensorPlate(
+    double v, double za, double beta,
+    ReflectionCoefficients *reflection_coefficients, double delta_cut,
+    vec::fixed<2> rel_err)
     : GreensTensor(v, beta) {
   this->za = za;
   this->delta_cut = delta_cut;
   this->rel_err = rel_err;
-  this->permittivity = permittivity;
+  this->reflection_coefficients = reflection_coefficients;
 };
 
 GreensTensorPlate::GreensTensorPlate(std::string input_file)
     : GreensTensor(input_file) {
-  this->permittivity = PermittivityFactory::create(input_file);
+  this->reflection_coefficients =
+      ReflectionCoefficientsFactory::create(input_file);
 
   // Create a root
   pt::ptree root;
@@ -59,14 +61,13 @@ void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3, 3> &GT,
   omega_abs = std::abs(opts.omega);
   omega_quad = omega_abs * omega_abs;
 
-
   // kapppa is defined to have either a purely
   // positive real part or purely negatively imaginary part
   kappa = sqrt(std::complex<double>(k_quad - omega_quad, 0.));
   kappa = std::complex<double>(std::abs(kappa.real()), -std::abs(kappa.imag()));
 
- // produce the reflection coefficients in s- and p-polarization
-  reflection_coefficients->ref(r_p, r_s , omega_abs, kappa);
+  // produce the reflection coefficients in s- and p-polarization
+  reflection_coefficients->ref(r_p, r_s, omega_abs, kappa);
 
   // For an better overview and a efficient calculation, the
   // pre-factors of the p and s polarization are collected separately
@@ -238,9 +239,9 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
   // actual calculation. Afterwards, the corresponding symmetry operation is
   // performed if the sign of omega_pl is negative.
   double omega_pl_abs = std::abs(omega_pl);
-  
+
   // producing the reflection coefficients in p- and s-polarization
-  pt->reflection_coefficients->ref(r_p,r_s,omega_pl_abs,kappa_complex);
+  pt->reflection_coefficients->ref(r_p, r_s, omega_pl_abs, kappa_complex);
   // For an better overview and a efficient calculation, we collect the
   // pre-factors of the p and s polarization separately
   prefactor_p =
@@ -319,25 +320,25 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
   }
   return result;
 };
-//std::complex<double> GreensTensorPlate::get_r_p(double omega, double k){
+// std::complex<double> GreensTensorPlate::get_r_p(double omega, double k){
 //  double r_p,r_s;
 //  std::complex<double> kappa;
 // if (omega > 0) {
-//  kappa = std::complex<double>(0.,-sqrt(omega*omega-k*k) ); 
+//  kappa = std::complex<double>(0.,-sqrt(omega*omega-k*k) );
 // } else {
-//  kappa = std::complex<double>(sqrt(k*k - omega*omega),0.); 
+//  kappa = std::complex<double>(sqrt(k*k - omega*omega),0.);
 // };
-//this->reflection_coefficients->ref(r_p, r_s, omega, kappa);
-//return r_p;
+// this->reflection_coefficients->ref(r_p, r_s, omega, kappa);
+// return r_p;
 //};
-//std::complex<double> GreensTensorPlate::get_r_s(double omega, double k){
+// std::complex<double> GreensTensorPlate::get_r_s(double omega, double k){
 //  double r_s,r_p;
 //  std::complex<double> kappa;
 // if (omega > 0) {
-//  kappa = std::complex<double>(0.,-sqrt(omega*omega-k*k) ); 
+//  kappa = std::complex<double>(0.,-sqrt(omega*omega-k*k) );
 // } else {
-//  kappa = std::complex<double>(sqrt(k*k - omega*omega),0.); 
+//  kappa = std::complex<double>(sqrt(k*k - omega*omega),0.);
 // };
-//this->reflection_coefficients->ref( r_p, r_s, omega, kappa);
-//return r_s;
+// this->reflection_coefficients->ref( r_p, r_s, omega, kappa);
+// return r_s;
 //};
