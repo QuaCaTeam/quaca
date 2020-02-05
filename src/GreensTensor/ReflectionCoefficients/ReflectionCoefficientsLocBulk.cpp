@@ -24,10 +24,9 @@ void ReflectionCoefficientsLocBulk::ref(std::complex<double> &r_p, std::complex<
 
   // kapppa as well as kappa_epsilon are defined to have either a purely
   // positive real part or purely negatively imaginary part
-  kappa_epsilon = sqrt(kappa*kappa - (eps + 1.) * omega_abs * omega_abs);
+  kappa_epsilon = sqrt(kappa*kappa - (eps - 1.) * omega_abs * omega_abs);
   kappa_epsilon = std::complex<double>(std::abs(kappa_epsilon.real()),
                                        -std::abs(kappa_epsilon.imag()));
-
   // Defining the reflection coefficients in transverse magnetice polarization
   // (p) and in transverse electric polarization (s)
   r_p = (kappa * eps - kappa_epsilon) / (kappa * eps + kappa_epsilon);
