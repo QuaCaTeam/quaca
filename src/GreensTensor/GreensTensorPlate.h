@@ -1,43 +1,55 @@
 #ifndef GREENSTENSORPLATE_H
 #define GREENSTENSORPLATE_H
 
+#include "GreensTensor.h"
+#include "Permittivity/PermittivityFactory.h"
+#include "ReflectionCoefficients/ReflectionCoefficientsFactory.h"
+#include <armadillo>
+#include <assert.h>
+#include <cmath>
+#include <complex>
 // ini parser
-#include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
 namespace pt = boost::property_tree;
 
-#include "GreensTensor.h"
-
-class GreensTensorPlate : public GreensTensor
-{
+//! The class of the Green's tensor above a flat macroscopic surface
+class GreensTensorPlate : public GreensTensor {
 private:
-  double z_a; // distance from plate
+  // reflection coefficients are needed to describe the surface's response
+  ReflectionCoefficients *reflection_coefficients;
+  // kappa_cut defines the numerical cut-off of the kappa integration
+  double delta_cut;
+  vec::fixed<2> rel_err = {NAN, NAN};
+  double za;
 
 public:
-
   // constructors
-  GreensTensorPlate(std::string input_file): GreensTensor(input_file)
-  {
-    pt::ptree root;
-    pt::read_ini(input_file, root);
-    this->z_a = root.get<double>("GreensTensor.z_a");
-  };
+  GreensTensorPlate(double v, double za, double beta,
+                    ReflectionCoefficients *reflection_coefficients,
+                    double delta_cut, vec::fixed<2> rel_err);
+  GreensTensorPlate(std::string input_file);
 
-  GreensTensorPlate(double v, double z_a, double beta): GreensTensor(v, beta), z_a(z_a)
-  {
-    assert(z_a > 0);
-  };
-
-  // calculate full tensor
-  void calculate_tensor(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts);
+  // calculate the tensor in frequency and momentum space
+  void calculate_tensor(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
 
   // integrate over a two-dimensional k space
-  void integrate_2d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts);
+  void integrate_2d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
 
   // integrate over a one-dimensional k space
-  void integrate_1d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts);
+  void integrate_1d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
 
+  // integrands
+  static double integrand_1d_k(double kx, void *opts);
+  static double integrand_2d_k(double ky, void *opts);
+
+  // getter functions
+  std::complex<double> get_r_p(double omega, double k);
+  std::complex<double> get_r_s(double omega, double k);
+  double get_za() { return this->za; };
+  double get_delta_cut() { return this->delta_cut; };
+  double get_rel_err_0() { return this->rel_err(0); };
+  double get_rel_err_1() { return this->rel_err(1); };
 };
-
 
 #endif // GREENSTENSORPLATE_H

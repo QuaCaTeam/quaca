@@ -1,12 +1,11 @@
+#include "MemoryKernelFactory.h"
+#include "OhmicMemoryKernel.h"
 #include <iostream>
 
 // ini parser
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 namespace pt = boost::property_tree;
-
-#include "MemoryKernelFactory.h"
-#include "OhmicMemoryKernel.h"
 
 // memory kernel factory
 MemoryKernel *MemoryKernelFactory::create(std::string input_file) {
