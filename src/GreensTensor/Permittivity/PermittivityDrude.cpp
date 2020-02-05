@@ -5,14 +5,6 @@ namespace pt = boost::property_tree;
 
 #include "PermittivityDrude.h"
 
-// direct constructor
-PermittivityDrude::PermittivityDrude(double a, double b)
-{
-    // set parameters
-    this->gamma = a;
-    this->omega_p = b;
-};
-
 // constructor for drude model from .ini file
 PermittivityDrude::PermittivityDrude(std::string input_file)
 {

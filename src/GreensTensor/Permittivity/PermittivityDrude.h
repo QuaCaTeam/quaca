@@ -13,31 +13,15 @@
 class PermittivityDrude : public Permittivity
 {
 private:
-  /*! plasma frequency */
-  double omega_p;
-
-  /*! damping coefficient */
-  double gamma;
+  double omega_p, gamma;
 
 public:
 
-  /*!
-  * Constructor for a Drude model permittivity.
-  * @param a damping coefficient
-  * @param b plasma frequency
-  */
-  PermittivityDrude(double a, double b);
-
-  /*!
-  * Constructor for a Drude model permittivity fron an input file.
-  * @param input_file .ini file containing the parameters
-  */
+  // constructors
+  PermittivityDrude(double omega_p, double gamma): omega_p(omega_p), gamma(gamma) {};
   PermittivityDrude(std::string input_file);
 
-  /*!
-  * Returns the numerical value of the permittivity.
-  * @param Frequency
-  */
+  // calculate the permittivity
   std::complex<double> epsilon(double omega);
 
   /*!

@@ -13,35 +13,18 @@
 */
 class OhmicMemoryKernel : public MemoryKernel
 {
-  private:
-    /*! damping coefficient */
-    double gamma;
+private:
+  double gamma;
 
-  public:
+public:
 
-    /*!
-    * Returns the memory kernel given a frequency omega, given by the formula
-    * \f$ \mu(\omega) = \gamma \f$
-    * @param omega Frequency
-    */
-    std::complex<double> mu( double omega );
+  // constructors
+  OhmicMemoryKernel(double gamma): gamma(gamma) {};
+  OhmicMemoryKernel(std::string input_file);
 
-    /*!
-    * Constructor for an ohmic memory kernel
-    * @param a damping coefficient
-    */
-    OhmicMemoryKernel(double a);
-
-    /*!
-    * Constructor for an ohmic memory kernel
-    * @param input_file .ini file containing parameters
-    */
-    OhmicMemoryKernel(std::string input_file);
-
-    /*!
-    * Getter method for damping coefficient.
-    */
-    double get_gamma();
+  // getter functions
+  std::complex<double> mu( double omega );
+  double get_gamma(){return this->gamma;};
 
 };
 
