@@ -6,19 +6,19 @@
 
 class Looper {
 protected:
-  QuantumFriction *quantum_friction;
-
   std::string scale; // scale type
   std::string type;  // type of looper, that is which variable gets iterated
 
-  double start;        // starting value
-  double end;          // end value
-  int number_of_steps; // number of steps
-  double steps[];      // array containing the steps
+  double start;              // starting value
+  double end;                // end value
+  int number_of_steps;       // number of steps
+  std::vector<double> steps; // array containing the steps
 
   void calculate_steps();
 
 public:
+  QuantumFriction *quantum_friction;
+
   // constructors
   Looper(double start, double end, int number_of_steps, std::string scale,
          std::string type, QuantumFriction *quantum_friction);

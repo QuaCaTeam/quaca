@@ -16,24 +16,30 @@ int main(int argc, char *argv[]) {
 
   // define looper
   Looper *looper = LooperFactory::create(parameters, quant_friction);
+  std::cout << "break" << std::endl;
 
   // define output file
   std::ofstream file;
   file.open(opts.get_output_file());
 
   // calculate values
+  double step, value;
   for (int i = 0; i < looper->get_steps_total(); i++) {
-    file << looper->get_step(i) << "," << looper->calculate_value(i) << "\n";
+    step = looper->get_step(i);
+    value = looper->calculate_value(i);
+
+    std::cout << step << "," << value << std::endl;
+    file << step << "," << value << "\n";
   };
 
   // close file
   file.close();
 
   // delete dynamically allocated memory
-  delete[] greens_tensor;
-  delete[] polarizabilty;
-  delete[] powerspectrum;
-  delete[] quant_friction;
+  // delete[] greens_tensor;
+  // delete[] polarizabilty;
+  // delete[] powerspectrum;
+  // delete[] quant_friction;
 
   return 0;
 };

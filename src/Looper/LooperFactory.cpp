@@ -20,7 +20,7 @@ Looper *LooperFactory::create(std::string input_file,
   pt::read_ini(input_file, root);
 
   // read the type of the kernel
-  std::string type = root.get<std::string>("Looper.variable");
+  std::string type = root.get<std::string>("Looper.type");
 
   // set the right pointer, show error if type is unknown
   if (type == "v") {

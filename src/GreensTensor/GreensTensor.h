@@ -36,8 +36,11 @@ public:
                               Options_GreensTensor opts) = 0;
 
   // getter functions
-  double get_v() { return this->v; }
-  double get_beta() { return this->beta; }
+  double get_v() { return this->v; };
+  double get_beta() { return this->beta; };
+
+  // setter function
+  void set_v(double v) { this->v = v; };
 };
 
 // A struct for integration options

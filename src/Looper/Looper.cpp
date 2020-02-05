@@ -33,12 +33,12 @@ void Looper::calculate_steps() {
   if (scale == "linear") {
     double spacing = (end - start) / ((double)number_of_steps);
     for (int i = 0; i < number_of_steps; i++) {
-      this->steps[i] = start + i * spacing;
+      this->steps.push_back(start + i * spacing);
     };
   } else if (scale == "log") {
     double spacing = pow(end / start, 1. / number_of_steps);
     for (int i = 0; i < number_of_steps; i++) {
-      this->steps[i] = start * pow(spacing, i);
+      this->steps.push_back(start * pow(spacing, i));
     };
 
   } else {
