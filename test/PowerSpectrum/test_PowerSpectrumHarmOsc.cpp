@@ -21,7 +21,7 @@ TEST_CASE("Constructors work", "[PowerSpectrumHarmOsc]") {
     REQUIRE(
         Approx(powerspectrum.polarizability->get_alpha_zero()).epsilon(1e-6) ==
         alpha_zero);
-  }
+  };
 
   SECTION("Constructor with ini file works") {
     double omega_a = 1.3;
@@ -41,7 +41,7 @@ TEST_CASE("Constructors work", "[PowerSpectrumHarmOsc]") {
     REQUIRE(
         Approx(powerspectrum.polarizability->get_alpha_zero()).epsilon(1e-6) ==
         alpha_zero);
-  }
+  };
 }
 
 TEST_CASE("Power spectrum is hermitian", "[PowerSpectrumHarmOsc]") {
@@ -72,7 +72,7 @@ TEST_CASE("Power spectrum is hermitian", "[PowerSpectrumHarmOsc]") {
 }
 
 TEST_CASE("Power spectrum reduces to polarizability in the static case",
-          "PowerSpectrumHarmOsc]") {
+          "[PowerSpectrumHarmOsc]") {
   // Generate randomnized power spectrum
   double beta = GENERATE(take(3, random(1e-5, 1e5)));
   double omega_a = GENERATE(take(3, random(0., 1e1)));

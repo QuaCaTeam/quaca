@@ -1,39 +1,35 @@
+#include "MemoryKernelFactory.h"
+#include "OhmicMemoryKernel.h"
 #include <iostream>
 
 // ini parser
-#include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
 namespace pt = boost::property_tree;
 
-#include "MemoryKernelFactory.h"
-#include "OhmicMemoryKernel.h"
-
 // memory kernel factory
-MemoryKernel * MemoryKernelFactory::create(std::string input_file)
-{
-    // set return pointer to NULL
-    MemoryKernel *memorykernel = NULL;
+MemoryKernel *MemoryKernelFactory::create(std::string input_file) {
+  // set return pointer to NULL
+  MemoryKernel *memorykernel = NULL;
 
-    // Create a root
-    pt::ptree root;
+  // Create a root
+  pt::ptree root;
 
-    // Load the ini file in this ptree
-    pt::read_ini(input_file, root);
+  // Load the ini file in this ptree
+  pt::read_ini(input_file, root);
 
-    // read the type of the kernel
-    std::string type = root.get<std::string>("MemoryKernel.type");
+  // read the type of the kernel
+  std::string type = root.get<std::string>("MemoryKernel.type");
 
-    // set the right pointer, show error if type is unknown
-    if ( type == "ohmic" )
-    {
-      memorykernel = new OhmicMemoryKernel(input_file);
-    }
-    else
-    {
-        std::cerr << "Error: Unknown Memory Kernel type (" << type << ")!" <<std::endl;
-        exit(0);
-    };
+  // set the right pointer, show error if type is unknown
+  if (type == "ohmic") {
+    memorykernel = new OhmicMemoryKernel(input_file);
+  } else {
+    std::cerr << "Error: Unknown Memory Kernel type (" << type << ")!"
+              << std::endl;
+    exit(0);
+  };
 
-    // return memory kernel pointer
-    return memorykernel;
+  // return memory kernel pointer
+  return memorykernel;
 };

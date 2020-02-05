@@ -3,28 +3,27 @@
 #include <armadillo>
 #include <complex>
 
-TEST_CASE("Constructors work properly", "[GreensTensorVacuum]"){
+TEST_CASE("Constructors work properly", "[GreensTensorVacuum]") {
 
-    SECTION("Constructor with argument list works"){
-        auto v = GENERATE(take(2, random(0., 1.)));
-auto beta = GENERATE(take(2, random(1e-3, 1e3)));
-GreensTensorVacuum Greens(v, beta);
+  SECTION("Constructor with argument list works") {
+    auto v = GENERATE(take(2, random(0., 1.)));
+    auto beta = GENERATE(take(2, random(1e-3, 1e3)));
+    GreensTensorVacuum Greens(v, beta);
 
-REQUIRE(Approx(Greens.get_v()).epsilon(1E-6) == v);
-REQUIRE(Approx(Greens.get_beta()).epsilon(1E-6) == beta);
-}
+    REQUIRE(Approx(Greens.get_v()).epsilon(1E-6) == v);
+    REQUIRE(Approx(Greens.get_beta()).epsilon(1E-6) == beta);
+  }
 
-SECTION("Constructor with ini file works") {
-  double v = 0.1;
-  double beta = 5;
+  SECTION("Constructor with ini file works") {
+    double v = 0.1;
+    double beta = 5;
 
-  GreensTensorVacuum Greens("../data/test_files/GreensTensorVacuum.ini");
+    GreensTensorVacuum Greens("../data/test_files/GreensTensorVacuum.ini");
 
-  REQUIRE(Approx(Greens.get_v()).epsilon(1E-6) == v);
-  REQUIRE(Approx(Greens.get_beta()).epsilon(1E-6) == beta);
-}
-}
-;
+    REQUIRE(Approx(Greens.get_v()).epsilon(1E-6) == v);
+    REQUIRE(Approx(Greens.get_beta()).epsilon(1E-6) == beta);
+  };
+};
 
 TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
   // Generate a Green's tensor with random attributes v and beta
@@ -57,7 +56,7 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
   opts.class_pt = &Greens;
   opts.omega = omega;
 
-  SECTION("Option: fancy_I", "[GreensTensorVacuum]") {
+  SECTION("Option: fancy_I") {
     opts.fancy_I = true;
     opts.indices = {0, 0};
     REQUIRE(Approx(Greens.integrand_1d_k(k_v, &opts)).epsilon(1E-7) ==
@@ -68,8 +67,9 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
     opts.indices = {2, 2};
     REQUIRE(Approx(Greens.integrand_1d_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
-  }
-  SECTION("Option: fancy_I_kv", "[GreensTensorVacuum]") {
+  };
+
+  SECTION("Option: fancy_I_kv") {
     opts.fancy_I = false;
     opts.fancy_I_kv = true;
     factor = k_v;
@@ -82,8 +82,8 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
     opts.indices = {2, 2};
     REQUIRE(Approx(Greens.integrand_1d_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
-  }
-  SECTION("Option: fancy_I_temp", "[GreensTensorVacuum]") {
+  };
+  SECTION("Option: fancy_I_temp") {
     opts.fancy_I_kv = false;
     opts.fancy_I_temp = true;
     factor = 1. / (1. - exp(-beta * omega_kv));
@@ -96,9 +96,9 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
     opts.indices = {2, 2};
     REQUIRE(Approx(Greens.integrand_1d_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
-  }
+  };
 
-  SECTION("Option: fancy_I_kv_temp", "[GreensTensorVacuum]") {
+  SECTION("Option: fancy_I_kv_temp") {
     opts.fancy_I_temp = false;
     opts.fancy_I_kv_temp = true;
     factor = k_v / (1. - exp(-beta * omega_kv));
@@ -111,12 +111,13 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
     opts.indices = {2, 2};
     REQUIRE(Approx(Greens.integrand_1d_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
-  }
+  };
 
-  SECTION("Option: fancy_I_non_LTE", "[GreensTensorVacuum]") {
+  SECTION("Option: fancy_I_non_LTE") {
     opts.fancy_I_kv_temp = false;
     opts.fancy_I_non_LTE = true;
-    factor = 1./(1.-exp(-beta*(omega_kv))) - 1./(1.-exp(-beta*omega));
+    factor =
+        1. / (1. - exp(-beta * (omega_kv))) - 1. / (1. - exp(-beta * omega));
     opts.indices = {0, 0};
     REQUIRE(Approx(Greens.integrand_1d_k(k_v, &opts)).epsilon(1E-7) ==
             result_x * factor);
@@ -126,8 +127,8 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
     opts.indices = {2, 2};
     REQUIRE(Approx(Greens.integrand_1d_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
-  }
-}
+  };
+};
 
 /*!
  * Some basic relations any Green's tensor should fulfill which can
@@ -231,149 +232,147 @@ TEST_CASE("Reality, see eq. [7]", "[GreensTensorVacuum]") {
   REQUIRE(approx_equal(Greens_lhs, -Greens_rhs, "reldiff", 10E-5));
 };
 
-TEST_CASE("Test the integration routine", "[GreensTensorVacuum]"){
+TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
 
-    SECTION("Option: fancy_I", "GreensTensorVacuum"){
-        // Generate a Green's tensor with random attributes v and beta
-        auto v = GENERATE(take(1, random(0., 1.)));
-        auto beta = GENERATE(take(1, random(1e-5, 1e5)));
-        auto omega = GENERATE(take(1, random(-1e2, 1e2)));
+  SECTION("Option: fancy_I") {
+    // Generate a Green's tensor with random attributes v and beta
+    auto v = GENERATE(take(1, random(0., 1.)));
+    auto beta = GENERATE(take(1, random(1e-5, 1e5)));
+    auto omega = GENERATE(take(1, random(-1e2, 1e2)));
 
-        GreensTensorVacuum Greens(v, beta);
+    GreensTensorVacuum Greens(v, beta);
 
-        // Create a struct with the integration options
-        Options_GreensTensor opts;
-        opts.class_pt = &Greens;
-        opts.omega = omega;
+    // Create a struct with the integration options
+    Options_GreensTensor opts;
+    opts.class_pt = &Greens;
+    opts.omega = omega;
 
-        // Matrix storing the numerical integration
-        cx_mat::fixed<3, 3> num_result(fill::zeros);
+    // Matrix storing the numerical integration
+    cx_mat::fixed<3, 3> num_result(fill::zeros);
 
-        // Matrix to store the analytic results
-        cx_mat::fixed<3, 3> ana_result(fill::zeros);
+    // Matrix to store the analytic results
+    cx_mat::fixed<3, 3> ana_result(fill::zeros);
 
-        double ana_pref = 0;
-        // Integration of the vacuum Green's tensor
-        opts.fancy_I = true;
-        Greens.integrate_1d_k(num_result, opts);
+    double ana_pref = 0;
+    // Integration of the vacuum Green's tensor
+    opts.fancy_I = true;
+    Greens.integrate_1d_k(num_result, opts);
 
-        // Computing the analytical result and storing it in analytic
-        ana_pref = 2. / 3. * pow(omega, 3) / pow(1 - pow(v, 2), 2);
-        ana_result(0, 0) = ana_pref;
-        ana_result(1, 1) = ana_pref * (1 + pow(v, 2)) / (1 - pow(v, 2));
-        ana_result(2, 2) = ana_pref * (1 + pow(v, 2)) / (1 - pow(v, 2));
+    // Computing the analytical result and storing it in analytic
+    ana_pref = 2. / 3. * pow(omega, 3) / pow(1 - pow(v, 2), 2);
+    ana_result(0, 0) = ana_pref;
+    ana_result(1, 1) = ana_pref * (1 + pow(v, 2)) / (1 - pow(v, 2));
+    ana_result(2, 2) = ana_pref * (1 + pow(v, 2)) / (1 - pow(v, 2));
 
-        REQUIRE(approx_equal(num_result, ana_result, "reldiff", 10E-5));
-    }
+    REQUIRE(approx_equal(num_result, ana_result, "reldiff", 10E-5));
+  };
 
-SECTION("Option: fancy_I_kv", "GreensTensorVacuum") {
+  SECTION("Option: fancy_I_kv") {
 
-  // Generate a Green's tensor with random attributes v and beta
-  auto v = GENERATE(take(1, random(0., 1.)));
-  auto beta = GENERATE(take(1, random(1e-5, 1e5)));
-  auto omega = GENERATE(take(1, random(-1e2, 1e2)));
+    // Generate a Green's tensor with random attributes v and beta
+    auto v = GENERATE(take(1, random(0., 1.)));
+    auto beta = GENERATE(take(1, random(1e-5, 1e5)));
+    auto omega = GENERATE(take(1, random(-1e2, 1e2)));
 
-  GreensTensorVacuum Greens(v, beta);
+    GreensTensorVacuum Greens(v, beta);
 
-  // Create a struct with the integration options
-  Options_GreensTensor opts;
-  opts.class_pt = &Greens;
-  opts.omega = omega;
+    // Create a struct with the integration options
+    Options_GreensTensor opts;
+    opts.class_pt = &Greens;
+    opts.omega = omega;
 
-  // Matrix storing the numerical integration
-  cx_mat::fixed<3, 3> num_result(fill::zeros);
+    // Matrix storing the numerical integration
+    cx_mat::fixed<3, 3> num_result(fill::zeros);
 
-  // Matrix to store the analytic results
-  cx_mat::fixed<3, 3> ana_result(fill::zeros);
+    // Matrix to store the analytic results
+    cx_mat::fixed<3, 3> ana_result(fill::zeros);
 
-  double ana_pref = 0;
-  // Integration of the vacuum Green's tensor
-  opts.fancy_I = false;
-  opts.fancy_I_kv = true;
-  Greens.integrate_1d_k(num_result, opts);
+    double ana_pref = 0;
+    // Integration of the vacuum Green's tensor
+    opts.fancy_I = false;
+    opts.fancy_I_kv = true;
+    Greens.integrate_1d_k(num_result, opts);
 
-  // Computing the analytical result and storing it in analytic
-  ana_pref = 2. / 3. * pow(omega, 4) * v / pow(1 - pow(v, 2), 3);
-  ana_result(0.0) = ana_pref;
-  ana_result(1, 1) = ana_pref * (2. + pow(v, 2)) / (1. - pow(v, 2));
-  ana_result(2, 2) = ana_result(1, 1);
+    // Computing the analytical result and storing it in analytic
+    ana_pref = 2. / 3. * pow(omega, 4) * v / pow(1 - pow(v, 2), 3);
+    ana_result(0.0) = ana_pref;
+    ana_result(1, 1) = ana_pref * (2. + pow(v, 2)) / (1. - pow(v, 2));
+    ana_result(2, 2) = ana_result(1, 1);
 
-  REQUIRE(approx_equal(num_result, ana_result, "reldiff", 10E-5));
-}
+    REQUIRE(approx_equal(num_result, ana_result, "reldiff", 10E-5));
+  }
 
-SECTION("Option: fancy_I_temp", "GreensTensorVacuum") {
-  // Generate a Green's tensor with random attributes v and beta
-  auto v = GENERATE(take(1, random(0., 1.)));
-  auto omega = GENERATE(take(3, random(-1e2, 1e2)));
-  auto beta = GENERATE(take(3, random(10e-10, 10e-12)));
-  beta *= fabs(omega);
+  SECTION("Option: fancy_I_temp") {
+    // Generate a Green's tensor with random attributes v and beta
+    auto v = GENERATE(take(1, random(0., 1.)));
+    auto omega = GENERATE(take(3, random(-1e2, 1e2)));
+    auto beta = GENERATE(take(3, random(10e-10, 10e-12)));
+    beta *= fabs(omega);
 
-  GreensTensorVacuum Greens(v, beta);
+    GreensTensorVacuum Greens(v, beta);
 
-  // Create a struct with the integration options
-  Options_GreensTensor opts;
-  opts.class_pt = &Greens;
-  opts.omega = omega;
+    // Create a struct with the integration options
+    Options_GreensTensor opts;
+    opts.class_pt = &Greens;
+    opts.omega = omega;
 
-  // Matrix storing the numerical integration
-  cx_mat::fixed<3, 3> num_result(fill::zeros);
+    // Matrix storing the numerical integration
+    cx_mat::fixed<3, 3> num_result(fill::zeros);
 
-  // Matrix to store the analytic results
-  cx_mat::fixed<3, 3> ana_result(fill::zeros);
+    // Matrix to store the analytic results
+    cx_mat::fixed<3, 3> ana_result(fill::zeros);
 
-  double ana_pref = 0;
-  // Integration of the vacuum Green's tensor
-  opts.fancy_I_temp = true;
-  Greens.integrate_1d_k(num_result, opts);
+    double ana_pref = 0;
+    // Integration of the vacuum Green's tensor
+    opts.fancy_I_temp = true;
+    Greens.integrate_1d_k(num_result, opts);
 
-  // Computing the analytical result and storing it in analytic
-  ana_pref = pow(omega, 2) / (2. * pow(v, 3) * beta);
-  ana_result(0.0) = ana_pref * (2. * v / (1. - pow(v, 2)) - 2. * atanh(v));
-  ana_result(1, 1) =
-      ana_pref * ((3. * pow(v, 3) - v) / pow(1 - pow(v, 2), 2) + atanh(v));
-  ana_result(2, 2) = ana_result(1, 1);
+    // Computing the analytical result and storing it in analytic
+    ana_pref = pow(omega, 2) / (2. * pow(v, 3) * beta);
+    ana_result(0.0) = ana_pref * (2. * v / (1. - pow(v, 2)) - 2. * atanh(v));
+    ana_result(1, 1) =
+        ana_pref * ((3. * pow(v, 3) - v) / pow(1 - pow(v, 2), 2) + atanh(v));
+    ana_result(2, 2) = ana_result(1, 1);
 
-  REQUIRE(approx_equal(num_result, ana_result, "reldiff", 10E-4));
-}
+    REQUIRE(approx_equal(num_result, ana_result, "reldiff", 10E-4));
+  }
 
-SECTION("Option: fancy_I_kv_temp", "GreensTensorVacuum") {
-  // Generate a Green's tensor with random attributes v and beta
-  auto v = GENERATE(take(1, random(0., 1.)));
-  auto omega = GENERATE(take(3, random(-1e1, 1e1)));
-  auto beta = GENERATE(take(3, random(10e-10, 10e-12)));
-  //  beta *= fabs(omega);
-  GreensTensorVacuum Greens(v, beta);
+  SECTION("Option: fancy_I_kv_temp") {
+    // Generate a Green's tensor with random attributes v and beta
+    auto v = GENERATE(take(1, random(0., 1.)));
+    auto omega = GENERATE(take(3, random(-1e1, 1e1)));
+    auto beta = GENERATE(take(3, random(10e-10, 10e-12)));
+    //  beta *= fabs(omega);
+    GreensTensorVacuum Greens(v, beta);
 
-  // Create a struct with the integration options
-  Options_GreensTensor opts;
-  opts.class_pt = &Greens;
-  opts.omega = omega;
+    // Create a struct with the integration options
+    Options_GreensTensor opts;
+    opts.class_pt = &Greens;
+    opts.omega = omega;
 
-  // Matrix storing the numerical integration
-  cx_mat::fixed<3, 3> num_result(fill::zeros);
+    // Matrix storing the numerical integration
+    cx_mat::fixed<3, 3> num_result(fill::zeros);
 
-  // Matrix to store the analytic results
-  cx_mat::fixed<3, 3> ana_result(fill::zeros);
+    // Matrix to store the analytic results
+    cx_mat::fixed<3, 3> ana_result(fill::zeros);
 
-  double ana_pref = 0;
+    double ana_pref = 0;
 
-  // Integration of the vacuum Green's tensor
-  opts.fancy_I_temp = false;
-  opts.fancy_I_kv_temp = true;
-  Greens.integrate_1d_k(num_result, opts);
+    // Integration of the vacuum Green's tensor
+    opts.fancy_I_temp = false;
+    opts.fancy_I_kv_temp = true;
+    Greens.integrate_1d_k(num_result, opts);
 
-  // Computing the analytical result and storing it in analytic
-  ana_pref = std::pow(omega, 3) / (6. * std::pow(v, 4) * beta);
-  ana_result(0, 0) =
-      ana_pref * (2 * (5 * pow(v, 3) - 3. * v) / pow(1. - pow(v, 2), 2) +
-                  6. * std::atanh(v));
-  ana_result(1, 1) = ana_pref * ((8. * pow(v, 3) - 3. * v - 13. * pow(v, 5)) /
-                                     pow(pow(v, 2) - 1, 3) -
-                                 3. * std::atanh(v));
-  ana_result(2, 2) = ana_result(1, 1);
+    // Computing the analytical result and storing it in analytic
+    ana_pref = std::pow(omega, 3) / (6. * std::pow(v, 4) * beta);
+    ana_result(0, 0) =
+        ana_pref * (2 * (5 * pow(v, 3) - 3. * v) / pow(1. - pow(v, 2), 2) +
+                    6. * std::atanh(v));
+    ana_result(1, 1) = ana_pref * ((8. * pow(v, 3) - 3. * v - 13. * pow(v, 5)) /
+                                       pow(pow(v, 2) - 1, 3) -
+                                   3. * std::atanh(v));
+    ana_result(2, 2) = ana_result(1, 1);
 
-  REQUIRE(approx_equal(num_result, ana_result, "reldiff", 10E-5));
-}
-}
-;
-
+    REQUIRE(approx_equal(num_result, ana_result, "reldiff", 10E-5));
+  };
+};

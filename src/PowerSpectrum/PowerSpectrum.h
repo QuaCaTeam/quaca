@@ -1,5 +1,5 @@
-#ifndef POWERSPECTRUM
-#define POWERSPECTRUM
+#ifndef POWERSPECTRUM_H
+#define POWERSPECTRUM_H
 
 #include "../GreensTensor/GreensTensor.h"
 #include "../Polarizability/Polarizability.h"
@@ -9,13 +9,12 @@ struct Options_PowerSpectrum;
  *  This is an abstract class implementing a structure to compute the power
  * spectrum tensor
  */
-
 class PowerSpectrum {
 public:
-  GreensTensor
-      *greens_tensor; // Green's tensor of describing the geometry of the system
+  GreensTensor *greens_tensor; // Green's tensor of describing the geometry of
+  // the system
   Polarizability *polarizability; // Polarizability describing the linear
-                                  // response of the microscopic particle
+  // response of the microscopic particle
   // Constructors
   PowerSpectrum(std::string input_file);
   PowerSpectrum(GreensTensor *greens_tensor, Polarizability *polarizability);
@@ -31,4 +30,4 @@ struct Options_PowerSpectrum {
   double omega = NAN;
 };
 
-#endif
+#endif // POWERSPECTRUM_H
