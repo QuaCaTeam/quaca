@@ -15,4 +15,4 @@ public:
                  Options_PowerSpectrum opts);
 };
 
-#endif
+#endif // POWERSPECTRUMHARMOSC_H

@@ -11,33 +11,23 @@ struct Options_PowerSpectrum;
  */
 class PowerSpectrum {
 public:
-  GreensTensor
-      *greens_tensor; // Green's tensor of describing the geometry of the system
+  GreensTensor *greens_tensor; // Green's tensor of describing the geometry of
+  // the system
   Polarizability *polarizability; // Polarizability describing the linear
-                                  // response of the microscopic particle
+  // response of the microscopic particle
   // Constructors
   PowerSpectrum(std::string input_file);
   PowerSpectrum(GreensTensor *greens_tensor, Polarizability *polarizability);
 
-  class PowerSpectrum {
-  public:
-    GreensTensor *greens_tensor; // Green's tensor of describing the geometry of
-                                 // the system
-    Polarizability *polarizability; // Polarizability describing the linear
-                                    // response of the microscopic particle
-    // Constructors
-    PowerSpectrum(std::string input_file);
-    PowerSpectrum(GreensTensor *greens_tensor, Polarizability *polarizability);
+  // calculate the power spectrum for a fixed value of the frequency
+  virtual void calculate(cx_mat::fixed<3, 3> &powerspectrum,
+                         Options_PowerSpectrum opts) = 0;
+};
 
-    // calculate the power spectrum for a fixed value of the frequency
-    virtual void calculate(cx_mat::fixed<3, 3> &powerspectrum,
-                           Options_PowerSpectrum opts) = 0;
-  };
+struct Options_PowerSpectrum {
+  bool full_spectrum = false;
+  bool non_LTE = false;
+  double omega = NAN;
+};
 
-  struct Options_PowerSpectrum {
-    bool full_spectrum = false;
-    bool non_LTE = false;
-    double omega = NAN;
-  };
-
-#endif
+#endif // POWERSPECTRUM_H

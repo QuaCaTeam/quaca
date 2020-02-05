@@ -55,7 +55,7 @@ The input file sections for the memory kernels look like this
 #### **OhmicMemoryKernel**
 ```ini
 [MemoryKernel]
-type = "ohmic"
+type = ohmic
 gamma =
 ```
 <!-- tabs:end -->

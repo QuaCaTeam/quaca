@@ -3,6 +3,37 @@
 #include "../Calculations/Integrations.h"
 #include "Permittivity/PermittivityFactory.h"
 
+GreensTensorPlate::GreensTensorPlate(double v, double za, double beta,
+                                     Permittivity *permittivity,
+                                     double delta_cut, vec::fixed<2> rel_err)
+    : GreensTensor(v, beta) {
+  this->za = za;
+  this->delta_cut = delta_cut;
+  this->rel_err = rel_err;
+  this->permittivity = permittivity;
+};
+
+GreensTensorPlate::GreensTensorPlate(std::string input_file)
+    : GreensTensor(input_file) {
+  this->permittivity = PermittivityFactory::create(input_file);
+
+  // Create a root
+  pt::ptree root;
+
+  // Load the ini file in this ptree
+  pt::read_ini(input_file, root);
+
+  // check if type is right
+  std::string type = root.get<std::string>("GreensTensor.type");
+  assert(type == "plate");
+
+  // read parameters
+  this->za = root.get<double>("GreensTensor.za");
+  this->delta_cut = root.get<double>("GreensTensor.delta_cut");
+  this->rel_err(0) = root.get<double>("GreensTensor.rel_err_0");
+  this->rel_err(1) = root.get<double>("GreensTensor.rel_err_1");
+};
+
 void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3, 3> &GT,
                                          Options_GreensTensor opts) {
   // wavevectors

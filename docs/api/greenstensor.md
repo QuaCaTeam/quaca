@@ -71,7 +71,7 @@ The input file sections for the Green's tensor look like this
 #### **GreensTensorVacuum**
 ```ini
 [GreensTensor]
-type = "vacuum"
+type = vacuum
 v =
 beta =
 ```
@@ -80,7 +80,7 @@ beta =
 #### **GreensTensorPlate**
 ```ini
 [GreensTensor]
-type = "plate"
+type = plate
 v =
 beta =
 ```

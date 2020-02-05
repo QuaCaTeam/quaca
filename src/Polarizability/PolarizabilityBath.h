@@ -19,8 +19,6 @@ public:
   void calculate_tensor(cx_mat::fixed<3, 3> &alpha,
                         Options_Polarizability opts);
 
-  std::complex<double> get_mu(double omega) { return this->mu->mu(omega); };
-
   // getter function for memory kernel
   std::complex<double> get_mu(double omega) { return this->mu->mu(omega); };
 };

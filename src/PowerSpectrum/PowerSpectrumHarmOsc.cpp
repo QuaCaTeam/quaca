@@ -4,8 +4,24 @@
 
 using namespace arma;
 
+// ini parser
+#include <boost/property_tree/ini_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
+namespace pt = boost::property_tree;
+
 PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(std::string input_file)
-    : PowerSpectrum(input_file){};
+    : PowerSpectrum(input_file) {
+
+  // Create a root
+  pt::ptree root;
+
+  // Load the ini file in this ptree
+  pt::read_ini(input_file, root);
+
+  // check if type is right
+  std::string type = root.get<std::string>("PowerSpectrum.type");
+  assert(type == "harmonic oscillator");
+};
 
 PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(GreensTensor *greens_tensor,
                                            Polarizability *polarizability)

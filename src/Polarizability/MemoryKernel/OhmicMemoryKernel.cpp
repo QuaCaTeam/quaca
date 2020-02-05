@@ -7,8 +7,7 @@ namespace pt = boost::property_tree;
 
 OhmicMemoryKernel::OhmicMemoryKernel(double gamma) : gamma(gamma){};
 
-OhmicMemoryKernel::OhmicMemoryKernel(std::string input_file)
-    : MemoryKernel(input_file) {
+OhmicMemoryKernel::OhmicMemoryKernel(std::string input_file) {
   // Create a root
   pt::ptree root;
 

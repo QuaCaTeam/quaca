@@ -27,7 +27,7 @@ TEST_CASE("Quantum friction calculations work") {
                 .epsilon(1e-6) == omega_a);
     REQUIRE(Approx(quant_fric.powerspectrum->polarizability->get_alpha_zero())
                 .epsilon(1e-6) == alpha_zero);
-  }
+  };
 
   SECTION("Constructor with ini file works") {
     double omega_a = 1.3;
@@ -52,7 +52,7 @@ TEST_CASE("Quantum friction calculations work") {
                 .epsilon(1e-6) == omega_a);
     REQUIRE(Approx(quant_fric.powerspectrum->polarizability->get_alpha_zero())
                 .epsilon(1e-6) == alpha_zero);
-  }
+  };
 
   SECTION("Analytical results with vacuum Green's tensor get reproduced") {
     // Units: c=1, 4 pi epsilon_0 = 1, hbar = 1
@@ -75,5 +75,5 @@ TEST_CASE("Quantum friction calculations work") {
     //    REQUIRE(Approx(quant_fric.calculate(opts, omega_min, omega_max,
     //    relerr, epsabs)).epsilon(1e-8) == analytical_result);
     REQUIRE(0 == 0);
-  }
+  };
 }

@@ -17,49 +17,31 @@ class GreensTensorPlate : public GreensTensor {
 private:
   // permittivity is needed to describe the surface's response
   Permittivity *permittivity;
-  // kappa_cut defines the numerical cut-off of the kappa integration
-  double delta_cut;
+
+  double delta_cut; // numerical cut-off of the kappa integration
   vec::fixed<2> rel_err = {NAN, NAN};
   double za;
 
 public:
-  // constructor with direct input
+  // constructors
   GreensTensorPlate(double v, double za, double beta,
                     Permittivity *permittivity, double delta_cut,
-                    vec::fixed<2> rel_err)
-      : GreensTensor(v, beta) {
-    this->za = za;
-    this->delta_cut = delta_cut;
-    this->rel_err = rel_err;
-    this->permittivity = permittivity;
-  };
+                    vec::fixed<2> rel_err);
+  GreensTensorPlate(std::string input_file);
 
-  // constructor with .ini file
-  GreensTensorPlate(std::string input_file) : GreensTensor(input_file) {
-    this->permittivity = PermittivityFactory::create(input_file);
-
-    // Create a root
-    pt::ptree root;
-
-    // Load the ini file in this ptree
-    pt::read_ini(input_file, root);
-
-    // read parameters
-    this->za = root.get<double>("GreensTensor.za");
-    this->delta_cut = root.get<double>("GreensTensor.delta_cut");
-    this->rel_err(0) = root.get<double>("GreensTensor.rel_err_0");
-    this->rel_err(1) = root.get<double>("GreensTensor.rel_err_1");
-  };
-  // calculate the pure Green's tensor of this class
+  // calculate the tensor in frequency and momentum space
   void calculate_tensor(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
-  // integrates the Green's tensor with respect to kappa
+
+  // integrate over a two-dimensional k space
   void integrate_2d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
-  // integrates the Green's tensor with respect to phi and kappa
+
+  // integrate over a one-dimensional k space
   void integrate_1d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
-  // integrand of Green's tensor element with respect to the phi integration
+
+  // integrands
   static double integrand_1d_k(double kx, void *opts);
-  // integrand of Green's tensor element with respect to the kappa integration
   static double integrand_2d_k(double ky, void *opts);
+
   // getter functions
   std::complex<double> get_epsilon(double omega) {
     return this->permittivity->epsilon(omega);

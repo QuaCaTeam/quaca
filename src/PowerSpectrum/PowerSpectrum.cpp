@@ -3,9 +3,9 @@
 #include "../Polarizability/PolarizabilityFactory.h"
 #include <string>
 
+// ini parser
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
-
 namespace pt = boost::property_tree;
 
 PowerSpectrum::PowerSpectrum(std::string input_file) {

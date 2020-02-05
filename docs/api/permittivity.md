@@ -57,7 +57,7 @@ The input file sections for the permittivities look like this
 ### **PermittivityDrude**
 ```ini
 [Permittivity]
-type = "drude"
+type = drude
 omega_p =
 gamma =
 ```

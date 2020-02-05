@@ -17,21 +17,12 @@ public:
   // calculate the permittivity
   std::complex<double> epsilon(double omega);
 
-  /*!
-   * Returns the numerical value of the permittivity scaled by omega.
-   * @param Frequency
-   */
+  // Returns the numerical value of the permittivity scaled by omega.
   std::complex<double> epsilon_omega(double omega);
 
-  /*!
-   * Getter method for damping coefficient.
-   */
-  double get_gamma();
-
-  /*!
-   * Getter method for plasma frequency.
-   */
-  double get_omega_p();
+  // getter methods
+  double get_gamma() { return this->gamma; };
+  double get_omega_p() { return this->omega_p; };
 };
 
 #endif // PERMITTIVITYDRUDE_H

@@ -6,11 +6,10 @@
 //! An abstract permittivity class
 class Permittivity {
 public:
-  /*!
-   * Return the permittivity given at frequency omega
-   * @param omega Frequency
-   */
+  // calculate the permittivity
   virtual std::complex<double> epsilon(double omega) = 0;
+
+  // calculate the permittivity times omega
   virtual std::complex<double> epsilon_omega(double omega) = 0;
 };
 

@@ -132,7 +132,7 @@ Do not forget that for all polarizabilities you need to define a [GreensTensor](
 #### **PolarizabilityNoBath**
 ```ini
 [Polarizability]
-type = "nobath"
+type = nobath
 omega_a =
 alpha_zero =
 ```
@@ -141,7 +141,7 @@ alpha_zero =
 #### **PolarizabilityBath**
 ```ini
 [Polarizability]
-type = "bath"
+type = bath
 omega_a =
 alpha_zero =
 ```

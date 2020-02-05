@@ -34,4 +34,4 @@ struct Options_Friction {
   bool non_LTE = false;
 };
 
-#endif
+#endif // QUANTUMFRICTION_H
