@@ -1,103 +1,90 @@
-# Green's Tensor
-```cpp
-class GreensTensor
-{
-protected:
+!> TODO: Describe the tensors better. Fill in description of function. Write examples.
 
+## GreensTensor
+This is an abstract class that defines a Green's tensor.
+A specific kind of Green's tensor will be a child of this class.
+
+```cpp
+class GreensTensor {
+protected:
   double v;    // velocity of the particle
   double beta; // inverse temperature
 
 public:
-
   // constructors
-  GreensTensor(double v, double beta);
   GreensTensor(std::string input_file);
+  GreensTensor(double v, double beta);
 
   // calculate the whole Green's tensor
-  virtual void calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega) =0;
+  virtual void calculate_tensor(cx_mat::fixed<3, 3> &GT,
+                                Options_GreensTensor opts) = 0;
 
   // integrate over a two-dimensional k space
-  virtual void integrate_2d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts)  =0;
+  virtual void integrate_2d_k(cx_mat::fixed<3, 3> &GT,
+                              Options_GreensTensor opts) = 0;
 
   // integrate over a one-dimensional k space
-  virtual void integrate_1d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts) =0;
+  virtual void integrate_1d_k(cx_mat::fixed<3, 3> &GT,
+                              Options_GreensTensor opts) = 0;
 
   // getter functions
-  double get_v();
-  double get_beta();
-```
+  double get_v() const { return this->v; }
+  double get_beta() const { return this->beta; }
 
-# Options_GreensTensor
-
-```cpp
-struct Options_GreensTensor {
-  // Different options for the integrand
-  bool fancy_R = false;
-  bool fancy_I = false;
-  bool fancy_I_kv = false;
-  bool fancy_I_temp = false;
-  bool fancy_I_kv_temp = false;
-
-  // Indices of the 3x3 GreensTensor
-  vec::fixed<2> indices = {NAN, NAN};
-
-  // Value of omega for the integration of the k-Variables
-  double omega = NAN;
-
-  // k-vector for the omega integration
-  vec::fixed<2> kvec = {NAN, NAN};
-
-  // Pointer to the GreensTensor to be able to access the attributes of the
-  // class eventhough the integrand is static
-  GreensTensor *class_pt;
+  // setter functions
+  void set_v(double v) { this->v = v; }
+  void set_beta(double beta) { this->beta = beta; }
 };
 ```
 
+### `# GreensTensor(std::string input_file)`
+Input file constructor of the class.
 
-# GreensTensorVacuum
-```cpp
-class GreensTensorVacuum : public GreensTensor
-{
-public:
+### `# GreensTensor(double v, double beta)`
+Direct constructor of the class.
 
-  // constructors
-  GreensTensorVacuum(double v, double beta);
-  GreensTensorVacuum(std::string input_file);
+### `# virtual void calculate_tensor(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts) = 0`
+Calculates the Green's tensor, i.e. $\underline{G}(k, \omega + kv)$ and puts the result into the matrix `GT`.
 
-  // calculate the whole Green's tensor
-  void calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega);
+### `# virtual void integrate_2d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts) = 0`
 
-  // integrate over a two-dimensional k space
-  void integrate_2d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts);
+### `# virtual void integrate_1d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts) = 0`
 
-  // integrate over a one-dimensional k space
-  void integrate_1d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts);
 
-  // integrand for integration over one-dimensional k space
-  static double integrand_1d_k(double k, void* opts);
-};
+## GreensTensorVacuum
+Implements the vacuum Green's tensor given by
+$$
+\underline{G}_0 =
+$$
+where ... .
+
+## GreensTensorPlate
+Implements the Green's tensor of a plate given by
+$$
+\underline{G} =
+$$
+
+
+## Input file
+The input file sections for the Green's tensor look like this
+<!-- tabs:start -->
+#### **GreensTensorVacuum**
+```ini
+[GreensTensor]
+type = "vacuum"
+v =
+beta =
 ```
 
-# GreensTensorPlate
-```cpp
-class GreensTensorPlate : public GreensTensor
-{
-private:
-  double z_a; // distance from plate
 
-public:
-
-  // constructors
-  GreensTensorPlate(std::string input_file);
-  GreensTensorPlate(double v, double z_a, double beta);
-
-  // calculate full tensor
-  void calculate_tensor(cx_mat::fixed<3,3>& GT, vec::fixed<2> kvec, double omega);
-
-  // integrate over a two-dimensional k space
-  void integrate_2d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts);
-
-  // integrate over a one-dimensional k space
-  void integrate_1d_k(cx_mat::fixed<3,3>& GT, Options_GreensTensor opts);
-};
+#### **GreensTensorPlate**
+```ini
+[GreensTensor]
+type = "plate"
+v =
+beta =
 ```
+For the plate Green's tensor you also need to define a [Permittivity](api/permittivity)!
+<!-- tabs:end -->
+
+## Examples

@@ -37,17 +37,17 @@ public:
 };
 ```
 
-### `# Polarizability(double omega_a, double alpha_zero, GreensTensor *greens_tensor);`
+### `# Polarizability(double omega_a, double alpha_zero, GreensTensor *greens_tensor)`
 Direct constructor for the class.
 
-### `# Polarizability(std::string input_file);`
+### `# Polarizability(std::string input_file)`
 Input file constructor for the class.
 
 ### `# void calculate_tensor(cx_mat::fixed<3, 3> &alpha, Options_Polarizability opts)`
 This function evaluates the tensor according to its formula for $\underline{\alpha}(\omega)$ and puts the result into the matrix `alpha`.
 The options struct `opts` contains the frequency argument at which the tensor shall be evaluated and further option flags for $\underline{\alpha}_{\Im}$ or $\underline{\alpha}_{\Re}$. See also the [Examples](#Examples).
 
-### `# double integrate_omega(Options_Polarizability opts, double omega_min, double omega_max, double relerr, double abserr); `
+### `# double integrate_omega(Options_Polarizability opts, double omega_min, double omega_max, double relerr, double abserr)`
 Integrates the polarizability from `omega_min` to `omega_max` with relative error `relerr` and absolute error `abserr` with the cquad integration routine.
 The options struct `opts` is given to determine whether to integrate $\underline{\alpha}_{\Im}$ or $\underline{\alpha}_{\Re}$, since the integrand needs to be a real function. See also Example 2 in [Examples](#Examples).
 
@@ -123,6 +123,30 @@ public:
 };
 ```
 Further information on the member function can be found in [Polarizability](#Polarizability).
+
+
+## Input file
+The input file sections for the polarizabilities look like the following.
+Do not forget that for all polarizabilities you need to define a [GreensTensor](api/greenstensor)!
+<!-- tabs:start -->
+#### **PolarizabilityNoBath**
+```ini
+[Polarizability]
+type = "nobath"
+omega_a =
+alpha_zero =
+```
+
+
+#### **PolarizabilityBath**
+```ini
+[Polarizability]
+type = "bath"
+omega_a =
+alpha_zero =
+```
+For the bath you also need to define a [MemoryKernel](api/memorykernel)!
+<!-- tabs:end -->
 
 
 ## Examples
