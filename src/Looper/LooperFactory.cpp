@@ -7,6 +7,7 @@ namespace pt = boost::property_tree;
 
 #include "LooperFactory.h"
 #include "LooperV.h"
+#include "LooperZa.h"
 
 Looper *LooperFactory::create(std::string input_file,
                               QuantumFriction *quantum_friction) {
@@ -25,6 +26,8 @@ Looper *LooperFactory::create(std::string input_file,
   // set the right pointer, show error if type is unknown
   if (type == "v") {
     looper = new LooperV(input_file, quantum_friction);
+  } else if (type == "za") {
+    looper = new LooperZa(input_file, quantum_friction);
   } else {
     std::cerr << "Error: Unknown Looper type (" << type << ")!" << std::endl;
     exit(0);

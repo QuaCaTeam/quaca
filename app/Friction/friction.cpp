@@ -16,7 +16,6 @@ int main(int argc, char *argv[]) {
 
   // define looper
   Looper *looper = LooperFactory::create(parameters, quant_friction);
-  std::cout << "break" << std::endl;
 
   // define output file
   std::ofstream file;
