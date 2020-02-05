@@ -42,10 +42,8 @@ void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3, 3> &GT,
   double omega_quad, omega_abs;
   // imaginary unit
   std::complex<double> I(0.0, 1.0);
-  // permittivity and permittivity scaled with omega
-  std::complex<double> eps, eps_omega;
   // propagation in free space and within the surface material
-  std::complex<double> kappa, kappa_epsilon;
+  std::complex<double> kappa;
   // polarization dependent reflection coefficients
   std::complex<double> r_p, r_s;
   // some prefactors for a better overview
@@ -61,24 +59,14 @@ void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3, 3> &GT,
   omega_abs = std::abs(opts.omega);
   omega_quad = omega_abs * omega_abs;
 
-  // calling the permittivity and scaled permittivity
-  eps = permittivity->epsilon(omega_abs);
-  eps_omega = permittivity->epsilon_omega(omega_abs);
 
-  // kapppa as well as kappa_epsilon are defined to have either a purely
+  // kapppa is defined to have either a purely
   // positive real part or purely negatively imaginary part
   kappa = sqrt(std::complex<double>(k_quad - omega_quad, 0.));
   kappa = std::complex<double>(std::abs(kappa.real()), -std::abs(kappa.imag()));
 
-  kappa_epsilon = sqrt(k_quad - eps_omega * omega_abs);
-  kappa_epsilon = std::complex<double>(std::abs(kappa_epsilon.real()),
-                                       -std::abs(kappa_epsilon.imag()));
-
-  // Defining the reflection coefficients in transverse magnetice polarization
-  // (p) and in transverse electric polarization (s)
-  r_p = (kappa * eps - kappa_epsilon) / (kappa * eps + kappa_epsilon);
-
-  r_s = (kappa - kappa_epsilon) / (kappa + kappa_epsilon);
+ // produce the reflection coefficients in s- and p-polarization
+  reflection_coefficients->ref(r_p, r_s , omega_abs, kappa);
 
   // For an better overview and a efficient calculation, the
   // pre-factors of the p and s polarization are collected separately
@@ -218,7 +206,7 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
   std::complex<double> I(0.0, 1.0);
 
   // permittivity and propagation through vacuum (kappa) and surface material
-  std::complex<double> eps, kappa_complex, kappa_epsilon;
+  std::complex<double> kappa_complex;
   double kappa_quad;
 
   // reflection coefficients and pre-factors of the corresponding polarization
@@ -250,22 +238,9 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
   // actual calculation. Afterwards, the corresponding symmetry operation is
   // performed if the sign of omega_pl is negative.
   double omega_pl_abs = std::abs(omega_pl);
-
-  eps = pt->get_epsilon(omega_pl_abs);
-
-  // kapppa as well as kappa_epsilon are defined to have either a purely
-  // positive real part or purely negatively imaginary part
-  kappa_epsilon = sqrt(k_quad - eps * omega_pl_quad);
-  kappa_epsilon = std::complex<double>(std::abs(kappa_epsilon.real()),
-                                       -std::abs(kappa_epsilon.imag()));
-
-  // Defining the reflection coefficients in transverse magnetice polarization
-  // (p) and in transverse electric polarization (s)
-  r_p = (eps * kappa_complex - kappa_epsilon) /
-        (eps * kappa_complex + kappa_epsilon);
-
-  r_s = (kappa_complex - kappa_epsilon) / (kappa_complex + kappa_epsilon);
-
+  
+  // producing the reflection coefficients in p- and s-polarization
+  pt->reflection_coefficients->ref(r_p,r_s,omega_pl_abs,kappa_complex);
   // For an better overview and a efficient calculation, we collect the
   // pre-factors of the p and s polarization separately
   prefactor_p =
@@ -344,3 +319,25 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
   }
   return result;
 };
+//std::complex<double> GreensTensorPlate::get_r_p(double omega, double k){
+//  double r_p,r_s;
+//  std::complex<double> kappa;
+// if (omega > 0) {
+//  kappa = std::complex<double>(0.,-sqrt(omega*omega-k*k) ); 
+// } else {
+//  kappa = std::complex<double>(sqrt(k*k - omega*omega),0.); 
+// };
+//this->reflection_coefficients->ref(r_p, r_s, omega, kappa);
+//return r_p;
+//};
+//std::complex<double> GreensTensorPlate::get_r_s(double omega, double k){
+//  double r_s,r_p;
+//  std::complex<double> kappa;
+// if (omega > 0) {
+//  kappa = std::complex<double>(0.,-sqrt(omega*omega-k*k) ); 
+// } else {
+//  kappa = std::complex<double>(sqrt(k*k - omega*omega),0.); 
+// };
+//this->reflection_coefficients->ref( r_p, r_s, omega, kappa);
+//return r_s;
+//};

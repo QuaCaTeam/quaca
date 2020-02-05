@@ -3,6 +3,7 @@
 
 #include "GreensTensor.h"
 #include "Permittivity/PermittivityFactory.h"
+#include "ReflectionCoefficients/ReflectionCoefficientsFactory.h"
 #include <armadillo>
 #include <assert.h>
 #include <cmath>
@@ -15,10 +16,10 @@ namespace pt = boost::property_tree;
 //! The class of the Green's tensor above a flat macroscopic surface
 class GreensTensorPlate : public GreensTensor {
 private:
-  // permittivity is needed to describe the surface's response
-  Permittivity *permittivity;
-
-  double delta_cut; // numerical cut-off of the kappa integration
+  // reflection coefficients are needed to describe the surface's response
+  ReflectionCoefficients *reflection_coefficients;
+  // kappa_cut defines the numerical cut-off of the kappa integration
+  double delta_cut;
   vec::fixed<2> rel_err = {NAN, NAN};
   double za;
 
@@ -43,9 +44,8 @@ public:
   static double integrand_2d_k(double ky, void *opts);
 
   // getter functions
-  std::complex<double> get_epsilon(double omega) {
-    return this->permittivity->epsilon(omega);
-  };
+  std::complex<double> get_r_p(double omega, double k);
+  std::complex<double> get_r_s(double omega, double k);
   double get_za() { return this->za; }
   double get_delta_cut() { return this->delta_cut; }
   double get_rel_err_0() { return this->rel_err(0); }
