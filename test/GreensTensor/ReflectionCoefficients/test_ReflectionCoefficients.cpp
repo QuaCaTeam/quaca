@@ -23,7 +23,7 @@ TEST_CASE("Constructors of the reflection coefficients work properly", "[Reflect
     REQUIRE(Approx(RefC.get_epsilon(omega).real()).epsilon(1E-6) == perm->epsilon(omega).real());
   }
 };
-TEST_CASE("Near-field Limit works", "[ReflectionCoefficients]"){
+TEST_CASE("Evanescent Limit works", "[ReflectionCoefficients]"){
     auto omega = GENERATE(take(5, random(-1e-2, 1e-2)));
     std::complex<double> kappa = 100.;
     std::complex<double> rp, rs, rp_app, rs_app;
@@ -40,24 +40,24 @@ TEST_CASE("Near-field Limit works", "[ReflectionCoefficients]"){
     REQUIRE(Approx(rs.real()).epsilon(1E-4) == rs_app.real());
     REQUIRE(Approx(rs.imag()).epsilon(1E-4) == rs_app.imag());
 };
-//TEST_CASE("Far-field Limit works", "[ReflectionCoefficients]"){
-//    auto omega = GENERATE(take(5, random(1e2, 1e3)));
-//    double k = 0.1;
-//    std::complex<double> kappa = std::complex<double> (0., -sqrt(omega*omega-k*k) );
-//    std::complex<double> rp, rs, rp_app, rs_app;
-//    ReflectionCoefficientsLocBulk RefC("../data/test_files/GreensTensorPlate.ini");
-//    Permittivity *perm = new PermittivityDrude("../data/test_files/GreensTensorPlate.ini");
-//    std::complex<double> eps = perm->epsilon(omega);
-//    std::complex<double> epsw = perm->epsilon_omega(omega);
-//
-//    RefC.ref(rp , rs , omega, kappa);
-//      rs_app = (omega - sqrt(epsw*omega))/(omega + sqrt(epsw*omega)) ;
-// //   REQUIRE(Approx(rp.real()).epsilon(1E-4) == rp_app.real());
-// //   REQUIRE(Approx(rp.imag()).epsilon(1E-4) == rp_app.imag());
-//    std::cout << rs.imag()/rs_app.imag() << std::endl;
-//    REQUIRE(Approx(rs.real()).epsilon(1E-4) == rs_app.real());
-//    REQUIRE(Approx(rs.imag()).epsilon(1E-4) == rs_app.imag());
-//};
+TEST_CASE("Propagation Limit works", "[ReflectionCoefficients]"){
+//    auto omega = GENERATE(take(5, random(1e1, 1e2)));
+    double omega=100;
+    double k = 0.1;
+    std::complex<double> kappa = std::complex<double> (0., -sqrt(omega*omega-k*k) );
+    std::complex<double> rp, rs, rp_app, rs_app;
+    ReflectionCoefficientsLocBulk RefC("../data/test_files/GreensTensorPlate.ini");
+    Permittivity *perm = new PermittivityDrude("../data/test_files/GreensTensorPlate.ini");
+    std::complex<double> eps = perm->epsilon(omega);
+    std::complex<double> epsw = perm->epsilon_omega(omega);
+    RefC.ref(rp , rs , omega, kappa);
+      rs_app = (1. - sqrt(eps))/(1. + sqrt(eps)) ;
+      rp_app = (eps - sqrt(eps))/(eps + sqrt(eps)) ;
+    REQUIRE(Approx(rp.real()).epsilon(1E-4) == rp_app.real());
+    REQUIRE(Approx(rp.imag()).epsilon(1E-4) == rp_app.imag());
+    REQUIRE(Approx(rs.real()).epsilon(1E-4) == rs_app.real());
+    REQUIRE(Approx(rs.imag()).epsilon(1E-4) == rs_app.imag());
+};
 TEST_CASE("r_p and r_s obey the crossing relation", "[ReflectionCoefficients]"){
     auto omega = GENERATE(take(5, random(-1e2, 1e2)));
     auto kappa_double = GENERATE(take(5, random(-1e2, 1e2)));

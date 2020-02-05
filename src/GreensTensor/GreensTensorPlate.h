@@ -3,6 +3,7 @@
 
 #include "GreensTensor.h"
 #include "Permittivity/PermittivityFactory.h"
+#include "ReflectionCoefficients/ReflectionCoefficientsFactory.h"
 #include <armadillo>
 #include <assert.h>
 #include <cmath>
@@ -15,8 +16,8 @@ namespace pt = boost::property_tree;
 //! The class of the Green's tensor above a flat macroscopic surface
 class GreensTensorPlate : public GreensTensor {
 private:
-  // permittivity is needed to describe the surface's response
-  Permittivity *permittivity;
+  // reflection coefficients are needed to describe the surface's response
+  ReflectionCoefficients *reflection_coefficients;
   // kappa_cut defines the numerical cut-off of the kappa integration
   double delta_cut;
   vec::fixed<2> rel_err = {NAN, NAN};
@@ -25,18 +26,18 @@ private:
 public:
   // constructor with direct input
   GreensTensorPlate(double v, double za, double beta,
-                    Permittivity *permittivity, double delta_cut,
+                    ReflectionCoefficients *reflection_coefficients, double delta_cut,
                     vec::fixed<2> rel_err)
       : GreensTensor(v, beta) {
     this->za = za;
     this->delta_cut = delta_cut;
     this->rel_err = rel_err;
-    this->permittivity = permittivity;
+    this->reflection_coefficients = reflection_coefficients;
   };
 
   // constructor with .ini file
   GreensTensorPlate(std::string input_file) : GreensTensor(input_file) {
-    this->permittivity = PermittivityFactory::create(input_file);
+    this->reflection_coefficients = ReflectionCoefficientsFactory::create(input_file);
 
     // Create a root
     pt::ptree root;
@@ -61,9 +62,8 @@ public:
   // integrand of Green's tensor element with respect to the kappa integration
   static double integrand_2d_k(double ky, void *opts);
   // getter functions
-  std::complex<double> get_epsilon(double omega) {
-    return this->permittivity->epsilon(omega);
-  };
+  std::complex<double> get_r_p(double omega, double k);
+  std::complex<double> get_r_s(double omega, double k);
   double get_za() { return this->za; }
   double get_delta_cut() { return this->delta_cut; }
   double get_rel_err_0() { return this->rel_err(0); }

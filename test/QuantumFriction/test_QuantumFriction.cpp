@@ -107,7 +107,8 @@ TEST_CASE("Analytical results with scattered Green's tensor gets reproduced",
   double epsabs = 0;
 
   PermittivityDrude perm(gamma, omega_p);
-  GreensTensorPlate green(v, za, beta, &perm, delta_cut, rel_err);
+  ReflectionCoefficientsLocBulk refl(&perm); 
+  GreensTensorPlate green(v, za, beta, &refl, delta_cut, rel_err);
   PolarizabilityNoBath alpha(omega_a, alpha_zero, &green);
   PowerSpectrumHarmOsc powerspectrum(&green, &alpha);
   QuantumFriction quant_fric(&green, &alpha, &powerspectrum);
