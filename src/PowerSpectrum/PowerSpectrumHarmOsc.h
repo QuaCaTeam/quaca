@@ -1,5 +1,5 @@
-#ifndef POWERSPECTRUMHARMOSC
-#define POWERSPECTRUMHARMOSC
+#ifndef POWERSPECTRUMHARMOSC_H
+#define POWERSPECTRUMHARMOSC_H
 
 #include "PowerSpectrum.h"
 #include <string>

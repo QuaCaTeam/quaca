@@ -1,5 +1,5 @@
-#ifndef POWERSPECTRUM
-#define POWERSPECTRUM
+#ifndef POWERSPECTRUM_H
+#define POWERSPECTRUM_H
 
 #include "../GreensTensor/GreensTensor.h"
 #include "../Polarizability/Polarizability.h"

@@ -1,5 +1,5 @@
-#ifndef QUANTUMFRICTION
-#define QUANTUMFRICTION
+#ifndef QUANTUMFRICTION_H
+#define QUANTUMFRICTION_H
 
 #include "../GreensTensor/GreensTensor.h"
 #include "../Polarizability/Polarizability.h"
