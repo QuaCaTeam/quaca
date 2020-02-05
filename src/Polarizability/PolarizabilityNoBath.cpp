@@ -2,13 +2,13 @@
 
 PolarizabilityNoBath::PolarizabilityNoBath(double omega_a, double alpha_zero,
                                            GreensTensor *greens_tensor)
-    : Polarizability(omega_a, alpha_zero, greens_tensor) {
-  this->type = "nobath";
-};
+    : Polarizability(omega_a, alpha_zero, greens_tensor){};
 
 PolarizabilityNoBath::PolarizabilityNoBath(std::string input_file)
     : Polarizability(input_file) {
-  assert(this->type == "nobath"); // check if type is right
+  // check if type is right
+  std::string type = root.get<std::string>("Polarizability.type");
+  assert(type == "nobath");
 };
 
 void PolarizabilityNoBath::calculate_tensor(cx_mat::fixed<3, 3> &alpha,

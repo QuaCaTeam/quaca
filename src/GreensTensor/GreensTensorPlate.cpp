@@ -8,18 +8,19 @@ namespace pt = boost::property_tree;
 GreensTensorPlate::GreensTensorPlate(std::string input_file)
     : GreensTensor(input_file) {
 
-  // check if the type is right
-  assert(this->type == "plate");
-
   // read parameters
   pt::ptree root;
   pt::read_ini(input_file, root);
+
+  // check if type is right
+  std::string type = root.get<std::string>("GreensTensor.type");
+  assert(type == "plate");
+
   this->z_a = root.get<double>("GreensTensor.z_a");
 };
 
 GreensTensorPlate::GreensTensorPlate(double v, double z_a, double beta)
     : GreensTensor(v, beta), z_a(z_a) {
-  this->type = "plate";
   assert(z_a > 0);
 };
 

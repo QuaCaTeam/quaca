@@ -13,8 +13,13 @@ GreensTensorVacuum::GreensTensorVacuum(double v, double beta)
 
 GreensTensorVacuum::GreensTensorVacuum(std::string input_file)
     : GreensTensor(input_file) {
+  // read parameters
+  pt::ptree root;
+  pt::read_ini(input_file, root);
+
   // check if type is right
-  assert(this->type == "vacuum");
+  std::string type = root.get<std::string>("GreensTensor.type");
+  assert(type == "vacuum");
 };
 
 void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3, 3> &GT,

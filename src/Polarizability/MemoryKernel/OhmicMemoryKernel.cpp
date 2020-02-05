@@ -5,20 +5,19 @@ namespace pt = boost::property_tree;
 
 #include "OhmicMemoryKernel.h"
 
-OhmicMemoryKernel::OhmicMemoryKernel(double gamma) : gamma(gamma) {
-  this->type = "ohmic";
-};
+OhmicMemoryKernel::OhmicMemoryKernel(double gamma) : gamma(gamma){};
 
 OhmicMemoryKernel::OhmicMemoryKernel(std::string input_file)
     : MemoryKernel(input_file) {
-  // check if type is right
-  assert(this->type == "ohmic");
-
   // Create a root
   pt::ptree root;
 
   // Load the ini file in this ptree
   pt::read_ini(input_file, root);
+
+  // check if type is right
+  std::string type = root.get<std::string>("MemoryKernel.type");
+  assert(type == "ohmic");
 
   // read damping coefficient
   this->gamma = root.get<double>("MemoryKernel.gamma");

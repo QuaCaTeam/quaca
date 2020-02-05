@@ -22,5 +22,4 @@ GreensTensor::GreensTensor(std::string input_file) {
   assert(v >= 0 && v < 1);
   this->beta = root.get<double>("GreensTensor.beta");
   assert(beta > 0);
-  this->type = root.get<std::string>("GreensTensor.type");
 };

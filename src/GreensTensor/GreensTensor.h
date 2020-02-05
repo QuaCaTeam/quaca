@@ -17,9 +17,8 @@ struct Options_GreensTensor;
  */
 class GreensTensor {
 protected:
-  double v;         // velocity of the particle
-  double beta;      // inverse temperature
-  std::string type; // type of Green's tensor
+  double v;    // velocity of the particle
+  double beta; // inverse temperature
 
 public:
   // constructors

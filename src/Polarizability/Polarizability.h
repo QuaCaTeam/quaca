@@ -19,7 +19,6 @@ protected:
   double omega_a;              // resonance frequency
   double alpha_zero;           // vacuum polarizability
   GreensTensor *greens_tensor; // Green's tensor
-  std::string type;            // type of polarizability
 
 public:
   // constructors
