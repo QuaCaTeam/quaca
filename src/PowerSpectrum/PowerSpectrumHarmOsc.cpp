@@ -1,34 +1,56 @@
 #include "PowerSpectrumHarmOsc.h"
-#include <string>
 #include <armadillo>
+#include <string>
 
 using namespace arma;
 
+PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(std::string input_file)
+    : PowerSpectrum(input_file){};
 
-PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(std::string input_file): PowerSpectrum(input_file)
-{
-};
+PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(GreensTensor *greens_tensor,
+                                           Polarizability *polarizability)
+    : PowerSpectrum(greens_tensor, polarizability){};
 
-PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(GreensTensor* greens_tensor, Polarizability* polarizability):PowerSpectrum(greens_tensor, polarizability)
-{
-};
+void PowerSpectrumHarmOsc::calculate(cx_mat::fixed<3, 3> &powerspectrum,
+                                     Options_PowerSpectrum opts) {
+  double omega = opts.omega;
+  if (opts.full_spectrum) {
+    cx_mat::fixed<3, 3> green(fill::zeros);
+    Options_GreensTensor opts_g;
+    opts_g.fancy_I_temp = true;
+    opts_g.omega = omega;
+    opts_g.class_pt = this->greens_tensor;
+    // Compute the Green's tensor
+    this->greens_tensor->integrate_1d_k(green, opts_g);
 
+    cx_mat::fixed<3, 3> alpha(fill::zeros);
+    Options_Polarizability opts_alpha;
+    opts_alpha.omega = omega;
+    // Compute the polarizability
+    this->polarizability->calculate_tensor(alpha, opts_alpha);
 
-void PowerSpectrumHarmOsc::calculate(cx_mat::fixed<3,3>& powerspectrum, double omega)
-{
-  cx_mat::fixed<3,3> green(fill::zeros);
-  Options_GreensTensor opts_g;
-  opts_g.fancy_I_kv_temp = true;
-  opts_g.omega = omega;
-  opts_g.class_pt = this->greens_tensor;
-  this->greens_tensor->integrate_1d_k(green, opts_g);
+    // Combine the previous results to a power spectrum, see eq. [3.9] in
+    // Marty's PhD thesis
+    powerspectrum = 1. / M_PI * alpha * green * trans(alpha);
+  }
+  if (opts.non_LTE) {
+    cx_mat::fixed<3, 3> green(fill::zeros);
+    Options_GreensTensor opts_g;
+    opts_g.fancy_I_non_LTE = true;
+    opts_g.omega = omega;
+    opts_g.class_pt = this->greens_tensor;
+    // Compute the Green's tensor
+    this->greens_tensor->integrate_1d_k(green, opts_g);
 
+    cx_mat::fixed<3, 3> alpha(fill::zeros);
+    Options_Polarizability opts_alpha;
+    opts_alpha.omega = omega;
 
-  cx_mat::fixed<3,3> alpha(fill::zeros);
-  Options_Polarizability opts_alpha;
-  opts_alpha.omega = omega;
-  this->polarizability->calculate_tensor(alpha, opts_alpha);
+    // Compute the polarizability
+    this->polarizability->calculate_tensor(alpha, opts_alpha);
 
-
-  powerspectrum = alpha*green*conj(trans(alpha));
+    // Combine the previous results to a power spectrum, see eq. [3.9] in
+    // Marty's PhD thesis
+    powerspectrum = alpha * green * trans(alpha);
+  }
 };

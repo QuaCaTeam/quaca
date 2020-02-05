@@ -5,17 +5,18 @@
 #include <cmath>
 #include "MemoryKernel/MemoryKernelFactory.h"
 #include "Polarizability.h"
+#include <cmath>
+#include <complex>
 
-class PolarizabilityBath : public Polarizability
-{
+class PolarizabilityBath : public Polarizability {
 private:
-    // memory kernel needed to calculate alpha
-    MemoryKernel *mu;
+  // memory kernel needed to calculate alpha
+  MemoryKernel *mu;
 
 public:
-
-    PolarizabilityBath(double omega_a, double alpha_zero, MemoryKernel *mu, GreensTensor *greens_tensor);
-    PolarizabilityBath(std::string input_file);
+  PolarizabilityBath(double omega_a, double alpha_zero, MemoryKernel *mu,
+                     GreensTensor *greens_tensor);
+  PolarizabilityBath(std::string input_file);
 
     void calculate_tensor(cx_mat::fixed<3,3>& alpha, Options_Polarizability opts);
 
@@ -23,5 +24,4 @@ public:
 
 };
 
-
-#endif //POLARIZABILITYBATH_H
+#endif // POLARIZABILITYBATH_H

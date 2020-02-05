@@ -201,3 +201,4 @@ TEST_CASE("Test integration for omega_cut much larger than omega_a", "[Polarizab
     };
   };
 };
+
