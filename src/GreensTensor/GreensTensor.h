@@ -1,9 +1,6 @@
 #ifndef GREENSTENSOR_H
 #define GREENSTENSOR_H
 
-#include <string>
-#include <armadillo>
-#include <cassert>
 #include "../Calculations/Integrations.h"
 #include <armadillo>
 using namespace arma;

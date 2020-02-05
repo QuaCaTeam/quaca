@@ -18,7 +18,7 @@ private:
 public:
 
   // constructors
-  PermittivityDrude(double omega_p, double gamma): omega_p(omega_p), gamma(gamma) {};
+  PermittivityDrude(double omega_p, double gamma);
   PermittivityDrude(std::string input_file);
 
   // calculate the permittivity
