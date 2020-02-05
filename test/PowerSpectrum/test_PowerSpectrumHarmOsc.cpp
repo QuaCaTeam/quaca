@@ -2,8 +2,7 @@
 #include "catch.hpp"
 #include <iostream>
 
-TEST_CASE("Power spectrum of harmonic oscillator works properly") {
-
+TEST_CASE("Constructors work", "[PowerSpectrumHarmOsc]") {
   SECTION("Constructor with initialisation list works") {
     auto v = GENERATE(take(1, random(0., 1.)));
     double beta = GENERATE(take(1, random(1e-5, 1e3)));
@@ -43,36 +42,64 @@ TEST_CASE("Power spectrum of harmonic oscillator works properly") {
         Approx(powerspectrum.polarizability->get_alpha_zero()).epsilon(1e-6) ==
         alpha_zero);
   }
+}
 
-  SECTION("Power spectrum is hermitian") {
-    auto omega = GENERATE(take(5, random(-1e3, 1e3)));
+TEST_CASE("Power spectrum is hermitian", "[PowerSpectrumHarmOsc]") {
+  // Generate randomnized power spectrum
+  auto v = GENERATE(take(1, random(0., 1.)));
+  double beta = GENERATE(take(1, random(1., 1e2)));
+  double omega_a = GENERATE(take(1, random(0.1, 1e1)));
+  double alpha_zero = GENERATE(take(1, random(1e-9, 1e-7)));
 
-    PowerSpectrumHarmOsc powerspectrum(
-        "../data/test_files/PowerSpectrumHarmOsc.ini");
+  GreensTensorVacuum green(v, beta);
+  PolarizabilityNoBath alpha(omega_a, alpha_zero, &green);
+  PowerSpectrumHarmOsc powerspectrum(&green, &alpha);
 
-    cx_mat::fixed<3, 3> lhs(fill::zeros);
-    cx_mat::fixed<3, 3> rhs(fill::zeros);
-    powerspectrum.calculate(lhs, omega);
-    powerspectrum.calculate(rhs, omega);
-    // cout << "Power spectrum" <<lhs << rhs << endl;
+  // Matrices to store results
+  cx_mat::fixed<3, 3> lhs(fill::zeros);
+  cx_mat::fixed<3, 3> rhs(fill::zeros);
 
-    REQUIRE(approx_equal(lhs, trans(conj(rhs)), "absdiff", 1e-5));
-  }
+  auto omega = GENERATE(take(5, random(-1e1, 1e1)));
 
-  SECTION("Power spectrum reduces to polarizability in the static case") {
-    PowerSpectrumHarmOsc powerspectrum(
-        "../data/test_files/PowerSpectrumHarmOsc.ini");
-    powerspectrum.greens_tensor->set_v(0);
-    PolarizabilityNoBath alpha("../data/test_files/PowerSpectrumHarmOsc.ini");
-    cx_mat::fixed<3, 3> lhs(fill::zeros);
-    cx_mat::fixed<3, 3> rhs(fill::zeros);
-    auto omega = GENERATE(take(5, random(-1e3, 1e3)));
-    powerspectrum.calculate(lhs, omega);
+  Options_PowerSpectrum opts;
+  opts.full_spectrum = true;
+  opts.omega = omega;
 
-    Options_Polarizability opts;
-    opts.omega = omega;
-    alpha.calculate_tensor(rhs, opts);
-    // cout << "Power spectrum" <<lhs << rhs << endl;
-    REQUIRE(approx_equal(lhs, rhs, "absdiff", 10e-5));
-  }
+  powerspectrum.calculate(lhs, opts);
+  powerspectrum.calculate(rhs, opts);
+
+  REQUIRE(approx_equal(lhs, trans(rhs), "reldiff", 1e-8));
+}
+
+TEST_CASE("Power spectrum reduces to polarizability in the static case",
+          "PowerSpectrumHarmOsc]") {
+  // Generate randomnized power spectrum
+  double beta = GENERATE(take(3, random(1e-5, 1e5)));
+  double omega_a = GENERATE(take(3, random(0., 1e1)));
+  double alpha_zero = GENERATE(take(3, random(1e-9, 1e-7)));
+  // Ensure equilibrium result
+  double v = 1e-9;
+
+  GreensTensorVacuum green(v, beta);
+  PolarizabilityNoBath alpha(omega_a, alpha_zero, &green);
+  PowerSpectrumHarmOsc powerspectrum(&green, &alpha);
+
+  // Matrices to store results
+  cx_mat::fixed<3, 3> lhs(fill::zeros);
+  cx_mat::fixed<3, 3> rhs(fill::zeros);
+
+  auto omega = GENERATE(take(5, random(0., 1e2)));
+  // Compute the powerspectrum
+  Options_PowerSpectrum opts_S;
+  opts_S.full_spectrum = true;
+  opts_S.omega = omega;
+  powerspectrum.calculate(lhs, opts_S);
+
+  // Set integration options for the polarizability
+  Options_Polarizability opts_alpha;
+  opts_alpha.omega = omega;
+  opts_alpha.fancy_I = true;
+  alpha.calculate_tensor(rhs, opts_alpha);
+  rhs *= 1. / (M_PI * (1. - exp(-beta * omega)));
+  REQUIRE(approx_equal(lhs, rhs, "reldiff", 10e-8));
 }

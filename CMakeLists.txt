@@ -15,6 +15,7 @@ find_package(Boost COMPONENTS program_options filesystem system REQUIRED)
 
 # find gsl
 find_package(GSL REQUIRED)
+include_directories(${GSL_INCLUDE_DIRS})
 
 # find lapack and use armadillo without runtimelibrary, wrap blas and lapack
 find_package(LAPACK REQUIRED)

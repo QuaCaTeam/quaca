@@ -9,11 +9,6 @@ PolarizabilityBath::PolarizabilityBath(double omega_a, double alpha_zero,
 
 PolarizabilityBath::PolarizabilityBath(std::string input_file)
     : Polarizability(input_file) {
-
-  // check if type is right
-  std::string type = root.get<std::string>("Polarizability.type");
-  assert(type == "bath");
-
   this->mu = MemoryKernelFactory::create(input_file);
 };
 

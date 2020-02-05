@@ -9,34 +9,32 @@ namespace pt = boost::property_tree;
 #include "GreensTensorVacuum.h"
 
 GreensTensorVacuum::GreensTensorVacuum(double v, double beta)
-    : GreensTensor(v, beta){};
+    : GreensTensor(v, beta) {
+  assert(beta > 0.);
+  assert(v >= 0.);
+};
 
 GreensTensorVacuum::GreensTensorVacuum(std::string input_file)
-    : GreensTensor(input_file) {
-  // read parameters
-  pt::ptree root;
-  pt::read_ini(input_file, root);
-
-  // check if type is right
-  std::string type = root.get<std::string>("GreensTensor.type");
-  assert(type == "vacuum");
-};
+    : GreensTensor(input_file){};
 
 void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3, 3> &GT,
                                           Options_GreensTensor opts) {
   if (opts.fancy_I) {
-    // calculating the solely the imaginary part of the free Green tensor
+    // calculating solely the imaginary part of the free Green tensor
     double pre, k_x, k_y, k_quad, omega, omega_quad;
     k_x = opts.kvec(0);
     k_y = opts.kvec(1);
     omega = opts.omega;
     k_quad = k_x * k_x + k_y * k_y;
     omega_quad = omega * omega;
-    pre = 1.0 / (2 * M_PI * sqrt(omega_quad - k_quad));
     GT.zeros();
-    GT(0, 0) = pre * (omega_quad - k_x * k_x);
-    GT(1, 1) = pre * (omega_quad - k_y * k_y);
-    GT(2, 2) = pre * k_quad;
+    // Test Heavyside function
+    if (omega_quad - k_quad > 0) {
+      pre = 1.0 / (2 * M_PI * sqrt(omega_quad - k_quad));
+      GT(0, 0) = pre * (omega_quad - k_x * k_x);
+      GT(1, 1) = pre * (omega_quad - k_y * k_y);
+      GT(2, 2) = pre * k_quad;
+    }
   } else {
     std::cerr << "Only the imaginary part of the Green tensor with Doppler "
                  "shift in the frequency argument is implemented"
@@ -81,18 +79,36 @@ void GreensTensorVacuum::integrate_1d_k(cx_mat::fixed<3, 3> &GT,
     GT.zeros();
     opts.indices(0) = 0;
     opts.indices(1) = 0;
-    GT(0, 0) = cquad(&integrand_1d_k, &opts, -omega / (1.0 + this->v),
-                     omega / (1.0 - this->v), 1E-7, 0);
-    opts.indices(0) = 1;
-    opts.indices(1) = 1;
-    GT(1, 1) = cquad(&integrand_1d_k, &opts, -omega / (1.0 + this->v),
-                     omega / (1.0 - this->v), 1E-7, 0);
-    GT(2, 2) = GT(1, 1);
+    // Performing the integration given by eq. (10) in docs/VacuumGreen.pdf
+    if (omega >= 0) {
+      GT(0, 0) = cquad(&integrand_1d_k, &opts, -omega / (1.0 + this->v),
+                       omega / (1.0 - this->v), 1E-9, 0);
+      opts.indices(0) = 1;
+      opts.indices(1) = 1;
+
+      GT(1, 1) = cquad(&integrand_1d_k, &opts, -omega / (1.0 + this->v),
+                       omega / (1.0 - this->v), 1E-9, 0);
+      GT(2, 2) = GT(1, 1);
+    }
+    // Changing the integrand for negative frequencies
+    if (omega < 0) {
+      GT(0, 0) = -cquad(&integrand_1d_k, &opts, omega / (1.0 - this->v),
+                        -omega / (1.0 + this->v), 1E-9, 0);
+      opts.indices(0) = 1;
+      opts.indices(1) = 1;
+
+      GT(1, 1) = -cquad(&integrand_1d_k, &opts, omega / (1.0 - this->v),
+                        -omega / (1.0 + this->v), 1E-9, 0);
+      GT(2, 2) = GT(1, 1);
+    }
   }
 };
 
 double GreensTensorVacuum::integrand_1d_k(double kv, void *opts) {
   // Units: c=1, 4 pi epsilon_0 = 1, hbar = 1
+  // The integrand can be found in docs/VacuumGreen.pdf eq. (10) where f(\omega,
+  // k_x)
+  // represents the different integration options below
   Options_GreensTensor *opts_pt = static_cast<Options_GreensTensor *>(opts);
   GreensTensorVacuum *pt = static_cast<GreensTensorVacuum *>(opts_pt->class_pt);
 
@@ -120,6 +136,13 @@ double GreensTensorVacuum::integrand_1d_k(double kv, void *opts) {
     result /= (1.0 - exp(-beta * omega_pl));
   } else if (opts_pt->fancy_I_kv_temp) {
     result *= kv / (1.0 - exp(-beta * omega_pl));
+  } else if (opts_pt->fancy_I_non_LTE) {
+    result *=
+        (1. / (1. - exp(-beta * omega_pl)) - 1. / (1. - exp(-beta * omega)));
+  } else if (opts_pt->fancy_I_kv_non_LTE) {
+    result *= kv * (1. / (1. - exp(-beta * omega_pl)) -
+                    1. / (1. - exp(-beta * omega)));
   }
+
   return result;
 };

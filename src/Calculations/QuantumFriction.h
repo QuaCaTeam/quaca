@@ -21,19 +21,17 @@ public:
   Polarizability *polarizability;
   PowerSpectrum *powerspectrum;
 
-  // constructors
   QuantumFriction(std::string input_file);
   QuantumFriction(GreensTensor *greens_tensor, Polarizability *polarizability,
                   PowerSpectrum *powerspectrum);
-
-  // calculate the quantum friction
-  double calculate(Options_Friction opts, double omega_min, double omega_max,
-                   double relerr, double epsabs);
+  double calculate(Options_Friction opts, double relerr, double epsabs);
   static double friction_integrand(double omega, void *opts);
 };
 
 struct Options_Friction {
   QuantumFriction *class_pt;
+  bool full_spectrum = false;
+  bool non_LTE = false;
 };
 
 #endif

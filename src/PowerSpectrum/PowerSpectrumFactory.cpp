@@ -8,7 +8,7 @@ namespace pt = boost::property_tree;
 #include "PowerSpectrumFactory.h"
 #include "PowerSpectrumHarmOsc.h"
 
-// power spectrum
+// Green's tensor factory
 PowerSpectrum *PowerSpectrumFactory::create(std::string input_file) {
   // set return pointer to NULL
   PowerSpectrum *powerspectrum = NULL;
@@ -19,7 +19,7 @@ PowerSpectrum *PowerSpectrumFactory::create(std::string input_file) {
   // Load the ini file in this ptree
   pt::read_ini(input_file, root);
 
-  // read the type of the power spectrum
+  // read the type of the kernel
   std::string type = root.get<std::string>("PowerSpectrum.type");
 
   // set the right pointer, show error if type is unknown
