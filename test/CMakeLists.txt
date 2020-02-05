@@ -15,4 +15,7 @@ target_link_libraries(test_quaca PRIVATE
   ${GSL_CBALS_LIBRARY}
   ${BLAS_LIBRARIES}
   ${LAPACK_LIBRARIES}
+  ${Boost_PROGRAM_OPTIONS_LIBRARY}
+  ${Boost_FILESYSTEM_LIBRARY}
+  ${Boost_SYSTEM_LIBRARY}
 )

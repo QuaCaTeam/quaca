@@ -11,7 +11,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
 # find boost libraries
 set(Boost_NO_BOOST_CMAKE ON)
-find_package(Boost COMPONENTS filesystem system REQUIRED)
+find_package(Boost COMPONENTS program_options filesystem system REQUIRED)
 
 # find gsl
 find_package(GSL REQUIRED)
