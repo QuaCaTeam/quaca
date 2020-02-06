@@ -64,6 +64,8 @@ TEST_CASE("r_p and r_s obey the crossing relation", "[ReflectionCoefficients]"){
     std::complex<double> kappa;
     if (kappa_double < 0.){
     kappa = std::complex<double>(0.,-std::abs(kappa_double));
+    } else {
+     kappa = std::complex<double>(kappa_double,0.) 
     };
     std::complex<double> rp_lhs, rs_lhs, rp_rhs, rs_rhs;
     ReflectionCoefficientsLocBulk RefC("../data/test_files/GreensTensorPlate.ini");
