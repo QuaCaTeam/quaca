@@ -179,32 +179,59 @@ GreensTensor/Permittivity/test_PermittivityDrude.cpp.s:
 	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/GreensTensor/Permittivity/test_PermittivityDrude.cpp.s
 .PHONY : GreensTensor/Permittivity/test_PermittivityDrude.cpp.s
 
-GreensTensor/ReflectionCoefficients/test_ReflectionCoefficients.o: GreensTensor/ReflectionCoefficients/test_ReflectionCoefficients.cpp.o
+GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk.o: GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk.cpp.o
 
-.PHONY : GreensTensor/ReflectionCoefficients/test_ReflectionCoefficients.o
+.PHONY : GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk.o
 
 # target to build an object file
-GreensTensor/ReflectionCoefficients/test_ReflectionCoefficients.cpp.o:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/GreensTensor/ReflectionCoefficients/test_ReflectionCoefficients.cpp.o
-.PHONY : GreensTensor/ReflectionCoefficients/test_ReflectionCoefficients.cpp.o
+GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk.cpp.o
+.PHONY : GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk.cpp.o
 
-GreensTensor/ReflectionCoefficients/test_ReflectionCoefficients.i: GreensTensor/ReflectionCoefficients/test_ReflectionCoefficients.cpp.i
+GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk.i: GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk.cpp.i
 
-.PHONY : GreensTensor/ReflectionCoefficients/test_ReflectionCoefficients.i
+.PHONY : GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk.i
 
 # target to preprocess a source file
-GreensTensor/ReflectionCoefficients/test_ReflectionCoefficients.cpp.i:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/GreensTensor/ReflectionCoefficients/test_ReflectionCoefficients.cpp.i
-.PHONY : GreensTensor/ReflectionCoefficients/test_ReflectionCoefficients.cpp.i
+GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk.cpp.i
+.PHONY : GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk.cpp.i
 
-GreensTensor/ReflectionCoefficients/test_ReflectionCoefficients.s: GreensTensor/ReflectionCoefficients/test_ReflectionCoefficients.cpp.s
+GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk.s: GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk.cpp.s
 
-.PHONY : GreensTensor/ReflectionCoefficients/test_ReflectionCoefficients.s
+.PHONY : GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk.s
 
 # target to generate assembly for a file
-GreensTensor/ReflectionCoefficients/test_ReflectionCoefficients.cpp.s:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/GreensTensor/ReflectionCoefficients/test_ReflectionCoefficients.cpp.s
-.PHONY : GreensTensor/ReflectionCoefficients/test_ReflectionCoefficients.cpp.s
+GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk.cpp.s
+.PHONY : GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk.cpp.s
+
+GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab.o: GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab.cpp.o
+
+.PHONY : GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab.o
+
+# target to build an object file
+GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab.cpp.o
+.PHONY : GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab.cpp.o
+
+GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab.i: GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab.cpp.i
+
+.PHONY : GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab.i
+
+# target to preprocess a source file
+GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab.cpp.i
+.PHONY : GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab.cpp.i
+
+GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab.s: GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab.cpp.s
+
+.PHONY : GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab.s
+
+# target to generate assembly for a file
+GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab.cpp.s
+.PHONY : GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab.cpp.s
 
 GreensTensor/test_GreensTensorPlate.o: GreensTensor/test_GreensTensorPlate.cpp.o
 
@@ -259,6 +286,60 @@ GreensTensor/test_GreensTensorVacuum.s: GreensTensor/test_GreensTensorVacuum.cpp
 GreensTensor/test_GreensTensorVacuum.cpp.s:
 	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/GreensTensor/test_GreensTensorVacuum.cpp.s
 .PHONY : GreensTensor/test_GreensTensorVacuum.cpp.s
+
+Looper/test_LooperV.o: Looper/test_LooperV.cpp.o
+
+.PHONY : Looper/test_LooperV.o
+
+# target to build an object file
+Looper/test_LooperV.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/Looper/test_LooperV.cpp.o
+.PHONY : Looper/test_LooperV.cpp.o
+
+Looper/test_LooperV.i: Looper/test_LooperV.cpp.i
+
+.PHONY : Looper/test_LooperV.i
+
+# target to preprocess a source file
+Looper/test_LooperV.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/Looper/test_LooperV.cpp.i
+.PHONY : Looper/test_LooperV.cpp.i
+
+Looper/test_LooperV.s: Looper/test_LooperV.cpp.s
+
+.PHONY : Looper/test_LooperV.s
+
+# target to generate assembly for a file
+Looper/test_LooperV.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/Looper/test_LooperV.cpp.s
+.PHONY : Looper/test_LooperV.cpp.s
+
+Looper/test_LooperZa.o: Looper/test_LooperZa.cpp.o
+
+.PHONY : Looper/test_LooperZa.o
+
+# target to build an object file
+Looper/test_LooperZa.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/Looper/test_LooperZa.cpp.o
+.PHONY : Looper/test_LooperZa.cpp.o
+
+Looper/test_LooperZa.i: Looper/test_LooperZa.cpp.i
+
+.PHONY : Looper/test_LooperZa.i
+
+# target to preprocess a source file
+Looper/test_LooperZa.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/Looper/test_LooperZa.cpp.i
+.PHONY : Looper/test_LooperZa.cpp.i
+
+Looper/test_LooperZa.s: Looper/test_LooperZa.cpp.s
+
+.PHONY : Looper/test_LooperZa.s
+
+# target to generate assembly for a file
+Looper/test_LooperZa.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/Looper/test_LooperZa.cpp.s
+.PHONY : Looper/test_LooperZa.cpp.s
 
 Options/test_Options.o: Options/test_Options.cpp.o
 
@@ -491,15 +572,24 @@ help:
 	@echo "... GreensTensor/Permittivity/test_PermittivityDrude.o"
 	@echo "... GreensTensor/Permittivity/test_PermittivityDrude.i"
 	@echo "... GreensTensor/Permittivity/test_PermittivityDrude.s"
-	@echo "... GreensTensor/ReflectionCoefficients/test_ReflectionCoefficients.o"
-	@echo "... GreensTensor/ReflectionCoefficients/test_ReflectionCoefficients.i"
-	@echo "... GreensTensor/ReflectionCoefficients/test_ReflectionCoefficients.s"
+	@echo "... GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk.o"
+	@echo "... GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk.i"
+	@echo "... GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk.s"
+	@echo "... GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab.o"
+	@echo "... GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab.i"
+	@echo "... GreensTensor/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab.s"
 	@echo "... GreensTensor/test_GreensTensorPlate.o"
 	@echo "... GreensTensor/test_GreensTensorPlate.i"
 	@echo "... GreensTensor/test_GreensTensorPlate.s"
 	@echo "... GreensTensor/test_GreensTensorVacuum.o"
 	@echo "... GreensTensor/test_GreensTensorVacuum.i"
 	@echo "... GreensTensor/test_GreensTensorVacuum.s"
+	@echo "... Looper/test_LooperV.o"
+	@echo "... Looper/test_LooperV.i"
+	@echo "... Looper/test_LooperV.s"
+	@echo "... Looper/test_LooperZa.o"
+	@echo "... Looper/test_LooperZa.i"
+	@echo "... Looper/test_LooperZa.s"
 	@echo "... Options/test_Options.o"
 	@echo "... Options/test_Options.i"
 	@echo "... Options/test_Options.s"
