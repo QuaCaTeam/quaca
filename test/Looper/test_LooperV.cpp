@@ -1,7 +1,7 @@
 #include "Quaca.h"
 #include "catch.hpp"
 
-TEST_CASE("Constructors work correctly", "[LooperV]") {
+TEST_CASE("LooperV Constructors work correctly", "[LooperV]") {
   SECTION("Direct constructor works") {
     double start = 0;
     double end = 1;
@@ -26,7 +26,7 @@ TEST_CASE("Constructors work correctly", "[LooperV]") {
   };
 };
 
-TEST_CASE("Steps are calculated correctly", "[LooperV]") {
+TEST_CASE("LooperV Steps are calculated correctly", "[LooperV]") {
   SECTION("Steps for linear scale") {
     double start = 0;
     double end = 3;
