@@ -9,7 +9,7 @@ class LooperZa : public Looper {
 public:
   // constructors
   LooperZa(double start, double end, int number_of_steps, std::string scale,
-           std::string type, QuantumFriction *quantum_friction);
+           QuantumFriction *quantum_friction);
   LooperZa(std::string input_file, QuantumFriction *quantum_friction);
 
   // calculate the the value of quantum friction

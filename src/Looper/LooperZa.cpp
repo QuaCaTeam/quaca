@@ -1,13 +1,27 @@
-#include "LooperZa.h"
+// ini parser
+#include <boost/property_tree/ini_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
+namespace pt = boost::property_tree;
+
 #include "../GreensTensor/GreensTensorPlate.h"
+#include "LooperZa.h"
 
 LooperZa::LooperZa(double start, double end, int number_of_steps,
-                   std::string scale, std::string type,
-                   QuantumFriction *quantum_friction)
-    : Looper(start, end, number_of_steps, scale, type, quantum_friction){};
+                   std::string scale, QuantumFriction *quantum_friction)
+    : Looper(start, end, number_of_steps, scale, quantum_friction){};
 
 LooperZa::LooperZa(std::string input_file, QuantumFriction *quantum_friction)
-    : Looper(input_file, quantum_friction){};
+    : Looper(input_file, quantum_friction) {
+  // Create a root
+  pt::ptree root;
+
+  // Load the ini file in this ptree
+  pt::read_ini(input_file, root);
+
+  // check if type is right
+  std::string type = root.get<std::string>("Looper.type");
+  assert(type == "za");
+};
 
 double LooperZa::calculate_value(int step) {
   Options_Friction opts;

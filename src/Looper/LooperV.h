@@ -9,7 +9,7 @@ class LooperV : public Looper {
 public:
   // constructors
   LooperV(double start, double end, int number_of_steps, std::string scale,
-          std::string type, QuantumFriction *quantum_friction);
+          QuantumFriction *quantum_friction);
   LooperV(std::string input_file, QuantumFriction *quantum_friction);
 
   // calculate the the value of quantum friction
