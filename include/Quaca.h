@@ -18,6 +18,7 @@
 #include "../src/Looper/Looper.h"
 #include "../src/Looper/LooperFactory.h"
 #include "../src/Looper/LooperV.h"
+#include "../src/Looper/LooperZa.h"
 
 #include "../src/Options/Options.h"
 
