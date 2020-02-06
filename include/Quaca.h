@@ -14,14 +14,12 @@
 #include "../src/GreensTensor/ReflectionCoefficients/ReflectionCoefficients.h"
 #include "../src/GreensTensor/ReflectionCoefficients/ReflectionCoefficientsFactory.h"
 #include "../src/GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.h"
-
+#include "../src/GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.h"
 #include "../src/Looper/Looper.h"
 #include "../src/Looper/LooperFactory.h"
 #include "../src/Looper/LooperV.h"
 #include "../src/Looper/LooperZa.h"
-
 #include "../src/Options/Options.h"
-
 #include "../src/Polarizability/Polarizability.h"
 #include "../src/Polarizability/PolarizabilityFactory.h"
 #include "../src/Polarizability/PolarizabilityBath.h"

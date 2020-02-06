@@ -8,6 +8,7 @@ namespace pt = boost::property_tree;
 
 #include "ReflectionCoefficientsFactory.h"
 #include "ReflectionCoefficientsLocBulk.h"
+#include "ReflectionCoefficientsLocSlab.h"
 
 // reflection coefficients factory
 ReflectionCoefficients *
@@ -27,6 +28,8 @@ ReflectionCoefficientsFactory::create(std::string input_file) {
   // set the right pointer, show error if type is unknown
   if (type == "local bulk") {
     refcoef = new ReflectionCoefficientsLocBulk(input_file);
+  } else if ( type == "local slab") {
+    refcoef = new ReflectionCoefficientsLocSlab(input_file);
   } else {
     std::cerr << "Error: Unknown Permittivity type (" << type << ")!"
               << std::endl;

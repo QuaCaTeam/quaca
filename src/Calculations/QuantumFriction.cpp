@@ -3,7 +3,8 @@
 #include "../Polarizability/PolarizabilityFactory.h"
 #include "../PowerSpectrum/PowerSpectrumFactory.h"
 #include <armadillo>
-
+#include <algorithm>
+#include <vector>
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 
@@ -16,7 +17,7 @@ QuantumFriction::QuantumFriction(std::string input_file) {
 
   // Load the ini file in this ptree
   pt::read_ini(input_file, root);
-
+  this-> relerr_omega = root.get<double>("Friction.relerr_omega");
   // read greens tensor
   this->greens_tensor = GreensTensorFactory::create(input_file);
   this->polarizability = PolarizabilityFactory::create(input_file);
@@ -25,24 +26,29 @@ QuantumFriction::QuantumFriction(std::string input_file) {
 
 QuantumFriction::QuantumFriction(GreensTensor *greens_tensor,
                                  Polarizability *polarizability,
-                                 PowerSpectrum *powerspectrum)
+                                 PowerSpectrum *powerspectrum, double relerr_omega)
     : greens_tensor(greens_tensor), polarizability(polarizability),
-      powerspectrum(powerspectrum){};
+      powerspectrum(powerspectrum), relerr_omega(relerr_omega){};
 
-double QuantumFriction::calculate(Options_Friction opts, double relerr,
-                                  double epsabs) {
+double QuantumFriction::calculate(Options_Friction opts) {
   double result;
-  double wcut = 1.e-3 * 30 / (2 * 0.01);
-  result = cquad(&friction_integrand, &opts, 0., wcut, relerr, epsabs);
-  result += cquad(&friction_integrand, &opts, wcut,
-                  0.999 * this->polarizability->get_omega_a(), relerr,
-                  std::abs(result) * 1E-2);
-  result += cquad(
-      &friction_integrand, &opts, 0.999 * this->polarizability->get_omega_a(),
-      2 * this->polarizability->get_omega_a(), relerr, std::abs(result) * 1E-2);
-  result +=
-      qagiu(&friction_integrand, &opts, 2 * this->polarizability->get_omega_a(),
-            relerr, std::abs(result) * 1E-2);
+  double omega_a =this->polarizability->get_omega_a();
+  // Collect all specifically relevant point within the integration
+  std::vector<double> lim = {0., 0.99*omega_a , 1.001*omega_a , this->greens_tensor->omega_ch()};
+  // Sort the points and erase duplicates
+  std::sort(lim.begin(), lim.end());
+  auto last = std::unique(lim.begin(), lim.end()); 
+  lim.erase(last, lim.end());
+
+  // Start integration
+  result = 0.;
+
+  for (int i =0; i < lim.size()-1 ; i++){ 
+  result += cquad(&friction_integrand, &opts, lim[i], lim[i+1], relerr_omega, std::abs(result)*relerr_omega);
+  
+  };
+  // Perform last integration from the last significant point to infinity
+  result += qagiu(&friction_integrand, &opts, lim[lim.size()-1], relerr_omega, std::abs(result) * relerr_omega);
   return result;
 };
 

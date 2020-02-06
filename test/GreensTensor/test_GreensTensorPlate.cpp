@@ -9,28 +9,56 @@ TEST_CASE("Construction of Green's tensor works properly",
 
   SECTION("Construction with direct input") {
     double omega = 1;
+    double k = 10;
+    std::complex<double> kappa; 
+    if (k < omega){
+    kappa = std::complex<double>(0.,-sqrt(omega*omega-k*k));
+    } else {
+    kappa = std::complex<double>(sqrt(k*k-omega*omega),0.);
+    };
     double omega_p = 9;
     double gamma = 0.1;
     double v = 1E-5;
     double za = 0.1;
     double beta = 1E4;
     double delta_cut = 20;
+    std::complex<double> rp, rs;
     vec::fixed<2> rel_err = {1E-8, 1E-6};
 
     PermittivityDrude perm(gamma, omega_p);
-    ReflectionCoefficientsLocBulk refl(&perm);
+    ReflectionCoefficientsLocBulk refl(&perm); 
+    refl.ref(rp, rs, omega, kappa);
     GreensTensorPlate Greens(v, za, beta, &refl, delta_cut, rel_err);
     REQUIRE(Greens.get_za() == za);
     REQUIRE(Greens.get_delta_cut() == delta_cut);
     REQUIRE(Greens.get_rel_err_0() == rel_err(0));
     REQUIRE(Greens.get_rel_err_1() == rel_err(1));
+    REQUIRE(real(Greens.get_r_s(omega,k)) == rs.real());
+    REQUIRE(real(Greens.get_r_p(omega,k)) == rp.real());
+    REQUIRE(imag(Greens.get_r_s(omega,k)) == rs.imag());
+    REQUIRE(imag(Greens.get_r_p(omega,k)) == rp.imag());
   };
   SECTION("Construction from .ini file") {
+    std::complex<double> rp, rs;
+    double omega = 1;
+    double k = 10;
+    std::complex<double> kappa; 
+    if (k < omega){
+    kappa = std::complex<double>(0.,-sqrt(omega*omega-k*k));
+    } else {
+    kappa = std::complex<double>(sqrt(k*k-omega*omega),0.);
+    };
     GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.ini");
+    ReflectionCoefficientsLocBulk refl("../data/test_files/GreensTensorPlate.ini"); 
+    refl.ref(rp, rs, omega, kappa);
     REQUIRE(Greens.get_za() == 0.1);
     REQUIRE(Greens.get_delta_cut() == 20);
     REQUIRE(Greens.get_rel_err_0() == 1E-8);
     REQUIRE(Greens.get_rel_err_1() == 1E-6);
+    REQUIRE(real(Greens.get_r_s(omega,k)) == rs.real());
+    REQUIRE(real(Greens.get_r_p(omega,k)) == rp.real());
+    REQUIRE(imag(Greens.get_r_s(omega,k)) == rs.imag());
+    REQUIRE(imag(Greens.get_r_p(omega,k)) == rp.imag());
   };
 };
 

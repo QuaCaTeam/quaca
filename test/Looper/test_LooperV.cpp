@@ -7,7 +7,7 @@ TEST_CASE("LooperV Constructors work correctly", "[LooperV]") {
     double end = 1;
     int number_of_steps = 10;
     std::string scale = "log";
-    QuantumFriction quant(NULL, NULL, NULL);
+    QuantumFriction quant(NULL, NULL, NULL, 0.);
 
     LooperV looper(start, end, number_of_steps, scale, &quant);
 
@@ -17,7 +17,7 @@ TEST_CASE("LooperV Constructors work correctly", "[LooperV]") {
   };
 
   SECTION("Constructor from .ini file works") {
-    QuantumFriction quant(NULL, NULL, NULL);
+    QuantumFriction quant(NULL, NULL, NULL, 0.);
     LooperV looper("../data/test_files/LooperV.ini", &quant);
 
     REQUIRE(looper.get_steps_total() == 20);
@@ -32,7 +32,7 @@ TEST_CASE("LooperV Steps are calculated correctly", "[LooperV]") {
     double end = 3;
     int number_of_steps = 4;
     std::string scale = "linear";
-    QuantumFriction quant(NULL, NULL, NULL);
+    QuantumFriction quant(NULL, NULL, NULL, 0.);
 
     LooperV looper(start, end, number_of_steps, scale, &quant);
 
@@ -47,7 +47,7 @@ TEST_CASE("LooperV Steps are calculated correctly", "[LooperV]") {
     double end = 1e-1;
     int number_of_steps = 4;
     std::string scale = "log";
-    QuantumFriction quant(NULL, NULL, NULL);
+    QuantumFriction quant(NULL, NULL, NULL, 0.);
 
     LooperV looper(start, end, number_of_steps, scale, &quant);
 
