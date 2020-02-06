@@ -184,7 +184,8 @@ QuaCa now produces an output file in the same directory as the input file and wi
 It contains in the first column the variable that we have looped over (which in this case is the velocity v) and in the second column the calculated value of the quantum friction.
 If you have followed all of the steps above it should look something like this
 ```csv
-
+0.0001,-4.92784e-16
+0.001,-1.36711e-12
 ```
 
 ## 4. Check the results
