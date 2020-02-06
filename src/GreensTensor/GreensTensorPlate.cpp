@@ -304,3 +304,8 @@ std::complex<double> GreensTensorPlate::get_r_s(double omega, double k){
  reflection_coefficients->ref( r_p, r_s, omega, kappa);
 return r_s;
 };
+
+  double GreensTensorPlate::omega_ch(){
+    // Calculate omega_cut (reasonable for every plate setup)
+    return this->delta_cut*this->v/this->za;
+  };

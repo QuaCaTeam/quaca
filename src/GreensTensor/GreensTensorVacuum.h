@@ -22,6 +22,7 @@ public:
 
   // integrand for integration over one-dimensional k space
   static double integrand_1d_k(double k, void *opts);
+  double omega_ch();
 };
 
 #endif // GREENSTENSORVACUUM_H

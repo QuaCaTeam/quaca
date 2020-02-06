@@ -146,3 +146,8 @@ double GreensTensorVacuum::integrand_1d_k(double kv, void *opts) {
 
   return result;
 };
+
+double GreensTensorVacuum::omega_ch(){
+  double result = 0;
+  return result;
+};

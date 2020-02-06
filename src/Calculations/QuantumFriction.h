@@ -17,14 +17,16 @@ struct Options_Friction;
 
 class QuantumFriction {
 public:
+  double relerr_omega;
+
   GreensTensor *greens_tensor;
   Polarizability *polarizability;
   PowerSpectrum *powerspectrum;
 
   QuantumFriction(std::string input_file);
   QuantumFriction(GreensTensor *greens_tensor, Polarizability *polarizability,
-                  PowerSpectrum *powerspectrum);
-  double calculate(Options_Friction opts, double relerr, double epsabs);
+                  PowerSpectrum *powerspectrum, double relerr_omega);
+  double calculate(Options_Friction opts);
   static double friction_integrand(double omega, void *opts);
 };
 

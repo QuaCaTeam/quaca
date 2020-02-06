@@ -29,8 +29,11 @@ public:
                               Options_GreensTensor opts) = 0;
   virtual void integrate_1d_k(cx_mat::fixed<3, 3> &GT,
                               Options_GreensTensor opts) = 0;
+  // getter functions
   double get_v() { return this->v; }
   double get_beta() { return this->beta; }
+  // calculate characteristic frequencies
+  virtual double omega_ch() = 0;
 };
 
 // A struct for integration options
