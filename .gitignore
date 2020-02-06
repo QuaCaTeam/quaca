@@ -16,3 +16,8 @@ tags
 
 *.aux
 *.synctex.gz
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.dvi

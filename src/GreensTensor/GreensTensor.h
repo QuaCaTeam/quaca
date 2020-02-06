@@ -20,20 +20,27 @@ protected:
 
 public:
   // constructor
-  GreensTensor(double v, double beta) : v(v), beta(beta){};
+  GreensTensor(double v, double beta);
   GreensTensor(std::string input_file);
 
+  // calculate the tensor in frequency and momentum space
   virtual void calculate_tensor(cx_mat::fixed<3, 3> &GT,
                                 Options_GreensTensor opts) = 0;
+
+  // integrate over a two-dimensional k space
   virtual void integrate_2d_k(cx_mat::fixed<3, 3> &GT,
                               Options_GreensTensor opts) = 0;
+
+  // integrate over a one-dimensional k space
   virtual void integrate_1d_k(cx_mat::fixed<3, 3> &GT,
                               Options_GreensTensor opts) = 0;
+
   // getter functions
-  double get_v() { return this->v; }
-  double get_beta() { return this->beta; }
-  // calculate characteristic frequencies
-  virtual double omega_ch() = 0;
+  double get_v() { return this->v; };
+  double get_beta() { return this->beta; };
+
+  // setter function
+  void set_v(double v) { this->v = v; };
 };
 
 // A struct for integration options

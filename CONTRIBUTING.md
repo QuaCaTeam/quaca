@@ -16,7 +16,7 @@ There are two parts in which QuaCa is documented.
 The first part are the comments within the code, explaining how exactly certain things are achieved.
 The second part consists of a user friendly documentation in tutorial style and a developers documentation giving more insight into how QuaCa works under the hood.
 
-## Coding conventions
+## Coding conventions and styling
 We follow the [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines).
 Some important conventions we follow are:
 * Use a `.cpp` suffix for code files and `.h` for interface files.
@@ -25,3 +25,6 @@ Some important conventions we follow are:
 * Class names are written in capital style (`House`, `GreensTensor`, `AnEvenLongerName`, ...)
 * Variable and function names are written in underscore style (`calculate_advanced`, `get_name_of`, ...)
 * Pointers should be abbreviated with `pt`
+
+For styling we use [clang-format](https://clang.llvm.org/docs/ClangFormat.html).
+Also have a look [here](https://electronjs.org/docs/development/clang-format) on how to implement clang-format in your editor.

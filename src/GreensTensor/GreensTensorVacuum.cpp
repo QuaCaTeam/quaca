@@ -9,13 +9,21 @@ namespace pt = boost::property_tree;
 #include "GreensTensorVacuum.h"
 
 GreensTensorVacuum::GreensTensorVacuum(double v, double beta)
-    : GreensTensor(v, beta) {
-  assert(beta > 0.);
-  assert(v >= 0.);
-};
+    : GreensTensor(v, beta){};
 
 GreensTensorVacuum::GreensTensorVacuum(std::string input_file)
-    : GreensTensor(input_file){};
+    : GreensTensor(input_file) {
+
+  // Create a root
+  pt::ptree root;
+
+  // Load the ini file in this ptree
+  pt::read_ini(input_file, root);
+
+  // check if type is right
+  std::string type = root.get<std::string>("GreensTensor.type");
+  assert(type == "vacuum");
+};
 
 void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3, 3> &GT,
                                           Options_GreensTensor opts) {

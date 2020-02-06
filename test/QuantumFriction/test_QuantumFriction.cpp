@@ -30,7 +30,7 @@ TEST_CASE("Quantum friction constructors work", "[QuantumFriction]") {
                 .epsilon(1e-6) == omega_a);
     REQUIRE(Approx(quant_fric.powerspectrum->polarizability->get_alpha_zero())
                 .epsilon(1e-6) == alpha_zero);
-  }
+  };
 
   SECTION("Constructor with ini file works") {
     double omega_a = 1.3;
@@ -55,8 +55,8 @@ TEST_CASE("Quantum friction constructors work", "[QuantumFriction]") {
                 .epsilon(1e-6) == omega_a);
     REQUIRE(Approx(quant_fric.powerspectrum->polarizability->get_alpha_zero())
                 .epsilon(1e-6) == alpha_zero);
-  }
-}
+  };
+};
 
 TEST_CASE("Analytical results with vacuum Green's tensor gets reproduced",
           "[QuantumFriction]") {
@@ -84,7 +84,8 @@ TEST_CASE("Analytical results with vacuum Green's tensor gets reproduced",
   // opts.full_spectrum = true;
   double num_result = quant_fric.calculate(opts);
   REQUIRE(Approx(num_result).epsilon(1e-4) == analytical_result);
-}
+};
+
 TEST_CASE("Analytical results with scattered Green's tensor gets reproduced",
           "[QuantumFriction]") {
   // Units: c=1, 4 pi epsilon_0 = 1, hbar = 1
@@ -108,7 +109,7 @@ TEST_CASE("Analytical results with scattered Green's tensor gets reproduced",
   double epsabs = 0;
 
   PermittivityDrude perm(gamma, omega_p);
-  ReflectionCoefficientsLocBulk refl(&perm); 
+  ReflectionCoefficientsLocBulk refl(&perm);
   GreensTensorPlate green(v, za, beta, &refl, delta_cut, rel_err);
   PolarizabilityNoBath alpha(omega_a, alpha_zero, &green);
   PowerSpectrumHarmOsc powerspectrum(&green, &alpha);
@@ -123,4 +124,4 @@ TEST_CASE("Analytical results with scattered Green's tensor gets reproduced",
   std::cout << "num=" << num_result << std::endl;
   std::cout << "num/ana=" << num_result / analytical_result << std::endl;
   REQUIRE(Approx(num_result).epsilon(1e-2) == analytical_result);
-}
+};

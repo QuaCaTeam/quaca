@@ -24,22 +24,31 @@ int main(int argc, char *argv[]) {
   QuantumFriction *quant_friction =
       new QuantumFriction(greens_tensor, polarizabilty, powerspectrum, relerr_omega);
 
+  // define looper
+  Looper *looper = LooperFactory::create(parameters, quant_friction);
+
   // define output file
   std::ofstream file;
   file.open(opts.get_output_file());
 
-  /*
-   * calculate quantum friction for wanted parameters
-   */
+  // calculate values
+  double step, value;
+  for (int i = 0; i < looper->get_steps_total(); i++) {
+    step = looper->get_step(i);
+    value = looper->calculate_value(i);
+
+    std::cout << step << "," << value << std::endl;
+    file << step << "," << value << "\n";
+  };
 
   // close file
   file.close();
 
   // delete dynamically allocated memory
-  delete[] greens_tensor;
-  delete[] polarizabilty;
-  delete[] powerspectrum;
-  delete[] quant_friction;
+  // delete[] greens_tensor;
+  // delete[] polarizabilty;
+  // delete[] powerspectrum;
+  // delete[] quant_friction;
 
   return 0;
 };
