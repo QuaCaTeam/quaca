@@ -50,6 +50,9 @@ public:
   double get_delta_cut() { return this->delta_cut; };
   double get_rel_err_0() { return this->rel_err(0); };
   double get_rel_err_1() { return this->rel_err(1); };
+
+  // setter function
+  void set_z_a(double za) { this->za = za; };
 };
 
 #endif // GREENSTENSORPLATE_H
