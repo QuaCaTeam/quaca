@@ -320,25 +320,32 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
   }
   return result;
 };
-// std::complex<double> GreensTensorPlate::get_r_p(double omega, double k){
-//  double r_p,r_s;
-//  std::complex<double> kappa;
-// if (omega > 0) {
-//  kappa = std::complex<double>(0.,-sqrt(omega*omega-k*k) );
-// } else {
-//  kappa = std::complex<double>(sqrt(k*k - omega*omega),0.);
-// };
-// this->reflection_coefficients->ref(r_p, r_s, omega, kappa);
-// return r_p;
-//};
-// std::complex<double> GreensTensorPlate::get_r_s(double omega, double k){
-//  double r_s,r_p;
-//  std::complex<double> kappa;
-// if (omega > 0) {
-//  kappa = std::complex<double>(0.,-sqrt(omega*omega-k*k) );
-// } else {
-//  kappa = std::complex<double>(sqrt(k*k - omega*omega),0.);
-// };
-// this->reflection_coefficients->ref( r_p, r_s, omega, kappa);
-// return r_s;
-//};
+
+std::complex<double> GreensTensorPlate::get_r_p(double omega, double k){
+  std::complex<double> r_p,r_s;
+  std::complex<double> kappa;
+ if (omega > 0) {
+  kappa = std::complex<double>(0.,-sqrt(omega*omega-k*k) ); 
+ } else {
+  kappa = std::complex<double>(sqrt(k*k - omega*omega),0.); 
+ };
+ reflection_coefficients->ref(r_p, r_s, omega, kappa);
+return r_p;
+};
+
+std::complex<double> GreensTensorPlate::get_r_s(double omega, double k){
+  std::complex<double> r_s,r_p;
+  std::complex<double> kappa;
+ if (omega > 0) {
+  kappa = std::complex<double>(0.,-sqrt(omega*omega-k*k) ); 
+ } else {
+  kappa = std::complex<double>(sqrt(k*k - omega*omega),0.); 
+ };
+ reflection_coefficients->ref( r_p, r_s, omega, kappa);
+return r_s;
+};
+
+  double GreensTensorPlate::omega_ch(){
+    // Calculate omega_cut (reasonable for every plate setup)
+    return this->delta_cut*this->v/this->za;
+  };

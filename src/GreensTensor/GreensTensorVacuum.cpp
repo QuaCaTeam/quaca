@@ -8,8 +8,10 @@ namespace pt = boost::property_tree;
 #include "../Calculations/Integrations.h"
 #include "GreensTensorVacuum.h"
 
-GreensTensorVacuum::GreensTensorVacuum(double v, double beta)
-    : GreensTensor(v, beta){};
+GreensTensorVacuum::GreensTensorVacuum(double v, double beta, double relerr)
+    : GreensTensor(v, beta) {
+  this->relerr = relerr;
+};
 
 GreensTensorVacuum::GreensTensorVacuum(std::string input_file)
     : GreensTensor(input_file) {
@@ -19,6 +21,9 @@ GreensTensorVacuum::GreensTensorVacuum(std::string input_file)
 
   // Load the ini file in this ptree
   pt::read_ini(input_file, root);
+
+  // Load relative accuracy
+  this->relerr = root.get<double>("GreensTensor.rel_err_1");
 
   // check if type is right
   std::string type = root.get<std::string>("GreensTensor.type");
@@ -90,23 +95,23 @@ void GreensTensorVacuum::integrate_1d_k(cx_mat::fixed<3, 3> &GT,
     // Performing the integration given by eq. (10) in docs/VacuumGreen.pdf
     if (omega >= 0) {
       GT(0, 0) = cquad(&integrand_1d_k, &opts, -omega / (1.0 + this->v),
-                       omega / (1.0 - this->v), 1E-9, 0);
+                       omega / (1.0 - this->v), this->relerr, 0);
       opts.indices(0) = 1;
       opts.indices(1) = 1;
 
       GT(1, 1) = cquad(&integrand_1d_k, &opts, -omega / (1.0 + this->v),
-                       omega / (1.0 - this->v), 1E-9, 0);
+                       omega / (1.0 - this->v), this->relerr, 0);
       GT(2, 2) = GT(1, 1);
     }
     // Changing the integrand for negative frequencies
     if (omega < 0) {
       GT(0, 0) = -cquad(&integrand_1d_k, &opts, omega / (1.0 - this->v),
-                        -omega / (1.0 + this->v), 1E-9, 0);
+                        -omega / (1.0 + this->v), this->relerr, 0);
       opts.indices(0) = 1;
       opts.indices(1) = 1;
 
       GT(1, 1) = -cquad(&integrand_1d_k, &opts, omega / (1.0 - this->v),
-                        -omega / (1.0 + this->v), 1E-9, 0);
+                        -omega / (1.0 + this->v), this->relerr, 0);
       GT(2, 2) = GT(1, 1);
     }
   }
@@ -152,5 +157,10 @@ double GreensTensorVacuum::integrand_1d_k(double kv, void *opts) {
                     1. / (1. - exp(-beta * omega)));
   }
 
+  return result;
+};
+
+double GreensTensorVacuum::omega_ch() {
+  double result = 0;
   return result;
 };

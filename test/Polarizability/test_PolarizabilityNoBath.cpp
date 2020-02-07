@@ -8,7 +8,8 @@ TEST_CASE("Check if integrand works for no bath", "[PolarizabilityNoBath]") {
   // define greens tensor
   double v = 0.1;
   double beta = 10;
-  GreensTensorVacuum greens(v, beta);
+  double relerr_k = 1E-9;
+  GreensTensorVacuum greens(v, beta, relerr_k);
 
   // define polarizability
   double omega_a = 3.0;
@@ -50,7 +51,8 @@ TEST_CASE(
   // define greens tensor
   auto v = GENERATE(take(3, random(0.0, 1.0)));
   auto beta = GENERATE(take(3, random(0.0, 1e4)));
-  GreensTensorVacuum greens(v, beta);
+  double relerr_k = 1E-9;
+  GreensTensorVacuum greens(v, beta, relerr_k);
 
   // define polarizability
   auto omega_a = GENERATE(take(3, random(1e-1, 1e1)));
@@ -106,7 +108,8 @@ TEST_CASE("Test integration for omega_cut much larger than omega_a for no bath",
   // define greens tensor
   auto v = GENERATE(take(3, random(0.0, 1.0)));
   double beta = 1e5;
-  GreensTensorVacuum greens(v, beta);
+  double relerr_k = 1E-9;
+  GreensTensorVacuum greens(v, beta, relerr_k);
 
   // define polarizability
   auto omega_a = GENERATE(take(3, random(1e-1, 1e1)));

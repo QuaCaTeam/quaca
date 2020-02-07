@@ -41,5 +41,5 @@ double LooperZa::calculate_value(int step) {
 
   pt->set_z_a(this->steps[step]);
 
-  return this->quantum_friction->calculate(opts, 1e-2, 0);
+  return this->quantum_friction->calculate(opts);
 };

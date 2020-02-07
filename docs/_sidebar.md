@@ -16,6 +16,7 @@
 - API
   - [Polarizability](api/polarizability)
   - [GreensTensor](api/greenstensor)
+  - [ReflectionCoefficients](api/reflection)
   - [Permittivity](api/permittivity)
   - [MemoryKernel](api/memorykernel)
   - [PowerSpectrum](api/powerspectrum)
