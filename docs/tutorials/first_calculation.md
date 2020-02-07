@@ -14,16 +14,19 @@ A calculation always consists of the following steps:
 Let us adhere to this outline and start by planing our setup.
 
 ## 1. Plan the physical system
-In this tutorial we want to calculate *describe calculation* , which has already been done in *give reference to publication*.
-So essentially we want to reproduce the plot *blabla on page blublu*.
+In this tutorial we want to calculate the non-contact friction of an atom above the surface of a Drude bulk material, which has already been done in [this publication](https://link.aps.org/doi/10.1103/PhysRevLett.123.120401).
+So essentially we want to reproduce the results of the yellowish line in FIG.2 of the aforementioned publication.
 
+<div style="text-align:center">
+<img class="plain" src="_media/setup.svg" class="center" width="40%">
+</div>
 Our setup consists of:
 
-* a particle, described by
-* a material filling the lower halfspace with
+* an object (for example an atom), described by its polarizability $\underline{\alpha}(\omega)$
+* a surface, described by the reflection coefficients $r^s(\omega,k)$ and $r^p(\omega,k)$
+* where the object moves with constant velocity $v$ and constant distance to the surface $z_a$, and the system is evaluated at temperature $T=\frac{1}{\beta k_\mathrm{B}}$.
 
-Furthermore we assume that ...
-
+Further physical assumptions and subtilities are explained in [this paper](http://link.aps.org/doi/10.1103/PhysRevLett.117.100402). 
 ## 2. Populate the input file
 There are lots of things we could change in the above setup without changing the formula we have to use.
 For example, imagine we want to calculate the exact same situation as above, but with a *blabla* atom.
@@ -108,4 +111,4 @@ QuaCa now produces a file in the same directory as the input file and with the s
 It contains in the first column that variable that we have looped over (which in this case is XXX) and in the second column the calculated value of the quantum friction.
 
 ## 4. Check the results
-Let us now plot the data we obtained from our calculation and compare it to *plot in paper*.
+Let us now plot the data we obtained from our calculation and compare it to the yellowish line in [this publication](https://link.aps.org/doi/10.1103/PhysRevLett.123.120401).
