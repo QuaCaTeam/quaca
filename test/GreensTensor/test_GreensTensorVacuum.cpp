@@ -8,20 +8,25 @@ TEST_CASE("Constructors work properly", "[GreensTensorVacuum]") {
   SECTION("Constructor with argument list works") {
     auto v = GENERATE(take(2, random(0., 1.)));
     auto beta = GENERATE(take(2, random(1e-3, 1e3)));
-    GreensTensorVacuum Greens(v, beta);
+    auto relerr = GENERATE(take(2, random(1e-9, 1e-1)));
 
-    REQUIRE(Approx(Greens.get_v()).epsilon(1E-6) == v);
-    REQUIRE(Approx(Greens.get_beta()).epsilon(1E-6) == beta);
+    GreensTensorVacuum Greens(v, beta, relerr);
+
+    REQUIRE(Greens.get_v() == v);
+    REQUIRE(Greens.get_beta() == beta);
+    REQUIRE(Greens.get_relerr() == relerr);
   }
 
   SECTION("Constructor with ini file works") {
     double v = 0.1;
     double beta = 5;
+    double relerr = 1E-9;
 
     GreensTensorVacuum Greens("../data/test_files/GreensTensorVacuum.ini");
 
     REQUIRE(Approx(Greens.get_v()).epsilon(1E-6) == v);
     REQUIRE(Approx(Greens.get_beta()).epsilon(1E-6) == beta);
+    REQUIRE(Greens.get_relerr() == relerr);
   };
 };
 
@@ -29,7 +34,8 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
   // Generate a Green's tensor with random attributes v and beta
   auto v = GENERATE(take(1, random(0., 1.)));
   auto beta = GENERATE(take(1, random(1., 1e2)));
-  GreensTensorVacuum Greens(v, beta);
+  double relerr = 1E-9;
+  GreensTensorVacuum Greens(v, beta, relerr);
 
   // Create the matries storing the Green's tensors
   cx_mat::fixed<3, 3> Greens_lhs(fill::zeros);
@@ -139,7 +145,8 @@ TEST_CASE("Crossing relation in frequency domain see eq. [1]",
   // Generate a Green's tensor with random attributes v and beta
   auto v = GENERATE(take(1, random(0., 1.)));
   auto beta = GENERATE(take(1, random(1e-5, 1e5)));
-  GreensTensorVacuum Greens(v, beta);
+  double relerr = 1E-9;
+  GreensTensorVacuum Greens(v, beta, relerr);
   // Create a struct with the integration options
   struct Options_GreensTensor opts;
   opts.fancy_I = true;
@@ -175,7 +182,8 @@ TEST_CASE("Reciprocity, see eq. [6]", "[GreensTensorVacuum]") {
   // Generate a Green's tensor with random attributes v and beta
   auto v = GENERATE(take(1, random(0., 1.)));
   auto beta = GENERATE(take(1, random(1e-5, 1e5)));
-  GreensTensorVacuum Greens(v, beta);
+  double relerr = 1E-9;
+  GreensTensorVacuum Greens(v, beta, relerr);
   // Create a struct with the integration options
   struct Options_GreensTensor opts;
   opts.fancy_I = true;
@@ -211,8 +219,8 @@ TEST_CASE("Reality, see eq. [7]", "[GreensTensorVacuum]") {
   auto v = GENERATE(take(1, random(0., 1.)));
   auto beta = GENERATE(take(1, random(1e-5, 1e5)));
   auto omega = GENERATE(take(5, random(-1e3, 1e3)));
-
-  GreensTensorVacuum Greens(v, beta);
+  double relerr = 1E-9;
+  GreensTensorVacuum Greens(v, beta, relerr);
 
   // Create a struct with the integration options
   Options_GreensTensor opts;
@@ -239,8 +247,8 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     auto v = GENERATE(take(1, random(0., 1.)));
     auto beta = GENERATE(take(1, random(1e-5, 1e5)));
     auto omega = GENERATE(take(1, random(-1e2, 1e2)));
-
-    GreensTensorVacuum Greens(v, beta);
+    double relerr = 1E-9;
+    GreensTensorVacuum Greens(v, beta, relerr);
 
     // Create a struct with the integration options
     Options_GreensTensor opts;
@@ -273,8 +281,8 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     auto v = GENERATE(take(1, random(0., 1.)));
     auto beta = GENERATE(take(1, random(1e-5, 1e5)));
     auto omega = GENERATE(take(1, random(-1e2, 1e2)));
-
-    GreensTensorVacuum Greens(v, beta);
+    double relerr = 1E-9;
+    GreensTensorVacuum Greens(v, beta, relerr);
 
     // Create a struct with the integration options
     Options_GreensTensor opts;
@@ -308,8 +316,8 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     auto omega = GENERATE(take(3, random(-1e2, 1e2)));
     auto beta = GENERATE(take(3, random(10e-10, 10e-12)));
     beta *= fabs(omega);
-
-    GreensTensorVacuum Greens(v, beta);
+    double relerr = 1E-9;
+    GreensTensorVacuum Greens(v, beta, relerr);
 
     // Create a struct with the integration options
     Options_GreensTensor opts;
@@ -343,7 +351,8 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     auto omega = GENERATE(take(3, random(-1e1, 1e1)));
     auto beta = GENERATE(take(3, random(10e-10, 10e-12)));
     //  beta *= fabs(omega);
-    GreensTensorVacuum Greens(v, beta);
+    double relerr = 1E-9;
+    GreensTensorVacuum Greens(v, beta, relerr);
 
     // Create a struct with the integration options
     Options_GreensTensor opts;

@@ -6,9 +6,12 @@
 #include <complex>
 
 class GreensTensorVacuum : public GreensTensor {
+private:
+  double relerr;
+
 public:
   // constructors
-  GreensTensorVacuum(double v, double beta);
+  GreensTensorVacuum(double v, double beta, double relerr);
   GreensTensorVacuum(std::string input_file);
 
   // calculate the tensor in frequency and momentum space
@@ -23,6 +26,7 @@ public:
   // integrand for integration over one-dimensional k space
   static double integrand_1d_k(double k, void *opts);
   double omega_ch();
+  double get_relerr() { return this->relerr; };
 };
 
 #endif // GREENSTENSORVACUUM_H

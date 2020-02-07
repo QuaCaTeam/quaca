@@ -31,7 +31,8 @@ TEST_CASE("Check if integrand works", "[PolarizabilityBath]") {
   // define greens tensor
   double v = 0.1;
   double beta = 10;
-  GreensTensorVacuum greens(v, beta);
+  double relerr_k = 1E-9;
+  GreensTensorVacuum greens(v, beta, relerr_k);
 
   // define polarizability
   double omega_a = 3.0;
@@ -73,12 +74,13 @@ TEST_CASE("Test integration for omega_cut much smaller than omega_a",
           "[PolarizabilityNoBath]") {
   // define greens tensor
   auto v = GENERATE(take(3, random(0.0, 1.0)));
-  auto beta = GENERATE(take(3, random(0.0, 1e4)));
-  GreensTensorVacuum greens(v, beta);
+  auto beta = GENERATE(take(3, random(1e-4, 1e4)));
+  double relerr_k = 1e-9;
+  GreensTensorVacuum greens(v, beta, relerr_k);
 
   // define polarizability
   auto omega_a = GENERATE(take(3, random(1e-1, 1e1)));
-  auto alpha_zero = GENERATE(take(3, random(0.0, 0.1)));
+  auto alpha_zero = GENERATE(take(3, random(0.0, 1e-8)));
   auto gamma = GENERATE(take(3, random(0.0, 1e2)));
   OhmicMemoryKernel mu(gamma);
   PolarizabilityBath pol(omega_a, alpha_zero, &mu, &greens);
@@ -135,7 +137,8 @@ TEST_CASE("Test integration for omega_cut much larger than omega_a",
   // define greens tensor
   double v = 1e-1;
   double beta = 1e3;
-  GreensTensorVacuum greens(v, beta);
+  double relerr_k = 1E-12;
+  GreensTensorVacuum greens(v, beta, relerr_k);
 
   // define polarizability
   double omega_a = 4.0;
@@ -190,4 +193,3 @@ TEST_CASE("Test integration for omega_cut much larger than omega_a",
     };
   };
 };
-
