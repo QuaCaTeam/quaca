@@ -30,5 +30,5 @@ double LooperV::calculate_value(int step) {
   // change v
   this->quantum_friction->greens_tensor->set_v(this->steps[step]);
 
-  return this->quantum_friction->calculate(opts, 1e-2, 0);
+  return this->quantum_friction->calculate(opts);
 };

@@ -395,6 +395,33 @@ GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.s:
 	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.s
 .PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.s
 
+GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.o: GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.o
+
+.PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.o
+
+# target to build an object file
+GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.o
+.PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.o
+
+GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.i: GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.i
+
+.PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.i
+
+# target to preprocess a source file
+GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.i
+.PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.i
+
+GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.s: GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.s
+
+.PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.s
+
+# target to generate assembly for a file
+GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.s
+.PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.s
+
 Looper/Looper.o: Looper/Looper.cpp.o
 
 .PHONY : Looper/Looper.o
@@ -812,6 +839,9 @@ help:
 	@echo "... GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.o"
 	@echo "... GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.i"
 	@echo "... GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.s"
+	@echo "... GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.o"
+	@echo "... GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.i"
+	@echo "... GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.s"
 	@echo "... Looper/Looper.o"
 	@echo "... Looper/Looper.i"
 	@echo "... Looper/Looper.s"
