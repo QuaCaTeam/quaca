@@ -1,5 +1,3 @@
-!> TODO: Write examples. More physics in description of permittivity (local, isotropic, this kind of stuff).
-
 ## ReflectionCoefficients
 This is an abstract class that defines the reflection coefficients $r^{s/p}(\omega, \kappa)$ as a function of the frequency $\omega$ and $\kappa=\sqrt{k^2-\omega^2/c^2}$ (the following definition of the square root is used, $\mathrm{Re}\{\kappa\}\geq 0$ and $\mathrm{Im}\{\kappa\}<0$), where $k$ is the modulus of the two-dimensional wavevector $\mathbf{k}$. The specific reflection coefficients with respect to diffirent systems are defined in the corresponding child of this class.
 ```cpp
@@ -63,40 +61,43 @@ See [ReflectionCoefficients](#ReflectionCoefficients).
 ## ReflectionCoefficientsLocSlab
 Implements the reflection coefficient of a plate of a local material and of finite thickness according to
 $$
-r^{s/p}(\omega,\kappa) = r^{s/p}_\mathrm{bulk}(\omega,\kappa) \frac{1-\exp(-2\kappa_\epsilon d)}{1-\left(r^{s/p} \exp(-\kappa_\epsilon d)\right)^2}
+r^{s/p}(\omega,\kappa) = r^{s/p}_\mathrm{bulk}(\omega,\kappa) \frac{1-\exp(-2\kappa_\epsilon d)}{1-\left(r^{s/p}(\omega,\kappa) \exp(-\kappa_\epsilon d)\right)^2}
 $$
 where $r^{s/p}_\mathrm{bulk}$ refers to the corresponding bulk refelction coefficient, as defined in [ReflectionCoefficientsLocBulk](#ReflectionCoefficientsLocBulk), and $d$ is the thickness of the plate. 
 ```cpp
-class ReflectionCoefficientsLocBulk : public ReflectionCoefficients {
+class ReflectionCoefficientsLocSlab : public ReflectionCoefficients {
 private:
   // permittivity is needed to describe the surface's response
   Permittivity *permittivity;
+  double thickness;
 
 public:
   /*!
    * Constructor for reflection coefficients of a local bulk medium.
    */
-  ReflectionCoefficientsLocBulk(Permittivity *permittivity);
-  ReflectionCoefficientsLocBulk(std::string input_file);
+  ReflectionCoefficientsLocSlab(Permittivity *permittivity, double thickness);
+
+  ReflectionCoefficientsLocSlab(std::string input_file);
 
   /*!
    * Returns the p- and s-polarized reflection coefficient.
    */
-  void ref(std::complex<double> &r_p, std::complex<double> &r_s, double omega,
-           std::complex<double> kappa);
+  void ref(std::complex<double> &r_p, std::complex<double> &r_s, double omega, std::complex<double> kappa);
   // getter functions
   std::complex<double> get_epsilon(double omega) {
     return this->permittivity->epsilon(omega);
   };
-};
-
+  double get_thickness(){
+   return this->thickness;
+  };
+  };
 ```
 
 
-### `# ReflectionCoefficientsLocBulk(Permittivity *permittivity)`
+### `# ReflectionCoefficientsLocSlab(Permittivity *permittivity, double thickness)`
 Direct constructor for the class.
 
-### `# ReflectionCoefficientsLocBulk(std::string input_file)`
+### `# ReflectionCoefficientsLocSlab(std::string input_file)`
 Input file constructor for the class.
 
 ### `# void ref(std::complex<double> &r_p, std::complex<double> &r_s, double omega, std::complex<double> kappa)`
@@ -111,4 +112,10 @@ The input file sections for the permittivities look like this
 type = local bulk
 ```
 
+### **ReflectionCoefficientsLocSlab**
+```ini
+[Reflection]
+type = local slab
+thickness = 0.05
+```
 <!-- tabs:end -->

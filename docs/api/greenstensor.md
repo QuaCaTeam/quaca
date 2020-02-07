@@ -9,7 +9,7 @@ class GreensTensor {
 protected:
   double v;    // velocity of the particle
   double beta; // inverse temperature
-
+  
 public:
   // constructors
   GreensTensor(std::string input_file);
@@ -99,6 +99,7 @@ The input file sections for the Green's tensor look like this
 type = vacuum
 v =
 beta =
+rel_err_1 =
 ```
 
 
@@ -108,6 +109,10 @@ beta =
 type = plate
 v =
 beta =
+za = 
+delta_cut =
+rel_err_0 =
+rel_err_1 =
 ```
 For the plate Green's tensor you also need to define the [Reflection Coefficients](api/reflection)!
 <!-- tabs:end -->

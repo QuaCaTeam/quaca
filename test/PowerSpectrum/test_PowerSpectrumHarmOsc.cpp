@@ -9,9 +9,10 @@ TEST_CASE("Constructors work", "[PowerSpectrumHarmOsc]") {
     double omega_a = GENERATE(take(1, random(0., 1e3)));
     double alpha_zero = GENERATE(take(1, random(1e-5, 1.)));
 
-    GreensTensorVacuum green(v, beta);
-    PolarizabilityNoBath alpha(omega_a, alpha_zero, &green);
-    PowerSpectrumHarmOsc powerspectrum(&green, &alpha);
+    double relerr_k = 1E-9;
+    GreensTensorVacuum greens(v, beta, relerr_k);
+    PolarizabilityNoBath alpha(omega_a, alpha_zero, &greens);
+    PowerSpectrumHarmOsc powerspectrum(&greens, &alpha);
 
     REQUIRE(Approx(powerspectrum.greens_tensor->get_v()).epsilon(1e-6) == v);
     REQUIRE(Approx(powerspectrum.greens_tensor->get_beta()).epsilon(1e-6) ==
@@ -51,9 +52,10 @@ TEST_CASE("Power spectrum is hermitian", "[PowerSpectrumHarmOsc]") {
   double omega_a = GENERATE(take(1, random(0.1, 1e1)));
   double alpha_zero = GENERATE(take(1, random(1e-9, 1e-7)));
 
-  GreensTensorVacuum green(v, beta);
-  PolarizabilityNoBath alpha(omega_a, alpha_zero, &green);
-  PowerSpectrumHarmOsc powerspectrum(&green, &alpha);
+  double relerr_k = 1E-9;
+  GreensTensorVacuum greens(v, beta, relerr_k);
+  PolarizabilityNoBath alpha(omega_a, alpha_zero, &greens);
+  PowerSpectrumHarmOsc powerspectrum(&greens, &alpha);
 
   // Matrices to store results
   cx_mat::fixed<3, 3> lhs(fill::zeros);
@@ -80,9 +82,10 @@ TEST_CASE("Power spectrum reduces to polarizability in the static case",
   // Ensure equilibrium result
   double v = 1e-9;
 
-  GreensTensorVacuum green(v, beta);
-  PolarizabilityNoBath alpha(omega_a, alpha_zero, &green);
-  PowerSpectrumHarmOsc powerspectrum(&green, &alpha);
+  double relerr_k = 1E-9;
+  GreensTensorVacuum greens(v, beta, relerr_k);
+  PolarizabilityNoBath alpha(omega_a, alpha_zero, &greens);
+  PowerSpectrumHarmOsc powerspectrum(&greens, &alpha);
 
   // Matrices to store results
   cx_mat::fixed<3, 3> lhs(fill::zeros);

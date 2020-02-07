@@ -11,10 +11,11 @@ TEST_CASE("Quantum friction constructors work", "[QuantumFriction]") {
     double alpha_zero = GENERATE(take(1, random(1e-5, 1.)));
     double relerr_omega = 1E-1;
 
-    GreensTensorVacuum green(v, beta);
-    PolarizabilityNoBath alpha(omega_a, alpha_zero, &green);
-    PowerSpectrumHarmOsc powerspectrum(&green, &alpha);
-    QuantumFriction quant_fric(&green, &alpha, &powerspectrum, relerr_omega);
+    double relerr_k = 1E-9;
+    GreensTensorVacuum greens(v, beta, relerr_k);
+    PolarizabilityNoBath alpha(omega_a, alpha_zero, &greens);
+    PowerSpectrumHarmOsc powerspectrum(&greens, &alpha);
+    QuantumFriction quant_fric(&greens, &alpha, &powerspectrum, relerr_omega);
 
     REQUIRE(Approx(quant_fric.greens_tensor->get_v()).epsilon(1e-6) == v);
     REQUIRE(Approx(quant_fric.greens_tensor->get_beta()).epsilon(1e-6) == beta);
@@ -73,10 +74,11 @@ TEST_CASE("Analytical results with vacuum Green's tensor gets reproduced",
   double relerr_omega = 1e-6;
   double epsabs = 0;
 
-  GreensTensorVacuum green(v, beta);
-  PolarizabilityNoBath alpha(omega_a, alpha_zero, &green);
-  PowerSpectrumHarmOsc powerspectrum(&green, &alpha);
-  QuantumFriction quant_fric(&green, &alpha, &powerspectrum, relerr_omega);
+  double relerr_k = 1E-9;
+  GreensTensorVacuum greens(v, beta, relerr_k);
+  PolarizabilityNoBath alpha(omega_a, alpha_zero, &greens);
+  PowerSpectrumHarmOsc powerspectrum(&greens, &alpha);
+  QuantumFriction quant_fric(&greens, &alpha, &powerspectrum, relerr_omega);
 
   Options_Friction opts;
   opts.class_pt = &quant_fric;
@@ -110,10 +112,10 @@ TEST_CASE("Analytical results with scattered Green's tensor gets reproduced",
 
   PermittivityDrude perm(gamma, omega_p);
   ReflectionCoefficientsLocBulk refl(&perm);
-  GreensTensorPlate green(v, za, beta, &refl, delta_cut, rel_err);
-  PolarizabilityNoBath alpha(omega_a, alpha_zero, &green);
-  PowerSpectrumHarmOsc powerspectrum(&green, &alpha);
-  QuantumFriction quant_fric(&green, &alpha, &powerspectrum, relerr_omega);
+  GreensTensorPlate greens(v, za, beta, &refl, delta_cut, rel_err);
+  PolarizabilityNoBath alpha(omega_a, alpha_zero, &greens);
+  PowerSpectrumHarmOsc powerspectrum(&greens, &alpha);
+  QuantumFriction quant_fric(&greens, &alpha, &powerspectrum, relerr_omega);
 
   Options_Friction opts;
   opts.class_pt = &quant_fric;
