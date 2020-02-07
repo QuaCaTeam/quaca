@@ -260,6 +260,60 @@ GreensTensor/test_GreensTensorVacuum.cpp.s:
 	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/GreensTensor/test_GreensTensorVacuum.cpp.s
 .PHONY : GreensTensor/test_GreensTensorVacuum.cpp.s
 
+Looper/test_LooperV.o: Looper/test_LooperV.cpp.o
+
+.PHONY : Looper/test_LooperV.o
+
+# target to build an object file
+Looper/test_LooperV.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/Looper/test_LooperV.cpp.o
+.PHONY : Looper/test_LooperV.cpp.o
+
+Looper/test_LooperV.i: Looper/test_LooperV.cpp.i
+
+.PHONY : Looper/test_LooperV.i
+
+# target to preprocess a source file
+Looper/test_LooperV.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/Looper/test_LooperV.cpp.i
+.PHONY : Looper/test_LooperV.cpp.i
+
+Looper/test_LooperV.s: Looper/test_LooperV.cpp.s
+
+.PHONY : Looper/test_LooperV.s
+
+# target to generate assembly for a file
+Looper/test_LooperV.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/Looper/test_LooperV.cpp.s
+.PHONY : Looper/test_LooperV.cpp.s
+
+Looper/test_LooperZa.o: Looper/test_LooperZa.cpp.o
+
+.PHONY : Looper/test_LooperZa.o
+
+# target to build an object file
+Looper/test_LooperZa.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/Looper/test_LooperZa.cpp.o
+.PHONY : Looper/test_LooperZa.cpp.o
+
+Looper/test_LooperZa.i: Looper/test_LooperZa.cpp.i
+
+.PHONY : Looper/test_LooperZa.i
+
+# target to preprocess a source file
+Looper/test_LooperZa.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/Looper/test_LooperZa.cpp.i
+.PHONY : Looper/test_LooperZa.cpp.i
+
+Looper/test_LooperZa.s: Looper/test_LooperZa.cpp.s
+
+.PHONY : Looper/test_LooperZa.s
+
+# target to generate assembly for a file
+Looper/test_LooperZa.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/Looper/test_LooperZa.cpp.s
+.PHONY : Looper/test_LooperZa.cpp.s
+
 Options/test_Options.o: Options/test_Options.cpp.o
 
 .PHONY : Options/test_Options.o
@@ -500,6 +554,12 @@ help:
 	@echo "... GreensTensor/test_GreensTensorVacuum.o"
 	@echo "... GreensTensor/test_GreensTensorVacuum.i"
 	@echo "... GreensTensor/test_GreensTensorVacuum.s"
+	@echo "... Looper/test_LooperV.o"
+	@echo "... Looper/test_LooperV.i"
+	@echo "... Looper/test_LooperV.s"
+	@echo "... Looper/test_LooperZa.o"
+	@echo "... Looper/test_LooperZa.i"
+	@echo "... Looper/test_LooperZa.s"
 	@echo "... Options/test_Options.o"
 	@echo "... Options/test_Options.i"
 	@echo "... Options/test_Options.s"

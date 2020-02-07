@@ -395,6 +395,114 @@ GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.s:
 	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.s
 .PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.s
 
+Looper/Looper.o: Looper/Looper.cpp.o
+
+.PHONY : Looper/Looper.o
+
+# target to build an object file
+Looper/Looper.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/Looper.cpp.o
+.PHONY : Looper/Looper.cpp.o
+
+Looper/Looper.i: Looper/Looper.cpp.i
+
+.PHONY : Looper/Looper.i
+
+# target to preprocess a source file
+Looper/Looper.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/Looper.cpp.i
+.PHONY : Looper/Looper.cpp.i
+
+Looper/Looper.s: Looper/Looper.cpp.s
+
+.PHONY : Looper/Looper.s
+
+# target to generate assembly for a file
+Looper/Looper.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/Looper.cpp.s
+.PHONY : Looper/Looper.cpp.s
+
+Looper/LooperFactory.o: Looper/LooperFactory.cpp.o
+
+.PHONY : Looper/LooperFactory.o
+
+# target to build an object file
+Looper/LooperFactory.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperFactory.cpp.o
+.PHONY : Looper/LooperFactory.cpp.o
+
+Looper/LooperFactory.i: Looper/LooperFactory.cpp.i
+
+.PHONY : Looper/LooperFactory.i
+
+# target to preprocess a source file
+Looper/LooperFactory.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperFactory.cpp.i
+.PHONY : Looper/LooperFactory.cpp.i
+
+Looper/LooperFactory.s: Looper/LooperFactory.cpp.s
+
+.PHONY : Looper/LooperFactory.s
+
+# target to generate assembly for a file
+Looper/LooperFactory.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperFactory.cpp.s
+.PHONY : Looper/LooperFactory.cpp.s
+
+Looper/LooperV.o: Looper/LooperV.cpp.o
+
+.PHONY : Looper/LooperV.o
+
+# target to build an object file
+Looper/LooperV.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperV.cpp.o
+.PHONY : Looper/LooperV.cpp.o
+
+Looper/LooperV.i: Looper/LooperV.cpp.i
+
+.PHONY : Looper/LooperV.i
+
+# target to preprocess a source file
+Looper/LooperV.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperV.cpp.i
+.PHONY : Looper/LooperV.cpp.i
+
+Looper/LooperV.s: Looper/LooperV.cpp.s
+
+.PHONY : Looper/LooperV.s
+
+# target to generate assembly for a file
+Looper/LooperV.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperV.cpp.s
+.PHONY : Looper/LooperV.cpp.s
+
+Looper/LooperZa.o: Looper/LooperZa.cpp.o
+
+.PHONY : Looper/LooperZa.o
+
+# target to build an object file
+Looper/LooperZa.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperZa.cpp.o
+.PHONY : Looper/LooperZa.cpp.o
+
+Looper/LooperZa.i: Looper/LooperZa.cpp.i
+
+.PHONY : Looper/LooperZa.i
+
+# target to preprocess a source file
+Looper/LooperZa.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperZa.cpp.i
+.PHONY : Looper/LooperZa.cpp.i
+
+Looper/LooperZa.s: Looper/LooperZa.cpp.s
+
+.PHONY : Looper/LooperZa.s
+
+# target to generate assembly for a file
+Looper/LooperZa.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperZa.cpp.s
+.PHONY : Looper/LooperZa.cpp.s
+
 Options/Options.o: Options/Options.cpp.o
 
 .PHONY : Options/Options.o
@@ -704,6 +812,18 @@ help:
 	@echo "... GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.o"
 	@echo "... GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.i"
 	@echo "... GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.s"
+	@echo "... Looper/Looper.o"
+	@echo "... Looper/Looper.i"
+	@echo "... Looper/Looper.s"
+	@echo "... Looper/LooperFactory.o"
+	@echo "... Looper/LooperFactory.i"
+	@echo "... Looper/LooperFactory.s"
+	@echo "... Looper/LooperV.o"
+	@echo "... Looper/LooperV.i"
+	@echo "... Looper/LooperV.s"
+	@echo "... Looper/LooperZa.o"
+	@echo "... Looper/LooperZa.i"
+	@echo "... Looper/LooperZa.s"
 	@echo "... Options/Options.o"
 	@echo "... Options/Options.i"
 	@echo "... Options/Options.s"
