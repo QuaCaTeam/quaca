@@ -26,7 +26,7 @@ Our setup consists of:
 * a surface, described by the reflection coefficients $r^s(\omega,k)$ and $r^p(\omega,k)$
 * where the object moves with constant velocity $v$ and constant distance to the surface $z_a$, and the system is evaluated at temperature $T=\frac{1}{\beta k_\mathrm{B}}$.
 
-Further physical assumptions and subtilities are explained in [this paper](http://link.aps.org/doi/10.1103/PhysRevLett.117.100402). 
+Further physical assumptions and subtilities are explained in [this paper](http://link.aps.org/doi/10.1103/PhysRevLett.117.100402).
 ## 2. Populate the input file
 There are lots of things we could change in the above setup without changing the formula we have to use.
 For example, imagine we want to calculate the exact same situation as above, but with a *blabla* atom.
@@ -175,10 +175,10 @@ You can chose to calculate as many steps as you want, however, be aware that dep
 With our input file filled we can now finally start the calculation.
 
 ## 3. Run QuaCa
-After installing and building QuaCa you should find an executable called `QuaCa` in the `bin/` directory.
+After installing and building QuaCa you should find an executable called `Friction` in the `bin/` directory.
 Change into this directory and type into the command line
 ```bash
-quaca/bin> ./QuaCa --file ../data/tutorial.ini
+quaca/bin> ./Friction --file ../data/tutorial.ini
 ```
 The flag `--file` specifies the input file, whose path is specified behind it.
 We will chose here the input file that we have populated above.

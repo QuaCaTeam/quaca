@@ -1,7 +1,7 @@
 !> TODO: Fill in values and finish writing
 
 # Write your own main
-In the first tutorial you calculated *...* using an input file and the executable `QuaCa`.
+In the first tutorial you calculated the non-contact friction of an atom above the surface of a Drude bulk material using an input file and the executable `Friction`.
 QuaCa can, however, also be used like a library and you can write your own executables!
 In this tutorial we will redo the last tutorial, but this time we will implement everything in our own main file.
 You will learn how to:
@@ -95,8 +95,8 @@ We can do so by typing
 int main(int argc, char *argv[])
 {
   // define permittivity
-  double omega_p =
-  double gamma =
+  double omega_p = 9.0;
+  double gamma = 0.1;
   PermittivityDrude permittivity(omega_p, gamma);
 
   return 0;
@@ -107,27 +107,22 @@ Let us proceed by defining our Green's tensor and put this permittivity inside i
 Type below the permittivity definition
 ```cpp
 // define the Green's tensor
-double v =
-double beta =
-double z_a =
+double v = 1e-4;
+double beta = 1e6;
+double z_a = 0.01;
+
+double delta_cut = 30;
 
 GreensTensorPlate greens_tensor(v, z_a, beta, &permittivity);
 ```
 We have now defined the Green's tensor and have it the permittivity which we defined above it.
 
-This process has to be repeated with the polarizability and the memorykernel that goes in it.
-For the memorykernel we type
-```cpp
-// define memorykernel
-double gamma_kernel =
-OhmicMemoryKernel memory_kernel(gamma_kernel);
-```
-Then we put all together inside the polarizability
+This process has to be repeated with the polarizability
 ```cpp
 // define polarizability
-double omega_a =
-double alpha_zero =
-PolarizabilityBath polarizability(omega_a, alpha_zero, &memory_kernel, &greens_tensor);
+double omega_a = 1.3;
+double alpha_zero = 6e-9;
+PolarizabilityBath polarizability(omega_a, alpha_zero, &greens_tensor);
 ```
 With the polarizability and the Green's tensor defined we now need to define the power spectrum and the quantum friction
 ```cpp
