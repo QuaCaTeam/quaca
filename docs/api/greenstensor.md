@@ -46,7 +46,7 @@ Direct constructor of the class.
 ### `# virtual void calculate_tensor(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts) = 0`
 Calculates the Green's tensor, i.e. $\underline{G}(\mathbf{k}, \omega + k_x v)$, where $x$ is the axis along the motion with velocity $v$, and puts the result into the matrix `GT`.
 
-### `# virtual void integrate_2d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts) = 0`
+### `# virtual void integrate_1d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts) = 0`
 Calculates the integral over the Green's tensor and writes it into the matrix `GT`, i.e. $\int \frac{\mathrm{d}^2\mathbf{k}}{(2\pi)} \underline{G}(\mathbf{k},\omega+k_xv) $. Here following integration options are available and governed by the flags in `opts`.
 
 | Flag                | Math       |
@@ -61,7 +61,7 @@ Calculates the integral over the Green's tensor and writes it into the matrix `G
 
 If a flag is `true` the corresponding integrand of the above table is calculated. Setting multiple flags to `true` might not lead to the desired outcome.
 
-### `# virtual void integrate_1d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts) = 0`
+### `# virtual void integrate_2d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts) = 0`
 Performs the first of the two integrations and analogously to `integrate_2d_k`. However, which specific variable is integrated first and second depends on the child of the class. 
 
 ## GreensTensorVacuum
@@ -131,3 +131,50 @@ For the plate Green's tensor you also need to define the [Reflection Coefficient
 <!-- tabs:end -->
 
 ## Examples
+<!-- tabs:start -->
+
+#### ** Example: Vacuum **
+We want to calculate the twofold integrated imaginary part of the vaccuum Green's tensor at frequency $\omega=3\,\mathrm{eV}$ in the static case $(v=0)$, and at $\beta=0.1\,\mathrm{eV}^{-1}$. Moreover, we need to define the accuracy of the numerical integration. Since the first integration of the vacuum Green's tensor is implemented analytically, we solely need to provide the demanded relative accuracy for the second integration $\delta_\mathrm{err}=10^{-9}$.
+Let's define the Green's tensor
+```cpp
+double v = 0;
+double beta = 1e-1;
+double relerr = 1e-9
+GreensTensorVacuum greens_tensor(v, beta, relerr);
+```
+To calculate the integration we perform we pass the desired $\omega$ and the integration option `fancy_I` to `opts`
+```cpp
+cx_mat::fixed<3,3> GT(fill::zeros);
+Options_GreensTensor opts;
+opts.omega = 3.0;
+opts.fancy_I = true;
+greens_tensor.integrated_1d_k(GT, opts);
+```
+The matrix `GT` now contains the integrated imaginary part of the vacuum Green's tensor.
+
+
+#### ** Example (.ini): Vacuum **
+We want to calculate the twofold integrated imaginary part of the vaccuum Green's tensor at frequency $\omega=3\,\mathrm{eV}$ in the static case $(v=0)$, and at $\beta=0.1\,\mathrm{eV}^{-1}$. Moreover, we need to define the accuracy of the numerical integration. Since the first integration of the vacuum Green's tensor is implemented analytically, we solely need to provide the demanded relative accuracy for the second integration $\delta_\mathrm{err}=10^{-9}$.
+Since we have to define a lot of parameters, QuaCa offers a shortcut to the long task before.
+We simply define all parameters in a file called `parameters.ini` which looks like this
+```ini
+[GreensTensor]
+type = vacuum
+v = 0
+beta = 1e-1
+rel_err_1 = 1e-9
+```
+Now we can easily define the vacuum Green's tensor class and calculate the desired part of the integrated Green's tensor
+```cpp
+GreensTensorVacuum greens_tensor("parameters.ini");
+
+cx_mat::fixed<3,3> GT(fill::zeros);
+Options_GreensTensor opts;
+opts.omega = 3.0;
+opts.fancy_I = true;
+greens_tensor.integrated_1d_k(GT, opts);
+```
+
+
+
+<!-- tabs:end -->
