@@ -8,45 +8,14 @@ namespace pt = boost::property_tree;
 
 int main(int argc, char *argv[]) {
 
-  // parameters for permittivity
-  double omega_p = 9.0;
-  double gamma = 0.1;
-
-  // define permittivity
-  PermittivityDrude permittivity(omega_p, gamma);
-
-  // define reflection coefficients
+  PermittivityDrude permittivity(9.0, 0.1);
   ReflectionCoefficientsLocBulk refl_coefficients(&permittivity);
-
-  // parameters for green's tensor
-  double v = 1e-4;
-  double beta = 1e6;
-  double z_a = 0.01;
-
-  // numerical error for green's tensor
-  double delta_cut = 20;
-  vec::fixed<2> rel_err = {1E-4, 1E-2};
-
-  // define the Green's tensor
-  GreensTensorPlate greens_tensor(v, z_a, beta, &refl_coefficients, delta_cut,
-                                  rel_err);
-
-  // parameters for polarizability
-  double omega_a = 1.3;
-  double alpha_zero = 6e-9;
-
-  // define polarizability
-  PolarizabilityNoBath polarizability(omega_a, alpha_zero, &greens_tensor);
-
-  // define power spectrum
+  GreensTensorPlate greens_tensor(1e-4, 0.01, 1e6, &refl_coefficients, 20,
+                                  {1e-4, 1e-2});
+  PolarizabilityNoBath polarizability(1.3, 6e-9, &greens_tensor);
   PowerSpectrumHarmOsc power_spectrum(&greens_tensor, &polarizability);
-
-  // numerical error for quantum friction
-  double rel_err_omega = 1e-1;
-
-  // define quantum friction
   QuantumFriction friction(&greens_tensor, &polarizability, &power_spectrum,
-                           rel_err_omega);
+                           1e-1);
 
   // quantum friction options
   Options_Friction opts;
@@ -56,9 +25,9 @@ int main(int argc, char *argv[]) {
   // loop over v
   double start = 1e-4;
   double end = 1e-2;
-  int number_of_steps = 40;
+  int number_of_steps = 2;
   double spacing = pow(end / start, 1. / ((double)number_of_steps - 1.0));
-  double step;
+  double step, value;
 
   // define output file
   std::ofstream file;
@@ -67,8 +36,10 @@ int main(int argc, char *argv[]) {
   for (int i = 0; i < number_of_steps; i++) {
     step = start * pow(spacing, i);
     friction.greens_tensor->set_v(step);
+    value = friction.calculate(opts);
 
-    file << step << "," << friction.calculate(opts) << "\n";
+    std::cout << step << "," << value << std::endl;
+    file << step << "," << value << "\n";
   };
 
   // close file

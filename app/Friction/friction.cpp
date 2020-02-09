@@ -18,13 +18,14 @@ int main(int argc, char *argv[]) {
   pt::read_ini(parameters, root);
 
   double relerr_omega = root.get<double>("Friction.relerr_omega");
+
   // define needed quantities
-  GreensTensor *greens_tensor = GreensTensorFactory::create(parameters);
-  Polarizability *polarizabilty = PolarizabilityFactory::create(parameters);
+  Polarizability *polarizability = PolarizabilityFactory::create(parameters);
   PowerSpectrumHarmOsc *powerspectrum =
-      new PowerSpectrumHarmOsc(greens_tensor, polarizabilty);
-  QuantumFriction *quant_friction = new QuantumFriction(
-      greens_tensor, polarizabilty, powerspectrum, relerr_omega);
+      new PowerSpectrumHarmOsc(polarizability->greens_tensor, polarizability);
+  QuantumFriction *quant_friction =
+      new QuantumFriction(polarizability->greens_tensor, polarizability,
+                          powerspectrum, relerr_omega);
 
   // define looper
   Looper *looper = LooperFactory::create(parameters, quant_friction);
