@@ -1,4 +1,4 @@
-!> TODO: Describe the tensors better. Fill in description of function. Write examples.
+!> TODO: Write examples.
 
 ## GreensTensor
 This is an abstract class that defines a Green's tensor.
@@ -44,12 +44,25 @@ Input file constructor of the class.
 Direct constructor of the class.
 
 ### `# virtual void calculate_tensor(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts) = 0`
-Calculates the Green's tensor, i.e. $\underline{G}(k, \omega + kv)$ and puts the result into the matrix `GT`.
+Calculates the Green's tensor, i.e. $\underline{G}(\mathbf{k}, \omega + k_x v)$, where $x$ is the axis along the motion with velocity $v$, and puts the result into the matrix `GT`.
 
 ### `# virtual void integrate_2d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts) = 0`
+Calculates the integral over the Green's tensor and writes it into the matrix `GT`, i.e. $\int \frac{\mathrm{d}^2\mathbf{k}}{(2\pi)} \underline{G}(\mathbf{k},\omega+k_xv) $. Here following integration options are available and governed by the flags in `opts`.
+
+| Flag                | Math       |
+|---------------------|------------|
+| `fancy_R`           | $\underline{G}_\Re = (\underline{G}+\underline{G}^\dagger)/2$ |
+| `fancy_I`           | $\underline{G}_\Im = (\underline{G}-\underline{G}^\dagger)/(2\mathrm{i})$ |
+| `fancy_I_kv`           | $k_x \, \underline{G}_\Im $ |
+| `fancy_I_temp`           | $ \frac{\underline{G}_\Im}{1-\exp(-\hbar\beta(\omega+k_xv))} $ |
+| `fancy_I_non_LTE`           | $ \underline{G}_\Im \left(\frac{1}{1-\exp(-\hbar\beta(\omega+k_xv))} - \frac{1}{1-\exp(-\hbar\beta\omega)}\right) $ |
+| `fancy_I_temp`           | $ \frac{k_x\,\underline{G}_\Im}{1-\exp(-\hbar\beta(\omega+k_xv))} $ |
+| `fancy_I_non_LTE`           | $ k_x\,\underline{G}_\Im \left(\frac{1}{1-\exp(-\hbar\beta(\omega+k_xv))} - \frac{1}{1-\exp(-\hbar\beta\omega)}\right) $ |
+
+If a flag is `true` the corresponding integrand of the above table is calculated. Setting multiple flags to `true` might not lead to the desired outcome.
 
 ### `# virtual void integrate_1d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts) = 0`
-
+Performs the first of the two integrations and analogously to `integrate_2d_k`. However, which specific variable is integrated first and second depends on the child of the class. 
 
 ## GreensTensorVacuum
 Implements the imaginary part of the vacuum Green's tensor given by
@@ -89,7 +102,7 @@ $$
   \mp\mathrm{i}\frac{k_x}{k},\,\mp\mathrm{i}\frac{k_y}{k},\, \frac{k}{\kappa}.
 \big)^\intercal.
 $$
-A reference for the scattered part of the Green's tensor can be found in [this paper](http://link.aps.org/doi/10.1103/PhysRevA.94.042114). Notice that the full Green's tensor of the described configuration reads $\underline{G}=\underline{G}_0+\underline{g}$. 
+A reference for the scattered part of the Green's tensor can be found in [this paper](http://link.aps.org/doi/10.1103/PhysRevA.94.042114). Please note, that the odd orders of $k_y$ are, due to symmetry reasons, not considered. Therefore, the elements $G_{xy}=G_{yx}=G_{yz}=G_{zy}=0$. Moreover, notice that the full Green's tensor of the described configuration reads $\underline{G}=\underline{G}_0+\underline{g}$. 
 ## Input file
 The input file sections for the Green's tensor look like this
 <!-- tabs:start -->
