@@ -111,7 +111,8 @@ double v = 1e-4;
 double beta = 1e6;
 double z_a = 0.01;
 
-double delta_cut = 30;
+double delta_cut = 20;
+vec::fixed<2> rel_err = {1E-4, 1E-2};
 
 GreensTensorPlate greens_tensor(v, z_a, beta, &permittivity);
 ```
