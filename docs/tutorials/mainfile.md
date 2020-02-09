@@ -83,7 +83,7 @@ The tutorial executable works!
 quaca/bin>
 ```
 Good job!
-Let us now proceed by filling our main with more meaningfull code.
+Let us now proceed by filling our main with more meaningful code.
 
 ## 2. Write the main function
 First let us define the permittivity.
@@ -94,46 +94,56 @@ We can do so by typing
 
 int main(int argc, char *argv[])
 {
-  // define permittivity
+  // parameters for permittivity
   double omega_p = 9.0;
   double gamma = 0.1;
+
+  // define permittivity
   PermittivityDrude permittivity(omega_p, gamma);
 
   return 0;
 };
 ```
 You have now created an object of the type PermittivityDrude called `permittivity` with the appropriate parameters.
-Let us proceed by defining our Green's tensor and put this permittivity inside it.
-Type below the permittivity definition
+Let us proceed by defining the reflection coefficient and put the permittivity inside.
 ```cpp
-// define the Green's tensor
+// define reflection coefficients
+ReflectionCoefficientsLocBulk refl_coefficients(&permittivity);
+```
+Let us proceed by defining our Green's tensor and put the reflection coefficient class inside it.
+```cpp
+// parameters for green's tensor
 double v = 1e-4;
 double beta = 1e6;
 double z_a = 0.01;
 
+// numerical error for green's tensor
 double delta_cut = 20;
 vec::fixed<2> rel_err = {1E-4, 1E-2};
 
-GreensTensorPlate greens_tensor(v, z_a, beta, &permittivity);
+// define the Green's tensor
+GreensTensorPlate greens_tensor(v, z_a, beta, &refl_coefficients, delta_cut, rel_err);
 ```
-We have now defined the Green's tensor and have it the permittivity which we defined above it.
-
-This process has to be repeated with the polarizability
+We have now defined our Green's tensor so let us proceed by defining the polarizability.
 ```cpp
-// define polarizability
+// parameters for polarizability
 double omega_a = 1.3;
 double alpha_zero = 6e-9;
-PolarizabilityBath polarizability(omega_a, alpha_zero, &greens_tensor);
+
+// define polarizability
+PolarizabilityNoBath polarizability(omega_a, alpha_zero, &greens_tensor);
 ```
 With the polarizability and the Green's tensor defined we now need to define the power spectrum and the quantum friction
 ```cpp
 // define power spectrum
 PowerSpectrumHarmOsc power_spectrum(&greens_tensor, &polarizability);
 
+// numerical error for quantum friction
+double rel_err_omega = 1e-1;
+
 // define quantum friction
-QuantumFriction friction(&greens_tensor, &polarizability, &power_spectrum);
+QuantumFriction friction(&greens_tensor, &polarizability, &power_spectrum, rel_err_omega);
 ```
 Perfect!
 We have defined every object there is to calculate quantum friction and have set all parameters.
 All that is left to do is calculate the quantum friction and print out the result.
-Let us therefore define the numerical parameters and

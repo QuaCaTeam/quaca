@@ -1,5 +1,3 @@
-!> TODO: fill in values and finish writing
-
 # First QuaCa calculation
 
 We assume that you have QuaCa installed and are ready to go.
@@ -29,7 +27,6 @@ Our setup consists of:
 Further physical assumptions and subtilities are explained in [this paper](http://link.aps.org/doi/10.1103/PhysRevLett.117.100402).
 ## 2. Populate the input file
 There are lots of things we could change in the above setup without changing the formula we have to use.
-For example, imagine we want to calculate the exact same situation as above, but with a *blabla* atom.
 Because of this inherent modularity QuaCa reads an input file that contains all these parameters, so that the program does not have to be recompiled on each change.
 
 The parameters are written in  a `.ini` file.
@@ -111,9 +108,9 @@ type = plate
 v = 1e-4
 beta = 1e6
 za = 0.01
-delta_cut = 30
-rel_err_0 = 1e-6
-rel_err_1 = 1e-4
+delta_cut = 20
+rel_err_0 = 1e-4
+rel_err_1 = 1e-2
 
 [Permittivity]
 type = drude
@@ -143,9 +140,9 @@ type = plate
 v = 1e-4
 beta = 1e6
 za = 0.01
-delta_cut = 30
-rel_err_0 = 1e-6
-rel_err_1 = 1e-4
+delta_cut = 20
+rel_err_0 = 1e-4
+rel_err_1 = 1e-2
 
 [Permittivity]
 type = drude
@@ -163,15 +160,16 @@ alpha_zero = 6e-9
 [PowerSpectrum]
 type = harmonic oscillator
 
+[Friction]
+relerr_omega = 1e-1
+
 [Looper]
 type = v
 scale = log
 start = 1e-4
-end = 1e-3
-steps = 2
+end = 1e-2
+steps = 40
 ```
-You can chose to calculate as many steps as you want, however, be aware that depending on your computer the time it takes to calculate a single step varies from 30sec up to 2min.
-
 With our input file filled we can now finally start the calculation.
 
 ## 3. Run QuaCa
@@ -185,11 +183,14 @@ We will chose here the input file that we have populated above.
 Notice that since we are in the `bin/` directory we first had to go one directory up and then to `data/tutorial.ini`.
 QuaCa now produces an output file in the same directory as the input file and with the same name, but of the file type `.csv`.
 It contains in the first column the variable that we have looped over (which in this case is the velocity v) and in the second column the calculated value of the quantum friction.
-If you have followed all of the steps above it should look something like this
-```csv
-0.0001,-4.92784e-16
-0.001,-1.36711e-12
-```
+
+The calculation might take a while, with the above paramters and depending on your computer around 10-25sec per value (on the PCs of the developers this calculation ran in 10-14min). If you do not want to wait that long, reduce the number of steps in the input file.
 
 ## 4. Check the results
 Let us now plot the data we obtained from our calculation and compare it to the yellowish line in [this publication](https://link.aps.org/doi/10.1103/PhysRevLett.123.120401).
+We have a plot script prepared for in the `plots/` directory.
+Simply type
+```bash
+quaca/plots> python plot.py ../data/tutorial.csv
+```
+and compare the plot with figure 2 of [the publication](https://link.aps.org/doi/10.1103/PhysRevLett.123.120401).
