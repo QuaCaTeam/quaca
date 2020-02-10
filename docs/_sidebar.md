@@ -20,6 +20,7 @@
   - [Permittivity](api/permittivity)
   - [MemoryKernel](api/memorykernel)
   - [PowerSpectrum](api/powerspectrum)
+  - [Friction](api/friction)
 
 - Development
   - [Testing](dev/testing)

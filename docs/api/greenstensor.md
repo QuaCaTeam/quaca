@@ -64,6 +64,8 @@ If a flag is `true` the corresponding integrand of the above table is calculated
 ### `# virtual void integrate_2d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts) = 0`
 Performs the first of the two integrations and analogously to `integrate_2d_k`. However, which specific variable is integrated first and second depends on the child of the class. 
 
+## Options_GreensTensor
+
 ## GreensTensorVacuum
 Implements the imaginary part of the vacuum Green's tensor given by
 $$
@@ -80,6 +82,33 @@ $$
   ,
 $$
 where $\omega$ is the frequency, $\mathbf{k}=(k_x,\,k_y)^\intercal$ is the corresponding wavevector to the two-dimensional $xy$ plane (with $|\mathbf{k}|=k$, and $z$ is the remaining (not Fourier-transformed) spatial coordinate. The $z- z'\to 0$ indicates, that the Green's tensor is evaluated twice at the same point with respect to the $z$ coordinate. The introduced Heaviside function $\theta(\omega^2/c^2-k^2)$ ensures, that solely imaginary values are considered. The real part of the vacuum Green's tensor is implicitly contained in the $\omega_a$. A clear derivation of the vacuum Green's tensor can be found for instance in [this paper](https://www.mdpi.com/2076-3417/7/11/1158).
+```cpp
+class GreensTensorVacuum : public GreensTensor {
+public:
+  // constructors
+  GreensTensorVacuum(double v, double beta);
+  GreensTensorVacuum(std::string input_file);
+
+  // calculate the tensor in frequency and momentum space
+  void calculate_tensor(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
+
+  // integrate over a two-dimensional k space
+  void integrate_2d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
+
+  // integrate over a one-dimensional k space
+  void integrate_1d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
+
+  // integrand for integration over one-dimensional k space
+  static double integrand_1d_k(double k, void *opts);
+};
+```
+
+###  `void calculate_tensor(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts)`
+Calculates the vacuum Green's tensor as given above. As the real part is divergent only the imaginary part can be calculated. Trying to compute the real part will result in an abort of the computation and an error message.
+
+###  `void integrate_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts)`
+Computes the integration along the 2-dimensional $\mathbf{k}$-vector. There are different additional factors in the integrand, which can be set by the `Options_GreensTensor` struct. For more information see the description of [Options_GreensTensor](#Options_GreensTensor).
+
 ## GreensTensorPlate
 Implements the scattered part of the Green's tensor of a flat surface beneath vaccuum and is given by
 $$
