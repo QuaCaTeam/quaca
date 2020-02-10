@@ -1,9 +1,9 @@
 # Power Spectrum
 
 This abstract class serves as a container for the power spectrum of the dipole autocorrelator.
-The power spectrum defined as
+The power spectrum can be defined with or without an internal bath. Without an internal bath, the power spectrum reads
 $$  \underline{S}(\omega) =\underline{\alpha}(\omega)\left\{ \int \frac{\mathrm{d}^2 \mathbf{k}}{(2 \pi)^2}\frac{ \underline{G}_\Im(\mathbf{k}, \omega + \mathbf{k}^\intercal\mathbf{v})}{1-\exp(-\hbar\omega(\omega+\mathbf{k}^\intercal\mathbf{v}))} + \frac{1}{\alpha_0\omega_a^2}\frac{\omega\mathrm{Re}\{\mu(\omega)\}}{1-\exp(-\hbar\beta\omega)}  \right\} \underline{\alpha}(\omega)^\dagger, $$
-where .
+where $\underline{G}$ is the Green's tensor described in [api/greenstensor](api/greenstensor).
 
 ```cpp
 class Polarizability {
