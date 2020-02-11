@@ -10,10 +10,11 @@ struct Options_PowerSpectrum;
  * spectrum tensor
  */
 class PowerSpectrum {
-public:
+protected:
   GreensTensor *greens_tensor; // Green's tensor of describing the geometry of
   // the system
   Polarizability *polarizability; // Polarizability describing the linear
+public:
   // response of the microscopic particle
   // Constructors
   PowerSpectrum(std::string input_file);
@@ -22,6 +23,10 @@ public:
   // calculate the power spectrum for a fixed value of the frequency
   virtual void calculate(cx_mat::fixed<3, 3> &powerspectrum,
                          Options_PowerSpectrum opts) = 0;
+
+  // getter functions
+  GreensTensor *get_greens_tensor() { return greens_tensor; };
+  Polarizability *get_polarizability() { return polarizability; };
 };
 
 struct Options_PowerSpectrum {

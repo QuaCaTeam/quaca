@@ -1,17 +1,17 @@
 #ifndef GREENSTENSORPLATE_H
 #define GREENSTENSORPLATE_H
-
-#include "GreensTensor.h"
-#include "Permittivity/PermittivityFactory.h"
-#include "ReflectionCoefficients/ReflectionCoefficientsFactory.h"
 #include <armadillo>
 #include <assert.h>
 #include <cmath>
 #include <complex>
+
 // ini parser
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 namespace pt = boost::property_tree;
+
+#include "../ReflectionCoefficients/ReflectionCoefficients.h"
+#include "GreensTensor.h"
 
 //! The class of the Green's tensor above a flat macroscopic surface
 class GreensTensorPlate : public GreensTensor {

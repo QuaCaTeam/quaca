@@ -1,4 +1,4 @@
-#include "QuantumFriction.h"
+#include "Friction.h"
 #include "../GreensTensor/GreensTensorFactory.h"
 #include "../Polarizability/PolarizabilityFactory.h"
 #include "../PowerSpectrum/PowerSpectrumFactory.h"
@@ -11,7 +11,7 @@
 namespace pt = boost::property_tree;
 using namespace arma;
 
-QuantumFriction::QuantumFriction(std::string input_file) {
+Friction::Friction(std::string input_file) {
   // Create a root
   pt::ptree root;
 
@@ -24,13 +24,13 @@ QuantumFriction::QuantumFriction(std::string input_file) {
   this->powerspectrum = PowerSpectrumFactory::create(input_file);
 };
 
-QuantumFriction::QuantumFriction(GreensTensor *greens_tensor,
+Friction::Friction(GreensTensor *greens_tensor,
                                  Polarizability *polarizability,
                                  PowerSpectrum *powerspectrum, double relerr_omega)
     : greens_tensor(greens_tensor), polarizability(polarizability),
       powerspectrum(powerspectrum), relerr_omega(relerr_omega){};
 
-double QuantumFriction::calculate(Options_Friction opts) {
+double Friction::calculate(Options_Friction opts) {
   double result;
   double omega_a =this->polarizability->get_omega_a();
   // Collect all specifically relevant point within the integration
@@ -52,7 +52,7 @@ double QuantumFriction::calculate(Options_Friction opts) {
   return result;
 };
 
-double QuantumFriction::friction_integrand(double omega, void *opts) {
+double Friction::friction_integrand(double omega, void *opts) {
   // Implementation of the integrand of eq. (4.3) in Marty's PhD thesis
   // Units: c=1, 4 pi epsilon_0 = 1, hbar = 1
   Options_Friction *opts_pt = static_cast<Options_Friction *>(opts);

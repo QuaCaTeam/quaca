@@ -5,7 +5,7 @@
 
 class LooperFactory {
 public:
-  static Looper *create(std::string type, QuantumFriction *quantum_friction);
+  static Looper *create(std::string type, Friction *quantum_friction);
 };
 
 #endif // LOOPERFACTORY_H

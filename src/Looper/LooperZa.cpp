@@ -7,10 +7,10 @@ namespace pt = boost::property_tree;
 #include "LooperZa.h"
 
 LooperZa::LooperZa(double start, double end, int number_of_steps,
-                   std::string scale, QuantumFriction *quantum_friction)
+                   std::string scale, Friction *quantum_friction)
     : Looper(start, end, number_of_steps, scale, quantum_friction){};
 
-LooperZa::LooperZa(std::string input_file, QuantumFriction *quantum_friction)
+LooperZa::LooperZa(std::string input_file, Friction *quantum_friction)
     : Looper(input_file, quantum_friction) {
   // Create a root
   pt::ptree root;
@@ -29,8 +29,8 @@ double LooperZa::calculate_value(int step) {
   opts.class_pt = this->quantum_friction;
 
   // change za
-  GreensTensorPlate *pt =
-      dynamic_cast<GreensTensorPlate *>(this->quantum_friction->greens_tensor);
+  GreensTensorPlate *pt = dynamic_cast<GreensTensorPlate *>(
+      this->quantum_friction->get_greens_tensor());
 
   if (pt == NULL) {
     std::cerr

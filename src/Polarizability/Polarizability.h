@@ -6,7 +6,7 @@
 #include <complex>
 
 #include "../GreensTensor/GreensTensor.h"
-#include "MemoryKernel/MemoryKernel.h"
+#include "../MemoryKernel/MemoryKernel.h"
 
 using namespace arma;
 
@@ -16,12 +16,11 @@ struct Options_Polarizability;
 //! An abstract polarizability class
 class Polarizability {
 protected:
-  double omega_a;    // resonance frequency
-  double alpha_zero; // vacuum polarizability
-
-public:
+  double omega_a;              // resonance frequency
+  double alpha_zero;           // vacuum polarizability
   GreensTensor *greens_tensor; // Green's tensor
 
+public:
   // constructors
   Polarizability(double omega_a, double alpha_zero,
                  GreensTensor *greens_tensor);
@@ -37,8 +36,9 @@ public:
   static double integrand_omega(double omega, void *opts);
 
   // getter functions
-  double get_omega_a() { return this->omega_a; };
-  double get_alpha_zero() { return this->alpha_zero; };
+  double get_omega_a() { return omega_a; };
+  double get_alpha_zero() { return alpha_zero; };
+  GreensTensor *get_greens_tensor() { return greens_tensor; };
 };
 
 // A struct for integration options

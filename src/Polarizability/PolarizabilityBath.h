@@ -1,7 +1,7 @@
 #ifndef POLARIZABILITYBATH_H
 #define POLARIZABILITYBATH_H
 
-#include "MemoryKernel/MemoryKernelFactory.h"
+#include "../MemoryKernel/MemoryKernelFactory.h"
 #include "Polarizability.h"
 #include <cmath>
 #include <complex>

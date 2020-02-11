@@ -152,32 +152,32 @@ Calculations/Integrations.cpp.s:
 	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Calculations/Integrations.cpp.s
 .PHONY : Calculations/Integrations.cpp.s
 
-Calculations/QuantumFriction.o: Calculations/QuantumFriction.cpp.o
+Calculations/Friction.o: Calculations/Friction.cpp.o
 
-.PHONY : Calculations/QuantumFriction.o
+.PHONY : Calculations/Friction.o
 
 # target to build an object file
-Calculations/QuantumFriction.cpp.o:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Calculations/QuantumFriction.cpp.o
-.PHONY : Calculations/QuantumFriction.cpp.o
+Calculations/Friction.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Calculations/Friction.cpp.o
+.PHONY : Calculations/Friction.cpp.o
 
-Calculations/QuantumFriction.i: Calculations/QuantumFriction.cpp.i
+Calculations/Friction.i: Calculations/Friction.cpp.i
 
-.PHONY : Calculations/QuantumFriction.i
+.PHONY : Calculations/Friction.i
 
 # target to preprocess a source file
-Calculations/QuantumFriction.cpp.i:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Calculations/QuantumFriction.cpp.i
-.PHONY : Calculations/QuantumFriction.cpp.i
+Calculations/Friction.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Calculations/Friction.cpp.i
+.PHONY : Calculations/Friction.cpp.i
 
-Calculations/QuantumFriction.s: Calculations/QuantumFriction.cpp.s
+Calculations/Friction.s: Calculations/Friction.cpp.s
 
-.PHONY : Calculations/QuantumFriction.s
+.PHONY : Calculations/Friction.s
 
 # target to generate assembly for a file
-Calculations/QuantumFriction.cpp.s:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Calculations/QuantumFriction.cpp.s
-.PHONY : Calculations/QuantumFriction.cpp.s
+Calculations/Friction.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Calculations/Friction.cpp.s
+.PHONY : Calculations/Friction.cpp.s
 
 GreensTensor/GreensTensor.o: GreensTensor/GreensTensor.cpp.o
 
@@ -812,9 +812,9 @@ help:
 	@echo "... Calculations/Integrations.o"
 	@echo "... Calculations/Integrations.i"
 	@echo "... Calculations/Integrations.s"
-	@echo "... Calculations/QuantumFriction.o"
-	@echo "... Calculations/QuantumFriction.i"
-	@echo "... Calculations/QuantumFriction.s"
+	@echo "... Calculations/Friction.o"
+	@echo "... Calculations/Friction.i"
+	@echo "... Calculations/Friction.s"
 	@echo "... GreensTensor/GreensTensor.o"
 	@echo "... GreensTensor/GreensTensor.i"
 	@echo "... GreensTensor/GreensTensor.s"
