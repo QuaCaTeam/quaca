@@ -23,16 +23,22 @@ public:
   Polarizability *polarizability;
   PowerSpectrum *powerspectrum;
 
+  //Constructor with ini-file
   QuantumFriction(std::string input_file);
+  //Constructor with initialization list
   QuantumFriction(GreensTensor *greens_tensor, Polarizability *polarizability,
                   PowerSpectrum *powerspectrum, double relerr_omega);
   double calculate(Options_Friction opts);
   static double friction_integrand(double omega, void *opts);
 };
 
+//Integration options for the quantum friction calculation
 struct Options_Friction {
+    //Pointer storing the address of the class itself (similar to 'this')
   QuantumFriction *class_pt;
+  //Compute the full power spectrum, using eq. (4.3) in Marty PhD thesis
   bool full_spectrum = false;
+  //Use eq. (4.5) in Marty's PhD thesis
   bool non_LTE = false;
 };
 

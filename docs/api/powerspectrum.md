@@ -10,13 +10,13 @@ where $\underline{G}$ is the Green's tensor described in [GreensTensor](api/gree
 ```cpp
 class PowerSpectrum {
 public:
-    
+
   //Green's tensor of describing the geometry of
   //the system
-  GreensTensor *greens_tensor; 
+  GreensTensor *greens_tensor;
 
   //Polarizability describing the linear of the microscopic particle
-  Polarizability *polarizability; 
+  Polarizability *polarizability;
 
   //Constructor with ini-file
   PowerSpectrum(std::string input_file);
@@ -59,8 +59,7 @@ struct Options_PowerSpectrum {
 If set to `true`, the power spectrum as shown above is calculated
 
 ### `bool non_LTE`
-If set to `true`, only the nonequilibrium part of the power spectrum 
+If set to `true`, only the nonequilibrium part of the power spectrum
 $$  \frac{\hbar}{\pi}\underline{J}(\omega) = \underline{S}(\omega) - \frac{\hbar}{\pi}\frac{\underline{\alpha}_\Im(\omega)}{1-\exp(-\hbar\beta\omega)} $$
 is calculated.
 ## PowerSpectrumHarmOsc
-

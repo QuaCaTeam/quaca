@@ -31,9 +31,15 @@ An executable called `quaca` should now have been build and can be found in the 
 
 ## Documentation
 For now we do not upload the documentation anywhere, so it can only be viewed locally using the following command from the command line
+### Python 2.7
 ```bash
 quaca $ cd docs && python -m SimpleHTTPServer 3000
 ```
+### Python 3
+```bash
+quaca $ cd docs && python -m http.server 3000
+```
+
 You can then see the documentation in your browser at the adress `http://localhost:3000/`.
 
 ## Testing

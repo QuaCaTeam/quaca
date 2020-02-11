@@ -9,7 +9,7 @@ class GreensTensor {
 protected:
   double v;    // velocity of the particle
   double beta; // inverse temperature
-  
+
 public:
   // constructors
   GreensTensor(std::string input_file);
@@ -62,7 +62,7 @@ Calculates the integral over the Green's tensor and writes it into the matrix `G
 If a flag is `true` the corresponding integrand of the above table is calculated. Setting multiple flags to `true` might not lead to the desired outcome.
 
 ### `# virtual void integrate_2d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts) = 0`
-Performs the first of the two integrations and analogously to `integrate_2d_k`. However, which specific variable is integrated first and second depends on the child of the class. 
+Performs the first of the two integrations and analogously to `integrate_2d_k`. However, which specific variable is integrated first and second depends on the child of the class.
 
 ## Options_GreensTensor
 
@@ -115,9 +115,9 @@ $$
   \underline{g}(\mathbf{k},z_a, z_a,\omega) =
   \frac{\omega^2}{c^2}
   \big(
-  r^s(\mathbf{k},\omega) \, \mathbf{ e}_s \otimes {\mathbf{ e}_s} 
+  r^s(\mathbf{k},\omega) \, \mathbf{ e}_s \otimes {\mathbf{ e}_s}
   +
-  r^p(\mathbf{k},\omega) \,\cdot \mathbf{ e}_{+p} \otimes {\mathbf{ e}_{-p}} 
+  r^p(\mathbf{k},\omega) \,\cdot \mathbf{ e}_{+p} \otimes {\mathbf{ e}_{-p}}
 \big)\frac{e^{-2\kappa z_a}}{2\epsilon_0\kappa}
 ,
 $$
@@ -131,7 +131,7 @@ $$
   \mp\mathrm{i}\frac{k_x}{k},\,\mp\mathrm{i}\frac{k_y}{k},\, \frac{k}{\kappa}.
 \big)^\intercal.
 $$
-A reference for the scattered part of the Green's tensor can be found in [this paper](http://link.aps.org/doi/10.1103/PhysRevA.94.042114). Please note, that the odd orders of $k_y$ are, due to symmetry reasons, not considered. Therefore, the elements $G_{xy}=G_{yx}=G_{yz}=G_{zy}=0$. Moreover, notice that the full Green's tensor of the described configuration reads $\underline{G}=\underline{G}_0+\underline{g}$. 
+A reference for the scattered part of the Green's tensor can be found in [this paper](http://link.aps.org/doi/10.1103/PhysRevA.94.042114). Please note, that the odd orders of $k_y$ are, due to symmetry reasons, not considered. Therefore, the elements $G_{xy}=G_{yx}=G_{yz}=G_{zy}=0$. Moreover, notice that the full Green's tensor of the described configuration reads $\underline{G}=\underline{G}_0+\underline{g}$.
 ## Input file
 The input file sections for the Green's tensor look like this
 <!-- tabs:start -->
@@ -151,7 +151,7 @@ rel_err_1 =
 type = plate
 v =
 beta =
-za = 
+za =
 delta_cut =
 rel_err_0 =
 rel_err_1 =
