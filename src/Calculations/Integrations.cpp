@@ -26,7 +26,7 @@ double cquad(double my_f(double, void *), void *params, double a, double b,
   int success =
       gsl_integration_cquad(&f, a, b, epsabs, relerr, ws, &res, NULL, NULL);
   if (success != 0) {
-    printf("error: %s\n", gsl_strerror(success));
+    printf("cquad error: %s\n", gsl_strerror(success));
     abort();
   }
 
@@ -59,7 +59,7 @@ double qags(double my_f(double, void *), void *params, double a, double b,
   int success =
       gsl_integration_qags(&f, a, b, epsabs, relerr, 1000, ws, &res, &abserr);
   if (success != 0) {
-    printf("error: %s\n", gsl_strerror(success));
+    printf("qags error: %s\n", gsl_strerror(success));
     abort();
   }
 
@@ -92,7 +92,7 @@ double qagiu(double my_f(double, void *), void *params, double a, double relerr,
   int success =
       gsl_integration_qagiu(&f, a, epsabs, relerr, 1000, ws, &res, &abserr);
   if (success != 0) {
-    printf("error: %s\n", gsl_strerror(success));
+    printf("qagiu error: %s\n", gsl_strerror(success));
     abort();
   }
 

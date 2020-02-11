@@ -1,0 +1,21 @@
+.search {
+    position: absolute;
+    width: 100%;
+    top: 150px;
+    border-top: 1px solid #EEEEEE;
+    z-index: 10;
+    background-color: #FFFFFF;
+}
+
+.sidebar > h1 {
+    position: absolute;
+    top: 20px;
+    left: 80px;
+    width: 40%;
+}
+
+.sidebar-nav {
+    position: absolute;
+    width: 100%;
+    top: 200px;
+}

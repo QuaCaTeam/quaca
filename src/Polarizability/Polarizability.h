@@ -16,11 +16,12 @@ struct Options_Polarizability;
 //! An abstract polarizability class
 class Polarizability {
 protected:
-  double omega_a;              // resonance frequency
-  double alpha_zero;           // vacuum polarizability
-  GreensTensor *greens_tensor; // Green's tensor
+  double omega_a;    // resonance frequency
+  double alpha_zero; // vacuum polarizability
 
 public:
+  GreensTensor *greens_tensor; // Green's tensor
+
   // constructors
   Polarizability(double omega_a, double alpha_zero,
                  GreensTensor *greens_tensor);

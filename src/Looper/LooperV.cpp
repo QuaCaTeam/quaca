@@ -25,6 +25,7 @@ LooperV::LooperV(std::string input_file, QuantumFriction *quantum_friction)
 double LooperV::calculate_value(int step) {
   Options_Friction opts;
   opts.non_LTE = true;
+  // opts.full_spectrum = true;
   opts.class_pt = this->quantum_friction;
 
   // change v

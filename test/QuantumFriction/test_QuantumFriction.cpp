@@ -110,7 +110,7 @@ TEST_CASE("Analytical results with scattered Green's tensor gets reproduced",
   double relerr_omega = 1e-2;
   double epsabs = 0;
 
-  PermittivityDrude perm(gamma, omega_p);
+  PermittivityDrude perm(omega_p, gamma);
   ReflectionCoefficientsLocBulk refl(&perm);
   GreensTensorPlate greens(v, za, beta, &refl, delta_cut, rel_err);
   PolarizabilityNoBath alpha(omega_a, alpha_zero, &greens);

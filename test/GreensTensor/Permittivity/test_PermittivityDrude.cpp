@@ -13,7 +13,7 @@ TEST_CASE("Drude model can be constructed in different ways",
     auto omega_p = GENERATE(take(5, random(0.0, 1e3)));
     auto gamma = GENERATE(take(5, random(0.0, 1e3)));
 
-    PermittivityDrude *perm = new PermittivityDrude(gamma, omega_p);
+    PermittivityDrude *perm = new PermittivityDrude(omega_p, gamma);
     REQUIRE(perm->get_gamma() == gamma);
     REQUIRE(perm->get_omega_p() == omega_p);
   };
