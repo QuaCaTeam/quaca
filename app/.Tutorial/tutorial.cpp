@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
   double rel_err_omega = 1e-1;
 
   // define quantum friction
-  QuantumFriction friction(&greens_tensor, &polarizability, &power_spectrum,
+  Friction friction(&greens_tensor, &polarizability, &power_spectrum,
                            rel_err_omega);
 
   // quantum friction options
@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
 
   for (int i = 0; i < number_of_steps; i++) {
     step = start * pow(spacing, i);
-    friction.greens_tensor->set_v(step);
+    friction.get_greens_tensor()->set_v(step);
     value = friction.calculate(opts);
 
     std::cout << step << "," << value << std::endl;

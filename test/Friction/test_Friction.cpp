@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <iostream>
 
-TEST_CASE("Quantum friction constructors work", "[QuantumFriction]") {
+TEST_CASE("Quantum friction constructors work", "[Friction]") {
   SECTION("Constructor with initialisation list works") {
     auto v = GENERATE(take(1, random(0., 1.)));
     double beta = GENERATE(take(1, random(1e-5, 1e3)));
@@ -15,21 +15,28 @@ TEST_CASE("Quantum friction constructors work", "[QuantumFriction]") {
     GreensTensorVacuum greens(v, beta, relerr_k);
     PolarizabilityNoBath alpha(omega_a, alpha_zero, &greens);
     PowerSpectrumHarmOsc powerspectrum(&greens, &alpha);
-    QuantumFriction quant_fric(&greens, &alpha, &powerspectrum, relerr_omega);
+    Friction quant_fric(&greens, &alpha, &powerspectrum, relerr_omega);
 
-    REQUIRE(Approx(quant_fric.greens_tensor->get_v()).epsilon(1e-6) == v);
-    REQUIRE(Approx(quant_fric.greens_tensor->get_beta()).epsilon(1e-6) == beta);
-    REQUIRE(Approx(quant_fric.polarizability->get_omega_a()).epsilon(1e-6) ==
-            omega_a);
-    REQUIRE(Approx(quant_fric.polarizability->get_alpha_zero()).epsilon(1e-6) ==
-            alpha_zero);
-    REQUIRE(Approx(quant_fric.powerspectrum->greens_tensor->get_v())
+    REQUIRE(Approx(quant_fric.get_greens_tensor()->get_v()).epsilon(1e-6) == v);
+    REQUIRE(Approx(quant_fric.get_greens_tensor()->get_beta()).epsilon(1e-6) ==
+            beta);
+    REQUIRE(
+        Approx(quant_fric.get_polarizability()->get_omega_a()).epsilon(1e-6) ==
+        omega_a);
+    REQUIRE(Approx(quant_fric.get_polarizability()->get_alpha_zero())
+                .epsilon(1e-6) == alpha_zero);
+    REQUIRE(Approx(quant_fric.get_powerspectrum()->get_greens_tensor()->get_v())
                 .epsilon(1e-6) == v);
-    REQUIRE(Approx(quant_fric.powerspectrum->greens_tensor->get_beta())
-                .epsilon(1e-6) == beta);
-    REQUIRE(Approx(quant_fric.powerspectrum->polarizability->get_omega_a())
-                .epsilon(1e-6) == omega_a);
-    REQUIRE(Approx(quant_fric.powerspectrum->polarizability->get_alpha_zero())
+    REQUIRE(
+        Approx(quant_fric.get_powerspectrum()->get_greens_tensor()->get_beta())
+            .epsilon(1e-6) == beta);
+    REQUIRE(
+        Approx(
+            quant_fric.get_powerspectrum()->get_polarizability()->get_omega_a())
+            .epsilon(1e-6) == omega_a);
+    REQUIRE(Approx(quant_fric.get_powerspectrum()
+                       ->get_polarizability()
+                       ->get_alpha_zero())
                 .epsilon(1e-6) == alpha_zero);
   };
 
@@ -40,27 +47,34 @@ TEST_CASE("Quantum friction constructors work", "[QuantumFriction]") {
     double beta = 5.;
     double v = 0.01;
 
-    QuantumFriction quant_fric("../data/test_files/QuantumFrictionVacuum.ini");
+    Friction quant_fric("../data/test_files/FrictionVacuum.ini");
 
-    REQUIRE(Approx(quant_fric.greens_tensor->get_v()).epsilon(1e-6) == v);
-    REQUIRE(Approx(quant_fric.greens_tensor->get_beta()).epsilon(1e-6) == beta);
-    REQUIRE(Approx(quant_fric.polarizability->get_omega_a()).epsilon(1e-6) ==
-            omega_a);
-    REQUIRE(Approx(quant_fric.polarizability->get_alpha_zero()).epsilon(1e-6) ==
-            alpha_zero);
-    REQUIRE(Approx(quant_fric.powerspectrum->greens_tensor->get_v())
+    REQUIRE(Approx(quant_fric.get_greens_tensor()->get_v()).epsilon(1e-6) == v);
+    REQUIRE(Approx(quant_fric.get_greens_tensor()->get_beta()).epsilon(1e-6) ==
+            beta);
+    REQUIRE(
+        Approx(quant_fric.get_polarizability()->get_omega_a()).epsilon(1e-6) ==
+        omega_a);
+    REQUIRE(Approx(quant_fric.get_polarizability()->get_alpha_zero())
+                .epsilon(1e-6) == alpha_zero);
+    REQUIRE(Approx(quant_fric.get_powerspectrum()->get_greens_tensor()->get_v())
                 .epsilon(1e-6) == v);
-    REQUIRE(Approx(quant_fric.powerspectrum->greens_tensor->get_beta())
-                .epsilon(1e-6) == beta);
-    REQUIRE(Approx(quant_fric.powerspectrum->polarizability->get_omega_a())
-                .epsilon(1e-6) == omega_a);
-    REQUIRE(Approx(quant_fric.powerspectrum->polarizability->get_alpha_zero())
+    REQUIRE(
+        Approx(quant_fric.get_powerspectrum()->get_greens_tensor()->get_beta())
+            .epsilon(1e-6) == beta);
+    REQUIRE(
+        Approx(
+            quant_fric.get_powerspectrum()->get_polarizability()->get_omega_a())
+            .epsilon(1e-6) == omega_a);
+    REQUIRE(Approx(quant_fric.get_powerspectrum()
+                       ->get_polarizability()
+                       ->get_alpha_zero())
                 .epsilon(1e-6) == alpha_zero);
   };
 };
 
 TEST_CASE("Analytical results with vacuum Green's tensor gets reproduced",
-          "[QuantumFriction]") {
+          "[Friction]") {
   // Units: c=1, 4 pi epsilon_0 = 1, hbar = 1
   double omega_a = .3;
   double alpha_zero = 6e-9;
@@ -78,7 +92,7 @@ TEST_CASE("Analytical results with vacuum Green's tensor gets reproduced",
   GreensTensorVacuum greens(v, beta, relerr_k);
   PolarizabilityNoBath alpha(omega_a, alpha_zero, &greens);
   PowerSpectrumHarmOsc powerspectrum(&greens, &alpha);
-  QuantumFriction quant_fric(&greens, &alpha, &powerspectrum, relerr_omega);
+  Friction quant_fric(&greens, &alpha, &powerspectrum, relerr_omega);
 
   Options_Friction opts;
   opts.class_pt = &quant_fric;
@@ -89,7 +103,7 @@ TEST_CASE("Analytical results with vacuum Green's tensor gets reproduced",
 };
 
 TEST_CASE("Analytical results with scattered Green's tensor gets reproduced",
-          "[QuantumFriction]") {
+          "[Friction]") {
   // Units: c=1, 4 pi epsilon_0 = 1, hbar = 1
   double omega_a = 1.3;
   double alpha_zero = 6e-9;
@@ -115,7 +129,7 @@ TEST_CASE("Analytical results with scattered Green's tensor gets reproduced",
   GreensTensorPlate greens(v, za, beta, &refl, delta_cut, rel_err);
   PolarizabilityNoBath alpha(omega_a, alpha_zero, &greens);
   PowerSpectrumHarmOsc powerspectrum(&greens, &alpha);
-  QuantumFriction quant_fric(&greens, &alpha, &powerspectrum, relerr_omega);
+  Friction quant_fric(&greens, &alpha, &powerspectrum, relerr_omega);
 
   Options_Friction opts;
   opts.class_pt = &quant_fric;

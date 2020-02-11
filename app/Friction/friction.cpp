@@ -21,10 +21,10 @@ int main(int argc, char *argv[]) {
 
   // define needed quantities
   Polarizability *polarizability = PolarizabilityFactory::create(parameters);
-  PowerSpectrumHarmOsc *powerspectrum =
-      new PowerSpectrumHarmOsc(polarizability->greens_tensor, polarizability);
-  QuantumFriction *quant_friction =
-      new QuantumFriction(polarizability->greens_tensor, polarizability,
+  PowerSpectrumHarmOsc *powerspectrum = new PowerSpectrumHarmOsc(
+      polarizability->get_greens_tensor(), polarizability);
+  Friction *quant_friction =
+      new Friction(polarizability->get_greens_tensor(), polarizability,
                           powerspectrum, relerr_omega);
 
   // define looper

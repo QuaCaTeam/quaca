@@ -10,7 +10,7 @@ namespace pt = boost::property_tree;
 #include "LooperZa.h"
 
 Looper *LooperFactory::create(std::string input_file,
-                              QuantumFriction *quantum_friction) {
+                              Friction *quantum_friction) {
   // set return pointer to NULL
   Looper *looper = NULL;
 

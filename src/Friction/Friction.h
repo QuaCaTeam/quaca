@@ -15,30 +15,32 @@
 // quantum friction force, definition can be found below
 struct Options_Friction;
 
-class QuantumFriction {
-public:
+class Friction {
+protected:
   double relerr_omega;
 
   GreensTensor *greens_tensor;
   Polarizability *polarizability;
   PowerSpectrum *powerspectrum;
 
-  //Constructor with ini-file
-  QuantumFriction(std::string input_file);
-  //Constructor with initialization list
-  QuantumFriction(GreensTensor *greens_tensor, Polarizability *polarizability,
-                  PowerSpectrum *powerspectrum, double relerr_omega);
+public:
+  Friction(std::string input_file);
+  Friction(GreensTensor *greens_tensor, Polarizability *polarizability,
+           PowerSpectrum *powerspectrum, double relerr_omega);
   double calculate(Options_Friction opts);
   static double friction_integrand(double omega, void *opts);
+
+  // getter functions
+  GreensTensor *get_greens_tensor() { return greens_tensor; };
+  Polarizability *get_polarizability() { return polarizability; };
+  PowerSpectrum *get_powerspectrum() { return powerspectrum; };
 };
 
-//Integration options for the quantum friction calculation
+// Integration options for the quantum friction calculation
 struct Options_Friction {
-    //Pointer storing the address of the class itself (similar to 'this')
-  QuantumFriction *class_pt;
-  //Compute the full power spectrum, using eq. (4.3) in Marty PhD thesis
+  Friction *class_pt;
   bool full_spectrum = false;
-  //Use eq. (4.5) in Marty's PhD thesis
+  // Use eq. (4.5) in Marty's PhD thesis
   bool non_LTE = false;
 };
 

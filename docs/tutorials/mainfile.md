@@ -142,7 +142,7 @@ PowerSpectrumHarmOsc power_spectrum(&greens_tensor, &polarizability);
 double rel_err_omega = 1e-1;
 
 // define quantum friction
-QuantumFriction friction(&greens_tensor, &polarizability, &power_spectrum, rel_err_omega);
+Friction friction(&greens_tensor, &polarizability, &power_spectrum, rel_err_omega);
 ```
 Perfect!
 We have defined every object there is to calculate quantum friction and have set all parameters.

@@ -14,14 +14,15 @@ TEST_CASE("Constructors work", "[PowerSpectrumHarmOsc]") {
     PolarizabilityNoBath alpha(omega_a, alpha_zero, &greens);
     PowerSpectrumHarmOsc powerspectrum(&greens, &alpha);
 
-    REQUIRE(Approx(powerspectrum.greens_tensor->get_v()).epsilon(1e-6) == v);
-    REQUIRE(Approx(powerspectrum.greens_tensor->get_beta()).epsilon(1e-6) ==
-            beta);
-    REQUIRE(Approx(powerspectrum.polarizability->get_omega_a()).epsilon(1e-6) ==
-            omega_a);
+    REQUIRE(Approx(powerspectrum.get_greens_tensor()->get_v()).epsilon(1e-6) ==
+            v);
     REQUIRE(
-        Approx(powerspectrum.polarizability->get_alpha_zero()).epsilon(1e-6) ==
-        alpha_zero);
+        Approx(powerspectrum.get_greens_tensor()->get_beta()).epsilon(1e-6) ==
+        beta);
+    REQUIRE(Approx(powerspectrum.get_polarizability()->get_omega_a())
+                .epsilon(1e-6) == omega_a);
+    REQUIRE(Approx(powerspectrum.get_polarizability()->get_alpha_zero())
+                .epsilon(1e-6) == alpha_zero);
   };
 
   SECTION("Constructor with ini file works") {
@@ -34,14 +35,15 @@ TEST_CASE("Constructors work", "[PowerSpectrumHarmOsc]") {
     PowerSpectrumHarmOsc powerspectrum(
         "../data/test_files/PowerSpectrumHarmOsc.ini");
 
-    REQUIRE(Approx(powerspectrum.greens_tensor->get_v()).epsilon(1e-6) == v);
-    REQUIRE(Approx(powerspectrum.greens_tensor->get_beta()).epsilon(1e-6) ==
-            beta);
-    REQUIRE(Approx(powerspectrum.polarizability->get_omega_a()).epsilon(1e-6) ==
-            omega_a);
+    REQUIRE(Approx(powerspectrum.get_greens_tensor()->get_v()).epsilon(1e-6) ==
+            v);
     REQUIRE(
-        Approx(powerspectrum.polarizability->get_alpha_zero()).epsilon(1e-6) ==
-        alpha_zero);
+        Approx(powerspectrum.get_greens_tensor()->get_beta()).epsilon(1e-6) ==
+        beta);
+    REQUIRE(Approx(powerspectrum.get_polarizability()->get_omega_a())
+                .epsilon(1e-6) == omega_a);
+    REQUIRE(Approx(powerspectrum.get_polarizability()->get_alpha_zero())
+                .epsilon(1e-6) == alpha_zero);
   };
 }
 

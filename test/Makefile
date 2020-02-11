@@ -476,59 +476,59 @@ PowerSpectrum/test_PowerSpectrumHarmOsc.cpp.s:
 	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/PowerSpectrum/test_PowerSpectrumHarmOsc.cpp.s
 .PHONY : PowerSpectrum/test_PowerSpectrumHarmOsc.cpp.s
 
-QuantumFriction/test_QuantumFriction.o: QuantumFriction/test_QuantumFriction.cpp.o
+Friction/test_Friction.o: Friction/test_Friction.cpp.o
 
-.PHONY : QuantumFriction/test_QuantumFriction.o
-
-# target to build an object file
-QuantumFriction/test_QuantumFriction.cpp.o:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/QuantumFriction/test_QuantumFriction.cpp.o
-.PHONY : QuantumFriction/test_QuantumFriction.cpp.o
-
-QuantumFriction/test_QuantumFriction.i: QuantumFriction/test_QuantumFriction.cpp.i
-
-.PHONY : QuantumFriction/test_QuantumFriction.i
-
-# target to preprocess a source file
-QuantumFriction/test_QuantumFriction.cpp.i:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/QuantumFriction/test_QuantumFriction.cpp.i
-.PHONY : QuantumFriction/test_QuantumFriction.cpp.i
-
-QuantumFriction/test_QuantumFriction.s: QuantumFriction/test_QuantumFriction.cpp.s
-
-.PHONY : QuantumFriction/test_QuantumFriction.s
-
-# target to generate assembly for a file
-QuantumFriction/test_QuantumFriction.cpp.s:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/QuantumFriction/test_QuantumFriction.cpp.s
-.PHONY : QuantumFriction/test_QuantumFriction.cpp.s
-
-QuantumFriction/test_QuantumFrictionVacuum.o: QuantumFriction/test_QuantumFrictionVacuum.cpp.o
-
-.PHONY : QuantumFriction/test_QuantumFrictionVacuum.o
+.PHONY : Friction/test_Friction.o
 
 # target to build an object file
-QuantumFriction/test_QuantumFrictionVacuum.cpp.o:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/QuantumFriction/test_QuantumFrictionVacuum.cpp.o
-.PHONY : QuantumFriction/test_QuantumFrictionVacuum.cpp.o
+Friction/test_Friction.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/Friction/test_Friction.cpp.o
+.PHONY : Friction/test_Friction.cpp.o
 
-QuantumFriction/test_QuantumFrictionVacuum.i: QuantumFriction/test_QuantumFrictionVacuum.cpp.i
+Friction/test_Friction.i: Friction/test_Friction.cpp.i
 
-.PHONY : QuantumFriction/test_QuantumFrictionVacuum.i
+.PHONY : Friction/test_Friction.i
 
 # target to preprocess a source file
-QuantumFriction/test_QuantumFrictionVacuum.cpp.i:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/QuantumFriction/test_QuantumFrictionVacuum.cpp.i
-.PHONY : QuantumFriction/test_QuantumFrictionVacuum.cpp.i
+Friction/test_Friction.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/Friction/test_Friction.cpp.i
+.PHONY : Friction/test_Friction.cpp.i
 
-QuantumFriction/test_QuantumFrictionVacuum.s: QuantumFriction/test_QuantumFrictionVacuum.cpp.s
+Friction/test_Friction.s: Friction/test_Friction.cpp.s
 
-.PHONY : QuantumFriction/test_QuantumFrictionVacuum.s
+.PHONY : Friction/test_Friction.s
 
 # target to generate assembly for a file
-QuantumFriction/test_QuantumFrictionVacuum.cpp.s:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/QuantumFriction/test_QuantumFrictionVacuum.cpp.s
-.PHONY : QuantumFriction/test_QuantumFrictionVacuum.cpp.s
+Friction/test_Friction.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/Friction/test_Friction.cpp.s
+.PHONY : Friction/test_Friction.cpp.s
+
+Friction/test_FrictionVacuum.o: Friction/test_FrictionVacuum.cpp.o
+
+.PHONY : Friction/test_FrictionVacuum.o
+
+# target to build an object file
+Friction/test_FrictionVacuum.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/Friction/test_FrictionVacuum.cpp.o
+.PHONY : Friction/test_FrictionVacuum.cpp.o
+
+Friction/test_FrictionVacuum.i: Friction/test_FrictionVacuum.cpp.i
+
+.PHONY : Friction/test_FrictionVacuum.i
+
+# target to preprocess a source file
+Friction/test_FrictionVacuum.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/Friction/test_FrictionVacuum.cpp.i
+.PHONY : Friction/test_FrictionVacuum.cpp.i
+
+Friction/test_FrictionVacuum.s: Friction/test_FrictionVacuum.cpp.s
+
+.PHONY : Friction/test_FrictionVacuum.s
+
+# target to generate assembly for a file
+Friction/test_FrictionVacuum.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/Friction/test_FrictionVacuum.cpp.s
+.PHONY : Friction/test_FrictionVacuum.cpp.s
 
 test_main.o: test_main.cpp.o
 
@@ -605,12 +605,12 @@ help:
 	@echo "... PowerSpectrum/test_PowerSpectrumHarmOsc.o"
 	@echo "... PowerSpectrum/test_PowerSpectrumHarmOsc.i"
 	@echo "... PowerSpectrum/test_PowerSpectrumHarmOsc.s"
-	@echo "... QuantumFriction/test_QuantumFriction.o"
-	@echo "... QuantumFriction/test_QuantumFriction.i"
-	@echo "... QuantumFriction/test_QuantumFriction.s"
-	@echo "... QuantumFriction/test_QuantumFrictionVacuum.o"
-	@echo "... QuantumFriction/test_QuantumFrictionVacuum.i"
-	@echo "... QuantumFriction/test_QuantumFrictionVacuum.s"
+	@echo "... Friction/test_Friction.o"
+	@echo "... Friction/test_Friction.i"
+	@echo "... Friction/test_Friction.s"
+	@echo "... Friction/test_FrictionVacuum.o"
+	@echo "... Friction/test_FrictionVacuum.i"
+	@echo "... Friction/test_FrictionVacuum.s"
 	@echo "... test_main.o"
 	@echo "... test_main.i"
 	@echo "... test_main.s"
