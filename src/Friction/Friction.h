@@ -26,7 +26,7 @@ protected:
 public:
   Friction(std::string input_file);
   Friction(GreensTensor *greens_tensor, Polarizability *polarizability,
-                  PowerSpectrum *powerspectrum, double relerr_omega);
+           PowerSpectrum *powerspectrum, double relerr_omega);
   double calculate(Options_Friction opts);
   static double friction_integrand(double omega, void *opts);
 
@@ -36,9 +36,11 @@ public:
   PowerSpectrum *get_powerspectrum() { return powerspectrum; };
 };
 
+// Integration options for the quantum friction calculation
 struct Options_Friction {
   Friction *class_pt;
   bool full_spectrum = false;
+  // Use eq. (4.5) in Marty's PhD thesis
   bool non_LTE = false;
 };
 

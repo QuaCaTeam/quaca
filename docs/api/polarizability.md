@@ -5,7 +5,7 @@
 ## Polarizability
 This abstract class serves as a container for two different polarizabilities: one of a particle with an internal heat bath and one without such a bath.
 We expect the polarizability to be of the form
-$$  \underline{\alpha}(\omega) = \alpha_0 \omega_a^2 \left( \omega_a^2 - \omega^2 - i \omega \mu(\omega) - \alpha_0 \omega_a^2 \int \frac{d^2 \mathbf{k}}{(2 \pi)^2} \underline{G}(\mathbf{k}, \omega + \mathbf{k}^{\mathrm{T}}\mathbf{v}) \right)^{-1}, $$
+$$  \underline{\alpha}(\omega) = \alpha_0 \omega_a^2 \left( \omega_a^2 - \omega^2 - \mathrm{i} \omega \mu(\omega) - \alpha_0 \omega_a^2 \int \frac{\mathrm{d}^2 \mathbf{k}}{(2 \pi)^2} \underline{G}(\mathbf{k}, \omega + \mathbf{k}^\intercal\mathbf{v}) \right)^{-1}, $$
 where we set $\mu(\omega) = 0$ for the particle without an internal heat bath.
 
 ```cpp
@@ -75,12 +75,12 @@ struct Options_Polarizability {
 If true, the calculation will use $\underline{\alpha}_{\Re} = \left(\underline{\alpha} + \underline{\alpha}^{\dagger}\right)/2$.
 
 ### `# bool fancy_I`
-If true, the calculation will use $\underline{\alpha}_{\Im} = \left(\underline{\alpha} - \underline{\alpha}^{\dagger}\right)/(2 i)$.
+If true, the calculation will use $\underline{\alpha}_{\Im} = \left(\underline{\alpha} - \underline{\alpha}^{\dagger}\right)/(2 \mathrm{i})$.
 
 ## PolarizabilityBath
 Implements a polarizability with an internal bath.
 Obeys the equation
-$  \underline{\alpha}(\omega) = \alpha_0 \omega_a^2 \left( \omega_a^2 - \omega^2 - i \omega \mu(\omega) - \alpha_0 \omega_a^2 \int \frac{d^2 \mathbf{k}}{(2 \pi)^2} \underline{G}(\mathbf{k}, \omega + \mathbf{k}^{\mathrm{T}}\mathbf{v}) \right)^{-1}$,
+$  \underline{\alpha}(\omega) = \alpha_0 \omega_a^2 \left( \omega_a^2 - \omega^2 - \mathrm{i} \omega \mu(\omega) - \alpha_0 \omega_a^2 \int \frac{\mathrm{d}^2 \mathbf{k}}{(2 \pi)^2} \underline{G}(\mathbf{k}, \omega + \mathbf{k}^\intercal\mathbf{v}) \right)^{-1}$,
 where $\alpha_0$ is the vacuum polarizability, $\omega_a$ is the dipole resonance frequency, $\mu(\omega)$ is the memory kernel in Fourier space and $\underline{G}$ is the Green's tensor.
 
 ```cpp
@@ -107,7 +107,7 @@ Further information on the member function can be found in [Polarizability](#Pol
 ## PolarizabilityNoBath
 Implements a polarizability with no internal bath.
 Obeys the equation
-$  \underline{\alpha}(\omega) = \alpha_0 \omega_a^2 \left( \omega_a^2 - \omega^2 - \alpha_0 \omega_a^2 \int \frac{d^2 \mathbf{k}}{(2 \pi)^2} \underline{G}(\mathbf{k}, \omega + \mathbf{k}^{\mathrm{T}}\mathbf{v}) \right)^{-1}$,
+$  \underline{\alpha}(\omega) = \alpha_0 \omega_a^2 \left( \omega_a^2 - \omega^2 - \alpha_0 \omega_a^2 \int \frac{\mathrm{d}^2 \mathbf{k}}{(2 \pi)^2} \underline{G}(\mathbf{k}, \omega + \mathbf{k}^\intercal\mathbf{v}) \right)^{-1}$,
 where $\alpha_0$ is the vacuum polarizability, $\omega_a$ is the dipole resonance frequency and $\underline{G}$ is the Green's tensor.
 ```cpp
 class PolarizabilityNoBath : public Polarizability {
@@ -154,7 +154,7 @@ For the bath you also need to define a [MemoryKernel](api/memorykernel)!
 
 #### ** Example 1 **
 
-We want to calculate the polarizability of a particle with an ohmic internal bath, above a plate with distance $z_a = 10$ and at frequency $3$.
+We want to calculate the polarizability of a particle with an ohmic internal bath, above a plate with distance $z_a = 10\,\mathrm{eV}^{-1}$ and at frequency $3\,\mathrm{eV}$.
 First let's define the ohmic memory kernel
 ```cpp
 double gamma = 3.0;
@@ -173,7 +173,7 @@ double omega_a = 1.3;
 double alpha_zero = 4.0;
 PolarizabilityBath pol(omega_a, alpha_zero, &mu, &greens_tensor);
 ```
-To calculate $\underline{\alpha}(3.0)$ we then do
+To calculate $\underline{\alpha}(3.0\,\mathrm{eV})$ we then do
 ```cpp
 cx_mat::fixed<3,3> alpha(fill::zeros);
 Options_Polarizability opts;
