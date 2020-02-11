@@ -9,7 +9,7 @@ class GreensTensor {
 protected:
   double v;    // velocity of the particle
   double beta; // inverse temperature
-  
+
 public:
   // constructors
   GreensTensor(std::string input_file);
@@ -44,7 +44,6 @@ Input file constructor of the class.
 Direct constructor of the class.
 
 ### `# virtual void calculate_tensor(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts) = 0`
-<<<<<<< HEAD
 Calculates the Green's tensor, i.e. $\underline{G}(\mathbf{k}, \omega + k_x v)$, where $x$ is the axis along the motion with velocity $v$, and puts the result into the matrix `GT`.
 
 ### `# virtual void integrate_1d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts) = 0`
@@ -63,47 +62,14 @@ Calculates the integral over the Green's tensor and writes it into the matrix `G
 If a flag is `true` the corresponding integrand of the above table is calculated. Setting multiple flags to `true` might not lead to the desired outcome.
 
 ### `# virtual void integrate_2d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts) = 0`
-Performs the first of the two integrations and analogously to `integrate_2d_k`. However, which specific variable is integrated first and second depends on the child of the class. 
+Performs the first of the two integrations and analogously to `integrate_2d_k`. However, which specific variable is integrated first and second depends on the child of the class.
 
 ## Options_GreensTensor
-=======
-Calculates the Green's tensor, i.e. $\underline{G}(k, \omega + kv)$ and puts the result into the matrix `GT`.
-
-### `# virtual void integrate_2d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts) = 0`
-Calculates the Green's tensor integrated along a one-dimensional k-vector, such that the result depends on the frequenccy $\omega$ and a one-dimensional k-vector $k$ e.g
-$$
-\int d k_1 \underline{G}(\mathbf{k},z_a,\omega) = \underline{G}(k_2,z_a,\omega)
-$$
-The chosen basis for the two-dimensional k-vector (e.g $(k_x,k_y)$ or $(k,\phi)$) depends on the implementation of the Green's tensor. The result is stored in the matrix `GT`.
-
-### `# virtual void integrate_1d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts) = 0`
-Calculates the Green's tensor integrated along the two-dimensional k-vector, such that the result only depends on the frequency $\omega$ and the distance $z_a$. The result is stored in  the matrix `GT`.
->>>>>>> Simon_Beautifies_Code
 
 ## GreensTensorVacuum
 Implements the imaginary part of the vacuum Green's tensor given by
 $$
-<<<<<<< HEAD
   \mathrm{Im}\left\{\underline{G}_0(\mathbf{ k}, z- z'\to 0,\omega)\right\} =
-=======
-  \underline{G}_0(\mathbf{k}, z,z',\omega) =
-  \frac{\omega^2}{\epsilon_0c^2}
-  \mathcal{P}\left[
-    \mathbb{1}-\frac{c^2}{\omega^2}
-    \begin{bmatrix}
-      \mathbf{k} \\ \pm i \kappa
-    \end{bmatrix}
-    \left[ \mathbf{k}^\intercal ,\,\pm i\kappa\right]
-  \right]
-  \frac{e^{-\kappa|z-z'|}}{2\kappa}
-  -\frac{\mathbf{e}_z\otimes\mathbf{e}_z}{\omega^2/c^2}\delta(z-z')
-  .
-$$
-Here the case $+$ relates to $z > z'$ and $-$ to $z < z '$.
-$\kappa=\sqrt{k^2-\omega^2/c^2}$ with $\mathrm{Re}\{\kappa\}\geq0$ and $\mathrm{Im}\{\kappa\}<0$. Especially, we focus on the case $z=z'$. As the real part of this Green's tensor is divergent for this case, we can continue calculating the imaginary part. Here we also eliminated odd orders of $k_y$, since we solely consider symmetric integration over $k_y$
-$$
-  \mathrm{Im}\left\{\underline{G}_0(\mathbf{k}, z\to z',\omega)\right\} =
->>>>>>> Simon_Beautifies_Code
   \frac{
   \theta(\frac{\omega^2}{c^2}-k^2)
 }{2\epsilon_0\sqrt{\omega^2/c^2-k^2}}
@@ -113,7 +79,6 @@ $$
       k_x^2,\,k_y^2,\,\frac{\omega^2}{c^2}-k^2
     \right]
   \right)
-<<<<<<< HEAD
   ,
 $$
 where $\omega$ is the frequency, $\mathbf{k}=(k_x,\,k_y)^\intercal$ is the corresponding wavevector to the two-dimensional $xy$ plane (with $|\mathbf{k}|=k$, and $z$ is the remaining (not Fourier-transformed) spatial coordinate. The $z- z'\to 0$ indicates, that the Green's tensor is evaluated twice at the same point with respect to the $z$ coordinate. The introduced Heaviside function $\theta(\omega^2/c^2-k^2)$ ensures, that solely imaginary values are considered. The real part of the vacuum Green's tensor is implicitly contained in the $\omega_a$. A clear derivation of the vacuum Green's tensor can be found for instance in [this paper](https://www.mdpi.com/2076-3417/7/11/1158).
@@ -143,45 +108,6 @@ Calculates the vacuum Green's tensor as given above. As the real part is diverge
 
 ###  `void integrate_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts)`
 Computes the integration along the 2-dimensional $\mathbf{k}$-vector. There are different additional factors in the integrand, which can be set by the `Options_GreensTensor` struct. For more information see the description of [Options_GreensTensor](#Options_GreensTensor).
-=======
-$$ 
-```cpp
-class GreensTensorVacuum : public GreensTensor {
-public:
-  // constructors
-  GreensTensorVacuum(double v, double beta);
-  GreensTensorVacuum(std::string input_file);
-
-  // calculate the tensor in frequency and momentum space
-  void calculate_tensor(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
-
-  // integrate over a two-dimensional k space
-  void integrate_2d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
-
-  // integrate over a one-dimensional k space
-  void integrate_1d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
-
-  // integrand for integration over one-dimensional k space
-  static double integrand_1d_k(double k, void *opts);
-};
-```
-
-###  `void calculate_tensor(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts)`
-Calculates the vacuum Green's tensor as given above. As the real part is divergent only the imaginary part can be calculated. Trying to compute the real part will result in an abort of the computation and an error message.
-
-
-###  `void integrate_2d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts)`
-Computes the vaccum Green's tensor integrated along the $k_y$ direction. The result is analytically obtained and takes the form
-$$
-\int d k_y \text{Im}\{\underline{G}(\mathbf{k},z\to z', \omega + \mathbf{k}\cdot\mathbf{v}) \} = \\ \text{diag}\big[ \xi^2,(\omega+k_x v)^2/c^2-\xi^2/2,(\omega+k_x v)^2/c^2-\xi^2/2\big]
-$$
-!> There are some prefactors missing
-
-###  `void integrate_1d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts)`
-Computes the integration along the 2-dimensional $\mathbf{k}$-vector. There are different additional factors in the integrand, which can be set by the `Options_GreensTensor` struct. For more information see the description of [Options_GreensTensor](#Options_GreensTensor).
-
-### `static double integrand_1d_k(double k, void *opts)`
->>>>>>> Simon_Beautifies_Code
 
 ## GreensTensorPlate
 Implements the scattered part of the Green's tensor of a flat surface beneath vaccuum and is given by
@@ -189,13 +115,12 @@ $$
   \underline{g}(\mathbf{k},z_a, z_a,\omega) =
   \frac{\omega^2}{c^2}
   \big(
-  r^s(\mathbf{k},\omega) \, \mathbf{ e}_s \otimes {\mathbf{ e}_s} 
+  r^s(\mathbf{k},\omega) \, \mathbf{ e}_s \otimes {\mathbf{ e}_s}
   +
-  r^p(\mathbf{k},\omega) \,\cdot \mathbf{ e}_{+p} \otimes {\mathbf{ e}_{-p}} 
+  r^p(\mathbf{k},\omega) \,\cdot \mathbf{ e}_{+p} \otimes {\mathbf{ e}_{-p}}
 \big)\frac{e^{-2\kappa z_a}}{2\epsilon_0\kappa}
 ,
 $$
-<<<<<<< HEAD
 where $r^s$ and $r^p$ are the reflection coefficients of the $s$ (transverse electric) and $p$ (transverse magnetic) polarization. The corresponding unit vector are
 $$
   \mathbf{e}_s = \frac{\mathbf{k}}{k}\times \frac{\mathbf{z}}{z}  = \big(
@@ -206,12 +131,7 @@ $$
   \mp\mathrm{i}\frac{k_x}{k},\,\mp\mathrm{i}\frac{k_y}{k},\, \frac{k}{\kappa}.
 \big)^\intercal.
 $$
-A reference for the scattered part of the Green's tensor can be found in [this paper](http://link.aps.org/doi/10.1103/PhysRevA.94.042114). Please note, that the odd orders of $k_y$ are, due to symmetry reasons, not considered. Therefore, the elements $G_{xy}=G_{yx}=G_{yz}=G_{zy}=0$. Moreover, notice that the full Green's tensor of the described configuration reads $\underline{G}=\underline{G}_0+\underline{g}$. 
-=======
-
-# Options_GreensTensor
-
->>>>>>> Simon_Beautifies_Code
+A reference for the scattered part of the Green's tensor can be found in [this paper](http://link.aps.org/doi/10.1103/PhysRevA.94.042114). Please note, that the odd orders of $k_y$ are, due to symmetry reasons, not considered. Therefore, the elements $G_{xy}=G_{yx}=G_{yz}=G_{zy}=0$. Moreover, notice that the full Green's tensor of the described configuration reads $\underline{G}=\underline{G}_0+\underline{g}$.
 ## Input file
 The input file sections for the Green's tensor look like this
 <!-- tabs:start -->
@@ -231,7 +151,7 @@ rel_err_1 =
 type = plate
 v =
 beta =
-za = 
+za =
 delta_cut =
 rel_err_0 =
 rel_err_1 =

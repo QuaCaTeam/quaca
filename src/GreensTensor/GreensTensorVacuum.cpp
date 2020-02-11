@@ -38,7 +38,7 @@ void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3, 3> &GT,
   if (opts.fancy_I) {
     // calculating solely the imaginary part of the free Green tensor
     double pre, k_x, k_y, k_quad, omega, omega_quad;
-    
+
     //Read out the k-vector and the frequency \omega
     k_x = opts.kvec(0);
     k_y = opts.kvec(1);
@@ -120,24 +120,12 @@ void GreensTensorVacuum::integrate_1d_k(cx_mat::fixed<3, 3> &GT,
       opts.indices(0) = 0;
       opts.indices(1) = 0;
       GT(0, 0) = cquad(&integrand_1d_k, &opts, -omega / (1.0 + this->v),
-<<<<<<< HEAD
                        omega / (1.0 - this->v), this->relerr, 0);
-=======
-                       omega / (1.0 - this->v), 1E-9, 0);
-
-      //Numerically integrate the yy component
->>>>>>> Simon_Beautifies_Code
       opts.indices(0) = 1;
       opts.indices(1) = 1;
 
       GT(1, 1) = cquad(&integrand_1d_k, &opts, -omega / (1.0 + this->v),
-<<<<<<< HEAD
                        omega / (1.0 - this->v), this->relerr, 0);
-=======
-                       omega / (1.0 - this->v), 1E-9, 0);
-
-      //the yy and zz component coincide and do not have to be computed separately
->>>>>>> Simon_Beautifies_Code
       GT(2, 2) = GT(1, 1);
     }
     // Switching the integration bounds for negative frequencies
@@ -147,24 +135,12 @@ void GreensTensorVacuum::integrate_1d_k(cx_mat::fixed<3, 3> &GT,
       opts.indices(0) = 0;
       opts.indices(1) = 0;
       GT(0, 0) = -cquad(&integrand_1d_k, &opts, omega / (1.0 - this->v),
-<<<<<<< HEAD
                         -omega / (1.0 + this->v), this->relerr, 0);
-=======
-                        -omega / (1.0 + this->v), 1E-9, 0);
-      
-      //Numerically integrate the xx component
->>>>>>> Simon_Beautifies_Code
       opts.indices(0) = 1;
       opts.indices(1) = 1;
 
       GT(1, 1) = -cquad(&integrand_1d_k, &opts, omega / (1.0 - this->v),
-<<<<<<< HEAD
                         -omega / (1.0 + this->v), this->relerr, 0);
-=======
-                        -omega / (1.0 + this->v), 1E-9, 0);
-
-      //the yy and zz component coincide and do not have to be computed separately
->>>>>>> Simon_Beautifies_Code
       GT(2, 2) = GT(1, 1);
     }
   }

@@ -32,30 +32,22 @@ QuantumFriction::QuantumFriction(GreensTensor *greens_tensor,
     : greens_tensor(greens_tensor), polarizability(polarizability),
       powerspectrum(powerspectrum), relerr_omega(relerr_omega){};
 
-<<<<<<< HEAD
 double QuantumFriction::calculate(Options_Friction opts) {
-=======
-//Calculate quantum friction with a certain relative error and/or absolute error.
-//If epsabs=0 only the relative error is taken as a condition for a succesful
-//integration
-double QuantumFriction::calculate(Options_Friction opts, double relerr,
-                                  double epsabs) {
->>>>>>> Simon_Beautifies_Code
   double result;
   double omega_a =this->polarizability->get_omega_a();
   // Collect all specifically relevant point within the integration
   std::vector<double> lim = {0., 0.99*omega_a , 1.001*omega_a , this->greens_tensor->omega_ch()};
   // Sort the points and erase duplicates
   std::sort(lim.begin(), lim.end());
-  auto last = std::unique(lim.begin(), lim.end()); 
+  auto last = std::unique(lim.begin(), lim.end());
   lim.erase(last, lim.end());
 
   // Start integration
   result = 0.;
 
-  for (int i =0; i < lim.size()-1 ; i++){ 
+  for (int i =0; i < lim.size()-1 ; i++){
   result += cquad(&friction_integrand, &opts, lim[i], lim[i+1], relerr_omega, std::abs(result)*relerr_omega);
-  
+
   };
   // Perform last integration from the last significant point to infinity
   result += qagiu(&friction_integrand, &opts, lim[lim.size()-1], relerr_omega, std::abs(result) * relerr_omega);
@@ -103,8 +95,8 @@ double QuantumFriction::friction_integrand(double omega, void *opts) {
     opts_pt->class_pt->powerspectrum->calculate(powerspectrum, opts_S);
     return real(2. * trace(-powerspectrum * green_kv +
                            1. / M_PI * alpha_I * green_temp_kv));
-  } 
- //Compute onyl the non-LTE contribution of the power-spectrum 
+  }
+ //Compute onyl the non-LTE contribution of the power-spectrum
   else if (opts_pt->non_LTE) {
       //Initialize all tensors
     cx_mat::fixed<3, 3> J(fill::zeros);
@@ -120,7 +112,7 @@ double QuantumFriction::friction_integrand(double omega, void *opts) {
     opts_g.fancy_I_kv = true;
     opts_pt->class_pt->greens_tensor->integrate_1d_k(green_kv, opts_g);
 
-    
+
     //Compute the Green's tensor in the second term of eq. (4.5)
     //the \Sigma distribution is already included here
     opts_g.fancy_I_kv = false;
@@ -145,7 +137,7 @@ double QuantumFriction::friction_integrand(double omega, void *opts) {
     return real(
         trace(2. / M_PI *
               (-J * green_kv + alpha_fancy_I * green_fancy_I_kv_non_LTE)));
-  } 
+  }
   //Ensure that a valid integration argument has been passed
   else {
     std::cerr << "No valid option for the calculation of quantum friction have "

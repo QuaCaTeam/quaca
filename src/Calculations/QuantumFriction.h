@@ -27,15 +27,8 @@ public:
   QuantumFriction(std::string input_file);
   //Constructor with initialization list
   QuantumFriction(GreensTensor *greens_tensor, Polarizability *polarizability,
-<<<<<<< HEAD
                   PowerSpectrum *powerspectrum, double relerr_omega);
   double calculate(Options_Friction opts);
-=======
-                  PowerSpectrum *powerspectrum);
-  //Compute friction with given relative error relerr and/or absolute erro epsabs
-  //If epsabs=0 only relerr is used
-  double calculate(Options_Friction opts, double relerr, double epsabs);
->>>>>>> Simon_Beautifies_Code
   static double friction_integrand(double omega, void *opts);
 };
 
