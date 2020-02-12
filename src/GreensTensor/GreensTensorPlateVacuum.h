@@ -12,8 +12,7 @@ public:
   // constructors
   GreensTensorPlateVacuum(double v, double za, double beta,
                           ReflectionCoefficients *reflection_coefficients,
-                          double delta_cut, vec::fixed<2> rel_err,
-                          double rel_err_vac);
+                          double delta_cut, vec::fixed<2> rel_err);
   GreensTensorPlateVacuum(std::string input_file);
 
   // calculate the tensor in frequency and momentum space
@@ -25,6 +24,12 @@ public:
   // integrate over a one-dimensional k space
   void integrate_1d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
 
+  // getters
+  GreensTensorVacuum *get_vacuums_greens_tensor() {
+    return vacuum_greens_tensor;
+  };
+
+  // setters
   void set_v(double v) {
     this->v = v;
     this->vacuum_greens_tensor->set_v(v);

@@ -4,10 +4,10 @@
 GreensTensorPlateVacuum::GreensTensorPlateVacuum(
     double v, double za, double beta,
     ReflectionCoefficients *reflection_coefficients, double delta_cut,
-    vec::fixed<2> rel_err, double rel_err_vac)
+    vec::fixed<2> rel_err)
     : GreensTensorPlate(v, za, beta, reflection_coefficients, delta_cut,
                         rel_err) {
-  this->vacuum_greens_tensor = new GreensTensorVacuum(v, beta, rel_err_vac);
+  this->vacuum_greens_tensor = new GreensTensorVacuum(v, beta, rel_err(0));
 };
 
 GreensTensorPlateVacuum::GreensTensorPlateVacuum(std::string input_file)
@@ -21,8 +21,8 @@ GreensTensorPlateVacuum::GreensTensorPlateVacuum(std::string input_file)
   std::string addvacuum = root.get<std::string>("GreensTensor.addvacuum");
   assert(addvacuum == "true");
 
-  double rel_err_vac = root.get<double>("GreensTensor.rel_err");
-  this->vacuum_greens_tensor = new GreensTensorVacuum(v, beta, rel_err_vac);
+  this->vacuum_greens_tensor =
+      new GreensTensorVacuum(v, beta, this->rel_err(0));
 };
 
 void GreensTensorPlateVacuum::integrate_1d_k(cx_mat::fixed<3, 3> &GT,
