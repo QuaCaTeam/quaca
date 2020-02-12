@@ -132,6 +132,46 @@ $$
 \big)^\intercal.
 $$
 A reference for the scattered part of the Green's tensor can be found in [this paper](http://link.aps.org/doi/10.1103/PhysRevA.94.042114). Please note, that the odd orders of $k_y$ are, due to symmetry reasons, not considered. Therefore, the elements $G_{xy}=G_{yx}=G_{yz}=G_{zy}=0$. Moreover, notice that the full Green's tensor of the described configuration reads $\underline{G}=\underline{G}_0+\underline{g}$.
+
+## GreensTensorPlateVacuum
+Implements the sum of a [GreensTensorPlate](#GreensTensorPlate) and a [GreensTensorVacuum](#GreensTensorVacuum).
+```cpp
+class GreensTensorPlateVacuum : public GreensTensorPlate {
+private:
+  GreensTensorVacuum *vacuum_greens_tensor;
+  Options_GreensTensor opts_vacuum;
+
+public:
+  // constructors
+  GreensTensorPlateVacuum(double v, double za, double beta,
+                          ReflectionCoefficients *reflection_coefficients,
+                          double delta_cut, vec::fixed<2> rel_err);
+  GreensTensorPlateVacuum(std::string input_file);
+
+  // calculate the tensor in frequency and momentum space
+  void calculate_tensor(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
+
+  // integrate over a two-dimensional k space
+  void integrate_2d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
+
+  // integrate over a one-dimensional k space
+  void integrate_1d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
+
+  // getters
+  GreensTensorVacuum *get_vacuums_greens_tensor() {
+    return vacuum_greens_tensor;
+  };
+
+  // setters
+  void set_v(double v) {
+    this->v = v;
+    this->vacuum_greens_tensor->set_v(v);
+  };
+};
+```
+
+For further reference on the functions see the base class [GreensTensor](#GreensTensor).
+
 ## Input file
 The input file sections for the Green's tensor look like this
 <!-- tabs:start -->
@@ -143,7 +183,6 @@ v =
 beta =
 rel_err_1 =
 ```
-
 
 #### **GreensTensorPlate**
 ```ini
@@ -157,6 +196,20 @@ rel_err_0 =
 rel_err_1 =
 ```
 For the plate Green's tensor you also need to define the [Reflection Coefficients](api/reflection)!
+
+#### **GreensTensorPlateVacuum**
+```ini
+[GreensTensor]
+type = plate
+addvacuum = true
+v =
+beta =
+za =
+delta_cut =
+rel_err_0 =
+rel_err_1 =
+```
+For the plate-and-vacuum Green's tensor you also need to define the [Reflection Coefficients](api/reflection)!
 <!-- tabs:end -->
 
 ## Examples
