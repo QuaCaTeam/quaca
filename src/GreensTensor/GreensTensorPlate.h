@@ -15,7 +15,7 @@ namespace pt = boost::property_tree;
 
 //! The class of the Green's tensor above a flat macroscopic surface
 class GreensTensorPlate : public GreensTensor {
-private:
+protected:
   // reflection coefficients are needed to describe the surface's response
   ReflectionCoefficients *reflection_coefficients;
   // kappa_cut defines the numerical cut-off of the kappa integration

@@ -2,15 +2,15 @@
 #include "catch.hpp"
 #include <iostream>
 
-TEST_CASE("Options constructors work", "[Options]") {
-  SECTION("direct construction") {
+TEST_CASE("Options constructors work as expected", "[Options]") {
+  SECTION("Direct constructor") {
     std::string file = "../README.ini";
     Options opts(file);
     REQUIRE(opts.get_parameter_file() == file);
     REQUIRE(opts.get_output_file() == "../README.csv");
   };
 
-  SECTION("construction with command line arguments") {
+  SECTION("Command line argument constructor") {
     // simulate command line arguments
     int argc = 3;
     char *argv[argc];

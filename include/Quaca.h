@@ -6,6 +6,7 @@
 #include "../src/GreensTensor/GreensTensor.h"
 #include "../src/GreensTensor/GreensTensorFactory.h"
 #include "../src/GreensTensor/GreensTensorPlate.h"
+#include "../src/GreensTensor/GreensTensorPlateVacuum.h"
 #include "../src/GreensTensor/GreensTensorVacuum.h"
 
 #include "../src/Looper/Looper.h"

@@ -3,9 +3,10 @@
 #include <armadillo>
 #include <complex>
 
-TEST_CASE("Constructors work properly", "[GreensTensorVacuum]") {
+TEST_CASE("Vacuum Green's tensor constructors work as expected",
+          "[GreensTensorVacuum]") {
 
-  SECTION("Constructor with argument list works") {
+  SECTION("Direct constructor") {
     auto v = GENERATE(take(2, random(0., 1.)));
     auto beta = GENERATE(take(2, random(1e-3, 1e3)));
     auto relerr = GENERATE(take(2, random(1e-9, 1e-1)));
@@ -15,9 +16,9 @@ TEST_CASE("Constructors work properly", "[GreensTensorVacuum]") {
     REQUIRE(Greens.get_v() == v);
     REQUIRE(Greens.get_beta() == beta);
     REQUIRE(Greens.get_relerr() == relerr);
-  }
+  };
 
-  SECTION("Constructor with ini file works") {
+  SECTION("ini file constructor") {
     double v = 0.1;
     double beta = 5;
     double relerr = 1E-9;
