@@ -33,6 +33,7 @@ Look inside the `app/` folder and you will find a subfolder called `QuaCa` and a
 
 Each folder inside the `app/` folder should contain a `.cpp` file containing a main file, so each folder corresponds to an executable program.
 In the last tutorial you have already worked with the executable `QuaCa`, so let us now create a new one.
+
 First create a new folder inside the `app/` folder and call it `Tutorial`.
 Next go to the file `CMakeLists.txt` inside the `app/` directory and add the following line to the end of the file
 ```cmake
@@ -72,7 +73,7 @@ Go to the `quaca/build/` directory and type into the command line
 quaca/build> cmake ..
 ```
 You have to do this again, because we created new files and CMake needs to know about them!
-The build the project typing
+Then build the project by typing
 ```bash
 quaca/build> make
 ```
@@ -105,11 +106,13 @@ int main(int argc, char *argv[])
 };
 ```
 You have now created an object of the type PermittivityDrude called `permittivity` with the appropriate parameters.
-Let us proceed by defining the reflection coefficient and put the permittivity inside.
+This object can be used to calculate stuff (like the numerical value of the permittivity) and can be put into other objects as we will now do.
+Define the reflection coefficient and put the permittivity inside it by adding to our code
 ```cpp
 // define reflection coefficients
 ReflectionCoefficientsLocBulk refl_coefficients(&permittivity);
 ```
+We hereby defined reflection coefficients and told them to use the permittivity from above.
 Let us proceed by defining our Green's tensor and put the reflection coefficient class inside it.
 ```cpp
 // parameters for green's tensor
