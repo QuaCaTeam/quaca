@@ -17,7 +17,8 @@ build:
     - make
   artifacts:
     paths:
-      - bin/test_quaca
+      - bin/test_quaca_unit
+      - bin/test_quaca_integrated
       - lib/
     expire_in: 1 hour
 
@@ -26,4 +27,5 @@ test:
   script:
     - mkdir -p build
     - cd build
-    - ./../bin/test_quaca
+    - ./../bin/test_quaca_unit
+    - ./../bin/test_quaca_integrated
