@@ -31,6 +31,9 @@ void GreensTensorPlateVacuum::integrate_1d_k(cx_mat::fixed<3, 3> &GT,
   cx_mat::fixed<3, 3> vac;
 
   GreensTensorPlate::integrate_1d_k(GT, opts);
+
+  opts_vacuum = opts;
+  opts.class_pt = vacuum_greens_tensor;
   vacuum_greens_tensor->integrate_1d_k(vac, opts);
 
   GT += vac;
@@ -42,6 +45,9 @@ void GreensTensorPlateVacuum::integrate_2d_k(cx_mat::fixed<3, 3> &GT,
   cx_mat::fixed<3, 3> vac;
 
   GreensTensorPlate::integrate_2d_k(GT, opts);
+
+  opts_vacuum = opts;
+  opts.class_pt = vacuum_greens_tensor;
   vacuum_greens_tensor->integrate_2d_k(vac, opts);
 
   GT += vac;
@@ -53,6 +59,9 @@ void GreensTensorPlateVacuum::calculate_tensor(cx_mat::fixed<3, 3> &GT,
   cx_mat::fixed<3, 3> vac;
 
   GreensTensorPlate::calculate_tensor(GT, opts);
+
+  opts_vacuum = opts;
+  opts.class_pt = vacuum_greens_tensor;
   vacuum_greens_tensor->calculate_tensor(vac, opts);
 
   GT += vac;

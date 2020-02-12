@@ -7,6 +7,7 @@
 class GreensTensorPlateVacuum : public GreensTensorPlate {
 private:
   GreensTensorVacuum *vacuum_greens_tensor;
+  Options_GreensTensor opts_vacuum;
 
 public:
   // constructors
