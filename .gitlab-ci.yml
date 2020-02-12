@@ -27,4 +27,5 @@ test:
   script:
     - mkdir -p build
     - cd build
-    - ./../bin/test_quaca
+    - ./../bin/test_quaca_unit
+    - ./../bin/test_quaca_integrated
