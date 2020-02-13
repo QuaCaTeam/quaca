@@ -38,11 +38,11 @@ public:
   // getter functions
   double get_v() { return this->v; };
   double get_beta() { return this->beta; };
-  
+
   virtual double omega_ch() = 0;
 
   // setter function
-  void set_v(double v) { this->v = v; };
+  virtual void set_v(double v) { this->v = v; };
 };
 
 // A struct for integration options

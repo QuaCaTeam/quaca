@@ -2,8 +2,9 @@
 #include "catch.hpp"
 #include <iostream>
 
-TEST_CASE("Constructors work", "[PowerSpectrumHarmOsc]") {
-  SECTION("Constructor with initialisation list works") {
+TEST_CASE("PowerSpectrumHarmOsc constructors work as expected",
+          "[PowerSpectrumHarmOsc]") {
+  SECTION("Direct constructor") {
     auto v = GENERATE(take(1, random(0., 1.)));
     double beta = GENERATE(take(1, random(1e-5, 1e3)));
     double omega_a = GENERATE(take(1, random(0., 1e3)));
@@ -26,8 +27,7 @@ TEST_CASE("Constructors work", "[PowerSpectrumHarmOsc]") {
     REQUIRE(powerspectrum.has_bath==false);
   };
 
-
-  SECTION("Constructor with ini file works") {
+  SECTION("ini file constructor") {
     double omega_a = 1.3;
     double alpha_zero = 6e-9;
 
