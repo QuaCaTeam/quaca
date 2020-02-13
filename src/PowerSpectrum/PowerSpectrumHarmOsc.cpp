@@ -85,13 +85,15 @@ void PowerSpectrumHarmOsc::calculate(cx_mat::fixed<3, 3> &powerspectrum,
     powerspectrum = 1. / M_PI * alpha * green * trans(alpha);
     //check wether polarizability has an internal bath
     if(has_bath) {
-
       //To be able to use the attributes of PolarizabilityBath we have to dynamically cast
       //the pointer on the Polarizablity to a pointer on PolarizablityBath
       PolarizabilityBath *pt = dynamic_cast<PolarizabilityBath *>(this->polarizability);
-      powerspectrum += 1./M_PI * alpha * 1./(pt->get_alpha_zero()
+
+      cx_mat::fixed<3,3> bathTerm(fill::zeros);
+      bathTerm = 1./M_PI * alpha * 1./(pt->get_alpha_zero()
 	  *pow(pt->get_omega_a(),2)) * omega*real(pt->get_mu(omega))
-	  /(1.-exp(this->greens_tensor->get_beta()*omega))*trans(alpha);
+	  /(1.-exp(-this->greens_tensor->get_beta()*omega))*trans(alpha);
+      powerspectrum += bathTerm;
     }
   }
 

@@ -148,9 +148,9 @@ TEST_CASE("Power spectrum with bath reduces to polarizability in the static case
   double beta = GENERATE(take(3, random(1e-5, 1e5)));
   double omega_a = GENERATE(take(3, random(0., 1e1)));
   double alpha_zero = GENERATE(take(3, random(1e-9, 1e-7)));
-  double gamma = GENERATE(take(1,random(0.,1.)));
+  double gamma = GENERATE(take(3,random(0.,1.)));
   // Ensure equilibrium result
-  double v = 1e-9;
+  double v = 1e-14;
 
   double relerr_k = 1E-9;
   GreensTensorVacuum greens(v, beta, relerr_k);
@@ -175,6 +175,5 @@ TEST_CASE("Power spectrum with bath reduces to polarizability in the static case
   opts_alpha.fancy_I = true;
   alpha.calculate_tensor(rhs, opts_alpha);
   rhs *= 1. / (M_PI * (1. - exp(-beta * omega)));
-  std::cout << "LHS:" << lhs << "RHS:" << rhs << std::endl;
   REQUIRE(approx_equal(lhs, rhs, "reldiff", 10e-8));
 }
