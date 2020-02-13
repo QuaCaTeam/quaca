@@ -24,6 +24,9 @@ find_package(BLAS REQUIRED)
 include_directories("${PROJECT_SOURCE_DIR}/lib/armadillo-9.800.2/include")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DARMA_DONT_USE_WRAPPER")
 
+#find OpenMP library
+find_package(OpenMP REQUIRED)
+
 
 # set include directories
 include_directories(

@@ -30,24 +30,40 @@ int main(int argc, char *argv[]) {
   // define looper
   Looper *looper = LooperFactory::create(parameters, quant_friction);
 
-  // define output file
-  std::ofstream file;
-  file.open(opts.get_output_file());
-
   // define progressbar
   ProgressBar progbar(looper->get_steps_total(), 70);
   progbar.display();
 
-  // calculate values
-  double step, value;
+  //array to store all the computed values of the loop
+  double friction_data[looper->get_steps_total()];
+
+  //Enable parallelization with OpenMP, ensurig, that each thread has it's
+  //own copy of quantum_friction
+#pragma omp parralel for private(quantum_friction, polarizabilty,powerspectrum)
+  {
+    // calculate values
+    for (int i = 0; i < looper->get_steps_total(); i++) {
+      double step, value;
+      step = looper->get_step(i);
+      friction_data[i] = looper->calculate_value(i);
+
+      ++progbar;
+      progbar.display();
+    }
+  }
+
+  //Store calculated data
+  
+  // define output file
+  std::ofstream file;
+  file.open(opts.get_output_file());
+
+  //write the data to the file
+  double step;
   for (int i = 0; i < looper->get_steps_total(); i++) {
     step = looper->get_step(i);
-    value = looper->calculate_value(i);
-
-    ++progbar;
-    progbar.display();
-    file << step << "," << value << "\n";
-  };
+    file << step << "," << friction_data[i] << "\n";
+  }
 
   // close file
   file.close();
