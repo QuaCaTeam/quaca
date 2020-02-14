@@ -6,16 +6,13 @@ namespace pt = boost::property_tree;
 #include "Looper.h"
 #include <cassert>
 
-Looper::Looper(double start, double end, int number_of_steps, std::string scale,
-               Friction *quantum_friction)
-    : start(start), end(end), number_of_steps(number_of_steps), scale(scale),
-      quantum_friction(quantum_friction) {
+Looper::Looper(double start, double end, int number_of_steps, std::string scale)
+    : start(start), end(end), number_of_steps(number_of_steps), scale(scale){
   assert(start < end);
   this->calculate_steps();
 };
 
-Looper::Looper(std::string input_file, Friction *quantum_friction)
-    : quantum_friction(quantum_friction) {
+Looper::Looper(std::string input_file){
 
   // read parameters
   pt::ptree root;

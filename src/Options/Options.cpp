@@ -12,7 +12,7 @@ namespace filesys = boost::filesystem;
 
 #include "Options.h"
 
-Options::Options(std::string parameter_file) : parameter_file(parameter_file) {
+Options::Options(std::string parameter_file, int num_threads) : parameter_file(parameter_file), num_threads(num_threads) {
   /* set according output file */
   this->output_file =
       this->parameter_file.substr(0, this->parameter_file.find_last_of('.')) +
@@ -28,7 +28,8 @@ Options::Options(int argc, char *argv[]) {
     // List all options and their description
     po::options_description desc("Allowed options");
     desc.add_options()("help,h", "Help screen")(
-        "file", po::value<std::string>(&(this->parameter_file)), "Input File");
+        "file", po::value<std::string>(&(this->parameter_file)), "Input File")
+      ("threads", po::value<int>(&(this->num_threads))->default_value(1), "Number of parallel thrads");
 
     po::variables_map vm;
     po::store(po::parse_command_line(argc, argv, desc), vm);

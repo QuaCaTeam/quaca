@@ -22,11 +22,13 @@ include_directories(${GSL_INCLUDE_DIRS})
 find_package(LAPACK REQUIRED)
 find_package(BLAS REQUIRED)
 include_directories("${PROJECT_SOURCE_DIR}/lib/armadillo-9.800.2/include")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DARMA_DONT_USE_WRAPPER")
 
 #find OpenMP library
 find_package(OpenMP REQUIRED)
+#add -fopenmp to the cxx_flags
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DARMA_DONT_USE_WRAPPER")
 
 # set include directories
 include_directories(

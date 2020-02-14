@@ -1,6 +1,7 @@
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <iostream>
+#include <omp.h>
 namespace pt = boost::property_tree;
 
 #include "ProgressBar.hpp"
@@ -11,6 +12,17 @@ int main(int argc, char *argv[]) {
   Options opts(argc, argv);
   std::string parameters = opts.get_parameter_file();
 
+  // define looper
+  Looper *looper = LooperFactory::create(parameters);
+
+  // define progressbar
+  ProgressBar progbar(looper->get_steps_total(), 70);
+  progbar.display();
+  //Create a paralle region given threads given by the --threads flag
+  //we have to create the parallel region already here to ensure,
+  //that any thread creates their own instance of quantum_friction
+  #pragma omp parallel num_threads(opts.get_num_threads())
+  {
   // Create a root
   pt::ptree root;
 
@@ -27,29 +39,21 @@ int main(int argc, char *argv[]) {
       new Friction(polarizability->get_greens_tensor(), polarizability,
                           powerspectrum, relerr_omega);
 
-  // define looper
-  Looper *looper = LooperFactory::create(parameters, quant_friction);
-
-  // define progressbar
-  ProgressBar progbar(looper->get_steps_total(), 70);
-  progbar.display();
 
   //array to store all the computed values of the loop
   double friction_data[looper->get_steps_total()];
 
-  //Enable parallelization with OpenMP, ensurig, that each thread has it's
-  //own copy of quantum_friction
-#pragma omp parralel for private(quantum_friction, polarizabilty,powerspectrum)
-  {
-    // calculate values
+  //Parallelize the for-loop of the given looper
+    #pragma omp for 
     for (int i = 0; i < looper->get_steps_total(); i++) {
-      double step, value;
-      step = looper->get_step(i);
-      friction_data[i] = looper->calculate_value(i);
+      std::cout << "Computing step with thread number: " << omp_get_thread_num();
+      std::cout << " of " << omp_get_num_threads() << std::endl;
+      friction_data[i] = looper->calculate_value(i, quantum_friction);
 
+      std::cout << "Step: " << i << " Friction force: " << friction_data[i] << endl;
       ++progbar;
       progbar.display();
-    }
+  }
   }
 
   //Store calculated data
