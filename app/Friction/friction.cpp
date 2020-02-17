@@ -21,10 +21,23 @@ int main(int argc, char *argv[]) {
   // define progressbar
   ProgressBar progbar(looper->get_steps_total(), 70);
   progbar.display();
+
+  //Check wether the number of threads have been set by the --threads flag
+  if(opts.get_num_threads() == -1)
+  {
+    //If the --threads flag has not been set, set the number of flags to 
+    //the maximal value
+    opts.set_num_threads(omp_get_max_threads());
+  }
   //Create a paralle region given threads given by the --threads flag
   //we have to create the parallel region already here to ensure,
   //that any thread creates their own instance of quantum_friction
-  std::cout << "Starting parallel region with " << opts.get_num_threads() << " threads." << std::endl;
+  std::cout << "Trying to start parallel region with " << opts.get_num_threads() << " threads." << std::endl;
+  if(opts.get_num_threads() > omp_get_max_threads()){
+    std::cout << "There are not enough avaiable threads. Maximal avaiable threads: " << omp_get_max_threads() << std::endl;
+    std::cout << "Aborting calculation" << std::endl;
+    exit(0);
+  }
   #pragma omp parallel num_threads(opts.get_num_threads())
   {
   // Create a root
@@ -45,11 +58,11 @@ int main(int argc, char *argv[]) {
 
 
   //Parallelize the for-loop of the given looper
-    #pragma omp for 
+    #pragma omp for schedule(dynamic)
     for (int i = 0; i < looper->get_steps_total(); i++) {
 	friction_data[i] = looper->calculate_value(i, quant_friction);
 
-      std::cout << "Thread: " << omp_get_thread_num << "Step: " << i << " Friction force: " << friction_data[i] << endl;
+      std::cout << "Thread: " << omp_get_thread_num() << " Step: " << i << " Friction force: " << friction_data[i] << endl;
       ++progbar;
       progbar.display();
   }

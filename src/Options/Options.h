@@ -22,6 +22,7 @@ public:
   std::string get_parameter_file() { return this->parameter_file; };
   std::string get_output_file() { return this->output_file; };
   int get_num_threads() { return this->num_threads; }
+  void set_num_threads(int threads){ this-> num_threads = threads;}
 };
 
 // get extension of a file

@@ -29,7 +29,7 @@ Options::Options(int argc, char *argv[]) {
     po::options_description desc("Allowed options");
     desc.add_options()("help,h", "Help screen")(
         "file", po::value<std::string>(&(this->parameter_file)), "Input File")
-      ("threads", po::value<int>(&(this->num_threads))->default_value(1), "Number of parallel thrads");
+      ("threads", po::value<int>(&(this->num_threads))->default_value(-1), "Number of parallel thrads");
 
     po::variables_map vm;
     po::store(po::parse_command_line(argc, argv, desc), vm);
