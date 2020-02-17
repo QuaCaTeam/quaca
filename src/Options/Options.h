@@ -8,10 +8,11 @@ class Options {
 private:
   std::string parameter_file; // path to parameter file
   std::string output_file;    // path to output file
+  int num_threads;
 
 public:
   // constructor
-  Options(std::string parameter_file);
+  Options(std::string parameter_file, int num_threads);
   Options(int argc, char *argv[]);
 
   // check input options
@@ -20,6 +21,8 @@ public:
   // getter function
   std::string get_parameter_file() { return this->parameter_file; };
   std::string get_output_file() { return this->output_file; };
+  int get_num_threads() { return this->num_threads; }
+  void set_num_threads(int threads){ this-> num_threads = threads;}
 };
 
 // get extension of a file

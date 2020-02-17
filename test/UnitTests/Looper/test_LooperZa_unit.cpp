@@ -7,9 +7,8 @@ TEST_CASE("LooperZa constructors work as expected", "[LooperZa]") {
     double end = 1;
     int number_of_steps = 10;
     std::string scale = "log";
-    Friction quant(NULL, NULL, NULL, 0.);
 
-    LooperZa looper(start, end, number_of_steps, scale, &quant);
+    LooperZa looper(start, end, number_of_steps, scale);
 
     REQUIRE(looper.get_steps_total() == number_of_steps);
     REQUIRE(looper.get_step(0) == start);
@@ -17,8 +16,7 @@ TEST_CASE("LooperZa constructors work as expected", "[LooperZa]") {
   };
 
   SECTION("ini file constructor") {
-    Friction quant(NULL, NULL, NULL, 0.);
-    LooperZa looper("../data/test_files/LooperZa.ini", &quant);
+    LooperZa looper("../data/test_files/LooperZa.ini");
 
     REQUIRE(looper.get_steps_total() == 20);
     REQUIRE(looper.get_step(0) == 10.2);
@@ -32,9 +30,8 @@ TEST_CASE("LooperZa Steps are calculated correctly", "[LooperZa]") {
     double end = 3;
     int number_of_steps = 4;
     std::string scale = "linear";
-    Friction quant(NULL, NULL, NULL, 0.);
 
-    LooperZa looper(start, end, number_of_steps, scale, &quant);
+    LooperZa looper(start, end, number_of_steps, scale);
 
     REQUIRE(looper.get_step(0) == Approx(start));
     REQUIRE(looper.get_step(1) == Approx(1));
@@ -47,9 +44,8 @@ TEST_CASE("LooperZa Steps are calculated correctly", "[LooperZa]") {
     double end = 1e-1;
     int number_of_steps = 4;
     std::string scale = "log";
-    Friction quant(NULL, NULL, NULL, 0.);
 
-    LooperZa looper(start, end, number_of_steps, scale, &quant);
+    LooperZa looper(start, end, number_of_steps, scale);
 
     REQUIRE(looper.get_step(0) == Approx(start));
     REQUIRE(looper.get_step(1) == Approx(1e-3));

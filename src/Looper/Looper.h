@@ -6,7 +6,6 @@
 
 class Looper {
 protected:
-  Friction *quantum_friction;
 
   std::string scale; // scale type
 
@@ -19,12 +18,11 @@ protected:
 
 public:
   // constructors
-  Looper(double start, double end, int number_of_steps, std::string scale,
-         Friction *quantum_friction);
-  Looper(std::string input_file, Friction *quantum_friction);
+  Looper(double start, double end, int number_of_steps, std::string scale);
+  Looper(std::string input_file);
 
   // calculate the the value of quantum friction
-  virtual double calculate_value(int step) = 0;
+  virtual double calculate_value(int step, Friction* quantum_friction) = 0;
 
   // getter functions
   int get_steps_total() { return this->number_of_steps; };
