@@ -15,12 +15,16 @@ int main(int argc, char *argv[]) {
   // define looper
   Looper *looper = LooperFactory::create(parameters);
 
+  //array to store all the computed values of the loop
+  double friction_data[looper->get_steps_total()];
+
   // define progressbar
   ProgressBar progbar(looper->get_steps_total(), 70);
   progbar.display();
   //Create a paralle region given threads given by the --threads flag
   //we have to create the parallel region already here to ensure,
   //that any thread creates their own instance of quantum_friction
+  std::cout << "Starting parallel region with " << opts.get_num_threads() << " threads." << std::endl;
   #pragma omp parallel num_threads(opts.get_num_threads())
   {
   // Create a root
@@ -40,17 +44,12 @@ int main(int argc, char *argv[]) {
                           powerspectrum, relerr_omega);
 
 
-  //array to store all the computed values of the loop
-  double friction_data[looper->get_steps_total()];
-
   //Parallelize the for-loop of the given looper
     #pragma omp for 
     for (int i = 0; i < looper->get_steps_total(); i++) {
-      std::cout << "Computing step with thread number: " << omp_get_thread_num();
-      std::cout << " of " << omp_get_num_threads() << std::endl;
-      friction_data[i] = looper->calculate_value(i, quantum_friction);
+	friction_data[i] = looper->calculate_value(i, quant_friction);
 
-      std::cout << "Step: " << i << " Friction force: " << friction_data[i] << endl;
+      std::cout << "Thread: " << omp_get_thread_num << "Step: " << i << " Friction force: " << friction_data[i] << endl;
       ++progbar;
       progbar.display();
   }

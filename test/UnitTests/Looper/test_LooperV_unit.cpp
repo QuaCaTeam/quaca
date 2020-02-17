@@ -7,9 +7,8 @@ TEST_CASE("LooperV constructors work as expected", "[LooperV]") {
     double end = 1;
     int number_of_steps = 10;
     std::string scale = "log";
-    Friction quant(NULL, NULL, NULL, 0.);
 
-    LooperV looper(start, end, number_of_steps, scale, &quant);
+    LooperV looper(start, end, number_of_steps, scale);
 
     REQUIRE(looper.get_steps_total() == number_of_steps);
     REQUIRE(looper.get_step(0) == start);
@@ -18,7 +17,7 @@ TEST_CASE("LooperV constructors work as expected", "[LooperV]") {
 
   SECTION("ini file constructor") {
     Friction quant(NULL, NULL, NULL, 0.);
-    LooperV looper("../data/test_files/LooperV.ini", &quant);
+    LooperV looper("../data/test_files/LooperV.ini");
 
     REQUIRE(looper.get_steps_total() == 20);
     REQUIRE(looper.get_step(0) == 10.2);
@@ -32,9 +31,8 @@ TEST_CASE("LooperV Steps are calculated correctly", "[LooperV]") {
     double end = 3;
     int number_of_steps = 4;
     std::string scale = "linear";
-    Friction quant(NULL, NULL, NULL, 0.);
 
-    LooperV looper(start, end, number_of_steps, scale, &quant);
+    LooperV looper(start, end, number_of_steps, scale);
 
     REQUIRE(looper.get_step(0) == Approx(start));
     REQUIRE(looper.get_step(1) == Approx(1));
@@ -49,7 +47,7 @@ TEST_CASE("LooperV Steps are calculated correctly", "[LooperV]") {
     std::string scale = "log";
     Friction quant(NULL, NULL, NULL, 0.);
 
-    LooperV looper(start, end, number_of_steps, scale, &quant);
+    LooperV looper(start, end, number_of_steps, scale);
 
     REQUIRE(looper.get_step(0) == Approx(start));
     REQUIRE(looper.get_step(1) == Approx(1e-3));
