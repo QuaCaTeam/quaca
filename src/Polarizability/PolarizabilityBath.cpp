@@ -28,19 +28,19 @@ void PolarizabilityBath::calculate_tensor(cx_mat::fixed<3, 3> &alpha,
   // calculate integral over green's tensor with fancy R
   cx_mat::fixed<3, 3> greens_R;
   struct Options_GreensTensor opts_R;
-  opts_R.fancy_R = true;
+  opts_R.fancy_complex = Re;
   opts_R.omega = omega;
   opts_R.class_pt = this->greens_tensor;
-  this->greens_tensor->integrate_1d_k(greens_R, opts_R);
+  this->greens_tensor->integrate_k(greens_R, opts_R);
 
   // calculate integral over green's tensor with fancy I
   cx_mat::fixed<3, 3> greens_I;
   struct Options_GreensTensor opts_I;
-  opts_I.fancy_I = true;
+  opts_I.fancy_complex = Im;
   opts_I.omega = omega;
   opts_I.class_pt = this->greens_tensor;
 
-  this->greens_tensor->integrate_1d_k(greens_I, opts_I);
+  this->greens_tensor->integrate_k(greens_I, opts_I);
 
   // put everything together
   alpha =

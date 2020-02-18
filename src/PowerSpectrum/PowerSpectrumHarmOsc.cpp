@@ -29,7 +29,7 @@ PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(std::string input_file)
     has_bath = true;
   }
   else {
-    has_bath = false; 
+    has_bath = false;
   }
 
   //Ensure that correct type has been chosen
@@ -40,7 +40,7 @@ PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(std::string input_file)
 PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(GreensTensor *greens_tensor,
                                            Polarizability *polarizability)
     : PowerSpectrum(greens_tensor, polarizability){
-    
+
   //read the type of the polarizability and set the bool to indicate,
   //whether the polarizablity has an interal bath
   PolarizabilityBath *pt = dynamic_cast<PolarizabilityBath *>(this->polarizability);
@@ -60,16 +60,16 @@ void PowerSpectrumHarmOsc::calculate(cx_mat::fixed<3, 3> &powerspectrum,
 
   //Compute the full spectrum
   if (opts.full_spectrum) {
-      //Initialize tensor storing the Green's tensor and setting the integration 
+      //Initialize tensor storing the Green's tensor and setting the integration
       //options for the Green's tensor
     cx_mat::fixed<3, 3> green(fill::zeros);
     Options_GreensTensor opts_g;
-    opts_g.fancy_I_temp = true;
+    opts_g.weight_function = temp;
     opts_g.omega = omega;
     opts_g.class_pt = this->greens_tensor;
 
     // Compute the Green's tensor
-    this->greens_tensor->integrate_1d_k(green, opts_g);
+    this->greens_tensor->integrate_k(green, opts_g);
 
     //Initialize tensor storing the polarizability and seting the integration
     //options for the polarizability
@@ -100,16 +100,16 @@ void PowerSpectrumHarmOsc::calculate(cx_mat::fixed<3, 3> &powerspectrum,
   //Compute only the non-LTE contributions to the power spectrum
   if (opts.non_LTE) {
 
-    //Initialize tensor storing the Green's tensor and setting the integration 
+    //Initialize tensor storing the Green's tensor and setting the integration
     //options for the Green's tensor
     cx_mat::fixed<3, 3> green(fill::zeros);
     Options_GreensTensor opts_g;
-    opts_g.fancy_I_non_LTE = true;
+    opts_g.weight_function = non_LTE;
     opts_g.omega = omega;
     opts_g.class_pt = this->greens_tensor;
 
     // Compute the Green's tensor
-    this->greens_tensor->integrate_1d_k(green, opts_g);
+    this->greens_tensor->integrate_k(green, opts_g);
 
     //Initialize tensor storing the polarizability and seting the integration
     //options for the polarizability

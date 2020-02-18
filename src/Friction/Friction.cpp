@@ -72,13 +72,13 @@ double Friction::friction_integrand(double omega, void *opts) {
     opts_g.omega = omega;
     opts_g.class_pt = opts_pt->class_pt->greens_tensor;
 
-    opts_g.fancy_I_kv = true;
-    opts_pt->class_pt->greens_tensor->integrate_1d_k(green_kv, opts_g);
+    opts_g.weight_function = kv;
+    opts_pt->class_pt->greens_tensor->integrate_k(green_kv, opts_g);
 
     // computation of the Green's tensor in the second term of eq. (4.3)
-    opts_g.fancy_I_kv = false;
-    opts_g.fancy_I_kv_temp = true;
-    opts_pt->class_pt->greens_tensor->integrate_1d_k(green_temp_kv, opts_g);
+    opts_g.weight_function = kv;
+    opts_g.weight_function = kv_temp;
+    opts_pt->class_pt->greens_tensor->integrate_k(green_temp_kv, opts_g);
 
     // computation of the imaginary part of the polarizability appearing in the
     // second term of eq. (4.3)
@@ -108,14 +108,14 @@ double Friction::friction_integrand(double omega, void *opts) {
     opts_g.omega = omega;
     opts_g.class_pt = opts_pt->class_pt->greens_tensor;
 
-    opts_g.fancy_I_kv = true;
-    opts_pt->class_pt->greens_tensor->integrate_1d_k(green_kv, opts_g);
+    opts_g.weight_function = kv;
+    opts_pt->class_pt->greens_tensor->integrate_k(green_kv, opts_g);
 
     // Compute the Green's tensor in the second term of eq. (4.5)
     // the \Sigma distribution is already included here
-    opts_g.fancy_I_kv = false;
-    opts_g.fancy_I_kv_non_LTE = true;
-    opts_pt->class_pt->greens_tensor->integrate_1d_k(green_fancy_I_kv_non_LTE,
+    opts_g.weight_function = kv;
+    opts_g.weight_function = kv_non_LTE;
+    opts_pt->class_pt->greens_tensor->integrate_k(green_fancy_I_kv_non_LTE,
                                                      opts_g);
 
     // Compute the power spectrum for the first term of eq. (4.5)

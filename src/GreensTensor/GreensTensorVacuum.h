@@ -18,13 +18,10 @@ public:
   void calculate_tensor(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
 
   // integrate over a two-dimensional k space
-  void integrate_2d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
-
-  // integrate over a one-dimensional k space
-  void integrate_1d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
+  void integrate_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
 
   // integrand for integration over one-dimensional k space
-  static double integrand_1d_k(double k, void *opts);
+  static double integrand_k(double k, void *opts);
   double omega_ch();
   double get_relerr() { return this->relerr; };
 };

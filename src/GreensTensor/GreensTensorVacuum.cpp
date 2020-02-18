@@ -35,7 +35,7 @@ GreensTensorVacuum::GreensTensorVacuum(std::string input_file)
 //For the definition see notes/VacuumGreen.pdf eq. (2)
 void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3, 3> &GT,
                                           Options_GreensTensor opts) {
-  if (opts.fancy_I) {
+  if (opts.fancy_complex = Im) {
     // calculating solely the imaginary part of the free Green tensor
     double pre, k_x, k_y, k_quad, omega, omega_quad;
 
@@ -68,40 +68,11 @@ void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3, 3> &GT,
   }
 };
 
-//Compute the integration along the y-direction in momentum space
-//Ref: notes/VacuumFriction.pdf eq. (10)
-void GreensTensorVacuum::integrate_2d_k(cx_mat::fixed<3, 3> &GT,
-                                        Options_GreensTensor opts) {
-  //Read out the k_x component the frequency \omega
-  double k = opts.kvec(0);
-  double omega = opts.omega;
-  //Compute the imaginary part of the Green's tensor with implicit Doppler-shift in the frequency argument
-  if (opts.fancy_I) {
-    //Define useful variables
-    double xi_quad, omega_pl_quad, omega_quad;
-    omega_quad = omega * omega;
-    omega_pl_quad = (omega + k * this->v) * (omega + k * this->v);
-    xi_quad = omega_pl_quad - k * k;
-    //Reset tensor in which the final result is stored
-    GT.zeros();
-    //Compute the diagonal components of the tensor
-    //All off-diagonal components are zero
-    GT(0, 0) = 0.5 * xi_quad;
-    GT(1, 1) = 0.5 * (omega_pl_quad - xi_quad * 0.5);
-    GT(2, 2) = 0.5 * (omega_pl_quad - xi_quad * 0.5);
-  } else {
-    std::cerr << "Only the imaginary part of the Green tensor with Doppler "
-                 "shift in the frequency argument is implemented"
-              << std::endl;
-    exit(0);
-  }
-};
-
 //Compute the integration with respect to the 2-d k vector
 //Ref: notes/VacuumFriction.pdf eq. (10)
-void GreensTensorVacuum::integrate_1d_k(cx_mat::fixed<3, 3> &GT,
+void GreensTensorVacuum::integrate_k(cx_mat::fixed<3, 3> &GT,
                                         Options_GreensTensor opts) {
-  if (opts.fancy_R) {
+  if (opts.fancy_complex == Re) {
     //Even though the real part of the Green's tensor is not implemented, a default
     //return value of an empty tensor was chosen, to allow for the general structure
     //of the polarizability to depend both on the real and imaginary part of a
@@ -119,12 +90,12 @@ void GreensTensorVacuum::integrate_1d_k(cx_mat::fixed<3, 3> &GT,
       //Numerically integrate the xx component
       opts.indices(0) = 0;
       opts.indices(1) = 0;
-      GT(0, 0) = cquad(&integrand_1d_k, &opts, -omega / (1.0 + this->v),
+      GT(0, 0) = cquad(&integrand_k, &opts, -omega / (1.0 + this->v),
                        omega / (1.0 - this->v), this->relerr, 0);
       opts.indices(0) = 1;
       opts.indices(1) = 1;
 
-      GT(1, 1) = cquad(&integrand_1d_k, &opts, -omega / (1.0 + this->v),
+      GT(1, 1) = cquad(&integrand_k, &opts, -omega / (1.0 + this->v),
                        omega / (1.0 - this->v), this->relerr, 0);
       GT(2, 2) = GT(1, 1);
     }
@@ -134,12 +105,12 @@ void GreensTensorVacuum::integrate_1d_k(cx_mat::fixed<3, 3> &GT,
       //Numerically integrate the xx component
       opts.indices(0) = 0;
       opts.indices(1) = 0;
-      GT(0, 0) = -cquad(&integrand_1d_k, &opts, omega / (1.0 - this->v),
+      GT(0, 0) = -cquad(&integrand_k, &opts, omega / (1.0 - this->v),
                         -omega / (1.0 + this->v), this->relerr, 0);
       opts.indices(0) = 1;
       opts.indices(1) = 1;
 
-      GT(1, 1) = -cquad(&integrand_1d_k, &opts, omega / (1.0 - this->v),
+      GT(1, 1) = -cquad(&integrand_k, &opts, omega / (1.0 - this->v),
                         -omega / (1.0 + this->v), this->relerr, 0);
       GT(2, 2) = GT(1, 1);
     }
@@ -149,7 +120,7 @@ void GreensTensorVacuum::integrate_1d_k(cx_mat::fixed<3, 3> &GT,
 //Implementation of the different integrands for the integration
 //of the 2-d k-vector
 //Ref: notes/VacuumFriction eq. (10) and (11)
-double GreensTensorVacuum::integrand_1d_k(double kv, void *opts) {
+double GreensTensorVacuum::integrand_k(double kv, void *opts) {
     //Casting the class-pointer to the correct pointer-type
   Options_GreensTensor *opts_pt = static_cast<Options_GreensTensor *>(opts);
   GreensTensorVacuum *pt = static_cast<GreensTensorVacuum *>(opts_pt->class_pt);
@@ -178,18 +149,16 @@ double GreensTensorVacuum::integrand_1d_k(double kv, void *opts) {
   }
 
   //Multply with the additional function f, the options can be found in eq. (11)
-  if (opts_pt->fancy_I) {
-    return result;
-  } else if (opts_pt->fancy_I_kv) {
+  if(opts_pt->weight_function == kv) {
     result *= kv;
-  } else if (opts_pt->fancy_I_temp) {
+  } else if (opts_pt->weight_function == temp) {
     result /= (1.0 - exp(-beta * omega_pl));
-  } else if (opts_pt->fancy_I_kv_temp) {
+  } else if (opts_pt->weight_function == kv_temp) {
     result *= kv / (1.0 - exp(-beta * omega_pl));
-  } else if (opts_pt->fancy_I_non_LTE) {
+  } else if (opts_pt->weight_function == non_LTE) {
     result *=
         (1. / (1. - exp(-beta * omega_pl)) - 1. / (1. - exp(-beta * omega)));
-  } else if (opts_pt->fancy_I_kv_non_LTE) {
+  } else if (opts_pt->weight_function == kv_non_LTE) {
     result *= kv * (1. / (1. - exp(-beta * omega_pl)) -
                     1. / (1. - exp(-beta * omega)));
   }
