@@ -7,6 +7,8 @@ namespace pt = boost::property_tree;
 
 #include "PermittivityDrude.h"
 #include "PermittivityFactory.h"
+#include "PermittivityLorentzBath.h"
+#include "PermittivityLorentzNoBath.h"
 
 // permittivity factory
 Permittivity *PermittivityFactory::create(std::string input_file) {
@@ -25,6 +27,10 @@ Permittivity *PermittivityFactory::create(std::string input_file) {
   // set the right pointer, show error if type is unknown
   if (type == "drude") {
     permittivity = new PermittivityDrude(input_file);
+  } else if (type == "lorentz bath") {
+    permittivity = new PermittivityLorentzBath(input_file);
+  } else if (type == "lorentz nobath") {
+    permittivity = new PermittivityLorentzNoBath(input_file);
   } else {
     std::cerr << "Error: Unknown Permittivity type (" << type << ")!"
               << std::endl;

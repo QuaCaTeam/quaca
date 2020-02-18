@@ -1,2 +1,2 @@
-add_subdirectory("QuaCa")
+add_subdirectory("Friction")
 #add_subdirectory(".Tutorial")

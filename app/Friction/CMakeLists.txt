@@ -1,6 +1,6 @@
 # add executable
-add_executable(QuaCa
-  ${CMAKE_CURRENT_SOURCE_DIR}/quaca.cpp
+add_executable(Friction
+  ${CMAKE_CURRENT_SOURCE_DIR}/friction.cpp
   )
 target_include_directories(Friction PRIVATE ../include)
 
