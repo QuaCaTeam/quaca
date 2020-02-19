@@ -70,7 +70,7 @@ TEST_CASE("Power spectrum without bath is hermitian", "[PowerSpectrumHarmOsc]") 
   auto omega = GENERATE(take(5, random(-1e1, 1e1)));
 
   Options_PowerSpectrum opts;
-  opts.full_spectrum = true;
+  opts.spectrum = FULL;
   opts.omega = omega;
 
   powerspectrum.calculate(lhs, opts);
@@ -100,7 +100,7 @@ TEST_CASE("Power spectrum without bath reduces to polarizability in the static c
   auto omega = GENERATE(take(5, random(0., 1e2)));
   // Compute the powerspectrum
   Options_PowerSpectrum opts_S;
-  opts_S.full_spectrum = true;
+  opts_S.spectrum = FULL;
   opts_S.omega = omega;
   powerspectrum.calculate(lhs, opts_S);
 
@@ -135,7 +135,7 @@ TEST_CASE("Power spectrum with bath is hermitian", "[PowerSpectrumHarmOsc]") {
   auto omega = GENERATE(take(5, random(-1e1, 1e1)));
 
   Options_PowerSpectrum opts;
-  opts.full_spectrum = true;
+  opts.spectrum = FULL;
   opts.omega = omega;
 
   powerspectrum.calculate(lhs, opts);
@@ -167,7 +167,7 @@ TEST_CASE("Power spectrum with bath reduces to polarizability in the static case
   auto omega = GENERATE(take(1, random(0., 1e2)));
   // Compute the powerspectrum
   Options_PowerSpectrum opts_S;
-  opts_S.full_spectrum = true;
+  opts_S.spectrum = FULL;
   opts_S.omega = omega;
   powerspectrum.calculate(lhs, opts_S);
 

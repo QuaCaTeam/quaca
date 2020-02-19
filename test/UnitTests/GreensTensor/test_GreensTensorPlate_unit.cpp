@@ -262,7 +262,7 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
 
     opts.omega = omega;
 
-    opts.weight_function = NONE;
+    opts.weight_function = UNIT;
     Greens.integrate_k(Greens_rhs1, opts);
 
     opts.weight_function = TEMP;

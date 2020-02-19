@@ -59,7 +59,7 @@ void PowerSpectrumHarmOsc::calculate(cx_mat::fixed<3, 3> &powerspectrum,
   double omega = opts.omega;
 
   //Compute the full spectrum
-  if (opts.full_spectrum) {
+  if (opts.spectrum == FULL) {
       //Initialize tensor storing the Green's tensor and setting the integration
       //options for the Green's tensor
     cx_mat::fixed<3, 3> green(fill::zeros);
@@ -102,8 +102,7 @@ void PowerSpectrumHarmOsc::calculate(cx_mat::fixed<3, 3> &powerspectrum,
   }
 
   //Compute only the non-LTE contributions to the power spectrum
-  if (opts.non_LTE) {
-
+  if (opts.spectrum == NON_LTE_ONLY) {
     //Initialize tensor storing the Green's tensor and setting the integration
     //options for the Green's tensor
     cx_mat::fixed<3, 3> green(fill::zeros);

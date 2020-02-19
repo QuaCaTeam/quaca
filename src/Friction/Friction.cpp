@@ -59,7 +59,7 @@ double Friction::friction_integrand(double omega, void *opts) {
   Options_Friction *opts_pt = static_cast<Options_Friction *>(opts);
 
   // Compute the full spectrum of the power spectrum
-  if (opts_pt->full_spectrum) {
+  if (opts_pt->spectrum == FULL) {
 
     // Initialize all tensors
     cx_mat::fixed<3, 3> green_kv(fill::zeros);
@@ -90,13 +90,13 @@ double Friction::friction_integrand(double omega, void *opts) {
     // computation of the powerspectrum apperaing in the first term of eq. (4.3)
     Options_PowerSpectrum opts_S;
     opts_S.omega = omega;
-    opts_S.full_spectrum = true;
+    opts_S.spectrum = FULL;
     opts_pt->class_pt->powerspectrum->calculate(powerspectrum, opts_S);
     return real(2. * trace(-powerspectrum * green_kv +
                            1. / M_PI * alpha_I * green_temp_kv));
   }
   // Compute onyl the non-LTE contribution of the power-spectrum
-  else if (opts_pt->non_LTE) {
+  else if (opts_pt->spectrum == NON_LTE_ONLY) {
     // Initialize all tensors
     cx_mat::fixed<3, 3> J(fill::zeros);
     cx_mat::fixed<3, 3> green_kv(fill::zeros);
@@ -120,7 +120,7 @@ double Friction::friction_integrand(double omega, void *opts) {
 
     // Compute the power spectrum for the first term of eq. (4.5)
     Options_PowerSpectrum opts_J;
-    opts_J.non_LTE = true;
+    opts_J.spectrum = NON_LTE_ONLY;
     opts_J.omega = omega;
     opts_pt->class_pt->powerspectrum->calculate(J, opts_J);
 

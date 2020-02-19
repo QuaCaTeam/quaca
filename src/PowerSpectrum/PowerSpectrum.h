@@ -5,6 +5,7 @@
 #include "../Polarizability/Polarizability.h"
 
 struct Options_PowerSpectrum;
+enum Spectrum_Options {FULL, NON_LTE_ONLY};
 /*!
  *  This is an abstract class implementing a structure to compute the power
  * spectrum tensor
@@ -33,10 +34,9 @@ public:
 
 struct Options_PowerSpectrum {
   // Compute the complete spectrum with LTE and non-LTE contributions
-  bool full_spectrum = false;
+   Spectrum_Options spectrum = FULL;
 
   // Only compute the non-LTE contributions to the powerspectrum
-  bool non_LTE = false;
 
   double omega = NAN;
 };

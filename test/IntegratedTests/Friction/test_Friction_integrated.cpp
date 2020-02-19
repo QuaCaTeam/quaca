@@ -26,7 +26,7 @@ TEST_CASE("Analytical results with vacuum Green's tensor gets reproduced",
 
   Options_Friction opts;
   opts.class_pt = &quant_fric;
-  opts.non_LTE = true;
+  opts.spectrum = NON_LTE_ONLY;
   // opts.full_spectrum = true;
   double num_result = quant_fric.calculate(opts);
   REQUIRE(Approx(num_result).epsilon(1e-4) == analytical_result);
@@ -63,7 +63,7 @@ TEST_CASE("Analytical results with scattered Green's tensor gets reproduced",
 
   Options_Friction opts;
   opts.class_pt = &quant_fric;
-  opts.non_LTE = true;
+  opts.spectrum = NON_LTE_ONLY;
   // opts.full_spectrum = true;
   double num_result = quant_fric.calculate(opts);
   std::cout << "ana=" << analytical_result << std::endl;
