@@ -1,20 +1,24 @@
-#ifndef PERMITTIVITYLORENTZNOBATH_H
-#define PERMITTIVITYLORENTZNOBATH_H
+#ifndef PERMITTIVITYLORENTZ_H
+#define PERMITTIVITYLORENTZ_H
 
+#include "../MemoryKernel/MemoryKernel.h"
 #include "Permittivity.h"
 #include <complex>
 
-//! A LorentzNoBath model permittivity
-class PermittivityLorentzNoBath : public Permittivity {
+//! A Lorentz model permittivity
+class PermittivityLorentz : public Permittivity {
 private:
   double eps_inf;
   double alpha_zero;
   double omega_0;
 
+  MemoryKernel *memory_kernel;
+
 public:
   // constructors
-  PermittivityLorentzNoBath(double eps_inf, double alpha_zero, double omega_0);
-  PermittivityLorentzNoBath(std::string input_file);
+  PermittivityLorentz(double eps_inf, double alpha_zero, double omega_0,
+                      MemoryKernel *memory_kernel);
+  PermittivityLorentz(std::string input_file);
 
   // calculate the permittivity
   std::complex<double> epsilon(double omega);
@@ -26,6 +30,7 @@ public:
   double get_eps_inf() { return this->eps_inf; };
   double get_alpha_zero() { return this->alpha_zero; };
   double get_omega_0() { return this->omega_0; };
+  MemoryKernel *get_memory_kernel() { return this->memory_kernel; };
 };
 
-#endif // PERMITTIVITYLORENTZNOBATH_H
+#endif // PERMITTIVITYLORENTZ_H

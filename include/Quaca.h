@@ -22,8 +22,7 @@
 #include "../src/Permittivity/Permittivity.h"
 #include "../src/Permittivity/PermittivityDrude.h"
 #include "../src/Permittivity/PermittivityFactory.h"
-#include "../src/Permittivity/PermittivityLorentzNoBath.h"
-#include "../src/Permittivity/PermittivityLorentzBath.h"
+#include "../src/Permittivity/PermittivityLorentz.h"
 
 #include "../src/Polarizability/Polarizability.h"
 #include "../src/Polarizability/PolarizabilityFactory.h"

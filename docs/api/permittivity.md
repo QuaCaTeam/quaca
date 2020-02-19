@@ -95,7 +95,7 @@ See [Permittivity](#Permittivity).
 
 
 
-## PermittivityLorentzBath
+## PermittivityLorentz
 Implements a Lorentz model with an internal bath according to the formula
 $$
 \varepsilon(\omega) = \varepsilon_{\infty} - \frac{\alpha_0 \omega_0^2}{\omega_0^2 - \omega^2 - \mathrm{i} \omega \mu(\omega)},
@@ -103,7 +103,7 @@ $$
 where $\omega_0$ is the resonance frequency, $\varepsilon_{\infty}$ is the blabla, $\alpha_zero$ is the blabla and $\mu(\omega)$ is the memory kernel.
 
 ```cpp
-class PermittivityLorentzBath : public Permittivity {
+class PermittivityLorentz : public Permittivity {
 private:
   double eps_inf;
   double alpha_zero;
@@ -113,9 +113,9 @@ private:
 
 public:
   // constructors
-  PermittivityLorentzBath(double eps_inf, double alpha_zero, double omega_0,
+  PermittivityLorentz(double eps_inf, double alpha_zero, double omega_0,
                           MemoryKernel *memory_kernel);
-  PermittivityLorentzBath(std::string input_file);
+  PermittivityLorentz(std::string input_file);
 
   // calculate the permittivity
   std::complex<double> epsilon(double omega);
@@ -132,10 +132,10 @@ public:
 ```
 
 
-### `# PermittivityLorentzBath(double eps_inf, double alpha_zero, double omega_0, MemoryKernel *memory_kernel)`
+### `# PermittivityLorentz(double eps_inf, double alpha_zero, double omega_0, MemoryKernel *memory_kernel)`
 Direct constructor for the class.
 
-### `# PermittivityLorentzBath(std::string input_file)`
+### `# PermittivityLorentz(std::string input_file)`
 Input file constructor for the class.
 
 ### `# std::complex<double> epsilon(double omega)`
@@ -163,7 +163,7 @@ alpha_zero =
 omega_0 =
 ```
 
-### **PermittivityLorentzBath**
+### **PermittivityLorentz**
 ```ini
 [Permittivity]
 type = lorentz bath
