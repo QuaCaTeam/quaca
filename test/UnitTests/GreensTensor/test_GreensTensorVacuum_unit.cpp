@@ -333,6 +333,7 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
 
     double ana_pref = 0;
     // Integration of the vacuum Green's tensor
+    opts.fancy_complex = Im;
     opts.weight_function = temp;
     Greens.integrate_k(num_result, opts);
 

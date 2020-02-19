@@ -236,6 +236,7 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
     cx_mat::fixed<3, 3> Greens_rhs(fill::zeros);
     // Test of fancy_I_kv
     opts.omega = omega;
+    opts.fancy_complex = Im;
     opts.weight_function = kv;
     Greens.integrate_k(Greens_lhs, opts);
 
@@ -254,13 +255,16 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
     cx_mat::fixed<3, 3> Greens_rhs2(fill::zeros);
     // Test of fancy_I_kv
     opts.omega = -omega;
+    opts.fancy_complex = Im;
     opts.weight_function = temp;
     Greens.integrate_k(Greens_lhs, opts);
 
     opts.omega = omega;
+    opts.fancy_complex = Im;
     opts.weight_function = temp;
     opts.fancy_complex = Im;
     Greens.integrate_k(Greens_rhs1, opts);
+    opts.fancy_complex = Im;
     opts.weight_function = temp;
     Greens.integrate_k(Greens_rhs2, opts);
     Greens_rhs = -Greens_rhs1 + Greens_rhs2;
@@ -278,13 +282,16 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
     cx_mat::fixed<3, 3> Greens_rhs2(fill::zeros);
     // Test of fancy_I_kv
     opts.omega = -omega;
+    opts.fancy_complex = Im;
     opts.weight_function = kv_temp;
     Greens.integrate_k(Greens_lhs, opts);
 
     opts.omega = omega;
+    opts.fancy_complex = Im;
     opts.weight_function = kv;
     Greens.integrate_k(Greens_rhs1, opts);
 
+    opts.fancy_complex = Im;
     opts.weight_function = kv_temp;
     Greens.integrate_k(Greens_rhs2, opts);
 
@@ -351,6 +358,7 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     GT_Ana(2, 0) = I * (v * rho * 2. / (pow(2 * za, 4) * M_PI)) *
                    (3. / 2. * M_PI + 2. * eta);
     GT_Ana(0, 2) = -GT_Ana(2, 0);
+    opts.fancy_complex = Im;
     opts.weight_function = temp;
     opts.omega = omega;
     Greens.integrate_k(GT_Num, opts);
@@ -385,6 +393,7 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     GT_Ana(2, 0) = I * (v * rho * 2. / (pow(2 * za, 5) * M_PI)) *
                    (3. / 2. * M_PI * eta + 16.);
     GT_Ana(0, 2) = -GT_Ana(2, 0);
+    opts.fancy_complex = Im;
     opts.weight_function = kv_temp;
     opts.omega = omega;
     Greens.integrate_k(GT_Num, opts);
@@ -408,6 +417,7 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     opts.class_pt = &Greens;
     cx_mat::fixed<3, 3> GT_lhs(fill::zeros);
     cx_mat::fixed<3, 3> GT_rhs(fill::zeros);
+    opts.fancy_complex = Im;
     opts.weight_function = temp;
     opts.omega = omega;
     Greens.integrate_k(GT_lhs, opts);

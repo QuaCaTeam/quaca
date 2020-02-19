@@ -64,6 +64,7 @@ void PowerSpectrumHarmOsc::calculate(cx_mat::fixed<3, 3> &powerspectrum,
       //options for the Green's tensor
     cx_mat::fixed<3, 3> green(fill::zeros);
     Options_GreensTensor opts_g;
+    opts_g.fancy_complex = Im;
     opts_g.weight_function = temp;
     opts_g.omega = omega;
     opts_g.class_pt = this->greens_tensor;
@@ -104,6 +105,7 @@ void PowerSpectrumHarmOsc::calculate(cx_mat::fixed<3, 3> &powerspectrum,
     //options for the Green's tensor
     cx_mat::fixed<3, 3> green(fill::zeros);
     Options_GreensTensor opts_g;
+    opts_g.fancy_complex = Im;
     opts_g.weight_function = non_LTE;
     opts_g.omega = omega;
     opts_g.class_pt = this->greens_tensor;

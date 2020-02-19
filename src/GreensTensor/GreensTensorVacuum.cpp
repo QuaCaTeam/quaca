@@ -148,19 +148,21 @@ double GreensTensorVacuum::integrand_k(double kv, void *opts) {
     return 0;
   }
 
-  //Multply with the additional function f, the options can be found in eq. (11)
-  if(opts_pt->weight_function == kv) {
-    result *= kv;
-  } else if (opts_pt->weight_function == temp) {
-    result /= (1.0 - exp(-beta * omega_pl));
-  } else if (opts_pt->weight_function == kv_temp) {
-    result *= kv / (1.0 - exp(-beta * omega_pl));
-  } else if (opts_pt->weight_function == non_LTE) {
-    result *=
-        (1. / (1. - exp(-beta * omega_pl)) - 1. / (1. - exp(-beta * omega)));
-  } else if (opts_pt->weight_function == kv_non_LTE) {
-    result *= kv * (1. / (1. - exp(-beta * omega_pl)) -
-                    1. / (1. - exp(-beta * omega)));
+  if(opts_pt->fancy_complex == Im) {
+    //Multply with the additional function f, the options can be found in eq. (11)
+    if(opts_pt->weight_function == kv) {
+      result *= kv;
+    } else if (opts_pt->weight_function == temp) {
+      result /= (1.0 - exp(-beta * omega_pl));
+    } else if (opts_pt->weight_function == kv_temp) {
+      result *= kv / (1.0 - exp(-beta * omega_pl));
+    } else if (opts_pt->weight_function == non_LTE) {
+      result *=
+	  (1. / (1. - exp(-beta * omega_pl)) - 1. / (1. - exp(-beta * omega)));
+    } else if (opts_pt->weight_function == kv_non_LTE) {
+      result *= kv * (1. / (1. - exp(-beta * omega_pl)) -
+		      1. / (1. - exp(-beta * omega)));
+    }
   }
 
   return result;
