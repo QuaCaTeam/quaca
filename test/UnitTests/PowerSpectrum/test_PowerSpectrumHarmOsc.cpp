@@ -1,6 +1,7 @@
 #include "Quaca.h"
 #include "catch.hpp"
 #include <iostream>
+#include <iomanip>
 
 TEST_CASE("PowerSpectrumHarmOsc constructors work as expected",
           "[PowerSpectrumHarmOsc]") {
@@ -85,7 +86,7 @@ TEST_CASE("Power spectrum without bath reduces to polarizability in the static c
   double omega_a = GENERATE(take(3, random(0., 1e1)));
   double alpha_zero = GENERATE(take(3, random(1e-9, 1e-7)));
   // Ensure equilibrium result
-  double v = 1e-9;
+  double v = 1e-11;
 
   double relerr_k = 1E-9;
   GreensTensorVacuum greens(v, beta, relerr_k);
@@ -106,9 +107,10 @@ TEST_CASE("Power spectrum without bath reduces to polarizability in the static c
   // Set integration options for the polarizability
   Options_Polarizability opts_alpha;
   opts_alpha.omega = omega;
-  opts_alpha.fancy_I = true;
+  opts_alpha.fancy_complex = IM;
   alpha.calculate_tensor(rhs, opts_alpha);
   rhs *= 1. / (M_PI * (1. - exp(-beta * omega)));
+
   REQUIRE(approx_equal(lhs, rhs, "reldiff", 10e-8));
 }
 
@@ -145,10 +147,10 @@ TEST_CASE("Power spectrum with bath is hermitian", "[PowerSpectrumHarmOsc]") {
 TEST_CASE("Power spectrum with bath reduces to polarizability in the static case",
           "[PowerSpectrumHarmOsc]") {
   // Generate randomnized power spectrum
-  double beta = GENERATE(take(3, random(1e-5, 1e5)));
-  double omega_a = GENERATE(take(3, random(0., 1e1)));
-  double alpha_zero = GENERATE(take(3, random(1e-9, 1e-7)));
-  double gamma = GENERATE(take(3,random(0.,1.)));
+  double beta = GENERATE(take(1, random(1e-5, 1e5)));
+  double omega_a = GENERATE(take(1, random(0., 1e1)));
+  double alpha_zero = GENERATE(take(1, random(1e-9, 1e-7)));
+  double gamma = GENERATE(take(1,random(0.,1.)));
   // Ensure equilibrium result
   double v = 1e-14;
 
@@ -162,7 +164,7 @@ TEST_CASE("Power spectrum with bath reduces to polarizability in the static case
   cx_mat::fixed<3, 3> lhs(fill::zeros);
   cx_mat::fixed<3, 3> rhs(fill::zeros);
 
-  auto omega = GENERATE(take(5, random(0., 1e2)));
+  auto omega = GENERATE(take(1, random(0., 1e2)));
   // Compute the powerspectrum
   Options_PowerSpectrum opts_S;
   opts_S.full_spectrum = true;
@@ -172,7 +174,7 @@ TEST_CASE("Power spectrum with bath reduces to polarizability in the static case
   // Set integration options for the polarizability
   Options_Polarizability opts_alpha;
   opts_alpha.omega = omega;
-  opts_alpha.fancy_I = true;
+  opts_alpha.fancy_complex = IM;
   alpha.calculate_tensor(rhs, opts_alpha);
   rhs *= 1. / (M_PI * (1. - exp(-beta * omega)));
   REQUIRE(approx_equal(lhs, rhs, "reldiff", 10e-8));

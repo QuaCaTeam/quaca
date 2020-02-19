@@ -35,7 +35,7 @@ GreensTensorVacuum::GreensTensorVacuum(std::string input_file)
 //For the definition see notes/VacuumGreen.pdf eq. (2)
 void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3, 3> &GT,
                                           Options_GreensTensor opts) {
-  if (opts.fancy_complex = Im) {
+  if (opts.fancy_complex == IM) {
     // calculating solely the imaginary part of the free Green tensor
     double pre, k_x, k_y, k_quad, omega, omega_quad;
 
@@ -72,13 +72,13 @@ void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3, 3> &GT,
 //Ref: notes/VacuumFriction.pdf eq. (10)
 void GreensTensorVacuum::integrate_k(cx_mat::fixed<3, 3> &GT,
                                         Options_GreensTensor opts) {
-  if (opts.fancy_complex == Re) {
+  if (opts.fancy_complex == RE) {
     //Even though the real part of the Green's tensor is not implemented, a default
     //return value of an empty tensor was chosen, to allow for the general structure
     //of the polarizability to depend both on the real and imaginary part of a
     //given Green's tensor
     GT.zeros();
-  } else {
+  } else if(opts.fancy_complex == IM) {
       //Read out the frequency \omega
     double omega = opts.omega;
 
@@ -139,27 +139,28 @@ double GreensTensorVacuum::integrand_k(double kv, void *opts) {
   //Variable to store the final result
   result = 0;
 
-  //Compute the basis integrand of eq. (10)
-  if (opts_pt->indices(0) == 0 && opts_pt->indices(1) == 0) {
-    result = 0.5 * xi_quad;
-  } else if (opts_pt->indices(0) == opts_pt->indices(1)) {
-    result = 0.5 * (omega_pl_quad - xi_quad * 0.5);
-  } else {
-    return 0;
-  }
+  //Only the imaginary part is implemented
+  if(opts_pt->fancy_complex == IM) {
+    //Compute the basis integrand of eq. (10)
+    if (opts_pt->indices(0) == 0 && opts_pt->indices(1) == 0) {
+      result = 0.5 * xi_quad;
+    } else if (opts_pt->indices(0) == opts_pt->indices(1)) {
+      result = 0.5 * (omega_pl_quad - xi_quad * 0.5);
+    } else {
+      return 0;
+    }
 
-  if(opts_pt->fancy_complex == Im) {
-    //Multply with the additional function f, the options can be found in eq. (11)
-    if(opts_pt->weight_function == kv) {
+    //Multply with the additional weight function f, the options can be found in eq. (11)
+    if (opts_pt->weight_function == KV) {
       result *= kv;
-    } else if (opts_pt->weight_function == temp) {
+    } else if (opts_pt->weight_function == TEMP) {
       result /= (1.0 - exp(-beta * omega_pl));
-    } else if (opts_pt->weight_function == kv_temp) {
+    } else if (opts_pt->weight_function == KV_TEMP) {
       result *= kv / (1.0 - exp(-beta * omega_pl));
-    } else if (opts_pt->weight_function == non_LTE) {
+    } else if (opts_pt->weight_function == NON_LTE) {
       result *=
 	  (1. / (1. - exp(-beta * omega_pl)) - 1. / (1. - exp(-beta * omega)));
-    } else if (opts_pt->weight_function == kv_non_LTE) {
+    } else if (opts_pt->weight_function == KV_NON_LTE) {
       result *= kv * (1. / (1. - exp(-beta * omega_pl)) -
 		      1. / (1. - exp(-beta * omega)));
     }

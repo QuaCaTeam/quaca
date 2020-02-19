@@ -122,7 +122,7 @@ TEST_CASE("The operations calculate_tensor and the integrand_2d_k coincide",
     kappa_double = kappa.real();
   }
   opts.omega = omega;
-  opts.fancy_complex = Im;
+  opts.fancy_complex = IM;
   opts.kvec(0) = acos(k_x / k);
   // loop over all indices
   for (int i = 0; i < 3; i++) {
@@ -201,7 +201,7 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
     cx_mat::fixed<3, 3> Greens_rhs(fill::zeros);
     // Test of fancy_I
     opts.omega = omega;
-    opts.fancy_complex = Im;
+    opts.fancy_complex = IM;
     Greens.integrate_k(Greens_lhs, opts);
 
     opts.omega = -omega;
@@ -219,7 +219,7 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
     cx_mat::fixed<3, 3> Greens_rhs(fill::zeros);
     // Test of fancy_R
     opts.omega = omega;
-    opts.fancy_complex = Re;
+    opts.fancy_complex = RE;
     Greens.integrate_k(Greens_lhs, opts);
 
     opts.omega = -omega;
@@ -236,42 +236,42 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
     cx_mat::fixed<3, 3> Greens_rhs(fill::zeros);
     // Test of fancy_I_kv
     opts.omega = omega;
-    opts.fancy_complex = Im;
-    opts.weight_function = kv;
+    opts.fancy_complex = IM;
+    opts.weight_function = KV;
     Greens.integrate_k(Greens_lhs, opts);
 
     opts.omega = -omega;
     Greens.integrate_k(Greens_rhs, opts);
     REQUIRE(approx_equal(Greens_lhs, strans(Greens_rhs), "reldiff", 10E-4));
   };
-  SECTION("Integral over Green_fancy_I_temp obeys the crossing relation") {
+  SECTION("Integral over Green fancy_I, temp obeys the crossing relation") {
     auto omega = GENERATE(take(1, random(0., 1e-1)));
     GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.ini");
     struct Options_GreensTensor opts;
     opts.class_pt = &Greens;
+    opts.fancy_complex = IM;
     cx_mat::fixed<3, 3> Greens_lhs(fill::zeros);
     cx_mat::fixed<3, 3> Greens_rhs(fill::zeros);
     cx_mat::fixed<3, 3> Greens_rhs1(fill::zeros);
     cx_mat::fixed<3, 3> Greens_rhs2(fill::zeros);
     // Test of fancy_I_kv
     opts.omega = -omega;
-    opts.fancy_complex = Im;
-    opts.weight_function = temp;
+    //opts.fancy_complex = IM;
+    opts.weight_function = TEMP;
     Greens.integrate_k(Greens_lhs, opts);
 
     opts.omega = omega;
-    opts.fancy_complex = Im;
-    opts.weight_function = temp;
-    opts.fancy_complex = Im;
+
+    opts.weight_function = NONE;
     Greens.integrate_k(Greens_rhs1, opts);
-    opts.fancy_complex = Im;
-    opts.weight_function = temp;
+
+    opts.weight_function = TEMP;
     Greens.integrate_k(Greens_rhs2, opts);
+
     Greens_rhs = -Greens_rhs1 + Greens_rhs2;
     REQUIRE(approx_equal(Greens_lhs, strans(Greens_rhs), "reldiff", 10E-4));
   };
   SECTION("Integral over Green_fancy_I_kv_temp obeys the crossing relation") {
-    // auto omega = GENERATE(take(1, random(1e2, 1e2)));
     auto omega = GENERATE(take(1, random(0., 1e-1)));
     GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.ini");
     struct Options_GreensTensor opts;
@@ -282,17 +282,17 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
     cx_mat::fixed<3, 3> Greens_rhs2(fill::zeros);
     // Test of fancy_I_kv
     opts.omega = -omega;
-    opts.fancy_complex = Im;
-    opts.weight_function = kv_temp;
+    opts.fancy_complex = IM;
+    opts.weight_function = KV_TEMP;
     Greens.integrate_k(Greens_lhs, opts);
 
     opts.omega = omega;
-    opts.fancy_complex = Im;
-    opts.weight_function = kv;
+    opts.fancy_complex = IM;
+    opts.weight_function = KV;
     Greens.integrate_k(Greens_rhs1, opts);
 
-    opts.fancy_complex = Im;
-    opts.weight_function = kv_temp;
+    opts.fancy_complex = IM;
+    opts.weight_function = KV_TEMP;
     Greens.integrate_k(Greens_rhs2, opts);
 
     Greens_rhs = -Greens_rhs1 + Greens_rhs2;
@@ -324,7 +324,7 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     GT_Ana(2, 2) = 2. * GT_Ana(0, 0);
     GT_Ana(0, 2) = (2 * 3 * v * gamma / (pow(omega_p, 2) * pow(2 * za, 4))) / I;
     GT_Ana(2, 0) = -GT_Ana(0, 2);
-    opts.fancy_complex = Im;
+    opts.fancy_complex = IM;
     opts.omega = omega;
     Greens.integrate_k(GT_Num, opts);
     REQUIRE(approx_equal(GT_Ana, GT_Num, "reldiff", 10E-4));
@@ -358,8 +358,8 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     GT_Ana(2, 0) = I * (v * rho * 2. / (pow(2 * za, 4) * M_PI)) *
                    (3. / 2. * M_PI + 2. * eta);
     GT_Ana(0, 2) = -GT_Ana(2, 0);
-    opts.fancy_complex = Im;
-    opts.weight_function = temp;
+    opts.fancy_complex = IM;
+    opts.weight_function = TEMP;
     opts.omega = omega;
     Greens.integrate_k(GT_Num, opts);
     REQUIRE(approx_equal(GT_Ana, GT_Num, "reldiff", 10E-4));
@@ -393,8 +393,8 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     GT_Ana(2, 0) = I * (v * rho * 2. / (pow(2 * za, 5) * M_PI)) *
                    (3. / 2. * M_PI * eta + 16.);
     GT_Ana(0, 2) = -GT_Ana(2, 0);
-    opts.fancy_complex = Im;
-    opts.weight_function = kv_temp;
+    opts.fancy_complex = IM;
+    opts.weight_function = KV_TEMP;
     opts.omega = omega;
     Greens.integrate_k(GT_Num, opts);
     REQUIRE(approx_equal(GT_Ana, GT_Num, "reldiff", 10E-4));
@@ -417,8 +417,8 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     opts.class_pt = &Greens;
     cx_mat::fixed<3, 3> GT_lhs(fill::zeros);
     cx_mat::fixed<3, 3> GT_rhs(fill::zeros);
-    opts.fancy_complex = Im;
-    opts.weight_function = temp;
+    opts.fancy_complex = IM;
+    opts.weight_function = TEMP;
     opts.omega = omega;
     Greens.integrate_k(GT_lhs, opts);
 

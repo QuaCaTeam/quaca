@@ -59,7 +59,7 @@ TEST_CASE("GreensTensorPlateVacuum calculate_tensor function returns the sum "
 
   Options_GreensTensor opts_pv;
   opts_pv.class_pt = &GTPlateVacuum;
-  opts_pv.fancy_complex = Im;
+  opts_pv.fancy_complex = IM;
   opts_pv.omega = omega;
   opts_pv.kvec(0) = -k_x;
   opts_pv.kvec(1) = -k_y;
@@ -109,7 +109,7 @@ TEST_CASE("GreensTensorPlateVacuum integrate_k function returns the sum "
 
   Options_GreensTensor opts_pv;
   opts_pv.class_pt = &GTPlateVacuum;
-  opts_pv.fancy_complex = Im;
+  opts_pv.fancy_complex = IM;
   opts_pv.omega = omega;
   cx_mat::fixed<3, 3> TensorPlateVacuum(fill::zeros);
   GTPlateVacuum.integrate_k(TensorPlateVacuum, opts_pv);

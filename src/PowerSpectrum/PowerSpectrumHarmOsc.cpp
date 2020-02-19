@@ -55,7 +55,7 @@ PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(GreensTensor *greens_tensor,
 //Compute the power spectrum for a given frequency \omega
 void PowerSpectrumHarmOsc::calculate(cx_mat::fixed<3, 3> &powerspectrum,
                                      Options_PowerSpectrum opts) {
-    //Read out variables
+  //Read out variables double omega = opts.omega;
   double omega = opts.omega;
 
   //Compute the full spectrum
@@ -64,8 +64,8 @@ void PowerSpectrumHarmOsc::calculate(cx_mat::fixed<3, 3> &powerspectrum,
       //options for the Green's tensor
     cx_mat::fixed<3, 3> green(fill::zeros);
     Options_GreensTensor opts_g;
-    opts_g.fancy_complex = Im;
-    opts_g.weight_function = temp;
+    opts_g.fancy_complex = IM;
+    opts_g.weight_function = TEMP;
     opts_g.omega = omega;
     opts_g.class_pt = this->greens_tensor;
 
@@ -77,6 +77,8 @@ void PowerSpectrumHarmOsc::calculate(cx_mat::fixed<3, 3> &powerspectrum,
     cx_mat::fixed<3, 3> alpha(fill::zeros);
     Options_Polarizability opts_alpha;
     opts_alpha.omega = omega;
+    if(opts_alpha.fancy_complex == IM) std::cout <<"Is IM" << std::endl;
+    if(opts_alpha.fancy_complex == RE) std::cout <<"Is RE" << std::endl;
 
     // Compute the polarizability
     this->polarizability->calculate_tensor(alpha, opts_alpha);
@@ -84,6 +86,7 @@ void PowerSpectrumHarmOsc::calculate(cx_mat::fixed<3, 3> &powerspectrum,
     // Combine the Green's tensor and the polarizability, see eq. [3.9] in
     // Marty's PhD thesis
     powerspectrum = 1. / M_PI * alpha * green * trans(alpha);
+
     //check wether polarizability has an internal bath
     if(has_bath) {
       //To be able to use the attributes of PolarizabilityBath we have to dynamically cast
@@ -105,8 +108,8 @@ void PowerSpectrumHarmOsc::calculate(cx_mat::fixed<3, 3> &powerspectrum,
     //options for the Green's tensor
     cx_mat::fixed<3, 3> green(fill::zeros);
     Options_GreensTensor opts_g;
-    opts_g.fancy_complex = Im;
-    opts_g.weight_function = non_LTE;
+    opts_g.fancy_complex = IM;
+    opts_g.weight_function = NON_LTE;
     opts_g.omega = omega;
     opts_g.class_pt = this->greens_tensor;
 
