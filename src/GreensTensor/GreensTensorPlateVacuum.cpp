@@ -25,30 +25,16 @@ GreensTensorPlateVacuum::GreensTensorPlateVacuum(std::string input_file)
       new GreensTensorVacuum(v, beta, this->rel_err(0));
 };
 
-void GreensTensorPlateVacuum::integrate_1d_k(cx_mat::fixed<3, 3> &GT,
+void GreensTensorPlateVacuum::integrate_k(cx_mat::fixed<3, 3> &GT,
                                              Options_GreensTensor opts) {
 
   cx_mat::fixed<3, 3> vac;
 
-  GreensTensorPlate::integrate_1d_k(GT, opts);
+  GreensTensorPlate::integrate_k(GT, opts);
 
   opts_vacuum = opts;
   opts.class_pt = vacuum_greens_tensor;
-  vacuum_greens_tensor->integrate_1d_k(vac, opts);
-
-  GT += vac;
-};
-
-void GreensTensorPlateVacuum::integrate_2d_k(cx_mat::fixed<3, 3> &GT,
-                                             Options_GreensTensor opts) {
-
-  cx_mat::fixed<3, 3> vac;
-
-  GreensTensorPlate::integrate_2d_k(GT, opts);
-
-  opts_vacuum = opts;
-  opts.class_pt = vacuum_greens_tensor;
-  vacuum_greens_tensor->integrate_2d_k(vac, opts);
+  vacuum_greens_tensor->integrate_k(vac, opts);
 
   GT += vac;
 };

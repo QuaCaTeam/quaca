@@ -5,8 +5,13 @@
 #include <armadillo>
 using namespace arma;
 
+
+//Enum variables for the different integration options
+enum Tensor_Options {COMPLEX, IM, RE};
+enum Weight_Options {UNIT, KV, TEMP, KV_TEMP, NON_LTE, KV_NON_LTE};
 // A struct with integration options
 struct Options_GreensTensor;
+
 // A Greens tensor class
 
 /*!
@@ -28,11 +33,7 @@ public:
                                 Options_GreensTensor opts) = 0;
 
   // integrate over a two-dimensional k space
-  virtual void integrate_2d_k(cx_mat::fixed<3, 3> &GT,
-                              Options_GreensTensor opts) = 0;
-
-  // integrate over a one-dimensional k space
-  virtual void integrate_1d_k(cx_mat::fixed<3, 3> &GT,
+  virtual void integrate_k(cx_mat::fixed<3, 3> &GT,
                               Options_GreensTensor opts) = 0;
 
   // getter functions
@@ -48,13 +49,8 @@ public:
 // A struct for integration options
 struct Options_GreensTensor {
   // Different options for the integrand
-  bool fancy_R = false;
-  bool fancy_I = false;
-  bool fancy_I_kv = false;
-  bool fancy_I_temp = false;
-  bool fancy_I_non_LTE = false;
-  bool fancy_I_kv_temp = false;
-  bool fancy_I_kv_non_LTE = false;
+  Tensor_Options fancy_complex = COMPLEX;
+  Weight_Options weight_function = UNIT;
   // Indices of the 3x3 GreensTensor
   arma::vec::fixed<2> indices = {-1, -1};
   // Value of omega for the integration of the k-Variables

@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
 
   // quantum friction options
   Options_Friction opts;
-  opts.non_LTE = true;
+  opts.spectrum = NON_LTE_ONLY;
   opts.class_pt = &friction;
 
   // loop over v

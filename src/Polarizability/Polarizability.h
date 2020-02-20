@@ -44,8 +44,7 @@ public:
 // A struct for integration options
 struct Options_Polarizability {
   // Different options for the integrand
-  bool fancy_R = false;
-  bool fancy_I = false;
+  Tensor_Options fancy_complex = COMPLEX;
 
   double omega = NAN;
 
