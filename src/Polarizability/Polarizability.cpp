@@ -1,5 +1,5 @@
-// ini parser
-#include <boost/property_tree/ini_parser.hpp>
+// json parser
+#include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 namespace pt = boost::property_tree;
 
@@ -14,8 +14,8 @@ Polarizability::Polarizability(std::string input_file) {
   // Create a root
   pt::ptree root;
 
-  // Load the ini file in this ptree
-  pt::read_ini(input_file, root);
+  // Load the json file in this ptree
+  pt::read_json(input_file, root);
 
   // read parameters
   this->omega_a = root.get<double>("Polarizability.omega_a");

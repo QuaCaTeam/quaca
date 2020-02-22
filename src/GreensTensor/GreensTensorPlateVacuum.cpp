@@ -1,5 +1,11 @@
-#include "GreensTensorPlateVacuum.h"
+// json parser
+#include <boost/property_tree/json_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
+namespace pt = boost::property_tree;
+
 #include "../ReflectionCoefficients/ReflectionCoefficientsFactory.h"
+#include "GreensTensorPlate.h"
+#include "GreensTensorPlateVacuum.h"
 
 GreensTensorPlateVacuum::GreensTensorPlateVacuum(
     double v, double za, double beta,
@@ -15,8 +21,8 @@ GreensTensorPlateVacuum::GreensTensorPlateVacuum(std::string input_file)
   // Create a root
   pt::ptree root;
 
-  // Load the ini file in this ptree
-  pt::read_ini(input_file, root);
+  // Load the json file in this ptree
+  pt::read_json(input_file, root);
 
   std::string addvacuum = root.get<std::string>("GreensTensor.addvacuum");
   assert(addvacuum == "true");
@@ -26,7 +32,7 @@ GreensTensorPlateVacuum::GreensTensorPlateVacuum(std::string input_file)
 };
 
 void GreensTensorPlateVacuum::integrate_k(cx_mat::fixed<3, 3> &GT,
-                                             Options_GreensTensor opts) {
+                                          Options_GreensTensor opts) {
 
   cx_mat::fixed<3, 3> vac;
 

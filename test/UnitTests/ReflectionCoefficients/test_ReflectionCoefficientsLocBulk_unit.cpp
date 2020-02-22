@@ -17,12 +17,12 @@ TEST_CASE("ReflectionCoefficientsLocBulk constructors work as expected",
             perm->epsilon(omega).real());
   };
 
-  SECTION("Constructor with ini file works") {
+  SECTION("Constructor with json file works") {
     double omega = 1;
     ReflectionCoefficientsLocBulk RefC(
-        "../data/test_files/GreensTensorPlate.ini");
+        "../data/test_files/GreensTensorPlate.json");
     Permittivity *perm =
-        new PermittivityDrude("../data/test_files/GreensTensorPlate.ini");
+        new PermittivityDrude("../data/test_files/GreensTensorPlate.json");
 
     REQUIRE(Approx(RefC.get_epsilon(omega).real()).epsilon(1E-6) ==
             perm->epsilon(omega).real());
@@ -35,9 +35,9 @@ TEST_CASE("ReflectionCoefficientsLocBulk reproduces evanescent limit",
   std::complex<double> kappa = 100.;
   std::complex<double> rp, rs, rp_app, rs_app;
   ReflectionCoefficientsLocBulk RefC(
-      "../data/test_files/GreensTensorPlate.ini");
+      "../data/test_files/GreensTensorPlate.json");
   Permittivity *perm =
-      new PermittivityDrude("../data/test_files/GreensTensorPlate.ini");
+      new PermittivityDrude("../data/test_files/GreensTensorPlate.json");
   double k_quad = std::real(kappa * kappa) + omega * omega;
 
   RefC.ref(rp, rs, omega, kappa);
@@ -60,9 +60,9 @@ TEST_CASE("ReflectionCoefficientsLocBulk reproduces propagation limit",
       std::complex<double>(0., -sqrt(omega * omega - k * k));
   std::complex<double> rp, rs, rp_app, rs_app;
   ReflectionCoefficientsLocBulk RefC(
-      "../data/test_files/GreensTensorPlate.ini");
+      "../data/test_files/GreensTensorPlate.json");
   Permittivity *perm =
-      new PermittivityDrude("../data/test_files/GreensTensorPlate.ini");
+      new PermittivityDrude("../data/test_files/GreensTensorPlate.json");
   std::complex<double> eps = perm->epsilon(omega);
   std::complex<double> epsw = perm->epsilon_omega(omega);
   RefC.ref(rp, rs, omega, kappa);
@@ -85,9 +85,9 @@ TEST_CASE("r_p and r_s of bulk obey the crossing relation",
   };
   std::complex<double> rp_lhs, rs_lhs, rp_rhs, rs_rhs;
   ReflectionCoefficientsLocBulk RefC(
-      "../data/test_files/GreensTensorPlate.ini");
+      "../data/test_files/GreensTensorPlate.json");
   Permittivity *perm =
-      new PermittivityDrude("../data/test_files/GreensTensorPlate.ini");
+      new PermittivityDrude("../data/test_files/GreensTensorPlate.json");
 
   RefC.ref(rp_lhs, rs_lhs, omega, kappa);
   RefC.ref(rp_rhs, rs_rhs, -omega, kappa);

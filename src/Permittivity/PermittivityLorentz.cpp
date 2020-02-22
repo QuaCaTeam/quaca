@@ -1,5 +1,5 @@
-// ini parser
-#include <boost/property_tree/ini_parser.hpp>
+// json parser
+#include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 namespace pt = boost::property_tree;
 
@@ -12,14 +12,14 @@ PermittivityLorentz::PermittivityLorentz(double eps_inf, double alpha_zero,
     : eps_inf(eps_inf), alpha_zero(alpha_zero), omega_0(omega_0),
       memory_kernel(memory_kernel){};
 
-// constructor for drude model from .ini file
+// constructor for drude model from .json file
 PermittivityLorentz::PermittivityLorentz(std::string input_file) {
 
   // Create a root
   pt::ptree root;
 
-  // Load the ini file in this ptree
-  pt::read_ini(input_file, root);
+  // Load the json file in this ptree
+  pt::read_json(input_file, root);
 
   // check if type is right
   std::string type = root.get<std::string>("Permittivity.type");
@@ -30,7 +30,8 @@ PermittivityLorentz::PermittivityLorentz(std::string input_file) {
   this->alpha_zero = root.get<double>("Permittivity.alpha_zero");
   this->omega_0 = root.get<double>("Permittivity.omega_0");
 
-  this->memory_kernel = MemoryKernelFactory::create(input_file);
+  this->memory_kernel =
+      MemoryKernelFactory::create(input_file, "Permittivity.MemoryKernel");
 };
 
 // calculate the permittivity

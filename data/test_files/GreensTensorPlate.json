@@ -1,0 +1,20 @@
+{
+    "GreensTensor": {
+        "type": "plate",
+        "v": 1e-5,
+        "za": 0.1,
+        "beta": 100,
+        "delta_cut": 20,
+        "rel_err_0": 1e-8,
+        "rel_err_1": 1e-6
+    },
+    "Reflection": {
+        "type": "local bulk",
+        "thickness": 0.05
+    },
+    "Permittivity": {
+        "type": "drude",
+        "gamma": 3.5e-2,
+        "omega_p": 9
+    }
+}

@@ -43,8 +43,8 @@ TEST_CASE("Plate Green's tensor constructors work as expected",
     REQUIRE(imag(Greens.get_r_p(omega, k)) == rp.imag());
   };
 
-  SECTION("ini file constructor") {
-    GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.ini");
+  SECTION("json file constructor") {
+    GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.json");
 
     REQUIRE(Greens.get_za() == 0.1);
     REQUIRE(Greens.get_delta_cut() == 20);
@@ -61,7 +61,7 @@ TEST_CASE("Plate Green's tensor constructors work as expected",
       kappa = std::complex<double>(sqrt(k * k - omega * omega), 0.);
     };
     ReflectionCoefficientsLocBulk refl(
-        "../data/test_files/GreensTensorPlate.ini");
+        "../data/test_files/GreensTensorPlate.json");
     refl.ref(rp, rs, omega, kappa);
 
     REQUIRE(real(Greens.get_r_s(omega, k)) == rs.real());
@@ -148,7 +148,7 @@ TEST_CASE("Plate Green's tensor fulfills physical relations",
     auto omega = GENERATE(take(5, random(0., 1e2)));
     auto k_x = GENERATE(take(5, random(0., 1e2)));
     auto k_y = GENERATE(take(5, random(0., 1e2)));
-    GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.ini");
+    GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.json");
     struct Options_GreensTensor opts;
     opts.class_pt = &Greens;
     cx_mat::fixed<3, 3> Greens_lhs(fill::zeros);
@@ -170,7 +170,7 @@ TEST_CASE("Plate Green's tensor fulfills physical relations",
     auto omega = GENERATE(take(5, random(0., 1e2)));
     auto k_x = GENERATE(take(5, random(0., 1e2)));
     auto k_y = GENERATE(take(5, random(0., 1e2)));
-    GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.ini");
+    GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.json");
     struct Options_GreensTensor opts;
     opts.class_pt = &Greens;
     cx_mat::fixed<3, 3> Greens_lhs(fill::zeros);
@@ -194,7 +194,7 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
 
   SECTION("Integral over Green_fancy_I obeys the crossing relation") {
     auto omega = GENERATE(take(1, random(0., 1e2)));
-    GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.ini");
+    GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.json");
     struct Options_GreensTensor opts;
     opts.class_pt = &Greens;
     cx_mat::fixed<3, 3> Greens_lhs(fill::zeros);
@@ -212,7 +212,7 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
 
   SECTION("Integral over Green_fancy_R obeys the crossing relation") {
     auto omega = GENERATE(take(1, random(0., 1e2)));
-    GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.ini");
+    GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.json");
     struct Options_GreensTensor opts;
     opts.class_pt = &Greens;
     cx_mat::fixed<3, 3> Greens_lhs(fill::zeros);
@@ -229,7 +229,7 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
   };
   SECTION("Integral over Green_fancy_I_kv obeys the crossing relation") {
     auto omega = GENERATE(take(1, random(0., 1e2)));
-    GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.ini");
+    GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.json");
     struct Options_GreensTensor opts;
     opts.class_pt = &Greens;
     cx_mat::fixed<3, 3> Greens_lhs(fill::zeros);
@@ -246,7 +246,7 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
   };
   SECTION("Integral over Green fancy_I, temp obeys the crossing relation") {
     auto omega = GENERATE(take(1, random(0., 1e-1)));
-    GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.ini");
+    GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.json");
     struct Options_GreensTensor opts;
     opts.class_pt = &Greens;
     opts.fancy_complex = IM;
@@ -256,7 +256,7 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
     cx_mat::fixed<3, 3> Greens_rhs2(fill::zeros);
     // Test of fancy_I_kv
     opts.omega = -omega;
-    //opts.fancy_complex = IM;
+    // opts.fancy_complex = IM;
     opts.weight_function = TEMP;
     Greens.integrate_k(Greens_lhs, opts);
 
@@ -273,7 +273,7 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
   };
   SECTION("Integral over Green_fancy_I_kv_temp obeys the crossing relation") {
     auto omega = GENERATE(take(1, random(0., 1e-1)));
-    GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.ini");
+    GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.json");
     struct Options_GreensTensor opts;
     opts.class_pt = &Greens;
     cx_mat::fixed<3, 3> Greens_lhs(fill::zeros);

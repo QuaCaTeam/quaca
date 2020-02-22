@@ -13,6 +13,7 @@ private:
 public:
   // constructors
   OhmicMemoryKernel(double gamma);
+  OhmicMemoryKernel(std::string input_file, std::string section);
   OhmicMemoryKernel(std::string input_file);
 
   // calculate function

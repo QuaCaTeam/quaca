@@ -38,14 +38,14 @@ TEST_CASE("Friction constructors work as expected", "[Friction]") {
                 .epsilon(1e-6) == alpha_zero);
   };
 
-  SECTION("ini file constructor") {
+  SECTION("json file constructor") {
     double omega_a = 1.3;
     double alpha_zero = 6e-9;
 
     double beta = 5.;
     double v = 0.01;
 
-    Friction quant_fric("../data/test_files/FrictionVacuum.ini");
+    Friction quant_fric("../data/test_files/FrictionVacuum.json");
 
     REQUIRE(Approx(quant_fric.get_greens_tensor()->get_v()).epsilon(1e-6) == v);
     REQUIRE(Approx(quant_fric.get_greens_tensor()->get_beta()).epsilon(1e-6) ==

@@ -4,14 +4,13 @@
 TEST_CASE("Lorentz permittivity constructors work as expected",
           "[PermittivityLorentz]") {
   SECTION("Direct constructor") {
-    PermittivityLorentz perm(
-        "../data/test_files/PermittivityLorentz.ini");
+    PermittivityLorentz perm("../data/test_files/PermittivityLorentz.json");
     REQUIRE(perm.get_eps_inf() == 1.4);
     REQUIRE(perm.get_alpha_zero() == 6e-9);
     REQUIRE(perm.get_omega_0() == 3.4);
     REQUIRE(perm.get_memory_kernel()->mu(3.5) == 0.69420);
   };
-  SECTION("ini file constructor") {
+  SECTION("json file constructor") {
 
     OhmicMemoryKernel mu(0.69420);
     auto eps_inf = GENERATE(take(3, random(0.0, 1e3)));

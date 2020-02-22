@@ -1,8 +1,13 @@
+// json parser
+#include <boost/property_tree/json_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
+namespace pt = boost::property_tree;
+
 // integration routine
-#include "GreensTensorPlate.h"
 #include "../Calculations/Integrations.h"
 #include "../Permittivity/PermittivityFactory.h"
 #include "../ReflectionCoefficients/ReflectionCoefficientsFactory.h"
+#include "GreensTensorPlate.h"
 
 GreensTensorPlate::GreensTensorPlate(
     double v, double za, double beta,
@@ -23,8 +28,8 @@ GreensTensorPlate::GreensTensorPlate(std::string input_file)
   // Create a root
   pt::ptree root;
 
-  // Load the ini file in this ptree
-  pt::read_ini(input_file, root);
+  // Load the json file in this ptree
+  pt::read_json(input_file, root);
 
   // check if type is right
   std::string type = root.get<std::string>("GreensTensor.type");
@@ -91,7 +96,7 @@ void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3, 3> &GT,
 };
 
 void GreensTensorPlate::integrate_k(cx_mat::fixed<3, 3> &GT,
-                                       Options_GreensTensor opts) {
+                                    Options_GreensTensor opts) {
 
   // imaginary unit
   std::complex<double> I(0.0, 1.0);
@@ -303,7 +308,7 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
     }
   }
   // Calculate fancy imaginary part of the given matrix element
-  else if(opts_pt->fancy_complex == IM) {
+  else if (opts_pt->fancy_complex == IM) {
     if (opts_pt->indices(0) == 2 && opts_pt->indices(1) == 0 ||
         opts_pt->indices(0) == 0 && opts_pt->indices(1) == 2) {
       // Mind the missing leading I! This must be added after the double
