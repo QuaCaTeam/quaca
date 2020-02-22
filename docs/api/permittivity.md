@@ -147,29 +147,28 @@ The input file sections for the permittivities look like this
 
 <!-- tabs:start -->
 ### **PermittivityDrude**
-```ini
-[Permittivity]
-type = drude
-omega_p =
-gamma =
-```
-
-### **PermittivityLorentzNoBath**
-```ini
-[Permittivity]
-type = lorentz nobath
-eps_inf =
-alpha_zero =
-omega_0 =
+```json
+{
+    "Permittivity": {
+        "type": "drude",
+        "gamma": ,
+        "omega_p": 
+    }
+}
 ```
 
 ### **PermittivityLorentz**
-```ini
-[Permittivity]
-type = lorentz bath
-eps_inf =
-alpha_zero =
-omega_0 =
+```json
+{
+    "Permittivity": {
+        "type": "lorentz",
+        "eps_inf": ,
+        "alpha_zero": ,
+        "omega_0": ,
+        "MemoryKernel": {
+        }
+    }
+}
 ```
 For the Lorentz model with an internal bath you also need to define a [MemoryKernel](api/memorykernel)!
 <!-- tabs:end -->

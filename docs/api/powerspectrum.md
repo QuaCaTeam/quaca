@@ -18,7 +18,7 @@ public:
   //Polarizability describing the linear of the microscopic particle
   Polarizability *polarizability;
 
-  //Constructor with ini-file
+  //Constructor with json-file
   PowerSpectrum(std::string input_file);
 
   //Constructor with initialization list
@@ -30,7 +30,7 @@ public:
 };
 ```
 ### `PowerSpectrum(std::string input_file)`
-Constructor with ini-file
+Constructor with json-file
 
 ### `PowerSpectrum(GreensTensor *greens_tensor, Polarizability *polarizability)`
 Direct constructor with initiatilization list

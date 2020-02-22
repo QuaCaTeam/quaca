@@ -53,9 +53,12 @@ The input file sections for the memory kernels look like this
 
 <!-- tabs:start -->
 #### **OhmicMemoryKernel**
-```ini
-[MemoryKernel]
-type = ohmic
-gamma =
+```json
+{
+  "MemoryKernel" : {
+    "type" : "ohmic",
+    "gamma" : 
+  }
+}
 ```
 <!-- tabs:end -->
