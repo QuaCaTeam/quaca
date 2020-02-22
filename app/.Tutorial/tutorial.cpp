@@ -58,6 +58,10 @@ int main(int argc, char *argv[]) {
   std::ofstream file;
   file.open("tutorial_mainfile.csv");
 
+  // define progressbar
+  ProgressBar progbar(number_of_steps, 70);
+  progbar.display();
+
   double step, value;
   for (int i = 0; i < number_of_steps; i++) {
     step = start * pow(spacing, i);
@@ -65,10 +69,14 @@ int main(int argc, char *argv[]) {
     value = friction.calculate(opts);
 
     file << step << "," << value << "\n";
+
+    ++progbar;
+    progbar.display();
   };
 
   // close file
   file.close();
+  progbar.done();
 
   return 0;
 };
