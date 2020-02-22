@@ -8,7 +8,7 @@
         "rel_err_0": 1E-8,
         "rel_err_1": 1E-6
     },
-    "Reflection": {
+    "ReflectionCoefficients": {
         "type": "local slab",
         "thickness": 0.05
     },
