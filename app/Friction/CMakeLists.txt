@@ -7,4 +7,7 @@ target_include_directories(Friction PRIVATE ../include)
 # link libraries
 target_link_libraries(Friction
   quaca
+  OpenMP::OpenMP_CXX
   )
+#OpenMP::OpenMP_CXX
+

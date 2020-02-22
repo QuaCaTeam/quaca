@@ -39,9 +39,7 @@ public:
 // Integration options for the quantum friction calculation
 struct Options_Friction {
   Friction *class_pt;
-  bool full_spectrum = false;
-  // Use eq. (4.5) in Marty's PhD thesis
-  bool non_LTE = false;
+  Spectrum_Options spectrum = FULL;
 };
 
 #endif // QUANTUMFRICTION_H

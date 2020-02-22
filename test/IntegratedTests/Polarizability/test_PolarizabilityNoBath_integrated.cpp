@@ -19,7 +19,7 @@ TEST_CASE("Integrated PolarizabilityNoBath fulfills the omega_cut much smaller "
   PolarizabilityNoBath pol(omega_a, alpha_zero, &greens);
 
   Options_Polarizability opts;
-  opts.fancy_I = true;
+  opts.fancy_complex = IM;
   opts.class_pt = &pol;
 
   double omega_min = 0.0;
@@ -77,7 +77,7 @@ TEST_CASE("Integrated PolarizabilityNoBath fulfills the omega_cut much larger "
   PolarizabilityNoBath pol(omega_a, alpha_zero, &greens);
 
   Options_Polarizability opts;
-  opts.fancy_I = true;
+  opts.fancy_complex = IM;
   opts.class_pt = &pol;
 
   double omega_min = 0.0;

@@ -33,8 +33,8 @@ TEST_CASE("Vacuum Green's tensor constructors work as expected",
 
 TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
   // Generate a Green's tensor with random attributes v and beta
-  auto v = GENERATE(take(1, random(0., 1.)));
-  auto beta = GENERATE(take(1, random(1., 1e2)));
+  auto v = GENERATE(take(3, random(1e-10, 1.)));
+  auto beta = GENERATE(take(3, random(1., 8e1)));
   double relerr = 1E-9;
   GreensTensorVacuum Greens(v, beta, relerr);
 
@@ -44,13 +44,13 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
 
   // Create the variables for the num_result, taking care, that
   //\omega^2 - k^2 >= 0 to stay in the non-trivial regime
-  auto omega = GENERATE(take(10, random(-1e1, 1e1)));
-  auto k_v = GENERATE(take(1, random(-1., 1.)));
+  auto omega = GENERATE(take(3, random(-1e1, 1e1)));
+  auto k_v = GENERATE(take(3, random(-1., 1.)));
   if (k_v < 0)
     k_v *= omega / (1 + v);
   if (k_v >= 0)
     k_v *= omega / (1 - v);
-
+  
   // Check the integrand for all possible integration options
   double omega_kv = omega + v * k_v;
   double xi = pow(omega_kv, 2) - pow(k_v, 2);
@@ -63,76 +63,77 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
   opts.class_pt = &Greens;
   opts.omega = omega;
 
-  SECTION("Option: fancy_I") {
-    opts.fancy_I = true;
+  SECTION("Option: IM") {
+    opts.fancy_complex = IM;
     opts.indices = {0, 0};
-    REQUIRE(Approx(Greens.integrand_1d_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_x * factor);
     opts.indices = {1, 1};
-    REQUIRE(Approx(Greens.integrand_1d_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
     opts.indices = {2, 2};
-    REQUIRE(Approx(Greens.integrand_1d_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
   };
 
-  SECTION("Option: fancy_I_kv") {
-    opts.fancy_I = false;
-    opts.fancy_I_kv = true;
+  SECTION("Option: IM, KV") {
+    opts.fancy_complex = IM;
+    opts.weight_function = KV;
     factor = k_v;
     opts.indices = {0, 0};
-    REQUIRE(Approx(Greens.integrand_1d_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_x * factor);
     opts.indices = {1, 1};
-    REQUIRE(Approx(Greens.integrand_1d_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
     opts.indices = {2, 2};
-    REQUIRE(Approx(Greens.integrand_1d_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
   };
-  SECTION("Option: fancy_I_temp") {
-    opts.fancy_I_kv = false;
-    opts.fancy_I_temp = true;
+
+  SECTION("Option: IM, TEMP") {
+    opts.fancy_complex = IM;
+    opts.weight_function = TEMP;
     factor = 1. / (1. - exp(-beta * omega_kv));
     opts.indices = {0, 0};
-    REQUIRE(Approx(Greens.integrand_1d_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_x * factor);
     opts.indices = {1, 1};
-    REQUIRE(Approx(Greens.integrand_1d_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
     opts.indices = {2, 2};
-    REQUIRE(Approx(Greens.integrand_1d_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
   };
 
-  SECTION("Option: fancy_I_kv_temp") {
-    opts.fancy_I_temp = false;
-    opts.fancy_I_kv_temp = true;
+  SECTION("Option: IM, KV_TEMP") {
+    opts.fancy_complex = IM;
+    opts.weight_function = KV_TEMP;
     factor = k_v / (1. - exp(-beta * omega_kv));
     opts.indices = {0, 0};
-    REQUIRE(Approx(Greens.integrand_1d_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_x * factor);
     opts.indices = {1, 1};
-    REQUIRE(Approx(Greens.integrand_1d_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
     opts.indices = {2, 2};
-    REQUIRE(Approx(Greens.integrand_1d_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
   };
 
-  SECTION("Option: fancy_I_non_LTE") {
-    opts.fancy_I_kv_temp = false;
-    opts.fancy_I_non_LTE = true;
+  SECTION("Option: IM, NON_LTE") {
+    opts.fancy_complex = IM;
+    opts.weight_function = NON_LTE;
     factor =
         1. / (1. - exp(-beta * (omega_kv))) - 1. / (1. - exp(-beta * omega));
     opts.indices = {0, 0};
-    REQUIRE(Approx(Greens.integrand_1d_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_x * factor);
     opts.indices = {1, 1};
-    REQUIRE(Approx(Greens.integrand_1d_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
     opts.indices = {2, 2};
-    REQUIRE(Approx(Greens.integrand_1d_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
   };
 };
@@ -150,7 +151,7 @@ TEST_CASE("Crossing relation in frequency domain see eq. [1]",
   GreensTensorVacuum Greens(v, beta, relerr);
   // Create a struct with the integration options
   struct Options_GreensTensor opts;
-  opts.fancy_I = true;
+  opts.fancy_complex = IM;
   opts.class_pt = &Greens;
 
   // Create the matries storing the Green's tensors
@@ -187,7 +188,7 @@ TEST_CASE("Reciprocity, see eq. [6]", "[GreensTensorVacuum]") {
   GreensTensorVacuum Greens(v, beta, relerr);
   // Create a struct with the integration options
   struct Options_GreensTensor opts;
-  opts.fancy_I = true;
+  opts.fancy_complex = IM;
   opts.class_pt = &Greens;
 
   // Create the matries storing the Green's tensors
@@ -225,7 +226,7 @@ TEST_CASE("Reality, see eq. [7]", "[GreensTensorVacuum]") {
 
   // Create a struct with the integration options
   Options_GreensTensor opts;
-  opts.fancy_I = true;
+  opts.fancy_complex = IM;
   opts.class_pt = &Greens;
 
   // Create the matries storing the Green's tensors
@@ -233,17 +234,17 @@ TEST_CASE("Reality, see eq. [7]", "[GreensTensorVacuum]") {
   cx_mat::fixed<3, 3> Greens_rhs(fill::zeros);
 
   opts.omega = omega;
-  Greens.integrate_1d_k(Greens_lhs, opts);
+  Greens.integrate_k(Greens_lhs, opts);
 
   opts.omega = -omega;
-  Greens.integrate_1d_k(Greens_rhs, opts);
+  Greens.integrate_k(Greens_rhs, opts);
 
   REQUIRE(approx_equal(Greens_lhs, -Greens_rhs, "reldiff", 10E-5));
 };
 
 TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
 
-  SECTION("Option: fancy_I") {
+  SECTION("Option: IM") {
     // Generate a Green's tensor with random attributes v and beta
     auto v = GENERATE(take(1, random(0., 1.)));
     auto beta = GENERATE(take(1, random(1e-5, 1e5)));
@@ -264,8 +265,8 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
 
     double ana_pref = 0;
     // Integration of the vacuum Green's tensor
-    opts.fancy_I = true;
-    Greens.integrate_1d_k(num_result, opts);
+    opts.fancy_complex = IM;
+    Greens.integrate_k(num_result, opts);
 
     // Computing the analytical result and storing it in analytic
     ana_pref = 2. / 3. * pow(omega, 3) / pow(1 - pow(v, 2), 2);
@@ -276,7 +277,7 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     REQUIRE(approx_equal(num_result, ana_result, "reldiff", 10E-5));
   };
 
-  SECTION("Option: fancy_I_kv") {
+  SECTION("Option: IM, KV") {
 
     // Generate a Green's tensor with random attributes v and beta
     auto v = GENERATE(take(1, random(0., 1.)));
@@ -298,9 +299,9 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
 
     double ana_pref = 0;
     // Integration of the vacuum Green's tensor
-    opts.fancy_I = false;
-    opts.fancy_I_kv = true;
-    Greens.integrate_1d_k(num_result, opts);
+    opts.fancy_complex = IM;
+    opts.weight_function = KV;
+    Greens.integrate_k(num_result, opts);
 
     // Computing the analytical result and storing it in analytic
     ana_pref = 2. / 3. * pow(omega, 4) * v / pow(1 - pow(v, 2), 3);
@@ -311,7 +312,7 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     REQUIRE(approx_equal(num_result, ana_result, "reldiff", 10E-5));
   }
 
-  SECTION("Option: fancy_I_temp") {
+  SECTION("Option: IM, TEMP") {
     // Generate a Green's tensor with random attributes v and beta
     auto v = GENERATE(take(1, random(0., 1.)));
     auto omega = GENERATE(take(3, random(-1e2, 1e2)));
@@ -333,8 +334,9 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
 
     double ana_pref = 0;
     // Integration of the vacuum Green's tensor
-    opts.fancy_I_temp = true;
-    Greens.integrate_1d_k(num_result, opts);
+    opts.fancy_complex = IM;
+    opts.weight_function = TEMP;
+    Greens.integrate_k(num_result, opts);
 
     // Computing the analytical result and storing it in analytic
     ana_pref = pow(omega, 2) / (2. * pow(v, 3) * beta);
@@ -346,7 +348,7 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     REQUIRE(approx_equal(num_result, ana_result, "reldiff", 10E-4));
   }
 
-  SECTION("Option: fancy_I_kv_temp") {
+  SECTION("Option: IM, KV_TEMP") {
     // Generate a Green's tensor with random attributes v and beta
     auto v = GENERATE(take(1, random(0., 1.)));
     auto omega = GENERATE(take(3, random(-1e1, 1e1)));
@@ -369,9 +371,9 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     double ana_pref = 0;
 
     // Integration of the vacuum Green's tensor
-    opts.fancy_I_temp = false;
-    opts.fancy_I_kv_temp = true;
-    Greens.integrate_1d_k(num_result, opts);
+    opts.fancy_complex = IM;
+    opts.weight_function = KV_TEMP;
+    Greens.integrate_k(num_result, opts);
 
     // Computing the analytical result and storing it in analytic
     ana_pref = std::pow(omega, 3) / (6. * std::pow(v, 4) * beta);

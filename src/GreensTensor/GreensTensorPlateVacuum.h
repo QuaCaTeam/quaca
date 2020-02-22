@@ -20,10 +20,7 @@ public:
   void calculate_tensor(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
 
   // integrate over a two-dimensional k space
-  void integrate_2d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
-
-  // integrate over a one-dimensional k space
-  void integrate_1d_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
+  void integrate_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
 
   // getters
   GreensTensorVacuum *get_vacuums_greens_tensor() {

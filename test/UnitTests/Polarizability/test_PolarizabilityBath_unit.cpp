@@ -49,7 +49,7 @@ TEST_CASE("PolarizabilityBath integrand works as expected",
   // define options struct for integrand
   Options_Polarizability opts;
   opts.class_pt = &pol;
-  opts.fancy_I = true;
+  opts.fancy_complex = IM;
   opts.indices(0) = 0;
   opts.indices(1) = 0;
 

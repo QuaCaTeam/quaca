@@ -26,5 +26,6 @@
   - [Testing](dev/testing)
   - [Documentation](dev/documentation)
   - [Project Organization](dev/organization)
+  - [Parallelization](dev/parallelization)
   - [Protocols](dev/protocols)
   - [On numerical integration in C++](dev/integration)

@@ -90,7 +90,7 @@ void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3, 3> &GT,
   }
 };
 
-void GreensTensorPlate::integrate_1d_k(cx_mat::fixed<3, 3> &GT,
+void GreensTensorPlate::integrate_k(cx_mat::fixed<3, 3> &GT,
                                        Options_GreensTensor opts) {
 
   // imaginary unit
@@ -167,12 +167,6 @@ double GreensTensorPlate::integrand_1d_k(double phi, void *opts) {
                    rel_err(0), 0);
   }
   return result;
-};
-
-void GreensTensorPlate::integrate_2d_k(cx_mat::fixed<3, 3> &GT,
-                                       Options_GreensTensor opts) {
-  std::cerr << "Currently, this routine is not implemented." << std::endl;
-  exit(0);
 };
 
 double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
@@ -282,23 +276,23 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
   }
 
   // Add weighting function if demanded
-  if (opts_pt->fancy_I_kv) {
+  if (opts_pt->weight_function == KV) {
     result_complex *= k * cos_phi;
-  } else if (opts_pt->fancy_I_temp) {
+  } else if (opts_pt->weight_function == TEMP) {
     result_complex /= (1.0 - exp(-beta * omega_pl));
-  } else if (opts_pt->fancy_I_non_LTE) {
+  } else if (opts_pt->weight_function == NON_LTE) {
     result_complex *=
         1. / (1.0 - exp(-beta * omega_pl)) - 1. / (1.0 - exp(-beta * omega));
-  } else if (opts_pt->fancy_I_kv_temp) {
+  } else if (opts_pt->weight_function == KV_TEMP) {
     result_complex *= k * cos_phi / (1.0 - exp(-beta * omega_pl));
-  } else if (opts_pt->fancy_I_kv_non_LTE) {
+  } else if (opts_pt->weight_function == KV_NON_LTE) {
     result_complex *=
         k * cos_phi *
         (1. / (1.0 - exp(-beta * omega_pl)) - 1. / (1.0 - exp(-beta * omega)));
   }
 
   // Calculate fancy real part of the given matrix element
-  if (opts_pt->fancy_R) {
+  if (opts_pt->fancy_complex == RE) {
     if (opts_pt->indices(0) == 2 && opts_pt->indices(1) == 0 ||
         opts_pt->indices(0) == 0 && opts_pt->indices(1) == 2) {
       // Mind the missing leading I! This must be added after the double
@@ -309,7 +303,7 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
     }
   }
   // Calculate fancy imaginary part of the given matrix element
-  else {
+  else if(opts_pt->fancy_complex == IM) {
     if (opts_pt->indices(0) == 2 && opts_pt->indices(1) == 0 ||
         opts_pt->indices(0) == 0 && opts_pt->indices(1) == 2) {
       // Mind the missing leading I! This must be added after the double

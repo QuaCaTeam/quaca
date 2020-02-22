@@ -6,11 +6,10 @@ namespace pt = boost::property_tree;
 #include "LooperV.h"
 
 LooperV::LooperV(double start, double end, int number_of_steps,
-                 std::string scale, Friction *quantum_friction)
-    : Looper(start, end, number_of_steps, scale, quantum_friction){};
+                 std::string scale)
+      : Looper(start, end, number_of_steps, scale){};
 
-LooperV::LooperV(std::string input_file, Friction *quantum_friction)
-    : Looper(input_file, quantum_friction) {
+LooperV::LooperV(std::string input_file): Looper(input_file){
   // Create a root
   pt::ptree root;
 
@@ -22,14 +21,14 @@ LooperV::LooperV(std::string input_file, Friction *quantum_friction)
   assert(type == "v");
 };
 
-double LooperV::calculate_value(int step) {
+double LooperV::calculate_value(int step, Friction* quantum_friction) {
   Options_Friction opts;
-  opts.non_LTE = true;
+  opts.spectrum = NON_LTE_ONLY;
   // opts.full_spectrum = true;
-  opts.class_pt = this->quantum_friction;
+  opts.class_pt = quantum_friction;
 
   // change v
-  this->quantum_friction->get_greens_tensor()->set_v(this->steps[step]);
+  quantum_friction->get_greens_tensor()->set_v(this->steps[step]);
 
-  return this->quantum_friction->calculate(opts);
+  return quantum_friction->calculate(opts);
 };
