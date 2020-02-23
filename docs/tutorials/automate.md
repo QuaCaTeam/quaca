@@ -3,14 +3,14 @@
 # Automate your calculation
 As you saw in the last tutorial it is quite tedious to define all parameters in the main function itself.
 It is also impractical, because if you want to change just one parameter, you have to recompile the whole project.
-That's why in this tutorial we teach you how to automate these calculation, which means we show you how to use the `.ini` files you have seen in the first tutorial.
+That's why in this tutorial we teach you how to automate these calculation, which means we show you how to use the `.json` files you have seen in the first tutorial.
 
 In this tutorial we want to write an executable that prints the x-x-component of the polarizability tensor into a file for varying values of the frequency omega.
 For this we have to do the following steps:
 
 1. Register a new executable.
 2. Write the main function.
-3. Write a `.ini` file.
+3. Write a `.json` file.
 4. Run the calculation.
 
 ## 1. Register a new executable

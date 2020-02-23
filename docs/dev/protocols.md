@@ -5,8 +5,8 @@ Protocols
 
 - Each participant presented his progress
     * Implementation of integration options as demanded accuracy were discussed
-    * Relative error bounds are given as input parameter in the .ini file
-    * Each Class draws its respective error bound from the .ini file
+    * Relative error bounds are given as input parameter in the .json file
+    * Each Class draws its respective error bound from the .json file
 
 - Testing was discussed
     * Marty will investigate with respect to physical domains of each input parameter

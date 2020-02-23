@@ -1,5 +1,3 @@
-!> TODO: Fill in values and finish writing
-
 # Write your own main
 In the first tutorial you calculated the non-contact friction of an atom above the surface of a Drude bulk material using an input file and the executable `Friction`.
 QuaCa can, however, also be used like a library and you can write your own executables!
@@ -8,6 +6,8 @@ You will learn how to:
 
 1. Register a new executable.
 2. Write the main function.
+3. Build and run your program.
+4. Check the results.
 
 ## 1. Register a new executable
 Let us look at the subfolders of `quaca/`.
@@ -265,3 +265,23 @@ int main(int argc, char *argv[]) {
   return 0;
 };
 ```
+
+## 3. Build and run your program
+We are now ready to build and run what we have programmed.
+Go into the `build/` directory and run
+```bash
+quaca/build> make Tutorial
+```
+You have now built the Tutorial executable which is automatically stored in the `quaca/bin/` folder.
+Run the executable by typing into the console
+```bash
+quaca/build> ./../bin/Tutorial
+```
+Notice that because of the way we have written our main function, the output file `tutorial_mainfile.csv` will be placed wherever the executable is run, so in this case it will be placed in the `build/` directory.
+
+## 4. Check the results
+Plot the data again by using our prepared plot script
+```bash
+quaca/plots> python plot.py ../build/tutorial_mainfile.csv
+```
+You should obtain a plot that looks exactly like the one we have got in the [first Tutorial](tutorials/first_calculation).
