@@ -1,0 +1,6 @@
+{
+    "MemoryKernel": {
+        "type": "ohmic",
+        "gamma": 0.69420
+    }
+}

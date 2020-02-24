@@ -9,7 +9,8 @@ PolarizabilityBath::PolarizabilityBath(double omega_a, double alpha_zero,
 
 PolarizabilityBath::PolarizabilityBath(std::string input_file)
     : Polarizability(input_file) {
-  this->mu = MemoryKernelFactory::create(input_file);
+  this->mu =
+      MemoryKernelFactory::create(input_file, "Polarizability.MemoryKernel");
 };
 
 void PolarizabilityBath::calculate_tensor(cx_mat::fixed<3, 3> &alpha,

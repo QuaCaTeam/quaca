@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
 
   // define quantum friction
   Friction friction(&greens_tensor, &polarizability, &power_spectrum,
-                           rel_err_omega);
+                    rel_err_omega);
 
   // quantum friction options
   Options_Friction opts;
@@ -53,23 +53,30 @@ int main(int argc, char *argv[]) {
   double end = 1e-2;
   int number_of_steps = 40;
   double spacing = pow(end / start, 1. / ((double)number_of_steps - 1.0));
-  double step, value;
 
   // define output file
   std::ofstream file;
   file.open("tutorial_mainfile.csv");
 
+  // define progressbar
+  ProgressBar progbar(number_of_steps, 70);
+  progbar.display();
+
+  double step, value;
   for (int i = 0; i < number_of_steps; i++) {
     step = start * pow(spacing, i);
     friction.get_greens_tensor()->set_v(step);
     value = friction.calculate(opts);
 
-    std::cout << step << "," << value << std::endl;
     file << step << "," << value << "\n";
+
+    ++progbar;
+    progbar.display();
   };
 
   // close file
   file.close();
+  progbar.done();
 
   return 0;
 };

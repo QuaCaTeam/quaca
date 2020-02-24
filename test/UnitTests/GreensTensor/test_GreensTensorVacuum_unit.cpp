@@ -18,12 +18,12 @@ TEST_CASE("Vacuum Green's tensor constructors work as expected",
     REQUIRE(Greens.get_relerr() == relerr);
   };
 
-  SECTION("ini file constructor") {
+  SECTION("json file constructor") {
     double v = 0.1;
     double beta = 5;
     double relerr = 1E-9;
 
-    GreensTensorVacuum Greens("../data/test_files/GreensTensorVacuum.ini");
+    GreensTensorVacuum Greens("../data/test_files/GreensTensorVacuum.json");
 
     REQUIRE(Approx(Greens.get_v()).epsilon(1E-6) == v);
     REQUIRE(Approx(Greens.get_beta()).epsilon(1E-6) == beta);
@@ -50,7 +50,7 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
     k_v *= omega / (1 + v);
   if (k_v >= 0)
     k_v *= omega / (1 - v);
-  
+
   // Check the integrand for all possible integration options
   double omega_kv = omega + v * k_v;
   double xi = pow(omega_kv, 2) - pow(k_v, 2);

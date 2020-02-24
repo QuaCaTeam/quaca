@@ -1,5 +1,5 @@
-// ini parser
-#include <boost/property_tree/ini_parser.hpp>
+// json parser
+#include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 namespace pt = boost::property_tree;
 
@@ -7,21 +7,21 @@ namespace pt = boost::property_tree;
 
 LooperV::LooperV(double start, double end, int number_of_steps,
                  std::string scale)
-      : Looper(start, end, number_of_steps, scale){};
+    : Looper(start, end, number_of_steps, scale){};
 
-LooperV::LooperV(std::string input_file): Looper(input_file){
+LooperV::LooperV(std::string input_file) : Looper(input_file) {
   // Create a root
   pt::ptree root;
 
-  // Load the ini file in this ptree
-  pt::read_ini(input_file, root);
+  // Load the json file in this ptree
+  pt::read_json(input_file, root);
 
   // check if type is right
   std::string type = root.get<std::string>("Looper.type");
   assert(type == "v");
 };
 
-double LooperV::calculate_value(int step, Friction* quantum_friction) {
+double LooperV::calculate_value(int step, Friction *quantum_friction) {
   Options_Friction opts;
   opts.spectrum = NON_LTE_ONLY;
   // opts.full_spectrum = true;

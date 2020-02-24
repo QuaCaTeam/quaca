@@ -1,5 +1,5 @@
-// ini parser
-#include <boost/property_tree/ini_parser.hpp>
+// json parser
+#include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 namespace pt = boost::property_tree;
 
@@ -7,12 +7,28 @@ namespace pt = boost::property_tree;
 
 OhmicMemoryKernel::OhmicMemoryKernel(double gamma) : gamma(gamma){};
 
+OhmicMemoryKernel::OhmicMemoryKernel(std::string input_file,
+                                     std::string section) {
+  // Create a root
+  pt::ptree root;
+
+  // Load the json file in this ptree
+  pt::read_json(input_file, root);
+
+  // check if type is right
+  std::string type = root.get<std::string>(section + ".type");
+  assert(type == "ohmic");
+
+  // read damping coefficient
+  this->gamma = root.get<double>(section + ".gamma");
+};
+
 OhmicMemoryKernel::OhmicMemoryKernel(std::string input_file) {
   // Create a root
   pt::ptree root;
 
-  // Load the ini file in this ptree
-  pt::read_ini(input_file, root);
+  // Load the json file in this ptree
+  pt::read_json(input_file, root);
 
   // check if type is right
   std::string type = root.get<std::string>("MemoryKernel.type");

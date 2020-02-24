@@ -6,10 +6,10 @@
 
 class PowerSpectrumHarmOsc : public PowerSpectrum {
 public:
-    //Constructor with initalization list
+  // Constructor with initalization list
   PowerSpectrumHarmOsc(GreensTensor *greens_tensor,
                        Polarizability *polarizability);
-  //Constructor with ini-file
+  // Constructor with json-file
   PowerSpectrumHarmOsc(std::string input_file);
 
   // calculate the power spectrum for a fixed value of the frequency

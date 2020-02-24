@@ -1,7 +1,7 @@
 #include "Quaca.h"
 #include "catch.hpp"
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 
 TEST_CASE("PowerSpectrumHarmOsc constructors work as expected",
           "[PowerSpectrumHarmOsc]") {
@@ -25,10 +25,10 @@ TEST_CASE("PowerSpectrumHarmOsc constructors work as expected",
                 .epsilon(1e-6) == omega_a);
     REQUIRE(Approx(powerspectrum.get_polarizability()->get_alpha_zero())
                 .epsilon(1e-6) == alpha_zero);
-    REQUIRE(powerspectrum.has_bath==false);
+    REQUIRE(powerspectrum.has_bath == false);
   };
 
-  SECTION("ini file constructor") {
+  SECTION("json file constructor") {
     double omega_a = 1.3;
     double alpha_zero = 6e-9;
 
@@ -36,7 +36,7 @@ TEST_CASE("PowerSpectrumHarmOsc constructors work as expected",
     double v = 0.01;
 
     PowerSpectrumHarmOsc powerspectrum(
-        "../data/test_files/PowerSpectrumHarmOsc.ini");
+        "../data/test_files/PowerSpectrumHarmOsc.json");
 
     REQUIRE(Approx(powerspectrum.get_greens_tensor()->get_v()).epsilon(1e-6) ==
             v);
@@ -51,7 +51,8 @@ TEST_CASE("PowerSpectrumHarmOsc constructors work as expected",
   };
 }
 
-TEST_CASE("Power spectrum without bath is hermitian", "[PowerSpectrumHarmOsc]") {
+TEST_CASE("Power spectrum without bath is hermitian",
+          "[PowerSpectrumHarmOsc]") {
   // Generate randomnized power spectrum
   auto v = GENERATE(take(1, random(0., 1.)));
   double beta = GENERATE(take(1, random(1., 1e2)));
@@ -79,8 +80,9 @@ TEST_CASE("Power spectrum without bath is hermitian", "[PowerSpectrumHarmOsc]") 
   REQUIRE(approx_equal(lhs, trans(rhs), "reldiff", 1e-8));
 }
 
-TEST_CASE("Power spectrum without bath reduces to polarizability in the static case",
-          "[PowerSpectrumHarmOsc]") {
+TEST_CASE(
+    "Power spectrum without bath reduces to polarizability in the static case",
+    "[PowerSpectrumHarmOsc]") {
   // Generate randomnized power spectrum
   double beta = GENERATE(take(3, random(1e-5, 1e5)));
   double omega_a = GENERATE(take(3, random(0., 1e1)));
@@ -120,7 +122,7 @@ TEST_CASE("Power spectrum with bath is hermitian", "[PowerSpectrumHarmOsc]") {
   double beta = GENERATE(take(1, random(1., 1e2)));
   double omega_a = GENERATE(take(1, random(0.1, 1e1)));
   double alpha_zero = GENERATE(take(1, random(1e-9, 1e-7)));
-  double gamma = GENERATE(take(1,random(0.,1e1)));
+  double gamma = GENERATE(take(1, random(0., 1e1)));
 
   double relerr_k = 1E-9;
   GreensTensorVacuum greens(v, beta, relerr_k);
@@ -144,13 +146,14 @@ TEST_CASE("Power spectrum with bath is hermitian", "[PowerSpectrumHarmOsc]") {
   REQUIRE(approx_equal(lhs, trans(rhs), "reldiff", 1e-8));
 }
 
-TEST_CASE("Power spectrum with bath reduces to polarizability in the static case",
-          "[PowerSpectrumHarmOsc]") {
+TEST_CASE(
+    "Power spectrum with bath reduces to polarizability in the static case",
+    "[PowerSpectrumHarmOsc]") {
   // Generate randomnized power spectrum
   double beta = GENERATE(take(1, random(1e-5, 1e5)));
   double omega_a = GENERATE(take(1, random(0., 1e1)));
   double alpha_zero = GENERATE(take(1, random(1e-9, 1e-7)));
-  double gamma = GENERATE(take(1,random(0.,1.)));
+  double gamma = GENERATE(take(1, random(0., 1.)));
   // Ensure equilibrium result
   double v = 1e-14;
 

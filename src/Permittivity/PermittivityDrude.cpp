@@ -1,5 +1,5 @@
-// ini parser
-#include <boost/property_tree/ini_parser.hpp>
+// json parser
+#include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 namespace pt = boost::property_tree;
 
@@ -8,14 +8,14 @@ namespace pt = boost::property_tree;
 PermittivityDrude::PermittivityDrude(double omega_p, double gamma)
     : gamma(gamma), omega_p(omega_p){};
 
-// constructor for drude model from .ini file
+// constructor for drude model from .json file
 PermittivityDrude::PermittivityDrude(std::string input_file) {
 
   // Create a root
   pt::ptree root;
 
-  // Load the ini file in this ptree
-  pt::read_ini(input_file, root);
+  // Load the json file in this ptree
+  pt::read_json(input_file, root);
 
   // check if type is right
   std::string type = root.get<std::string>("Permittivity.type");

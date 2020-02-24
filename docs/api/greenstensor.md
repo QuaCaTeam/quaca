@@ -176,38 +176,47 @@ For further reference on the functions see the base class [GreensTensor](#Greens
 The input file sections for the Green's tensor look like this
 <!-- tabs:start -->
 #### **GreensTensorVacuum**
-```ini
-[GreensTensor]
-type = vacuum
-v =
-beta =
-rel_err_1 =
+```json
+{
+  "GreensTensor" : {
+    "type" : "vacuum",
+    "v" : ,
+    "beta" : ,
+    "rel_err_1" : 
+  }
+}
 ```
 
 #### **GreensTensorPlate**
-```ini
-[GreensTensor]
-type = plate
-v =
-beta =
-za =
-delta_cut =
-rel_err_0 =
-rel_err_1 =
+```json
+{
+  "GreensTensor" : {
+    "type" : "plate",
+    "v" : ,
+    "beta" : ,
+    "za" : ,
+    "delta_cut" : ,
+    "rel_err_0" : ,
+    "rel_err_1" : 
+  }
+}
 ```
 For the plate Green's tensor you also need to define the [Reflection Coefficients](api/reflection)!
 
 #### **GreensTensorPlateVacuum**
-```ini
-[GreensTensor]
-type = plate
-addvacuum = true
-v =
-beta =
-za =
-delta_cut =
-rel_err_0 =
-rel_err_1 =
+```json
+{
+  "GreensTensor" : {
+    "type" : "plate",
+    "addvacuum" : "true",
+    "v" : ,
+    "beta" : ,
+    "za" : ,
+    "delta_cut" : ,
+    "rel_err_0" : ,
+    "rel_err_1" : 
+  }
+}
 ```
 For the plate-and-vacuum Green's tensor you also need to define the [Reflection Coefficients](api/reflection)!
 <!-- tabs:end -->
@@ -235,20 +244,23 @@ greens_tensor.integrated_1d_k(GT, opts);
 The matrix `GT` now contains the integrated imaginary part of the vacuum Green's tensor.
 
 
-#### ** Example (.ini): Vacuum **
+#### ** Example (.json): Vacuum **
 We want to calculate the twofold integrated imaginary part of the vaccuum Green's tensor at frequency $\omega=3\,\mathrm{eV}$ in the static case $(v=0)$, and at $\beta=0.1\,\mathrm{eV}^{-1}$. Moreover, we need to define the accuracy of the numerical integration. Since the first integration of the vacuum Green's tensor is implemented analytically, we solely need to provide the demanded relative accuracy for the second integration $\delta_\mathrm{err}=10^{-9}$.
 Since we have to define a lot of parameters, QuaCa offers a shortcut to the long task before.
-We simply define all parameters in a file called `parameters.ini` which looks like this
-```ini
-[GreensTensor]
-type = vacuum
-v = 0
-beta = 1e-1
-rel_err_1 = 1e-9
+We simply define all parameters in a file called `parameters.json` which looks like this
+```json
+{
+  "GreensTensor" : {
+    "type" : "vacuum",
+    "v" : 0,
+    "beta" : 1e-1,
+    "rel_err_1" = 1e-9
+  }
+}
 ```
 Now we can easily define the vacuum Green's tensor class and calculate the desired part of the integrated Green's tensor
 ```cpp
-GreensTensorVacuum greens_tensor("parameters.ini");
+GreensTensorVacuum greens_tensor("parameters.json");
 
 cx_mat::fixed<3,3> GT(fill::zeros);
 Options_GreensTensor opts;

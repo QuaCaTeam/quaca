@@ -7,7 +7,7 @@
 class MemoryKernelFactory {
 public:
   // Function returning a memory kernel pointer of the right type.
-  static MemoryKernel *create(std::string type);
+  static MemoryKernel *create(std::string type, std::string section);
 };
 
 #endif // MEMORYKERNELFACTORY_H

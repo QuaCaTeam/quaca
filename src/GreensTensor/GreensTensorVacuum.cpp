@@ -1,7 +1,7 @@
 #include <assert.h>
 
-// ini parser
-#include <boost/property_tree/ini_parser.hpp>
+// json parser
+#include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 namespace pt = boost::property_tree;
 
@@ -19,8 +19,8 @@ GreensTensorVacuum::GreensTensorVacuum(std::string input_file)
   // Create a root
   pt::ptree root;
 
-  // Load the ini file in this ptree
-  pt::read_ini(input_file, root);
+  // Load the json file in this ptree
+  pt::read_json(input_file, root);
 
   // Load relative accuracy
   this->relerr = root.get<double>("GreensTensor.rel_err_1");
@@ -30,31 +30,30 @@ GreensTensorVacuum::GreensTensorVacuum(std::string input_file)
   assert(type == "vacuum");
 };
 
-
-//Compute the full Green's tensor for a given frequency \omega and a given momentum vector k
-//For the definition see notes/VacuumGreen.pdf eq. (2)
+// Compute the full Green's tensor for a given frequency \omega and a given
+// momentum vector k For the definition see notes/VacuumGreen.pdf eq. (2)
 void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3, 3> &GT,
                                           Options_GreensTensor opts) {
   if (opts.fancy_complex == IM) {
     // calculating solely the imaginary part of the free Green tensor
     double pre, k_x, k_y, k_quad, omega, omega_quad;
 
-    //Read out the k-vector and the frequency \omega
+    // Read out the k-vector and the frequency \omega
     k_x = opts.kvec(0);
     k_y = opts.kvec(1);
     omega = opts.omega;
 
-    //Define useful variables
+    // Define useful variables
     k_quad = k_x * k_x + k_y * k_y;
     omega_quad = omega * omega;
 
-    //Reset tensor in which the final result is stored
+    // Reset tensor in which the final result is stored
     GT.zeros();
 
     // Ensure that heavyside function is fulfilled
     if (omega_quad - k_quad > 0) {
-      //Compute the diagonal components of the tensor. The off-diagonal elements
-      //are all zero
+      // Compute the diagonal components of the tensor. The off-diagonal
+      // elements are all zero
       pre = 1.0 / (2 * M_PI * sqrt(omega_quad - k_quad));
       GT(0, 0) = pre * (omega_quad - k_x * k_x);
       GT(1, 1) = pre * (omega_quad - k_y * k_y);
@@ -68,26 +67,26 @@ void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3, 3> &GT,
   }
 };
 
-//Compute the integration with respect to the 2-d k vector
-//Ref: notes/VacuumFriction.pdf eq. (10)
+// Compute the integration with respect to the 2-d k vector
+// Ref: notes/VacuumFriction.pdf eq. (10)
 void GreensTensorVacuum::integrate_k(cx_mat::fixed<3, 3> &GT,
-                                        Options_GreensTensor opts) {
+                                     Options_GreensTensor opts) {
   if (opts.fancy_complex == RE) {
-    //Even though the real part of the Green's tensor is not implemented, a default
-    //return value of an empty tensor was chosen, to allow for the general structure
-    //of the polarizability to depend both on the real and imaginary part of a
-    //given Green's tensor
+    // Even though the real part of the Green's tensor is not implemented, a
+    // default return value of an empty tensor was chosen, to allow for the
+    // general structure of the polarizability to depend both on the real and
+    // imaginary part of a given Green's tensor
     GT.zeros();
-  } else if(opts.fancy_complex == IM) {
-      //Read out the frequency \omega
+  } else if (opts.fancy_complex == IM) {
+    // Read out the frequency \omega
     double omega = opts.omega;
 
-    //Reset the tensor to store the final result
+    // Reset the tensor to store the final result
     GT.zeros();
-    //Ensure that the integration limits are properly ordered
+    // Ensure that the integration limits are properly ordered
     if (omega >= 0) {
 
-      //Numerically integrate the xx component
+      // Numerically integrate the xx component
       opts.indices(0) = 0;
       opts.indices(1) = 0;
       GT(0, 0) = cquad(&integrand_k, &opts, -omega / (1.0 + this->v),
@@ -102,7 +101,7 @@ void GreensTensorVacuum::integrate_k(cx_mat::fixed<3, 3> &GT,
     // Switching the integration bounds for negative frequencies
     if (omega < 0) {
 
-      //Numerically integrate the xx component
+      // Numerically integrate the xx component
       opts.indices(0) = 0;
       opts.indices(1) = 0;
       GT(0, 0) = -cquad(&integrand_k, &opts, omega / (1.0 - this->v),
@@ -117,31 +116,31 @@ void GreensTensorVacuum::integrate_k(cx_mat::fixed<3, 3> &GT,
   }
 };
 
-//Implementation of the different integrands for the integration
-//of the 2-d k-vector
-//Ref: notes/VacuumFriction eq. (10) and (11)
+// Implementation of the different integrands for the integration
+// of the 2-d k-vector
+// Ref: notes/VacuumFriction eq. (10) and (11)
 double GreensTensorVacuum::integrand_k(double kv, void *opts) {
-    //Casting the class-pointer to the correct pointer-type
+  // Casting the class-pointer to the correct pointer-type
   Options_GreensTensor *opts_pt = static_cast<Options_GreensTensor *>(opts);
   GreensTensorVacuum *pt = static_cast<GreensTensorVacuum *>(opts_pt->class_pt);
 
-  //Read out the relevant parameters
+  // Read out the relevant parameters
   double omega = opts_pt->omega;
   double beta = pt->beta;
 
-  //Define useful variables
+  // Define useful variables
   double result, xi_quad, omega_pl, omega_pl_quad;
 
   omega_pl = (omega + kv * pt->v);
   omega_pl_quad = omega_pl * omega_pl;
   xi_quad = omega_pl_quad - kv * kv;
 
-  //Variable to store the final result
+  // Variable to store the final result
   result = 0;
 
-  //Only the imaginary part is implemented
-  if(opts_pt->fancy_complex == IM) {
-    //Compute the basis integrand of eq. (10)
+  // Only the imaginary part is implemented
+  if (opts_pt->fancy_complex == IM) {
+    // Compute the basis integrand of eq. (10)
     if (opts_pt->indices(0) == 0 && opts_pt->indices(1) == 0) {
       result = 0.5 * xi_quad;
     } else if (opts_pt->indices(0) == opts_pt->indices(1)) {
@@ -150,7 +149,8 @@ double GreensTensorVacuum::integrand_k(double kv, void *opts) {
       return 0;
     }
 
-    //Multply with the additional weight function f, the options can be found in eq. (11)
+    // Multply with the additional weight function f, the options can be found
+    // in eq. (11)
     if (opts_pt->weight_function == KV) {
       result *= kv;
     } else if (opts_pt->weight_function == TEMP) {
@@ -159,10 +159,10 @@ double GreensTensorVacuum::integrand_k(double kv, void *opts) {
       result *= kv / (1.0 - exp(-beta * omega_pl));
     } else if (opts_pt->weight_function == NON_LTE) {
       result *=
-	  (1. / (1. - exp(-beta * omega_pl)) - 1. / (1. - exp(-beta * omega)));
+          (1. / (1. - exp(-beta * omega_pl)) - 1. / (1. - exp(-beta * omega)));
     } else if (opts_pt->weight_function == KV_NON_LTE) {
       result *= kv * (1. / (1. - exp(-beta * omega_pl)) -
-		      1. / (1. - exp(-beta * omega)));
+                      1. / (1. - exp(-beta * omega)));
     }
   }
 

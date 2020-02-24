@@ -13,8 +13,8 @@ TEST_CASE("PolarizabilityNoBath constructors work as expected",
     REQUIRE(pol.get_alpha_zero() == 6E-9);
   };
 
-  SECTION("ini file constructor") {
-    PolarizabilityNoBath pol("../data/test_files/PolarizabilityNoBath.ini");
+  SECTION("json file constructor") {
+    PolarizabilityNoBath pol("../data/test_files/PolarizabilityNoBath.json");
     REQUIRE(pol.get_omega_a() == 1.3);
     REQUIRE(pol.get_alpha_zero() == 6E-9);
   };
