@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="QuaCa"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\src\;CMake Files\app\;CMake Files\app\Friction\;CMake Files\app\.Tutorial\;CMake Files\test\;CMake Files\test\UnitTests\;CMake Files\test\IntegratedTests\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="quaca">
+				<Option output="/users/stud/hermasim/Documents/cpp/quaca/lib/libquaca.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/src"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/lib/armadillo-9.800.2/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/include"/>
+					<Add directory="/usr/include/c++/8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
+					<Add directory="/usr/include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 quaca"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="quaca/fast">
+				<Option output="/users/stud/hermasim/Documents/cpp/quaca/lib/libquaca.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/src"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/lib/armadillo-9.800.2/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/include"/>
+					<Add directory="/usr/include/c++/8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
+					<Add directory="/usr/include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 quaca/fast"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Friction">
+				<Option output="/users/stud/hermasim/Documents/cpp/quaca/bin/Friction" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/users/stud/hermasim/Documents/cpp/quaca/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/lib/armadillo-9.800.2/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/app/Friction/../include"/>
+					<Add directory="/usr/include/c++/8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
+					<Add directory="/usr/include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/app/Friction/Makefile&quot;  VERBOSE=1 Friction"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/app/Friction/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/app/Friction/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/app/Friction/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Friction/fast">
+				<Option output="/users/stud/hermasim/Documents/cpp/quaca/bin/Friction" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/users/stud/hermasim/Documents/cpp/quaca/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/lib/armadillo-9.800.2/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/app/Friction/../include"/>
+					<Add directory="/usr/include/c++/8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
+					<Add directory="/usr/include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/app/Friction/Makefile&quot;  VERBOSE=1 Friction/fast"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/app/Friction/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/app/Friction/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/app/Friction/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Tutorial">
+				<Option output="/users/stud/hermasim/Documents/cpp/quaca/bin/Tutorial" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/users/stud/hermasim/Documents/cpp/quaca/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/lib/armadillo-9.800.2/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/app/.Tutorial/../include"/>
+					<Add directory="/usr/include/c++/8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
+					<Add directory="/usr/include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/app/.Tutorial/Makefile&quot;  VERBOSE=1 Tutorial"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/app/.Tutorial/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/app/.Tutorial/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/app/.Tutorial/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Tutorial/fast">
+				<Option output="/users/stud/hermasim/Documents/cpp/quaca/bin/Tutorial" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/users/stud/hermasim/Documents/cpp/quaca/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/lib/armadillo-9.800.2/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/app/.Tutorial/../include"/>
+					<Add directory="/usr/include/c++/8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
+					<Add directory="/usr/include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/app/.Tutorial/Makefile&quot;  VERBOSE=1 Tutorial/fast"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/app/.Tutorial/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/app/.Tutorial/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/app/.Tutorial/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_quaca_unit">
+				<Option output="/users/stud/hermasim/Documents/cpp/quaca/bin/test_quaca_unit" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/users/stud/hermasim/Documents/cpp/quaca/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/lib/armadillo-9.800.2/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/test/UnitTests/../include"/>
+					<Add directory="/usr/include/c++/8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
+					<Add directory="/usr/include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/test/UnitTests/Makefile&quot;  VERBOSE=1 test_quaca_unit"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/test/UnitTests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/test/UnitTests/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/test/UnitTests/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_quaca_unit/fast">
+				<Option output="/users/stud/hermasim/Documents/cpp/quaca/bin/test_quaca_unit" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/users/stud/hermasim/Documents/cpp/quaca/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/lib/armadillo-9.800.2/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/test/UnitTests/../include"/>
+					<Add directory="/usr/include/c++/8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
+					<Add directory="/usr/include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/test/UnitTests/Makefile&quot;  VERBOSE=1 test_quaca_unit/fast"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/test/UnitTests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/test/UnitTests/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/test/UnitTests/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_quaca_integrated">
+				<Option output="/users/stud/hermasim/Documents/cpp/quaca/bin/test_quaca_integrated" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/users/stud/hermasim/Documents/cpp/quaca/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/lib/armadillo-9.800.2/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/test/IntegratedTests/../include"/>
+					<Add directory="/usr/include/c++/8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
+					<Add directory="/usr/include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/test/IntegratedTests/Makefile&quot;  VERBOSE=1 test_quaca_integrated"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/test/IntegratedTests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/test/IntegratedTests/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/test/IntegratedTests/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_quaca_integrated/fast">
+				<Option output="/users/stud/hermasim/Documents/cpp/quaca/bin/test_quaca_integrated" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/users/stud/hermasim/Documents/cpp/quaca/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/lib/armadillo-9.800.2/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/include"/>
+					<Add directory="/users/stud/hermasim/Documents/cpp/quaca/test/IntegratedTests/../include"/>
+					<Add directory="/usr/include/c++/8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
+					<Add directory="/usr/include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/test/IntegratedTests/Makefile&quot;  VERBOSE=1 test_quaca_integrated/fast"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/test/IntegratedTests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/test/IntegratedTests/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/test/IntegratedTests/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/app/.Tutorial/tutorial.cpp">
+			<Option target="Tutorial"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/app/Friction/friction.cpp">
+			<Option target="Friction"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Calculations/Integrations.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Calculations/Integrations.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Friction/Friction.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Friction/Friction.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/GreensTensor/GreensTensor.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/GreensTensor/GreensTensor.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/GreensTensor/GreensTensorFactory.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/GreensTensor/GreensTensorFactory.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/GreensTensor/GreensTensorPlate.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/GreensTensor/GreensTensorPlate.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/GreensTensor/GreensTensorPlateVacuum.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/GreensTensor/GreensTensorPlateVacuum.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/GreensTensor/GreensTensorVacuum.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/GreensTensor/GreensTensorVacuum.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Looper/Looper.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Looper/Looper.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Looper/LooperFactory.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Looper/LooperFactory.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Looper/LooperV.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Looper/LooperV.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Looper/LooperZa.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Looper/LooperZa.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/MemoryKernel/MemoryKernelFactory.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/MemoryKernel/MemoryKernelFactory.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/MemoryKernel/OhmicMemoryKernel.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/MemoryKernel/OhmicMemoryKernel.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Options/Options.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Options/Options.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Permittivity/PermittivityDrude.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Permittivity/PermittivityDrude.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Permittivity/PermittivityFactory.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Permittivity/PermittivityFactory.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Polarizability/Polarizability.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Polarizability/Polarizability.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Polarizability/PolarizabilityBath.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Polarizability/PolarizabilityBath.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Polarizability/PolarizabilityFactory.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Polarizability/PolarizabilityFactory.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Polarizability/PolarizabilityNoBath.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/Polarizability/PolarizabilityNoBath.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/PowerSpectrum/PowerSpectrum.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/PowerSpectrum/PowerSpectrum.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/PowerSpectrum/PowerSpectrumFactory.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/PowerSpectrum/PowerSpectrumFactory.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/PowerSpectrum/PowerSpectrumHarmOsc.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/PowerSpectrum/PowerSpectrumHarmOsc.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/ReflectionCoefficients/ReflectionCoefficientsFactory.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/ReflectionCoefficients/ReflectionCoefficientsLocBulk.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/ReflectionCoefficients/ReflectionCoefficientsLocSlab.h">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/IntegratedTests/Friction/test_Friction_integrated.cpp">
+			<Option target="test_quaca_integrated"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/IntegratedTests/Polarizability/test_PolarizabilityBath_integrated.cpp">
+			<Option target="test_quaca_integrated"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/IntegratedTests/Polarizability/test_PolarizabilityNoBath_integrated.cpp">
+			<Option target="test_quaca_integrated"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/IntegratedTests/test_main.cpp">
+			<Option target="test_quaca_integrated"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/UnitTests/Calculations/test_Integrations_unit.cpp">
+			<Option target="test_quaca_unit"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/UnitTests/Friction/test_Friction_unit.cpp">
+			<Option target="test_quaca_unit"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/UnitTests/GreensTensor/test_GreensTensorPlateVacuum_unit.cpp">
+			<Option target="test_quaca_unit"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/UnitTests/GreensTensor/test_GreensTensorPlate_unit.cpp">
+			<Option target="test_quaca_unit"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/UnitTests/GreensTensor/test_GreensTensorVacuum_unit.cpp">
+			<Option target="test_quaca_unit"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/UnitTests/Looper/test_LooperV_unit.cpp">
+			<Option target="test_quaca_unit"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/UnitTests/Looper/test_LooperZa_unit.cpp">
+			<Option target="test_quaca_unit"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/UnitTests/MemoryKernel/test_OhmicMemoryKernel_unit.cpp">
+			<Option target="test_quaca_unit"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/UnitTests/Options/test_Options_unit.cpp">
+			<Option target="test_quaca_unit"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/UnitTests/Permittivity/test_PermittivityDrude_unit.cpp">
+			<Option target="test_quaca_unit"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/UnitTests/Polarizability/test_PolarizabilityBath_unit.cpp">
+			<Option target="test_quaca_unit"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/UnitTests/Polarizability/test_PolarizabilityNoBath_unit.cpp">
+			<Option target="test_quaca_unit"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/UnitTests/PowerSpectrum/test_PowerSpectrumHarmOsc.cpp">
+			<Option target="test_quaca_unit"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/UnitTests/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk_unit.cpp">
+			<Option target="test_quaca_unit"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/UnitTests/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab_unit.cpp">
+			<Option target="test_quaca_unit"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/UnitTests/test_main.cpp">
+			<Option target="test_quaca_unit"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/app/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\app\"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/app/Friction/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\app\Friction\"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/app/.Tutorial/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\app\.Tutorial\"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\test\"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/UnitTests/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\test\UnitTests\"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/IntegratedTests/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\test\IntegratedTests\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

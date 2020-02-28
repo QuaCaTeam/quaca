@@ -220,7 +220,7 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
     kappa_quad = kappa_double * kappa_double;
   }
 
-  // Express kappa via frequency and kappa
+  // Express k via frequency and kappa
   k = (sqrt(kappa_quad * (1.0 - v_quad * cos_phi_quad) + omega_quad) +
        v * omega * cos_phi) /
       (1 - v_quad * cos_phi_quad);

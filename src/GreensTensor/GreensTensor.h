@@ -7,7 +7,7 @@ using namespace arma;
 
 
 //Enum variables for the different integration options
-enum Tensor_Options {COMPLEX, IM, RE};
+enum Tensor_Options {COMPLEX, IM, RE, IGNORE};
 enum Weight_Options {UNIT, KV, TEMP, KV_TEMP, NON_LTE, KV_NON_LTE};
 // A struct with integration options
 struct Options_GreensTensor;
