@@ -19,11 +19,9 @@ public:
                                ReflectionCoefficients *reflection_coefficients,
                                double delta_cut, vec::fixed<2> rel_err ): GreensTensorPlate(v,za,beta,
                                                                        reflection_coefficients, delta_cut, rel_err) {};
-   // calculate the tensor in frequency and momentum space
-   void calculate_tensor(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
-
     // integrate over a two-dimensional k space
     //void integrate_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
+    void calculate_tensor(cx_mat::fixed<3,3> &GT, Options_GreensTensor opts);
 
     // integrands
     //static double integrand_1d_k(double kx, void *opts);
