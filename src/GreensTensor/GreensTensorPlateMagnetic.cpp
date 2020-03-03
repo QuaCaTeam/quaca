@@ -6,6 +6,15 @@
 #include <complex>
 
 
+GreensTensorPlateMagnetic::GreensTensorPlateMagnetic(
+        double v, double za, double beta,
+        ReflectionCoefficients *reflection_coefficients, double delta_cut,
+        vec::fixed<2> rel_err)
+        : GreensTensorPlate(v, za, beta, reflection_coefficients, delta_cut, rel_err) {};
+
+GreensTensorPlateMagnetic::GreensTensorPlateMagnetic(std::string input_file)
+        : GreensTensorPlate(input_file) {};
+
 void GreensTensorPlateMagnetic::calculate_tensor(cx_mat::fixed<3, 3> &GT,
                                          Options_GreensTensor opts) {
     // wavevectors
@@ -61,6 +70,86 @@ void GreensTensorPlateMagnetic::calculate_tensor(cx_mat::fixed<3, 3> &GT,
     if (opts.omega < 0) {
         GT = trans(GT);
     }
+};
+
+void GreensTensorPlateMagnetic::integrate_k(cx_mat::fixed<3, 3> &GT,
+                                    Options_GreensTensor opts) {
+
+    // imaginary unit
+    std::complex<double> I(0.0, 1.0);
+    // importing error vector to set accuracy of the integration
+    vec::fixed<2> rel_err = this->rel_err;
+    // intialize Green's tensor
+    GT.zeros();
+
+    // calculate the five non-zero elements of the Green's tensor. Here, the
+    // symmetry in y direction was already applied. Thus, the integration only
+    // consideres twice the domain from 0 to pi.
+
+    // the xx element
+    opts.indices = {0, 0};
+    GT(0, 0) = cquad(&integrand_1d_k_magnetic, &opts, 0, 0.5 * M_PI, rel_err(1), 0) / M_PI;
+    GT(0, 0) +=
+            cquad(&integrand_1d_k_magnetic, &opts, 0.5 * M_PI, M_PI, rel_err(1), 0) / M_PI;
+    // the yy element
+    opts.indices = {1, 1};
+    GT(1, 1) = cquad(&integrand_1d_k_magnetic, &opts, 0, 0.5 * M_PI, rel_err(1), 0) / M_PI;
+    GT(1, 1) +=
+            cquad(&integrand_1d_k, &opts, 0.5 * M_PI, M_PI, rel_err(1), 0) / M_PI;
+    // the zz element
+    opts.indices = {2, 2};
+    GT(2, 2) = cquad(&integrand_1d_k_magnetic, &opts, 0, 0.5 * M_PI, rel_err(1), 0) / M_PI;
+    GT(2, 2) +=
+            cquad(&integrand_1d_k_magnetic, &opts, 0.5 * M_PI, M_PI, rel_err(1), 0) / M_PI;
+    // the zx element
+    opts.indices = {2, 0};
+    GT(2, 0) =
+            I * cquad(&integrand_1d_k_magnetic, &opts, 0, 0.5 * M_PI, rel_err(1), 0) / M_PI;
+    GT(2, 0) +=
+            I * cquad(&integrand_1d_k_magnetic, &opts, 0.5 * M_PI, M_PI, rel_err(1), 0) / M_PI;
+    // the xz element
+    GT(0, 2) = -GT(2, 0);
+};
+
+double GreensTensorPlateMagnetic::integrand_1d_k_magnetic(double phi, void *opts) {
+    // The needed parameters for the integration are encoded in the void pointer.
+    // This void pointer is casted the options struct given in GreensTensor.h.
+    Options_GreensTensorMagnetic *opts_pt = static_cast<Options_GreensTensorMagnetic *>(opts);
+    // To access attributes of the GreensTensorPlate class, the class pointer
+    // within the struct is casted.
+    GreensTensorPlateMagnetic *pt = static_cast<GreensTensorPlateMagnetic *>(opts_pt->class_pt);
+
+    double result = 0.;
+    // import parameters
+    double omega = opts_pt->omega;
+    double beta = pt->beta;
+    double v = pt->v;
+    double za = pt->za;
+    // The cut-off parameters acts as upper bound of the kappa integration.
+    double kappa_cut = pt->delta_cut / (2 * za);
+    // import demande relative accuracy of the integration
+    vec::fixed<2> rel_err = pt->rel_err;
+    // read integration variable phi
+    double cos_phi = std::cos(phi);
+
+    // Write the integration variable into the options struct
+    opts_pt->kvec(0) = phi;
+
+    // Calculate the integrand corresponding to the given options. To resolve the
+    // probably sharp edge of the Bose-Einstein distribution, the integration is
+    // split at the edge, if the edged lies below the cut-off kappa_cut.
+    if (kappa_cut > std::abs(omega / (v * cos_phi))) {
+        //Ignore the propagating part of the Green's tensor
+        //result = cquad(&integrand_2d_k_magnetic, opts, -std::abs(omega), 0, rel_err(0), 0);
+        result += cquad(&integrand_2d_k_magnetic, opts, 0, std::abs(omega / (v * cos_phi)),
+                        rel_err(0), 0);
+        result += cquad(&integrand_2d_k_magnetic, opts, std::abs(omega / (v * cos_phi)),
+                        kappa_cut, rel_err(0), 0);
+    } else {
+        result = cquad(&integrand_2d_k_magnetic, opts, -std::abs(omega), kappa_cut,
+                       rel_err(0), 0);
+    }
+    return result;
 };
 
 double GreensTensorPlateMagnetic::integrand_2d_k_magnetic(double kappa_double, void *opts) {

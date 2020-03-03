@@ -28,9 +28,11 @@
 #include "../src/Polarizability/PolarizabilityFactory.h"
 #include "../src/Polarizability/PolarizabilityBath.h"
 #include "../src/Polarizability/PolarizabilityNoBath.h"
+#include "../src/Polarizability/PolarizabilityNoBathMagnetic.h"
 
 #include "../src/PowerSpectrum/PowerSpectrum.h"
 #include "../src/PowerSpectrum/PowerSpectrumHarmOsc.h"
+#include "../src/PowerSpectrum/PowerSpectrumHarmOscMagnetic.h"
 #include "../src/PowerSpectrum/PowerSpectrumFactory.h"
 
 #include "../src/Friction/Friction.h"

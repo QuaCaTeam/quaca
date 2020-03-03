@@ -14,11 +14,11 @@ struct Options_GreensTensorMagnetic: Options_GreensTensor
 
 class GreensTensorPlateMagnetic: public GreensTensorPlate{
 public:
-    GreensTensorPlateMagnetic(std::string input_file): GreensTensorPlate(input_file) {};
+    // constructors
+    GreensTensorPlateMagnetic(std::string input_file);
     GreensTensorPlateMagnetic(double v, double za, double beta,
                                ReflectionCoefficients *reflection_coefficients,
-                               double delta_cut, vec::fixed<2> rel_err ): GreensTensorPlate(v,za,beta,
-                                                                       reflection_coefficients, delta_cut, rel_err) {};
+                               double delta_cut, vec::fixed<2> rel_err );
     // integrate over a two-dimensional k space
     //void integrate_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
     void calculate_tensor(cx_mat::fixed<3,3> &GT, Options_GreensTensor opts);
@@ -26,6 +26,10 @@ public:
     // integrands
     //static double integrand_1d_k(double kx, void *opts);
     static double integrand_2d_k_magnetic(double ky, void *opts);
+    static double integrand_1d_k_magnetic(double phi, void *opts);
+    void integrate_k(cx_mat::fixed<3, 3> &GT,
+                                                    Options_GreensTensor opts);
+
 };
 
 #endif
