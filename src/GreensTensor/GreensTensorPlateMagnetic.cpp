@@ -129,6 +129,14 @@ double GreensTensorPlateMagnetic::integrand_2d_k_magnetic(double kappa_double, v
     // producing the reflection coefficients in p- and s-polarization
     pt->reflection_coefficients->ref(r_p, r_s, omega_pl_abs, kappa_complex);
 
+    //Enforce the crossing relation
+    if(omega_pl < 0)
+    {
+        kappa_complex = conj(kappa_complex);
+        r_s = conj(r_s);
+        r_p = conj(r_p);
+    }
+
     //check wether the electric Green's tensor should be computed
     if(opts_pt->fancy_complex != IGNORE) {
 
