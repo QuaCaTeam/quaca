@@ -260,6 +260,33 @@ GreensTensor/GreensTensorPlate.cpp.s:
 	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlate.cpp.s
 .PHONY : GreensTensor/GreensTensorPlate.cpp.s
 
+GreensTensor/GreensTensorPlateMagnetic.o: GreensTensor/GreensTensorPlateMagnetic.cpp.o
+
+.PHONY : GreensTensor/GreensTensorPlateMagnetic.o
+
+# target to build an object file
+GreensTensor/GreensTensorPlateMagnetic.cpp.o:
+	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlateMagnetic.cpp.o
+.PHONY : GreensTensor/GreensTensorPlateMagnetic.cpp.o
+
+GreensTensor/GreensTensorPlateMagnetic.i: GreensTensor/GreensTensorPlateMagnetic.cpp.i
+
+.PHONY : GreensTensor/GreensTensorPlateMagnetic.i
+
+# target to preprocess a source file
+GreensTensor/GreensTensorPlateMagnetic.cpp.i:
+	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlateMagnetic.cpp.i
+.PHONY : GreensTensor/GreensTensorPlateMagnetic.cpp.i
+
+GreensTensor/GreensTensorPlateMagnetic.s: GreensTensor/GreensTensorPlateMagnetic.cpp.s
+
+.PHONY : GreensTensor/GreensTensorPlateMagnetic.s
+
+# target to generate assembly for a file
+GreensTensor/GreensTensorPlateMagnetic.cpp.s:
+	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlateMagnetic.cpp.s
+.PHONY : GreensTensor/GreensTensorPlateMagnetic.cpp.s
+
 GreensTensor/GreensTensorPlateVacuum.o: GreensTensor/GreensTensorPlateVacuum.cpp.o
 
 .PHONY : GreensTensor/GreensTensorPlateVacuum.o
@@ -851,6 +878,9 @@ help:
 	@echo "... GreensTensor/GreensTensorPlate.o"
 	@echo "... GreensTensor/GreensTensorPlate.i"
 	@echo "... GreensTensor/GreensTensorPlate.s"
+	@echo "... GreensTensor/GreensTensorPlateMagnetic.o"
+	@echo "... GreensTensor/GreensTensorPlateMagnetic.i"
+	@echo "... GreensTensor/GreensTensorPlateMagnetic.s"
 	@echo "... GreensTensor/GreensTensorPlateVacuum.o"
 	@echo "... GreensTensor/GreensTensorPlateVacuum.i"
 	@echo "... GreensTensor/GreensTensorPlateVacuum.s"

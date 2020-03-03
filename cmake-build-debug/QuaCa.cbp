@@ -342,6 +342,12 @@
 		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/GreensTensor/GreensTensorPlate.h">
 			<Option target="quaca"/>
 		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/GreensTensor/GreensTensorPlateMagnetic.cpp">
+			<Option target="quaca"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/GreensTensor/GreensTensorPlateMagnetic.h">
+			<Option target="quaca"/>
+		</Unit>
 		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/src/GreensTensor/GreensTensorPlateVacuum.cpp">
 			<Option target="quaca"/>
 		</Unit>
@@ -484,6 +490,9 @@
 			<Option target="test_quaca_unit"/>
 		</Unit>
 		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/UnitTests/Friction/test_Friction_unit.cpp">
+			<Option target="test_quaca_unit"/>
+		</Unit>
+		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/UnitTests/GreensTensor/test_GreensTensorPlateMagnetic_unit.cpp">
 			<Option target="test_quaca_unit"/>
 		</Unit>
 		<Unit filename="/users/stud/hermasim/Documents/cpp/quaca/test/UnitTests/GreensTensor/test_GreensTensorPlateVacuum_unit.cpp">

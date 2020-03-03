@@ -162,32 +162,28 @@ double GreensTensorPlateMagnetic::integrand_2d_k_magnetic(double kappa_double, v
 
         // Calculate the G_xx element
         if (opts_pt->indices(0) == 0 && opts_pt->indices(1) == 0) {
-            result_complex =  r_s_factor * sin_quad;
+            result_complex +=  r_s_factor * sin_quad;
             result_complex += r_p_herm_factor * cos_quad;
         }
             // Calculate the G_yy element
         else if (opts_pt->indices(0) == 1 && opts_pt->indices(1) == 1) {
-            result_complex = r_p_herm_factor * sin_quad;
+            result_complex += r_p_herm_factor * sin_quad;
             result_complex += r_s_factor * cos_quad;
         }
             // Calculate the G_zz element
         else if (opts_pt->indices(0) == 2 && opts_pt->indices(1) == 2) {
-            result_complex = r_p_herm_factor * k_quad / kappa_quad;
+            result_complex += r_p_herm_factor * k_quad / kappa_quad;
         }
             // Calculate the G_zx element
         else if (opts_pt->indices(0) == 2 && opts_pt->indices(1) == 0) {
-            result_complex = r_p_rot_factor*I*k*cos(phi)/kappa_complex;
+            result_complex += r_p_rot_factor*I*k*cos(phi)/kappa_complex;
         }
             // Calculate the G_xz element
         else if (opts_pt->indices(0) == 0 && opts_pt->indices(1) == 2) {
-            result_complex = -r_p_rot_factor* I * k*cos(phi)/kappa_complex;
-        } else {
-            result_complex = (0, 0);
+            result_complex += -r_p_rot_factor* I * k*cos(phi)/kappa_complex;
         }
     }
-    result = result_complex.imag() + result_complex.real();
     //reset the result_complex variable to store additonal components of the other Green's tensors
-    result_complex = (0,0);
     //check if the BE-GreensTensor should be computed
     if(opts_pt->BE != IGNORE)
     {
@@ -311,7 +307,18 @@ double GreensTensorPlateMagnetic::integrand_2d_k_magnetic(double kappa_double, v
     }
     //Depending on the component that was computed either the real or the imaginary part should be zero. Therefore
     //we can add both of the up. The missing I has to be added after integration procedure
-    result += imag(result_complex) + real(result_complex);
+    if(real(result_complex) == 0)
+    {
+        result = imag(result_complex);
+    }
+    else if(imag(result_complex) == 0)
+    {
+        result = real(result_complex);
+    }
+    else {
+        std::cerr << "Result_complex is neither purely real nor purely complex. Such a result is not implemented yet" << std::endl;
+        exit(0);
+    }
 
     // Add weighting function if demanded
     if (opts_pt->weight_function == KV) {

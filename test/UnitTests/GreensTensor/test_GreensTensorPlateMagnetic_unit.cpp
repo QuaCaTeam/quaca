@@ -8,9 +8,12 @@ TEST_CASE("The tensors from calculate_tensor and integrand_2d_k coincide",
           "[GreensTensorPlateMagnetic]") {
     // Here we considered also the volume element from the integration.
     std::complex<double> I(0.0, 1.0);
-    double phi = 0;
-    double k = 3.;
-    double omega = 2.;
+    //Calculate computes all possible entries of the electric Green's tensor. On the other hand integrand_2d_k_magnetic
+    //already sets all entries linear in k_y to zero, as the integral from 0 to 2 Pi would vanish
+    //there phi has to be set, such that sin(phi) = 0
+    double phi = GENERATE(0.,M_PI);
+    double k = 3;
+    double omega = -2.;
     double k_x = k*cos(phi);
     double k_y = k*sin(phi);
     double omega_p = 9;
@@ -81,8 +84,6 @@ TEST_CASE("The tensors from calculate_tensor and integrand_2d_k coincide",
             }
         }
         RHS = Green_fancy_I;
-        std::cout << LHS << std::endl << RHS << std::endl;
-        std::cout << LHS/RHS << std::endl;
         REQUIRE(approx_equal(LHS, RHS, "abs", 10E-12));
     }
     SECTION("Options: EE, RE") {
@@ -225,5 +226,113 @@ TEST_CASE("The tensors from calculate_tensor and integrand_2d_k coincide",
         REQUIRE(approx_equal(LHS, RHS, "abs", 10E-12));
     }
     opts.BB = IGNORE;
-};
+}
 
+TEST_CASE("Test the sum of several Green's tensors","[GreensTensorPlateMagnetic]") {
+    //In general there a lot of variations of Green's tensors that one could some up. For simplicity only the two cases
+    // which are relevant for quantum friction are tested
+    // Here we considered also the volume element from the integration.
+    std::complex<double> I(0.0, 1.0);
+    //Calculate computes all possible entries of the electric Green's tensor. On the other hand integrand_2d_k_magnetic
+    //already sets all entries linear in k_y to zero, as the integral from 0 to 2 Pi would vanish
+    //there phi has to be set, such that sin(phi) = 0
+    double phi = GENERATE(0., M_PI);
+    double k = GENERATE(take(3,random(0.,1e2)));
+    //At this point only the evanescent part is implemented, therefore omega_pl_quad has to be smaller then k_quad
+    double omega = GENERATE(take(3,random(-.8,.8)));
+    double k_x = k*cos(phi);
+    double k_y = k*sin(phi);
+    double omega_p = 9;
+    double gamma = 0.1;
+    double v = 1e-2;
+    double za = 0.1;
+    double delta_cut = 30;
+    vec::fixed<2> rel_err = {1E-8, 1E-6};
+    double kappa_double;
+    std::complex<double> kappa, volume_element;
+    PermittivityDrude perm(omega_p, gamma);
+    ReflectionCoefficientsLocBulk refl(&perm);
+    GreensTensorPlateMagnetic Greens(v, za, 0.1, &refl, delta_cut, rel_err);
+    struct Options_GreensTensorMagnetic opts;
+    opts.class_pt = &Greens;
+
+    // First, the calculate_tensor operation is used to generate the
+    // Green's tensor with fancy_I
+    cx_mat::fixed<3, 3> Green(fill::zeros);
+    cx_mat::fixed<3, 3> Green_fancy_I(fill::zeros);
+    cx_mat::fixed<3, 3> Green_fancy_R(fill::zeros);
+
+    opts.kvec(0) = k_x;
+    opts.kvec(1) = k_y;
+    opts.omega = omega + k_x * v;
+    k = sqrt(k_x * k_x + k_y * k_y);
+    kappa = sqrt(std::complex<double>(k * k - opts.omega * opts.omega, 0.));
+    kappa = std::complex<double>(std::abs(kappa.real()), -std::abs(kappa.imag()));
+    volume_element = kappa * k / (k - cos(phi) * v * opts.omega);
+
+    Greens.calculate_tensor(Green, opts);
+    if (opts.omega < 0) {
+        volume_element = conj(volume_element);
+    }
+    Green *= volume_element;
+    Green_fancy_I = (Green - trans(Green)) / (2. * I);
+    Green_fancy_R = (Green + trans(Green)) / (2.);
+
+    cx_mat::fixed<3,3> Sigma = {{0,0,0},{sin(phi),-cos(phi),0},{I*kappa/k,0,-cos(phi)}};
+    Sigma *= k*v/(opts.omega);
+
+    cx_mat::fixed<3, 3> LHS(fill::zeros);
+    cx_mat::fixed<3, 3> RHS(fill::zeros);
+
+    if (kappa.real() == 0.) {
+        kappa_double = kappa.imag();
+    } else {
+        kappa_double = kappa.real();
+
+    }// Here we considered also the volume element from the integration.
+
+    opts.kvec(0) = phi ;
+    opts.omega = omega;
+
+    SECTION("Sum of G^EE_I and G^BE_R")
+    {
+        opts.fancy_complex = IM;
+        opts.BE = RE;
+        for(int i = 0; i < 3; ++i)
+        {
+            for(int j = 0; j < 3; ++j)
+            {
+                opts.indices(0) = i;
+                opts.indices(1) = j;
+                LHS(i,j) = (2*M_PI)*Greens.integrand_2d_k_magnetic(kappa_double, &opts);
+                if(i != j)
+                {
+                    LHS(i,j) *= I;
+                }
+
+            }
+        }
+        RHS = Green_fancy_I + Sigma*Green_fancy_R;
+        REQUIRE(approx_equal(LHS,RHS,"abs",10e-12));
+    }
+    SECTION("Sum of fancy_I of all Green's tensors") {
+        opts.fancy_complex = IM;
+        opts.BE = IM;
+        opts.EB = IM;
+        opts.BB = IM;
+        for(int i = 0; i < 3; ++i) {
+            for(int j = 0; j < 3; ++j) {
+                opts.indices(0) = i;
+                opts.indices(1) = j;
+                LHS(i,j) = (2*M_PI)*Greens.integrand_2d_k_magnetic(kappa_double, &opts);
+                if(i != j) {
+                    LHS(i,j) *= I;
+                }
+
+            }
+        }
+        RHS = Green_fancy_I + Sigma*Green_fancy_I + Green_fancy_I*trans(Sigma) + Sigma*Green_fancy_I*trans(Sigma);
+        REQUIRE(approx_equal(LHS,RHS,"abs",10e-12));
+    }
+
+}

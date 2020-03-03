@@ -179,6 +179,33 @@ Friction/test_Friction_unit.cpp.s:
 	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/Friction/test_Friction_unit.cpp.s
 .PHONY : Friction/test_Friction_unit.cpp.s
 
+GreensTensor/test_GreensTensorPlateMagnetic_unit.o: GreensTensor/test_GreensTensorPlateMagnetic_unit.cpp.o
+
+.PHONY : GreensTensor/test_GreensTensorPlateMagnetic_unit.o
+
+# target to build an object file
+GreensTensor/test_GreensTensorPlateMagnetic_unit.cpp.o:
+	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/GreensTensor/test_GreensTensorPlateMagnetic_unit.cpp.o
+.PHONY : GreensTensor/test_GreensTensorPlateMagnetic_unit.cpp.o
+
+GreensTensor/test_GreensTensorPlateMagnetic_unit.i: GreensTensor/test_GreensTensorPlateMagnetic_unit.cpp.i
+
+.PHONY : GreensTensor/test_GreensTensorPlateMagnetic_unit.i
+
+# target to preprocess a source file
+GreensTensor/test_GreensTensorPlateMagnetic_unit.cpp.i:
+	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/GreensTensor/test_GreensTensorPlateMagnetic_unit.cpp.i
+.PHONY : GreensTensor/test_GreensTensorPlateMagnetic_unit.cpp.i
+
+GreensTensor/test_GreensTensorPlateMagnetic_unit.s: GreensTensor/test_GreensTensorPlateMagnetic_unit.cpp.s
+
+.PHONY : GreensTensor/test_GreensTensorPlateMagnetic_unit.s
+
+# target to generate assembly for a file
+GreensTensor/test_GreensTensorPlateMagnetic_unit.cpp.s:
+	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/GreensTensor/test_GreensTensorPlateMagnetic_unit.cpp.s
+.PHONY : GreensTensor/test_GreensTensorPlateMagnetic_unit.cpp.s
+
 GreensTensor/test_GreensTensorPlateVacuum_unit.o: GreensTensor/test_GreensTensorPlateVacuum_unit.cpp.o
 
 .PHONY : GreensTensor/test_GreensTensorPlateVacuum_unit.o
@@ -572,6 +599,9 @@ help:
 	@echo "... Friction/test_Friction_unit.o"
 	@echo "... Friction/test_Friction_unit.i"
 	@echo "... Friction/test_Friction_unit.s"
+	@echo "... GreensTensor/test_GreensTensorPlateMagnetic_unit.o"
+	@echo "... GreensTensor/test_GreensTensorPlateMagnetic_unit.i"
+	@echo "... GreensTensor/test_GreensTensorPlateMagnetic_unit.s"
 	@echo "... GreensTensor/test_GreensTensorPlateVacuum_unit.o"
 	@echo "... GreensTensor/test_GreensTensorPlateVacuum_unit.i"
 	@echo "... GreensTensor/test_GreensTensorPlateVacuum_unit.s"
