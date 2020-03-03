@@ -16,7 +16,7 @@ GreensTensorPlateMagnetic::GreensTensorPlateMagnetic(std::string input_file)
         : GreensTensorPlate(input_file) {};
 
 void GreensTensorPlateMagnetic::calculate_tensor(cx_mat::fixed<3, 3> &GT,
-                                         Options_GreensTensor opts) {
+                                         Options_GreensTensorMagnetic opts) {
     // wavevectors
     double kx, ky, k_quad;
     // squared and absolute value of the frequency
@@ -73,7 +73,7 @@ void GreensTensorPlateMagnetic::calculate_tensor(cx_mat::fixed<3, 3> &GT,
 };
 
 void GreensTensorPlateMagnetic::integrate_k(cx_mat::fixed<3, 3> &GT,
-                                    Options_GreensTensor opts) {
+                                    Options_GreensTensorMagnetic opts) {
 
     // imaginary unit
     std::complex<double> I(0.0, 1.0);
@@ -140,7 +140,7 @@ double GreensTensorPlateMagnetic::integrand_1d_k_magnetic(double phi, void *opts
     // split at the edge, if the edged lies below the cut-off kappa_cut.
     if (kappa_cut > std::abs(omega / (v * cos_phi))) {
         //Ignore the propagating part of the Green's tensor
-        //result = cquad(&integrand_2d_k_magnetic, opts, -std::abs(omega), 0, rel_err(0), 0);
+        result = cquad(&integrand_2d_k_magnetic, opts, -std::abs(omega), 0, rel_err(0), 0);
         result += cquad(&integrand_2d_k_magnetic, opts, 0, std::abs(omega / (v * cos_phi)),
                         rel_err(0), 0);
         result += cquad(&integrand_2d_k_magnetic, opts, std::abs(omega / (v * cos_phi)),
