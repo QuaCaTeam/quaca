@@ -13,7 +13,7 @@ GreensTensorPlate::GreensTensorPlate(
   this->delta_cut = delta_cut;
   this->rel_err = rel_err;
   this->reflection_coefficients = reflection_coefficients;
-};
+}
 
 GreensTensorPlate::GreensTensorPlate(std::string input_file)
     : GreensTensor(input_file) {
@@ -27,7 +27,7 @@ GreensTensorPlate::GreensTensorPlate(std::string input_file)
   pt::read_ini(input_file, root);
 
   // check if type is right
-  std::string type = root.get<std::string>("GreensTensor.type");
+  auto type = root.get<std::string>("GreensTensor.type");
   assert(type == "plate");
 
   // read parameters
@@ -35,7 +35,7 @@ GreensTensorPlate::GreensTensorPlate(std::string input_file)
   this->delta_cut = root.get<double>("GreensTensor.delta_cut");
   this->rel_err(0) = root.get<double>("GreensTensor.rel_err_0");
   this->rel_err(1) = root.get<double>("GreensTensor.rel_err_1");
-};
+}
 
 void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3, 3> &GT,
                                          Options_GreensTensor opts) {
@@ -88,15 +88,13 @@ void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3, 3> &GT,
   if (opts.omega < 0) {
     GT = trans(GT);
   }
-};
+}
 
 void GreensTensorPlate::integrate_k(cx_mat::fixed<3, 3> &GT,
-                                       Options_GreensTensor opts) {
+                                    Options_GreensTensor opts) {
 
   // imaginary unit
   std::complex<double> I(0.0, 1.0);
-  // importing error vector to set accuracy of the integration
-  vec::fixed<2> rel_err = this->rel_err;
   // intialize Green's tensor
   GT.zeros();
 
@@ -106,47 +104,51 @@ void GreensTensorPlate::integrate_k(cx_mat::fixed<3, 3> &GT,
 
   // the xx element
   opts.indices = {0, 0};
-  GT(0, 0) = cquad(&integrand_1d_k, &opts, 0, 0.5 * M_PI, rel_err(1), 0) / M_PI;
+  GT(0, 0) =
+      cquad(&integrand_1d_k, &opts, 0, 0.5 * M_PI, this->rel_err(1), 0) / M_PI;
   GT(0, 0) +=
-      cquad(&integrand_1d_k, &opts, 0.5 * M_PI, M_PI, rel_err(1), 0) / M_PI;
+      cquad(&integrand_1d_k, &opts, 0.5 * M_PI, M_PI, this->rel_err(1), 0) /
+      M_PI;
   // the yy element
   opts.indices = {1, 1};
-  GT(1, 1) = cquad(&integrand_1d_k, &opts, 0, 0.5 * M_PI, rel_err(1), 0) / M_PI;
+  GT(1, 1) =
+      cquad(&integrand_1d_k, &opts, 0, 0.5 * M_PI, this->rel_err(1), 0) / M_PI;
   GT(1, 1) +=
-      cquad(&integrand_1d_k, &opts, 0.5 * M_PI, M_PI, rel_err(1), 0) / M_PI;
+      cquad(&integrand_1d_k, &opts, 0.5 * M_PI, M_PI, this->rel_err(1), 0) /
+      M_PI;
   // the zz element
   opts.indices = {2, 2};
-  GT(2, 2) = cquad(&integrand_1d_k, &opts, 0, 0.5 * M_PI, rel_err(1), 0) / M_PI;
+  GT(2, 2) =
+      cquad(&integrand_1d_k, &opts, 0, 0.5 * M_PI, this->rel_err(1), 0) / M_PI;
   GT(2, 2) +=
-      cquad(&integrand_1d_k, &opts, 0.5 * M_PI, M_PI, rel_err(1), 0) / M_PI;
+      cquad(&integrand_1d_k, &opts, 0.5 * M_PI, M_PI, this->rel_err(1), 0) /
+      M_PI;
   // the zx element
   opts.indices = {2, 0};
-  GT(2, 0) =
-      I * cquad(&integrand_1d_k, &opts, 0, 0.5 * M_PI, rel_err(1), 0) / M_PI;
+  GT(2, 0) = I *
+             cquad(&integrand_1d_k, &opts, 0, 0.5 * M_PI, this->rel_err(1), 0) /
+             M_PI;
   GT(2, 0) +=
-      I * cquad(&integrand_1d_k, &opts, 0.5 * M_PI, M_PI, rel_err(1), 0) / M_PI;
+      I * cquad(&integrand_1d_k, &opts, 0.5 * M_PI, M_PI, this->rel_err(1), 0) /
+      M_PI;
   // the xz element
   GT(0, 2) = -GT(2, 0);
-};
+}
 
 double GreensTensorPlate::integrand_1d_k(double phi, void *opts) {
   // The needed parameters for the integration are encoded in the void pointer.
   // This void pointer is casted the options struct given in GreensTensor.h.
-  Options_GreensTensor *opts_pt = static_cast<Options_GreensTensor *>(opts);
+  auto *opts_pt = static_cast<Options_GreensTensor *>(opts);
   // To access attributes of the GreensTensorPlate class, the class pointer
   // within the struct is casted.
-  GreensTensorPlate *pt = static_cast<GreensTensorPlate *>(opts_pt->class_pt);
+  auto *pt = dynamic_cast<GreensTensorPlate *>(opts_pt->class_pt);
 
   double result;
   // import parameters
   double omega = opts_pt->omega;
-  double beta = pt->beta;
   double v = pt->v;
-  double za = pt->za;
   // The cut-off parameters acts as upper bound of the kappa integration.
-  double kappa_cut = pt->delta_cut / (2 * za);
-  // import demande relative accuracy of the integration
-  vec::fixed<2> rel_err = pt->rel_err;
+  double kappa_cut = pt->delta_cut / (2 * pt->za);
   // read integration variable phi
   double cos_phi = std::cos(phi);
 
@@ -157,25 +159,26 @@ double GreensTensorPlate::integrand_1d_k(double phi, void *opts) {
   // probably sharp edge of the Bose-Einstein distribution, the integration is
   // split at the edge, if the edged lies below the cut-off kappa_cut.
   if (kappa_cut > std::abs(omega / (v * cos_phi))) {
-    result = cquad(&integrand_2d_k, opts, -std::abs(omega), 0, rel_err(0), 0);
+    result =
+        cquad(&integrand_2d_k, opts, -std::abs(omega), 0, pt->rel_err(0), 0);
     result += cquad(&integrand_2d_k, opts, 0, std::abs(omega / (v * cos_phi)),
-                    rel_err(0), 0);
+                    pt->rel_err(0), 0);
     result += cquad(&integrand_2d_k, opts, std::abs(omega / (v * cos_phi)),
-                    kappa_cut, rel_err(0), 0);
+                    kappa_cut, pt->rel_err(0), 0);
   } else {
     result = cquad(&integrand_2d_k, opts, -std::abs(omega), kappa_cut,
-                   rel_err(0), 0);
+                   pt->rel_err(0), 0);
   }
   return result;
-};
+}
 
 double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
   // The needed parameters for the integration are encoded in the void pointer.
   // This void pointer is casted the options struct given in GreensTensor.h.
-  Options_GreensTensor *opts_pt = static_cast<Options_GreensTensor *>(opts);
+  auto *opts_pt = static_cast<Options_GreensTensor *>(opts);
   // To access attributes of the GreensTensorPlate class, the class pointer
   // within the struct is casted.
-  GreensTensorPlate *pt = static_cast<GreensTensorPlate *>(opts_pt->class_pt);
+  auto *pt = dynamic_cast<GreensTensorPlate *>(opts_pt->class_pt);
 
   // read general input parameters
   double beta = pt->beta;
@@ -192,7 +195,7 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
   // Before the real or imaginary part of the chosen matrix element can be
   // calculated, the complex result is stored in result_complex.
   std::complex<double> result_complex;
-  double result;
+  double result = 0;
   // Doppler-shifted frequency
   double omega_pl, omega_pl_quad;
   // wavevector
@@ -303,7 +306,7 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
     }
   }
   // Calculate fancy imaginary part of the given matrix element
-  else if(opts_pt->fancy_complex == IM) {
+  else if (opts_pt->fancy_complex == IM) {
     if (opts_pt->indices(0) == 2 && opts_pt->indices(1) == 0 ||
         opts_pt->indices(0) == 0 && opts_pt->indices(1) == 2) {
       // Mind the missing leading I! This must be added after the double
@@ -314,7 +317,7 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
     }
   }
   return result;
-};
+}
 
 std::complex<double> GreensTensorPlate::get_r_p(double omega, double k) {
   std::complex<double> r_p, r_s;
@@ -323,10 +326,10 @@ std::complex<double> GreensTensorPlate::get_r_p(double omega, double k) {
     kappa = std::complex<double>(0., -sqrt(omega * omega - k * k));
   } else {
     kappa = std::complex<double>(sqrt(k * k - omega * omega), 0.);
-  };
+  }
   reflection_coefficients->ref(r_p, r_s, omega, kappa);
   return r_p;
-};
+}
 
 std::complex<double> GreensTensorPlate::get_r_s(double omega, double k) {
   std::complex<double> r_s, r_p;
@@ -335,12 +338,12 @@ std::complex<double> GreensTensorPlate::get_r_s(double omega, double k) {
     kappa = std::complex<double>(0., -sqrt(omega * omega - k * k));
   } else {
     kappa = std::complex<double>(sqrt(k * k - omega * omega), 0.);
-  };
+  }
   reflection_coefficients->ref(r_p, r_s, omega, kappa);
   return r_s;
-};
+}
 
 double GreensTensorPlate::omega_ch() {
   // Calculate omega_cut (reasonable for every plate setup)
   return this->delta_cut * this->v / this->za;
-};
+}
