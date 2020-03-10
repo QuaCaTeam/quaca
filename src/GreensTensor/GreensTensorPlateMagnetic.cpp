@@ -294,13 +294,12 @@ double GreensTensorPlateMagnetic::integrand_2d_k_magnetic_R(double kappa_double,
   if (opts_pt->fancy_complex != IGNORE) {
 
     // General prefactor for all components
-    std::complex<double> prefactor =
-        kappa_complex / (1. - cos(phi) * v * omega_pl / k);
+    double prefactor =
+        std::abs(kappa_double) / (1. - cos(phi) * v * omega_pl / k);
     // prefactors for the ss-polarization, the hermitian part of the pp
     // polarization and the rotational part of the pp-polarization
-    std::complex<double> r_s_factor;
-    std::complex<double> r_p_herm_factor;
-    std::complex<double> r_p_rot_factor;
+    double r_s_factor;
+    double r_p_herm_factor;
     if (opts_pt->fancy_complex == IM) {
       r_s_factor = prefactor * omega_pl_quad *
                    imag(r_s/kappa_complex * exp(-2 * za * kappa_complex));
@@ -334,20 +333,20 @@ double GreensTensorPlateMagnetic::integrand_2d_k_magnetic_R(double kappa_double,
   // other Green's tensors check if the BE-GreensTensor should be computed
   if (opts_pt->BE != IGNORE) {
     // General prefactor for all components
-    std::complex<double> prefactor =
-        kappa_complex / (1. - cos(phi) * v * omega_pl / k);
+    double prefactor =
+        std::abs(kappa_double) / (1. - cos(phi) * v * omega_pl / k);
     // prefactors for the ss-polarization, the hermitian part of the pp
     // polarization and the rotational part of the pp-polarization
-    std::complex<double> r_s_factor;
-    std::complex<double> r_p_herm_factor;
-    std::complex<double> r_p_rot_factor;
+    double r_s_factor;
+    double r_p_herm_factor;
+    double r_p_rot_factor;
     if (opts_pt->BE == IM) {
       r_s_factor = prefactor * omega_pl_quad *
                    imag(r_s / kappa_complex * exp(-2 * za * kappa_complex));
       r_p_herm_factor =
           prefactor * imag(r_p * kappa_complex * exp(-2. * za * kappa_complex));
       r_p_rot_factor =
-          prefactor * kappa_complex * imag(r_p * exp(-2. * za * kappa_complex));
+          prefactor * imag(r_p * exp(-2. * za * kappa_complex));
     }
     if (opts_pt->BE == RE) {
       r_s_factor = prefactor * omega_pl_quad *
@@ -355,11 +354,10 @@ double GreensTensorPlateMagnetic::integrand_2d_k_magnetic_R(double kappa_double,
       r_p_herm_factor =
           prefactor * real(r_p * kappa_complex * exp(-2. * za * kappa_complex));
       r_p_rot_factor =
-          prefactor * kappa_complex * real(r_p * exp(-2. * za * kappa_complex));
+          prefactor * real(r_p * exp(-2. * za * kappa_complex));
     }
     // Compute all the different components of the Green's tensor
-    // for real kappa the diagonal elements are real
-    if (kappa_double >= 0) {
+    // for all kappa the diagonal elements are real
       // G_yy
       if (opts_pt->indices(0) == 1 && opts_pt->indices(1) == 1) {
         result_complex -= r_s_factor * k * v * cos(phi) / omega_pl;
@@ -368,36 +366,40 @@ double GreensTensorPlateMagnetic::integrand_2d_k_magnetic_R(double kappa_double,
       else if (opts_pt->indices(0) == 2 && opts_pt->indices(1) == 2) {
         result_complex -= r_p_herm_factor * pow(k, 3) * v * cos(phi) /
                           (kappa_quad * omega_pl);
-        result_complex += r_p_rot_factor * k * v * cos(phi) / (omega_pl);
       }
-    } else if (kappa_double < 0) {
-      // G_zx
-      if (opts_pt->indices(0) == 2 && opts_pt->indices(1) == 0) {
-        result_complex +=
-            r_s_factor * I * v * kappa_complex * sin_quad / omega_pl;
-        result_complex +=
-            r_p_herm_factor * I * v * kappa_complex * cos_quad / omega_pl;
-        result_complex -= r_p_rot_factor * I * k_quad * v * cos_quad /
-                          (omega_pl * kappa_complex);
+      //Add terms linear in kappa depending on the integration regime
+      if(kappa_double >= 0) {
+        if(opts_pt->indices(0) == 2 && opts_pt->indices(1) == 2) {
+          result_complex += r_p_rot_factor*k*v*kappa_double*cos(phi)/omega_pl;
+        }
       }
-    }
+      if(kappa_double < 0)
+      {
+        if(opts_pt->indices(0) == 2 && opts_pt->indices(1) == 0) {
+          result_complex += r_s_factor*I*v*kappa_complex*sin_quad/omega_pl;
+          result_complex += r_p_herm_factor*I*v*kappa_complex*cos_quad/omega_pl;
+        }
+      }
+
   }
+
+  // if the EB-GreensTensor should be computed
   if (opts_pt->EB != IGNORE) {
     // General prefactor for all components
-    std::complex<double> prefactor =
-        kappa_complex / (1 - cos(phi) * v * omega_pl / k);
+    double prefactor =
+        std::abs(kappa_double) / (1. - cos(phi) * v * omega_pl / k);
     // prefactors for the ss-polarization, the hermitian part of the pp
     // polarization and the rotational part of the pp-polarization
-    std::complex<double> r_s_factor;
-    std::complex<double> r_p_herm_factor;
-    std::complex<double> r_p_rot_factor;
+    double r_s_factor;
+    double r_p_herm_factor;
+    double r_p_rot_factor;
     if (opts_pt->EB == IM) {
       r_s_factor = prefactor * omega_pl_quad *
                    imag(r_s / kappa_complex * exp(-2 * za * kappa_complex));
       r_p_herm_factor =
           prefactor * imag(r_p * kappa_complex * exp(-2. * za * kappa_complex));
       r_p_rot_factor =
-          prefactor * kappa_complex * imag(r_p * exp(-2. * za * kappa_complex));
+          prefactor * imag(r_p * exp(-2. * za * kappa_complex));
     }
     if (opts_pt->EB == RE) {
       r_s_factor = prefactor * omega_pl_quad *
@@ -405,42 +407,43 @@ double GreensTensorPlateMagnetic::integrand_2d_k_magnetic_R(double kappa_double,
       r_p_herm_factor =
           prefactor * real(r_p * kappa_complex * exp(-2. * za * kappa_complex));
       r_p_rot_factor =
-          prefactor * kappa_complex * real(r_p * exp(-2. * za * kappa_complex));
+          prefactor * real(r_p * exp(-2. * za * kappa_complex));
     }
     // Compute all the different components of the Green's tensor
-    // for real kappa the diagonal elements are real
-    if (kappa_double >= 0) {
-      // G_yy
-      if (opts_pt->indices(0) == 1 && opts_pt->indices(1) == 1) {
-        result_complex -= r_s_factor * k * v * cos(phi) / omega_pl;
-      }
+    // for all kappa the diagonal elements are real
+    // G_yy
+    if (opts_pt->indices(0) == 1 && opts_pt->indices(1) == 1) {
+      result_complex -= r_s_factor * k * v * cos(phi) / omega_pl;
+    }
       // G_zz
-      else if (opts_pt->indices(0) == 2 && opts_pt->indices(1) == 2) {
-        result_complex -= r_p_herm_factor * pow(k, 3) * v * cos(phi) /
-                          (kappa_quad * omega_pl);
-        result_complex += r_p_rot_factor * k * v * cos(phi) *
-                          conj(kappa_complex) / (kappa_complex * omega_pl);
-      }
-    } else if (kappa_double < 0) {
-      // G_xz
-      if (opts_pt->indices(0) == 0 && opts_pt->indices(1) == 2) {
-        result_complex -=
-            r_s_factor * I * v * conj(kappa_complex) * sin_quad / omega_pl;
-        result_complex -=
-            r_p_herm_factor * I * v * conj(kappa_complex) * cos_quad / omega_pl;
-        result_complex += r_p_rot_factor * I * k_quad * v * cos_quad /
-                          (omega_pl * kappa_complex);
+    else if (opts_pt->indices(0) == 2 && opts_pt->indices(1) == 2) {
+      result_complex -= r_p_herm_factor * pow(k, 3) * v * cos(phi) /
+                        (kappa_quad * omega_pl);
+    }
+    //Add terms linear in kappa depending on the integration regime
+    if(kappa_double >= 0) {
+      if(opts_pt->indices(0) == 2 && opts_pt->indices(1) == 2) {
+        result_complex += r_p_rot_factor*k*v*kappa_double*cos(phi)/omega_pl;
       }
     }
+    if(kappa_double < 0)
+    {
+      if(opts_pt->indices(0) == 0 && opts_pt->indices(1) == 2) {
+        result_complex -= r_s_factor*I*v*conj(kappa_complex)*sin_quad/omega_pl;
+        result_complex -= r_p_herm_factor*I*v*conj(kappa_complex)*cos_quad/omega_pl;
+      }
+    }
+
   }
-  if (opts_pt->BB != IGNORE) {
-    // General prefactor for all components
-    std::complex<double> prefactor =
-        kappa_complex / (1 - cos(phi) * v * omega_pl / k);
+
+if (opts_pt->BB != IGNORE) {
+// General prefactor for all components
+    double prefactor =
+        std::abs(kappa_double) / (1 - cos(phi) * v * omega_pl / k);
     // prefactors for the ss-polarization, the hermitian part of the pp
     // polarization and the rotational part of the pp-polarization
-    std::complex<double> r_s_factor;
-    std::complex<double> r_p_herm_factor;
+    double r_s_factor;
+    double r_p_herm_factor;
     std::complex<double> r_p_rot_factor;
     if (opts_pt->BB == IM) {
       r_s_factor = prefactor * omega_pl_quad *
@@ -476,8 +479,7 @@ double GreensTensorPlateMagnetic::integrand_2d_k_magnetic_R(double kappa_double,
                         real(kappa_complex) / (kappa_complex * omega_pl_quad);
     }
   }
-  // Depending on the component that was computed either the real or the
-  // imaginary part should be zero. Therefore we can add both of the up. The
+
   // missing I has to be added after integration procedure
   if (imag(result_complex) == 0) {
     result = real(result_complex);
@@ -587,11 +589,11 @@ double GreensTensorPlateMagnetic::integrand_2d_k_magnetic_I(double kappa_double,
   if (opts_pt->fancy_complex != IGNORE) {
 
     // General prefactor for all components
-    std::complex<double> prefactor =
-        kappa_complex / (1. - cos(phi) * v * omega_pl / k);
+    double prefactor =
+        std::abs(kappa_double) / (1. - cos(phi) * v * omega_pl / k);
     // prefactors for the ss-polarization, the hermitian part of the pp
     // polarization and the rotational part of the pp-polarization
-    std::complex<double> r_p_rot_factor;
+    double r_p_rot_factor;
     if (opts_pt->fancy_complex == IM) {
       r_p_rot_factor =
           prefactor * imag(r_p * exp(-2. * za * kappa_complex));
@@ -614,20 +616,20 @@ double GreensTensorPlateMagnetic::integrand_2d_k_magnetic_I(double kappa_double,
   // check if the BE-GreensTensor should be computed
   if (opts_pt->BE != IGNORE) {
     // General prefactor for all components
-    std::complex<double> prefactor =
-        kappa_complex / (1. - cos(phi) * v * omega_pl / k);
+    double prefactor =
+        std::abs(kappa_double) / (1. - cos(phi) * v * omega_pl / k);
     // prefactors for the ss-polarization, the hermitian part of the pp
     // polarization and the rotational part of the pp-polarization
-    std::complex<double> r_s_factor;
-    std::complex<double> r_p_herm_factor;
-    std::complex<double> r_p_rot_factor;
+    double r_s_factor;
+    double r_p_herm_factor;
+    double r_p_rot_factor;
     if (opts_pt->BE == IM) {
       r_s_factor = prefactor * omega_pl_quad *
                    imag(r_s / kappa_complex * exp(-2 * za * kappa_complex));
       r_p_herm_factor =
           prefactor * imag(r_p * kappa_complex * exp(-2. * za * kappa_complex));
       r_p_rot_factor =
-          prefactor * kappa_complex * imag(r_p * exp(-2. * za * kappa_complex));
+          prefactor * imag(r_p * exp(-2. * za * kappa_complex));
     }
     if (opts_pt->BE == RE) {
       r_s_factor = prefactor * omega_pl_quad *
@@ -635,49 +637,47 @@ double GreensTensorPlateMagnetic::integrand_2d_k_magnetic_I(double kappa_double,
       r_p_herm_factor =
           prefactor * real(r_p * kappa_complex * exp(-2. * za * kappa_complex));
       r_p_rot_factor =
-          prefactor * kappa_complex * real(r_p * exp(-2. * za * kappa_complex));
+          prefactor * real(r_p * exp(-2. * za * kappa_complex));
     }
     // Compute all the different components of the Green's tensor
     // for real kappa the diagonal elements are complex
-    if (kappa_double >= 0) {
       // G_zx
+    if (opts_pt->indices(0) == 2 && opts_pt->indices(1) == 0) {
+      result_complex -= r_p_rot_factor * I * k_quad * v * cos_quad /
+                        omega_pl;
+    }
+    //Add terms depending on the integration regime
+    if(kappa_double >= 0) {
       if (opts_pt->indices(0) == 2 && opts_pt->indices(1) == 0) {
         result_complex +=
             r_s_factor * I * v * kappa_complex * sin_quad / omega_pl;
         result_complex +=
             r_p_herm_factor * I * v * kappa_complex * cos_quad / omega_pl;
-        result_complex -= r_p_rot_factor * I * k_quad * v * cos_quad /
-                          (omega_pl * kappa_complex);
       }
-    } else if (kappa_double < 0) {
-      // G_yy
-      if (opts_pt->indices(0) == 1 && opts_pt->indices(1) == 1) {
-        result_complex -= r_s_factor * k * v * cos(phi) / omega_pl;
-      }
-      // G_zz
-      else if (opts_pt->indices(0) == 2 && opts_pt->indices(1) == 2) {
-        result_complex -= r_p_herm_factor * pow(k, 3) * v * cos(phi) /
-                          (kappa_quad * omega_pl);
-        result_complex += r_p_rot_factor * k * v * cos(phi) / (omega_pl);
+    }
+    if(kappa_double < 0) {
+      if(opts_pt->indices(0) == 2 && opts_pt->indices(1) == 2) {
+        result_complex += r_p_rot_factor*k*v*kappa_complex*cos(phi)/omega_pl;
       }
     }
   }
+  //Check if G^BE should be computed
   if (opts_pt->EB != IGNORE) {
     // General prefactor for all components
-    std::complex<double> prefactor =
-        kappa_complex / (1 - cos(phi) * v * omega_pl / k);
+    double prefactor =
+        std::abs(kappa_double) / (1. - cos(phi) * v * omega_pl / k);
     // prefactors for the ss-polarization, the hermitian part of the pp
     // polarization and the rotational part of the pp-polarization
-    std::complex<double> r_s_factor;
-    std::complex<double> r_p_herm_factor;
-    std::complex<double> r_p_rot_factor;
+    double r_s_factor;
+    double r_p_herm_factor;
+    double r_p_rot_factor;
     if (opts_pt->EB == IM) {
       r_s_factor = prefactor * omega_pl_quad *
                    imag(r_s / kappa_complex * exp(-2 * za * kappa_complex));
       r_p_herm_factor =
           prefactor * imag(r_p * kappa_complex * exp(-2. * za * kappa_complex));
       r_p_rot_factor =
-          prefactor * kappa_complex * imag(r_p * exp(-2. * za * kappa_complex));
+          prefactor * imag(r_p * exp(-2. * za * kappa_complex));
     }
     if (opts_pt->EB == RE) {
       r_s_factor = prefactor * omega_pl_quad *
@@ -685,34 +685,32 @@ double GreensTensorPlateMagnetic::integrand_2d_k_magnetic_I(double kappa_double,
       r_p_herm_factor =
           prefactor * real(r_p * kappa_complex * exp(-2. * za * kappa_complex));
       r_p_rot_factor =
-          prefactor * kappa_complex * real(r_p * exp(-2. * za * kappa_complex));
+          prefactor * real(r_p * exp(-2. * za * kappa_complex));
     }
     // Compute all the different components of the Green's tensor
     // for real kappa the diagonal elements are complex
-    if (kappa_double >= 0) {
-      // G_xz
+    // G_zx
+    if (opts_pt->indices(0) == 0 && opts_pt->indices(1) == 2) {
+      result_complex += r_p_rot_factor * I * k_quad * v * cos_quad /
+                        omega_pl;
+    }
+
+    //Add terms depending on the integration regime
+    if(kappa_double >= 0) {
       if (opts_pt->indices(0) == 0 && opts_pt->indices(1) == 2) {
         result_complex -=
-            r_s_factor * I * v * conj(kappa_complex) * sin_quad / omega_pl;
+            r_s_factor * I * v * kappa_double * sin_quad / omega_pl;
         result_complex -=
-            r_p_herm_factor * I * v * conj(kappa_complex) * cos_quad / omega_pl;
-        result_complex += r_p_rot_factor * I * k_quad * v * cos_quad /
-                          (omega_pl * kappa_complex);
+            r_p_herm_factor * I * v * kappa_double * cos_quad / omega_pl;
       }
-    } else if (kappa_double < 0) {
-      // G_yy
-      if (opts_pt->indices(0) == 1 && opts_pt->indices(1) == 1) {
-        result_complex -= r_s_factor * k * v * cos(phi) / omega_pl;
-      }
-      // G_zz
-      else if (opts_pt->indices(0) == 2 && opts_pt->indices(1) == 2) {
-        result_complex -= r_p_herm_factor * pow(k, 3) * v * cos(phi) /
-                          (kappa_quad * omega_pl);
-        result_complex += r_p_rot_factor * k * v * cos(phi) *
-                          conj(kappa_complex) / (kappa_complex * omega_pl);
+    }
+    if(kappa_double < 0) {
+      if(opts_pt->indices(0) == 2 && opts_pt->indices(1) == 2) {
+        result_complex -= r_p_rot_factor*k*v*kappa_complex*cos(phi)/omega_pl;
       }
     }
   }
+
   // There are no complex contribution of the G^BB Green"s tensor.
 
   // Ensure that the integrand was implemented correctly

@@ -12,9 +12,9 @@ TEST_CASE("The tensors from calculate_tensor and integrand_2d_k coincide",
   // the other hand integrand_2d_k_magnetic already sets all entries linear in
   // k_y to zero, as the integral from 0 to 2 Pi would vanish there phi has to
   // be set, such that sin(phi) = 0
-  auto phi =  0;//GENERATE(0., M_PI);
-  auto k = 2.;//GENERATE(take(3, random(0., 1e2)));
-  auto omega = 3.;//GENERATE(take(3, random(-1e2, 1e2)));
+  auto phi =  GENERATE(0., M_PI);
+  auto k = GENERATE(take(3, random(0., 1e2)));
+  auto omega = GENERATE(take(3, random(-1e2, 1e2)));
   double k_x = k * cos(phi);
   double k_y = k * sin(phi);
   double omega_p = 9;
@@ -43,20 +43,26 @@ TEST_CASE("The tensors from calculate_tensor and integrand_2d_k coincide",
   k = sqrt(k_x * k_x + k_y * k_y);
   kappa = sqrt(std::complex<double>(k * k - opts.omega * opts.omega, 0.));
   kappa = std::complex<double>(std::abs(kappa.real()), -std::abs(kappa.imag()));
-  volume_element = (kappa.real() + std::abs(kappa.imag())) * k / (k - cos(phi) * v * opts.omega);
+  volume_element = std::abs(kappa) * k / (k - cos(phi) * v * opts.omega);
 
   Greens.calculate_tensor(Green, opts);
-  if (opts.omega < 0) {
-    volume_element = conj(volume_element);
-  }
+
   Green_fancy_I = (Green - trans(Green)) / (2. * I);
   Green_fancy_R = (Green + trans(Green)) / (2.);
   Green *= volume_element;
   Green_fancy_I *= volume_element;
   Green_fancy_R *= volume_element;
 
+  //variable to store the kappa for the sigma matrix.
+  std::complex<double> kappa_sigma = kappa;
+  //ensure reality of kappa_sigma for complex kappa
+  if(opts.omega < 0)
+  {
+    kappa_sigma = conj(kappa_sigma);
+
+  }
   cx_mat::fixed<3, 3> Sigma = {
-      {0, 0, 0}, {sin(phi), -cos(phi), 0}, {I * kappa / k, 0, -cos(phi)}};
+      {0, 0, 0}, {sin(phi), -cos(phi), 0}, {I * kappa_sigma / k, 0, -cos(phi)}};
   Sigma *= k * v / (opts.omega);
 
   cx_mat::fixed<3, 3> LHS(fill::zeros);
@@ -85,10 +91,9 @@ TEST_CASE("The tensors from calculate_tensor and integrand_2d_k coincide",
       }
     }
     RHS = Green_fancy_I;
-    std::cout << LHS << RHS << std::endl;
     REQUIRE(approx_equal(LHS, RHS, "abs", 10E-12));
   }
-/*
+
   SECTION("Options: EE, RE") {
     opts.fancy_complex = RE;
     // loop over all indices
@@ -106,6 +111,7 @@ TEST_CASE("The tensors from calculate_tensor and integrand_2d_k coincide",
     REQUIRE(approx_equal(LHS, RHS, "abs", 10E-12));
   }
   opts.fancy_complex = IGNORE;
+
   SECTION("Options: BE, RE") {
     opts.BE = RE;
     // loop over all indices
@@ -173,6 +179,7 @@ TEST_CASE("The tensors from calculate_tensor and integrand_2d_k coincide",
     RHS = Green_fancy_I * trans(Sigma);
     REQUIRE(approx_equal(LHS, RHS, "abs", 10E-12));
   }
+
   opts.EB = IGNORE;
 
   SECTION("Options: BB, RE") {
@@ -208,10 +215,9 @@ TEST_CASE("The tensors from calculate_tensor and integrand_2d_k coincide",
     REQUIRE(approx_equal(LHS, RHS, "abs", 10E-12));
   }
   opts.BB = IGNORE;
-  */
+
 }
 
-/*
 TEST_CASE("Crossing relation in k-space works for all Green's tensors",
           "[GreensTensorPlateMagnetic]") {
   // Here we considered also the volume element from the integration.
@@ -220,9 +226,9 @@ TEST_CASE("Crossing relation in k-space works for all Green's tensors",
   // the other hand integrand_2d_k_magnetic already sets all entries linear in
   // k_y to zero, as the integral from 0 to 2 Pi would vanish there phi has to
   // be set, such that sin(phi) = 0
-  double phi = M_PI; // GENERATE(0., M_PI);
-  double k = 3;
-  double omega = 2.;
+  auto phi = GENERATE(0., M_PI);
+  auto k = GENERATE(take(3,random(0.,1e2)));
+  auto omega = GENERATE(take(3,random(-1e2,1e2)));
   double omega_p = 9;
   double gamma = 0.1;
   double v = 1e-2;
@@ -237,6 +243,8 @@ TEST_CASE("Crossing relation in k-space works for all Green's tensors",
                                           rel_err);
   struct Options_GreensTensorMagnetic opts;
   opts.class_pt = &greens_tensor;
+  opts.omega = omega;
+  opts.kvec(0) = phi;
   double omega_doppler = omega + k * cos(phi) * v;
 
   // Matrices to store the result, which we want to compare
@@ -254,20 +262,18 @@ TEST_CASE("Crossing relation in k-space works for all Green's tensors",
 
   SECTION("G^EE_I fulfills the crossing relation in k-space") {
     opts.fancy_complex = IM;
-    std::cout << kappa_double << std::endl;
 
     // Green's tensor with positive frequency and k-vector
     opts.omega = omega;
     opts.kvec(0) = phi;
     for (int i = 0; i < 3; ++i) {
       for (int j = 0; j < 3; ++j) {
-        std::cout << (2. * M_PI) * greens_tensor.integrand_2d_k_magnetic(
-                                       kappa_double, &opts)
-                  << std::endl;
-        LHS(i, j) = (2. * M_PI) *
-                    greens_tensor.integrand_2d_k_magnetic(kappa_double, &opts);
-        if (i != j)
-          LHS(i, j) *= I;
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+        LHS(i, j) += (2. * M_PI) *
+                    greens_tensor.integrand_2d_k_magnetic_R(kappa_double, &opts);
+        LHS(i, j) += I * (2. * M_PI) *
+                    greens_tensor.integrand_2d_k_magnetic_I(kappa_double, &opts);
       }
     }
     // Green's tensor with negative frequency and k-vector
@@ -275,22 +281,245 @@ TEST_CASE("Crossing relation in k-space works for all Green's tensors",
     opts.kvec(0) = phi + M_PI;
     for (int i = 0; i < 3; ++i) {
       for (int j = 0; j < 3; ++j) {
-        RHS(i, j) = (2. * M_PI) *
-                    greens_tensor.integrand_2d_k_magnetic(kappa_double, &opts);
-        if (i != j)
-          RHS(i, j) *= I;
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+        RHS(i, j) += (2. * M_PI) *
+                    greens_tensor.integrand_2d_k_magnetic_R(kappa_double, &opts);
+        RHS(i, j) += I * (2. * M_PI) *
+                    greens_tensor.integrand_2d_k_magnetic_I(kappa_double, &opts);
       }
     }
-    std::cout << LHS << std::endl << -strans(RHS) << std::endl;
-    REQUIRE(approx_equal(LHS, -strans(RHS), "abs", 1e-12));
+    REQUIRE(approx_equal(conj(LHS), -RHS, "abs", 1e-12));
   }
+  SECTION("G^EE_R fulfills the crossing relation in k-space") {
+    opts.fancy_complex = RE;
+
+    // Green's tensor with positive frequency and k-vector
+    opts.omega = omega;
+    opts.kvec(0) = phi;
+    for (int i = 0; i < 3; ++i) {
+      for (int j = 0; j < 3; ++j) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+        LHS(i, j) += (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_R(kappa_double, &opts);
+        LHS(i, j) += I * (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_I(kappa_double, &opts);
+      }
+    }
+    // Green's tensor with negative frequency and k-vector
+    opts.omega = -omega;
+    opts.kvec(0) = phi + M_PI;
+    for (int i = 0; i < 3; ++i) {
+      for (int j = 0; j < 3; ++j) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+        RHS(i, j) += (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_R(kappa_double, &opts);
+        RHS(i, j) += I * (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_I(kappa_double, &opts);
+      }
+    }
+    REQUIRE(approx_equal(conj(LHS), RHS, "abs", 1e-12));
+  }
+  opts.fancy_complex = IGNORE;
+  SECTION("G^BE_I fulfills the crossing relation in k-space") {
+    opts.BE = IM;
+
+    // Green's tensor with positive frequency and k-vector
+    opts.omega = omega;
+    opts.kvec(0) = phi;
+    for (int i = 0; i < 3; ++i) {
+      for (int j = 0; j < 3; ++j) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+        LHS(i, j) += (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_R(kappa_double, &opts);
+        LHS(i, j) += I * (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_I(kappa_double, &opts);
+      }
+    }
+    // Green's tensor with negative frequency and k-vector
+    opts.omega = -omega;
+    opts.kvec(0) = phi + M_PI;
+    for (int i = 0; i < 3; ++i) {
+      for (int j = 0; j < 3; ++j) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+        RHS(i, j) += (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_R(kappa_double, &opts);
+        RHS(i, j) += I * (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_I(kappa_double, &opts);
+      }
+    }
+    REQUIRE(approx_equal(conj(LHS), -RHS, "abs", 1e-12));
+  }
+  SECTION("G^BE_R fulfills the crossing relation in k-space") {
+    opts.BE = RE;
+
+    // Green's tensor with positive frequency and k-vector
+    opts.omega = omega;
+    opts.kvec(0) = phi;
+    for (int i = 0; i < 3; ++i) {
+      for (int j = 0; j < 3; ++j) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+        LHS(i, j) += (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_R(kappa_double, &opts);
+        LHS(i, j) += I * (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_I(kappa_double, &opts);
+      }
+    }
+    // Green's tensor with negative frequency and k-vector
+    opts.omega = -omega;
+    opts.kvec(0) = phi + M_PI;
+    for (int i = 0; i < 3; ++i) {
+      for (int j = 0; j < 3; ++j) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+        RHS(i, j) += (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_R(kappa_double, &opts);
+        RHS(i, j) += I * (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_I(kappa_double, &opts);
+      }
+    }
+    REQUIRE(approx_equal(conj(LHS), RHS, "abs", 1e-12));
+  }
+  opts.BE = IGNORE;
+  SECTION("G^EB_I fulfills the crossing relation in k-space") {
+    opts.EB = IM;
+
+    // Green's tensor with positive frequency and k-vector
+    opts.omega = omega;
+    opts.kvec(0) = phi;
+    for (int i = 0; i < 3; ++i) {
+      for (int j = 0; j < 3; ++j) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+        LHS(i, j) += (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_R(kappa_double, &opts);
+        LHS(i, j) += I * (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_I(kappa_double, &opts);
+      }
+    }
+    // Green's tensor with negative frequency and k-vector
+    opts.omega = -omega;
+    opts.kvec(0) = phi + M_PI;
+    for (int i = 0; i < 3; ++i) {
+      for (int j = 0; j < 3; ++j) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+        RHS(i, j) += (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_R(kappa_double, &opts);
+        RHS(i, j) += I * (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_I(kappa_double, &opts);
+      }
+    }
+    REQUIRE(approx_equal(conj(LHS), -RHS, "abs", 1e-12));
+  }
+  SECTION("G^EB_R fulfills the crossing relation in k-space") {
+    opts.EB = RE;
+
+    // Green's tensor with positive frequency and k-vector
+    opts.omega = omega;
+    opts.kvec(0) = phi;
+    for (int i = 0; i < 3; ++i) {
+      for (int j = 0; j < 3; ++j) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+        LHS(i, j) += (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_R(kappa_double, &opts);
+        LHS(i, j) += I * (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_I(kappa_double, &opts);
+      }
+    }
+    // Green's tensor with negative frequency and k-vector
+    opts.omega = -omega;
+    opts.kvec(0) = phi + M_PI;
+    for (int i = 0; i < 3; ++i) {
+      for (int j = 0; j < 3; ++j) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+        RHS(i, j) += (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_R(kappa_double, &opts);
+        RHS(i, j) += I * (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_I(kappa_double, &opts);
+      }
+    }
+    REQUIRE(approx_equal(conj(LHS), RHS, "abs", 1e-12));
+  }
+  opts.EB = IGNORE;
+  SECTION("G^BB_I fulfills the crossing relation in k-space") {
+    opts.BB = IM;
+
+    // Green's tensor with positive frequency and k-vector
+    opts.omega = omega;
+    opts.kvec(0) = phi;
+    for (int i = 0; i < 3; ++i) {
+      for (int j = 0; j < 3; ++j) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+        LHS(i, j) += (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_R(kappa_double, &opts);
+        LHS(i, j) += I * (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_I(kappa_double, &opts);
+      }
+    }
+    // Green's tensor with negative frequency and k-vector
+    opts.omega = -omega;
+    opts.kvec(0) = phi + M_PI;
+    for (int i = 0; i < 3; ++i) {
+      for (int j = 0; j < 3; ++j) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+        RHS(i, j) += (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_R(kappa_double, &opts);
+        RHS(i, j) += I * (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_I(kappa_double, &opts);
+      }
+    }
+    REQUIRE(approx_equal(conj(LHS), -RHS, "abs", 1e-12));
+  }
+  SECTION("G^BB_R fulfills the crossing relation in k-space") {
+    opts.BB = RE;
+
+    // Green's tensor with positive frequency and k-vector
+    opts.omega = omega;
+    opts.kvec(0) = phi;
+    for (int i = 0; i < 3; ++i) {
+      for (int j = 0; j < 3; ++j) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+        LHS(i, j) += (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_R(kappa_double, &opts);
+        LHS(i, j) += I * (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_I(kappa_double, &opts);
+      }
+    }
+    // Green's tensor with negative frequency and k-vector
+    opts.omega = -omega;
+    opts.kvec(0) = phi + M_PI;
+    for (int i = 0; i < 3; ++i) {
+      for (int j = 0; j < 3; ++j) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+        RHS(i, j) += (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_R(kappa_double, &opts);
+        RHS(i, j) += I * (2. * M_PI) *
+                     greens_tensor.integrand_2d_k_magnetic_I(kappa_double, &opts);
+      }
+    }
+    REQUIRE(approx_equal(conj(LHS), RHS, "abs", 1e-12));
+  }
+  opts.BB = IGNORE;
 }
 
 TEST_CASE("Test the sum of several Green's tensors",
           "[GreensTensorPlateMagnetic]") {
   // In general there a lot of variations of Green's tensors that one could some
   // up. For simplicity only the two cases
-  // which are relevant for quantum friction are tested
+  // which are relevant for quantum friction are tested, if to plan to use
+  // other sums, consider testing them as well.
   // Here we considered also the volume element from the integration.
   std::complex<double> I(0.0, 1.0);
   // Calculate computes all possible entries of the electric Green's tensor. On
@@ -364,13 +593,12 @@ TEST_CASE("Test the sum of several Green's tensors",
       for (int j = 0; j < 3; ++j) {
         opts.indices(0) = i;
         opts.indices(1) = j;
-        LHS(i, j) =
-            (2 * M_PI) * Greens.integrand_2d_k_magnetic(kappa_double, &opts);
-        if (i != j) {
-          LHS(i, j) *= I;
-        }
+        LHS(i, j) +=
+            (2 * M_PI) * Greens.integrand_2d_k_magnetic_R(kappa_double, &opts);
+        LHS(i, j) +=
+            (2 * M_PI) * I * Greens.integrand_2d_k_magnetic_I(kappa_double, &opts);
+       }
       }
-    }
     RHS = Green_fancy_I + Sigma * Green_fancy_R;
     REQUIRE(approx_equal(LHS, RHS, "abs", 10e-12));
   }
@@ -383,11 +611,10 @@ TEST_CASE("Test the sum of several Green's tensors",
       for (int j = 0; j < 3; ++j) {
         opts.indices(0) = i;
         opts.indices(1) = j;
-        LHS(i, j) =
-            (2 * M_PI) * Greens.integrand_2d_k_magnetic(kappa_double, &opts);
-        if (i != j) {
-          LHS(i, j) *= I;
-        }
+        LHS(i, j) +=
+            (2 * M_PI) * Greens.integrand_2d_k_magnetic_R(kappa_double, &opts);
+        LHS(i, j) +=
+            (2 * M_PI) * I * Greens.integrand_2d_k_magnetic_I(kappa_double, &opts);
       }
     }
     RHS = Green_fancy_I + Sigma * Green_fancy_I + Green_fancy_I * trans(Sigma) +
@@ -395,7 +622,7 @@ TEST_CASE("Test the sum of several Green's tensors",
     REQUIRE(approx_equal(LHS, RHS, "abs", 10e-12));
   }
 }
- */
+
 /*
 TEST_CASE("Integrals of all the Green's tensor work properly",
 "[GreensTensorPlate]") {
@@ -429,7 +656,7 @@ TEST_CASE("Integrals of all the Green's tensor work properly",
 std::endl; REQUIRE(approx_equal(Greens_lhs, -strans(Greens_rhs), "reldiff",
 10E-4));
     }
-*//*
+/*
     SECTION("Integral over G^EE_R obeys the crossing relation") {
         opts.omega = omega;
         opts.fancy_complex = RE;
@@ -464,4 +691,6 @@ std::endl; REQUIRE(approx_equal(Greens_lhs, -strans(Greens_rhs), "reldiff",
         REQUIRE(approx_equal(Greens_lhs, strans(Greens_rhs), "reldiff", 10E-4));
     }
 
-}*/
+
+}
+ */
