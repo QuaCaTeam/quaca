@@ -623,7 +623,7 @@ TEST_CASE("Test the sum of several Green's tensors",
   }
 }
 
-/*
+
 TEST_CASE("Integrals of all the Green's tensor work properly",
 "[GreensTensorPlate]") {
 
@@ -640,57 +640,97 @@ TEST_CASE("Integrals of all the Green's tensor work properly",
         struct Options_GreensTensorMagnetic opts;
         opts.class_pt = &Greens;
 
-        cx_mat::fixed<3, 3> Greens_lhs(fill::zeros);
-        cx_mat::fixed<3, 3> Greens_rhs(fill::zeros);
+  cx_mat::fixed<3, 3> LHS(fill::zeros);
+        cx_mat::fixed<3, 3> RHS(fill::zeros);
         // Test of fancy_I
     SECTION("Integral over G^EE_I obeys the crossing relation") {
-        opts.omega = omega;
         opts.fancy_complex = IM;
-        Greens.integrate_k(Greens_lhs, opts);
+        opts.omega = omega;
+        Greens.integrate_k(LHS, opts);
 
         opts.omega = -omega;
-        Greens.integrate_k(Greens_rhs, opts);
+        Greens.integrate_k(RHS, opts);
 
-        std::cout << "Omega=" << std::endl << omega << std::endl;
-        std::cout << Greens_lhs << std::endl << -strans(Greens_rhs) <<
-std::endl; REQUIRE(approx_equal(Greens_lhs, -strans(Greens_rhs), "reldiff",
-10E-4));
+      REQUIRE(approx_equal(LHS, -RHS, "reldiff",10E-4));
     }
-/*
+
     SECTION("Integral over G^EE_R obeys the crossing relation") {
         opts.omega = omega;
         opts.fancy_complex = RE;
-        Greens.integrate_k(Greens_lhs, opts);
+        Greens.integrate_k(LHS, opts);
 
         opts.omega = -omega;
-        Greens.integrate_k(Greens_rhs, opts);
+        Greens.integrate_k(RHS, opts);
 
-        REQUIRE(approx_equal(Greens_lhs, strans(Greens_rhs), "reldiff", 10E-4));
+        REQUIRE(approx_equal(LHS, RHS, "reldiff", 10E-4));
     }
     opts.fancy_complex = IGNORE;
 
     SECTION("Integral over G^BE_I obeys the crossing relation") {
         opts.omega = omega;
         opts.BE = IM;
-        Greens.integrate_k(Greens_lhs, opts);
+        Greens.integrate_k(LHS, opts);
 
         opts.omega = -omega;
-        Greens.integrate_k(Greens_rhs, opts);
+        Greens.integrate_k(RHS, opts);
 
-        REQUIRE(approx_equal(Greens_lhs, -strans(Greens_rhs), "reldiff", 10E-4));
+        REQUIRE(approx_equal(LHS, -RHS, "reldiff", 10E-4));
     }
 
     SECTION("Integral over G^BE_R obeys the crossing relation") {
         opts.omega = omega;
         opts.BE = RE;
-        Greens.integrate_k(Greens_lhs, opts);
+        Greens.integrate_k(LHS, opts);
 
         opts.omega = -omega;
-        Greens.integrate_k(Greens_rhs, opts);
+        Greens.integrate_k(RHS, opts);
 
-        REQUIRE(approx_equal(Greens_lhs, strans(Greens_rhs), "reldiff", 10E-4));
+        REQUIRE(approx_equal(LHS, RHS, "reldiff", 10E-4));
     }
+    opts.BE = IGNORE;
 
+  SECTION("Integral over G^EB_I obeys the crossing relation") {
+    opts.omega = omega;
+    opts.EB = IM;
+    Greens.integrate_k(LHS, opts);
+
+    opts.omega = -omega;
+    Greens.integrate_k(RHS, opts);
+
+    REQUIRE(approx_equal(LHS, -RHS, "reldiff", 10E-4));
+  }
+
+  SECTION("Integral over G^EB_R obeys the crossing relation") {
+    opts.omega = omega;
+    opts.EB = RE;
+    Greens.integrate_k(LHS, opts);
+
+    opts.omega = -omega;
+    Greens.integrate_k(RHS, opts);
+
+    REQUIRE(approx_equal(LHS, RHS, "reldiff", 10E-4));
+  }
+  SECTION("Integral over G^BB_I obeys the crossing relation") {
+    opts.omega = omega;
+    opts.BB = IM;
+    Greens.integrate_k(LHS, opts);
+
+    opts.omega = -omega;
+    Greens.integrate_k(RHS, opts);
+
+    REQUIRE(approx_equal(LHS, -RHS, "reldiff", 10E-4));
+  }
+
+  SECTION("Integral over G^BB_R obeys the crossing relation") {
+    opts.omega = omega;
+    opts.BB = RE;
+    Greens.integrate_k(LHS, opts);
+
+    opts.omega = -omega;
+    Greens.integrate_k(RHS, opts);
+
+    REQUIRE(approx_equal(LHS, RHS, "reldiff", 10E-4));
+  }
 
 }
- */
+
