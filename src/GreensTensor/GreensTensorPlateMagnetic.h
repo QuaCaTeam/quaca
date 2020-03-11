@@ -21,7 +21,7 @@ public:
   // integrate over a two-dimensional k space
   // void integrate_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
   void calculate_tensor(cx_mat::fixed<3, 3> &GT,
-                        Options_GreensTensorMagnetic opts);
+                        Options_GreensTensor opts);
 
   // integrands
   // static double integrand_1d_k(double kx, void *opts);
@@ -29,7 +29,7 @@ public:
   static double integrand_2d_k_magnetic_I(double ky, void *opts);
   static double integrand_1d_k_magnetic_R(double phi, void *opts);
   static double integrand_1d_k_magnetic_I(double phi, void *opts);
-  void integrate_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensorMagnetic opts);
+  void integrate_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
 };
 
 #endif

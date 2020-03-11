@@ -623,9 +623,164 @@ TEST_CASE("Test the sum of several Green's tensors",
   }
 }
 
+TEST_CASE("Integrand_1d_k_magnetic gives non-vanishing contriubtions for all"
+          "Green's tensors ","GreensTensorPlateMagnetic")
+{
+  double omega = GENERATE(take(3,random(0.,1e2)));
+  double omega_p = 9;
+  double gamma = 0.1;
+  double v = 1e-2;
+  double za = 0.1;
+  double delta_cut = 30;
+  vec::fixed<2> rel_err = {1E-8, 1E-6};
+  PermittivityDrude perm(omega_p, gamma);
+  ReflectionCoefficientsLocBulk refl(&perm);
+  GreensTensorPlateMagnetic Greens(v, za, 0.1, &refl, delta_cut, rel_err);
+  struct Options_GreensTensorMagnetic opts;
 
+  std::complex<double> I (0.,1.);
+
+  auto phi = GENERATE(take(1,random(0.,2.*M_PI)));
+  opts.class_pt = &Greens;
+  opts.omega = omega;
+
+  cx_mat::fixed<3, 3> LHS(fill::zeros);
+  cx_mat::fixed<3, 3> RHS(fill::zeros);
+
+  SECTION("G^EE_I") {
+    opts.fancy_complex = IM;
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+        LHS(i, j) = Greens.integrand_1d_k_magnetic_R(phi, &opts);
+        LHS(i, j) += I * Greens.integrand_1d_k_magnetic_I(phi, &opts);
+      }
+    }
+    REQUIRE(!approx_equal(LHS, RHS, "abs", 1e-12));
+  }
+  SECTION("G^EE_R") {
+    opts.fancy_complex = RE;
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+        LHS(i, j) = Greens.integrand_1d_k_magnetic_R(phi, &opts);
+        LHS(i, j) += I * Greens.integrand_1d_k_magnetic_I(phi, &opts);
+      }
+    }
+    REQUIRE(!approx_equal(LHS, RHS, "abs", 1e-12));
+  }
+  opts.fancy_complex = IGNORE;
+  SECTION("G^BE_I") {
+    opts.BE = IM;
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+        LHS(i, j) = Greens.integrand_1d_k_magnetic_R(phi, &opts);
+        LHS(i, j) += I * Greens.integrand_1d_k_magnetic_I(phi, &opts);
+      }
+    }
+    REQUIRE(!approx_equal(LHS, RHS, "abs", 1e-12));
+  }
+  SECTION("G^BE_R") {
+    opts.BE = RE;
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+        LHS(i, j) = Greens.integrand_1d_k_magnetic_R(phi, &opts);
+        LHS(i, j) += I * Greens.integrand_1d_k_magnetic_I(phi, &opts);
+      }
+    }
+    REQUIRE(!approx_equal(LHS, RHS, "abs", 1e-12));
+  }
+  opts.BE = IGNORE;
+  SECTION("G^EB_I") {
+    opts.EB = IM;
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+        LHS(i, j) = Greens.integrand_1d_k_magnetic_R(phi, &opts);
+        LHS(i, j) += I * Greens.integrand_1d_k_magnetic_I(phi, &opts);
+      }
+    }
+    REQUIRE(!approx_equal(LHS, RHS, "abs", 1e-12));
+  }
+  SECTION("G^EB_R") {
+    opts.EB = RE;
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+        LHS(i, j) = Greens.integrand_1d_k_magnetic_R(phi, &opts);
+        LHS(i, j) += I * Greens.integrand_1d_k_magnetic_I(phi, &opts);
+      }
+    }
+    REQUIRE(!approx_equal(LHS, RHS, "abs", 1e-12));
+  }
+  opts.BE = IGNORE;
+  SECTION("G^BB_I") {
+    opts.BB = IM;
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+        LHS(i, j) = Greens.integrand_1d_k_magnetic_R(phi, &opts);
+        LHS(i, j) += I * Greens.integrand_1d_k_magnetic_I(phi, &opts);
+      }
+    }
+    REQUIRE(!approx_equal(LHS, RHS, "abs", 1e-12));
+  }
+  SECTION("G^BB_R") {
+    opts.BB = RE;
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+        LHS(i, j) = Greens.integrand_1d_k_magnetic_R(phi, &opts);
+        LHS(i, j) += I * Greens.integrand_1d_k_magnetic_I(phi, &opts);
+      }
+    }
+    REQUIRE(!approx_equal(LHS, RHS, "abs", 1e-12));
+  }
+}
+
+TEST_CASE("integrate_k gives non-vanishing contriubtions for all"
+          "Green's tensors ","GreensTensorPlateMagnetic")
+{
+  double omega = GENERATE(take(3,random(0.,1e2)));
+  double omega_p = 9;
+  double gamma = 0.1;
+  double v = 1e-2;
+  double za = 0.1;
+  double delta_cut = 30;
+  vec::fixed<2> rel_err = {1E-8, 1E-6};
+  PermittivityDrude perm(omega_p, gamma);
+  ReflectionCoefficientsLocBulk refl(&perm);
+  GreensTensorPlate Greens(v, za, 0.1, &refl, delta_cut, rel_err);
+  struct Options_GreensTensor opts;
+
+  std::complex<double> I (0.,1.);
+
+  opts.class_pt = &Greens;
+  opts.omega = omega;
+  std::cout << omega << std::endl;
+
+  cx_mat::fixed<3, 3> LHS(fill::zeros);
+  cx_mat::fixed<3, 3> RHS(fill::zeros);
+
+  SECTION("G^EE_I") {
+    opts.fancy_complex = IM;
+    Greens.integrate_k(LHS, opts);
+    REQUIRE(!approx_equal(LHS, RHS, "abs", 1e-12));
+  }
+}
+/*
 TEST_CASE("Integrals of all the Green's tensor work properly",
-"[GreensTensorPlate]") {
+          "[GreensTensorPlate]") {
 
         double omega = GENERATE(take(2,random(0.,1e2)));
         double omega_p = 9;
@@ -733,4 +888,4 @@ TEST_CASE("Integrals of all the Green's tensor work properly",
   }
 
 }
-
+*/

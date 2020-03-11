@@ -5,6 +5,9 @@
 #ifndef QUACA_POWERSPECTRUMHARMOSCMAGNETIC_H
 #define QUACA_POWERSPECTRUMHARMOSCMAGNETIC_H
 
+#include "PowerSpectrumHarmOsc.h"
+#include "PowerSpectrum.h"
+
 
 class PowerSpectrumHarmOscMagnetic: public PowerSpectrumHarmOsc {
 public:

@@ -4,14 +4,14 @@
 
 #include "PolarizabilityNoBathMagnetic.h"
 
-PolarizabilityNoBath::PolarizabilityNoBath(double omega_a, double alpha_zero,
+PolarizabilityNoBathMagnetic::PolarizabilityNoBathMagnetic(double omega_a, double alpha_zero,
                                            GreensTensor *greens_tensor)
         : PolarizabilityNoBath(omega_a, alpha_zero, greens_tensor){};
 
-PolarizabilityNoBath::PolarizabilityNoBath(std::string input_file)
+PolarizabilityNoBathMagnetic::PolarizabilityNoBathMagnetic(std::string input_file)
         : PolarizabilityNoBath(input_file){};
 
-void PolarizabilityNoBath::calculate_tensor(cx_mat::fixed<3, 3> &alpha,
+void PolarizabilityNoBathMagnetic::calculate_tensor(cx_mat::fixed<3, 3> &alpha,
                                             Options_Polarizability opts) {
     // imaginary unit
     std::complex<double> I(0.0, 1.0);
@@ -24,22 +24,25 @@ void PolarizabilityNoBath::calculate_tensor(cx_mat::fixed<3, 3> &alpha,
     diag(0, 0) = diag(1, 1) = diag(2, 2) = omega_a * omega_a - omega * omega;
 
     // calculate integral over green's tensor with fancy R
+    struct Options_GreensTensorMagnetic opts_g;
+    opts_g.omega = omega;
+    opts_g.class_pt = this->greens_tensor;
+
     cx_mat::fixed<3, 3> greens_R;
-    struct Options_GreensTensorMagnetic opts;
-    opts.omega = omega;
-    opts.class_pt = this->greens_tensor;
+    //opts_g.fancy_complex = RE;
+    opts_g.BE = RE;
 
-    opts.fancy_complex = RE;
-    opts.BE = RE;
-
-    this->greens_tensor->integrate_k(greens_R, opts);
+    this->greens_tensor->integrate_k(greens_R, opts_g);
 
     // calculate integral over green's tensor with fancy I
     cx_mat::fixed<3, 3> greens_I;
-    opts.fancy_complex = IM;
-    otps.BE = IM;
+    //opts_g.fancy_complex = IM;
+    opts_g.BE = IM;
 
-    this->greens_tensor->integrate_k(greens_I, opts);
+    this->greens_tensor->integrate_k(greens_I, opts_g);
+
+    std::cout << "Green's tensor magnetic: " << std::endl;
+    std::cout << greens_R + I*greens_I << std::endl;
 
     // put everything together
     alpha =

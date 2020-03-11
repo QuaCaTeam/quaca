@@ -3,18 +3,18 @@
 //
 
 #include "PowerSpectrumHarmOscMagnetic.h"
-#include "../Polarizability/PolarizabilityBathMagnetic.h"
+#include "../Polarizability/PolarizabilityNoBathMagnetic.h"
 #include <armadillo>
 #include <string>
 
 using namespace arma;
 
 //Constructor with ini-file
-PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(std::string input_file)
+PowerSpectrumHarmOscMagnetic::PowerSpectrumHarmOscMagnetic(std::string input_file)
         : PowerSpectrumHarmOsc(input_file) {};
 
 //Constructor with initialization list
-PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(GreensTensor *greens_tensor,
+PowerSpectrumHarmOscMagnetic::PowerSpectrumHarmOscMagnetic(GreensTensor *greens_tensor,
                                            Polarizability *polarizability)
         : PowerSpectrumHarmOsc(greens_tensor, polarizability){};
 
@@ -29,7 +29,7 @@ void PowerSpectrumHarmOscMagnetic::calculate(cx_mat::fixed<3, 3> &powerspectrum,
         //Initialize tensor storing the Green's tensor and setting the integration
         //options for the Green's tensor
         cx_mat::fixed<3, 3> green(fill::zeros);
-        Options_GreensTensor opts_g;
+        Options_GreensTensorMagnetic opts_g;
         opts_g.fancy_complex = IM;
         opts_g.BE = IM;
         opts_g.EB = IM;
@@ -56,14 +56,14 @@ void PowerSpectrumHarmOscMagnetic::calculate(cx_mat::fixed<3, 3> &powerspectrum,
 
         //check wether polarizability has an internal bath
         if(has_bath) {
-            std::cerr << "This feature is not implemented at this moment. Please check the documentation."
+            std::cerr << "This feature is not implemented at this moment. Please check the documentation.";
             exit(0);
         }
     }
 
     //Compute only the non-LTE contributions to the power spectrum
     if (opts.spectrum == NON_LTE_ONLY) {
-        std::cerr << "This feature is not implemented for the moment. Please check the documentation."
-        exti(0);
+        std::cerr << "This feature is not implemented for the moment. Please check the documentation.";
+        exit(0);
     }
 };

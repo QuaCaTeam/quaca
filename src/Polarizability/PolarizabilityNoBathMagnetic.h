@@ -5,8 +5,13 @@
 #ifndef QUACA_POLARIZABILITYNOBATHMAGNETIC_H
 #define QUACA_POLARIZABILITYNOBATHMAGNETIC_H
 
+#include "../GreensTensor/GreensTensor.h"
+#include "../GreensTensor/GreensTensorPlateMagnetic.h"
+#include "Polarizability.h"
+#include "PolarizabilityNoBath.h"
 
-class PolarizabilityNoBathMagnetic {
+
+class PolarizabilityNoBathMagnetic: public PolarizabilityNoBath {
 public:
     PolarizabilityNoBathMagnetic(double omega_a, double alpha_zero,
                          GreensTensor *greens_tensor);

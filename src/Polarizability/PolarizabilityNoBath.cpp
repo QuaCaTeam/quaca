@@ -37,6 +37,9 @@ void PolarizabilityNoBath::calculate_tensor(cx_mat::fixed<3, 3> &alpha,
 
   this->greens_tensor->integrate_k(greens_I, opts_I);
 
+  std::cout << "Electric Green's tensor" << std::endl;
+  std::cout << greens_R + I*greens_I << std::endl;
+
   // put everything together
   alpha =
       alpha_zero * omega_a * omega_a *
