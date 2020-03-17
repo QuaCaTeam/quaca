@@ -7,15 +7,18 @@ ReflectionCoefficientsLocBulk::ReflectionCoefficientsLocBulk(
   // set parameters
   this->permittivity = permittivity;
 };
-// constructor from .ini file
-ReflectionCoefficientsLocBulk::ReflectionCoefficientsLocBulk(std::string input_file) {
+// constructor from .json file
+ReflectionCoefficientsLocBulk::ReflectionCoefficientsLocBulk(
+    std::string input_file) {
   // set permittivity
   // set parameters
-    this->permittivity = PermittivityFactory::create(input_file);
+  this->permittivity = PermittivityFactory::create(input_file);
 };
 
 // calculate the p-polarized reflection coefficient
-void ReflectionCoefficientsLocBulk::ref(std::complex<double> &r_p, std::complex<double> &r_s, double omega, std::complex<double> kappa){
+void ReflectionCoefficientsLocBulk::ref(std::complex<double> &r_p,
+                                        std::complex<double> &r_s, double omega,
+                                        std::complex<double> kappa) {
   // absolute value of omega. r_p is always calculated for positive omega and if
   // needed complex conjugated after the calculation
   double omega_abs = std::abs(omega);
@@ -24,7 +27,7 @@ void ReflectionCoefficientsLocBulk::ref(std::complex<double> &r_p, std::complex<
 
   // kapppa as well as kappa_epsilon are defined to have either a purely
   // positive real part or purely negatively imaginary part
-  kappa_epsilon = sqrt(kappa*kappa - (eps - 1.) * omega_abs * omega_abs);
+  kappa_epsilon = sqrt(kappa * kappa - (eps - 1.) * omega_abs * omega_abs);
   kappa_epsilon = std::complex<double>(std::abs(kappa_epsilon.real()),
                                        -std::abs(kappa_epsilon.imag()));
   // Defining the reflection coefficients in transverse magnetice polarization

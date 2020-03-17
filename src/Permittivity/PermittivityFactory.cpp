@@ -1,12 +1,13 @@
 #include <iostream>
 
-// ini parser
-#include <boost/property_tree/ini_parser.hpp>
+// json parser
+#include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 namespace pt = boost::property_tree;
 
 #include "PermittivityDrude.h"
 #include "PermittivityFactory.h"
+#include "PermittivityLorentz.h"
 
 // permittivity factory
 Permittivity *PermittivityFactory::create(std::string input_file) {
@@ -16,8 +17,8 @@ Permittivity *PermittivityFactory::create(std::string input_file) {
   // Create a root
   pt::ptree root;
 
-  // Load the ini file in this ptree
-  pt::read_ini(input_file, root);
+  // Load the json file in this ptree
+  pt::read_json(input_file, root);
 
   // read the type of permittivity
   std::string type = root.get<std::string>("Permittivity.type");
@@ -25,6 +26,8 @@ Permittivity *PermittivityFactory::create(std::string input_file) {
   // set the right pointer, show error if type is unknown
   if (type == "drude") {
     permittivity = new PermittivityDrude(input_file);
+  } else if (type == "lorentz") {
+    permittivity = new PermittivityLorentz(input_file);
   } else {
     std::cerr << "Error: Unknown Permittivity type (" << type << ")!"
               << std::endl;

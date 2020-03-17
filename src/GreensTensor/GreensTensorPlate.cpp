@@ -1,8 +1,13 @@
+// json parser
+#include <boost/property_tree/json_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
+namespace pt = boost::property_tree;
+
 // integration routine
-#include "GreensTensorPlate.h"
 #include "../Calculations/Integrations.h"
 #include "../Permittivity/PermittivityFactory.h"
 #include "../ReflectionCoefficients/ReflectionCoefficientsFactory.h"
+#include "GreensTensorPlate.h"
 
 GreensTensorPlate::GreensTensorPlate(
     double v, double za, double beta,
@@ -23,8 +28,8 @@ GreensTensorPlate::GreensTensorPlate(std::string input_file)
   // Create a root
   pt::ptree root;
 
-  // Load the ini file in this ptree
-  pt::read_ini(input_file, root);
+  // Load the json file in this ptree
+  pt::read_json(input_file, root);
 
   // check if type is right
   auto type = root.get<std::string>("GreensTensor.type");

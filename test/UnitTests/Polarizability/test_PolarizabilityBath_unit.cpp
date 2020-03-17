@@ -17,8 +17,8 @@ TEST_CASE("PolarizabilityBath constructors work as expected",
     REQUIRE(test.real() == 0.69420);
   };
 
-  SECTION("ini file constructor") {
-    PolarizabilityBath pol("../data/test_files/PolarizabilityBath.ini");
+  SECTION("json file constructor") {
+    PolarizabilityBath pol("../data/test_files/PolarizabilityBath.json");
     REQUIRE(pol.get_omega_a() == 1.3);
     REQUIRE(pol.get_alpha_zero() == 6E-9);
 

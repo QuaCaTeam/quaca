@@ -18,12 +18,12 @@ TEST_CASE("ReflectionCoefficientsLocSlab constructors work as expected",
     REQUIRE(RefC.get_thickness() == thickness);
   };
 
-  SECTION("ini file constructor") {
+  SECTION("json file constructor") {
     double omega = 1;
     ReflectionCoefficientsLocSlab RefC(
-        "../data/test_files/GreensTensorSlab.ini");
+        "../data/test_files/GreensTensorSlab.json");
     Permittivity *perm =
-        new PermittivityDrude("../data/test_files/GreensTensorSlab.ini");
+        new PermittivityDrude("../data/test_files/GreensTensorSlab.json");
 
     REQUIRE(RefC.get_epsilon(omega).real() == perm->epsilon(omega).real());
     REQUIRE(RefC.get_thickness() == 0.05);
@@ -62,9 +62,10 @@ TEST_CASE("r_p and r_s of the slab configuration obey the crossing relation",
     kappa = std::complex<double>(kappa_double, 0.);
   };
   std::complex<double> rp_lhs, rs_lhs, rp_rhs, rs_rhs;
-  ReflectionCoefficientsLocSlab RefC("../data/test_files/GreensTensorSlab.ini");
+  ReflectionCoefficientsLocSlab RefC(
+      "../data/test_files/GreensTensorSlab.json");
   Permittivity *perm =
-      new PermittivityDrude("../data/test_files/GreensTensorSlab.ini");
+      new PermittivityDrude("../data/test_files/GreensTensorSlab.json");
 
   RefC.ref(rp_lhs, rs_lhs, omega, kappa);
   RefC.ref(rp_rhs, rs_rhs, -omega, kappa);

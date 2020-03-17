@@ -107,15 +107,21 @@ The input file sections for the permittivities look like this
 
 <!-- tabs:start -->
 ### **ReflectionCoefficientsLocBulk**
-```ini
-[Reflection]
-type = local bulk
+```json
+{
+  "ReflectionCoefficients" : {
+    "type" : "local bulk"
+  }
+}
 ```
 
 ### **ReflectionCoefficientsLocSlab**
-```ini
-[Reflection]
-type = local slab
-thickness = 0.05
+```json
+{
+  "ReflectionCoefficients" : {
+    "type" : "local slab",
+    "thickness" : 0.05
+  }
+}
 ```
 <!-- tabs:end -->

@@ -4,7 +4,7 @@
 
 Using the default main function of *QuaCa* a simple parallelization of the for-loop was implemented using the [OpenMP API](https://www.openmp.org/resources/refguides/). By default all avaiable threads are used. To limit the number of threads a flag can be set
 ``` bash
-quaca/bin/./Friction --file ../data/MyInputFile.ini --threads number_of_threads
+quaca/bin/./Friction --file ../data/MyInputFile.json --threads number_of_threads
 ```
 where `number_of_threads` represents the number of threads that you want to use.
 

@@ -15,9 +15,9 @@ TEST_CASE("LooperV constructors work as expected", "[LooperV]") {
     REQUIRE(looper.get_step(number_of_steps - 1) == end);
   };
 
-  SECTION("ini file constructor") {
+  SECTION("json file constructor") {
     Friction quant(NULL, NULL, NULL, 0.);
-    LooperV looper("../data/test_files/LooperV.ini");
+    LooperV looper("../data/test_files/LooperV.json");
 
     REQUIRE(looper.get_steps_total() == 20);
     REQUIRE(looper.get_step(0) == 10.2);

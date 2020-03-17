@@ -15,8 +15,8 @@ TEST_CASE("LooperZa constructors work as expected", "[LooperZa]") {
     REQUIRE(looper.get_step(number_of_steps - 1) == end);
   };
 
-  SECTION("ini file constructor") {
-    LooperZa looper("../data/test_files/LooperZa.ini");
+  SECTION("json file constructor") {
+    LooperZa looper("../data/test_files/LooperZa.json");
 
     REQUIRE(looper.get_steps_total() == 20);
     REQUIRE(looper.get_step(0) == 10.2);

@@ -4,11 +4,11 @@
 TEST_CASE("Drude permittivity constructors work as expected",
           "[PermittivityDrude]") {
   SECTION("Direct constructor") {
-    PermittivityDrude perm("../data/test_files/PermittivityDrude.ini");
+    PermittivityDrude perm("../data/test_files/PermittivityDrude.json");
     REQUIRE(perm.get_gamma() == 3.5E-2);
     REQUIRE(perm.get_omega_p() == 3.2);
   };
-  SECTION("ini file constructor") {
+  SECTION("json file constructor") {
     auto omega_p = GENERATE(take(5, random(0.0, 1e3)));
     auto gamma = GENERATE(take(5, random(0.0, 1e3)));
 

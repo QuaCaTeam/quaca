@@ -1,5 +1,5 @@
-// ini parser
-#include <boost/property_tree/ini_parser.hpp>
+// json parser
+#include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 namespace pt = boost::property_tree;
 
@@ -7,16 +7,16 @@ namespace pt = boost::property_tree;
 #include <cassert>
 
 Looper::Looper(double start, double end, int number_of_steps, std::string scale)
-    : start(start), end(end), number_of_steps(number_of_steps), scale(scale){
+    : start(start), end(end), number_of_steps(number_of_steps), scale(scale) {
   assert(start < end);
   this->calculate_steps();
 };
 
-Looper::Looper(std::string input_file){
+Looper::Looper(std::string input_file) {
 
   // read parameters
   pt::ptree root;
-  pt::read_ini(input_file, root);
+  pt::read_json(input_file, root);
   this->start = root.get<double>("Looper.start");
   this->end = root.get<double>("Looper.end");
   this->number_of_steps = root.get<double>("Looper.steps");

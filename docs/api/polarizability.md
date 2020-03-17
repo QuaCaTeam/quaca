@@ -130,20 +130,28 @@ The input file sections for the polarizabilities look like the following.
 Do not forget that for all polarizabilities you need to define a [GreensTensor](api/greenstensor)!
 <!-- tabs:start -->
 #### **PolarizabilityNoBath**
-```ini
-[Polarizability]
-type = nobath
-omega_a =
-alpha_zero =
+```json
+{
+    "Polarizability": {
+        "type": "nobath",
+        "omega_a": ,
+        "alpha_zero": 
+    }
+}
 ```
 
 
 #### **PolarizabilityBath**
-```ini
-[Polarizability]
-type = bath
-omega_a =
-alpha_zero =
+```json
+{
+    "Polarizability": {
+        "type": "bath",
+        "omega_a": ,
+        "alpha_zero": ,
+        "MemoryKernel": {
+        }
+    }
+}
 ```
 For the bath you also need to define a [MemoryKernel](api/memorykernel)!
 <!-- tabs:end -->
@@ -185,26 +193,29 @@ The matrix `alpha` now contains the correctly calculated polarizability tensor.
 
 #### ** Example 1 (easier) **
 Since we have to define a lot of parameters, QuaCa offers a shortcut to the long task before.
-We simply define all parameters in a file called `parameters.ini` which looks like this
-```ini
-[MemoryKernel]
-type = ohmic
-gamma = 3.0
-
-[GreensTensor]
-type = plate
-v = 0.1
-za = 10
-beta = 1e4
-
-[Polarizability]
-type = bath
-omega_a = 1.3
-alpha_zero = 4.0
+We simply define all parameters in a file called `parameters.json` which looks like this
+```json
+{
+    "Polarizability": {
+        "type": "bath",
+        "omega_a": 1.3,
+        "alpha_zero": 4.0,
+        "MemoryKernel": {
+            "type": "ohmic",
+            "gamma": 3.0
+        }
+    },
+    "GreensTensor": {
+        "type": "plate",
+        "v": 0.1,
+        "za" : 10,
+        "beta": 3.2
+    }
+}
 ```
 Now we can easily define and calculate the polarizability as such
 ```cpp
-PolarizabilityBath pol("parameters.ini");
+PolarizabilityBath pol("parameters.json");
 
 cx_mat::fixed<3,3> alpha(fill::zeros);
 pol.calculate_tensor(alpha, 3.0);

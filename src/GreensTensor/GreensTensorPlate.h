@@ -1,14 +1,10 @@
 #ifndef GREENSTENSORPLATE_H
 #define GREENSTENSORPLATE_H
+
 #include <armadillo>
 #include <assert.h>
 #include <cmath>
 #include <complex>
-
-// ini parser
-#include <boost/property_tree/ini_parser.hpp>
-#include <boost/property_tree/ptree.hpp>
-namespace pt = boost::property_tree;
 
 #include "../ReflectionCoefficients/ReflectionCoefficients.h"
 #include "GreensTensor.h"

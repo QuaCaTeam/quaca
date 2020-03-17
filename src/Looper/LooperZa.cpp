@@ -1,5 +1,5 @@
-// ini parser
-#include <boost/property_tree/ini_parser.hpp>
+// json parser
+#include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 namespace pt = boost::property_tree;
 
@@ -10,27 +10,26 @@ LooperZa::LooperZa(double start, double end, int number_of_steps,
                    std::string scale)
     : Looper(start, end, number_of_steps, scale){};
 
-LooperZa::LooperZa(std::string input_file)
-    : Looper(input_file) {
+LooperZa::LooperZa(std::string input_file) : Looper(input_file) {
   // Create a root
   pt::ptree root;
 
-  // Load the ini file in this ptree
-  pt::read_ini(input_file, root);
+  // Load the json file in this ptree
+  pt::read_json(input_file, root);
 
   // check if type is right
   std::string type = root.get<std::string>("Looper.type");
   assert(type == "za");
 };
 
-double LooperZa::calculate_value(int step, Friction* quantum_friction) {
+double LooperZa::calculate_value(int step, Friction *quantum_friction) {
   Options_Friction opts;
   opts.spectrum = NON_LTE_ONLY;
   opts.class_pt = quantum_friction;
 
   // change za
-  GreensTensorPlate *pt = dynamic_cast<GreensTensorPlate *>(
-      quantum_friction->get_greens_tensor());
+  GreensTensorPlate *pt =
+      dynamic_cast<GreensTensorPlate *>(quantum_friction->get_greens_tensor());
 
   if (pt == NULL) {
     std::cerr

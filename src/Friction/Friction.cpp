@@ -1,22 +1,25 @@
-#include "Friction.h"
+#include <algorithm>
+#include <vector>
+
+#include <armadillo>
+using namespace arma;
+
+// json parser
+#include <boost/property_tree/json_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
+namespace pt = boost::property_tree;
+
 #include "../GreensTensor/GreensTensorFactory.h"
 #include "../Polarizability/PolarizabilityFactory.h"
 #include "../PowerSpectrum/PowerSpectrumFactory.h"
-#include <algorithm>
-#include <armadillo>
-#include <boost/property_tree/ini_parser.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include <vector>
-
-namespace pt = boost::property_tree;
-using namespace arma;
+#include "Friction.h"
 
 Friction::Friction(std::string input_file) {
   // Create a root
   pt::ptree root;
 
-  // Load the ini file in this ptree
-  pt::read_ini(input_file, root);
+  // Load the json file in this ptree
+  pt::read_json(input_file, root);
   this->relerr_omega = root.get<double>("Friction.relerr_omega");
   // read greens tensor
   this->greens_tensor = GreensTensorFactory::create(input_file);
@@ -116,7 +119,7 @@ double Friction::friction_integrand(double omega, void *opts) {
     // the \Sigma distribution is already included here
     opts_g.weight_function = KV_NON_LTE;
     opts_pt->class_pt->greens_tensor->integrate_k(green_fancy_I_kv_non_LTE,
-                                                     opts_g);
+                                                  opts_g);
 
     // Compute the power spectrum for the first term of eq. (4.5)
     Options_PowerSpectrum opts_J;

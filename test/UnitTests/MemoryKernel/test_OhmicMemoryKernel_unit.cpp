@@ -9,8 +9,8 @@ TEST_CASE("Ohmic memory kernel constructors work as expected",
     REQUIRE(memorykernel.get_gamma() == 7.8);
   };
 
-  SECTION("ini file constructor") {
-    OhmicMemoryKernel memorykernel("../data/test_files/MemoryKernel.ini");
+  SECTION("json file constructor") {
+    OhmicMemoryKernel memorykernel("../data/test_files/MemoryKernel.json");
     REQUIRE(memorykernel.get_gamma() == 0.69420);
   };
 };
