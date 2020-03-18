@@ -148,7 +148,7 @@ double GreensTensorPlate::integrand_1d_k(double phi, void *opts) {
   // within the struct is casted.
   auto *pt = dynamic_cast<GreensTensorPlate *>(opts_pt->class_pt);
 
-  double result;
+  double result = 0;
   // import parameters
   double omega = opts_pt->omega;
   double v = pt->v;
@@ -164,8 +164,8 @@ double GreensTensorPlate::integrand_1d_k(double phi, void *opts) {
   // probably sharp edge of the Bose-Einstein distribution, the integration is
   // split at the edge, if the edged lies below the cut-off kappa_cut.
   if (kappa_cut > std::abs(omega / (v * cos_phi))) {
-    result =
-        cquad(&integrand_2d_k, opts, -std::abs(omega), 0, pt->rel_err(0), 0);
+    //result =
+     //   cquad(&integrand_2d_k, opts, -std::abs(omega), 0, pt->rel_err(0), 0);
     result += cquad(&integrand_2d_k, opts, 0, std::abs(omega / (v * cos_phi)),
                     pt->rel_err(0), 0);
     result += cquad(&integrand_2d_k, opts, std::abs(omega / (v * cos_phi)),

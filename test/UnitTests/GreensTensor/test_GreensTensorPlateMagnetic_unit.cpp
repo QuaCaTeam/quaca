@@ -18,7 +18,7 @@ TEST_CASE("The tensors from calculate_tensor and integrand_2d_k coincide",
   double k_x = k * cos(phi);
   double k_y = k * sin(phi);
   double omega_p = 9;
-  double gamma = 0.1;
+  double gamma = .1;
   double v = 1e-2;
   double za = 0.1;
   double delta_cut = 30;
@@ -43,7 +43,7 @@ TEST_CASE("The tensors from calculate_tensor and integrand_2d_k coincide",
   k = sqrt(k_x * k_x + k_y * k_y);
   kappa = sqrt(std::complex<double>(k * k - opts.omega * opts.omega, 0.));
   kappa = std::complex<double>(std::abs(kappa.real()), -std::abs(kappa.imag()));
-  volume_element = std::abs(kappa) * k / (k - cos(phi) * v * opts.omega);
+  volume_element = (real(kappa)-imag(kappa))*k / (k - cos(phi) * v * opts.omega);
 
   Greens.calculate_tensor(Green, opts);
 
@@ -215,11 +215,14 @@ TEST_CASE("The tensors from calculate_tensor and integrand_2d_k coincide",
     REQUIRE(approx_equal(LHS, RHS, "abs", 10E-12));
   }
   opts.BB = IGNORE;
+  
 
 }
 
+
 TEST_CASE("Crossing relation in k-space works for all Green's tensors",
           "[GreensTensorPlateMagnetic]") {
+  
   // Here we considered also the volume element from the integration.
   std::complex<double> I(0.0, 1.0);
   // Calculate computes all possible entries of the electric Green's tensor. On
@@ -230,7 +233,7 @@ TEST_CASE("Crossing relation in k-space works for all Green's tensors",
   auto k = GENERATE(take(3,random(0.,1e2)));
   auto omega = GENERATE(take(3,random(-1e2,1e2)));
   double omega_p = 9;
-  double gamma = 0.1;
+  double gamma = .1;
   double v = 1e-2;
   double za = 0.1;
   double delta_cut = 30;
@@ -291,6 +294,7 @@ TEST_CASE("Crossing relation in k-space works for all Green's tensors",
     }
     REQUIRE(approx_equal(conj(LHS), -RHS, "abs", 1e-12));
   }
+  
   SECTION("G^EE_R fulfills the crossing relation in k-space") {
     opts.fancy_complex = RE;
 
@@ -302,7 +306,7 @@ TEST_CASE("Crossing relation in k-space works for all Green's tensors",
         opts.indices(0) = i;
         opts.indices(1) = j;
         LHS(i, j) += (2. * M_PI) *
-                     greens_tensor.integrand_2d_k_magnetic_R(kappa_double, &opts);
+                    greens_tensor.integrand_2d_k_magnetic_R(kappa_double, &opts);
         LHS(i, j) += I * (2. * M_PI) *
                      greens_tensor.integrand_2d_k_magnetic_I(kappa_double, &opts);
       }
@@ -512,7 +516,9 @@ TEST_CASE("Crossing relation in k-space works for all Green's tensors",
     REQUIRE(approx_equal(conj(LHS), RHS, "abs", 1e-12));
   }
   opts.BB = IGNORE;
+  
 }
+
 
 TEST_CASE("Test the sum of several Green's tensors",
           "[GreensTensorPlateMagnetic]") {
@@ -534,7 +540,7 @@ TEST_CASE("Test the sum of several Green's tensors",
   double k_x = k * cos(phi);
   double k_y = k * sin(phi);
   double omega_p = 9;
-  double gamma = 0.1;
+  double gamma = .1;
   double v = 1e-2;
   double za = 0.1;
   double delta_cut = 30;
@@ -623,12 +629,13 @@ TEST_CASE("Test the sum of several Green's tensors",
   }
 }
 
+
 TEST_CASE("Integrand_1d_k_magnetic gives non-vanishing contriubtions for all"
           "Green's tensors ","GreensTensorPlateMagnetic")
 {
-  double omega = GENERATE(take(3,random(0.,1e2)));
+  double omega = GENERATE(take(3,random(-1e2,1e2)));
   double omega_p = 9;
-  double gamma = 0.1;
+  double gamma = .1;
   double v = 1e-2;
   double za = 0.1;
   double delta_cut = 30;
@@ -640,7 +647,7 @@ TEST_CASE("Integrand_1d_k_magnetic gives non-vanishing contriubtions for all"
 
   std::complex<double> I (0.,1.);
 
-  auto phi = GENERATE(take(1,random(0.,2.*M_PI)));
+  auto phi = GENERATE(take(3,random(0.,2.*M_PI)));
   opts.class_pt = &Greens;
   opts.omega = omega;
 
@@ -748,12 +755,15 @@ TEST_CASE("Integrand_1d_k_magnetic gives non-vanishing contriubtions for all"
   }
 }
 
-TEST_CASE("integrate_k gives non-vanishing contriubtions for all"
-          "Green's tensors ","GreensTensorPlateMagnetic")
+TEST_CASE("integrand_2d_k for G^EE corresponds to GreensTensorPlate","[GreensTensorPlateMagnetic]")
 {
-  double omega = GENERATE(take(3,random(0.,1e2)));
+  auto omega = GENERATE(take(3,random(-1e2,1e2)));
+  auto phi = GENERATE(take(3,random(0.,2.*M_PI)));
+  auto kappa_double = GENERATE(take(3,random(0.,1e2)));
+
+  std::complex<double> I (0.,1.);
   double omega_p = 9;
-  double gamma = 0.1;
+  double gamma = .1;
   double v = 1e-2;
   double za = 0.1;
   double delta_cut = 30;
@@ -761,43 +771,174 @@ TEST_CASE("integrate_k gives non-vanishing contriubtions for all"
   PermittivityDrude perm(omega_p, gamma);
   ReflectionCoefficientsLocBulk refl(&perm);
   GreensTensorPlate Greens(v, za, 0.1, &refl, delta_cut, rel_err);
+  GreensTensorPlateMagnetic GreensM(v, za, 0.1, &refl, delta_cut, rel_err);
+  struct Options_GreensTensorMagnetic opts;
+  opts.omega = omega;
+  opts.kvec(0) = phi;
+  
+  cx_mat::fixed<3,3> LHS(fill::zeros);
+  cx_mat::fixed<3,3> RHS(fill::zeros);
+
+  SECTION("IM") {
+    opts.fancy_complex = IM;
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+
+	opts.class_pt = &GreensM;
+	RHS(i,j) = GreensM.integrand_2d_k_magnetic_R(kappa_double,&opts);
+	RHS(i,j) += I*GreensM.integrand_2d_k_magnetic_I(kappa_double, &opts);
+
+	opts.class_pt = &Greens;
+        LHS(i, j) = Greens.integrand_2d_k(kappa_double, &opts);
+	if(i != j) LHS(i,j) *= I;
+      }
+    }
+    REQUIRE(approx_equal(LHS, RHS, "abs", 1e-12));
+  }
+  SECTION("RE") {
+    opts.fancy_complex = RE;
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+
+	opts.class_pt = &GreensM;
+	RHS(i,j) = GreensM.integrand_2d_k_magnetic_R(kappa_double,&opts);
+	RHS(i,j) += I*GreensM.integrand_2d_k_magnetic_I(kappa_double, &opts);
+
+	opts.class_pt = &Greens;
+        LHS(i, j) = Greens.integrand_2d_k(kappa_double, &opts);
+	if(i != j) LHS(i,j) *= I;
+      }
+    }
+    REQUIRE(approx_equal(LHS, RHS, "abs", 1e-12));
+  }
+}
+
+TEST_CASE("integrand_1d_k of G^EE corresponds to GreensTensorPlate","[GreensTensorPlateMagnetic]")
+{
+  auto omega = GENERATE(take(1,random(-1e2,1e2)));
+  auto phi = GENERATE(take(1,random(0.,2.*M_PI)));
+
+  std::complex<double> I (0.,1.);
+  double omega_p = 9;
+  double gamma = .1;
+  double v = 1e-2;
+  double za = 0.1;
+  double delta_cut = 30;
+  vec::fixed<2> rel_err = {1E-8, 1E-6};
+  PermittivityDrude perm(omega_p, gamma);
+  ReflectionCoefficientsLocBulk refl(&perm);
+  GreensTensorPlate Greens(v, za, 0.1, &refl, delta_cut, rel_err);
+  GreensTensorPlateMagnetic GreensM(v, za, 0.1, &refl, delta_cut, rel_err);
+  struct Options_GreensTensorMagnetic opts;
+  opts.omega = omega;
+  
+  cx_mat::fixed<3,3> LHS(fill::zeros);
+  cx_mat::fixed<3,3> RHS(fill::zeros);
+
+  SECTION("IM") {
+    std::cout << "omega " << omega << std::endl;
+    std::cout << "phi " << phi << std::endl;
+    opts.fancy_complex = IM;
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+
+	opts.class_pt = &GreensM;
+	RHS(i,j) = GreensM.integrand_1d_k_magnetic_R(phi,&opts);
+	RHS(i,j) += I*GreensM.integrand_1d_k_magnetic_I(phi, &opts);
+
+	opts.class_pt = &Greens;
+        LHS(i, j) = Greens.integrand_1d_k(phi, &opts);
+	if(i != j) LHS(i,j) *= I;
+      }
+    }
+    std::cout << LHS << RHS << std::endl;
+    std::cout << LHS/RHS << std::endl;
+    REQUIRE(approx_equal(LHS, RHS, "abs", 1e-12));
+  }
+  /*
+  SECTION("RE") {
+    opts.fancy_complex = RE;
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        opts.indices(0) = i;
+        opts.indices(1) = j;
+
+	opts.class_pt = &GreensM;
+	RHS(i,j) = GreensM.integrand_1d_k_magnetic_R(phi,&opts);
+	RHS(i,j) += I*GreensM.integrand_1d_k_magnetic_I(phi, &opts);
+
+	opts.class_pt = &Greens;
+        LHS(i, j) = Greens.integrand_1d_k(phi, &opts);
+	if(i != j) LHS(i,j) *= I;
+      }
+    }
+    REQUIRE(approx_equal(LHS, RHS, "abs", 1e-12));
+  }
+  */
+}
+
+/*
+TEST_CASE("integrate_k gives non-vanishing contriubtions for all"
+          "Green's tensors ","[GreensTensorPlateMagnetic]")
+{
+  double omega = GENERATE(take(3,random(-1e2,1e2)));
+  double omega_p = 9;
+  double gamma = .1;
+  double v = 1e-2;
+  double za = 0.1;
+  double delta_cut = 30;
+  vec::fixed<2> rel_err = {1E-8, 1E-6};
+  PermittivityDrude perm(omega_p, gamma);
+  ReflectionCoefficientsLocBulk refl(&perm);
+  GreensTensorPlateMagnetic Greens(v, za, 0.1, &refl, delta_cut, rel_err);
   struct Options_GreensTensor opts;
 
   std::complex<double> I (0.,1.);
 
   opts.class_pt = &Greens;
   opts.omega = omega;
-  std::cout << omega << std::endl;
 
   cx_mat::fixed<3, 3> LHS(fill::zeros);
   cx_mat::fixed<3, 3> RHS(fill::zeros);
 
   SECTION("G^EE_I") {
+    std::cout << "Omega = " << omega << std::endl;
     opts.fancy_complex = IM;
     Greens.integrate_k(LHS, opts);
     REQUIRE(!approx_equal(LHS, RHS, "abs", 1e-12));
   }
+  SECTION("G^EE_R") {
+    opts.fancy_complex = RE;
+    Greens.integrate_k(LHS, opts);
+    REQUIRE(!approx_equal(LHS, RHS, "abs", 1e-12));
+  }
 }
+*/
+
 /*
 TEST_CASE("Integrals of all the Green's tensor work properly",
           "[GreensTensorPlate]") {
+    double omega = GENERATE(take(1,random(0.,1.)));
+    double omega_p = 9;
+    double gamma = .1;
+    double v = 1e-2;
+    double za = 0.1;
+    double delta_cut = 100;
+    vec::fixed<2> rel_err = {1E-8, 1E-6};
+    PermittivityDrude perm(omega_p, gamma);
+    ReflectionCoefficientsLocBulk refl(&perm);
+    GreensTensorPlateMagnetic Greens(v, za, 0.1, &refl, delta_cut, rel_err);
+    struct Options_GreensTensorMagnetic opts;
+    opts.class_pt = &Greens;
 
-        double omega = GENERATE(take(2,random(0.,1e2)));
-        double omega_p = 9;
-        double gamma = 0.1;
-        double v = 1e-2;
-        double za = 0.1;
-        double delta_cut = 30;
-        vec::fixed<2> rel_err = {1E-8, 1E-6};
-        PermittivityDrude perm(omega_p, gamma);
-        ReflectionCoefficientsLocBulk refl(&perm);
-        GreensTensorPlateMagnetic Greens(v, za, 0.1, &refl, delta_cut, rel_err);
-        struct Options_GreensTensorMagnetic opts;
-        opts.class_pt = &Greens;
-
-  cx_mat::fixed<3, 3> LHS(fill::zeros);
-        cx_mat::fixed<3, 3> RHS(fill::zeros);
-        // Test of fancy_I
+    cx_mat::fixed<3, 3> LHS(fill::zeros);
+    cx_mat::fixed<3, 3> RHS(fill::zeros);
     SECTION("Integral over G^EE_I obeys the crossing relation") {
         opts.fancy_complex = IM;
         opts.omega = omega;
@@ -806,9 +947,14 @@ TEST_CASE("Integrals of all the Green's tensor work properly",
         opts.omega = -omega;
         Greens.integrate_k(RHS, opts);
 
-      REQUIRE(approx_equal(LHS, -RHS, "reldiff",10E-4));
+	std::cout << "Omega = " << omega << std::endl;
+	std::cout << LHS << -RHS << std::endl;
+	std::cout << "Difference" << std::endl;
+	std::cout << LHS + RHS << std::endl;
+	REQUIRE(approx_equal(LHS, -RHS, "reldiff",10E-4));
     }
 
+    
     SECTION("Integral over G^EE_R obeys the crossing relation") {
         opts.omega = omega;
         opts.fancy_complex = RE;
@@ -820,7 +966,6 @@ TEST_CASE("Integrals of all the Green's tensor work properly",
         REQUIRE(approx_equal(LHS, RHS, "reldiff", 10E-4));
     }
     opts.fancy_complex = IGNORE;
-
     SECTION("Integral over G^BE_I obeys the crossing relation") {
         opts.omega = omega;
         opts.BE = IM;
@@ -828,10 +973,13 @@ TEST_CASE("Integrals of all the Green's tensor work properly",
 
         opts.omega = -omega;
         Greens.integrate_k(RHS, opts);
+	std::cout << LHS << -RHS << std::endl;
+	std::cout << "Difference" << std::endl;
+	std::cout << LHS + RHS << std::endl;
 
         REQUIRE(approx_equal(LHS, -RHS, "reldiff", 10E-4));
     }
-
+ 
     SECTION("Integral over G^BE_R obeys the crossing relation") {
         opts.omega = omega;
         opts.BE = RE;
@@ -889,3 +1037,4 @@ TEST_CASE("Integrals of all the Green's tensor work properly",
 
 }
 */
+
