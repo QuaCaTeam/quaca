@@ -23,10 +23,12 @@ find_package(LAPACK REQUIRED)
 find_package(BLAS REQUIRED)
 include_directories("${PROJECT_SOURCE_DIR}/lib/armadillo-9.800.2/include")
 
-#find OpenMP library
-find_package(OpenMP REQUIRED)
-#add -fopenmp to the cxx_flags
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+#include OpenMP
+find_package(OpenMP)
+if(OpenMP_CXX_FOUND)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+endif()
+
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DARMA_DONT_USE_WRAPPER")
 
