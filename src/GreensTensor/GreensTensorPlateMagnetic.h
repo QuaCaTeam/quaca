@@ -25,11 +25,12 @@ public:
 
   // integrands
   // static double integrand_1d_k(double kx, void *opts);
+  void integrate_k_magnetic(cx_mat::fixed<3, 3> &GT,
+                                            Options_GreensTensorMagnetic opts); 
   static double integrand_2d_k_magnetic_R(double ky, void *opts);
   static double integrand_2d_k_magnetic_I(double ky, void *opts);
   static double integrand_1d_k_magnetic_R(double phi, void *opts);
   static double integrand_1d_k_magnetic_I(double phi, void *opts);
-  void integrate_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
 };
 
 #endif

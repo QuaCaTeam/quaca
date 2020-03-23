@@ -171,7 +171,8 @@ double GreensTensorPlate::integrand_1d_k(double phi, void *opts) {
     result += cquad(&integrand_2d_k, opts, std::abs(omega / (v * cos_phi)),
                     kappa_cut, pt->rel_err(0), 0);
   } else {
-    result = cquad(&integrand_2d_k, opts, -std::abs(omega), kappa_cut,
+    //result = cquad(&integrand_2d_k, opts, -std::abs(omega), kappa_cut,
+    result = cquad(&integrand_2d_k, opts, 0. , kappa_cut,
                    pt->rel_err(0), 0);
   }
   return result;

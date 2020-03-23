@@ -74,8 +74,8 @@ void GreensTensorPlateMagnetic::calculate_tensor(
   }
 }
 
-void GreensTensorPlateMagnetic::integrate_k(cx_mat::fixed<3, 3> &GT,
-                                            Options_GreensTensor opts) {
+void GreensTensorPlateMagnetic::integrate_k_magnetic(cx_mat::fixed<3, 3> &GT,
+                                            Options_GreensTensorMagnetic opts) {
 
   // imaginary unit
   std::complex<double> I(0.0, 1.0);
@@ -203,7 +203,8 @@ double GreensTensorPlateMagnetic::integrand_1d_k_magnetic_R(double phi,
     result += cquad(&integrand_2d_k_magnetic_R, opts,
                     std::abs(omega / (v * cos_phi)), kappa_cut, rel_err(0), 0);
   } else {
-    result = cquad(&integrand_2d_k_magnetic_R, opts, -std::abs(omega),
+    //result = cquad(&integrand_2d_k_magnetic_R, opts, -std::abs(omega),
+    result = cquad(&integrand_2d_k_magnetic_R, opts, 0.,
                    kappa_cut, rel_err(0), 0);
   }
   return result;
@@ -246,7 +247,8 @@ double GreensTensorPlateMagnetic::integrand_1d_k_magnetic_I(double phi,
     result += cquad(&integrand_2d_k_magnetic_I, opts,
                     std::abs(omega / (v * cos_phi)), kappa_cut, rel_err(0), 0);
   } else {
-    result = cquad(&integrand_2d_k_magnetic_I, opts, -std::abs(omega),
+    //result = cquad(&integrand_2d_k_magnetic_I, opts, -std::abs(omega),
+    result = cquad(&integrand_2d_k_magnetic_I, opts, 0.,
                    kappa_cut, rel_err(0), 0);
   }
   return result;
@@ -744,6 +746,10 @@ double GreensTensorPlateMagnetic::integrand_2d_k_magnetic_I(double kappa_double,
         k * cos(phi) *
         (1. / (1.0 - exp(-beta * omega_pl)) - 1. / (1.0 - exp(-beta * omega)));
   }
-
+  int x = opts_pt->indices(0);
+  int y = opts_pt->indices(1);
+  if(x == 2 && y == 0)
+  {
+  }
   return result;
 }
