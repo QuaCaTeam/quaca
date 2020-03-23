@@ -164,15 +164,14 @@ double GreensTensorPlate::integrand_1d_k(double phi, void *opts) {
   // probably sharp edge of the Bose-Einstein distribution, the integration is
   // split at the edge, if the edged lies below the cut-off kappa_cut.
   if (kappa_cut > std::abs(omega / (v * cos_phi))) {
-    //result =
-     //   cquad(&integrand_2d_k, opts, -std::abs(omega), 0, pt->rel_err(0), 0);
+    result =
+        cquad(&integrand_2d_k, opts, -std::abs(omega), 0, pt->rel_err(0), 0);
     result += cquad(&integrand_2d_k, opts, 0, std::abs(omega / (v * cos_phi)),
                     pt->rel_err(0), 0);
     result += cquad(&integrand_2d_k, opts, std::abs(omega / (v * cos_phi)),
                     kappa_cut, pt->rel_err(0), 0);
   } else {
-    //result = cquad(&integrand_2d_k, opts, -std::abs(omega), kappa_cut,
-    result = cquad(&integrand_2d_k, opts, 0. , kappa_cut,
+    result = cquad(&integrand_2d_k, opts, -std::abs(omega), kappa_cut,
                    pt->rel_err(0), 0);
   }
   return result;
@@ -217,8 +216,6 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
   // reflection coefficients and pre-factors of the corresponding polarization
   std::complex<double> r_p, r_s;
 
-  // helpful prefactors
-  std::complex<double> prefactor_p, prefactor_s, prefactor_off;
 
   // Transfer kappa to the correct complex value
   if (kappa_double < 0.0) {
@@ -248,18 +245,22 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
   pt->reflection_coefficients->ref(r_p, r_s, omega_pl_abs, kappa_complex);
   // For an better overview and a efficient calculation, we collect the
   // pre-factors of the p and s polarization separately
-  prefactor_p =
-      exp(-2 * za * kappa_complex) / (1. - cos_phi * v * omega_pl / k);
-  prefactor_s = prefactor_p * r_s * omega_pl_quad;
-  prefactor_p = prefactor_p * r_p * kappa_quad;
-  prefactor_off = prefactor_p * k * cos_phi / kappa_complex;
-
+  
   // Impose reality in time
   if (omega_pl < 0) {
-    prefactor_s = conj(prefactor_s);
-    prefactor_p = conj(prefactor_p);
-    prefactor_off = conj(prefactor_off);
+    kappa_complex = conj(kappa_complex);
+    r_s = conj(r_s);
+    r_p = conj(r_p);
   }
+
+  // helpful prefactors
+  
+  // volume element + exponential function
+  std::complex<double> prefactor = std::abs(kappa_complex)/(1. - cos_phi * v * omega_pl / k)*exp(-2. * za * kappa_complex);
+  //prefactor for the r_s reflection coefficient
+  std::complex<double> prefactor_s = prefactor * r_s * omega_pl_quad;
+  //prefactor for the r_p reflection coefficient
+  std::complex<double> prefactor_p = prefactor * r_p * kappa_quad;
 
   // Calculate the G_xx element
   if (opts_pt->indices(0) == 0 && opts_pt->indices(1) == 0) {
@@ -275,11 +276,11 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
   }
   // Calculate the G_zx element
   else if (opts_pt->indices(0) == 2 && opts_pt->indices(1) == 0) {
-    result_complex = I * prefactor_off;
+    result_complex = I * prefactor_p * k / kappa_complex * cos_phi;
   }
   // Calculate the G_xz element
   else if (opts_pt->indices(0) == 0 && opts_pt->indices(1) == 2) {
-    result_complex = -I * prefactor_off;
+    result_complex = -I * prefactor_p * k / kappa_complex * cos_phi;
   } else {
     result_complex = (0, 0);
   }

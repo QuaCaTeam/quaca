@@ -75,9 +75,9 @@ TEST_CASE("The operations calculate_tensor and the integrand_2d_k coincide",
           "[GreensTensorPlate]") {
   // Here we considered also the volume element from the integration.
   std::complex<double> I(0.0, 1.0);
-  auto omega = GENERATE(take(5, random(-1e2, 1e2)));
-  auto k_x = GENERATE(take(5, random(0., 1e2)));
-  auto k_y = GENERATE(take(5, random(0., 1e2)));
+  auto omega = GENERATE(take(1, random(-1e2, 1e2)));
+  auto k_x = GENERATE(take(1, random(0., 1e2)));
+  auto k_y = GENERATE(take(1, random(0., 1e2)));
   double omega_p = 9;
   double gamma = 0.1;
   double v = 1e-2;
@@ -86,7 +86,6 @@ TEST_CASE("The operations calculate_tensor and the integrand_2d_k coincide",
   vec::fixed<2> rel_err = {1E-8, 1E-6};
   double kappa_double;
   double cos_phi, k;
-  std::complex<double> kappa, volume_element;
   PermittivityDrude perm(omega_p, gamma);
   ReflectionCoefficientsLocBulk refl(&perm);
   GreensTensorPlate Greens(v, za, 0.1, &refl, delta_cut, rel_err);
@@ -104,14 +103,12 @@ TEST_CASE("The operations calculate_tensor and the integrand_2d_k coincide",
   opts.omega = omega + k_x * v;
   k = sqrt(k_x * k_x + k_y * k_y);
   cos_phi = k_x / k;
-  kappa = sqrt(std::complex<double>(k * k - opts.omega * opts.omega, 0.));
+  std::complex<double> kappa = sqrt(std::complex<double>(k * k - opts.omega * opts.omega, 0.));
   kappa = std::complex<double>(std::abs(kappa.real()), -std::abs(kappa.imag()));
-  volume_element = kappa * k / (k - cos_phi * v * opts.omega);
+  double volume_element = std::abs(kappa) * k / (k - cos_phi * v * opts.omega);
 
   Greens.calculate_tensor(Green, opts);
-  if (opts.omega < 0) {
-    volume_element = conj(volume_element);
-  }
+
   Green *= volume_element;
   Green_fancy_I_ct = (Green - trans(Green)) / (2. * I);
   Green_fancy_R_ct = (Green + trans(Green)) / (2.);
@@ -142,6 +139,7 @@ TEST_CASE("The operations calculate_tensor and the integrand_2d_k coincide",
               }
           }
       }
+      std::cout << Green_fancy_I_ct << Green_fancy_I_ik2d << std::endl;
       REQUIRE(approx_equal(Green_fancy_I_ct, Green_fancy_I_ik2d, "reldiff", 10E-4));
   }
     SECTION("Test fancy real part") {
@@ -323,6 +321,7 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
   }
 }
 
+/*
 TEST_CASE("Integrated Green's tensor matches asymptotes",
           "[GreensTensorPlate]") {
   SECTION("Low-frequency asymptote of fancy_I") {
@@ -455,3 +454,4 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     REQUIRE(approx_equal(GT_lhs, GT_rhs, "reldiff", 10E-4));
   }
 }
+*/
