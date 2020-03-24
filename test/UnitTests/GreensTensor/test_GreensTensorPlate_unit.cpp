@@ -75,9 +75,9 @@ TEST_CASE("The operations calculate_tensor and the integrand_2d_k coincide",
           "[GreensTensorPlate]") {
   // Here we considered also the volume element from the integration.
   std::complex<double> I(0.0, 1.0);
-  auto omega = GENERATE(take(1, random(-1e2, 1e2)));
-  auto k_x = GENERATE(take(1, random(0., 1e2)));
-  auto k_y = GENERATE(take(1, random(0., 1e2)));
+  auto omega = GENERATE(take(5, random(-1e2, 1e2)));
+  auto k_x = GENERATE(take(5, random(0., 1e2)));
+  auto k_y = GENERATE(take(5, random(0., 1e2)));
   double omega_p = 9;
   double gamma = 0.1;
   double v = 1e-2;
@@ -139,7 +139,6 @@ TEST_CASE("The operations calculate_tensor and the integrand_2d_k coincide",
               }
           }
       }
-      std::cout << Green_fancy_I_ct << Green_fancy_I_ik2d << std::endl;
       REQUIRE(approx_equal(Green_fancy_I_ct, Green_fancy_I_ik2d, "reldiff", 10E-4));
   }
     SECTION("Test fancy real part") {
@@ -321,7 +320,7 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
   }
 }
 
-/*
+
 TEST_CASE("Integrated Green's tensor matches asymptotes",
           "[GreensTensorPlate]") {
   SECTION("Low-frequency asymptote of fancy_I") {
@@ -454,4 +453,4 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     REQUIRE(approx_equal(GT_lhs, GT_rhs, "reldiff", 10E-4));
   }
 }
-*/
+

@@ -256,11 +256,11 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
   // helpful prefactors
   
   // volume element + exponential function
-  std::complex<double> prefactor = std::abs(kappa_complex)/(1. - cos_phi * v * omega_pl / k)*exp(-2. * za * kappa_complex);
+  std::complex<double> prefactor = std::abs(kappa_double)/(1. - cos_phi * v * omega_pl / k)*exp(-2. * za * kappa_complex);
   //prefactor for the r_s reflection coefficient
-  std::complex<double> prefactor_s = prefactor * r_s * omega_pl_quad;
+  std::complex<double> prefactor_s = prefactor * r_s * omega_pl_quad/kappa_complex;
   //prefactor for the r_p reflection coefficient
-  std::complex<double> prefactor_p = prefactor * r_p * kappa_quad;
+  std::complex<double> prefactor_p = prefactor * r_p * kappa_complex;
 
   // Calculate the G_xx element
   if (opts_pt->indices(0) == 0 && opts_pt->indices(1) == 0) {
