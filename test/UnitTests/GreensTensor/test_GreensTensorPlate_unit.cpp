@@ -86,7 +86,6 @@ TEST_CASE("The operations calculate_tensor and the integrand_2d_k coincide",
   vec::fixed<2> rel_err = {1E-8, 1E-6};
   double kappa_double;
   double cos_phi, k;
-  std::complex<double> kappa, volume_element;
   PermittivityDrude perm(omega_p, gamma);
   ReflectionCoefficientsLocBulk refl(&perm);
   GreensTensorPlate Greens(v, za, 0.1, &refl, delta_cut, rel_err);
@@ -103,14 +102,12 @@ TEST_CASE("The operations calculate_tensor and the integrand_2d_k coincide",
   opts.omega = omega + k_x * v;
   k = sqrt(k_x * k_x + k_y * k_y);
   cos_phi = k_x / k;
-  kappa = sqrt(std::complex<double>(k * k - opts.omega * opts.omega, 0.));
+  std::complex<double> kappa = sqrt(std::complex<double>(k * k - opts.omega * opts.omega, 0.));
   kappa = std::complex<double>(std::abs(kappa.real()), -std::abs(kappa.imag()));
-  volume_element = kappa * k / (k - cos_phi * v * opts.omega);
+  double volume_element = std::abs(kappa) * k / (k - cos_phi * v * opts.omega);
 
   Greens.calculate_tensor(Green, opts);
-  if (opts.omega < 0) {
-    volume_element = conj(volume_element);
-  }
+
   Green *= volume_element;
   Green_fancy_I_ct = (Green - trans(Green)) / (2. * I);
 
