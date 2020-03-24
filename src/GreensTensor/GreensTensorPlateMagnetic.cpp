@@ -1,4 +1,4 @@
-//
+  //
 // Created by hermasim on 20/02/2020.
 //
 #include "GreensTensorPlateMagnetic.h"
@@ -74,7 +74,16 @@ void GreensTensorPlateMagnetic::calculate_tensor(
   }
 }
 
-void GreensTensorPlateMagnetic::integrate_k_magnetic(cx_mat::fixed<3, 3> &GT,
+/*
+void GreensTensorPlateMagnetic::integrate_k(cx_mat::fixed<3, 3> &GT,
+                                            Options_GreensTensor opts) {
+  std::cerr << "You are trying to integrate a magnetic Green's tensor \
+with an electric option struct, which is a permitted action. Exiting"
+    << std::endl;
+  exit(-1);
+}
+*/
+void GreensTensorPlateMagnetic::integrate_k(cx_mat::fixed<3, 3> &GT,
                                             Options_GreensTensorMagnetic opts) {
 
   // imaginary unit
@@ -196,15 +205,14 @@ double GreensTensorPlateMagnetic::integrand_1d_k_magnetic_R(double phi,
   // probably sharp edge of the Bose-Einstein distribution, the integration is
   // split at the edge, if the edged lies below the cut-off kappa_cut.
   if (kappa_cut > std::abs(omega / (v * cos_phi))) {
-    //result = cquad(&integrand_2d_k_magnetic_R, opts, -std::abs(omega), 0,
-     //              rel_err(0), 0);
+    result = cquad(&integrand_2d_k_magnetic_R, opts, -std::abs(omega), 0,
+                   rel_err(0), 0);
     result += cquad(&integrand_2d_k_magnetic_R, opts, 0,
                     std::abs(omega / (v * cos_phi)), rel_err(0), 0);
     result += cquad(&integrand_2d_k_magnetic_R, opts,
                     std::abs(omega / (v * cos_phi)), kappa_cut, rel_err(0), 0);
   } else {
-    //result = cquad(&integrand_2d_k_magnetic_R, opts, -std::abs(omega),
-    result = cquad(&integrand_2d_k_magnetic_R, opts, 0.,
+    result = cquad(&integrand_2d_k_magnetic_R, opts, -std::abs(omega),
                    kappa_cut, rel_err(0), 0);
   }
   return result;
@@ -240,15 +248,14 @@ double GreensTensorPlateMagnetic::integrand_1d_k_magnetic_I(double phi,
   // probably sharp edge of the Bose-Einstein distribution, the integration is
   // split at the edge, if the edged lies below the cut-off kappa_cut.
   if (kappa_cut > std::abs(omega / (v * cos_phi))) {
-    //result = cquad(&integrand_2d_k_magnetic_I, opts, -std::abs(omega), 0,
-     //              rel_err(0), 0);
+    result = cquad(&integrand_2d_k_magnetic_I, opts, -std::abs(omega), 0,
+                   rel_err(0), 0);
     result += cquad(&integrand_2d_k_magnetic_I, opts, 0,
                     std::abs(omega / (v * cos_phi)), rel_err(0), 0);
     result += cquad(&integrand_2d_k_magnetic_I, opts,
                     std::abs(omega / (v * cos_phi)), kappa_cut, rel_err(0), 0);
   } else {
-    //result = cquad(&integrand_2d_k_magnetic_I, opts, -std::abs(omega),
-    result = cquad(&integrand_2d_k_magnetic_I, opts, 0.,
+    result = cquad(&integrand_2d_k_magnetic_I, opts, -std::abs(omega),
                    kappa_cut, rel_err(0), 0);
   }
   return result;
@@ -491,12 +498,15 @@ if (opts_pt->BB != IGNORE) {
     else if (opts_pt->indices(0) == 2 && opts_pt->indices(1) == 2) {
       result_complex +=
           r_s_factor * pow(v, 2) * kappa_quad * sin_quad / omega_pl_quad;
-      result_complex +=
-          r_p_herm_factor * pow(v, 2) *
-          (pow(k, 4) + pow(kappa_complex, 3) * conj(kappa_complex)) * cos_quad /
-          (kappa_quad * omega_pl_quad);
-      result_complex -= r_p_rot_factor * 2. * k_quad * pow(v, 2) * cos_quad *
-                        real(kappa_complex) / (kappa_complex * omega_pl_quad);
+      if(kappa_double < 0) {
+	result_complex +=
+	    r_p_herm_factor * pow(v, 2) *
+	    (pow(k, 4) + pow(kappa_complex, 3) * conj(kappa_complex)) * cos_quad /
+	    (kappa_quad * omega_pl_quad);
+      }
+      else if(kappa_double >= 0) {
+	result_complex += r_p_herm_factor * pow(v,2) * omega_pl_quad * cos_quad / kappa_quad;
+      }
     }
   }
 

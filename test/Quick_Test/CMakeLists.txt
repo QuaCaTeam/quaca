@@ -5,7 +5,7 @@ file(GLOB_RECURSE test_sources ${CMAKE_CURRENT_SOURCE_DIR} "*.cpp")
 add_executable(quick_test
         quick_test.cpp
         ../UnitTests/Polarizability/test_PolarizabilityNoBathMagnetic_unit.cpp
-        ../UnitTests/GreensTensor/test_GreensTensorPlate_unit.cpp
+	../UnitTests/GreensTensor/test_GreensTensorPlateMagnetic_unit.cpp
         )
 
 target_include_directories(quick_test PRIVATE ../include)

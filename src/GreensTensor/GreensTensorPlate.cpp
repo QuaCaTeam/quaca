@@ -230,6 +230,7 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
   k = (sqrt(kappa_quad * (1.0 - v_quad * cos_phi_quad) + omega_quad) +
        v * omega * cos_phi) /
       (1 - v_quad * cos_phi_quad);
+
   k_quad = k * k;
 
   // Define the Doppler-shifted frequency

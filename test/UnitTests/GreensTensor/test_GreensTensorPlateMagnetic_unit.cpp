@@ -759,7 +759,7 @@ TEST_CASE("integrand_2d_k for G^EE corresponds to GreensTensorPlate","[GreensTen
 {
   auto omega = GENERATE(231.21,0.9,-2.51, 9.73408);
   auto phi = GENERATE(0.,2.10922,1.3212);
-  auto kappa_double = GENERATE(0.21, 21.1221, 201.12);
+  auto kappa_double = GENERATE(0.21, 21.1221, -101.12, -65.12);
 
   std::complex<double> I (0.,1.);
   double omega_p = 9;
@@ -815,15 +815,15 @@ TEST_CASE("integrand_2d_k for G^EE corresponds to GreensTensorPlate","[GreensTen
 	if(i != j) LHS(i,j) *= I;
       }
     }
-    REQUIRE(approx_equal(LHS, RHS, "abs", 1e-11));
+    REQUIRE(approx_equal(LHS, RHS, "abs", 1e-10));
   }
   
 }
 
 TEST_CASE("integrand_1d_k of G^EE corresponds to GreensTensorPlate","[GreensTensorPlateMagnetic]")
 {
-  auto omega = GENERATE(take(1,random(-1e1,1e1)));
-  auto phi = GENERATE(take(1,random(0.,2.*M_PI)));
+  auto omega = GENERATE(take(3,random(-1e1,1e1)));
+  auto phi = GENERATE(take(3,random(0.,2.*M_PI)));
 
   std::complex<double> I (0.,1.);
   double omega_p = 9;
@@ -879,10 +879,6 @@ TEST_CASE("integrand_1d_k of G^EE corresponds to GreensTensorPlate","[GreensTens
     }
     if(!approx_equal(LHS, RHS, "abs", 1e-9))
     {
-      std::cout << "omega = " << omega << std::endl;
-      std::cout << "phi = " << phi << std::endl;
-      std::cout << LHS << RHS << std::endl;
-      std::cout << LHS - RHS << std::endl;
     }
     REQUIRE(approx_equal(LHS, RHS, "abs", 1e-9));
   }
@@ -916,12 +912,12 @@ TEST_CASE("integrate_k gives non-vanishing contriubtions for all"
 
   SECTION("G^EE_I") {
     opts.fancy_complex = IM;
-    Greens.integrate_k_magnetic(LHS, opts);
+    Greens.integrate_k(LHS, opts);
     REQUIRE(!approx_equal(LHS, RHS, "abs", 1e-12));
   }
   SECTION("G^EE_R") {
     opts.fancy_complex = RE;
-    Greens.integrate_k_magnetic(LHS, opts);
+    Greens.integrate_k(LHS, opts);
     REQUIRE(!approx_equal(LHS, RHS, "abs", 1e-12));
   }
 }
@@ -948,9 +944,9 @@ TEST_CASE("Integrals of all the Green's tensor work properly",
     cx_mat::fixed<3, 3> RHS(fill::zeros);
     SECTION("Integral over G^EE_I obeys the crossing relation") {
         opts.fancy_complex = IM;
-        Greens.integrate_k_magnetic(LHS, opts);
+        Greens.integrate_k(LHS, opts);
         opts.omega = -omega;
-        Greens.integrate_k_magnetic(RHS, opts);
+        Greens.integrate_k(RHS, opts);
 
 	REQUIRE(approx_equal(LHS, -strans(RHS), "reldiff",10E-4));
     }
@@ -959,85 +955,68 @@ TEST_CASE("Integrals of all the Green's tensor work properly",
     SECTION("Integral over G^EE_R obeys the crossing relation") {
         opts.omega = omega;
         opts.fancy_complex = RE;
-        Greens.integrate_k_magnetic(LHS, opts);
+        Greens.integrate_k(LHS, opts);
 
         opts.omega = -omega;
-        Greens.integrate_k_magnetic(RHS, opts);
+        Greens.integrate_k(RHS, opts);
 
         REQUIRE(approx_equal(LHS, strans(RHS), "reldiff", 10E-4));
     }
     
     opts.fancy_complex = IGNORE;
-    /*
-    SECTION("Integral over G^BE_I obeys the crossing relation") {
+    
+    SECTION("Integral over G^BE_I ond G^EB_I obey the crossing relation") {
         opts.omega = omega;
         opts.BE = IM;
-        Greens.integrate_k_magnetic(LHS, opts);
+        Greens.integrate_k(LHS, opts);
+	opts.BE = IGNORE;
 
         opts.omega = -omega;
-        Greens.integrate_k_magnetic(RHS, opts);
-	std::cout << LHS << -RHS << std::endl;
-	std::cout << "Difference" << std::endl;
-	std::cout << LHS + RHS << std::endl;
+	opts.EB = IM;
+        Greens.integrate_k(RHS, opts);
+	opts.EB = IGNORE;
 
-        REQUIRE(approx_equal(LHS, -RHS, "reldiff", 10E-4));
+        REQUIRE(approx_equal(LHS, -strans(RHS), "reldiff", 10E-4));
     }
- 
-    SECTION("Integral over G^BE_R obeys the crossing relation") {
+    SECTION("Integral over G^BE_R ond G^EB_R obey the crossing relation") {
         opts.omega = omega;
         opts.BE = RE;
-        Greens.integrate_k_magnetic(LHS, opts);
+        Greens.integrate_k(LHS, opts);
+	opts.BE = IGNORE;
+        Greens.integrate_k(LHS, opts);
+	opts.BE = IGNORE;
 
         opts.omega = -omega;
-        Greens.integrate_k_magnetic(RHS, opts);
+	opts.EB = RE;
+        Greens.integrate_k(RHS, opts);
+	opts.EB = IGNORE;
 
-        REQUIRE(approx_equal(LHS, RHS, "reldiff", 10E-4));
-    }
-    opts.BE = IGNORE;
-
-  SECTION("Integral over G^EB_I obeys the crossing relation") {
-    opts.omega = omega;
-    opts.EB = IM;
-    Greens.integrate_k_magnetic(LHS, opts);
-
-    opts.omega = -omega;
-    Greens.integrate_k_magnetic(RHS, opts);
-
-    REQUIRE(approx_equal(LHS, -RHS, "reldiff", 10E-4));
+        REQUIRE(approx_equal(LHS, strans(RHS), "reldiff", 10E-4));
   }
-
-  SECTION("Integral over G^EB_R obeys the crossing relation") {
-    opts.omega = omega;
-    opts.EB = RE;
-    Greens.integrate_k_magnetic(LHS, opts);
-
-    opts.omega = -omega;
-    Greens.integrate_k_magnetic(RHS, opts);
-
-    REQUIRE(approx_equal(LHS, RHS, "reldiff", 10E-4));
-  }
+ 
   SECTION("Integral over G^BB_I obeys the crossing relation") {
     opts.omega = omega;
     opts.BB = IM;
-    Greens.integrate_k_magnetic(LHS, opts);
+    Greens.integrate_k(LHS, opts);
 
     opts.omega = -omega;
-    Greens.integrate_k_magnetic(RHS, opts);
+    Greens.integrate_k(RHS, opts);
 
-    REQUIRE(approx_equal(LHS, -RHS, "reldiff", 10E-4));
+    REQUIRE(approx_equal(LHS, -strans(RHS), "reldiff", 10E-4));
   }
 
   SECTION("Integral over G^BB_R obeys the crossing relation") {
     opts.omega = omega;
     opts.BB = RE;
-    Greens.integrate_k_magnetic(LHS, opts);
+    std::cout << "omega " << omega << std::endl;
+    Greens.integrate_k(LHS, opts);
 
+    std::cout << "negative" << std::endl;
     opts.omega = -omega;
-    Greens.integrate_k_magnetic(RHS, opts);
+    Greens.integrate_k(RHS, opts);
 
-    REQUIRE(approx_equal(LHS, RHS, "reldiff", 10E-4));
+    REQUIRE(approx_equal(LHS, strans(RHS), "reldiff", 10E-4));
   }
-  */
 
 }
 
