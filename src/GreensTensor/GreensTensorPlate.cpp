@@ -213,8 +213,6 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
   // reflection coefficients and pre-factors of the corresponding polarization
   std::complex<double> r_p, r_s;
 
-  // helpful prefactors
-  std::complex<double> prefactor_p, prefactor_s, prefactor_off;
 
   // Transfer kappa to the correct complex value
   if (kappa_double < 0.0) {
@@ -242,20 +240,23 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
 
   // producing the reflection coefficients in p- and s-polarization
   pt->reflection_coefficients->ref(r_p, r_s, omega_pl_abs, kappa_complex);
-  // For an better overview and a efficient calculation, we collect the
-  // pre-factors of the p and s polarization separately
-  prefactor_p =
-      exp(-2 * za * kappa_complex) / (1. - cos_phi * v * omega_pl / k);
-  prefactor_s = prefactor_p * r_s * omega_pl_quad;
-  prefactor_p = prefactor_p * r_p * kappa_quad;
-  prefactor_off = prefactor_p * k * cos_phi / kappa_complex;
 
   // Impose reality in time
   if (omega_pl < 0) {
-    prefactor_s = conj(prefactor_s);
-    prefactor_p = conj(prefactor_p);
-    prefactor_off = conj(prefactor_off);
+    r_s = conj(r_s);
+    r_p = conj(r_p);
+    kappa_complex = conj(kappa_complex);
   }
+  
+  // helpful prefactors
+  //general prefactor with volume element and exponential
+  std::complex<double> prefactor = std::abs(kappa_complex)
+      *exp(-2 * za * kappa_complex) / (1. - cos_phi * v * omega_pl / k);
+  // For an better overview and a efficient calculation, we collect the
+  // pre-factors of the p and s polarization separately
+  std::complex<double> prefactor_s = prefactor * r_s * omega_pl_quad/kappa_complex;
+  std::complex<double> prefactor_p = prefactor * r_p * kappa_complex;
+
 
   // Calculate the G_xx element
   if (opts_pt->indices(0) == 0 && opts_pt->indices(1) == 0) {
@@ -271,11 +272,11 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
   }
   // Calculate the G_zx element
   else if (opts_pt->indices(0) == 2 && opts_pt->indices(1) == 0) {
-    result_complex = I * prefactor_off;
+    result_complex = prefactor_p * I * cos_phi * k / kappa_complex;
   }
   // Calculate the G_xz element
   else if (opts_pt->indices(0) == 0 && opts_pt->indices(1) == 2) {
-    result_complex = -I * prefactor_off;
+    result_complex = -prefactor_p * I * cos_phi * k  / kappa_complex;
   } else {
     result_complex = (0, 0);
   }
