@@ -24,8 +24,9 @@ public:
 
   void integrate_k(cx_mat::fixed<3, 3> &GT,
                                             Options_GreensTensorMagnetic opts); 
-  //void integrate_k(cx_mat::fixed<3, 3> &GT,
-   //                                         Options_GreensTensor opts); 
+  void integrate_k(cx_mat::fixed<3, 3> &GT,
+                                            Options_GreensTensor opts); 
+
   // integrands
   static double integrand_2d_k_magnetic_R(double kappa_double, void *opts);
   static double integrand_2d_k_magnetic_I(double kappa_double, void *opts);

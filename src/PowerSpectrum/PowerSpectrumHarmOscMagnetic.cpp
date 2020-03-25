@@ -11,12 +11,16 @@ using namespace arma;
 
 //Constructor with ini-file
 PowerSpectrumHarmOscMagnetic::PowerSpectrumHarmOscMagnetic(std::string input_file)
-        : PowerSpectrumHarmOsc(input_file) {};
+        : PowerSpectrumHarmOsc(input_file) {
+	greens_magnetic = dynamic_cast<GreensTensorPlateMagnetic* >(greens_tensor);
+	};
 
 //Constructor with initialization list
 PowerSpectrumHarmOscMagnetic::PowerSpectrumHarmOscMagnetic(GreensTensor *greens_tensor,
                                            Polarizability *polarizability)
-        : PowerSpectrumHarmOsc(greens_tensor, polarizability){};
+        : PowerSpectrumHarmOsc(greens_tensor, polarizability){
+	greens_magnetic = dynamic_cast<GreensTensorPlateMagnetic* >(greens_tensor);
+	};
 
 //Compute the power spectrum for a given frequency \omega
 void PowerSpectrumHarmOscMagnetic::calculate(cx_mat::fixed<3, 3> &powerspectrum,
@@ -36,10 +40,10 @@ void PowerSpectrumHarmOscMagnetic::calculate(cx_mat::fixed<3, 3> &powerspectrum,
         opts_g.BB = IM;
         opts_g.weight_function = TEMP;
         opts_g.omega = omega;
-        opts_g.class_pt = this->greens_tensor;
+        opts_g.class_pt = this->greens_magnetic;
 
         // Compute the Green's tensor
-        this->greens_tensor->integrate_k(green, opts_g);
+        this->greens_magnetic->integrate_k(green, opts_g);
 
         //Initialize tensor storing the polarizability and seting the integration
         //options for the polarizability

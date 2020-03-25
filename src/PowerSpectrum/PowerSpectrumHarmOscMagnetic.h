@@ -7,10 +7,12 @@
 
 #include "PowerSpectrumHarmOsc.h"
 #include "PowerSpectrum.h"
+#include "../GreensTensor/GreensTensorPlateMagnetic.h"
 
 
 class PowerSpectrumHarmOscMagnetic: public PowerSpectrumHarmOsc {
 public:
+  GreensTensorPlateMagnetic* greens_magnetic;
     //Constructor with initalization list
     PowerSpectrumHarmOscMagnetic(GreensTensor *greens_tensor,
     Polarizability *polarizability);

@@ -91,7 +91,7 @@ TEST_CASE("The tensors from calculate_tensor and integrand_2d_k coincide",
       }
     }
     RHS = Green_fancy_I;
-    REQUIRE(approx_equal(LHS, RHS, "abs", 10E-12));
+    REQUIRE(approx_equal(LHS, RHS, "abs", 10E-10));
   }
 
   SECTION("Options: EE, RE") {
@@ -983,14 +983,13 @@ TEST_CASE("Integrals of all the Green's tensor work properly",
         opts.BE = RE;
         Greens.integrate_k(LHS, opts);
 	opts.BE = IGNORE;
-        Greens.integrate_k(LHS, opts);
-	opts.BE = IGNORE;
 
         opts.omega = -omega;
 	opts.EB = RE;
         Greens.integrate_k(RHS, opts);
 	opts.EB = IGNORE;
 
+	//std::cout << LHS << strans(RHS) << std::endl;
         REQUIRE(approx_equal(LHS, strans(RHS), "reldiff", 10E-4));
   }
  
@@ -1008,10 +1007,8 @@ TEST_CASE("Integrals of all the Green's tensor work properly",
   SECTION("Integral over G^BB_R obeys the crossing relation") {
     opts.omega = omega;
     opts.BB = RE;
-    std::cout << "omega " << omega << std::endl;
     Greens.integrate_k(LHS, opts);
 
-    std::cout << "negative" << std::endl;
     opts.omega = -omega;
     Greens.integrate_k(RHS, opts);
 

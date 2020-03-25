@@ -74,15 +74,12 @@ void GreensTensorPlateMagnetic::calculate_tensor(
   }
 }
 
-/*
 void GreensTensorPlateMagnetic::integrate_k(cx_mat::fixed<3, 3> &GT,
                                             Options_GreensTensor opts) {
-  std::cerr << "You are trying to integrate a magnetic Green's tensor \
-with an electric option struct, which is a permitted action. Exiting"
-    << std::endl;
+  std::cerr << "Your are trying to use a magnetic Green's tensor with an electric\
+ Option struct. This might lead to unwanted behaviour and is therefore prohibited." << std::endl;
   exit(-1);
 }
-*/
 void GreensTensorPlateMagnetic::integrate_k(cx_mat::fixed<3, 3> &GT,
                                             Options_GreensTensorMagnetic opts) {
 

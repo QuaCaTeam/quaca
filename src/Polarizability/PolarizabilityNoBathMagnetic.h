@@ -13,6 +13,7 @@
 
 class PolarizabilityNoBathMagnetic: public PolarizabilityNoBath {
 public:
+  GreensTensorPlateMagnetic* greens_magnetic;
     PolarizabilityNoBathMagnetic(double omega_a, double alpha_zero,
                          GreensTensor *greens_tensor);
     PolarizabilityNoBathMagnetic(std::string input_file);

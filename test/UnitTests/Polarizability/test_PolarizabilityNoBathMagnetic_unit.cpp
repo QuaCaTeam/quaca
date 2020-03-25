@@ -8,7 +8,7 @@
 #include "Quaca.h"
 #include "catch.hpp"
 
-/*
+
 TEST_CASE("Ensure that PolarizabilityNoBathMagnetic fulfills the crossing relation"
           "[PolarizabilityNoBath]") {
   //define Green's tesnsor
@@ -43,8 +43,8 @@ TEST_CASE("Ensure that PolarizabilityNoBathMagnetic fulfills the crossing relati
   pol.calculate_tensor(RHS, opts);
   REQUIRE(approx_equal(LHS, conj(RHS), "abs", 1e-12));
 };
-*/
-/*
+
+
 TEST_CASE("Ensure that there are non negligible contributions in the magnetic "
           "part of the polarizability"
           "[PolarizabilityNoBath]") {
@@ -74,6 +74,7 @@ TEST_CASE("Ensure that there are non negligible contributions in the magnetic "
   //Matrices to store the results
   cx_mat::fixed<3,3> LHS(fill::zeros);
   cx_mat::fixed<3,3> RHS(fill::zeros);
+  cx_mat::fixed<3,3> EMPTY(fill::zeros);
 
   opts.omega = omega;
   //compute Polarizability with electric Green's tensor only
@@ -84,10 +85,6 @@ TEST_CASE("Ensure that there are non negligible contributions in the magnetic "
   opts.class_pt = &pol_magnetic;
   pol_magnetic.calculate_tensor(RHS, opts);
 
-  for(int i = 0; i < 3; i++) {
-    for(int j = 0; j < 3; j++) {
-      REQUIRE(LHS(i,j) != RHS(i,j));
-    }
-  }
+  REQUIRE(!approx_equal(RHS-LHS, EMPTY,"abs",1e-10));
 };
- */
+

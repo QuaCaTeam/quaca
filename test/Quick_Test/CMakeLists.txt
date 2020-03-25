@@ -6,6 +6,7 @@ add_executable(quick_test
         quick_test.cpp
         ../UnitTests/Polarizability/test_PolarizabilityNoBathMagnetic_unit.cpp
 	../UnitTests/GreensTensor/test_GreensTensorPlateMagnetic_unit.cpp
+	../UnitTests/PowerSpectrum/test_PowerSpectrumHarmOscMagnetic.cpp
         )
 
 target_include_directories(quick_test PRIVATE ../include)
