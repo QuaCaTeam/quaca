@@ -55,66 +55,37 @@ Protocols
 - optimization and code profiling should be made a standing issue
 
 ### Meeting 4: Marty and Christoph (09.04.2020)
-1) Stand der Dinge + Kapazität
+ - Stand der Dinge + Kapazität
+    * Simon uebergibt lead development an bettina
+    * kapazitaet ist da
 
-    - simon uebergibt lead development an bettina
-
-    - kapazitaet ist da
-
-
-2) Was wollen wir noch umsetzen
-
-    - nichts, jetziger stand soll veroeffentlicht werden
+ - Was wollen wir noch umsetzen?
+    * Umstrukturierung der Test Cases (kein random testing, lieber konkrete parameter)
+    * Mehr Groessen bestimmen (Power spectrum, Drehmoment, ...)
+    * Dokumentation polieren
 
 
-    2.1) Umstrukturierung der Test Cases
-
-    - kein random testing, lieber konkrete parameter
-
-
-    2.2) Mehr Groessen bestimmen (Power spectrum, Drehmoment, ...)
+  - Wo veroeffentlichen wir?
+    * Marty fragt Kurt bzgl JOSS
 
 
-    2.3) Dokumentation polieren
+  - Was ist fuer eine Veroeffentlichung zu tun?
+   * Code auf guten Stand bringen
+   * Porten auf GitHub
 
 
-3) Wo veroeffentlichen wir?
-
-    - Marty fragt Kurt bzgl JOSS
-
-
-4) Was ist fuer eine Veroeffentlichung zu tun?
+  - Anderes Paper
+   * Konkrete Aufgaben kommunizieren
+   * Marty und Daniel kümmern sich um Inhalte
+   * Christoph und Simon helfen beim debugging von QuaCa
 
 
-    - Code auf guten Stand bringen
+  - Vorgehensweise
+    * Wöchentliche "Treffen" (Donnerstag 10 Uhr)
+    * _Marty_: Dokumentation, Kommunikation mit Kurt
+    * _Simon_: Refactoring von Test cases
+    * _Christoph_: CMake und Memory Check, Profiling, Coverage
 
-    - Porten auf GitHub
-
-
-5) Anderes Paper
-
-
-    - Konkrete Aufgaben kommunizieren
-
-    - Marty und Daniel kümmern sich um Inhalte
-
-    - Christoph und Simon helfen beim debugging von QuaCa
-
-
-6) Vorgehensweise
-
-
-    - Wöchentliche "Treffen" (Donnerstag 10 Uhr)
-
-    Marty: Dokumentation, Kommunikation mit Kurt
-
-    Simon: Refactoring von Test cases
-
-    Christoph: CMake und Memory Check, Profiling, Coverage
-
-
-7) Timeline
-
-    - Ende April: Code auf GitLab fertig
-
-    - Ende Mai: fertig
+ - Timeline
+   * Ende April: Code auf GitLab fertig
+   * Ende Mai: fertig
