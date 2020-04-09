@@ -53,3 +53,68 @@ Protocols
 - marty keeps working on the reflection coefficients
 - quantum friction with plate setup works and will soon be pushed into the master
 - optimization and code profiling should be made a standing issue
+
+### Meeting 4: Marty and Christoph (09.04.2020)
+1) Stand der Dinge + Kapazität
+
+    - simon uebergibt lead development an bettina
+
+    - kapazitaet ist da
+
+
+2) Was wollen wir noch umsetzen
+
+    - nichts, jetziger stand soll veroeffentlicht werden
+
+
+    2.1) Umstrukturierung der Test Cases
+
+    - kein random testing, lieber konkrete parameter
+
+
+    2.2) Mehr Groessen bestimmen (Power spectrum, Drehmoment, ...)
+
+
+    2.3) Dokumentation polieren
+
+
+3) Wo veroeffentlichen wir?
+
+    - Marty fragt Kurt bzgl JOSS
+
+
+4) Was ist fuer eine Veroeffentlichung zu tun?
+
+
+    - Code auf guten Stand bringen
+
+    - Porten auf GitHub
+
+
+5) Anderes Paper
+
+
+    - Konkrete Aufgaben kommunizieren
+
+    - Marty und Daniel kümmern sich um Inhalte
+
+    - Christoph und Simon helfen beim debugging von QuaCa
+
+
+6) Vorgehensweise
+
+
+    - Wöchentliche "Treffen" (Donnerstag 10 Uhr)
+
+    Marty: Dokumentation, Kommunikation mit Kurt
+
+    Simon: Refactoring von Test cases
+
+    Christoph: CMake und Memory Check, Profiling, Coverage
+
+
+7) Timeline
+
+    - Ende April: Code auf GitLab fertig
+
+    - Ende Mai: fertig
