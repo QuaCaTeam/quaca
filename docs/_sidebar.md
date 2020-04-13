@@ -1,19 +1,17 @@
 <!-- docs/_sidebar.md -->
 
-- Getting Started
-  - [Installation](installing)
-
-- Tutorials
+- [__Getting Started__](gettingstarted)
+- [__Tutorials__](tutorials/first_calculation)
   - [First QuaCa calculation](tutorials/first_calculation)
   - [Write your own main](tutorials/mainfile)
   - [Automate your calculation](tutorials/automate)
   - [Implement a new feature](tutorials/newfeature)
 
-- Documentation
+- [__Documentation__](documentation/units)
   - [Units / Unit Converter](documentation/units)
   - [Input file API](documentation/inputfileapi)
 
-- API
+- [__API__](api/polarizability)
   - [Polarizability](api/polarizability)
   - [GreensTensor](api/greenstensor)
   - [ReflectionCoefficients](api/reflection)
@@ -22,7 +20,7 @@
   - [PowerSpectrum](api/powerspectrum)
   - [Friction](api/friction)
 
-- Development
+- [__Development__](dev/testing)
   - [Testing](dev/testing)
   - [Documentation](dev/documentation)
   - [Project Organization](dev/organization)

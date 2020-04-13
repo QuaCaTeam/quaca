@@ -54,7 +54,7 @@ Protocols
 - quantum friction with plate setup works and will soon be pushed into the master
 - optimization and code profiling should be made a standing issue
 
-### Meeting 4: Marty and Christoph (09.04.2020)
+### Meeting 4: Christoph, Simon and Marty (09.04.2020)
  - Stand der Dinge + Kapazität
     * Simon uebergibt lead development an bettina
     * kapazitaet ist da

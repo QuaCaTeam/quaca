@@ -137,17 +137,43 @@ Friction/fast:
 .PHONY : Friction/fast
 
 #=============================================================================
-# Target rules for targets named test_quaca
+# Target rules for targets named Tutorial
 
 # Build rule for target.
-test_quaca: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_quaca
-.PHONY : test_quaca
+Tutorial: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Tutorial
+.PHONY : Tutorial
 
 # fast build rule for target.
-test_quaca/fast:
-	$(MAKE) -f test/CMakeFiles/test_quaca.dir/build.make test/CMakeFiles/test_quaca.dir/build
-.PHONY : test_quaca/fast
+Tutorial/fast:
+	$(MAKE) -f app/.Tutorial/CMakeFiles/Tutorial.dir/build.make app/.Tutorial/CMakeFiles/Tutorial.dir/build
+.PHONY : Tutorial/fast
+
+#=============================================================================
+# Target rules for targets named test_quaca_unit
+
+# Build rule for target.
+test_quaca_unit: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_quaca_unit
+.PHONY : test_quaca_unit
+
+# fast build rule for target.
+test_quaca_unit/fast:
+	$(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/build
+.PHONY : test_quaca_unit/fast
+
+#=============================================================================
+# Target rules for targets named test_quaca_integrated
+
+# Build rule for target.
+test_quaca_integrated: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_quaca_integrated
+.PHONY : test_quaca_integrated
+
+# fast build rule for target.
+test_quaca_integrated/fast:
+	$(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build
+.PHONY : test_quaca_integrated/fast
 
 # Help Target
 help:
@@ -159,7 +185,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... quaca"
 	@echo "... Friction"
-	@echo "... test_quaca"
+	@echo "... Tutorial"
+	@echo "... test_quaca_unit"
+	@echo "... test_quaca_integrated"
 .PHONY : help
 
 
