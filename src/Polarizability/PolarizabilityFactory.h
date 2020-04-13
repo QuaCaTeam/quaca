@@ -1,6 +1,8 @@
 #ifndef POLARIZABILITYFACTORY_H
 #define POLARIZABILITYFACTORY_H
 
+#include <memory>
+
 #include "Polarizability.h"
 
 //! A Greens tensor factory
@@ -15,7 +17,7 @@ public:
    * Function returning a memory kernel pointer of the right type.
    * @param type Type of the memory kernel.
    */
-  static Polarizability *create(std::string type);
+  static std::shared_ptr<Polarizability> create(const std::string& type);
 };
 
 #endif // GREENSTENSORFACTORY_H

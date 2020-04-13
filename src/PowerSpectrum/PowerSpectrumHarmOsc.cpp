@@ -9,10 +9,11 @@ using namespace arma;
 // json parser
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
+#include <utility>
 namespace pt = boost::property_tree;
 
 // Constructor with json-file
-PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(std::string input_file)
+PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(const std::string& input_file)
     : PowerSpectrum(input_file) {
 
   // Create a root
@@ -27,31 +28,24 @@ PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(std::string input_file)
   // whether the polarizablity has an interal bath
   std::string polarizability_type =
       root.get<std::string>("Polarizability.type");
-  if (polarizability_type.compare("bath") == 0) {
-    has_bath = true;
-  } else {
-    has_bath = false;
-  };
+  has_bath = polarizability_type == "bath";
+
 
   // Ensure that correct type has been chosen
   assert(type == "harmonic oscillator");
-};
+}
 
 // Constructor with initialization list
-PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(GreensTensor *greens_tensor,
-                                           Polarizability *polarizability)
-    : PowerSpectrum(greens_tensor, polarizability) {
+PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(
+    std::shared_ptr<GreensTensor> greens_tensor,
+    std::shared_ptr<Polarizability> polarizability)
+    : PowerSpectrum(std::move(greens_tensor), std::move(polarizability)) {
 
   // read the type of the polarizability and set the bool to indicate,
   // whether the polarizablity has an interal bath
-  PolarizabilityBath *pt =
-      dynamic_cast<PolarizabilityBath *>(this->polarizability);
-  if (pt == NULL) {
-    has_bath = false;
-  } else {
-    has_bath = true;
-  }
-};
+  auto pt = std::static_pointer_cast<PolarizabilityBath>(this->polarizability);
+  has_bath = !(pt == nullptr);
+}
 
 // Compute the power spectrum for a given frequency \omega
 void PowerSpectrumHarmOsc::calculate(cx_mat::fixed<3, 3> &powerspectrum,
@@ -95,8 +89,8 @@ void PowerSpectrumHarmOsc::calculate(cx_mat::fixed<3, 3> &powerspectrum,
       // To be able to use the attributes of PolarizabilityBath we have to
       // dynamically cast the pointer on the Polarizablity to a pointer on
       // PolarizablityBath
-      PolarizabilityBath *pt =
-          dynamic_cast<PolarizabilityBath *>(this->polarizability);
+      auto pt =
+          std::dynamic_pointer_cast<PolarizabilityBath>(this->polarizability);
 
       cx_mat::fixed<3, 3> bathTerm(fill::zeros);
       bathTerm = 1. / M_PI * alpha * 1. /
@@ -135,4 +129,4 @@ void PowerSpectrumHarmOsc::calculate(cx_mat::fixed<3, 3> &powerspectrum,
     // Marty's PhD thesis
     powerspectrum = alpha * green * trans(alpha);
   }
-};
+}

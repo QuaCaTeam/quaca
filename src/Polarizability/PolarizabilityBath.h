@@ -9,12 +9,13 @@
 class PolarizabilityBath : public Polarizability {
 private:
   // memory kernel needed to calculate alpha
-  MemoryKernel *mu;
+  std::shared_ptr<MemoryKernel> mu;
 
 public:
-  PolarizabilityBath(double omega_a, double alpha_zero, MemoryKernel *mu,
-                     GreensTensor *greens_tensor);
-  PolarizabilityBath(std::string input_file);
+  PolarizabilityBath(double omega_a, double alpha_zero,
+                     std::shared_ptr<MemoryKernel> mu,
+                     std::shared_ptr<GreensTensor> greens_tensor);
+  PolarizabilityBath(const std::string &input_file);
 
   void calculate_tensor(cx_mat::fixed<3, 3> &alpha,
                         Options_Polarizability opts);

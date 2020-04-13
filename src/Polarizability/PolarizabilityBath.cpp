@@ -1,17 +1,17 @@
 #include "PolarizabilityBath.h"
 
-PolarizabilityBath::PolarizabilityBath(double omega_a, double alpha_zero,
-                                       MemoryKernel *mu,
-                                       GreensTensor *greens_tensor)
-    : Polarizability(omega_a, alpha_zero, greens_tensor) {
-  this->mu = mu;
-};
+#include <utility>
 
-PolarizabilityBath::PolarizabilityBath(std::string input_file)
+PolarizabilityBath::PolarizabilityBath(
+    double omega_a, double alpha_zero, std::shared_ptr<MemoryKernel> mu,
+    std::shared_ptr<GreensTensor> greens_tensor)
+    : Polarizability(omega_a, alpha_zero, std::move(greens_tensor)), mu(std::move(mu)) {}
+
+PolarizabilityBath::PolarizabilityBath(const std::string &input_file)
     : Polarizability(input_file) {
   this->mu =
       MemoryKernelFactory::create(input_file, "Polarizability.MemoryKernel");
-};
+}
 
 void PolarizabilityBath::calculate_tensor(cx_mat::fixed<3, 3> &alpha,
                                           Options_Polarizability opts) {
@@ -21,8 +21,7 @@ void PolarizabilityBath::calculate_tensor(cx_mat::fixed<3, 3> &alpha,
   double omega = opts.omega;
 
   // calculate diagonal entries
-  cx_mat::fixed<3, 3> diag;
-  diag.zeros();
+  cx_mat::fixed<3, 3> diag(fill::zeros);
   diag(0, 0) = diag(1, 1) = diag(2, 2) =
       omega_a * omega_a - omega * omega - I * omega * mu->mu(omega);
 
@@ -55,4 +54,4 @@ void PolarizabilityBath::calculate_tensor(cx_mat::fixed<3, 3> &alpha,
     alpha = (alpha + trans(alpha)) /
             (2.0); // trans is hermitean conjugation in armadillo
   }
-};
+}

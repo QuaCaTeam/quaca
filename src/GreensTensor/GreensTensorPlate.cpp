@@ -1,6 +1,7 @@
 // json parser
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
+#include <utility>
 namespace pt = boost::property_tree;
 
 // integration routine
@@ -10,17 +11,14 @@ namespace pt = boost::property_tree;
 #include "GreensTensorPlate.h"
 
 GreensTensorPlate::GreensTensorPlate(
-    double v, double za, double beta,
-    ReflectionCoefficients *reflection_coefficients, double delta_cut,
-    vec::fixed<2> rel_err)
-    : GreensTensor(v, beta) {
-  this->za = za;
-  this->delta_cut = delta_cut;
-  this->rel_err = rel_err;
-  this->reflection_coefficients = reflection_coefficients;
-};
+    double v, double beta, double za,
+    std::shared_ptr<ReflectionCoefficients> reflection_coefficients,
+    double delta_cut, const vec::fixed<2>& rel_err)
+    : GreensTensor(v, beta), za(za),
+      reflection_coefficients(std::move(reflection_coefficients)), delta_cut(delta_cut),
+      rel_err(rel_err) {}
 
-GreensTensorPlate::GreensTensorPlate(std::string input_file)
+GreensTensorPlate::GreensTensorPlate(const std::string& input_file)
     : GreensTensor(input_file) {
   this->reflection_coefficients =
       ReflectionCoefficientsFactory::create(input_file);
@@ -40,7 +38,7 @@ GreensTensorPlate::GreensTensorPlate(std::string input_file)
   this->delta_cut = root.get<double>("GreensTensor.delta_cut");
   this->rel_err(0) = root.get<double>("GreensTensor.rel_err_0");
   this->rel_err(1) = root.get<double>("GreensTensor.rel_err_1");
-};
+}
 
 void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3, 3> &GT,
                                          Options_GreensTensor opts) {
@@ -93,15 +91,13 @@ void GreensTensorPlate::calculate_tensor(cx_mat::fixed<3, 3> &GT,
   if (opts.omega < 0) {
     GT = trans(GT);
   }
-};
+}
 
 void GreensTensorPlate::integrate_k(cx_mat::fixed<3, 3> &GT,
                                     Options_GreensTensor opts) {
 
   // imaginary unit
   std::complex<double> I(0.0, 1.0);
-  // importing error vector to set accuracy of the integration
-  vec::fixed<2> rel_err = this->rel_err;
   // intialize Green's tensor
   GT.zeros();
 
@@ -132,20 +128,19 @@ void GreensTensorPlate::integrate_k(cx_mat::fixed<3, 3> &GT,
       I * cquad(&integrand_1d_k, &opts, 0.5 * M_PI, M_PI, rel_err(1), 0) / M_PI;
   // the xz element
   GT(0, 2) = -GT(2, 0);
-};
+}
 
 double GreensTensorPlate::integrand_1d_k(double phi, void *opts) {
   // The needed parameters for the integration are encoded in the void pointer.
   // This void pointer is casted the options struct given in GreensTensor.h.
-  Options_GreensTensor *opts_pt = static_cast<Options_GreensTensor *>(opts);
+  auto *opts_pt = static_cast<Options_GreensTensor *>(opts);
   // To access attributes of the GreensTensorPlate class, the class pointer
   // within the struct is casted.
-  GreensTensorPlate *pt = static_cast<GreensTensorPlate *>(opts_pt->class_pt);
+  auto pt = std::dynamic_pointer_cast<GreensTensorPlate>(opts_pt->class_pt);
 
   double result;
   // import parameters
   double omega = opts_pt->omega;
-  double beta = pt->beta;
   double v = pt->v;
   double za = pt->za;
   // The cut-off parameters acts as upper bound of the kappa integration.
@@ -172,15 +167,15 @@ double GreensTensorPlate::integrand_1d_k(double phi, void *opts) {
                    rel_err(0), 0);
   }
   return result;
-};
+}
 
 double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
   // The needed parameters for the integration are encoded in the void pointer.
   // This void pointer is casted the options struct given in GreensTensor.h.
-  Options_GreensTensor *opts_pt = static_cast<Options_GreensTensor *>(opts);
+  auto *opts_pt = static_cast<Options_GreensTensor *>(opts);
   // To access attributes of the GreensTensorPlate class, the class pointer
   // within the struct is casted.
-  GreensTensorPlate *pt = static_cast<GreensTensorPlate *>(opts_pt->class_pt);
+  auto pt = std::dynamic_pointer_cast<GreensTensorPlate>(opts_pt->class_pt);
 
   // read general input parameters
   double beta = pt->beta;
@@ -197,7 +192,7 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
   // Before the real or imaginary part of the chosen matrix element can be
   // calculated, the complex result is stored in result_complex.
   std::complex<double> result_complex;
-  double result;
+  double result = 0;
   // Doppler-shifted frequency
   double omega_pl, omega_pl_quad;
   // wavevector
@@ -212,7 +207,6 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
 
   // reflection coefficients and pre-factors of the corresponding polarization
   std::complex<double> r_p, r_s;
-
 
   // Transfer kappa to the correct complex value
   if (kappa_double < 0.0) {
@@ -247,16 +241,17 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
     r_p = conj(r_p);
     kappa_complex = conj(kappa_complex);
   }
-  
+
   // helpful prefactors
-  //general prefactor with volume element and exponential
-  std::complex<double> prefactor = std::abs(kappa_complex)
-      *exp(-2 * za * kappa_complex) / (1. - cos_phi * v * omega_pl / k);
+  // general prefactor with volume element and exponential
+  std::complex<double> prefactor = std::abs(kappa_complex) *
+                                   exp(-2 * za * kappa_complex) /
+                                   (1. - cos_phi * v * omega_pl / k);
   // For an better overview and a efficient calculation, we collect the
   // pre-factors of the p and s polarization separately
-  std::complex<double> prefactor_s = prefactor * r_s * omega_pl_quad/kappa_complex;
+  std::complex<double> prefactor_s =
+      prefactor * r_s * omega_pl_quad / kappa_complex;
   std::complex<double> prefactor_p = prefactor * r_p * kappa_complex;
-
 
   // Calculate the G_xx element
   if (opts_pt->indices(0) == 0 && opts_pt->indices(1) == 0) {
@@ -276,9 +271,9 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
   }
   // Calculate the G_xz element
   else if (opts_pt->indices(0) == 0 && opts_pt->indices(1) == 2) {
-    result_complex = -prefactor_p * I * cos_phi * k  / kappa_complex;
+    result_complex = -prefactor_p * I * cos_phi * k / kappa_complex;
   } else {
-    result_complex = (0, 0);
+    result_complex = 0.;
   }
 
   // Add weighting function if demanded
@@ -299,8 +294,8 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
 
   // Calculate fancy real part of the given matrix element
   if (opts_pt->fancy_complex == RE) {
-    if (opts_pt->indices(0) == 2 && opts_pt->indices(1) == 0 ||
-        opts_pt->indices(0) == 0 && opts_pt->indices(1) == 2) {
+    if ((opts_pt->indices(0) == 2 && opts_pt->indices(1) == 0) ||
+        (opts_pt->indices(0) == 0 && opts_pt->indices(1) == 2)) {
       // Mind the missing leading I! This must be added after the double
       // integration!
       result = result_complex.imag();
@@ -310,8 +305,8 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
   }
   // Calculate fancy imaginary part of the given matrix element
   else if (opts_pt->fancy_complex == IM) {
-    if (opts_pt->indices(0) == 2 && opts_pt->indices(1) == 0 ||
-        opts_pt->indices(0) == 0 && opts_pt->indices(1) == 2) {
+    if ((opts_pt->indices(0) == 2 && opts_pt->indices(1) == 0) ||
+        (opts_pt->indices(0) == 0 && opts_pt->indices(1) == 2)) {
       // Mind the missing leading I! This must be added after the double
       // integration!
       result = -result_complex.real();
@@ -320,7 +315,7 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
     }
   }
   return result;
-};
+}
 
 std::complex<double> GreensTensorPlate::get_r_p(double omega, double k) {
   std::complex<double> r_p, r_s;
@@ -329,10 +324,10 @@ std::complex<double> GreensTensorPlate::get_r_p(double omega, double k) {
     kappa = std::complex<double>(0., -sqrt(omega * omega - k * k));
   } else {
     kappa = std::complex<double>(sqrt(k * k - omega * omega), 0.);
-  };
+  }
   reflection_coefficients->ref(r_p, r_s, omega, kappa);
   return r_p;
-};
+}
 
 std::complex<double> GreensTensorPlate::get_r_s(double omega, double k) {
   std::complex<double> r_s, r_p;
@@ -341,12 +336,12 @@ std::complex<double> GreensTensorPlate::get_r_s(double omega, double k) {
     kappa = std::complex<double>(0., -sqrt(omega * omega - k * k));
   } else {
     kappa = std::complex<double>(sqrt(k * k - omega * omega), 0.);
-  };
+  }
   reflection_coefficients->ref(r_p, r_s, omega, kappa);
   return r_s;
-};
+}
 
 double GreensTensorPlate::omega_ch() {
   // Calculate omega_cut (reasonable for every plate setup)
   return this->delta_cut * this->v / this->za;
-};
+}

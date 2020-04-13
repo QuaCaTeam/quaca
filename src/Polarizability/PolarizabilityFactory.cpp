@@ -10,14 +10,11 @@ namespace pt = boost::property_tree;
 #include "PolarizabilityNoBath.h"
 
 // Green's tensor factory
-Polarizability *PolarizabilityFactory::create(std::string input_file) {
-  // set return pointer to NULL
-  Polarizability *polarizability = NULL;
+std::shared_ptr<Polarizability>
+PolarizabilityFactory::create(const std::string& input_file) {
 
   // Create a root
   pt::ptree root;
-
-  // Load the json file in this ptree
   pt::read_json(input_file, root);
 
   // read the type of the kernel
@@ -25,15 +22,12 @@ Polarizability *PolarizabilityFactory::create(std::string input_file) {
 
   // set the right pointer, show error if type is unknown
   if (type == "bath") {
-    polarizability = new PolarizabilityBath(input_file);
+    return std::make_shared<PolarizabilityBath>(input_file);
   } else if (type == "nobath") {
-    polarizability = new PolarizabilityNoBath(input_file);
+    return std::make_shared<PolarizabilityNoBath>(input_file);
   } else {
     std::cerr << "Error: Unknown Polarizability type (" << type << ")!"
               << std::endl;
     exit(0);
-  };
-
-  // return memory kernel pointer
-  return polarizability;
-};
+  }
+}

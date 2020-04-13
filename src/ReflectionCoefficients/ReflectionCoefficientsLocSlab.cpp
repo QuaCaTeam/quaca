@@ -3,21 +3,19 @@
 // json parser
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
+#include <utility>
 namespace pt = boost::property_tree;
 
 #include "ReflectionCoefficientsLocSlab.h"
 
 // direct constructor
 ReflectionCoefficientsLocSlab::ReflectionCoefficientsLocSlab(
-    Permittivity *permittivity, double thickness) {
-  // set permittivity
-  // set parameters
-  this->permittivity = permittivity;
-  this->thickness = thickness;
-};
+    std::shared_ptr<Permittivity> permittivity, double thickness)
+    : permittivity(std::move(permittivity)), thickness(thickness) {}
+
 // constructor from .json file
 ReflectionCoefficientsLocSlab::ReflectionCoefficientsLocSlab(
-    std::string input_file) {
+    const std::string &input_file) {
   // set permittivity
   // set parameters
   this->permittivity = PermittivityFactory::create(input_file);
@@ -29,7 +27,7 @@ ReflectionCoefficientsLocSlab::ReflectionCoefficientsLocSlab(
 
   // read parameters
   this->thickness = root.get<double>("ReflectionCoefficients.thickness");
-};
+}
 
 // calculate the p-polarized reflection coefficient
 void ReflectionCoefficientsLocSlab::ref(std::complex<double> &r_p,
@@ -43,12 +41,12 @@ void ReflectionCoefficientsLocSlab::ref(std::complex<double> &r_p,
   std::complex<double> I(0., 1.);
   std::complex<double> r_p_bulk, r_s_bulk;
 
-  // kapppa as well as kappa_epsilon are defined to have either a purely
+  // kappa as well as kappa_epsilon are defined to have either a purely
   // positive real part or purely negatively imaginary part
   kappa_epsilon = sqrt(kappa * kappa - (eps - 1.) * omega_abs * omega_abs);
   kappa_epsilon = std::complex<double>(std::abs(kappa_epsilon.real()),
                                        -std::abs(kappa_epsilon.imag()));
-  // Defining the reflection coefficients in transverse magnetice polarization
+  // Defining the reflection coefficients in transverse magnetic polarization
   // (p) and in transverse electric polarization (s)
   r_p_bulk = (kappa * eps - kappa_epsilon) / (kappa * eps + kappa_epsilon);
   r_s_bulk = (kappa - kappa_epsilon) / (kappa + kappa_epsilon);
@@ -62,5 +60,5 @@ void ReflectionCoefficientsLocSlab::ref(std::complex<double> &r_p,
   if (omega < 0.) {
     r_p = conj(r_p);
     r_s = conj(r_s);
-  };
-};
+  }
+}

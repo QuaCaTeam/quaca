@@ -12,7 +12,7 @@ private:
 public:
   // constructors
   PermittivityDrude(double omega_p, double gamma);
-  PermittivityDrude(std::string input_file);
+  PermittivityDrude(const std::string& input_file);
 
   // calculate the permittivity
   std::complex<double> epsilon(double omega);

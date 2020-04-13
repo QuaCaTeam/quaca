@@ -6,10 +6,10 @@ namespace pt = boost::property_tree;
 #include "PermittivityDrude.h"
 
 PermittivityDrude::PermittivityDrude(double omega_p, double gamma)
-    : gamma(gamma), omega_p(omega_p){};
+    : omega_p(omega_p), gamma(gamma) {}
 
 // constructor for drude model from .json file
-PermittivityDrude::PermittivityDrude(std::string input_file) {
+PermittivityDrude::PermittivityDrude(const std::string& input_file) {
 
   // Create a root
   pt::ptree root;
@@ -24,7 +24,7 @@ PermittivityDrude::PermittivityDrude(std::string input_file) {
   // read parameters
   this->gamma = root.get<double>("Permittivity.gamma");
   this->omega_p = root.get<double>("Permittivity.omega_p");
-};
+}
 
 // calculate the permittivity
 std::complex<double> PermittivityDrude::epsilon(double omega) {
@@ -36,7 +36,7 @@ std::complex<double> PermittivityDrude::epsilon(double omega) {
   result = 1.0 - omega_p * omega_p / (omega * (omega + I * gamma));
 
   return result;
-};
+}
 
 // calculate the permittivity scaled by omega
 std::complex<double> PermittivityDrude::epsilon_omega(double omega) {
@@ -48,4 +48,4 @@ std::complex<double> PermittivityDrude::epsilon_omega(double omega) {
   result = omega - omega_p * omega_p / (omega + I * gamma);
 
   return result;
-};
+}

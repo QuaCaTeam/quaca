@@ -1,6 +1,8 @@
 #ifndef GREENSTENSORFACTORY_H
 #define GREENSTENSORFACTORY_H
 
+#include <memory>
+
 #include "GreensTensor.h"
 
 //! A Greens tensor factory
@@ -15,7 +17,7 @@ public:
    * Function returning a memory kernel pointer of the right type.
    * @param type Type of the memory kernel.
    */
-  static GreensTensor *create(std::string type);
+  static std::shared_ptr<GreensTensor> create(const std::string& type);
 };
 
 #endif // GREENSTENSORFACTORY_H

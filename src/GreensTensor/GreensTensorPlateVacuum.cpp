@@ -1,6 +1,7 @@
 // json parser
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
+#include <utility>
 namespace pt = boost::property_tree;
 
 #include "../ReflectionCoefficients/ReflectionCoefficientsFactory.h"
@@ -9,14 +10,15 @@ namespace pt = boost::property_tree;
 
 GreensTensorPlateVacuum::GreensTensorPlateVacuum(
     double v, double za, double beta,
-    ReflectionCoefficients *reflection_coefficients, double delta_cut,
-    vec::fixed<2> rel_err)
-    : GreensTensorPlate(v, za, beta, reflection_coefficients, delta_cut,
-                        rel_err) {
-  this->vacuum_greens_tensor = new GreensTensorVacuum(v, beta, rel_err(0));
-};
+    std::shared_ptr<ReflectionCoefficients> reflection_coefficients,
+    double delta_cut, vec::fixed<2> rel_err)
+    : GreensTensorPlate(v, za, beta, std::move(reflection_coefficients),
+                        delta_cut, rel_err) {
+  this->vacuum_greens_tensor =
+      std::make_shared<GreensTensorVacuum>(v, beta, rel_err(0));
+}
 
-GreensTensorPlateVacuum::GreensTensorPlateVacuum(std::string input_file)
+GreensTensorPlateVacuum::GreensTensorPlateVacuum(const std::string &input_file)
     : GreensTensorPlate(input_file) {
   // Create a root
   pt::ptree root;
@@ -28,8 +30,8 @@ GreensTensorPlateVacuum::GreensTensorPlateVacuum(std::string input_file)
   assert(addvacuum == "true");
 
   this->vacuum_greens_tensor =
-      new GreensTensorVacuum(v, beta, this->rel_err(0));
-};
+      std::make_shared<GreensTensorVacuum>(v, beta, this->rel_err(0));
+}
 
 void GreensTensorPlateVacuum::integrate_k(cx_mat::fixed<3, 3> &GT,
                                           Options_GreensTensor opts) {
@@ -43,7 +45,7 @@ void GreensTensorPlateVacuum::integrate_k(cx_mat::fixed<3, 3> &GT,
   vacuum_greens_tensor->integrate_k(vac, opts);
 
   GT += vac;
-};
+}
 
 void GreensTensorPlateVacuum::calculate_tensor(cx_mat::fixed<3, 3> &GT,
                                                Options_GreensTensor opts) {
@@ -57,4 +59,4 @@ void GreensTensorPlateVacuum::calculate_tensor(cx_mat::fixed<3, 3> &GT,
   vacuum_greens_tensor->calculate_tensor(vac, opts);
 
   GT += vac;
-};
+}

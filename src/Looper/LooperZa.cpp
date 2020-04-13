@@ -1,6 +1,7 @@
 // json parser
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
+#include <utility>
 namespace pt = boost::property_tree;
 
 #include "../GreensTensor/GreensTensorPlate.h"
@@ -8,9 +9,9 @@ namespace pt = boost::property_tree;
 
 LooperZa::LooperZa(double start, double end, int number_of_steps,
                    std::string scale)
-    : Looper(start, end, number_of_steps, scale){};
+    : Looper(start, end, number_of_steps, std::move(scale)){}
 
-LooperZa::LooperZa(std::string input_file) : Looper(input_file) {
+LooperZa::LooperZa(const std::string &input_file) : Looper(input_file) {
   // Create a root
   pt::ptree root;
 
@@ -20,18 +21,19 @@ LooperZa::LooperZa(std::string input_file) : Looper(input_file) {
   // check if type is right
   std::string type = root.get<std::string>("Looper.type");
   assert(type == "za");
-};
+}
 
-double LooperZa::calculate_value(int step, Friction *quantum_friction) {
+double LooperZa::calculate_value(int step,
+                                 std::shared_ptr<Friction> quantum_friction) {
   Options_Friction opts;
   opts.spectrum = NON_LTE_ONLY;
   opts.class_pt = quantum_friction;
 
   // change za
-  GreensTensorPlate *pt =
-      dynamic_cast<GreensTensorPlate *>(quantum_friction->get_greens_tensor());
+  auto pt = std::dynamic_pointer_cast<GreensTensorPlate>(
+      quantum_friction->get_greens_tensor());
 
-  if (pt == NULL) {
+  if (pt == nullptr) {
     std::cerr
         << "You try to loop over z_a, but did not give a plate Green's tensor."
         << std::endl;
@@ -41,4 +43,4 @@ double LooperZa::calculate_value(int step, Friction *quantum_friction) {
   pt->set_z_a(this->steps[step]);
 
   return quantum_friction->calculate(opts);
-};
+}

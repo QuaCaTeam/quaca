@@ -8,12 +8,13 @@ namespace po = boost::program_options;
 
 // filesystem
 #include <boost/filesystem.hpp>
+#include <utility>
 namespace filesys = boost::filesystem;
 
 #include "Options.h"
 
 Options::Options(std::string parameter_file, int num_threads)
-    : parameter_file(parameter_file), num_threads(num_threads) {
+    : parameter_file(std::move(parameter_file)), num_threads(num_threads) {
   /* set according output file */
   this->output_file =
       this->parameter_file.substr(0, this->parameter_file.find_last_of('.')) +
@@ -21,7 +22,7 @@ Options::Options(std::string parameter_file, int num_threads)
 
   /* check the given options */
   this->check();
-};
+}
 
 Options::Options(int argc, char *argv[]) {
   /* Read command line options */
@@ -31,7 +32,7 @@ Options::Options(int argc, char *argv[]) {
     desc.add_options()("help,h", "Help screen")(
         "file", po::value<std::string>(&(this->parameter_file)), "Input File")(
         "threads", po::value<int>(&(this->num_threads))->default_value(-1),
-        "Number of parallel thrads");
+        "Number of parallel threads");
 
     po::variables_map vm;
     po::store(po::parse_command_line(argc, argv, desc), vm);
@@ -41,7 +42,7 @@ Options::Options(int argc, char *argv[]) {
     if (vm.count("help")) {
       std::cout << desc << std::endl;
       exit(0);
-    };
+    }
 
   } catch (std::exception &e) {
     std::cerr << "error: " << e.what() << std::endl;
@@ -54,7 +55,7 @@ Options::Options(int argc, char *argv[]) {
 
   /* check the given options */
   this->check();
-};
+}
 
 // check the command line options
 void Options::check() {
@@ -73,9 +74,9 @@ void Options::check() {
 
     if (input == 'n') {
       exit(0);
-    };
-  };
-};
+    }
+  }
+}
 
 // Get File extension from File path or File Name
 std::string getFileExtension(std::string filePath) {
@@ -88,10 +89,10 @@ std::string getFileExtension(std::string filePath) {
   }
   // In case of no extension return empty string
   return "";
-};
+}
 
 // check if given file exists
 bool exists(const std::string &path) {
-  struct stat buffer;
+  struct stat buffer{};
   return (stat(path.c_str(), &buffer) == 0);
-};
+}

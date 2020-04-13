@@ -1,6 +1,8 @@
 #ifndef REFLECTIONCOEFFICIENTSLOCBULK_H
 #define REFLECTIONCOEFFICIENTSLOCBULK_H
 
+#include <memory>
+
 #include "../Permittivity/PermittivityFactory.h"
 #include "ReflectionCoefficients.h"
 #include <armadillo>
@@ -16,20 +18,21 @@
 class ReflectionCoefficientsLocBulk : public ReflectionCoefficients {
 private:
   // permittivity is needed to describe the surface's response
-  Permittivity *permittivity;
+  std::shared_ptr<Permittivity> permittivity;
 
 public:
   /*!
    * Constructor for reflection coefficients of a local bulk medium.
    */
-  ReflectionCoefficientsLocBulk(Permittivity *permittivity);
-  ReflectionCoefficientsLocBulk(std::string input_file);
+  ReflectionCoefficientsLocBulk(std::shared_ptr<Permittivity> permittivity);
+  ReflectionCoefficientsLocBulk(const std::string& input_file);
 
   /*!
    * Returns the p- and s-polarized reflection coefficient.
    */
   void ref(std::complex<double> &r_p, std::complex<double> &r_s, double omega,
            std::complex<double> kappa);
+
   // getter functions
   std::complex<double> get_epsilon(double omega) {
     return this->permittivity->epsilon(omega);

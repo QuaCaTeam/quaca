@@ -1,6 +1,8 @@
 #ifndef GREENSTENSOR_H
 #define GREENSTENSOR_H
 
+#include <memory>
+
 #include "../Calculations/Integrations.h"
 #include <armadillo>
 using namespace arma;
@@ -26,7 +28,7 @@ protected:
 public:
   // constructor
   GreensTensor(double v, double beta);
-  GreensTensor(std::string input_file);
+  GreensTensor(const std::string& input_file);
 
   // calculate the tensor in frequency and momentum space
   virtual void calculate_tensor(cx_mat::fixed<3, 3> &GT,
@@ -43,7 +45,7 @@ public:
   virtual double omega_ch() = 0;
 
   // setter function
-  virtual void set_v(double v) { this->v = v; };
+  virtual void set_v(double v_new) { this->v = v_new; };
 };
 
 // A struct for integration options
@@ -59,7 +61,7 @@ struct Options_GreensTensor {
   vec::fixed<2> kvec = {NAN, NAN};
   // Pointer to the GreensTensor to be able to access the attributes of the
   // class eventhough the integrand is static
-  GreensTensor *class_pt;
+  std::shared_ptr<GreensTensor> class_pt;
 };
 
 #endif // GREENSTENSOR_H

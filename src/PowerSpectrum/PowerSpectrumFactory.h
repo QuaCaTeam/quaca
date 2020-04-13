@@ -1,6 +1,8 @@
 #ifndef POWERSPECTRUMFACTORY_H
 #define POWERSPECTRUMFACTORY_H
 
+#include <memory>
+
 #include "PowerSpectrum.h"
 
 //! A Greens tensor factory
@@ -15,7 +17,7 @@ public:
    * Function returning a memory kernel pointer of the right type.
    * @param type Type of the memory kernel.
    */
-  static PowerSpectrum *create(std::string type);
+  static std::shared_ptr<PowerSpectrum> create(const std::string &input_file);
 };
 
 #endif // POWERSPECTRUMFACTORY_H

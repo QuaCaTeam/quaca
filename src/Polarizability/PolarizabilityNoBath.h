@@ -8,8 +8,8 @@
 class PolarizabilityNoBath : public Polarizability {
 public:
   PolarizabilityNoBath(double omega_a, double alpha_zero,
-                       GreensTensor *greens_tensor);
-  PolarizabilityNoBath(std::string input_file);
+                       std::shared_ptr<GreensTensor> greens_tensor);
+  PolarizabilityNoBath(const std::string& input_file);
 
   void calculate_tensor(cx_mat::fixed<3, 3> &alpha,
                         Options_Polarizability opts);

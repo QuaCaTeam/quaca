@@ -1,4 +1,4 @@
-#include <assert.h>
+#include <cassert>
 
 // json parser
 #include <boost/property_tree/json_parser.hpp>
@@ -11,9 +11,9 @@ namespace pt = boost::property_tree;
 GreensTensorVacuum::GreensTensorVacuum(double v, double beta, double relerr)
     : GreensTensor(v, beta) {
   this->relerr = relerr;
-};
+}
 
-GreensTensorVacuum::GreensTensorVacuum(std::string input_file)
+GreensTensorVacuum::GreensTensorVacuum(const std::string& input_file)
     : GreensTensor(input_file) {
 
   // Create a root
@@ -28,7 +28,7 @@ GreensTensorVacuum::GreensTensorVacuum(std::string input_file)
   // check if type is right
   std::string type = root.get<std::string>("GreensTensor.type");
   assert(type == "vacuum");
-};
+}
 
 // Compute the full Green's tensor for a given frequency \omega and a given
 // momentum vector k For the definition see notes/VacuumGreen.pdf eq. (2)
@@ -65,7 +65,7 @@ void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3, 3> &GT,
               << std::endl;
     exit(0);
   }
-};
+}
 
 // Compute the integration with respect to the 2-d k vector
 // Ref: notes/VacuumFriction.pdf eq. (10)
@@ -114,15 +114,15 @@ void GreensTensorVacuum::integrate_k(cx_mat::fixed<3, 3> &GT,
       GT(2, 2) = GT(1, 1);
     }
   }
-};
+}
 
 // Implementation of the different integrands for the integration
 // of the 2-d k-vector
 // Ref: notes/VacuumFriction eq. (10) and (11)
 double GreensTensorVacuum::integrand_k(double kv, void *opts) {
   // Casting the class-pointer to the correct pointer-type
-  Options_GreensTensor *opts_pt = static_cast<Options_GreensTensor *>(opts);
-  GreensTensorVacuum *pt = static_cast<GreensTensorVacuum *>(opts_pt->class_pt);
+  auto *opts_pt = static_cast<Options_GreensTensor *>(opts);
+  auto pt = std::dynamic_pointer_cast<GreensTensorVacuum>(opts_pt->class_pt);
 
   // Read out the relevant parameters
   double omega = opts_pt->omega;
@@ -167,9 +167,9 @@ double GreensTensorVacuum::integrand_k(double kv, void *opts) {
   }
 
   return result;
-};
+}
 
 double GreensTensorVacuum::omega_ch() {
   double result = 0;
   return result;
-};
+}

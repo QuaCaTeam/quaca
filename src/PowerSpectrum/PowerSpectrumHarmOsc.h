@@ -7,10 +7,10 @@
 class PowerSpectrumHarmOsc : public PowerSpectrum {
 public:
   // Constructor with initalization list
-  PowerSpectrumHarmOsc(GreensTensor *greens_tensor,
-                       Polarizability *polarizability);
+  PowerSpectrumHarmOsc(std::shared_ptr<GreensTensor> greens_tensor,
+                       std::shared_ptr<Polarizability> polarizability);
   // Constructor with json-file
-  PowerSpectrumHarmOsc(std::string input_file);
+  PowerSpectrumHarmOsc(const std::string& input_file);
 
   // calculate the power spectrum for a fixed value of the frequency
   void calculate(cx_mat::fixed<3, 3> &powerspectrum,
