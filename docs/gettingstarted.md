@@ -1,8 +1,8 @@
-# QuaCa
+# QuaCa {docsify-ignore-all}
 **QuaCa** stands for Quantum / Casimir Friction and is a numerical framework to calculate just that.
 
 ## Dependencies
-QuaCa requires for its installation:
+QuaCa requires:
 
 * [GSL](https://www.gnu.org/software/gsl/): integration routines
 * [Boost](https://www.boost.org/): file parser and file handling
@@ -40,19 +40,19 @@ quaca $ cd docs && python -m SimpleHTTPServer 3000
 quaca $ cd docs && python -m http.server 3000
 ```
 
-You can then see the documentation in your browser at the adress `http://localhost:3000/`.
+You can then see the documentation in your browser at the address `http://localhost:3000/`.
 
 ## Testing
-The follow a test-driven development style and are currently use [Catch2] for our unit testing.
-To run all unit tests, build the tests first with
+Employing test-driven development, we are using [Catch2](https://github.com/catchorg/Catch2) for our unit and integrated testing.
+To build and run all implemented test use
 ```bash
 quaca/build $ make test_quaca
 ```
-then run the tests from the `bin/` directory
+and afterwards run the tests from the `bin/` directory
 ```bash
 quaca/bin $ ./test_quaca
 ```
-
+More detailled information is given in the section [Testing](dev/testing.md).
 ## Contributing
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on how you can become a part of this project.
 

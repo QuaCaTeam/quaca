@@ -1,4 +1,4 @@
-# PowerSpectrum
+# PowerSpectrum {docsify-ignore-all}
 
 This abstract class serves as a container for the power spectrum of the dipole autocorrelator.
 The power spectrum can be defined with or without an internal bath. Without an internal bath, the power spectrum reads

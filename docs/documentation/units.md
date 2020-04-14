@@ -1,9 +1,12 @@
-# System of units
-QuaCa does not anticipate any system of measurement, so essentially you have to know yourself which units you put in and which units result from this.
-To make this easier, however, we **strongly** advise the use to use a system of measurement that is commonly called *natural units*, where we set $\hbar = c = k_B = 4\pi\epsilon_0 = 1$.
+# Input {docsify-ignore-all}
+
+In order to lift the curse of looking up the conversion tables to correctly implement your data into QuaCa, in the following we provide a short note on the used system of units, including a useful converter, as well as mention which quantities are not burdened by units.
+
+# System of Units
+In QuaCa the used system of units are the so-called *natural units*, where we set $\hbar = c = k_B = 4\pi\epsilon_0 = 1$.
 Please refer to the [Wikipedia page](https://en.wikipedia.org/wiki/Natural_units#%22Natural_units%22_(particle_physics_and_cosmology)) for more information.
-Below you find a table which matches each parameter to it's LaTeX expressions and clarifies what we mean by it.
-Further we provide a converter from common units of the respective quantity to the natural units used for QuaCa.
+Below you find a table which matches each parameter to it's LaTeX expressions and clarifies its meaning.
+Further we provide a converter from several common units of the respective quantity of the natural units used for QuaCa.
 Quantities without converter in its row, have the same unit as the quantity above.
 
 <table>
@@ -55,6 +58,14 @@ Quantities without converter in its row, have the same unit as the quantity abov
     <td><p><span id="outputValueFreq">0</span></p></td>
   </tr>
   <tr>
+    <td><code>double omega_0</code></td>
+    <td>$\omega_0$</td>
+    <td>Central frequency of the material</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
     <td><code>double omega_p</code></td>
     <td>$\omega_p$</td>
     <td>Plasma frequency of the material</td>
@@ -96,5 +107,49 @@ Quantities without converter in its row, have the same unit as the quantity abov
     </select>
     </td>
     <td><p><span id="outputValueLen">0</span></p></td>
+  </tr>
+  <tr>
+    <td><code>double thickness</code></td>
+    <td>$d$</td>
+    <td>Finite thickness of the material slab</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
+## Unitless Quantities
+
+Furthermore, the code contains the following unitless quantities
+<table>
+  <tr>
+    <th>Code</th>
+    <th>Math</th>
+    <th>Physical quantity</th>
+  </tr>
+  <tr>
+    <td><code>double eps_inf</code></td>
+    <td>$\epsilon_\infty$</td>
+    <td>High-frequency permittivity limit</td>
+  </tr>
+  <tr>
+    <td><code>double delta_cut</code></td>
+    <td>$\delta_\mathrm{cut}$</td>
+    <td>Numerical cut-off of the real part $\kappa$ integration</td>
+  </tr>
+  <tr>
+    <td><code>double rel_err_0</code></td>
+    <td>$\delta_\mathrm{rel}^0$</td>
+    <td>Relative accuracy of the first (deepest) integration of the Green's Tensor</td>
+  </tr>
+  <tr>
+    <td><code>double rel_err_1</code></td>
+    <td>$\delta_\mathrm{rel}^1$</td>
+    <td>Relative accuracy of the second (deepest) integration of the Green's Tensor</td>
+  </tr>
+  <tr>
+    <td><code>double relerr_omega</code></td>
+    <td>$\delta_\omega$</td>
+    <td>Relative accuracy of the $\omega$ integration</td>
   </tr>
 </table>

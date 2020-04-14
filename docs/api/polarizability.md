@@ -2,7 +2,7 @@
 
 ?> We try to use the same variable names for the same physical quantities, which resemble the LaTeX writing. Please have a look at the [reference table](documentation/units)
 
-## Polarizability
+# Polarizability {docsify-ignore-all}
 This abstract class serves as a container for two different polarizabilities: one of a particle with an internal heat bath and one without such a bath.
 We expect the polarizability to be of the form
 $$  \underline{\alpha}(\omega) = \alpha_0 \omega_a^2 \left( \omega_a^2 - \omega^2 - \mathrm{i} \omega \mu(\omega) - \alpha_0 \omega_a^2 \int \frac{\mathrm{d}^2 \mathbf{k}}{(2 \pi)^2} \underline{G}(\mathbf{k}, \omega + \mathbf{k}^\intercal\mathbf{v}) \right)^{-1}, $$

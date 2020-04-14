@@ -1,6 +1,6 @@
 !> TODO: Write examples.
 
-## GreensTensor
+# GreensTensor {docsify-ignore-all}
 This is an abstract class that defines a Green's tensor.
 A specific kind of Green's tensor will be a child of this class.
 

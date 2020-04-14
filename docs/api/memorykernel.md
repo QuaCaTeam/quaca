@@ -1,6 +1,6 @@
 !> TODO: Write examples.
 
-## MemoryKernel
+# MemoryKernel {docsify-ignore-all}
 This is an abstract class that defines the Fourier transform of the memory kernel, i.e. $\mu(\omega)$.
 A specific model for this will be a child of this class.
 ```cpp

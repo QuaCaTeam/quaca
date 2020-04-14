@@ -8,11 +8,11 @@
 </br>
 For more information scroll down or immediately jump to the sections
 
- * [__Getting Started__](README.md)
+ * [__Getting Started__](gettingstarted.md)
  * [__Tutorials__](tutorials/first_calculation)
- * [__Documentation__](documentation/units.md)
- * [__API__](api/polarizability.md)
- * [__Development__](dev/testing.md)
+ * [__Documentation__](api/polarizability.md)
+ * [__Input__](documentation/units.md)
+ * [__Development__](dev/organization.md)
 
 
 <!-- background color -->

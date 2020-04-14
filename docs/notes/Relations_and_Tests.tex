@@ -1,0 +1,482 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[top=1cm, bottom=2.0cm, left=1.0cm, right=1.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{bbold}
+\usepackage{amsmath,amssymb}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{cite}
+\usepackage{here}
+\usepackage{algpseudocode,algorithm,algorithmicx}
+\usepackage{empheq}
+\usepackage{lscape}
+\usepackage{color}
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+\newcommand{\vv}[1]{\mathbf{#1}}
+\newcommand{\todo}[1]{\textcolor{red}{#1}}
+\newcommand{\uni}[1]{\,\mathrm{#1}}
+\newcommand{\ii}[0]{\mathrm{i}}
+\newcommand{\dd}[0]{\mathrm{d}}
+\newcommand{\kB}[0]{k_\mathrm{B}}
+\DeclareMathOperator\arctanh{arctanh}
+% define citation style
+\bibliographystyle{unsrt}
+\title{Test Results in the Context of Quantum/Casimir Friction}
+\author{Marty Oelschläger}
+\begin{document}
+\maketitle
+%\tableofcontents
+\section{Introduction and Definitions}
+Here, we like to sum up several important equations in the context of noncontact friction. For a detailed explanation see \cite{oelschlager2019a}. We describe a charge neutral microscopic object without an intrinsic magnetic dipole moving above a macroscopic surface, which is flat at least in the direction of motion of the object. Since we consider solely fluctuating fields, we assume that the coupling between the electromagnetic field with the macroscopic material as well as with the microscopic object is described sufficiently in linear coupling. This means that the equation of motion of the microscopic object's relative motion --- described by the electric dipole moment --- can be expressed as
+\begin{align}
+  \hat{\vv{d}}(\omega) = \underline{\alpha}(\omega) \hat{\vv{E}}(\vv r_\mathrm{cm}(t),\omega)\,,
+\end{align}
+where $\hat{\vv{d}}(\omega)$ is the dipole moment operator in frequency domain, $\hat{\vv{E}}(\vv r_\mathrm{cm}(t),\omega)$ is the electric field operator evaluated at the time-dependent center of mass of the microscopic object, and $\underline{\alpha}(\omega)$ is the corresponding polarizability of the dipole. In the case of a harmonic oscillator driven by the electric field and with an internal heat bath the polarizability can be written as
+\begin{equation}
+\underline{\alpha}(\omega)=
+\alpha_0\omega_a^2 \left(
+  \left[
+  \omega_a^2 - \omega^2 -\ii\omega\mu(\omega)\right]\mathbb{1}
+- \alpha_0\omega_a^2\int\frac{\mathrm{d}^2\mathbf{k}}{(2\pi)^2} \underline{G}(\mathbf{k},z_a,\mathbf{k}^\intercal \mathbf{v} + \omega)
+\right)^{-1}\,,
+\end{equation}
+where $\underline{G}$ is the electric Green's tensor and $\vv k$ the reciprocal domain corresponding to the two dimensional spatial vector $\vv R=(x,\, y)^\intercal$, and $\mu_R(\omega)$ is the real part of the memory kernel $\mu(\omega)$, which encodes the internal bath dynamics of the microscopic object.
+The electric field itself already includes a free field as well as an induced field of the dipole moment, which reads
+\begin{align}
+  \hat{\vv{E}}(\vv r,\omega) = \hat{\vv{E}}(\vv r,\omega) + \int\frac{\dd^2\vv k}{(2\pi)^2} \underline{G}(\vv k,z,\omega)\hat{\vv{d}}(\omega)e^{\ii\vv k^\intercal \vv R}
+\end{align}
+\\
+The above introduced quantities cover all necessary ingredients to calculate the noncontact friction. Additionally, we introduce the power spectrum of the dipole moment's autocorrelator, which has the form
+%
+%
+\begin{align}
+\underline{S}(\omega)
+=&\frac{\hbar}{\pi}\,
+\underline{\alpha}(\omega)\Bigg\lbrace\int \frac{\mathrm{d}^2\mathbf{k}}{(2\pi)^2}
+\frac{\underline{G}_\Im(\mathbf{k},z_a,\mathbf{k}^\intercal \mathbf{v} + \omega)}{1-e^{-\beta\hbar[\mathbf{k}^\intercal \mathbf{v} + \omega]}}
++\frac{1}{\alpha_0\omega_a^2}
+\frac{\omega \mu_R(\omega)}{1-e^{-\beta\hbar\omega}}
+\Bigg\rbrace \underline{\alpha}^\dagger(\omega)
+%
+\label{eq:powerspec}.
+\end{align}
+where $\beta= (k_\mathrm{B}T)^{-1}$ is the inverse temperature of the system. At this point it is noteworthy, that $\underline{S}$ and $\underline{\alpha}_\Im=(\underline{\alpha}-\underline{\alpha^\dagger})/(2\ii)$ are strongly related since
+\begin{align}
+\underline{\alpha}_\Im(\omega)
+=&\frac{\hbar}{\pi}\,
+\underline{\alpha}(\omega)\Bigg\lbrace\int \frac{\mathrm{d}^2\mathbf{k}}{(2\pi)^2}
+\underline{G}_\Im(\mathbf{k},z_a,\mathbf{k}^\intercal \mathbf{v} + \omega)
++\frac{1}{\alpha_0\omega_a^2}
+\omega \mu_R(\omega)
+\Bigg\rbrace \underline{\alpha}^\dagger(\omega)
+%
+\label{eq:powerspec}.
+\end{align}
+As last note, we present the two implemented forms of the noncontact friction, which read
+\begin{align}
+\label{eq:numInt1}
+F =&
+-2
+\int_{0}^{\infty} \mathrm{d}\omega\,
+\mathrm{Tr}\left[
+\underline{S}(\omega) \int\frac{\mathrm{d}^2\mathbf{k}}{(2\pi)^2} \, k_x\,\underline{G}_\Im(\mathbf{k}, z_a, k_xv+\omega)
+\right]
+\nonumber\\
+&+
+2\frac{\hbar}{\pi}
+\int_{0}^{\infty} \mathrm{d}\omega\,
+\mathrm{Tr}\left[
+\underline{\alpha}_\Im(\omega)
+\int\frac{\mathrm{d}^2\mathbf{k}}{(2\pi)^2} \, k_x\,
+\frac{
+\underline{G}_\Im(\mathbf{k}, z_a, k_xv+\omega)}{1-\exp(-\beta\hbar[\omega+k_xv])}
+\right].
+\end{align}
+or
+\begin{align}
+\label{eq:numInt2}
+F =&
+-2
+\frac{\hbar}{\pi}\int_{0}^{\infty} \mathrm{d}\omega\,
+\mathrm{Tr}\left[
+\underline{J}(\omega) \int\frac{\mathrm{d}^2\mathbf{k}}{(2\pi)^2} \, k_x\,\underline{G}_\Im(\mathbf{k}, z_a, k_xv+\omega)
+\right]
+\nonumber\\
+&+
+2\frac{\hbar}{\pi}
+\int_{0}^{\infty} \mathrm{d}\omega\,
+\mathrm{Tr}\left[
+\underline{\alpha}_\Im(\omega)
+\int\frac{\mathrm{d}^2\mathbf{k}}{(2\pi)^2} \, k_x\,
+\underline{G}_\Im(\mathbf{k}, z_a, k_xv+\omega)\Theta(\Omega_+,\Omega)
+\right],
+\end{align}
+where $\Omega=\hbar\beta\omega$ and $\Omega_+=\hbar\beta(\omega+k_xv)$, $\Theta(\Omega_+,\Omega)=\frac{1}{1-\exp(-\Omega_+)} - \frac{1}{1-\exp(-\Omega)}$ and 
+\begin{align}
+  \frac{\hbar}{\pi}\underline{J}(\omega) =
+  \underline{S}(\omega)-\frac{\hbar}{\pi}\frac{\underline{\alpha}_\Im(\omega)}{1-\exp(-\hbar\beta\omega)}=
+\frac{\hbar}{\pi}\,
+\underline{\alpha}(\omega)\int \frac{\mathrm{d}^2\mathbf{k}}{(2\pi)^2}
+\underline{G}_\Im(\mathbf{k},z_a,\mathbf{k}^\intercal \mathbf{v} + \omega)
+\Theta(\Omega_+,\Omega)
+\underline{\alpha}^\dagger(\omega)
+\end{align}
+For a detailed derivation see \cite{oelschlager2019a}.
+\section{Tests of Response Functions}
+All response functions, for example $\underline{G}$ and $\underline{\alpha}$, have to fulfill a certain set of easily testable relations%
+\footnote{This is also true for the permittivity of the macroscopic material $\epsilon(-\omega)=\epsilon^*(\omega)$, or the reflection coefficient of a flat surface $r(-\omega)=r^*(\omega)$}%
+. First, they have to fulfill reality in time domain and thus the crossing relation in frequency domain
+\begin{align}
+  \underline{G}(-\omega,\vv r, \vv r') = \underline{G}^\dagger(\omega,\vv r, \vv r')\quad\text{or}\quad
+\underline{\alpha}(-\omega) = \underline{\alpha}^*(\omega) \,,
+\end{align}
+Furthermore, in most cases one can rely on reciprocity of the Green's tensor
+\begin{align}
+\underline{G}(\omega,-\vv k,z) &= \underline{G}^\intercal(\omega,\vv k, z)\,.
+\end{align}
+In order to test the Green's tensor's reality, one can use that
+\begin{align}
+\underline{G}_\Im(\omega,\vv k, z) =\frac{\underline{G}(\omega,\vv k, z) - \underline{G}^\dagger(\omega,\vv k, z)}{2\ii}=
+\frac{\underline{G}^\dagger(-\omega,\vv k, z) - \underline{G}(-\omega,\vv k, z)}{2\ii}= -\underline{G}_\Im(-\omega,\vv k, z)\,,\\
+\underline{G}_\Re(\omega,\vv k, z) =\frac{\underline{G}(\omega,\vv k, z) + \underline{G}^\dagger(\omega,\vv k, z)}{2}=
+\frac{\underline{G}^\dagger(-\omega,\vv k, z) + \underline{G}(-\omega,\vv k, z)}{2}= \underline{G}_\Re(-\omega,\vv k, z)
+\,,
+\end{align}
+or alternatively
+\begin{align}
+  \int\frac{\dd^2\vv k}{(2\pi)^2}\underline{G}_\Im(\omega,\vv k, z) =
+-  \int\frac{\dd^2\vv k}{(2\pi)^2}\underline{G}_\Im(-\omega,\vv k, z)
+\quad\text{and}\quad
+  \int\frac{\dd^2\vv k}{(2\pi)^2}\underline{G}_\Re(\omega,\vv k, z) =
+  \int\frac{\dd^2\vv k}{(2\pi)^2}\underline{G}_\Re(-\omega,\vv k, z)
+\end{align}
+\section{Test of the Power Spectrum}
+The power spectrum is an hermitian matrix, i.e.
+\begin{align}
+\underline{S}^\dagger(\omega) &= \underline{S}(\omega)\,.
+\end{align}
+Moreover, one can test the static case, which reproduces
+\begin{align}
+  \lim_{v\to0}\underline{S}(\omega) \sim \frac{\hbar}{\pi}\frac{\underline{\alpha}_\Im(\omega)}{1-e^{-\hbar\beta\omega}}\,.
+\quad\text{or} \quad
+  \lim_{v\to0}\int_0^\infty\dd\omega\,\underline{S}(\omega) \sim \frac{\hbar}{\pi}\int_0^\infty\dd\omega\,\frac{\underline{\alpha}_\Im(\omega)}{1-e^{-\hbar\beta\omega}}\,.
+\end{align}
+Here, the integral expression might be preferred for very low temperatures, since $\frac{1}{1-e^{-\hbar\beta\omega}}\stackrel{\hbar\omega \gg k_\mathrm{B}T}\sim \theta(\omega)$, which can be problematic in a numerical integration.
+%Additionally, one can test the integration of $\underline{\alpha}$ in the first order in $\alpha_0$.
+%\begin{align}
+%\int_0^{\omega_\mathrm{cut}}\dd\omega\,\underline{\alpha}_\Im(\omega)
+%\sim
+%\begin{cases}
+%\mathbb{1}\frac{\pi}{2}\alpha_0\omega_a
+%\quad  & \text{for}\quad \omega_\mathrm{cut}\gg \omega_a
+%\\
+%\alpha_0^2
+%\int_0^{\omega_\mathrm{cut}}\dd\omega\,
+%\int\frac{\dd^2\vv k}{(2\pi)^2}
+%\underline{G}_\Im(\vv k, z_a,\omega + k_xv)
+%\quad  &\text{for}\quad \omega_\mathrm{cut}\ll \omega_a
+%\end{cases}
+%\end{align}
+\section{Tests of specific setups}
+\subsection{Test Case: Free Space}\label{sec:vacuum}
+As neatly derived in \cite{amorim2017} the free Green tensor can be written as
+\footnote{The Green's tensor definition in \cite{amorim2017} differs from the displayed one by the factor $\frac{\omega^2}{\epsilon_0c^2}$. This is due to the different definitions of the Green's tensor.}
+\begin{align}
+  \underline{G}_0(\vv k, z,z',\omega) &=
+  \frac{\omega^2}{\epsilon_0c^2}
+  \mathcal{P}\left[
+    \mathbb{1}-\frac{c^2}{\omega^2}
+    \begin{bmatrix}
+      \vv k \\ \pm\ii \kappa
+    \end{bmatrix}
+    \left[ \vv k^\intercal ,\,\pm\ii\kappa\right]
+  \right]
+  \frac{e^{-\kappa|z-z'|}}{2\kappa}
+  -\frac{\vv e_z\otimes\vv e_z}{\omega^2/c^2}\delta(z-z')
+  .
+\end{align}
+Here the case $\pm$ relates to $z\gtrless z'$ and $\kappa=\sqrt{k^2-\omega^2/c^2}$ with $\mathrm{Re}\{\kappa\}\geq0$ and $\mathrm{Im}\{\kappa\}<0$. Especially, we focus on the case $z=z'$. Despite the real part of this Green's tensor being divergent for this case, we can continue calculating the imaginary part. Here we also eliminated odd orders of $k_y$, since we solely consider symmetric integration over $k_y$
+%
+\begin{align}
+  \mathrm{Im}\left\{\underline{G}_0(\vv k, z\to z',\omega)\right\} &=
+  \frac{
+  \theta(\frac{\omega^2}{c^2}-k^2)
+}{2\epsilon_0\sqrt{\omega^2/c^2-k^2}}
+  \left(
+    \mathbb{1}\frac{\omega^2}{c^2} -
+    \mathrm{diag}\left[
+      k_x^2,\,k_y^2,\,\frac{\omega^2}{c^2}-k^2
+    \right]
+  \right)
+  .
+\end{align}
+The Heaviside function is needed to prohibit the $\omega^2/c^2 -k^2 <0$. Otherwise the term would be purely real and thus would not contribute to the imaginary part of the free Green's tensor. To show, that we can obtain the same result as e.g. given in \cite{buhmann2012b} or \cite{intravaia2016b}, we quickly calculate the integration over polar coordinates (assuming $\omega>0$). First, we perform the integration over $\varphi$ and find
+%
+\begin{align}
+  \int \frac{\dd^2\vv k}{(2\pi)^2}
+  \mathrm{Im}\left\{\underline{G}_0(\vv k, z\to z',\omega)\right\} &=
+  \frac{1}{4\pi\epsilon_0}
+  \int_0^{\omega/c} \dd k \,k
+  \frac{1
+}{\sqrt{\omega^2/c^2-k^2}}
+    \mathrm{diag}\left[
+     \frac{\omega^2}{c^2}-  \frac{k^2}{2},\,\frac{\omega^2}{c^2}-\frac{k^2}{2},\,k^2
+    \right]
+  .
+\end{align}
+%
+In order to perform the $k$ integration, we use the known integrals
+\begin{align}
+  \int_0^y \dd x \frac{x}{\sqrt{y^2-x^2}}=y,
+ \quad \quad
+  \int_0^y \dd x \frac{x^3}{\sqrt{y^2-x^2}}=\frac{2y^3}{3},
+  \end{align}
+  and find
+\begin{align}
+  \int \frac{\dd^2\vv k}{(2\pi)^2}
+  \mathrm{Im}\left\{\underline{G}_0(\vv k, z\to z',\omega)\right\} &=
+     \frac{\omega^3}{6\pi\epsilon_0 c^3}
+     \mathbb{1}
+     .
+\end{align}
+In general, when considering a constant motion of the source with $\vv r = \vv v t +\vv r_0$, we can shift the motion into the frequency dependence, which manifests as a Doppler shift $\omega\to\omega_+=\omega+k_x v$. Since we need several different integrals concerning the $k_x$ integration, we want restrict us here to the $k_y$ integration. The inequality from the Heaviside function then reads $\omega_+^2/c^2-k_x^2\geq k_y^2$. However, when employing this inequality for the upper $k_y$ bound we still have to fulfil the $\omega_+^2/c^2-k_x^2\geq 0$ bound with respect to the $k_x$ integration. In the following we perform the $k_y$ integration
+
+\begin{align}
+  \int\frac{\dd^2\vv k}{(2\pi)^2}  \mathrm{Im}\left\{\underline{G}_0(\vv k, z\to z',\omega_+)\right\} &=
+  \int\frac{\dd k_x}{4\pi\epsilon_0}
+  \theta(\frac{\omega_+^2}{c^2}-k_x^2)
+  \int_0^{\xi} \frac{\dd k_y}{\pi}
+  \frac{1
+}{\sqrt{\xi^2-k_y^2}}
+  \left(
+  \mathbb{1}\frac{\omega_+^2}{c^2} -
+    \mathrm{diag}\left[
+      k_x^2,\,k_y^2,\,\xi^2-k_y^2
+    \right]
+  \right)
+  ,
+\end{align}
+where we introduced $\xi=\sqrt{\omega_+^2/c^2-k_x^2}$. Again we take advantage from the following known integrations
+\begin{align}
+  \int_0^y \dd x \frac{1}{\sqrt{y^2-x^2}}=\frac{\pi}{2},
+ \quad \quad
+  \int_0^y \dd x \frac{x^2}{\sqrt{y^2-x^2}}=\frac{\pi y^2}{4},
+  \end{align}
+  and find
+
+\begin{align}
+  \int\frac{\dd^2\vv k}{(2\pi)^2}  \mathrm{Im}\left\{\underline{G}_0(\vv k, z\to z',\omega_+)\right\}f(\omega_+,k_x) &=
+  \int\frac{\dd k_x}{8\pi\epsilon_0}
+  \theta(\xi^2)
+  \left(
+  \mathbb{1}\frac{\omega_+^2}{c^2} -
+    \mathrm{diag}\left[
+      k_x^2,\,\frac{\xi^2}{2},\,\xi^2-\frac{\xi^2}{2}
+    \right]
+  \right)f(\omega_+,k_x)
+  \\
+&=
+  \int\frac{\dd k_x}{8\pi\epsilon_0}
+  \theta(\xi^2)
+    \mathrm{diag}\left[
+      \xi^2,\,\frac{\omega_+^2}{c^2}-\frac{\xi^2}{2},\,\frac{\omega_+^2}{c^2}-\frac{\xi^2}{2}    \right]f(\omega_+,k_x)
+  \\
+&=
+\int_{-\frac{\omega}{c+v}}^{\frac{\omega}{c-v}}\frac{\dd k_x}{8\pi\epsilon_0}
+    \mathrm{diag}\left[
+      \xi^2,\,\frac{\omega_+^2}{c^2}-\frac{\xi^2}{2},\,\frac{\omega_+^2}{c^2}-\frac{\xi^2}{2}    \right]f(\omega_+,k_x)
+    \\
+&=
+\frac{1}{v8\pi\epsilon_0}
+\int_{\frac{c\omega}{c+v}}^{\frac{c\omega}{c-v}}\dd \omega_+
+    \mathrm{diag}\left[
+    \xi^2,\,\frac{\omega_+^2}{c^2}-\frac{\xi^2}{2},\,\frac{\omega_+^2}{c^2}-\frac{\xi^2}{2}    \right]f(\omega_+,\frac{\omega_+-\omega}{v})
+      .
+\end{align}
+Here the $f(\omega_+,k_x)$ indicates potential weight functions. In the context of non-contact friction the weight function can take several forms
+\begin{align}
+  f(\omega_+,k_x) &=
+  \begin{cases}
+  1
+  \\
+  k_x
+  \\
+  \Theta(\hbar\beta\omega_+,\hbar\beta\omega) = \frac{1}{1-\exp(-\beta\hbar\omega_+)}-\frac{1}{1-\exp(-\beta\hbar\omega)}
+  \\
+  k_x\Theta(\hbar\beta\omega_+,\hbar\beta\omega)
+  \end{cases}
+\end{align}
+The first to cases can be calculated straight-forward
+\begin{align}
+  \int\frac{\dd^2\vv k}{(2\pi)^2}  \mathrm{Im}\left\{\underline{G}_0(\vv k, z\to z',\omega_+)\right\}k_x 
+  &=
+\frac{\omega^4}{6\pi\epsilon_0} 
+ \frac{ v c }{(c^2-v^2)^3}   
+\mathrm{diag}\left[
+    1,\,
+  \frac{  2 c^2+v^2}{ c^2-v^2}
+  ,\,
+  \frac{ 2 c^2+v^2}{ c^2-v^2}
+\right]
+\\
+&\stackrel{c\gg v}=
+\frac{v/c }{6\pi\epsilon_0} 
+ \frac{ \omega^4 }{c^4}   
+\mathrm{diag}\left[
+    1,\,
+    2
+    ,\,
+     2\right]
+\\
+  \int\frac{\dd^2\vv k}{(2\pi)^2}  \mathrm{Im}\left\{\underline{G}_0(\vv k, z\to z',\omega_+)\right\} 
+  &=
+  \frac{1}{8\pi\epsilon_0}\mathrm{diag}\left[
+  \frac{4 c \omega ^3}{3 \left(c^2-v^2\right)^2}
+    ,\,
+    \frac{4 c \omega ^3 \left(c^2+v^2\right)}{3 \left(c^2-v^2\right)^3}
+  ,\,
+\frac{4 c \omega ^3 \left(c^2+v^2\right)}{3 \left(c^2-v^2\right)^3}  
+\right]
+  \\
+  &\stackrel{c\gg v}=
+  \mathbb{1}
+\frac{\omega^3}{6\pi \epsilon_0 c^3}
+\end{align}
+In a next step we solve the integrals with temperature distribution. For conveniece, we introduce the dimensionless variable $\Omega=\hbar\beta\omega$
+\begin{align}
+  \int\frac{\dd^2\vv k}{(2\pi)^2}  \mathrm{Im}\left\{\underline{G}_0(\vv k, z\to z',\omega_+)\right\} \Theta(\Omega_+,\Omega)
+\end{align}
+\begin{align}
+  &=
+  \frac{1}{v8\pi\epsilon_0(\hbar\beta)^3}
+\int_{\frac{c\Omega}{c+v}}^{\frac{c\Omega}{c-v}}\dd \Omega_+
+   \mathrm{diag}\left[
+   \frac{\Omega_+^2}{c^2}-\frac{(\Omega-\Omega_+)^2}{v^2},\,\frac{\Omega_+^2}{2c^2}+\frac{(\Omega-\Omega_+)^2}{2v^2},\,\frac{\Omega_+^2}{2c^2}+\frac{(\Omega-\Omega_+)^2}{2v^2}\right]\Theta(\Omega_+,\Omega)
+\\
+&\stackrel{v\ll c}\sim
+\frac{\mathrm{diag}[1,2,2]}{240 \pi\epsilon_0 }\frac{v^2}{c^2}
+\frac{\omega^3}{c^3}\frac{\hbar\omega }{ \kB T}\frac{\Omega  \coth \left(\frac{\Omega }{2}\right)-10}{ \sinh^2\left(\frac{\Omega }{2}\right)}
+\stackrel{\Omega\ll 1}\sim -
+\frac{2\mathrm{diag}[1,2,2]}{15 \pi\epsilon_0 }\frac{v^2}{c^2}
+\frac{\omega^3}{c^3}\frac{ \kB T}{\hbar\omega }
+\end{align}
+It is noteworthy that the function $ \frac{\Omega  \coth \left(\frac{\Omega }{2}\right)-10}{ \sinh^2\left(\frac{\Omega }{2}\right)}$ has, if $\Omega>0$, a maximum at $\Omega(\cosh(\Omega)+2)=11\sinh(\Omega)$. Assuming $\Omega \gg 1$ the maximum is roughly at $\Omega\approx 11$.
+\\
+Finally, we solve the integral with the last weighing function $k_x\Theta(\Omega_+,\Omega)$
+\begin{align}
+  \int\frac{\dd^2\vv k}{(2\pi)^2}  \mathrm{Im}\left\{\underline{G}_0(\vv k, z\to z',\omega_+)\right\}\frac{\Omega_+-\Omega}{\hbar\beta v} \Theta(\Omega_+,\Omega)
+\end{align}
+\begin{align}
+  &=
+  \frac{1}{v^2 8\pi\epsilon_0(\hbar\beta)^4}
+\int_{\frac{c\Omega}{c+v}}^{\frac{c\Omega}{c-v}}\dd \Omega_+
+   \mathrm{diag}\left[
+   \frac{\Omega_+^2}{c^2}-\frac{(\Omega-\Omega_+)^2}{v^2},\,\frac{\Omega_+^2}{2c^2}+\frac{(\Omega-\Omega_+)^2}{2v^2},\,\frac{\Omega_+^2}{2c^2}+\frac{(\Omega-\Omega_+)^2}{2v^2}\right](\Omega_+-\Omega)\Theta(\Omega_+,\Omega)
+   \\
+   &\stackrel{v\ll c}\sim
+ -
+ \frac{\mathrm{diag}\left[1,2,2\right]}{120\pi\epsilon_0}\frac{v}{c}\frac{\omega^4}{c^4}
+ \frac{\hbar\omega}{\kB T}\frac{1}{\sinh^2 (\frac{\Omega}{2})}
+ \stackrel{\Omega\ll 1} \sim
+ -
+ \frac{\mathrm{diag}\left[1,2,2\right]}{30\pi\epsilon_0}\frac{v}{c}\frac{\omega^4}{c^4}
+ \frac{\kB T}{\hbar\omega}
+ \end{align}
+\\
+In the following we first assume that the microscopic object has \textbf{no internal bath}. Thus, the polarizability has the form
+\begin{align}
+\underline{\alpha}(\omega)\stackrel{v\ll c}\sim
+\frac{\mathbb{1}\alpha_0\omega_a^2}{\omega_a^2-\omega^2 -\ii\alpha_0\omega_a^2\frac{\omega^3}{6\pi\epsilon_0c^3}}
+= 
+\frac{\mathbb{1}\alpha_0}{1-\frac{\omega^2}{\omega_a^2} -\ii\psi(\omega)}
+\end{align}
+The new function $\psi(\omega)=\omega^3\frac{\alpha_0}{(\hbar\beta)^36\pi\epsilon_0c^3}$ yields two different regimes. If $\omega\ll c\sqrt[3]{\frac{6\pi\epsilon_0}{\alpha_0}}$ we can treat the polarizability as an sharp delta peak. Else, in the case of $\omega\gg c\sqrt[3]{\frac{6\pi\epsilon_0}{\alpha_0}}$ the polarizability is dominated by the damping.
+\todo{\\ Put together \\}In free space for temperatures $k_\mathrm{B}T\gg \hbar\omega_a$ one finds (see \texttt{VacuumGreen.pdf})
+\begin{align}
+F &= -\frac{v}{c} \frac{k_\mathrm{B}T \alpha_0}{6\pi\epsilon_0} \frac{\omega_a^4}{c^4}
+\end{align}
+Furthermore, one can test the individual Green's tensor integrations via the relations given in the \texttt{VacuumGreen.pdf}. With respect to the polarizability one finds
+\begin{align}
+\int_0^{\omega_\mathrm{cut}}\dd\omega\,\underline{\alpha}_\Im(\omega)
+\sim
+\begin{cases}
+\mathbb{1}\frac{\pi}{2}\alpha_0\omega_a
+\quad  & \text{for}\quad \omega_\mathrm{cut}\gg \omega_a
+\\
+\alpha_0^2
+  \frac{\omega_\mathrm{cut}^4}{8\pi\epsilon_0}\mathrm{diag}\left[
+  \frac{ c }{3 \left(c^2-v^2\right)^2}
+    ,\,
+    \frac{ c  \left(c^2+v^2\right)}{3 \left(c^2-v^2\right)^3}
+  ,\,
+\frac{ c  \left(c^2+v^2\right)}{3 \left(c^2-v^2\right)^3}
+\right]
+\stackrel{v\ll c}\approx
+\mathbb{1}\alpha_0^2 \frac{\omega_\mathrm{cut}^4}{24\pi\epsilon_0 c^3}
+\quad  &\text{for}\quad \omega_\mathrm{cut}\ll \omega_a
+\end{cases}
+\end{align}
+For a microscopic object with a internal bath another term has to be added in the $\omega_\mathrm{cut} \ll \omega_a$ limit
+\begin{align}
+\int_0^{\omega_\mathrm{cut}}\dd\omega\,\underline{\alpha}_\Im(\omega)
+\stackrel{\omega_\mathrm{cut}\ll\omega_a}\sim
+\mathbb{1}\alpha_0^2 \frac{\omega_\mathrm{cut}^4}{24\pi\epsilon_0 c^3}
++ \frac{\alpha_0}{\omega_a^2}\mathbb{1}\int\limits_0^{\omega_\mathrm{cut}} \omega\mu_R(\omega)
+\stackrel{\mu_R(\omega)=\gamma}=
+\mathbb{1}\alpha_0^2 \frac{\omega_\mathrm{cut}^4}{24\pi\epsilon_0 c^3}
++ \frac{\alpha_0\gamma\omega_\mathrm{cut}^2}{2\omega_a^2}\mathbb{1}
+\end{align}
+If $\gamma$ is not very small compared to $\omega_a$ then we find
+\begin{align}
+\int_0^{\omega_\mathrm{cut}}\dd\omega\,\underline{\alpha}_\Im(\omega)
+\stackrel{\omega_\mathrm{cut}\gg\omega_a}\sim
+\mathbb{1}\frac{\alpha_0\omega_a^2}{2}
+\left[
+  \frac{\pi}{\sqrt{4 \omega_a^2-\gamma ^2}}-\frac{2 \arctan\left(\frac{\gamma ^2-2 \omega_a^2}{\gamma  \sqrt{4 \omega_a^2-\gamma ^2}}\right)}{\sqrt{4 \omega_a^2-\gamma ^2}}
+\right]
+\stackrel{\gamma\ll\omega_a}\sim\mathbb{1}\frac{\pi}{2}\alpha_0\omega_a
+\end{align}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\subsection{Test Case: Object above a flat surface}
+Here we want to present some test cases for the setup of a microscopic object moving above a flat surface. In general the Green's tensor of such a half-space system is
+\begin{align}
+\underline{G}(\vv k,\omega) &= \underline{G}_0(\vv k, \omega) + \underline{g}(\vv k, \omega)
+\end{align}
+where $\underline{G}_0$ is the free space Green's tensor of Sec.~\ref{sec:vacuum}.
+\section{Test Case: Object in a cylindrical cavity}
+\section{Parameter Values}
+In this section we provide estimated values of physical parameters, as well as a brief investigation into the numerical parameters used for the calculation.
+\subsection{Physical Parameters}
+\begin{table}[H]
+\centering
+\begin{tabular}{c|c|c|c}
+\textbf{Quantity} & \textbf{Lower Value} & \textbf{Upper Value} & \textbf{Comment}
+\\\hline
+$v/c$  & $0$ & $10^{-3}\cdots 10^{-2} c$  & Nonrelativistic
+\\\hline
+$T$ & $0\,\mathrm{K}$ & $T_a = \hbar\omega_a/k_\mathrm{B} \approx 10^4\,\mathrm{K}$ & Must not lead to resonant excitation
+\\\hline
+$z_a$ & $10\,\mathrm{nm}$ & $1\,\mu\mathrm{m}$ & Dependent on experiment (see \cite{oelschlager2019a})
+\\\hline
+$\omega_a$ & $0.1\,\mathrm{eV}$ & $10\uni{eV}$ & Typical atomic/nanoparticle resonances
+\\\hline
+$\alpha_0$ & $1\uni{a.u.}$ & $300\uni{a.u.}$ & Typical atomic values \cite{schwerdtfeger2019}. May differs for other objects
+\\\hline
+$\omega_\mathrm{p}$ & $0.001\uni{eV}$ & $10\uni{eV}$ & we considered doped semi-conductors \cite{pirozhenko2008a} and ``usual'' metals \cite{nozieres1999}
+\\\hline
+$\gamma$ & $1\uni{meV}$ & $600\uni{meV}$  & See comments of $\omega_\mathrm{p}$ and \href{http://www.wave-scattering.com/drudefit.html}{this link}
+\\\hline
+\end{tabular}
+\end{table}
+All values depend on the actual physical situation and should be reinvestigated for the actual calculations. Furthermore, all values are rough estimates and should not be taken too seriously.
+\subsection{Numerical Parameters}
+General numerical parameters of \texttt{QuaCa} are the error bounds of the numerical integrations. As one sees in Eq.~\eqref{eq:numInt1}, three nested integrations have to be performed. To obtain reasonable results the accuracy of the numerical integration must be higher as deeper the nesting, i.e. the lowest integrate has the highest accuracy. To skirt a full quantitative analysis of the magnitude of each integration result, one might stick to relative error bounds.
+\\
+Besides the general accuracy of the integration routines, we might introduce further numerical parameters. One example is a cut-off wavevector in the scattered Green's tensor (see \cite{intravaia2016a}. Here, the Green's tensor contains a term with $\exp{-2z_a\kappa}$, which dampens strongly for $\mathrm{Re}\{\kappa\}> 0$. Thus, one can easily introduce a faithful cut-off value $\kappa_\mathrm{cut}=\delta_\mathrm{cut}/(2z_a)$, where for instance a $\delta_\mathrm{cut}=20$ leads to a damping of $\exp(-20)\approx 2\times 10^{-9}$.
+
+\bibliography{lib}
+\end{document}

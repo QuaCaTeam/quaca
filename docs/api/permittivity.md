@@ -1,6 +1,6 @@
 !> TODO: Write examples. More physics in description of permittivity (local, isotropic, this kind of stuff).
 
-## Permittivity
+# Permittivity {docsify-ignore-all}
 This is an abstract class that defines the permittivity as a function of the frequency, i.e. $\varepsilon(\omega)$.
 A specific model for the permittivity will be a child of this class.
 ```cpp
