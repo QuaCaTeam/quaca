@@ -1,4 +1,4 @@
-!> TODO: Write examples. More physics in description of permittivity (local, isotropic, this kind of stuff).
+!> TODO: Simplifiy Lorentz model to one class (if MemoryKernel is not defined, then $\mu=0$).
 
 # Permittivity {docsify-ignore-all}
 This is an abstract class that defines the permittivity as a function of the frequency, i.e. $\varepsilon(\omega)$.
@@ -95,7 +95,7 @@ See [Permittivity](#Permittivity).
 
 
 
-## PermittivityLorentz
+## PermittivityLorentzBath
 Implements a Lorentz model with an internal bath according to the formula
 $$
 \varepsilon(\omega) = \varepsilon_{\infty} - \frac{\omega_p^2}{\omega_0^2 - \omega^2 - \mathrm{i} \omega \mu(\omega)},
