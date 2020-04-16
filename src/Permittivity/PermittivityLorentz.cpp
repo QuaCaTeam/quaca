@@ -6,10 +6,10 @@ namespace pt = boost::property_tree;
 #include "../MemoryKernel/MemoryKernelFactory.h"
 #include "PermittivityLorentz.h"
 
-PermittivityLorentz::PermittivityLorentz(double eps_inf, double alpha_zero,
+PermittivityLorentz::PermittivityLorentz(double eps_inf, double omega_p,
                                          double omega_0,
                                          MemoryKernel *memory_kernel)
-    : eps_inf(eps_inf), alpha_zero(alpha_zero), omega_0(omega_0),
+    : eps_inf(eps_inf), omega_p(omega_p), omega_0(omega_0),
       memory_kernel(memory_kernel){};
 
 // constructor for drude model from .json file
@@ -27,7 +27,7 @@ PermittivityLorentz::PermittivityLorentz(std::string input_file) {
 
   // read parameters
   this->eps_inf = root.get<double>("Permittivity.eps_inf");
-  this->alpha_zero = root.get<double>("Permittivity.alpha_zero");
+  this->omega_p = root.get<double>("Permittivity.omega_p");
   this->omega_0 = root.get<double>("Permittivity.omega_0");
 
   this->memory_kernel =
@@ -41,7 +41,7 @@ std::complex<double> PermittivityLorentz::epsilon(double omega) {
   std::complex<double> I(0.0, 1.0);
 
   // calculate the result
-  result = eps_inf - alpha_zero * omega_0 * omega_0 /
+  result = eps_inf - omega_p * omega_p /
                          (omega_0 * omega_0 - omega * omega -
                           I * omega * memory_kernel->mu(omega));
 
@@ -55,7 +55,7 @@ std::complex<double> PermittivityLorentz::epsilon_omega(double omega) {
   std::complex<double> I(0.0, 1.0);
 
   // calculate the result
-  result = eps_inf * omega - alpha_zero * omega_0 * omega_0 * omega /
+  result = eps_inf * omega - omega_p * omega_p * omega /
                                  (omega_0 * omega_0 - omega * omega -
                                   I * omega * memory_kernel->mu(omega));
 

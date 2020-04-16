@@ -53,3 +53,110 @@ Protocols
 - marty keeps working on the reflection coefficients
 - quantum friction with plate setup works and will soon be pushed into the master
 - optimization and code profiling should be made a standing issue
+
+### Meeting 4: Christoph, Simon and Marty (09.04.2020)
+ - Stand der Dinge + Kapazität
+    * Simon uebergibt lead development an bettina
+    * kapazitaet ist da
+
+ - Was wollen wir noch umsetzen?
+    * Umstrukturierung der Test Cases (kein random testing, lieber konkrete parameter)
+    * Mehr Groessen bestimmen (Power spectrum, Drehmoment, ...)
+    * Dokumentation polieren
+
+
+  - Wo veroeffentlichen wir?
+    * Marty fragt Kurt bzgl JOSS
+
+
+  - Was ist fuer eine Veroeffentlichung zu tun?
+   * Code auf guten Stand bringen
+   * Porten auf GitHub
+
+
+  - Anderes Paper
+   * Konkrete Aufgaben kommunizieren
+   * Marty und Daniel kümmern sich um Inhalte
+   * Christoph und Simon helfen beim debugging von QuaCa
+
+
+  - Vorgehensweise
+    * Wöchentliche "Treffen" (Donnerstag 10 Uhr)
+    * _Marty_: Dokumentation, Kommunikation mit Kurt
+    * _Simon_: Refactoring von Test cases
+    * _Christoph_: CMake und Memory Check, Profiling, Coverage
+
+ - Timeline
+   * Ende April: Code auf GitLab fertig
+   * Ende Mai: fertig
+   * 
+   
+
+
+
+Quaca Meeting 16.04.2020
+
+1) Current state 
+Christoph
+
+    - from old to new school C++ (introduced shared_ptr in order to stop memory leaks)
+
+    - openmp -> mpi
+
+
+Marty (Documentation)
+
+    - we now have a cover page
+
+    - sections are clickable (link to first subsection)
+
+    - sections and subsections were renamed
+
+    - overall clean up
+
+    - for permittivity and polarizability: classes with bath and nobath shall be unified by overloading the constructor
+
+    - implementation of a unit conversion script
+
+    - list of test cases were added to the documentation
+
+
+Simon (Test cases)
+
+    - for each relevant variable one test in each relevant magnitude
+
+
+2) Paper & Choice of Journal
+
+    - Marty prepares a mail for Kurt
+
+
+3) Integration
+
+    - Christoph is looking into another solution for the numerical integration (using templates)
+
+
+4) App vs. Library
+
+    - Options class will be moved to the executable
+
+
+5) weitere executables?
+
+    - would be nice
+
+    - Marty: investigate potential executables (Casimir Polder, Angular Momentum, Free Energy ?)
+
+
+-) TODO: 
+Marty: - more Documentation
+       - find executables
+       - mail to Kurt
+       - log lin ?
+Christoph: - print_info() function
+
+     - MPI
+
+           - (delete options class and implement logger)
+Simon: Test cases: rewrite GENERATE and pointer to smart pointer
+        Example input files, Tutorials, print_info() function with comments in .csv file, Logger

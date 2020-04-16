@@ -1,6 +1,6 @@
 !> TODO: Finish writing.
 
-# Automate your calculation
+# Automate your calculation {docsify-ignore-all}
 As you saw in the last tutorial it is quite tedious to define all parameters in the main function itself.
 It is also impractical, because if you want to change just one parameter, you have to recompile the whole project.
 That's why in this tutorial we teach you how to automate these calculation, which means we show you how to use the `.json` files you have seen in the first tutorial.
