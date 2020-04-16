@@ -2,11 +2,11 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="QuaCa" targetName="quaca" />
-      <config projectName="QuaCa" targetName="Tutorial" />
       <config projectName="QuaCa" targetName="Friction" />
-      <config projectName="QuaCa" targetName="test_quaca_unit" />
       <config projectName="QuaCa" targetName="test_quaca_integrated" />
+      <config projectName="QuaCa" targetName="Tutorial" />
+      <config projectName="QuaCa" targetName="quaca" />
+      <config projectName="QuaCa" targetName="test_quaca_unit" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -16,63 +16,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddb7b759-02db-4107-ba31-9c5642378a44" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Friction/friction.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/app/Friction/friction.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ProgressBar.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ProgressBar.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Calculations/Integrations.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Calculations/Integrations.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Friction/Friction.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Friction/Friction.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Friction/Friction.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Friction/Friction.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensor.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorFactory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorFactory.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorFactory.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorFactory.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlate.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlate.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlate.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlate.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateVacuum.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateVacuum.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateVacuum.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateVacuum.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorVacuum.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorVacuum.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorVacuum.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorVacuum.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Looper/Looper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Looper/Looper.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Looper/Looper.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Looper/Looper.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Looper/LooperFactory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Looper/LooperFactory.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Looper/LooperFactory.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Looper/LooperFactory.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Looper/LooperV.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Looper/LooperV.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Looper/LooperV.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Looper/LooperV.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Looper/LooperZa.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Looper/LooperZa.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Looper/LooperZa.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Looper/LooperZa.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MemoryKernel/MemoryKernelFactory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/MemoryKernel/MemoryKernelFactory.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MemoryKernel/MemoryKernelFactory.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/MemoryKernel/MemoryKernelFactory.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MemoryKernel/OhmicMemoryKernel.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/MemoryKernel/OhmicMemoryKernel.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MemoryKernel/OhmicMemoryKernel.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/MemoryKernel/OhmicMemoryKernel.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Options/Options.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Options/Options.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Permittivity/PermittivityDrude.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/PermittivityDrude.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Permittivity/PermittivityDrude.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/PermittivityDrude.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Permittivity/PermittivityFactory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/PermittivityFactory.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Permittivity/PermittivityFactory.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/PermittivityFactory.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Permittivity/PermittivityLorentz.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/PermittivityLorentz.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Permittivity/PermittivityLorentz.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/PermittivityLorentz.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Polarizability/Polarizability.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/Polarizability.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Polarizability/Polarizability.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/Polarizability.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityBath.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/PolarizabilityBath.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityBath.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/PolarizabilityBath.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityFactory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/PolarizabilityFactory.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityFactory.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/PolarizabilityFactory.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityNoBath.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/PolarizabilityNoBath.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityNoBath.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/PolarizabilityNoBath.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrum.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrum.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrum.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrum.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumFactory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumFactory.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumFactory.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumFactory.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumHarmOsc.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumHarmOsc.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumHarmOsc.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumHarmOsc.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsFactory.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsFactory.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocBulk.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocBulk.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocSlab.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocSlab.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +60,7 @@
       <recent name="$PROJECT_DIR$/test/Quick_Test" />
     </key>
   </component>
-  <component name="RunManager" selected="CMake Application.Friction">
+  <component name="RunManager" selected="CMake Application.test_quaca_unit">
     <configuration name="Make project" type="CLionExternalRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="CLION.EXTERNAL.BUILD" enabled="true" />
@@ -158,6 +103,7 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Custom Build Application.Make project" />
       <item itemvalue="Catch.Unit tests" />
       <item itemvalue="CMake Application.Cmake" />
       <item itemvalue="CMake Application.Friction" />
@@ -165,7 +111,6 @@
       <item itemvalue="CMake Application.quaca" />
       <item itemvalue="CMake Application.test_quaca_integrated" />
       <item itemvalue="CMake Application.test_quaca_unit" />
-      <item itemvalue="Custom Build Application.Make project" />
     </list>
   </component>
   <component name="SvnConfiguration">
@@ -186,49 +131,67 @@
       <workItem from="1583770139985" duration="1634000" />
       <workItem from="1583834691463" duration="12153000" />
       <workItem from="1583920183145" duration="14654000" />
-      <workItem from="1586772361294" duration="6486000" />
+      <workItem from="1586772361294" duration="6743000" />
+      <workItem from="1586870145977" duration="104000" />
+      <workItem from="1586956868330" duration="1492000" />
+      <workItem from="1586963393537" duration="10000" />
     </task>
+    <task id="LOCAL-00001" summary="Made quaca compliant with C++14 standard. Introduced smart pointers.">
+      <created>1586781818860</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1586781818860</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="Made quaca compliant with C++14 standard. Introduced smart pointers." />
+    <option name="LAST_COMMIT_MESSAGE" value="Made quaca compliant with C++14 standard. Introduced smart pointers." />
   </component>
   <component name="WindowStateProjectService">
     <state x="506" y="146" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583749372118">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
     <state x="506" y="146" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583749372118" />
-    <state x="1920" y="596" width="1920" height="604" key="CommitChangelistDialog2" timestamp="1583763089709">
-      <screen x="1920" y="0" width="1920" height="1200" />
+    <state x="1920" y="91" width="1920" height="604" key="CommitChangelistDialog2" timestamp="1586781818780">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state x="1920" y="91" key="CommitChangelistDialog2/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1586781818780" />
     <state x="1920" y="596" width="1920" height="604" key="CommitChangelistDialog2/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583763089709" />
     <state x="532" y="159" key="CommitChangelistDialog2/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583762864519" />
     <state x="830" y="246" key="FileChooserDialogImpl" timestamp="1583749362496">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
     <state x="830" y="246" key="FileChooserDialogImpl/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583749362496" />
-    <state width="1870" height="290" key="GridCell.Tab.0.bottom" timestamp="1586781729424">
+    <state width="1870" height="290" key="GridCell.Tab.0.bottom" timestamp="1586782039118">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1870" height="290" key="GridCell.Tab.0.bottom/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1586781729424" />
+    <state width="1870" height="290" key="GridCell.Tab.0.bottom/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1586782039118" />
     <state width="1920" height="1143" key="GridCell.Tab.0.bottom/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583768470973" />
     <state width="1920" height="1125" key="GridCell.Tab.0.bottom/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583931559041" />
-    <state width="1870" height="290" key="GridCell.Tab.0.center" timestamp="1586781729424">
+    <state width="1870" height="290" key="GridCell.Tab.0.center" timestamp="1586782039118">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1870" height="290" key="GridCell.Tab.0.center/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1586781729424" />
+    <state width="1870" height="290" key="GridCell.Tab.0.center/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1586782039118" />
     <state width="1920" height="1143" key="GridCell.Tab.0.center/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583768470973" />
     <state width="1920" height="1125" key="GridCell.Tab.0.center/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583931559041" />
-    <state width="1870" height="290" key="GridCell.Tab.0.left" timestamp="1586781729424">
+    <state width="1870" height="290" key="GridCell.Tab.0.left" timestamp="1586782039118">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1870" height="290" key="GridCell.Tab.0.left/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1586781729424" />
+    <state width="1870" height="290" key="GridCell.Tab.0.left/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1586782039118" />
     <state width="1920" height="1143" key="GridCell.Tab.0.left/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583768470973" />
     <state width="1920" height="1125" key="GridCell.Tab.0.left/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583931559040" />
-    <state width="1870" height="290" key="GridCell.Tab.0.right" timestamp="1586781729424">
+    <state width="1870" height="290" key="GridCell.Tab.0.right" timestamp="1586782039118">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1870" height="290" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1586781729424" />
+    <state width="1870" height="290" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1586782039118" />
     <state width="1920" height="1143" key="GridCell.Tab.0.right/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583768470973" />
     <state width="1920" height="1125" key="GridCell.Tab.0.right/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583931559041" />
     <state x="536" y="117" width="1022" height="733" key="SettingsEditor" timestamp="1583771274484">
@@ -236,9 +199,21 @@
     </state>
     <state x="536" y="117" width="1022" height="733" key="SettingsEditor/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583771274484" />
     <state x="536" y="123" key="SettingsEditor/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583758972006" />
+    <state x="2473" y="266" width="804" height="518" key="Vcs.Push.Dialog.v2" timestamp="1586781830190">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2473" y="266" width="804" height="518" key="Vcs.Push.Dialog.v2/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1586781830190" />
+    <state x="2059" y="357" key="com.intellij.ide.util.TipDialog" timestamp="1586963395751">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2059" y="357" key="com.intellij.ide.util.TipDialog/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1586963395751" />
     <state x="934" y="216" key="com.intellij.tools.ToolSelectDialog.dimensionServiceKey" timestamp="1583749266563">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
     <state x="934" y="216" key="com.intellij.tools.ToolSelectDialog.dimensionServiceKey/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583749266563" />
+    <state x="2536" y="144" width="688" height="807" key="find.popup" timestamp="1586956955437">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2536" y="144" width="688" height="807" key="find.popup/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1586956955437" />
   </component>
 </project>

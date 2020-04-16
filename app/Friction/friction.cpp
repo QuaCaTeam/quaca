@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
     // the maximal value
     opts.set_num_threads(omp_get_max_threads());
   }
-  // Create a paralle region given threads given by the --threads flag
+  // Create a parallel region given threads given by the --threads flag
   // we have to create the parallel region already here to ensure,
   // that any thread creates their own instance of quantum_friction
   std::cout << "Starting parallel region with " << opts.get_num_threads()
