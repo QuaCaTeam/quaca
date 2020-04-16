@@ -2,11 +2,11 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="QuaCa" targetName="Friction" />
-      <config projectName="QuaCa" targetName="test_quaca_integrated" />
-      <config projectName="QuaCa" targetName="Tutorial" />
       <config projectName="QuaCa" targetName="quaca" />
+      <config projectName="QuaCa" targetName="Tutorial" />
+      <config projectName="QuaCa" targetName="Friction" />
       <config projectName="QuaCa" targetName="test_quaca_unit" />
+      <config projectName="QuaCa" targetName="test_quaca_integrated" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -17,12 +17,48 @@
   <component name="ChangeListManager">
     <list default="true" id="ddb7b759-02db-4107-ba31-9c5642378a44" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Friction/friction.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/app/Friction/friction.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.Tutorial/tutorial.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/app/.Tutorial/tutorial.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateVacuum.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateVacuum.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateVacuum.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateVacuum.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumHarmOsc.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumHarmOsc.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/IntegratedTests/Friction/test_Friction_integrated.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/IntegratedTests/Friction/test_Friction_integrated.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/IntegratedTests/Polarizability/test_PolarizabilityBath_integrated.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/IntegratedTests/Polarizability/test_PolarizabilityBath_integrated.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/IntegratedTests/Polarizability/test_PolarizabilityNoBath_integrated.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/IntegratedTests/Polarizability/test_PolarizabilityNoBath_integrated.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/Calculations/test_Integrations_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Calculations/test_Integrations_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/Friction/test_Friction_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Friction/test_Friction_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/GreensTensor/test_GreensTensorPlateVacuum_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/GreensTensor/test_GreensTensorPlateVacuum_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/GreensTensor/test_GreensTensorPlate_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/GreensTensor/test_GreensTensorPlate_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/GreensTensor/test_GreensTensorVacuum_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/GreensTensor/test_GreensTensorVacuum_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/Looper/test_LooperV_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Looper/test_LooperV_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/Looper/test_LooperZa_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Looper/test_LooperZa_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/MemoryKernel/test_OhmicMemoryKernel_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/MemoryKernel/test_OhmicMemoryKernel_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/Options/test_Options_unit.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/Permittivity/test_PermittivityDrude_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Permittivity/test_PermittivityDrude_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/Permittivity/test_PermittivityLorentz_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Permittivity/test_PermittivityLorentz_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/Polarizability/test_PolarizabilityBath_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Polarizability/test_PolarizabilityBath_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/Polarizability/test_PolarizabilityNoBath_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Polarizability/test_PolarizabilityNoBath_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/PowerSpectrum/test_PowerSpectrumHarmOsc.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/PowerSpectrum/test_PowerSpectrumHarmOsc.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab_unit.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FavoritesManager">
@@ -103,7 +139,6 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Custom Build Application.Make project" />
       <item itemvalue="Catch.Unit tests" />
       <item itemvalue="CMake Application.Cmake" />
       <item itemvalue="CMake Application.Friction" />
@@ -111,6 +146,7 @@
       <item itemvalue="CMake Application.quaca" />
       <item itemvalue="CMake Application.test_quaca_integrated" />
       <item itemvalue="CMake Application.test_quaca_unit" />
+      <item itemvalue="Custom Build Application.Make project" />
     </list>
   </component>
   <component name="SvnConfiguration">
@@ -135,6 +171,7 @@
       <workItem from="1586870145977" duration="104000" />
       <workItem from="1586956868330" duration="1492000" />
       <workItem from="1586963393537" duration="10000" />
+      <workItem from="1587028005432" duration="5896000" />
     </task>
     <task id="LOCAL-00001" summary="Made quaca compliant with C++14 standard. Introduced smart pointers.">
       <created>1586781818860</created>
@@ -170,28 +207,28 @@
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
     <state x="830" y="246" key="FileChooserDialogImpl/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583749362496" />
-    <state width="1870" height="290" key="GridCell.Tab.0.bottom" timestamp="1586782039118">
+    <state width="1870" height="290" key="GridCell.Tab.0.bottom" timestamp="1587037482287">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1870" height="290" key="GridCell.Tab.0.bottom/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1586782039118" />
+    <state width="1870" height="290" key="GridCell.Tab.0.bottom/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587037482287" />
     <state width="1920" height="1143" key="GridCell.Tab.0.bottom/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583768470973" />
     <state width="1920" height="1125" key="GridCell.Tab.0.bottom/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583931559041" />
-    <state width="1870" height="290" key="GridCell.Tab.0.center" timestamp="1586782039118">
+    <state width="1870" height="290" key="GridCell.Tab.0.center" timestamp="1587037482287">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1870" height="290" key="GridCell.Tab.0.center/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1586782039118" />
+    <state width="1870" height="290" key="GridCell.Tab.0.center/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587037482287" />
     <state width="1920" height="1143" key="GridCell.Tab.0.center/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583768470973" />
     <state width="1920" height="1125" key="GridCell.Tab.0.center/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583931559041" />
-    <state width="1870" height="290" key="GridCell.Tab.0.left" timestamp="1586782039118">
+    <state width="1870" height="290" key="GridCell.Tab.0.left" timestamp="1587037482287">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1870" height="290" key="GridCell.Tab.0.left/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1586782039118" />
+    <state width="1870" height="290" key="GridCell.Tab.0.left/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587037482287" />
     <state width="1920" height="1143" key="GridCell.Tab.0.left/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583768470973" />
     <state width="1920" height="1125" key="GridCell.Tab.0.left/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583931559040" />
-    <state width="1870" height="290" key="GridCell.Tab.0.right" timestamp="1586782039118">
+    <state width="1870" height="290" key="GridCell.Tab.0.right" timestamp="1587037482287">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1870" height="290" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1586782039118" />
+    <state width="1870" height="290" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587037482287" />
     <state width="1920" height="1143" key="GridCell.Tab.0.right/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583768470973" />
     <state width="1920" height="1125" key="GridCell.Tab.0.right/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583931559041" />
     <state x="536" y="117" width="1022" height="733" key="SettingsEditor" timestamp="1583771274484">

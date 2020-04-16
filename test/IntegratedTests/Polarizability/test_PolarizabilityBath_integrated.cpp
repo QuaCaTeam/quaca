@@ -1,4 +1,3 @@
-#include <armadillo>
 #include <complex>
 
 #include "Quaca.h"
@@ -11,18 +10,19 @@ TEST_CASE("Integrated PolarizabilityBath fulfills the omega_cut much smaller "
   auto v = GENERATE(take(3, random(0.0, 1.0)));
   auto beta = GENERATE(take(3, random(1e-4, 1e4)));
   double relerr_k = 1e-9;
-  GreensTensorVacuum greens(v, beta, relerr_k);
+  auto greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr_k);
 
   // define polarizability
   auto omega_a = GENERATE(take(3, random(1e-1, 1e1)));
   auto alpha_zero = GENERATE(take(3, random(0.0, 1e-8)));
   auto gamma = GENERATE(take(3, random(0.0, 1e2)));
-  OhmicMemoryKernel mu(gamma);
-  PolarizabilityBath pol(omega_a, alpha_zero, &mu, &greens);
+  auto mu = std::make_shared<OhmicMemoryKernel>(gamma);
+  auto pol =
+      std::make_shared<PolarizabilityBath>(omega_a, alpha_zero, mu, greens);
 
   Options_Polarizability opts;
   opts.fancy_complex = IM;
-  opts.class_pt = &pol;
+  opts.class_pt = pol;
 
   double omega_min = 0.0;
   double fact = 1e-3;
@@ -38,7 +38,7 @@ TEST_CASE("Integrated PolarizabilityBath fulfills the omega_cut much smaller "
     for (int j = 0; j < 3; j++) {
       opts.indices(0) = i;
       opts.indices(1) = j;
-      result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
+      result = pol->integrate_omega(opts, omega_min, omega_max, relerr, abserr);
 
       /*
        * error tolerance includes absolute error from integration, which is
@@ -59,13 +59,13 @@ TEST_CASE("Integrated PolarizabilityBath fulfills the omega_cut much smaller "
                       (1.0 + v * v) / (3 * pow((1.0 - v * v), 3)) +
                   alpha_zero * gamma * fact * fact / (2.0);
           REQUIRE(Approx(result).margin(toterr) == asymp);
-        };
+        }
       } else {
         REQUIRE(result == 0); // off-diagonals are zero
-      };
-    };
-  };
-};
+      }
+    }
+  }
+}
 
 TEST_CASE("Integrated PolarizabilityBath fulfills the omega_cut much larger "
           "than omega_a asymptote",
@@ -74,20 +74,21 @@ TEST_CASE("Integrated PolarizabilityBath fulfills the omega_cut much larger "
   double v = 1e-1;
   double beta = 1e3;
   double relerr_k = 1E-12;
-  GreensTensorVacuum greens(v, beta, relerr_k);
+  auto greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr_k);
 
   // define polarizability
   double omega_a = 4.0;
   double alpha_zero = 1e-4;
   double gamma = 1.0;
-  OhmicMemoryKernel mu(gamma);
-  PolarizabilityBath pol(omega_a, alpha_zero, &mu, &greens);
+  auto mu = std::make_shared<OhmicMemoryKernel>(gamma);
+  auto pol =
+      std::make_shared<PolarizabilityBath>(omega_a, alpha_zero, mu, greens);
 
   Options_Polarizability opts;
   opts.fancy_complex = IM;
   opts.indices(0) = 0;
   opts.indices(1) = 0;
-  opts.class_pt = &pol;
+  opts.class_pt = pol;
 
   double omega_min = 0.0;
   double omega_max = omega_a * 1e4;
@@ -108,11 +109,11 @@ TEST_CASE("Integrated PolarizabilityBath fulfills the omega_cut much larger "
       opts.indices(0) = i;
       opts.indices(1) = j;
       result =
-          pol.integrate_omega(opts, omega_min, omega_a - 1e-3, relerr, abserr);
-      result += pol.integrate_omega(opts, omega_a - 1e-3, omega_a + 1e-3,
+          pol->integrate_omega(opts, omega_min, omega_a - 1e-3, relerr, abserr);
+      result += pol->integrate_omega(opts, omega_a - 1e-3, omega_a + 1e-3,
                                     relerr, abserr);
       result +=
-          pol.integrate_omega(opts, omega_a + 1e-3, omega_max, relerr, abserr);
+          pol->integrate_omega(opts, omega_a + 1e-3, omega_max, relerr, abserr);
 
       /*
        * error tolerance includes absolute error from integration, which is
@@ -125,7 +126,7 @@ TEST_CASE("Integrated PolarizabilityBath fulfills the omega_cut much larger "
         REQUIRE(Approx(result).margin(toterr) == asymp);
       } else {
         REQUIRE(result == 0); // off-diagonals are zero
-      };
-    };
-  };
-};
+      }
+    }
+  }
+}

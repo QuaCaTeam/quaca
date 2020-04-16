@@ -13,7 +13,7 @@ private:
 
 public:
   // constructors
-  GreensTensorPlateVacuum(double v, double za, double beta,
+  GreensTensorPlateVacuum(double v, double beta, double za,
                           std::shared_ptr<ReflectionCoefficients> reflection_coefficients,
                           double delta_cut, vec::fixed<2> rel_err);
   GreensTensorPlateVacuum(const std::string& input_file);

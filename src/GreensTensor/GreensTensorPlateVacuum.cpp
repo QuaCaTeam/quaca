@@ -9,10 +9,10 @@ namespace pt = boost::property_tree;
 #include "GreensTensorPlateVacuum.h"
 
 GreensTensorPlateVacuum::GreensTensorPlateVacuum(
-    double v, double za, double beta,
+    double v, double beta, double za,
     std::shared_ptr<ReflectionCoefficients> reflection_coefficients,
     double delta_cut, vec::fixed<2> rel_err)
-    : GreensTensorPlate(v, za, beta, std::move(reflection_coefficients),
+    : GreensTensorPlate(v, beta, za, std::move(reflection_coefficients),
                         delta_cut, rel_err) {
   this->vacuum_greens_tensor =
       std::make_shared<GreensTensorVacuum>(v, beta, rel_err(0));

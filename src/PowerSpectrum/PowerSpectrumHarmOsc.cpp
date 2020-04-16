@@ -28,7 +28,7 @@ PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(const std::string& input_file)
   // whether the polarizablity has an interal bath
   std::string polarizability_type =
       root.get<std::string>("Polarizability.type");
-  has_bath = polarizability_type == "bath";
+  has_bath = (polarizability_type == "bath");
 
 
   // Ensure that correct type has been chosen
@@ -42,9 +42,9 @@ PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(
     : PowerSpectrum(std::move(greens_tensor), std::move(polarizability)) {
 
   // read the type of the polarizability and set the bool to indicate,
-  // whether the polarizablity has an interal bath
-  auto pt = std::static_pointer_cast<PolarizabilityBath>(this->polarizability);
-  has_bath = !(pt == nullptr);
+  // whether the polarizability has an internal bath
+  auto pt = std::dynamic_pointer_cast<PolarizabilityBath>(this->polarizability);
+  has_bath = (pt != nullptr);
 }
 
 // Compute the power spectrum for a given frequency \omega

@@ -16,7 +16,7 @@ TEST_CASE("Vacuum Green's tensor constructors work as expected",
     REQUIRE(Greens.get_v() == v);
     REQUIRE(Greens.get_beta() == beta);
     REQUIRE(Greens.get_relerr() == relerr);
-  };
+  }
 
   SECTION("json file constructor") {
     double v = 0.1;
@@ -28,19 +28,15 @@ TEST_CASE("Vacuum Green's tensor constructors work as expected",
     REQUIRE(Approx(Greens.get_v()).epsilon(1E-6) == v);
     REQUIRE(Approx(Greens.get_beta()).epsilon(1E-6) == beta);
     REQUIRE(Greens.get_relerr() == relerr);
-  };
-};
+  }
+}
 
 TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
   // Generate a Green's tensor with random attributes v and beta
   auto v = GENERATE(take(3, random(1e-10, 1.)));
   auto beta = GENERATE(take(3, random(1., 8e1)));
   double relerr = 1E-9;
-  GreensTensorVacuum Greens(v, beta, relerr);
-
-  // Create the matries storing the Green's tensors
-  cx_mat::fixed<3, 3> Greens_lhs(fill::zeros);
-  cx_mat::fixed<3, 3> Greens_rhs(fill::zeros);
+  auto Greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr);
 
   // Create the variables for the num_result, taking care, that
   //\omega^2 - k^2 >= 0 to stay in the non-trivial regime
@@ -60,66 +56,66 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
 
   // Create a struct with the integration options
   struct Options_GreensTensor opts;
-  opts.class_pt = &Greens;
+  opts.class_pt = Greens;
   opts.omega = omega;
 
   SECTION("Option: IM") {
     opts.fancy_complex = IM;
     opts.indices = {0, 0};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens->integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_x * factor);
     opts.indices = {1, 1};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens->integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
     opts.indices = {2, 2};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens->integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
-  };
+  }
 
   SECTION("Option: IM, KV") {
     opts.fancy_complex = IM;
     opts.weight_function = KV;
     factor = k_v;
     opts.indices = {0, 0};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens->integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_x * factor);
     opts.indices = {1, 1};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens->integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
     opts.indices = {2, 2};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens->integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
-  };
+  }
 
   SECTION("Option: IM, TEMP") {
     opts.fancy_complex = IM;
     opts.weight_function = TEMP;
     factor = 1. / (1. - exp(-beta * omega_kv));
     opts.indices = {0, 0};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens->integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_x * factor);
     opts.indices = {1, 1};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens->integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
     opts.indices = {2, 2};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens->integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
-  };
+  }
 
   SECTION("Option: IM, KV_TEMP") {
     opts.fancy_complex = IM;
     opts.weight_function = KV_TEMP;
     factor = k_v / (1. - exp(-beta * omega_kv));
     opts.indices = {0, 0};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens->integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_x * factor);
     opts.indices = {1, 1};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens->integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
     opts.indices = {2, 2};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens->integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
-  };
+  }
 
   SECTION("Option: IM, NON_LTE") {
     opts.fancy_complex = IM;
@@ -127,16 +123,16 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
     factor =
         1. / (1. - exp(-beta * (omega_kv))) - 1. / (1. - exp(-beta * omega));
     opts.indices = {0, 0};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens->integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_x * factor);
     opts.indices = {1, 1};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens->integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
     opts.indices = {2, 2};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
+    REQUIRE(Approx(Greens->integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
-  };
-};
+  }
+}
 
 /*!
  * Some basic relations any Green's tensor should fulfill which can
@@ -148,11 +144,11 @@ TEST_CASE("Crossing relation in frequency domain see eq. [1]",
   auto v = GENERATE(take(1, random(0., 1.)));
   auto beta = GENERATE(take(1, random(1e-5, 1e5)));
   double relerr = 1E-9;
-  GreensTensorVacuum Greens(v, beta, relerr);
+  auto Greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr);
   // Create a struct with the integration options
   struct Options_GreensTensor opts;
   opts.fancy_complex = IM;
-  opts.class_pt = &Greens;
+  opts.class_pt = Greens;
 
   // Create the matries storing the Green's tensors
   cx_mat::fixed<3, 3> Greens_lhs(fill::zeros);
@@ -170,26 +166,26 @@ TEST_CASE("Crossing relation in frequency domain see eq. [1]",
   opts.omega = -omega;
   opts.kvec(0) = -k_x;
   opts.kvec(1) = -k_y;
-  Greens.calculate_tensor(Greens_lhs, opts);
+  Greens->calculate_tensor(Greens_lhs, opts);
 
   opts.omega = omega;
   opts.kvec(0) = k_x;
   opts.kvec(1) = k_y;
-  Greens.calculate_tensor(Greens_rhs, opts);
+  Greens->calculate_tensor(Greens_rhs, opts);
 
   REQUIRE(approx_equal(Greens_lhs, trans(conj(Greens_rhs)), "reldiff", 10E-5));
-};
+}
 
 TEST_CASE("Reciprocity, see eq. [6]", "[GreensTensorVacuum]") {
   // Generate a Green's tensor with random attributes v and beta
   auto v = GENERATE(take(1, random(0., 1.)));
   auto beta = GENERATE(take(1, random(1e-5, 1e5)));
   double relerr = 1E-9;
-  GreensTensorVacuum Greens(v, beta, relerr);
+  auto Greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr);
   // Create a struct with the integration options
   struct Options_GreensTensor opts;
   opts.fancy_complex = IM;
-  opts.class_pt = &Greens;
+  opts.class_pt = Greens;
 
   // Create the matries storing the Green's tensors
   cx_mat::fixed<3, 3> Greens_lhs(fill::zeros);
@@ -206,15 +202,15 @@ TEST_CASE("Reciprocity, see eq. [6]", "[GreensTensorVacuum]") {
   opts.omega = omega;
   opts.kvec(0) = -k_x;
   opts.kvec(1) = -k_y;
-  Greens.calculate_tensor(Greens_lhs, opts);
+  Greens->calculate_tensor(Greens_lhs, opts);
 
   opts.omega = omega;
   opts.kvec(0) = k_x;
   opts.kvec(1) = k_y;
-  Greens.calculate_tensor(Greens_rhs, opts);
+  Greens->calculate_tensor(Greens_rhs, opts);
 
   REQUIRE(approx_equal(Greens_lhs, trans(Greens_rhs), "reldiff", 10E-5));
-};
+}
 
 TEST_CASE("Reality, see eq. [7]", "[GreensTensorVacuum]") {
   // Generate a Green's tensor with random attributes v and beta
@@ -222,25 +218,25 @@ TEST_CASE("Reality, see eq. [7]", "[GreensTensorVacuum]") {
   auto beta = GENERATE(take(1, random(1e-5, 1e5)));
   auto omega = GENERATE(take(5, random(-1e3, 1e3)));
   double relerr = 1E-9;
-  GreensTensorVacuum Greens(v, beta, relerr);
+  auto Greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr);
 
   // Create a struct with the integration options
   Options_GreensTensor opts;
   opts.fancy_complex = IM;
-  opts.class_pt = &Greens;
+  opts.class_pt = Greens;
 
   // Create the matries storing the Green's tensors
   cx_mat::fixed<3, 3> Greens_lhs(fill::zeros);
   cx_mat::fixed<3, 3> Greens_rhs(fill::zeros);
 
   opts.omega = omega;
-  Greens.integrate_k(Greens_lhs, opts);
+  Greens->integrate_k(Greens_lhs, opts);
 
   opts.omega = -omega;
-  Greens.integrate_k(Greens_rhs, opts);
+  Greens->integrate_k(Greens_rhs, opts);
 
   REQUIRE(approx_equal(Greens_lhs, -Greens_rhs, "reldiff", 10E-5));
-};
+}
 
 TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
 
@@ -250,11 +246,11 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     auto beta = GENERATE(take(1, random(1e-5, 1e5)));
     auto omega = GENERATE(take(1, random(-1e2, 1e2)));
     double relerr = 1E-9;
-    GreensTensorVacuum Greens(v, beta, relerr);
+    auto Greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr);
 
     // Create a struct with the integration options
     Options_GreensTensor opts;
-    opts.class_pt = &Greens;
+    opts.class_pt = Greens;
     opts.omega = omega;
 
     // Matrix storing the numerical integration
@@ -266,7 +262,7 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     double ana_pref = 0;
     // Integration of the vacuum Green's tensor
     opts.fancy_complex = IM;
-    Greens.integrate_k(num_result, opts);
+    Greens->integrate_k(num_result, opts);
 
     // Computing the analytical result and storing it in analytic
     ana_pref = 2. / 3. * pow(omega, 3) / pow(1 - pow(v, 2), 2);
@@ -275,7 +271,7 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     ana_result(2, 2) = ana_pref * (1 + pow(v, 2)) / (1 - pow(v, 2));
 
     REQUIRE(approx_equal(num_result, ana_result, "reldiff", 10E-5));
-  };
+  }
 
   SECTION("Option: IM, KV") {
 
@@ -284,11 +280,11 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     auto beta = GENERATE(take(1, random(1e-5, 1e5)));
     auto omega = GENERATE(take(1, random(-1e2, 1e2)));
     double relerr = 1E-9;
-    GreensTensorVacuum Greens(v, beta, relerr);
+    auto Greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr);
 
     // Create a struct with the integration options
     Options_GreensTensor opts;
-    opts.class_pt = &Greens;
+    opts.class_pt = Greens;
     opts.omega = omega;
 
     // Matrix storing the numerical integration
@@ -301,7 +297,7 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     // Integration of the vacuum Green's tensor
     opts.fancy_complex = IM;
     opts.weight_function = KV;
-    Greens.integrate_k(num_result, opts);
+    Greens->integrate_k(num_result, opts);
 
     // Computing the analytical result and storing it in analytic
     ana_pref = 2. / 3. * pow(omega, 4) * v / pow(1 - pow(v, 2), 3);
@@ -319,11 +315,11 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     auto beta = GENERATE(take(3, random(10e-10, 10e-12)));
     beta *= fabs(omega);
     double relerr = 1E-9;
-    GreensTensorVacuum Greens(v, beta, relerr);
+    auto Greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr);
 
     // Create a struct with the integration options
     Options_GreensTensor opts;
-    opts.class_pt = &Greens;
+    opts.class_pt = Greens;
     opts.omega = omega;
 
     // Matrix storing the numerical integration
@@ -336,7 +332,7 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     // Integration of the vacuum Green's tensor
     opts.fancy_complex = IM;
     opts.weight_function = TEMP;
-    Greens.integrate_k(num_result, opts);
+    Greens->integrate_k(num_result, opts);
 
     // Computing the analytical result and storing it in analytic
     ana_pref = pow(omega, 2) / (2. * pow(v, 3) * beta);
@@ -355,11 +351,11 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     auto beta = GENERATE(take(3, random(10e-10, 10e-12)));
     //  beta *= fabs(omega);
     double relerr = 1E-9;
-    GreensTensorVacuum Greens(v, beta, relerr);
+    auto Greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr);
 
     // Create a struct with the integration options
     Options_GreensTensor opts;
-    opts.class_pt = &Greens;
+    opts.class_pt = Greens;
     opts.omega = omega;
 
     // Matrix storing the numerical integration
@@ -373,7 +369,7 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     // Integration of the vacuum Green's tensor
     opts.fancy_complex = IM;
     opts.weight_function = KV_TEMP;
-    Greens.integrate_k(num_result, opts);
+    Greens->integrate_k(num_result, opts);
 
     // Computing the analytical result and storing it in analytic
     ana_pref = std::pow(omega, 3) / (6. * std::pow(v, 4) * beta);
@@ -386,5 +382,5 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     ana_result(2, 2) = ana_result(1, 1);
 
     REQUIRE(approx_equal(num_result, ana_result, "reldiff", 10E-5));
-  };
-};
+  }
+}
