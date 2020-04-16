@@ -89,3 +89,74 @@ Protocols
  - Timeline
    * Ende April: Code auf GitLab fertig
    * Ende Mai: fertig
+   * 
+   
+
+
+
+Quaca Meeting 16.04.2020
+
+1) Current state 
+Christoph
+
+    - from old to new school C++ (introduced shared_ptr in order to stop memory leaks)
+
+    - openmp -> mpi
+
+
+Marty (Documentation)
+
+    - we now have a cover page
+
+    - sections are clickable (link to first subsection)
+
+    - sections and subsections were renamed
+
+    - overall clean up
+
+    - for permittivity and polarizability: classes with bath and nobath shall be unified by overloading the constructor
+
+    - implementation of a unit conversion script
+
+    - list of test cases were added to the documentation
+
+
+Simon (Test cases)
+
+    - for each relevant variable one test in each relevant magnitude
+
+
+2) Paper & Choice of Journal
+
+    - Marty prepares a mail for Kurt
+
+
+3) Integration
+
+    - Christoph is looking into another solution for the numerical integration (using templates)
+
+
+4) App vs. Library
+
+    - Options class will be moved to the executable
+
+
+5) weitere executables?
+
+    - would be nice
+
+    - Marty: investigate potential executables (Casimir Polder, Angular Momentum, Free Energy ?)
+
+
+-) TODO: 
+Marty: - more Documentation
+       - find executables
+       - mail to Kurt
+       - log lin ?
+Christoph: - print_info() function
+
+     - MPI
+
+           - (delete options class and implement logger)
+Simon: Test cases: rewrite GENERATE and pointer to smart pointer
+        Example input files, Tutorials, print_info() function with comments in .csv file, Logger
