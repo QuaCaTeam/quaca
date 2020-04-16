@@ -9,14 +9,14 @@
 class PermittivityLorentz : public Permittivity {
 private:
   double eps_inf;
-  double alpha_zero;
+  double omega_p;
   double omega_0;
 
   MemoryKernel *memory_kernel;
 
 public:
   // constructors
-  PermittivityLorentz(double eps_inf, double alpha_zero, double omega_0,
+  PermittivityLorentz(double eps_inf, double omega_p, double omega_0,
                       MemoryKernel *memory_kernel);
   PermittivityLorentz(std::string input_file);
 
@@ -28,7 +28,7 @@ public:
 
   // getter methods
   double get_eps_inf() { return this->eps_inf; };
-  double get_alpha_zero() { return this->alpha_zero; };
+  double get_omega_p() { return this->omega_p; };
   double get_omega_0() { return this->omega_0; };
   MemoryKernel *get_memory_kernel() { return this->memory_kernel; };
 };

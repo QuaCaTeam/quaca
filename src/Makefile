@@ -152,32 +152,32 @@ Calculations/Integrations.cpp.s:
 	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Calculations/Integrations.cpp.s
 .PHONY : Calculations/Integrations.cpp.s
 
-Calculations/Friction.o: Calculations/Friction.cpp.o
+Friction/Friction.o: Friction/Friction.cpp.o
 
-.PHONY : Calculations/Friction.o
+.PHONY : Friction/Friction.o
 
 # target to build an object file
-Calculations/Friction.cpp.o:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Calculations/Friction.cpp.o
-.PHONY : Calculations/Friction.cpp.o
+Friction/Friction.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Friction/Friction.cpp.o
+.PHONY : Friction/Friction.cpp.o
 
-Calculations/Friction.i: Calculations/Friction.cpp.i
+Friction/Friction.i: Friction/Friction.cpp.i
 
-.PHONY : Calculations/Friction.i
+.PHONY : Friction/Friction.i
 
 # target to preprocess a source file
-Calculations/Friction.cpp.i:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Calculations/Friction.cpp.i
-.PHONY : Calculations/Friction.cpp.i
+Friction/Friction.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Friction/Friction.cpp.i
+.PHONY : Friction/Friction.cpp.i
 
-Calculations/Friction.s: Calculations/Friction.cpp.s
+Friction/Friction.s: Friction/Friction.cpp.s
 
-.PHONY : Calculations/Friction.s
+.PHONY : Friction/Friction.s
 
 # target to generate assembly for a file
-Calculations/Friction.cpp.s:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Calculations/Friction.cpp.s
-.PHONY : Calculations/Friction.cpp.s
+Friction/Friction.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Friction/Friction.cpp.s
+.PHONY : Friction/Friction.cpp.s
 
 GreensTensor/GreensTensor.o: GreensTensor/GreensTensor.cpp.o
 
@@ -260,6 +260,33 @@ GreensTensor/GreensTensorPlate.cpp.s:
 	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlate.cpp.s
 .PHONY : GreensTensor/GreensTensorPlate.cpp.s
 
+GreensTensor/GreensTensorPlateVacuum.o: GreensTensor/GreensTensorPlateVacuum.cpp.o
+
+.PHONY : GreensTensor/GreensTensorPlateVacuum.o
+
+# target to build an object file
+GreensTensor/GreensTensorPlateVacuum.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlateVacuum.cpp.o
+.PHONY : GreensTensor/GreensTensorPlateVacuum.cpp.o
+
+GreensTensor/GreensTensorPlateVacuum.i: GreensTensor/GreensTensorPlateVacuum.cpp.i
+
+.PHONY : GreensTensor/GreensTensorPlateVacuum.i
+
+# target to preprocess a source file
+GreensTensor/GreensTensorPlateVacuum.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlateVacuum.cpp.i
+.PHONY : GreensTensor/GreensTensorPlateVacuum.cpp.i
+
+GreensTensor/GreensTensorPlateVacuum.s: GreensTensor/GreensTensorPlateVacuum.cpp.s
+
+.PHONY : GreensTensor/GreensTensorPlateVacuum.s
+
+# target to generate assembly for a file
+GreensTensor/GreensTensorPlateVacuum.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlateVacuum.cpp.s
+.PHONY : GreensTensor/GreensTensorPlateVacuum.cpp.s
+
 GreensTensor/GreensTensorVacuum.o: GreensTensor/GreensTensorVacuum.cpp.o
 
 .PHONY : GreensTensor/GreensTensorVacuum.o
@@ -286,141 +313,6 @@ GreensTensor/GreensTensorVacuum.s: GreensTensor/GreensTensorVacuum.cpp.s
 GreensTensor/GreensTensorVacuum.cpp.s:
 	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorVacuum.cpp.s
 .PHONY : GreensTensor/GreensTensorVacuum.cpp.s
-
-GreensTensor/Permittivity/PermittivityDrude.o: GreensTensor/Permittivity/PermittivityDrude.cpp.o
-
-.PHONY : GreensTensor/Permittivity/PermittivityDrude.o
-
-# target to build an object file
-GreensTensor/Permittivity/PermittivityDrude.cpp.o:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/Permittivity/PermittivityDrude.cpp.o
-.PHONY : GreensTensor/Permittivity/PermittivityDrude.cpp.o
-
-GreensTensor/Permittivity/PermittivityDrude.i: GreensTensor/Permittivity/PermittivityDrude.cpp.i
-
-.PHONY : GreensTensor/Permittivity/PermittivityDrude.i
-
-# target to preprocess a source file
-GreensTensor/Permittivity/PermittivityDrude.cpp.i:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/Permittivity/PermittivityDrude.cpp.i
-.PHONY : GreensTensor/Permittivity/PermittivityDrude.cpp.i
-
-GreensTensor/Permittivity/PermittivityDrude.s: GreensTensor/Permittivity/PermittivityDrude.cpp.s
-
-.PHONY : GreensTensor/Permittivity/PermittivityDrude.s
-
-# target to generate assembly for a file
-GreensTensor/Permittivity/PermittivityDrude.cpp.s:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/Permittivity/PermittivityDrude.cpp.s
-.PHONY : GreensTensor/Permittivity/PermittivityDrude.cpp.s
-
-GreensTensor/Permittivity/PermittivityFactory.o: GreensTensor/Permittivity/PermittivityFactory.cpp.o
-
-.PHONY : GreensTensor/Permittivity/PermittivityFactory.o
-
-# target to build an object file
-GreensTensor/Permittivity/PermittivityFactory.cpp.o:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/Permittivity/PermittivityFactory.cpp.o
-.PHONY : GreensTensor/Permittivity/PermittivityFactory.cpp.o
-
-GreensTensor/Permittivity/PermittivityFactory.i: GreensTensor/Permittivity/PermittivityFactory.cpp.i
-
-.PHONY : GreensTensor/Permittivity/PermittivityFactory.i
-
-# target to preprocess a source file
-GreensTensor/Permittivity/PermittivityFactory.cpp.i:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/Permittivity/PermittivityFactory.cpp.i
-.PHONY : GreensTensor/Permittivity/PermittivityFactory.cpp.i
-
-GreensTensor/Permittivity/PermittivityFactory.s: GreensTensor/Permittivity/PermittivityFactory.cpp.s
-
-.PHONY : GreensTensor/Permittivity/PermittivityFactory.s
-
-# target to generate assembly for a file
-GreensTensor/Permittivity/PermittivityFactory.cpp.s:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/Permittivity/PermittivityFactory.cpp.s
-.PHONY : GreensTensor/Permittivity/PermittivityFactory.cpp.s
-
-GreensTensor/ReflectionCoefficients/ReflectionCoefficientsFactory.o: GreensTensor/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.o
-
-.PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsFactory.o
-
-# target to build an object file
-GreensTensor/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.o:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.o
-.PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.o
-
-GreensTensor/ReflectionCoefficients/ReflectionCoefficientsFactory.i: GreensTensor/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.i
-
-.PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsFactory.i
-
-# target to preprocess a source file
-GreensTensor/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.i:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.i
-.PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.i
-
-GreensTensor/ReflectionCoefficients/ReflectionCoefficientsFactory.s: GreensTensor/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.s
-
-.PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsFactory.s
-
-# target to generate assembly for a file
-GreensTensor/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.s:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.s
-.PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.s
-
-GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.o: GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.o
-
-.PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.o
-
-# target to build an object file
-GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.o:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.o
-.PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.o
-
-GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.i: GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.i
-
-.PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.i
-
-# target to preprocess a source file
-GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.i:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.i
-.PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.i
-
-GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.s: GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.s
-
-.PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.s
-
-# target to generate assembly for a file
-GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.s:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.s
-.PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.s
-
-GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.o: GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.o
-
-.PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.o
-
-# target to build an object file
-GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.o:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.o
-.PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.o
-
-GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.i: GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.i
-
-.PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.i
-
-# target to preprocess a source file
-GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.i:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.i
-.PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.i
-
-GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.s: GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.s
-
-.PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.s
-
-# target to generate assembly for a file
-GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.s:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.s
-.PHONY : GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.s
 
 Looper/Looper.o: Looper/Looper.cpp.o
 
@@ -530,6 +422,60 @@ Looper/LooperZa.cpp.s:
 	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperZa.cpp.s
 .PHONY : Looper/LooperZa.cpp.s
 
+MemoryKernel/MemoryKernelFactory.o: MemoryKernel/MemoryKernelFactory.cpp.o
+
+.PHONY : MemoryKernel/MemoryKernelFactory.o
+
+# target to build an object file
+MemoryKernel/MemoryKernelFactory.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/MemoryKernelFactory.cpp.o
+.PHONY : MemoryKernel/MemoryKernelFactory.cpp.o
+
+MemoryKernel/MemoryKernelFactory.i: MemoryKernel/MemoryKernelFactory.cpp.i
+
+.PHONY : MemoryKernel/MemoryKernelFactory.i
+
+# target to preprocess a source file
+MemoryKernel/MemoryKernelFactory.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/MemoryKernelFactory.cpp.i
+.PHONY : MemoryKernel/MemoryKernelFactory.cpp.i
+
+MemoryKernel/MemoryKernelFactory.s: MemoryKernel/MemoryKernelFactory.cpp.s
+
+.PHONY : MemoryKernel/MemoryKernelFactory.s
+
+# target to generate assembly for a file
+MemoryKernel/MemoryKernelFactory.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/MemoryKernelFactory.cpp.s
+.PHONY : MemoryKernel/MemoryKernelFactory.cpp.s
+
+MemoryKernel/OhmicMemoryKernel.o: MemoryKernel/OhmicMemoryKernel.cpp.o
+
+.PHONY : MemoryKernel/OhmicMemoryKernel.o
+
+# target to build an object file
+MemoryKernel/OhmicMemoryKernel.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/OhmicMemoryKernel.cpp.o
+.PHONY : MemoryKernel/OhmicMemoryKernel.cpp.o
+
+MemoryKernel/OhmicMemoryKernel.i: MemoryKernel/OhmicMemoryKernel.cpp.i
+
+.PHONY : MemoryKernel/OhmicMemoryKernel.i
+
+# target to preprocess a source file
+MemoryKernel/OhmicMemoryKernel.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/OhmicMemoryKernel.cpp.i
+.PHONY : MemoryKernel/OhmicMemoryKernel.cpp.i
+
+MemoryKernel/OhmicMemoryKernel.s: MemoryKernel/OhmicMemoryKernel.cpp.s
+
+.PHONY : MemoryKernel/OhmicMemoryKernel.s
+
+# target to generate assembly for a file
+MemoryKernel/OhmicMemoryKernel.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/OhmicMemoryKernel.cpp.s
+.PHONY : MemoryKernel/OhmicMemoryKernel.cpp.s
+
 Options/Options.o: Options/Options.cpp.o
 
 .PHONY : Options/Options.o
@@ -557,59 +503,86 @@ Options/Options.cpp.s:
 	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Options/Options.cpp.s
 .PHONY : Options/Options.cpp.s
 
-Polarizability/MemoryKernel/MemoryKernelFactory.o: Polarizability/MemoryKernel/MemoryKernelFactory.cpp.o
+Permittivity/PermittivityDrude.o: Permittivity/PermittivityDrude.cpp.o
 
-.PHONY : Polarizability/MemoryKernel/MemoryKernelFactory.o
-
-# target to build an object file
-Polarizability/MemoryKernel/MemoryKernelFactory.cpp.o:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/MemoryKernel/MemoryKernelFactory.cpp.o
-.PHONY : Polarizability/MemoryKernel/MemoryKernelFactory.cpp.o
-
-Polarizability/MemoryKernel/MemoryKernelFactory.i: Polarizability/MemoryKernel/MemoryKernelFactory.cpp.i
-
-.PHONY : Polarizability/MemoryKernel/MemoryKernelFactory.i
-
-# target to preprocess a source file
-Polarizability/MemoryKernel/MemoryKernelFactory.cpp.i:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/MemoryKernel/MemoryKernelFactory.cpp.i
-.PHONY : Polarizability/MemoryKernel/MemoryKernelFactory.cpp.i
-
-Polarizability/MemoryKernel/MemoryKernelFactory.s: Polarizability/MemoryKernel/MemoryKernelFactory.cpp.s
-
-.PHONY : Polarizability/MemoryKernel/MemoryKernelFactory.s
-
-# target to generate assembly for a file
-Polarizability/MemoryKernel/MemoryKernelFactory.cpp.s:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/MemoryKernel/MemoryKernelFactory.cpp.s
-.PHONY : Polarizability/MemoryKernel/MemoryKernelFactory.cpp.s
-
-Polarizability/MemoryKernel/OhmicMemoryKernel.o: Polarizability/MemoryKernel/OhmicMemoryKernel.cpp.o
-
-.PHONY : Polarizability/MemoryKernel/OhmicMemoryKernel.o
+.PHONY : Permittivity/PermittivityDrude.o
 
 # target to build an object file
-Polarizability/MemoryKernel/OhmicMemoryKernel.cpp.o:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/MemoryKernel/OhmicMemoryKernel.cpp.o
-.PHONY : Polarizability/MemoryKernel/OhmicMemoryKernel.cpp.o
+Permittivity/PermittivityDrude.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Permittivity/PermittivityDrude.cpp.o
+.PHONY : Permittivity/PermittivityDrude.cpp.o
 
-Polarizability/MemoryKernel/OhmicMemoryKernel.i: Polarizability/MemoryKernel/OhmicMemoryKernel.cpp.i
+Permittivity/PermittivityDrude.i: Permittivity/PermittivityDrude.cpp.i
 
-.PHONY : Polarizability/MemoryKernel/OhmicMemoryKernel.i
+.PHONY : Permittivity/PermittivityDrude.i
 
 # target to preprocess a source file
-Polarizability/MemoryKernel/OhmicMemoryKernel.cpp.i:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/MemoryKernel/OhmicMemoryKernel.cpp.i
-.PHONY : Polarizability/MemoryKernel/OhmicMemoryKernel.cpp.i
+Permittivity/PermittivityDrude.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Permittivity/PermittivityDrude.cpp.i
+.PHONY : Permittivity/PermittivityDrude.cpp.i
 
-Polarizability/MemoryKernel/OhmicMemoryKernel.s: Polarizability/MemoryKernel/OhmicMemoryKernel.cpp.s
+Permittivity/PermittivityDrude.s: Permittivity/PermittivityDrude.cpp.s
 
-.PHONY : Polarizability/MemoryKernel/OhmicMemoryKernel.s
+.PHONY : Permittivity/PermittivityDrude.s
 
 # target to generate assembly for a file
-Polarizability/MemoryKernel/OhmicMemoryKernel.cpp.s:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/MemoryKernel/OhmicMemoryKernel.cpp.s
-.PHONY : Polarizability/MemoryKernel/OhmicMemoryKernel.cpp.s
+Permittivity/PermittivityDrude.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Permittivity/PermittivityDrude.cpp.s
+.PHONY : Permittivity/PermittivityDrude.cpp.s
+
+Permittivity/PermittivityFactory.o: Permittivity/PermittivityFactory.cpp.o
+
+.PHONY : Permittivity/PermittivityFactory.o
+
+# target to build an object file
+Permittivity/PermittivityFactory.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Permittivity/PermittivityFactory.cpp.o
+.PHONY : Permittivity/PermittivityFactory.cpp.o
+
+Permittivity/PermittivityFactory.i: Permittivity/PermittivityFactory.cpp.i
+
+.PHONY : Permittivity/PermittivityFactory.i
+
+# target to preprocess a source file
+Permittivity/PermittivityFactory.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Permittivity/PermittivityFactory.cpp.i
+.PHONY : Permittivity/PermittivityFactory.cpp.i
+
+Permittivity/PermittivityFactory.s: Permittivity/PermittivityFactory.cpp.s
+
+.PHONY : Permittivity/PermittivityFactory.s
+
+# target to generate assembly for a file
+Permittivity/PermittivityFactory.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Permittivity/PermittivityFactory.cpp.s
+.PHONY : Permittivity/PermittivityFactory.cpp.s
+
+Permittivity/PermittivityLorentz.o: Permittivity/PermittivityLorentz.cpp.o
+
+.PHONY : Permittivity/PermittivityLorentz.o
+
+# target to build an object file
+Permittivity/PermittivityLorentz.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Permittivity/PermittivityLorentz.cpp.o
+.PHONY : Permittivity/PermittivityLorentz.cpp.o
+
+Permittivity/PermittivityLorentz.i: Permittivity/PermittivityLorentz.cpp.i
+
+.PHONY : Permittivity/PermittivityLorentz.i
+
+# target to preprocess a source file
+Permittivity/PermittivityLorentz.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Permittivity/PermittivityLorentz.cpp.i
+.PHONY : Permittivity/PermittivityLorentz.cpp.i
+
+Permittivity/PermittivityLorentz.s: Permittivity/PermittivityLorentz.cpp.s
+
+.PHONY : Permittivity/PermittivityLorentz.s
+
+# target to generate assembly for a file
+Permittivity/PermittivityLorentz.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Permittivity/PermittivityLorentz.cpp.s
+.PHONY : Permittivity/PermittivityLorentz.cpp.s
 
 Polarizability/Polarizability.o: Polarizability/Polarizability.cpp.o
 
@@ -800,6 +773,87 @@ PowerSpectrum/PowerSpectrumHarmOsc.cpp.s:
 	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/PowerSpectrum/PowerSpectrumHarmOsc.cpp.s
 .PHONY : PowerSpectrum/PowerSpectrumHarmOsc.cpp.s
 
+ReflectionCoefficients/ReflectionCoefficientsFactory.o: ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.o
+
+.PHONY : ReflectionCoefficients/ReflectionCoefficientsFactory.o
+
+# target to build an object file
+ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.o
+.PHONY : ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.o
+
+ReflectionCoefficients/ReflectionCoefficientsFactory.i: ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.i
+
+.PHONY : ReflectionCoefficients/ReflectionCoefficientsFactory.i
+
+# target to preprocess a source file
+ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.i
+.PHONY : ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.i
+
+ReflectionCoefficients/ReflectionCoefficientsFactory.s: ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.s
+
+.PHONY : ReflectionCoefficients/ReflectionCoefficientsFactory.s
+
+# target to generate assembly for a file
+ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.s
+.PHONY : ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.s
+
+ReflectionCoefficients/ReflectionCoefficientsLocBulk.o: ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.o
+
+.PHONY : ReflectionCoefficients/ReflectionCoefficientsLocBulk.o
+
+# target to build an object file
+ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.o
+.PHONY : ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.o
+
+ReflectionCoefficients/ReflectionCoefficientsLocBulk.i: ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.i
+
+.PHONY : ReflectionCoefficients/ReflectionCoefficientsLocBulk.i
+
+# target to preprocess a source file
+ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.i
+.PHONY : ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.i
+
+ReflectionCoefficients/ReflectionCoefficientsLocBulk.s: ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.s
+
+.PHONY : ReflectionCoefficients/ReflectionCoefficientsLocBulk.s
+
+# target to generate assembly for a file
+ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.s
+.PHONY : ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.s
+
+ReflectionCoefficients/ReflectionCoefficientsLocSlab.o: ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.o
+
+.PHONY : ReflectionCoefficients/ReflectionCoefficientsLocSlab.o
+
+# target to build an object file
+ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.o
+.PHONY : ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.o
+
+ReflectionCoefficients/ReflectionCoefficientsLocSlab.i: ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.i
+
+.PHONY : ReflectionCoefficients/ReflectionCoefficientsLocSlab.i
+
+# target to preprocess a source file
+ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.i
+.PHONY : ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.i
+
+ReflectionCoefficients/ReflectionCoefficientsLocSlab.s: ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.s
+
+.PHONY : ReflectionCoefficients/ReflectionCoefficientsLocSlab.s
+
+# target to generate assembly for a file
+ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.s
+.PHONY : ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -812,9 +866,9 @@ help:
 	@echo "... Calculations/Integrations.o"
 	@echo "... Calculations/Integrations.i"
 	@echo "... Calculations/Integrations.s"
-	@echo "... Calculations/Friction.o"
-	@echo "... Calculations/Friction.i"
-	@echo "... Calculations/Friction.s"
+	@echo "... Friction/Friction.o"
+	@echo "... Friction/Friction.i"
+	@echo "... Friction/Friction.s"
 	@echo "... GreensTensor/GreensTensor.o"
 	@echo "... GreensTensor/GreensTensor.i"
 	@echo "... GreensTensor/GreensTensor.s"
@@ -824,24 +878,12 @@ help:
 	@echo "... GreensTensor/GreensTensorPlate.o"
 	@echo "... GreensTensor/GreensTensorPlate.i"
 	@echo "... GreensTensor/GreensTensorPlate.s"
+	@echo "... GreensTensor/GreensTensorPlateVacuum.o"
+	@echo "... GreensTensor/GreensTensorPlateVacuum.i"
+	@echo "... GreensTensor/GreensTensorPlateVacuum.s"
 	@echo "... GreensTensor/GreensTensorVacuum.o"
 	@echo "... GreensTensor/GreensTensorVacuum.i"
 	@echo "... GreensTensor/GreensTensorVacuum.s"
-	@echo "... GreensTensor/Permittivity/PermittivityDrude.o"
-	@echo "... GreensTensor/Permittivity/PermittivityDrude.i"
-	@echo "... GreensTensor/Permittivity/PermittivityDrude.s"
-	@echo "... GreensTensor/Permittivity/PermittivityFactory.o"
-	@echo "... GreensTensor/Permittivity/PermittivityFactory.i"
-	@echo "... GreensTensor/Permittivity/PermittivityFactory.s"
-	@echo "... GreensTensor/ReflectionCoefficients/ReflectionCoefficientsFactory.o"
-	@echo "... GreensTensor/ReflectionCoefficients/ReflectionCoefficientsFactory.i"
-	@echo "... GreensTensor/ReflectionCoefficients/ReflectionCoefficientsFactory.s"
-	@echo "... GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.o"
-	@echo "... GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.i"
-	@echo "... GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocBulk.s"
-	@echo "... GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.o"
-	@echo "... GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.i"
-	@echo "... GreensTensor/ReflectionCoefficients/ReflectionCoefficientsLocSlab.s"
 	@echo "... Looper/Looper.o"
 	@echo "... Looper/Looper.i"
 	@echo "... Looper/Looper.s"
@@ -854,15 +896,24 @@ help:
 	@echo "... Looper/LooperZa.o"
 	@echo "... Looper/LooperZa.i"
 	@echo "... Looper/LooperZa.s"
+	@echo "... MemoryKernel/MemoryKernelFactory.o"
+	@echo "... MemoryKernel/MemoryKernelFactory.i"
+	@echo "... MemoryKernel/MemoryKernelFactory.s"
+	@echo "... MemoryKernel/OhmicMemoryKernel.o"
+	@echo "... MemoryKernel/OhmicMemoryKernel.i"
+	@echo "... MemoryKernel/OhmicMemoryKernel.s"
 	@echo "... Options/Options.o"
 	@echo "... Options/Options.i"
 	@echo "... Options/Options.s"
-	@echo "... Polarizability/MemoryKernel/MemoryKernelFactory.o"
-	@echo "... Polarizability/MemoryKernel/MemoryKernelFactory.i"
-	@echo "... Polarizability/MemoryKernel/MemoryKernelFactory.s"
-	@echo "... Polarizability/MemoryKernel/OhmicMemoryKernel.o"
-	@echo "... Polarizability/MemoryKernel/OhmicMemoryKernel.i"
-	@echo "... Polarizability/MemoryKernel/OhmicMemoryKernel.s"
+	@echo "... Permittivity/PermittivityDrude.o"
+	@echo "... Permittivity/PermittivityDrude.i"
+	@echo "... Permittivity/PermittivityDrude.s"
+	@echo "... Permittivity/PermittivityFactory.o"
+	@echo "... Permittivity/PermittivityFactory.i"
+	@echo "... Permittivity/PermittivityFactory.s"
+	@echo "... Permittivity/PermittivityLorentz.o"
+	@echo "... Permittivity/PermittivityLorentz.i"
+	@echo "... Permittivity/PermittivityLorentz.s"
 	@echo "... Polarizability/Polarizability.o"
 	@echo "... Polarizability/Polarizability.i"
 	@echo "... Polarizability/Polarizability.s"
@@ -884,6 +935,15 @@ help:
 	@echo "... PowerSpectrum/PowerSpectrumHarmOsc.o"
 	@echo "... PowerSpectrum/PowerSpectrumHarmOsc.i"
 	@echo "... PowerSpectrum/PowerSpectrumHarmOsc.s"
+	@echo "... ReflectionCoefficients/ReflectionCoefficientsFactory.o"
+	@echo "... ReflectionCoefficients/ReflectionCoefficientsFactory.i"
+	@echo "... ReflectionCoefficients/ReflectionCoefficientsFactory.s"
+	@echo "... ReflectionCoefficients/ReflectionCoefficientsLocBulk.o"
+	@echo "... ReflectionCoefficients/ReflectionCoefficientsLocBulk.i"
+	@echo "... ReflectionCoefficients/ReflectionCoefficientsLocBulk.s"
+	@echo "... ReflectionCoefficients/ReflectionCoefficientsLocSlab.o"
+	@echo "... ReflectionCoefficients/ReflectionCoefficientsLocSlab.i"
+	@echo "... ReflectionCoefficients/ReflectionCoefficientsLocSlab.s"
 .PHONY : help
 
 

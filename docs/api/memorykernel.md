@@ -1,6 +1,4 @@
-!> TODO: Write examples.
-
-## MemoryKernel
+# MemoryKernel {docsify-ignore-all}
 This is an abstract class that defines the Fourier transform of the memory kernel, i.e. $\mu(\omega)$.
 A specific model for this will be a child of this class.
 ```cpp
@@ -60,5 +58,35 @@ The input file sections for the memory kernels look like this
     "gamma" : 
   }
 }
+```
+<!-- tabs:end -->
+
+## Examples
+The input file sections for the memory kernels look like this
+
+<!-- tabs:start -->
+#### **Example: Ohmice Memory Kernel**
+If we want to construct an Ohmic memory kernel with $\gamma=0.1\,\mathrm{eV}$, we can employ the direct constructor in following form
+```cpp
+    double gamma = 0.1;
+    OhmicMemoryKernel memorykernel(gamma);
+    std::cout << memorykernel.get_gamma();
+```
+where we use the ```get_gamma()``` function to access the attribut of the class.
+
+#### **Example (.json): Ohmice Memory Kernel**
+Again, we can easy define a memory kernel with e.g. $\gamma=0.1\,\mathrm{eV}$ by employing a parameter file ```parameters.json```
+```json
+{
+  "MemoryKernel" : {
+    "type" : "ohmic",
+    "gamma" : 0.1
+  }
+}
+```
+If we want access the memory kernel, we can use the ```get_gamma()``` function as follows
+```cpp
+    OhmicMemoryKernel memorykernel("parameters.json");
+    std::cout << memorykernel.get_gamma();
 ```
 <!-- tabs:end -->

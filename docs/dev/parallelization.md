@@ -1,4 +1,4 @@
-# Parallelization
+# Parallelization {docsify-ignore-all}
 
 ## Compute friction in parallel
 

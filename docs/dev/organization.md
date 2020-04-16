@@ -1,4 +1,4 @@
-# Organization
+# Organization {docsify-ignore-all}
 
 ## Development
 The project is organized inside a git repository.

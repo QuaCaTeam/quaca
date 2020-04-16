@@ -80,14 +80,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/coelschl/PhD/code/cpp/quaca && $(CMAKE_COMMAND) -E cmake_progress_start /home/coelschl/PhD/code/cpp/quaca/CMakeFiles /home/coelschl/PhD/code/cpp/quaca/test/CMakeFiles/progress.marks
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f CMakeFiles/Makefile2 test/all
+	cd /home/coelschl/PhD/code/cpp/quaca && $(CMAKE_COMMAND) -E cmake_progress_start /home/coelschl/PhD/code/cpp/quaca/CMakeFiles /home/coelschl/PhD/code/cpp/quaca/app/.Tutorial/CMakeFiles/progress.marks
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f CMakeFiles/Makefile2 app/.Tutorial/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/coelschl/PhD/code/cpp/quaca/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f CMakeFiles/Makefile2 test/clean
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f CMakeFiles/Makefile2 app/.Tutorial/clean
 .PHONY : clean
 
 # The main clean target
@@ -97,18 +97,60 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f CMakeFiles/Makefile2 test/preinstall
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f CMakeFiles/Makefile2 app/.Tutorial/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f CMakeFiles/Makefile2 test/preinstall
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f CMakeFiles/Makefile2 app/.Tutorial/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
 	cd /home/coelschl/PhD/code/cpp/quaca && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
+
+# Convenience name for target.
+app/.Tutorial/CMakeFiles/Tutorial.dir/rule:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f CMakeFiles/Makefile2 app/.Tutorial/CMakeFiles/Tutorial.dir/rule
+.PHONY : app/.Tutorial/CMakeFiles/Tutorial.dir/rule
+
+# Convenience name for target.
+Tutorial: app/.Tutorial/CMakeFiles/Tutorial.dir/rule
+
+.PHONY : Tutorial
+
+# fast build rule for target.
+Tutorial/fast:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f app/.Tutorial/CMakeFiles/Tutorial.dir/build.make app/.Tutorial/CMakeFiles/Tutorial.dir/build
+.PHONY : Tutorial/fast
+
+tutorial.o: tutorial.cpp.o
+
+.PHONY : tutorial.o
+
+# target to build an object file
+tutorial.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f app/.Tutorial/CMakeFiles/Tutorial.dir/build.make app/.Tutorial/CMakeFiles/Tutorial.dir/tutorial.cpp.o
+.PHONY : tutorial.cpp.o
+
+tutorial.i: tutorial.cpp.i
+
+.PHONY : tutorial.i
+
+# target to preprocess a source file
+tutorial.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f app/.Tutorial/CMakeFiles/Tutorial.dir/build.make app/.Tutorial/CMakeFiles/Tutorial.dir/tutorial.cpp.i
+.PHONY : tutorial.cpp.i
+
+tutorial.s: tutorial.cpp.s
+
+.PHONY : tutorial.s
+
+# target to generate assembly for a file
+tutorial.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f app/.Tutorial/CMakeFiles/Tutorial.dir/build.make app/.Tutorial/CMakeFiles/Tutorial.dir/tutorial.cpp.s
+.PHONY : tutorial.cpp.s
 
 # Help Target
 help:
@@ -117,7 +159,11 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
+	@echo "... Tutorial"
 	@echo "... edit_cache"
+	@echo "... tutorial.o"
+	@echo "... tutorial.i"
+	@echo "... tutorial.s"
 .PHONY : help
 
 

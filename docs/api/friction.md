@@ -1,4 +1,4 @@
-## Friction
+# Friction {docsify-ignore-all}
 This abstract class contains the calculations for the noncontact friction. Here, two different general formulas are implemented
 $$\begin{aligned} F_\mathrm{fric} =& -2 \int_{0}^{\infty} \mathrm{d}\omega\, \mathrm{Tr}\left[\underline{S}(\omega) \int\frac{\mathrm{d}^2\mathbf{k}}{(2\pi)^2} \, k_x\,\underline{G}_\Im(\mathbf{k}, z_a, k_xv+\omega)\right] \\ &+ 2\frac{\hbar}{\pi} \int_{0}^{\infty} \mathrm{d}\omega\,\mathrm{Tr}\left[\underline{\alpha}_\Im(\omega)\int\frac{\mathrm{d}^2\mathbf{k}}{(2\pi)^2} \, k_x\, \frac{\underline{G}_\Im(\mathbf{k}, z_a, k_xv+\omega)}{1-\exp(-\beta\hbar[\omega+k_xv])}\right],\end{aligned}$$
 and

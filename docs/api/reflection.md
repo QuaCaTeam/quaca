@@ -1,4 +1,4 @@
-## ReflectionCoefficients
+# ReflectionCoefficients {docsify-ignore-all}
 This is an abstract class that defines the reflection coefficients $r^{s/p}(\omega, \kappa)$ as a function of the frequency $\omega$ and $\kappa=\sqrt{k^2-\omega^2/c^2}$ (the following definition of the square root is used, $\mathrm{Re}\{\kappa\}\geq 0$ and $\mathrm{Im}\{\kappa\}<0$), where $k$ is the modulus of the two-dimensional wavevector $\mathbf{k}$. The specific reflection coefficients with respect to diffirent systems are defined in the corresponding child of this class.
 ```cpp
 class ReflectionCoefficients {

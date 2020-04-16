@@ -1,6 +1,4 @@
-!> TODO: Write examples.
-
-## GreensTensor
+# GreensTensor {docsify-ignore-all}
 This is an abstract class that defines a Green's tensor.
 A specific kind of Green's tensor will be a child of this class.
 
@@ -233,7 +231,7 @@ double beta = 1e-1;
 double relerr = 1e-9
 GreensTensorVacuum greens_tensor(v, beta, relerr);
 ```
-To calculate the integration we perform we pass the desired $\omega$ and the integration option `fancy_I` to `opts`
+To calculate the integration we pass the desired $\omega$ and the integration option `fancy_I` to `opts`
 ```cpp
 cx_mat::fixed<3,3> GT(fill::zeros);
 Options_GreensTensor opts;
@@ -268,6 +266,88 @@ opts.omega = 3.0;
 opts.fancy_I = true;
 greens_tensor.integrated_1d_k(GT, opts);
 ```
+
+#### ** Example: Plate **
+
+We want to calculate the twofold integrated imaginary part of the scattered Green's tensor at frequency $\omega=3\,\mathrm{eV}$ in the static case $(v=0)$, at a distance of $z_a=10\,\mathrm{nm}=0.05\,\mathrm{eV}^{-1}$ (for a quick conversion between the systems of units you can use [our converter](documentation/units), and at $\beta=0.1\,\mathrm{eV}^{-1}$.
+
+Additionally, we need to specify the geometry and material of the surface. Here, we assume a semi-infinite bulk of gold with $\omega_p=9\,\mathrm{eV}$ and $\gamma=0.1\,\mathrm{eV}$, from which we can construct the [permittivity](api/permittivity) and the [reflection coefficients](api/reflection).
+
+ Moreover, we need to define the accuracy of the numerical integration. If we demand the relative accuracy for the second integration to be $\delta_\mathrm{rel}^1=10^{-9}$, we ought to choose a more precise relative accuracy of the integration below, as e.g. $\delta_\mathrm{rel}^0=10^{-12}$. Furthermore, in order to perform a efficient integration we provide a cut-off value for the $\kappa$ integration, since --- as shown above --- the scattered Green's tensor decays for real $\kappa$ with $\propto\exp(-2z_a\kappa)$. Since we defined the cut-off as $\kappa_\mathrm{cut}=\delta_\mathrm{cut}/(2z_a)$, a $\delta_\mathrm{cut}=30$ yields a prefactor of $\exp(-30)\approx 10^{-13}$, which should be a reasonable choice.
+Now with all parameters set, we can define the scattered Green's tensor
+```cpp
+// Construct permittivity and reflection coefficients
+double omega_p = 9;
+double gamma = 0.1;
+PermittivityDrude perm(omega_p, gamma);
+ReflectionCoefficientsLocBulk refl(&perm);
+
+// Define further input parameters
+double v = 0;
+double beta = 1e-1;
+double za = 0.05;
+double delta_cut =30;
+double rel_err_0 = 1e-12
+double rel_err_1 = 1e-9
+
+vec::fixed<2> rel_err = {rel_err_0, rel_err_1};
+
+GreensTensorPlate greens_tensor(v, za, beta, &refl, delta_cut, rel_err);
+```
+To calculate the integration we pass the desired $\omega$ and the integration option `fancy_I` to `opts`
+```cpp
+cx_mat::fixed<3,3> GT(fill::zeros);
+Options_GreensTensor opts;
+opts.omega = 3.0;
+opts.fancy_I = true;
+greens_tensor.integrated_1d_k(GT, opts);
+```
+The matrix `GT` now contains the integrated imaginary part of the vacuum Green's tensor.
+
+
+#### ** Example (.json): Plate **
+
+We want to calculate the twofold integrated imaginary part of the scattered Green's tensor at frequency $\omega=3\,\mathrm{eV}$ in the static case $(v=0)$, at a distance of $z_a=10\,\mathrm{nm}=0.05\,\mathrm{eV}^{-1}$ (for a quick conversion between the systems of units you can use [our converter](documentation/units), and at $\beta=0.1\,\mathrm{eV}^{-1}$.
+
+Additionally, we need to specify the geometry and material of the surface. Here, we assume a semi-infinite bulk of gold with $\omega_p=9\,\mathrm{eV}$ and $\gamma=0.1\,\mathrm{eV}$, from which we can construct the [permittivity](api/permittivity) and the [reflection coefficients](api/reflection).
+
+ Moreover, we need to define the accuracy of the numerical integration. If we demand the relative accuracy for the second integration to be $\delta_\mathrm{rel}^1=10^{-9}$, we ought to choose a more precise relative accuracy of the integration below, as e.g. $\delta_\mathrm{rel}^0=10^{-12}$. Furthermore, in order to perform a efficient integration we provide a cut-off value for the $\kappa$ integration, since --- as shown above --- the scattered Green's tensor decays for real $\kappa$ with $\propto\exp(-2z_a\kappa)$. Since we defined the cut-off as $\kappa_\mathrm{cut}=\delta_\mathrm{cut}/(2z_a)$, a $\delta_\mathrm{cut}=30$ yields a prefactor of $\exp(-30)\approx 10^{-13}$, which should be a reasonable choice.
+
+Since we have to define a lot of parameters, QuaCa offers a shortcut to the long task before.
+We simply define all parameters in a file called `parameters.json`. Here, the permittivity and the reflection coefficients are treated as separated objects.
+```json
+
+{
+    "GreensTensor": {
+        "type": "plate",
+        "v": 0e0,
+        "za": 0.05,
+        "beta": 1e-1,
+        "delta_cut": 30,
+        "rel_err_0": 1e-12,
+        "rel_err_1": 1e-9
+    },
+    "ReflectionCoefficients": {
+        "type": "local bulk",
+    },
+    "Permittivity": {
+        "type": "drude",
+        "gamma": 0.1,
+        "omega_p": 9
+    }
+}
+```
+Now we can easily define the plate Green's tensor class and calculate the desired part of the integrated Green's tensor
+```cpp
+GreensTensorVacuum greens_tensor("parameters.json");
+
+cx_mat::fixed<3,3> GT(fill::zeros);
+Options_GreensTensor opts;
+opts.omega = 3.0;
+opts.fancy_I = true;
+greens_tensor.integrated_1d_k(GT, opts);
+```
+
 
 
 

@@ -1,6 +1,6 @@
-!> TODO: Write examples. More physics in description of permittivity (local, isotropic, this kind of stuff).
+!> TODO: Simplifiy Lorentz model to one class (if MemoryKernel is not defined, then $\mu=0$).
 
-## Permittivity
+# Permittivity {docsify-ignore-all}
 This is an abstract class that defines the permittivity as a function of the frequency, i.e. $\varepsilon(\omega)$.
 A specific model for the permittivity will be a child of this class.
 ```cpp
@@ -54,20 +54,20 @@ See [Permittivity](#Permittivity).
 ## PermittivityLorentzNoBath
 Implements a Lorentz model according to the formula
 $$
-\varepsilon(\omega) = \varepsilon_{\infty} - \frac{\alpha_0 \omega_0^2}{\omega_0^2 - \omega^2},
+\varepsilon(\omega) = \varepsilon_{\infty} - \frac{\omega_p^2}{\omega_0^2 - \omega^2},
 $$
-where $\omega_0$ is the resonance frequency, $\varepsilon_{\infty}$ is the blabla and $\alpha_zero$ is the blabla.
+where $\omega_0$ is the central frequency, $\varepsilon_{\infty}$ is the high-frequency permittivity limit and $\omega_p$ is the plasma frequency.
 
 ```cpp
 class PermittivityLorentzNoBath : public Permittivity {
 private:
   double eps_inf;
-  double alpha_zero;
+  double omega_p;
   double omega_0;
 
 public:
   // constructors
-  PermittivityLorentzNoBath(double eps_inf, double alpha_zero, double omega_0);
+  PermittivityLorentzNoBath(double eps_inf, double omega_p, double omega_0);
   PermittivityLorentzNoBath(std::string input_file);
 
   // calculate the permittivity
@@ -78,13 +78,13 @@ public:
 
   // getter methods
   double get_eps_inf() { return this->eps_inf; };
-  double get_alpha_zero() { return this->alpha_zero; };
+  double get_omega_p() { return this->omega_p; };
   double get_omega_0() { return this->omega_0; };
 };
 ```
 
 
-### `# PermittivityLorentzNoBath(double eps_inf, double alpha_zero, double omega_0)`
+### `# PermittivityLorentzNoBath(double eps_inf, double omega_p, double omega_0)`
 Direct constructor for the class.
 
 ### `# PermittivityLorentzNoBath(std::string input_file)`
@@ -95,12 +95,12 @@ See [Permittivity](#Permittivity).
 
 
 
-## PermittivityLorentz
+## PermittivityLorentzBath
 Implements a Lorentz model with an internal bath according to the formula
 $$
-\varepsilon(\omega) = \varepsilon_{\infty} - \frac{\alpha_0 \omega_0^2}{\omega_0^2 - \omega^2 - \mathrm{i} \omega \mu(\omega)},
+\varepsilon(\omega) = \varepsilon_{\infty} - \frac{\omega_p^2}{\omega_0^2 - \omega^2 - \mathrm{i} \omega \mu(\omega)},
 $$
-where $\omega_0$ is the resonance frequency, $\varepsilon_{\infty}$ is the blabla, $\alpha_zero$ is the blabla and $\mu(\omega)$ is the memory kernel.
+where $\omega_0$ is the central frequency, $\varepsilon_{\infty}$ is high-frequency permittivity limit, $\omega_p$ is the plasma frequency and $\mu(\omega)$ is the memory kernel.
 
 ```cpp
 class PermittivityLorentz : public Permittivity {
@@ -113,7 +113,7 @@ private:
 
 public:
   // constructors
-  PermittivityLorentz(double eps_inf, double alpha_zero, double omega_0,
+  PermittivityLorentz(double eps_inf, double omega_p, double omega_0,
                           MemoryKernel *memory_kernel);
   PermittivityLorentz(std::string input_file);
 
@@ -125,14 +125,14 @@ public:
 
   // getter methods
   double get_eps_inf() { return this->eps_inf; };
-  double get_alpha_zero() { return this->alpha_zero; };
+  double get_omega_p() { return this->omega_p; };
   double get_omega_0() { return this->omega_0; };
   MemoryKernel *get_memory_kernel() { return this->memory_kernel; };
 };
 ```
 
 
-### `# PermittivityLorentz(double eps_inf, double alpha_zero, double omega_0, MemoryKernel *memory_kernel)`
+### `# PermittivityLorentz(double eps_inf, double omega_p, double omega_0, MemoryKernel *memory_kernel)`
 Direct constructor for the class.
 
 ### `# PermittivityLorentz(std::string input_file)`
@@ -163,7 +163,7 @@ The input file sections for the permittivities look like this
     "Permittivity": {
         "type": "lorentz",
         "eps_inf": ,
-        "alpha_zero": ,
+        "omega_p": ,
         "omega_0": ,
         "MemoryKernel": {
         }

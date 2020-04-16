@@ -1,4 +1,4 @@
-# Write your own main
+# Write your own main {docsify-ignore-all}
 In the first tutorial you calculated the non-contact friction of an atom above the surface of a Drude bulk material using an input file and the executable `Friction`.
 QuaCa can, however, also be used like a library and you can write your own executables!
 In this tutorial we will redo the last tutorial, but this time we will implement everything in our own main file.

@@ -1,4 +1,4 @@
-# Contributing
+# Contributing {docsify-ignore-all}
 
 Thank you for your interest in contributing to this project!
 Below you'll find all information regarding the development of QuaCa.
