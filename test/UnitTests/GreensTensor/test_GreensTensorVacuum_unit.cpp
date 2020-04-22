@@ -34,18 +34,14 @@ TEST_CASE("Vacuum Green's tensor constructors work as expected",
 TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
   // Generate a Green's tensor with random attributes v and beta
   auto v = GENERATE(1e-4,1e-8);
-  auto beta = GENERATE(123.21,1.32,54.23);
+  auto beta = GENERATE(12.21,1.32,5.23);
   double relerr = 1E-9;
   GreensTensorVacuum Greens(v, beta, relerr);
 
-  // Create the matries storing the Green's tensors
-  cx_mat::fixed<3, 3> Greens_lhs(fill::zeros);
-  cx_mat::fixed<3, 3> Greens_rhs(fill::zeros);
-
   // Create the variables for the num_result, taking care, that
   //\omega^2 - k^2 >= 0 to stay in the non-trivial regime
-  auto omega = GENERATE(take(3, random(-1e1, 1e1)));
-  auto k_v = GENERATE(take(3, random(-1., 1.)));
+  auto omega = GENERATE(-7.43,0.21,1.76);
+  auto k_v = GENERATE(-.9,.1,.8);
   if (k_v < 0)
     k_v *= omega / (1 + v);
   if (k_v >= 0)
@@ -54,9 +50,22 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
   // Check the integrand for all possible integration options
   double omega_kv = omega + v * k_v;
   double xi = pow(omega_kv, 2) - pow(k_v, 2);
-  double result_x = .5 * xi;
-  double result_yz = .5 * (pow(omega_kv, 2) - .5 * xi);
+  //Stores the prefactors of the integration options
   double factor = 1.;
+  cx_mat::fixed<3,3> LHS(fill::zeros);
+  cx_mat::fixed<3,3> RHS(fill::zeros);
+  
+
+  //Set the values of the analytical result
+  LHS(0,0) = .5 * xi;
+  LHS(1,1) = .5 * (pow(omega_kv, 2) - .5 * xi);
+  LHS(2,2) = LHS(1,1);
+
+  double result_x = LHS(0,0).real();
+  double result_yz = LHS(1,1).real();
+
+  //Matrix with only zero entries
+  cx_mat::fixed<3,3> zero_mat(fill::zeros);
 
   // Create a struct with the integration options
   struct Options_GreensTensor opts;
@@ -65,60 +74,68 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
 
   SECTION("Option: IM") {
     opts.fancy_complex = IM;
-    opts.indices = {0, 0};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
-            result_x * factor);
-    opts.indices = {1, 1};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
-            result_yz * factor);
-    opts.indices = {2, 2};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
-            result_yz * factor);
-  };
+    for(int i = 0; i < 3; ++i) {
+      for(int j = 0; j < 3; ++j) {
+	opts.indices(0) = i;
+	opts.indices(1) = j;
+	RHS(i,j) = Greens.integrand_k(k_v, &opts);
+      }
+    }
+    //Ensure that result is non-trivial
+    REQUIRE(!approx_equal(RHS,zero_mat,"reldiff",1e-1));
+
+    REQUIRE(approx_equal(LHS,RHS,"reldiff",1e-12));
+  }
 
   SECTION("Option: IM, KV") {
     opts.fancy_complex = IM;
     opts.weight_function = KV;
     factor = k_v;
-    opts.indices = {0, 0};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
-            result_x * factor);
-    opts.indices = {1, 1};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
-            result_yz * factor);
-    opts.indices = {2, 2};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
-            result_yz * factor);
+    for(int i = 0; i < 3; ++i) {
+      for(int j = 0; j < 3; ++j) {
+	opts.indices(0) = i;
+	opts.indices(1) = j;
+	RHS(i,j) = Greens.integrand_k(k_v, &opts);
+      }
+    }
+    //Ensure that result is non-trivial
+    REQUIRE(!approx_equal(RHS,zero_mat,"reldiff",1e-1));
+
+    REQUIRE(approx_equal(factor*LHS,RHS,"reldiff",1e-12));
   };
 
   SECTION("Option: IM, TEMP") {
     opts.fancy_complex = IM;
     opts.weight_function = TEMP;
     factor = 1. / (1. - exp(-beta * omega_kv));
-    opts.indices = {0, 0};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
-            result_x * factor);
-    opts.indices = {1, 1};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
-            result_yz * factor);
-    opts.indices = {2, 2};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
-            result_yz * factor);
+    for(int i = 0; i < 3; ++i) {
+      for(int j = 0; j < 3; ++j) {
+	opts.indices(0) = i;
+	opts.indices(1) = j;
+	RHS(i,j) = Greens.integrand_k(k_v, &opts);
+      }
+    }
+    //Ensure that result is non-trivial
+    REQUIRE(!approx_equal(RHS,zero_mat,"reldiff",1e-1));
+
+    REQUIRE(approx_equal(factor*LHS,RHS,"reldiff",1e-12));
   };
 
   SECTION("Option: IM, KV_TEMP") {
     opts.fancy_complex = IM;
     opts.weight_function = KV_TEMP;
     factor = k_v / (1. - exp(-beta * omega_kv));
-    opts.indices = {0, 0};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
-            result_x * factor);
-    opts.indices = {1, 1};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
-            result_yz * factor);
-    opts.indices = {2, 2};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
-            result_yz * factor);
+    for(int i = 0; i < 3; ++i) {
+      for(int j = 0; j < 3; ++j) {
+	opts.indices(0) = i;
+	opts.indices(1) = j;
+	RHS(i,j) = Greens.integrand_k(k_v, &opts);
+      }
+    }
+    //Ensure that result is non-trivial
+    REQUIRE(!approx_equal(RHS,zero_mat,"reldiff",1e-1));
+
+    REQUIRE(approx_equal(factor*LHS,RHS,"reldiff",1e-12));
   };
 
   SECTION("Option: IM, NON_LTE") {
@@ -126,15 +143,22 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
     opts.weight_function = NON_LTE;
     factor =
         1. / (1. - exp(-beta * (omega_kv))) - 1. / (1. - exp(-beta * omega));
-    opts.indices = {0, 0};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
-            result_x * factor);
-    opts.indices = {1, 1};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
-            result_yz * factor);
-    opts.indices = {2, 2};
-    REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
-            result_yz * factor);
+    for(int i = 0; i < 3; ++i) {
+      for(int j = 0; j < 3; ++j) {
+	opts.indices(0) = i;
+	opts.indices(1) = j;
+	RHS(i,j) = Greens.integrand_k(k_v, &opts);
+      }
+    }
+    //Ensure that result is non-trivial
+    if(approx_equal(RHS,zero_mat,"reldiff",1e-1))
+    {
+      std::cout << omega << '\t' << k_v << '\t' << beta << '\t' << v << std::endl;
+      std::cout << RHS << std::endl;
+    }
+    REQUIRE(!approx_equal(RHS,zero_mat,"reldiff",1e-1));
+
+    REQUIRE(approx_equal(factor*LHS,RHS,"reldiff",1e-12));
   };
 };
 
