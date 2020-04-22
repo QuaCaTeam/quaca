@@ -261,8 +261,6 @@ double GreensTensorPlate::integrand_2d_k(double kappa_double, void *opts) {
   // Calculate the G_xx element
   if (opts_pt->indices(0) == 0 && opts_pt->indices(1) == 0) {
     result_complex = prefactor_p * cos_phi_quad + prefactor_s * sin_phi_quad;
-    std::cout << kappa_complex << '\t' << r_s << '\t' <<  omega_pl_quad/kappa_complex << '\t' << prefactor << std::endl;
-    //std::cout << prefactor_p << '\t' << prefactor_s << '\t' << result_complex << std::endl;
   }
   // Calculate the G_yy element
   else if (opts_pt->indices(0) == 1 && opts_pt->indices(1) == 1) {

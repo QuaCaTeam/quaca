@@ -4,10 +4,9 @@
 #include <complex>
 #include <iomanip> // std::setprecision
 
-/*
+
 TEST_CASE("Plate Green's tensor constructors work as expected",
           "[GreensTensorPlate]") {
-
   SECTION("Direct constructor") {
 
     double omega_p = 9;
@@ -76,7 +75,7 @@ TEST_CASE("The operations calculate_tensor and the integrand_2d_k coincide",
           "[GreensTensorPlate]") {
   // Here we considered also the volume element from the integration.
   std::complex<double> I(0.0, 1.0);
-  auto omega = GENERATE(-201,21,-1.2,3.2,103,12);
+  auto omega = GENERATE(-201,21,-1.2,3.2,103.12);
   auto k_x = GENERATE(-321.46,-3.54,1.21,32.1);
   auto k_y = GENERATE(-123.12,-0.0132,3.87,67.21);
   double omega_p = 9;
@@ -136,14 +135,19 @@ TEST_CASE("The operations calculate_tensor and the integrand_2d_k coincide",
       }
     }
   }
+  //Ensure that the results are non trivial
+  cx_mat::fixed<3, 3> zero_mat(fill::zeros);
+  REQUIRE(!approx_equal(Green_fancy_I_ct, zero_mat, "reldiff", 1e-4));
+  REQUIRE(!approx_equal(Green_fancy_I_ik2d, zero_mat, "reldiff", 1e-4));
+
   REQUIRE(approx_equal(Green_fancy_I_ct, Green_fancy_I_ik2d, "reldiff", 10E-4));
 };
-*/
+
 TEST_CASE("Plate Green's tensor fulfills physical relations",
           "[GreensTensorPlate]") {
-/*
+
   SECTION("Green's tensor obeys reciprocity") {
-    auto omega = GENERATE(-201,21,-1.2,3.2,103,12);
+    auto omega = GENERATE(-201,21,-1.2,3.2,87.2);
     auto k_x = GENERATE(-321.46,-3.54,1.21,32.1);
     auto k_y = GENERATE(-123.12,-0.0132,3.87,67.21);
     GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.json");
@@ -162,10 +166,15 @@ TEST_CASE("Plate Green's tensor fulfills physical relations",
     opts.kvec(1) = -k_y;
     Greens.calculate_tensor(Greens_rhs, opts);
 
+    //Ensure that the results are non trivial
+    cx_mat::fixed<3, 3> zero_mat(fill::zeros);
+    REQUIRE(!approx_equal(Greens_lhs, zero_mat, "reldiff", 1e-14));
+    REQUIRE(!approx_equal(Greens_rhs, zero_mat, "reldiff", 1e-14));
+
     REQUIRE(approx_equal(Greens_lhs, strans(Greens_rhs), "reldiff", 10E-15));
   };
   SECTION("Green's tensor obeys reality condition") {
-    auto omega = GENERATE(-201,21,-1.2,3.2,103,12);
+    auto omega = GENERATE(-201,21,-1.2,3.2,87.2);
     auto k_x = GENERATE(-321.46,-3.54,1.21,32.1);
     auto k_y = GENERATE(-123.12,-0.0132,3.87,67.21);
     GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.json");
@@ -183,6 +192,11 @@ TEST_CASE("Plate Green's tensor fulfills physical relations",
     opts.kvec(0) = k_x;
     opts.kvec(1) = k_y;
     Greens.calculate_tensor(Greens_rhs, opts);
+
+    //Ensure that the results are non trivial
+    cx_mat::fixed<3, 3> zero_mat(fill::zeros);
+    REQUIRE(!approx_equal(Greens_lhs, zero_mat, "reldiff", 1e-14));
+    REQUIRE(!approx_equal(Greens_rhs, zero_mat, "reldiff", 1e-14));
 
     REQUIRE(approx_equal(Greens_lhs, trans(Greens_rhs), "reldiff", 10E-15));
   };
@@ -205,13 +219,16 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
     opts.omega = -omega;
     Greens.integrate_k(Greens_rhs, opts);
 
+    //Ensure that the results are non trivial
+    cx_mat::fixed<3, 3> zero_mat(fill::zeros);
+    REQUIRE(!approx_equal(Greens_lhs, zero_mat, "reldiff", 1e-14));
+    REQUIRE(!approx_equal(Greens_rhs, zero_mat, "reldiff", 1e-14));
+
     REQUIRE(approx_equal(Greens_lhs, -strans(Greens_rhs), "reldiff", 10E-4));
   };
-*/
+
   SECTION("Integral over Green_fancy_R obeys the crossing relation") {
-    //double omega = GENERATE(1.543,23.54,89.12,12.0);
-    double omega = 12. - 1.3e-12;
-    std::cout << "Omega " << omega << std::endl;
+    auto omega = GENERATE(1.543,23.54,89.12);
     GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.json");
     struct Options_GreensTensor opts;
     opts.class_pt = &Greens;
@@ -221,18 +238,21 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
     opts.omega = omega;
     opts.fancy_complex = RE;
     Greens.integrate_k(Greens_lhs, opts);
-    std::cout << "Getting here";
 
     opts.omega = -omega;
 
     Greens.integrate_k(Greens_rhs, opts);
-    std:: cout << " Getting here " << std::endl;
+
+    //Ensure that the results are non trivial
+    cx_mat::fixed<3, 3> zero_mat(fill::zeros);
+    REQUIRE(!approx_equal(Greens_lhs, zero_mat, "reldiff", 1e-14));
+    REQUIRE(!approx_equal(Greens_rhs, zero_mat, "reldiff", 1e-14));
 
     REQUIRE(approx_equal(Greens_lhs, strans(Greens_rhs), "reldiff", 10E-4));
   };
-/*
+
   SECTION("Integral over Green_fancy_I_kv obeys the crossing relation") {
-    auto omega = GENERATE(1.543,23.54,765,12);
+    auto omega = GENERATE(5.43e-2,2.354e-3,8.12e-4);
     GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.json");
     struct Options_GreensTensor opts;
     opts.class_pt = &Greens;
@@ -246,22 +266,30 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
 
     opts.omega = -omega;
     Greens.integrate_k(Greens_rhs, opts);
+
+    //Ensure that the results are non trivial
+    cx_mat::fixed<3, 3> zero_mat(fill::zeros);
+    REQUIRE(!approx_equal(Greens_lhs, zero_mat, "reldiff", 1e-14));
+    REQUIRE(!approx_equal(Greens_rhs, zero_mat, "reldiff", 1e-14));
+
     REQUIRE(approx_equal(Greens_lhs, strans(Greens_rhs), "reldiff", 10E-4));
   };
   SECTION("Integral over Green fancy_I, temp obeys the crossing relation") {
-    auto omega = GENERATE(1.543,23.54,765,12);
+    auto omega = GENERATE(5.43e-2,2.354e-3,8.12e-4);
     GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.json");
     struct Options_GreensTensor opts;
     opts.class_pt = &Greens;
     opts.fancy_complex = IM;
+    // Test of fancy_I_kv
+    opts.omega = -omega;
+    opts.fancy_complex = IM;
+    opts.weight_function = TEMP;
+
     cx_mat::fixed<3, 3> Greens_lhs(fill::zeros);
     cx_mat::fixed<3, 3> Greens_rhs(fill::zeros);
     cx_mat::fixed<3, 3> Greens_rhs1(fill::zeros);
     cx_mat::fixed<3, 3> Greens_rhs2(fill::zeros);
-    // Test of fancy_I_kv
-    opts.omega = -omega;
-    // opts.fancy_complex = IM;
-    opts.weight_function = TEMP;
+
     Greens.integrate_k(Greens_lhs, opts);
 
     opts.omega = omega;
@@ -273,10 +301,17 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
     Greens.integrate_k(Greens_rhs2, opts);
 
     Greens_rhs = -Greens_rhs1 + Greens_rhs2;
+
+    //Ensure that the results are non trivial
+    cx_mat::fixed<3, 3> zero_mat(fill::zeros);
+    REQUIRE(!approx_equal(Greens_lhs, zero_mat, "reldiff", 1e-14));
+    REQUIRE(!approx_equal(Greens_rhs, zero_mat, "reldiff", 1e-14));
+
     REQUIRE(approx_equal(Greens_lhs, strans(Greens_rhs), "reldiff", 10E-4));
   };
+
   SECTION("Integral over Green_fancy_I_kv_temp obeys the crossing relation") {
-    auto omega = GENERATE(1.543,23.54,765,12);
+    auto omega = GENERATE(5.43e-2,2.354e-3,8.12e-4);
     GreensTensorPlate Greens("../data/test_files/GreensTensorPlate.json");
     struct Options_GreensTensor opts;
     opts.class_pt = &Greens;
@@ -300,12 +335,18 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
     Greens.integrate_k(Greens_rhs2, opts);
 
     Greens_rhs = -Greens_rhs1 + Greens_rhs2;
+
+    //Ensure that the results are non trivial
+    cx_mat::fixed<3, 3> zero_mat(fill::zeros);
+    REQUIRE(!approx_equal(Greens_lhs, zero_mat, "reldiff", 1e-14));
+    REQUIRE(!approx_equal(Greens_rhs, zero_mat, "reldiff", 1e-14));
+
     REQUIRE(approx_equal(Greens_lhs, -strans(Greens_rhs), "reldiff", 10E-4));
   };
-  */
+  
 };
 
-/*
+
 TEST_CASE("Integrated Green's tensor matches asymptotes",
           "[GreensTensorPlate]") {
   SECTION("Low-frequency asymptote of fancy_I") {
@@ -315,7 +356,7 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     double gamma = 0.1;
     double v = 1e-5;
     double za = 0.1;
-    auto omega = GENERATE(-0.1*1e-6, -0.54*10e-8,1.23*1e-7,0.1*1e-6);
+    auto omega = GENERATE(-0.1*1e-8, -0.54*10e-8,1.23*1e-7,0.1*1e-6);
     double delta_cut = 30;
     vec::fixed<2> rel_err = {1E-8, 1E-6};
     PermittivityDrude perm(omega_p, gamma);
@@ -333,6 +374,12 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     opts.fancy_complex = IM;
     opts.omega = omega;
     Greens.integrate_k(GT_Num, opts);
+
+    //Ensure that the results are non trivial
+    cx_mat::fixed<3, 3> zero_mat(fill::zeros);
+    REQUIRE(!approx_equal(GT_Ana, zero_mat, "reldiff", 1e-14));
+    REQUIRE(!approx_equal(GT_Num, zero_mat, "reldiff", 1e-14));
+
     REQUIRE(approx_equal(GT_Ana, GT_Num, "reldiff", 10E-4));
   };
   SECTION("Low-frequency and low temperature asymptote of fancy_I_temp") {
@@ -344,7 +391,7 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     double za = 0.1;
     double beta = 1e12;
     double eta, rho;
-    auto omega = GENERATE( 5.32*1e-8,3.54*10-7,1e-6);
+    auto omega = GENERATE( 5.32*1e-8,3.54*1e-7,1e-6);
     double delta_cut = 30;
     vec::fixed<2> rel_err = {1E-8, 1E-6};
     PermittivityDrude perm(omega_p, gamma);
@@ -368,8 +415,15 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     opts.weight_function = TEMP;
     opts.omega = omega;
     Greens.integrate_k(GT_Num, opts);
+
+    //Ensure that the results are non trivial
+    cx_mat::fixed<3, 3> zero_mat(fill::zeros);
+    REQUIRE(!approx_equal(GT_Ana, zero_mat, "reldiff", 1e-14));
+    REQUIRE(!approx_equal(GT_Num, zero_mat, "reldiff", 1e-14));
+
     REQUIRE(approx_equal(GT_Ana, GT_Num, "reldiff", 10E-4));
   };
+
   SECTION("Low-frequency and low temperature asymptote of fancy_I_temp_kv") {
     // \omega << \omega_p and \omega << v/z_a
     std::complex<double> I(0.0, 1.0);
@@ -379,7 +433,7 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     double za = 0.1;
     double beta = 1e12;
     double eta, rho;
-    auto omega = GENERATE(take(1, random(0., 1e-6)));
+    auto omega = GENERATE( 5.32*1e-8,3.54*1e-7,1e-6);
     double delta_cut = 30;
     vec::fixed<2> rel_err = {1E-8, 1E-6};
     PermittivityDrude perm(omega_p, gamma);
@@ -403,6 +457,12 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     opts.weight_function = KV_TEMP;
     opts.omega = omega;
     Greens.integrate_k(GT_Num, opts);
+
+    //Ensure that the results are non trivial
+    cx_mat::fixed<3, 3> zero_mat(fill::zeros);
+    REQUIRE(!approx_equal(GT_Ana, zero_mat, "reldiff", 1e-14));
+    REQUIRE(!approx_equal(GT_Num, zero_mat, "reldiff", 1e-14));
+
     REQUIRE(approx_equal(GT_Ana, GT_Num, "reldiff", 10E-4));
   };
   SECTION("Low-frequency and high temperature asymptote of fancy_I_temp") {
@@ -413,7 +473,7 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     double v = 1e-5;
     double za = 0.1;
     double beta = 1e-1;
-    auto omega = GENERATE(take(1, random(1e-8, 1e-7)));
+    auto omega = GENERATE(3.21*1e-8,1.23*1e-7);
     double delta_cut = 30;
     vec::fixed<2> rel_err = {1E-8, 1E-6};
     PermittivityDrude perm(omega_p, gamma);
@@ -435,7 +495,12 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
         0.5 * (2 * 3 * v * gamma / (pow(omega_p, 2) * pow(2 * za, 4))) / I;
     GT_rhs(2, 0) = -GT_rhs(0, 2);
 
+    //Ensure that the results are non trivial
+    cx_mat::fixed<3, 3> zero_mat(fill::zeros);
+    REQUIRE(!approx_equal(GT_lhs, zero_mat, "reldiff", 1e-14));
+    REQUIRE(!approx_equal(GT_rhs, zero_mat, "reldiff", 1e-14));
+
     REQUIRE(approx_equal(GT_lhs, GT_rhs, "reldiff", 10E-4));
   };
 };
-*/
+

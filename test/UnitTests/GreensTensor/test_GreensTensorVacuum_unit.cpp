@@ -7,9 +7,9 @@ TEST_CASE("Vacuum Green's tensor constructors work as expected",
           "[GreensTensorVacuum]") {
 
   SECTION("Direct constructor") {
-    auto v = GENERATE(take(2, random(0., 1.)));
-    auto beta = GENERATE(take(2, random(1e-3, 1e3)));
-    auto relerr = GENERATE(take(2, random(1e-9, 1e-1)));
+    auto v = GENERATE(3.2e-3,1.2e-1);
+    auto beta = GENERATE(3.65,100.34);
+    auto relerr = GENERATE(1e-8,1e-7);
 
     GreensTensorVacuum Greens(v, beta, relerr);
 
@@ -33,8 +33,8 @@ TEST_CASE("Vacuum Green's tensor constructors work as expected",
 
 TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
   // Generate a Green's tensor with random attributes v and beta
-  auto v = GENERATE(take(3, random(1e-10, 1.)));
-  auto beta = GENERATE(take(3, random(1., 8e1)));
+  auto v = GENERATE(1e-4,1e-8);
+  auto beta = GENERATE(123.21,1.32,54.23);
   double relerr = 1E-9;
   GreensTensorVacuum Greens(v, beta, relerr);
 
