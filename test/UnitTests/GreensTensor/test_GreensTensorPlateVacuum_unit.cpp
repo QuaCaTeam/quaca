@@ -43,9 +43,9 @@ TEST_CASE("GreensTensorPlateVacuum calculate_tensor function returns the sum "
   PermittivityDrude perm(omega_p, gamma);
   ReflectionCoefficientsLocBulk refl(&perm);
 
-  double v = 1E-5;
+  double v = 1E-8;
   double za = 0.1;
-  double beta = 1E4;
+  double beta = 0.01;
   double delta_cut = 20;
   vec::fixed<2> rel_err = {1E-8, 1E-6};
 
@@ -53,28 +53,34 @@ TEST_CASE("GreensTensorPlateVacuum calculate_tensor function returns the sum "
   GreensTensorPlate GTPlate(v, za, beta, &refl, delta_cut, rel_err);
   GreensTensorVacuum GTVacuum(v, beta, rel_err(0));
 
-  auto k_x = GENERATE(take(1, random(-1e3, 1e3)));
-  auto k_y = GENERATE(take(1, random(-1e3, 1e3)));
-  auto omega = GENERATE(take(1, random(1., 1e3)));
+  auto k_x = GENERATE(-12.42,0.124);
+  auto k_y = GENERATE(-6.543,34.123);
+  auto omega = GENERATE(-1.1, 5.3);
+  //Only for \omega^2 - k^2 >= 0 GreensTensorVacuum returns non-trivial results
+  omega *= sqrt(pow(k_x,2) + pow(k_y,2));
 
-  Options_GreensTensor opts_pv;
-  opts_pv.class_pt = &GTPlateVacuum;
-  opts_pv.fancy_complex = IM;
-  opts_pv.omega = omega;
-  opts_pv.kvec(0) = -k_x;
-  opts_pv.kvec(1) = -k_y;
+  Options_GreensTensor opts;
+  opts.class_pt = &GTPlateVacuum;
+  opts.fancy_complex = IM;
+  opts.omega = omega;
+  opts.kvec(0) = k_x;
+  opts.kvec(1) = k_y;
   cx_mat::fixed<3, 3> TensorPlateVacuum(fill::zeros);
-  GTPlateVacuum.calculate_tensor(TensorPlateVacuum, opts_pv);
+  GTPlateVacuum.calculate_tensor(TensorPlateVacuum, opts);
 
-  Options_GreensTensor opts_vac = opts_pv;
-  opts_vac.class_pt = &GTVacuum;
+  opts.class_pt = &GTVacuum;
   cx_mat::fixed<3, 3> TensorVacuum(fill::zeros);
-  GTVacuum.calculate_tensor(TensorVacuum, opts_vac);
+  GTVacuum.calculate_tensor(TensorVacuum, opts);
 
-  Options_GreensTensor opts_plate = opts_pv;
-  opts_plate.class_pt = &GTPlate;
+  opts.class_pt = &GTPlate;
   cx_mat::fixed<3, 3> TensorPlate(fill::zeros);
-  GTPlate.calculate_tensor(TensorPlate, opts_plate);
+  GTPlate.calculate_tensor(TensorPlate, opts);
+
+  //Ensure non-trivial results
+  cx_mat::fixed<3,3> zero_mat(fill::zeros);
+  REQUIRE(!approx_equal(TensorPlateVacuum,zero_mat,"reldiff",1e-1));
+  REQUIRE(!approx_equal(TensorVacuum,zero_mat,"reldiff",1e-1));
+  REQUIRE(!approx_equal(TensorPlate,zero_mat,"reldiff",1e-1));
 
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
@@ -103,9 +109,11 @@ TEST_CASE("GreensTensorPlateVacuum integrate_k function returns the sum "
   GreensTensorPlate GTPlate(v, za, beta, &refl, delta_cut, rel_err);
   GreensTensorVacuum GTVacuum(v, beta, rel_err(0));
 
-  auto k_x = GENERATE(take(1, random(-1e3, 1e3)));
-  auto k_y = GENERATE(take(1, random(-1e3, 1e3)));
-  auto omega = GENERATE(take(1, random(1., 1e3)));
+  auto k_x = GENERATE(-10.32,2.43);
+  auto k_y = GENERATE(-6.53,32.43);
+  auto omega = GENERATE(3.2);
+  //Only for \omega^2 - k^2 >= 0 GreensTensorVacuum returns non-trivial results
+  omega *= sqrt(pow(k_x,2) + pow(k_y,2));
 
   Options_GreensTensor opts_pv;
   opts_pv.class_pt = &GTPlateVacuum;
@@ -123,6 +131,12 @@ TEST_CASE("GreensTensorPlateVacuum integrate_k function returns the sum "
   opts_plate.class_pt = &GTPlate;
   cx_mat::fixed<3, 3> TensorPlate(fill::zeros);
   GTPlate.integrate_k(TensorPlate, opts_plate);
+
+  //Ensure non-trivial results
+  cx_mat::fixed<3,3> zero_mat(fill::zeros);
+  REQUIRE(!approx_equal(TensorPlateVacuum,zero_mat,"reldiff",1e-1));
+  REQUIRE(!approx_equal(TensorVacuum,zero_mat,"reldiff",1e-1));
+  REQUIRE(!approx_equal(TensorPlate,zero_mat,"reldiff",1e-1));
 
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
