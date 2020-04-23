@@ -34,7 +34,7 @@ TEST_CASE("Vacuum Green's tensor constructors work as expected",
 TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
   // Generate a Green's tensor with random attributes v and beta
   auto v = GENERATE(1e-4,1e-8);
-  auto beta = GENERATE(12.21,1.32,5.23);
+  auto beta = GENERATE(0.21,1.32,5.23);
   double relerr = 1E-9;
   GreensTensorVacuum Greens(v, beta, relerr);
 
@@ -60,9 +60,6 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
   LHS(0,0) = .5 * xi;
   LHS(1,1) = .5 * (pow(omega_kv, 2) - .5 * xi);
   LHS(2,2) = LHS(1,1);
-
-  double result_x = LHS(0,0).real();
-  double result_yz = LHS(1,1).real();
 
   //Matrix with only zero entries
   cx_mat::fixed<3,3> zero_mat(fill::zeros);
@@ -150,12 +147,8 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
 	RHS(i,j) = Greens.integrand_k(k_v, &opts);
       }
     }
-    //Ensure that result is non-trivial
-    if(approx_equal(RHS,zero_mat,"reldiff",1e-1))
-    {
-      std::cout << omega << '\t' << k_v << '\t' << beta << '\t' << v << std::endl;
-      std::cout << RHS << std::endl;
-    }
+	
+    //Ensure non-trivial result
     REQUIRE(!approx_equal(RHS,zero_mat,"reldiff",1e-1));
 
     REQUIRE(approx_equal(factor*LHS,RHS,"reldiff",1e-12));
@@ -169,8 +162,8 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
 TEST_CASE("Crossing relation in frequency domain see eq. [1]",
           "[GreensTensorVacuum]") {
   // Generate a Green's tensor with random attributes v and beta
-  auto v = GENERATE(take(1, random(0., 1.)));
-  auto beta = GENERATE(take(1, random(1e-5, 1e5)));
+  auto v = GENERATE(1e-4,1e-8);
+  auto beta = GENERATE(0.01,10.);
   double relerr = 1E-9;
   GreensTensorVacuum Greens(v, beta, relerr);
   // Create a struct with the integration options
@@ -184,9 +177,9 @@ TEST_CASE("Crossing relation in frequency domain see eq. [1]",
 
   // Create the variables for the num_result, taking care, that
   //\omega^2 - k^2 >= 0 to stay in the non-trivial regime
-  auto k_x = GENERATE(take(3, random(-1e3, 1e3)));
-  auto k_y = GENERATE(take(3, random(-1e3, 1e3)));
-  auto omega = GENERATE(take(3, random(1., 1e3)));
+  auto k_x = GENERATE(-12.42,0.124,76.543);
+  auto k_y = GENERATE(-6.543,-1.43,34.123);
+  auto omega = GENERATE(1.1, 5.3,10.2);
   double k = sqrt(k_x * k_x + k_y * k_y);
   omega *= k;
 
@@ -201,13 +194,18 @@ TEST_CASE("Crossing relation in frequency domain see eq. [1]",
   opts.kvec(1) = k_y;
   Greens.calculate_tensor(Greens_rhs, opts);
 
+  //Ensure non-trivial result
+  cx_mat::fixed<3,3> zero_mat(fill::zeros);
+  REQUIRE(!approx_equal(Greens_lhs,zero_mat,"reldiff",1e-1));
+  REQUIRE(!approx_equal(Greens_rhs,zero_mat,"reldiff",1e-1));
+
   REQUIRE(approx_equal(Greens_lhs, trans(conj(Greens_rhs)), "reldiff", 10E-5));
 };
 
 TEST_CASE("Reciprocity, see eq. [6]", "[GreensTensorVacuum]") {
   // Generate a Green's tensor with random attributes v and beta
-  auto v = GENERATE(take(1, random(0., 1.)));
-  auto beta = GENERATE(take(1, random(1e-5, 1e5)));
+  auto v = GENERATE(1e-4,1e-8);
+  auto beta = GENERATE(0.01,10.);
   double relerr = 1E-9;
   GreensTensorVacuum Greens(v, beta, relerr);
   // Create a struct with the integration options
@@ -218,9 +216,9 @@ TEST_CASE("Reciprocity, see eq. [6]", "[GreensTensorVacuum]") {
   // Create the matries storing the Green's tensors
   cx_mat::fixed<3, 3> Greens_lhs(fill::zeros);
   cx_mat::fixed<3, 3> Greens_rhs(fill::zeros);
-  auto omega = GENERATE(take(5, random(1., 1e3)));
-  auto k_x = GENERATE(take(5, random(0.0, 1e3)));
-  auto k_y = GENERATE(take(5, random(0.0, 1e3)));
+  auto k_x = GENERATE(-12.42,0.124,76.543);
+  auto k_y = GENERATE(-6.543,-1.43,34.123);
+  auto omega = GENERATE(1.1, 5.3,10.2);
 
   // Take care that we are looking at the non trivial part of the Green's tensor
   // where \omega^2 - k^2 >= 0
@@ -237,14 +235,19 @@ TEST_CASE("Reciprocity, see eq. [6]", "[GreensTensorVacuum]") {
   opts.kvec(1) = k_y;
   Greens.calculate_tensor(Greens_rhs, opts);
 
+  //Ensure non-trivial result
+  cx_mat::fixed<3,3> zero_mat(fill::zeros);
+  REQUIRE(!approx_equal(Greens_lhs,zero_mat,"reldiff",1e-1));
+  REQUIRE(!approx_equal(Greens_rhs,zero_mat,"reldiff",1e-1));
+
   REQUIRE(approx_equal(Greens_lhs, trans(Greens_rhs), "reldiff", 10E-5));
 };
 
 TEST_CASE("Reality, see eq. [7]", "[GreensTensorVacuum]") {
   // Generate a Green's tensor with random attributes v and beta
-  auto v = GENERATE(take(1, random(0., 1.)));
-  auto beta = GENERATE(take(1, random(1e-5, 1e5)));
-  auto omega = GENERATE(take(5, random(-1e3, 1e3)));
+  auto v = GENERATE(1e-4,1e-8);
+  auto beta = GENERATE(0.01,10.);
+  auto omega = GENERATE(1.32,6.34,10.32,54.21);
   double relerr = 1E-9;
   GreensTensorVacuum Greens(v, beta, relerr);
 
@@ -263,6 +266,11 @@ TEST_CASE("Reality, see eq. [7]", "[GreensTensorVacuum]") {
   opts.omega = -omega;
   Greens.integrate_k(Greens_rhs, opts);
 
+  //Ensure non-trivial result
+  cx_mat::fixed<3,3> zero_mat(fill::zeros);
+  REQUIRE(!approx_equal(Greens_lhs,zero_mat,"reldiff",1e-1));
+  REQUIRE(!approx_equal(Greens_rhs,zero_mat,"reldiff",1e-1));
+
   REQUIRE(approx_equal(Greens_lhs, -Greens_rhs, "reldiff", 10E-5));
 };
 
@@ -270,9 +278,9 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
 
   SECTION("Option: IM") {
     // Generate a Green's tensor with random attributes v and beta
-    auto v = GENERATE(take(1, random(0., 1.)));
-    auto beta = GENERATE(take(1, random(1e-5, 1e5)));
-    auto omega = GENERATE(take(1, random(-1e2, 1e2)));
+    auto v = GENERATE(1e-4);
+    auto beta = GENERATE(1e-3);
+    auto omega = GENERATE(1.32);
     double relerr = 1E-9;
     GreensTensorVacuum Greens(v, beta, relerr);
 
@@ -298,15 +306,20 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     ana_result(1, 1) = ana_pref * (1 + pow(v, 2)) / (1 - pow(v, 2));
     ana_result(2, 2) = ana_pref * (1 + pow(v, 2)) / (1 - pow(v, 2));
 
+    //Ensure non-trivial results
+    cx_mat::fixed<3,3> zero_mat(fill::zeros);
+    REQUIRE(!approx_equal(num_result, zero_mat, "reldiff", 10E-5));
+    REQUIRE(!approx_equal(ana_result, zero_mat,  "reldiff", 10E-5));
+
     REQUIRE(approx_equal(num_result, ana_result, "reldiff", 10E-5));
   };
 
   SECTION("Option: IM, KV") {
 
     // Generate a Green's tensor with random attributes v and beta
-    auto v = GENERATE(take(1, random(0., 1.)));
-    auto beta = GENERATE(take(1, random(1e-5, 1e5)));
-    auto omega = GENERATE(take(1, random(-1e2, 1e2)));
+    auto v = GENERATE(1e-4);
+    auto beta = GENERATE(1e-3);
+    auto omega = GENERATE(1.32);
     double relerr = 1E-9;
     GreensTensorVacuum Greens(v, beta, relerr);
 
@@ -333,14 +346,19 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     ana_result(1, 1) = ana_pref * (2. + pow(v, 2)) / (1. - pow(v, 2));
     ana_result(2, 2) = ana_result(1, 1);
 
+    //Ensure non-trivial results
+    cx_mat::fixed<3,3> zero_mat(fill::zeros);
+    REQUIRE(!approx_equal(num_result, zero_mat, "reldiff", 10E-5));
+    REQUIRE(!approx_equal(ana_result, zero_mat,  "reldiff", 10E-5));
+
     REQUIRE(approx_equal(num_result, ana_result, "reldiff", 10E-5));
   }
 
   SECTION("Option: IM, TEMP") {
     // Generate a Green's tensor with random attributes v and beta
-    auto v = GENERATE(take(1, random(0., 1.)));
-    auto omega = GENERATE(take(3, random(-1e2, 1e2)));
-    auto beta = GENERATE(take(3, random(10e-10, 10e-12)));
+    auto v = GENERATE(1e-4);
+    auto beta = GENERATE(1e-3);
+    auto omega = GENERATE(1.32);
     beta *= fabs(omega);
     double relerr = 1E-9;
     GreensTensorVacuum Greens(v, beta, relerr);
@@ -369,15 +387,19 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
         ana_pref * ((3. * pow(v, 3) - v) / pow(1 - pow(v, 2), 2) + atanh(v));
     ana_result(2, 2) = ana_result(1, 1);
 
+    //Ensure non-trivial results
+    cx_mat::fixed<3,3> zero_mat(fill::zeros);
+    REQUIRE(!approx_equal(num_result, zero_mat, "reldiff", 10E-5));
+    REQUIRE(!approx_equal(ana_result, zero_mat,  "reldiff", 10E-5));
+
     REQUIRE(approx_equal(num_result, ana_result, "reldiff", 10E-4));
   }
 
   SECTION("Option: IM, KV_TEMP") {
     // Generate a Green's tensor with random attributes v and beta
-    auto v = GENERATE(take(1, random(0., 1.)));
-    auto omega = GENERATE(take(3, random(-1e1, 1e1)));
-    auto beta = GENERATE(take(3, random(10e-10, 10e-12)));
-    //  beta *= fabs(omega);
+    auto v = GENERATE(1e-2);
+    auto beta = GENERATE(1e-12);
+    auto omega = GENERATE(.54);
     double relerr = 1E-9;
     GreensTensorVacuum Greens(v, beta, relerr);
 
@@ -408,6 +430,11 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
                                        pow(pow(v, 2) - 1, 3) -
                                    3. * std::atanh(v));
     ana_result(2, 2) = ana_result(1, 1);
+
+    //Ensure non-trivial results
+    cx_mat::fixed<3,3> zero_mat(fill::zeros);
+    REQUIRE(!approx_equal(num_result, zero_mat, "reldiff", 10E-5));
+    REQUIRE(!approx_equal(ana_result, zero_mat,  "reldiff", 10E-5));
 
     REQUIRE(approx_equal(num_result, ana_result, "reldiff", 10E-5));
   };
