@@ -59,15 +59,21 @@ TEST_CASE("PolarizabilityBath integrand works as expected",
   pol.calculate_tensor(alpha, opts);
 
   // calculation with calculate_tensor give the same result as integrand
+  // Tensor to store the result
+  cx_mat::fixed<3,3> alpha_int(fill::zeros);
 
   // loop over all indices
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
       opts.indices(0) = i;
       opts.indices(1) = j;
-      pol.calculate_tensor(alpha, opts);
-      REQUIRE(pol.integrand_omega(omega, &opts) ==
-              alpha(opts.indices(0), opts.indices(1)));
+      alpha_int(i,j) = pol.integrand_omega(omega, &opts);
     }
   }
+  //Ensure non-trivial results
+  cx_mat::fixed<3,3> zero_mat(fill::zeros);
+  REQUIRE(!approx_equal(alpha,zero_mat,"reldiff",1e-1));
+  REQUIRE(!approx_equal(alpha_int,zero_mat,"reldiff",1e-1));
+
+  REQUIRE(approx_equal(alpha,alpha_int,"reldiff",1e-6));
 };
