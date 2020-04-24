@@ -160,3 +160,99 @@ Christoph: - print_info() function
            - (delete options class and implement logger)
 Simon: Test cases: rewrite GENERATE and pointer to smart pointer
         Example input files, Tutorials, print_info() function with comments in .csv file, Logger
+        
+        
+# Quaca Meeting 24.04.2020
+
+## Update
+
+ - Simon Testcases: Test if tensors are different from zero
+
+ - is_zero() function of the armadillo library is not working
+
+    * We need to update armadillo library (to >= 9.850)
+
+
+ - Christoph explains pointer problems in integrations:
+
+    * Shared pointer cause massive overhead (with the current integration solution)
+
+    * Integration could be adapted, but seems to be challenging
+
+
+   - Simon is in favour of reimplementing, since it would improve the code's extensibility
+
+ - Casimir-Polder and other features:
+
+    * either we should spend some time on Casimir-Polder or leave it out
+
+    * also Bettina plans to work on Casimir-Polder either way as a starting point of here PhD Thesis
+
+    * alternatively we can implement the decay rate, well established quantity in the community and easy to implement
+
+    (everything is already there)
+
+    * rather implement angular momentum (good for presenting numerical efficiency of the integrations)
+
+
+## Perspectives
+
+    - Currently Bettina will not join the project
+
+    - Paula want to do her thesis with QuaCa (September - December)
+
+    - Daniel wants to learn the code
+
+    - Is Francesco ready to hand over the code to another student?
+
+    - Huddle with Francesco?
+
+
+## Open Source Paper 
+
+    - Kurt agrees to publish in JOSS
+
+    - the developers are happy
+
+
+## Tasks
+
+    - __Current__:
+
+     - Marty:
+
+      - finish the docs
+
+      - implement decay rate
+
+
+     - Simon: 
+
+      - finish tests
+
+
+     - Christoph:
+
+      - move options struct
+
+      - openmp to mpi
+
+
+    - __Coming up next__:
+
+
+     - Marty:
+
+      - Test private gitHub with Travis CI
+
+      - Mail to Francesco
+
+
+     - Simon: 
+
+      - finish tests
+
+
+     - Christoph:
+
+      - shared pointer with new integration
