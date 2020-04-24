@@ -21,7 +21,7 @@ include_directories(${GSL_INCLUDE_DIRS})
 # find lapack and use armadillo without runtimelibrary, wrap blas and lapack
 find_package(LAPACK REQUIRED)
 find_package(BLAS REQUIRED)
-include_directories("${PROJECT_SOURCE_DIR}/lib/armadillo-9.800.2/include")
+include_directories("${PROJECT_SOURCE_DIR}/lib/armadillo-9.870.2/include")
 
 #find OpenMP library
 find_package(OpenMP REQUIRED)
