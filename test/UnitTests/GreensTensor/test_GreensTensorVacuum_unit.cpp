@@ -61,9 +61,6 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
   LHS(1,1) = .5 * (pow(omega_kv, 2) - .5 * xi);
   LHS(2,2) = LHS(1,1);
 
-  //Matrix with only zero entries
-  cx_mat::fixed<3,3> zero_mat(fill::zeros);
-
   // Create a struct with the integration options
   struct Options_GreensTensor opts;
   opts.class_pt = &Greens;
@@ -79,7 +76,7 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
       }
     }
     //Ensure that result is non-trivial
-    REQUIRE(!approx_equal(RHS,zero_mat,"reldiff",1e-1));
+    REQUIRE(!RHS.is_zero());
 
     REQUIRE(approx_equal(LHS,RHS,"reldiff",1e-12));
   }
@@ -96,7 +93,7 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
       }
     }
     //Ensure that result is non-trivial
-    REQUIRE(!approx_equal(RHS,zero_mat,"reldiff",1e-1));
+    REQUIRE(!RHS.is_zero());
 
     REQUIRE(approx_equal(factor*LHS,RHS,"reldiff",1e-12));
   };
@@ -113,7 +110,7 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
       }
     }
     //Ensure that result is non-trivial
-    REQUIRE(!approx_equal(RHS,zero_mat,"reldiff",1e-1));
+    REQUIRE(!RHS.is_zero());
 
     REQUIRE(approx_equal(factor*LHS,RHS,"reldiff",1e-12));
   };
@@ -130,7 +127,7 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
       }
     }
     //Ensure that result is non-trivial
-    REQUIRE(!approx_equal(RHS,zero_mat,"reldiff",1e-1));
+    REQUIRE(!RHS.is_zero());
 
     REQUIRE(approx_equal(factor*LHS,RHS,"reldiff",1e-12));
   };
@@ -149,7 +146,7 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
     }
 	
     //Ensure non-trivial result
-    REQUIRE(!approx_equal(RHS,zero_mat,"reldiff",1e-1));
+    REQUIRE(!RHS.is_zero());
 
     REQUIRE(approx_equal(factor*LHS,RHS,"reldiff",1e-12));
   };
@@ -195,9 +192,8 @@ TEST_CASE("Crossing relation in frequency domain see eq. [1]",
   Greens.calculate_tensor(Greens_rhs, opts);
 
   //Ensure non-trivial result
-  cx_mat::fixed<3,3> zero_mat(fill::zeros);
-  REQUIRE(!approx_equal(Greens_lhs,zero_mat,"reldiff",1e-1));
-  REQUIRE(!approx_equal(Greens_rhs,zero_mat,"reldiff",1e-1));
+  REQUIRE(!Greens_lhs.is_zero());
+  REQUIRE(!Greens_rhs.is_zero());
 
   REQUIRE(approx_equal(Greens_lhs, trans(conj(Greens_rhs)), "reldiff", 10E-5));
 };
@@ -236,9 +232,8 @@ TEST_CASE("Reciprocity, see eq. [6]", "[GreensTensorVacuum]") {
   Greens.calculate_tensor(Greens_rhs, opts);
 
   //Ensure non-trivial result
-  cx_mat::fixed<3,3> zero_mat(fill::zeros);
-  REQUIRE(!approx_equal(Greens_lhs,zero_mat,"reldiff",1e-1));
-  REQUIRE(!approx_equal(Greens_rhs,zero_mat,"reldiff",1e-1));
+  REQUIRE(!Greens_lhs.is_zero());
+  REQUIRE(!Greens_rhs.is_zero());
 
   REQUIRE(approx_equal(Greens_lhs, trans(Greens_rhs), "reldiff", 10E-5));
 };
@@ -267,9 +262,8 @@ TEST_CASE("Reality, see eq. [7]", "[GreensTensorVacuum]") {
   Greens.integrate_k(Greens_rhs, opts);
 
   //Ensure non-trivial result
-  cx_mat::fixed<3,3> zero_mat(fill::zeros);
-  REQUIRE(!approx_equal(Greens_lhs,zero_mat,"reldiff",1e-1));
-  REQUIRE(!approx_equal(Greens_rhs,zero_mat,"reldiff",1e-1));
+  REQUIRE(!Greens_lhs.is_zero());
+  REQUIRE(!Greens_rhs.is_zero());
 
   REQUIRE(approx_equal(Greens_lhs, -Greens_rhs, "reldiff", 10E-5));
 };
@@ -307,9 +301,8 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     ana_result(2, 2) = ana_pref * (1 + pow(v, 2)) / (1 - pow(v, 2));
 
     //Ensure non-trivial results
-    cx_mat::fixed<3,3> zero_mat(fill::zeros);
-    REQUIRE(!approx_equal(num_result, zero_mat, "reldiff", 10E-5));
-    REQUIRE(!approx_equal(ana_result, zero_mat,  "reldiff", 10E-5));
+    REQUIRE(!num_result.is_zero());
+    REQUIRE(!ana_result.is_zero());
 
     REQUIRE(approx_equal(num_result, ana_result, "reldiff", 10E-5));
   };
@@ -347,9 +340,8 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     ana_result(2, 2) = ana_result(1, 1);
 
     //Ensure non-trivial results
-    cx_mat::fixed<3,3> zero_mat(fill::zeros);
-    REQUIRE(!approx_equal(num_result, zero_mat, "reldiff", 10E-5));
-    REQUIRE(!approx_equal(ana_result, zero_mat,  "reldiff", 10E-5));
+    REQUIRE(!num_result.is_zero());
+    REQUIRE(!ana_result.is_zero());
 
     REQUIRE(approx_equal(num_result, ana_result, "reldiff", 10E-5));
   }
@@ -388,9 +380,8 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     ana_result(2, 2) = ana_result(1, 1);
 
     //Ensure non-trivial results
-    cx_mat::fixed<3,3> zero_mat(fill::zeros);
-    REQUIRE(!approx_equal(num_result, zero_mat, "reldiff", 10E-5));
-    REQUIRE(!approx_equal(ana_result, zero_mat,  "reldiff", 10E-5));
+    REQUIRE(!num_result.is_zero());
+    REQUIRE(!ana_result.is_zero());
 
     REQUIRE(approx_equal(num_result, ana_result, "reldiff", 10E-4));
   }
@@ -432,9 +423,8 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     ana_result(2, 2) = ana_result(1, 1);
 
     //Ensure non-trivial results
-    cx_mat::fixed<3,3> zero_mat(fill::zeros);
-    REQUIRE(!approx_equal(num_result, zero_mat, "reldiff", 10E-5));
-    REQUIRE(!approx_equal(ana_result, zero_mat,  "reldiff", 10E-5));
+    REQUIRE(!num_result.is_zero());
+    REQUIRE(!ana_result.is_zero());
 
     REQUIRE(approx_equal(num_result, ana_result, "reldiff", 10E-5));
   };

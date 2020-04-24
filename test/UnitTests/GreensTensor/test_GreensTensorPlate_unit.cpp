@@ -136,9 +136,8 @@ TEST_CASE("The operations calculate_tensor and the integrand_2d_k coincide",
     }
   }
   //Ensure that the results are non trivial
-  cx_mat::fixed<3, 3> zero_mat(fill::zeros);
-  REQUIRE(!approx_equal(Green_fancy_I_ct, zero_mat, "reldiff", 1e-4));
-  REQUIRE(!approx_equal(Green_fancy_I_ik2d, zero_mat, "reldiff", 1e-4));
+  REQUIRE(!Green_fancy_I_ct.is_zero());
+  REQUIRE(!Green_fancy_I_ik2d.is_zero());
 
   REQUIRE(approx_equal(Green_fancy_I_ct, Green_fancy_I_ik2d, "reldiff", 10E-4));
 };
@@ -167,9 +166,8 @@ TEST_CASE("Plate Green's tensor fulfills physical relations",
     Greens.calculate_tensor(Greens_rhs, opts);
 
     //Ensure that the results are non trivial
-    cx_mat::fixed<3, 3> zero_mat(fill::zeros);
-    REQUIRE(!approx_equal(Greens_lhs, zero_mat, "reldiff", 1e-14));
-    REQUIRE(!approx_equal(Greens_rhs, zero_mat, "reldiff", 1e-14));
+    REQUIRE(!Greens_lhs.is_zero());
+    REQUIRE(!Greens_rhs.is_zero());
 
     REQUIRE(approx_equal(Greens_lhs, strans(Greens_rhs), "reldiff", 10E-15));
   };
@@ -194,9 +192,8 @@ TEST_CASE("Plate Green's tensor fulfills physical relations",
     Greens.calculate_tensor(Greens_rhs, opts);
 
     //Ensure that the results are non trivial
-    cx_mat::fixed<3, 3> zero_mat(fill::zeros);
-    REQUIRE(!approx_equal(Greens_lhs, zero_mat, "reldiff", 1e-14));
-    REQUIRE(!approx_equal(Greens_rhs, zero_mat, "reldiff", 1e-14));
+    REQUIRE(!Greens_lhs.is_zero());
+    REQUIRE(!Greens_rhs.is_zero());
 
     REQUIRE(approx_equal(Greens_lhs, trans(Greens_rhs), "reldiff", 10E-15));
   };
@@ -220,9 +217,8 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
     Greens.integrate_k(Greens_rhs, opts);
 
     //Ensure that the results are non trivial
-    cx_mat::fixed<3, 3> zero_mat(fill::zeros);
-    REQUIRE(!approx_equal(Greens_lhs, zero_mat, "reldiff", 1e-14));
-    REQUIRE(!approx_equal(Greens_rhs, zero_mat, "reldiff", 1e-14));
+    REQUIRE(!Greens_lhs.is_zero());
+    REQUIRE(!Greens_rhs.is_zero());
 
     REQUIRE(approx_equal(Greens_lhs, -strans(Greens_rhs), "reldiff", 10E-4));
   };
@@ -244,9 +240,8 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
     Greens.integrate_k(Greens_rhs, opts);
 
     //Ensure that the results are non trivial
-    cx_mat::fixed<3, 3> zero_mat(fill::zeros);
-    REQUIRE(!approx_equal(Greens_lhs, zero_mat, "reldiff", 1e-14));
-    REQUIRE(!approx_equal(Greens_rhs, zero_mat, "reldiff", 1e-14));
+    REQUIRE(!Greens_lhs.is_zero());
+    REQUIRE(!Greens_rhs.is_zero());
 
     REQUIRE(approx_equal(Greens_lhs, strans(Greens_rhs), "reldiff", 10E-4));
   };
@@ -268,9 +263,8 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
     Greens.integrate_k(Greens_rhs, opts);
 
     //Ensure that the results are non trivial
-    cx_mat::fixed<3, 3> zero_mat(fill::zeros);
-    REQUIRE(!approx_equal(Greens_lhs, zero_mat, "reldiff", 1e-14));
-    REQUIRE(!approx_equal(Greens_rhs, zero_mat, "reldiff", 1e-14));
+    REQUIRE(!Greens_lhs.is_zero());
+    REQUIRE(!Greens_rhs.is_zero());
 
     REQUIRE(approx_equal(Greens_lhs, strans(Greens_rhs), "reldiff", 10E-4));
   };
@@ -303,9 +297,8 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
     Greens_rhs = -Greens_rhs1 + Greens_rhs2;
 
     //Ensure that the results are non trivial
-    cx_mat::fixed<3, 3> zero_mat(fill::zeros);
-    REQUIRE(!approx_equal(Greens_lhs, zero_mat, "reldiff", 1e-14));
-    REQUIRE(!approx_equal(Greens_rhs, zero_mat, "reldiff", 1e-14));
+    REQUIRE(!Greens_lhs.is_zero());
+    REQUIRE(!Greens_rhs.is_zero());
 
     REQUIRE(approx_equal(Greens_lhs, strans(Greens_rhs), "reldiff", 10E-4));
   };
@@ -337,9 +330,8 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
     Greens_rhs = -Greens_rhs1 + Greens_rhs2;
 
     //Ensure that the results are non trivial
-    cx_mat::fixed<3, 3> zero_mat(fill::zeros);
-    REQUIRE(!approx_equal(Greens_lhs, zero_mat, "reldiff", 1e-14));
-    REQUIRE(!approx_equal(Greens_rhs, zero_mat, "reldiff", 1e-14));
+    REQUIRE(!Greens_lhs.is_zero());
+    REQUIRE(!Greens_rhs.is_zero());
 
     REQUIRE(approx_equal(Greens_lhs, -strans(Greens_rhs), "reldiff", 10E-4));
   };
@@ -376,9 +368,8 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     Greens.integrate_k(GT_Num, opts);
 
     //Ensure that the results are non trivial
-    cx_mat::fixed<3, 3> zero_mat(fill::zeros);
-    REQUIRE(!approx_equal(GT_Ana, zero_mat, "reldiff", 1e-14));
-    REQUIRE(!approx_equal(GT_Num, zero_mat, "reldiff", 1e-14));
+    REQUIRE(!GT_Ana.is_zero());
+    REQUIRE(!GT_Num.is_zero());
 
     REQUIRE(approx_equal(GT_Ana, GT_Num, "reldiff", 10E-4));
   };
@@ -417,9 +408,8 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     Greens.integrate_k(GT_Num, opts);
 
     //Ensure that the results are non trivial
-    cx_mat::fixed<3, 3> zero_mat(fill::zeros);
-    REQUIRE(!approx_equal(GT_Ana, zero_mat, "reldiff", 1e-14));
-    REQUIRE(!approx_equal(GT_Num, zero_mat, "reldiff", 1e-14));
+    REQUIRE(!GT_Ana.is_zero());
+    REQUIRE(!GT_Num.is_zero());
 
     REQUIRE(approx_equal(GT_Ana, GT_Num, "reldiff", 10E-4));
   };
@@ -459,9 +449,8 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     Greens.integrate_k(GT_Num, opts);
 
     //Ensure that the results are non trivial
-    cx_mat::fixed<3, 3> zero_mat(fill::zeros);
-    REQUIRE(!approx_equal(GT_Ana, zero_mat, "reldiff", 1e-14));
-    REQUIRE(!approx_equal(GT_Num, zero_mat, "reldiff", 1e-14));
+    REQUIRE(!GT_Ana.is_zero());
+    REQUIRE(!GT_Num.is_zero());
 
     REQUIRE(approx_equal(GT_Ana, GT_Num, "reldiff", 10E-4));
   };
@@ -496,9 +485,8 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     GT_rhs(2, 0) = -GT_rhs(0, 2);
 
     //Ensure that the results are non trivial
-    cx_mat::fixed<3, 3> zero_mat(fill::zeros);
-    REQUIRE(!approx_equal(GT_lhs, zero_mat, "reldiff", 1e-14));
-    REQUIRE(!approx_equal(GT_rhs, zero_mat, "reldiff", 1e-14));
+    REQUIRE(!GT_lhs.is_zero());
+    REQUIRE(!GT_rhs.is_zero());
 
     REQUIRE(approx_equal(GT_lhs, GT_rhs, "reldiff", 10E-4));
   };

@@ -77,10 +77,9 @@ TEST_CASE("GreensTensorPlateVacuum calculate_tensor function returns the sum "
   GTPlate.calculate_tensor(TensorPlate, opts);
 
   //Ensure non-trivial results
-  cx_mat::fixed<3,3> zero_mat(fill::zeros);
-  REQUIRE(!approx_equal(TensorPlateVacuum,zero_mat,"reldiff",1e-1));
-  REQUIRE(!approx_equal(TensorVacuum,zero_mat,"reldiff",1e-1));
-  REQUIRE(!approx_equal(TensorPlate,zero_mat,"reldiff",1e-1));
+  REQUIRE(!TensorPlateVacuum.is_zero());
+  REQUIRE(!TensorVacuum.is_zero());
+  REQUIRE(!TensorPlate.is_zero());
 
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
@@ -133,10 +132,9 @@ TEST_CASE("GreensTensorPlateVacuum integrate_k function returns the sum "
   GTPlate.integrate_k(TensorPlate, opts_plate);
 
   //Ensure non-trivial results
-  cx_mat::fixed<3,3> zero_mat(fill::zeros);
-  REQUIRE(!approx_equal(TensorPlateVacuum,zero_mat,"reldiff",1e-1));
-  REQUIRE(!approx_equal(TensorVacuum,zero_mat,"reldiff",1e-1));
-  REQUIRE(!approx_equal(TensorPlate,zero_mat,"reldiff",1e-1));
+  REQUIRE(!TensorPlateVacuum.is_zero());
+  REQUIRE(!TensorVacuum.is_zero());
+  REQUIRE(!TensorPlate.is_zero());
 
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {

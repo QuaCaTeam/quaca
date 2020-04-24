@@ -71,9 +71,8 @@ TEST_CASE("PolarizabilityBath integrand works as expected",
     }
   }
   //Ensure non-trivial results
-  cx_mat::fixed<3,3> zero_mat(fill::zeros);
-  REQUIRE(!approx_equal(alpha,zero_mat,"reldiff",1e-1));
-  REQUIRE(!approx_equal(alpha_int,zero_mat,"reldiff",1e-1));
+  REQUIRE(!alpha.is_zero());
+  REQUIRE(!alpha_int.is_zero());
 
   REQUIRE(approx_equal(alpha,alpha_int,"reldiff",1e-6));
 };
