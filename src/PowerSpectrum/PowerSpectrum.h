@@ -30,6 +30,8 @@ public:
   // getter functions
   GreensTensor *get_greens_tensor() const { return greens_tensor; };
   Polarizability *get_polarizability() const { return polarizability; };
+
+  virtual void print_info(std::ofstream &file) = 0;
 };
 
 struct Options_PowerSpectrum {

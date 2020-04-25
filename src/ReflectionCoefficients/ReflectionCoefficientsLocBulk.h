@@ -35,6 +35,9 @@ public:
   std::complex<double> get_epsilon(double omega) const {
     return this->permittivity->epsilon(omega);
   };
+
+
+  void print_info(std::ofstream &file);
 };
 
 #endif // REFLECTIONCOEFFICIENTSLOCBULK_H

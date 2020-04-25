@@ -17,6 +17,8 @@ public:
                  Options_PowerSpectrum opts);
 
   bool has_bath;
+
+  void print_info(std::ofstream &file);
 };
 
 #endif // POWERSPECTRUMHARMOSC_H

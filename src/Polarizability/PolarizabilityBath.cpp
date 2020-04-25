@@ -53,3 +53,11 @@ void PolarizabilityBath::calculate_tensor(cx_mat::fixed<3, 3> &alpha,
             (2.0); // trans is hermitean conjugation in armadillo
   }
 }
+
+void PolarizabilityBath::print_info(std::ofstream &file) {
+  file << "# PolarizabilityBath\n"
+       << "# omega_a = " << omega_a << "\n"
+       << "# alpha_zero = " << alpha_zero << "\n";
+  mu->print_info(file);
+  greens_tensor->print_info(file);
+}

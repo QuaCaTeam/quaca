@@ -11,6 +11,8 @@ public:
 
   // calculate the permittivity times omega
   virtual std::complex<double> epsilon_omega(double omega) = 0;
+
+  virtual void print_info(std::ofstream &file) = 0;
 };
 
 #endif // PERMITTIVITY_H

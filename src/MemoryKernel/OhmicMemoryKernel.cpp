@@ -5,10 +5,10 @@ namespace pt = boost::property_tree;
 
 #include "OhmicMemoryKernel.h"
 
-OhmicMemoryKernel::OhmicMemoryKernel(double gamma) : gamma(gamma){}
+OhmicMemoryKernel::OhmicMemoryKernel(double gamma) : gamma(gamma) {}
 
-OhmicMemoryKernel::OhmicMemoryKernel(const std::string& input_file,
-                                     const std::string& section) {
+OhmicMemoryKernel::OhmicMemoryKernel(const std::string &input_file,
+                                     const std::string &section) {
   // Create a root
   pt::ptree root;
 
@@ -23,7 +23,7 @@ OhmicMemoryKernel::OhmicMemoryKernel(const std::string& input_file,
   this->gamma = root.get<double>(section + ".gamma");
 }
 
-OhmicMemoryKernel::OhmicMemoryKernel(const std::string& input_file) {
+OhmicMemoryKernel::OhmicMemoryKernel(const std::string &input_file) {
   // Create a root
   pt::ptree root;
 
@@ -42,4 +42,9 @@ OhmicMemoryKernel::OhmicMemoryKernel(const std::string& input_file) {
 std::complex<double> OhmicMemoryKernel::mu(double omega) {
   const std::complex<double> gammac(this->gamma, 0E0);
   return gammac;
+}
+
+void OhmicMemoryKernel::print_info(std::ofstream &file) {
+  file << "# OhmicMemoryKernel\n"
+       << "# gamma = " << gamma << "\n";
 }

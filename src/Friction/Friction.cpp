@@ -147,3 +147,9 @@ double Friction::friction_integrand(double omega, void *opts) {
     exit(0);
   }
 }
+
+void Friction::print_info(std::ofstream &file) {
+  file << " # Friction\n"
+  << "# relerr_omega" << relerr_omega << "\n";
+  powerspectrum->print_info(file);
+}

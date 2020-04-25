@@ -347,14 +347,12 @@ double GreensTensorPlate::omega_ch() {
 }
 
 void GreensTensorPlate::print_info(std::ofstream &file) {
-  file << "# GreensTensorPlate "
-       << "\n"
+  file << "# GreensTensorPlate \n"
        << "# v = " << v << "\n"
        << "# beta = " << beta << "\n"
-      << "# z_a = " << za << "\n"
-      << "# delta_cut = " << delta_cut << "\n"
-      << "# rel_err = " << rel_err(0) << " " << rel_err(1) << "\n"
-      << "\n";
+       << "# z_a = " << za << "\n"
+       << "# delta_cut = " << delta_cut << "\n"
+       << "# rel_err = " << rel_err(0) << " " << rel_err(1) << "\n";
 
   reflection_coefficients->print_info(file);
 }

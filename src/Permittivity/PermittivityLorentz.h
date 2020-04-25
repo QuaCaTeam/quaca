@@ -31,6 +31,8 @@ public:
   double get_omega_p() const { return this->omega_p; };
   double get_omega_0() const { return this->omega_0; };
   MemoryKernel *get_memory_kernel() const { return this->memory_kernel; };
+
+  void print_info(std::ofstream &file);
 };
 
 #endif // PERMITTIVITYLORENTZ_H

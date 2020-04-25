@@ -41,3 +41,8 @@ void ReflectionCoefficientsLocBulk::ref(std::complex<double> &r_p,
     r_s = conj(r_s);
   }
 }
+
+void ReflectionCoefficientsLocBulk::print_info(std::ofstream &file) {
+  file << "# ReflectionCoefficientsLocBulk\n";
+  permittivity->print_info(file);
+}

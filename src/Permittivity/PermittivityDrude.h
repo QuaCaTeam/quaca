@@ -24,6 +24,8 @@ public:
   // getter methods
   double get_gamma() const { return this->gamma; };
   double get_omega_p() const { return this->omega_p; };
+
+  void print_info(std::ofstream &file);
 };
 
 #endif // PERMITTIVITYDRUDE_H

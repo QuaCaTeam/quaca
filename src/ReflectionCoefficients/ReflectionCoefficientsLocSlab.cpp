@@ -40,14 +40,17 @@ void ReflectionCoefficientsLocSlab::ref(std::complex<double> &r_p,
 
   // kapppa as well as kappa_epsilon are defined to have either a purely
   // positive real part or purely negatively imaginary part
-  std::complex<double> kappa_epsilon = sqrt(kappa * kappa - (eps - 1.) * omega_abs * omega_abs);
+  std::complex<double> kappa_epsilon =
+      sqrt(kappa * kappa - (eps - 1.) * omega_abs * omega_abs);
   kappa_epsilon = std::complex<double>(std::abs(kappa_epsilon.real()),
                                        -std::abs(kappa_epsilon.imag()));
 
   // Defining the reflection coefficients in transverse magnetice polarization
   // (p) and in transverse electric polarization (s)
-  std::complex<double> r_p_bulk = (kappa * eps - kappa_epsilon) / (kappa * eps + kappa_epsilon);
-  std::complex<double> r_s_bulk = (kappa - kappa_epsilon) / (kappa + kappa_epsilon);
+  std::complex<double> r_p_bulk =
+      (kappa * eps - kappa_epsilon) / (kappa * eps + kappa_epsilon);
+  std::complex<double> r_s_bulk =
+      (kappa - kappa_epsilon) / (kappa + kappa_epsilon);
 
   r_p = r_p_bulk * (1. - exp(-2. * kappa_epsilon * this->thickness)) /
         (1. - pow(r_p_bulk * exp(-kappa_epsilon * this->thickness), 2));
@@ -59,4 +62,10 @@ void ReflectionCoefficientsLocSlab::ref(std::complex<double> &r_p,
     r_p = conj(r_p);
     r_s = conj(r_s);
   }
+}
+
+void ReflectionCoefficientsLocSlab::print_info(std::ofstream &file) {
+  file << "# ReflectionCoefficientsLocBulk\n"
+       << "# thickness = " << thickness << "\n";
+  permittivity->print_info(file);
 }

@@ -13,6 +13,8 @@ public:
 
   void calculate_tensor(cx_mat::fixed<3, 3> &alpha,
                         Options_Polarizability opts);
+
+  void print_info(std::ofstream &file);
 };
 
 #endif // POLARIZABILITYNOBATH_H

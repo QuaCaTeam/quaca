@@ -39,6 +39,8 @@ public:
   double get_omega_a() const { return omega_a; };
   double get_alpha_zero() const { return alpha_zero; };
   GreensTensor *get_greens_tensor() const { return greens_tensor; };
+
+  virtual void print_info(std::ofstream &file) = 0;
 };
 
 // A struct for integration options

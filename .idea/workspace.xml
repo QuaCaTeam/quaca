@@ -1,32 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="QuaCa" targetName="Friction" />
-      <config projectName="QuaCa" targetName="test_quaca_integrated" />
-      <config projectName="QuaCa" targetName="Tutorial" />
       <config projectName="QuaCa" targetName="quaca" />
+      <config projectName="QuaCa" targetName="Tutorial" />
+      <config projectName="QuaCa" targetName="Friction" />
       <config projectName="QuaCa" targetName="test_quaca_unit" />
+      <config projectName="QuaCa" targetName="test_quaca_integrated" />
     </generated>
   </component>
-  <component name="CMakeSettings">
+  <component name="CMakeSettings" AUTO_RELOAD="true">
     <configurations>
       <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
     </configurations>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddb7b759-02db-4107-ba31-9c5642378a44" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test/Quick_Test/quick_test.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateMagnetic.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateMagnetic.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateMagnetic.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateMagnetic.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Friction/Friction.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Friction/Friction.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Friction/Friction.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Friction/Friction.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlate.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlate.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateVacuum.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateVacuum.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorVacuum.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorVacuum.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MemoryKernel/MemoryKernel.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/MemoryKernel/MemoryKernel.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MemoryKernel/OhmicMemoryKernel.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/MemoryKernel/OhmicMemoryKernel.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MemoryKernel/OhmicMemoryKernel.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/MemoryKernel/OhmicMemoryKernel.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Permittivity/Permittivity.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/Permittivity.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Permittivity/PermittivityDrude.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/PermittivityDrude.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Permittivity/PermittivityDrude.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/PermittivityDrude.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Permittivity/PermittivityLorentz.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/PermittivityLorentz.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Permittivity/PermittivityLorentz.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/PermittivityLorentz.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Polarizability/Polarizability.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/Polarizability.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityBath.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/PolarizabilityBath.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityBath.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/PolarizabilityBath.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityNoBath.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/PolarizabilityNoBath.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityNoBathMagnetic.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/PolarizabilityNoBathMagnetic.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityNoBathMagnetic.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/PolarizabilityNoBathMagnetic.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumHarmOscMagnetic.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumHarmOscMagnetic.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumHarmOscMagnetic.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumHarmOscMagnetic.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/UnitTests/GreensTensor/test_GreensTensorPlateMagnetic_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/GreensTensor/test_GreensTensorPlateMagnetic_unit.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/UnitTests/Polarizability/test_PolarizabilityNoBathMagnetic_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Polarizability/test_PolarizabilityNoBathMagnetic_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityNoBath.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/PolarizabilityNoBath.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrum.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrum.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumHarmOsc.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumHarmOsc.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumHarmOsc.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumHarmOsc.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficients.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficients.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocBulk.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocBulk.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocSlab.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocSlab.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,9 +68,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
-  <component name="FavoritesManager">
-    <favorites_list name="QuaCa" />
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -50,71 +81,43 @@
   <component name="ProjectId" id="1YcYofXCHFsn3F2Zx06FVQ2QB4t" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.advertisement.text.overridden" value="true" />
-    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="settings.editor.selected.configurable" value="CMakeSettings" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/test/Quick_Test" />
     </key>
   </component>
-  <component name="RunManager" selected="CMake Application.test_quaca_unit">
-    <configuration name="Make project" type="CLionExternalRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Unit tests" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QuaCa" TARGET_NAME="test_quaca_unit" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QuaCa" RUN_TARGET_NAME="test_quaca_unit" TEST_MODE="SUITE_TEST">
+  <component name="RunManager" selected="Catch.Unit tests">
+    <configuration name="All in test_quaca_integrated" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" nameIsGenerated="true" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QuaCa" TARGET_NAME="test_quaca_integrated" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QuaCa" RUN_TARGET_NAME="test_quaca_integrated" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Cmake" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QuaCa" TARGET_NAME="Tutorial" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QuaCa" RUN_TARGET_NAME="Tutorial">
+    <configuration name="Unit tests" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" singleton="false" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QuaCa" TARGET_NAME="test_quaca_unit" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QuaCa" RUN_TARGET_NAME="test_quaca_unit" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Friction" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QuaCa" TARGET_NAME="Friction" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QuaCa" RUN_TARGET_NAME="Friction">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Tutorial" type="CMakeRunConfiguration" factoryName="Application" nameIsGenerated="true" WORKING_DIR="file://$PROJECT_DIR$/build" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QuaCa" RUN_TARGET_NAME="Friction" EXPLICIT_BUILD_TARGET_NAME="all">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="quaca" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QuaCa" TARGET_NAME="quaca" CONFIG_NAME="Debug">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="test_quaca_integrated" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QuaCa" TARGET_NAME="test_quaca_integrated" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QuaCa" RUN_TARGET_NAME="test_quaca_integrated">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="test_quaca_unit" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QuaCa" TARGET_NAME="test_quaca_unit" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QuaCa" RUN_TARGET_NAME="test_quaca_unit">
+    <configuration name="test_quaca_unit" type="CMakeRunConfiguration" factoryName="Application" nameIsGenerated="true" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QuaCa" TARGET_NAME="test_quaca_unit" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QuaCa" RUN_TARGET_NAME="test_quaca_unit">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <list>
+      <item itemvalue="Catch.All in test_quaca_integrated" />
       <item itemvalue="Catch.Unit tests" />
-      <item itemvalue="CMake Application.Cmake" />
-      <item itemvalue="CMake Application.Friction" />
-      <item itemvalue="CMake Application.Tutorial" />
-      <item itemvalue="CMake Application.quaca" />
-      <item itemvalue="CMake Application.test_quaca_integrated" />
       <item itemvalue="CMake Application.test_quaca_unit" />
-      <item itemvalue="Custom Build Application.Make project" />
     </list>
   </component>
   <component name="SvnConfiguration">
@@ -135,54 +138,99 @@
       <workItem from="1583770139985" duration="1634000" />
       <workItem from="1583834691463" duration="12153000" />
       <workItem from="1583920183145" duration="14654000" />
+      <workItem from="1587822648790" duration="800000" />
+      <workItem from="1587823470164" duration="27000" />
+      <workItem from="1587823513968" duration="7117000" />
     </task>
+    <task id="LOCAL-00001" summary="Made the code compliant with c++11, started adding print_info() functionality">
+      <created>1587829540256</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1587829540256</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Made the code compliant with c++11, started adding print_info() functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made the code compliant with c++11, started adding print_info() functionality" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="506" y="146" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583749372118">
-      <screen x="0" y="0" width="1920" height="1200" />
+    <state x="2543" y="232" width="664" height="586" key="#Make_project" timestamp="1587823557604">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state x="2543" y="232" width="664" height="586" key="#Make_project/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587823557604" />
+    <state x="2332" y="152" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587828471236">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2332" y="152" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587828471236" />
     <state x="506" y="146" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583749372118" />
-    <state x="1920" y="596" width="1920" height="604" key="CommitChangelistDialog2" timestamp="1583763089709">
-      <screen x="1920" y="0" width="1920" height="1200" />
+    <state x="2272" y="70" width="1383" height="801" key="CommitChangelistDialog2" timestamp="1587829540108">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state x="2272" y="70" width="1383" height="801" key="CommitChangelistDialog2/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587829540108" />
     <state x="1920" y="596" width="1920" height="604" key="CommitChangelistDialog2/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583763089709" />
     <state x="532" y="159" key="CommitChangelistDialog2/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583762864519" />
+    <state x="2191" y="24" width="1540" height="884" key="DiffContextDialog" timestamp="1587829493805">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2191" y="24" width="1540" height="884" key="DiffContextDialog/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587829493805" />
     <state x="830" y="246" key="FileChooserDialogImpl" timestamp="1583749362496">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
     <state x="830" y="246" key="FileChooserDialogImpl/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583749362496" />
-    <state width="1920" height="1125" key="GridCell.Tab.0.bottom" timestamp="1583931559041">
-      <screen x="0" y="0" width="1920" height="1200" />
+    <state width="1870" height="290" key="GridCell.Tab.0.bottom" timestamp="1587830638828">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state width="1870" height="290" key="GridCell.Tab.0.bottom/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587830638828" />
     <state width="1920" height="1143" key="GridCell.Tab.0.bottom/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583768470973" />
     <state width="1920" height="1125" key="GridCell.Tab.0.bottom/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583931559041" />
-    <state width="1920" height="1125" key="GridCell.Tab.0.center" timestamp="1583931559041">
-      <screen x="0" y="0" width="1920" height="1200" />
+    <state width="1870" height="290" key="GridCell.Tab.0.center" timestamp="1587830638827">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state width="1870" height="290" key="GridCell.Tab.0.center/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587830638827" />
     <state width="1920" height="1143" key="GridCell.Tab.0.center/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583768470973" />
     <state width="1920" height="1125" key="GridCell.Tab.0.center/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583931559041" />
-    <state width="1920" height="1125" key="GridCell.Tab.0.left" timestamp="1583931559040">
-      <screen x="0" y="0" width="1920" height="1200" />
+    <state width="1870" height="290" key="GridCell.Tab.0.left" timestamp="1587830638827">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state width="1870" height="290" key="GridCell.Tab.0.left/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587830638827" />
     <state width="1920" height="1143" key="GridCell.Tab.0.left/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583768470973" />
     <state width="1920" height="1125" key="GridCell.Tab.0.left/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583931559040" />
-    <state width="1920" height="1125" key="GridCell.Tab.0.right" timestamp="1583931559041">
-      <screen x="0" y="0" width="1920" height="1200" />
+    <state width="1870" height="290" key="GridCell.Tab.0.right" timestamp="1587830638828">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state width="1870" height="290" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587830638828" />
     <state width="1920" height="1143" key="GridCell.Tab.0.right/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583768470973" />
     <state width="1920" height="1125" key="GridCell.Tab.0.right/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583931559041" />
-    <state x="536" y="117" width="1022" height="733" key="SettingsEditor" timestamp="1583771274484">
-      <screen x="0" y="0" width="1920" height="1146" />
+    <state x="2454" y="92" width="1022" height="720" key="SettingsEditor" timestamp="1587823415255">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state x="2454" y="92" width="1022" height="720" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587823415255" />
     <state x="536" y="117" width="1022" height="733" key="SettingsEditor/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583771274484" />
     <state x="536" y="123" key="SettingsEditor/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583758972006" />
     <state x="934" y="216" key="com.intellij.tools.ToolSelectDialog.dimensionServiceKey" timestamp="1583749266563">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
     <state x="934" y="216" key="com.intellij.tools.ToolSelectDialog.dimensionServiceKey/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583749266563" />
+    <state x="2543" y="251" width="672" height="678" key="search.everywhere.popup" timestamp="1587823405305">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2543" y="251" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587823405305" />
   </component>
 </project>

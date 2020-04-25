@@ -39,6 +39,8 @@ public:
   };
 
   double get_thickness() const { return this->thickness; };
+
+  void print_info(std::ofstream &file);
 };
 
 #endif // REFLECTIONCOEFFICIENTSLOCSLAB_H

@@ -23,6 +23,8 @@ public:
   std::complex<double> get_mu(double omega) const {
     return this->mu->mu(omega);
   };
+
+  void print_info(std::ofstream &file);
 };
 
 #endif // POLARIZABILITYBATH_H

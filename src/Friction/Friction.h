@@ -34,6 +34,8 @@ public:
   GreensTensor *get_greens_tensor() { return greens_tensor; };
   Polarizability *get_polarizability() { return polarizability; };
   PowerSpectrum *get_powerspectrum() { return powerspectrum; };
+
+  void print_info(std::ofstream &file);
 };
 
 // Integration options for the quantum friction calculation

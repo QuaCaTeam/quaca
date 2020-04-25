@@ -21,6 +21,8 @@ public:
 
   // getter functions
   double get_gamma() const { return this->gamma; };
+
+  void print_info(std::ofstream &file);
 };
 
 #endif // OHMICMEMORYKERNEL_H

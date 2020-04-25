@@ -49,3 +49,9 @@ std::complex<double> PermittivityDrude::epsilon_omega(double omega) {
 
   return result;
 }
+
+void PermittivityDrude::print_info(std::ofstream &file) {
+  file << "# PermittivityDrude\n"
+       << "# omega_p = " << omega_p << "\n"
+       << "# gamma = " << gamma << "\n";
+}

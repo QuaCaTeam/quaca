@@ -167,10 +167,8 @@ double GreensTensorVacuum::omega_ch() {
 }
 
 void GreensTensorVacuum::print_info(std::ofstream &file) {
-  file << "# GreensTensorVacuum "
-       << "\n"
+  file << "# GreensTensorVacuum\n"
        << "# v = " << v << "\n"
        << "# beta = " << beta << "\n"
-       << "# rel_err_1 = " << relerr << "\n"
-       << "\n";
+       << "# rel_err_1 = " << relerr << "\n";
 }

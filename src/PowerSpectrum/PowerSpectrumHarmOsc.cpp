@@ -129,3 +129,9 @@ void PowerSpectrumHarmOsc::calculate(cx_mat::fixed<3, 3> &powerspectrum,
     powerspectrum = alpha * green * trans(alpha);
   }
 }
+
+void PowerSpectrumHarmOsc::print_info(std::ofstream &file) {
+  file << "# PowerSpectrumHarmOsc\n";
+  polarizability->print_info(file);
+  greens_tensor->print_info(file);
+}

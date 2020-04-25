@@ -58,14 +58,12 @@ void GreensTensorPlateVacuum::calculate_tensor(cx_mat::fixed<3, 3> &GT,
 }
 
 void GreensTensorPlateVacuum::print_info(std::ofstream &file) {
-  file << "# GreensTensorPlateVacuum"
-       << "\n"
+  file << "# GreensTensorPlateVacuum\n"
        << "# v = " << v << "\n"
        << "# beta = " << beta << "\n"
        << "# z_a = " << za << "\n"
        << "# delta_cut = " << delta_cut << "\n"
-       << "# rel_err = " << rel_err(0) << " " << rel_err(1) << "\n"
-       << "\n";
+       << "# rel_err = " << rel_err(0) << " " << rel_err(1) << "\n";
 
   reflection_coefficients->print_info(file);
 }
