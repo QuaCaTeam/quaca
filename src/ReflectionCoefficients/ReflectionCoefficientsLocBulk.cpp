@@ -1,19 +1,18 @@
 #include "ReflectionCoefficientsLocBulk.h"
 #include <armadillo>
+
 // direct constructor
 ReflectionCoefficientsLocBulk::ReflectionCoefficientsLocBulk(
-    Permittivity *permittivity) {
-  // set permittivity
-  // set parameters
-  this->permittivity = permittivity;
-};
+    Permittivity *permittivity)
+    : permittivity(permittivity) {}
+
 // constructor from .json file
 ReflectionCoefficientsLocBulk::ReflectionCoefficientsLocBulk(
-    std::string input_file) {
+    const std::string &input_file) {
   // set permittivity
   // set parameters
   this->permittivity = PermittivityFactory::create(input_file);
-};
+}
 
 // calculate the p-polarized reflection coefficient
 void ReflectionCoefficientsLocBulk::ref(std::complex<double> &r_p,
@@ -30,13 +29,15 @@ void ReflectionCoefficientsLocBulk::ref(std::complex<double> &r_p,
   kappa_epsilon = sqrt(kappa * kappa - (eps - 1.) * omega_abs * omega_abs);
   kappa_epsilon = std::complex<double>(std::abs(kappa_epsilon.real()),
                                        -std::abs(kappa_epsilon.imag()));
+
   // Defining the reflection coefficients in transverse magnetice polarization
   // (p) and in transverse electric polarization (s)
   r_p = (kappa * eps - kappa_epsilon) / (kappa * eps + kappa_epsilon);
   r_s = (kappa - kappa_epsilon) / (kappa + kappa_epsilon);
+
   // Imposing crossing relation
   if (omega < 0.) {
     r_p = conj(r_p);
     r_s = conj(r_s);
-  };
-};
+  }
+}

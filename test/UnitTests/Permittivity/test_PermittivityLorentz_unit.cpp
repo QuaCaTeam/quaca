@@ -9,7 +9,7 @@ TEST_CASE("Lorentz permittivity constructors work as expected",
     REQUIRE(perm.get_omega_p() == 6e-9);
     REQUIRE(perm.get_omega_0() == 3.4);
     REQUIRE(perm.get_memory_kernel()->mu(3.5) == 0.69420);
-  };
+  }
   SECTION("json file constructor") {
 
     OhmicMemoryKernel mu(0.69420);
@@ -22,8 +22,8 @@ TEST_CASE("Lorentz permittivity constructors work as expected",
     REQUIRE(perm.get_omega_p() == omega_p);
     REQUIRE(perm.get_omega_0() == omega_0);
     REQUIRE(perm.get_memory_kernel()->mu(3.5) == mu.mu(3.5));
-  };
-};
+  }
+}
 
 TEST_CASE("Lorentz permittivity obeys crossing relation",
           "[PermittivityLorentz]") {
@@ -36,4 +36,4 @@ TEST_CASE("Lorentz permittivity obeys crossing relation",
 
   auto omega = GENERATE(take(10, random(-150.4, 150.4)));
   REQUIRE(perm.epsilon(omega) == std::conj(perm.epsilon(-omega)));
-};
+}

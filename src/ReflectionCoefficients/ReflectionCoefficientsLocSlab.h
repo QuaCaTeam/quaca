@@ -25,19 +25,20 @@ public:
    */
   ReflectionCoefficientsLocSlab(Permittivity *permittivity, double thickness);
 
-  ReflectionCoefficientsLocSlab(std::string input_file);
+  ReflectionCoefficientsLocSlab(const std::string &input_file);
 
   /*!
    * Returns the p- and s-polarized reflection coefficient.
    */
-  void ref(std::complex<double> &r_p, std::complex<double> &r_s, double omega, std::complex<double> kappa);
+  void ref(std::complex<double> &r_p, std::complex<double> &r_s, double omega,
+           std::complex<double> kappa);
+
   // getter functions
-  std::complex<double> get_epsilon(double omega) {
+  std::complex<double> get_epsilon(double omega) const {
     return this->permittivity->epsilon(omega);
   };
-  double get_thickness(){
-   return this->thickness;
-  };
-  };
+
+  double get_thickness() const { return this->thickness; };
+};
 
 #endif // REFLECTIONCOEFFICIENTSLOCSLAB_H

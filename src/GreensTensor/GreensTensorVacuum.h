@@ -12,7 +12,7 @@ private:
 public:
   // constructors
   GreensTensorVacuum(double v, double beta, double relerr);
-  GreensTensorVacuum(std::string input_file);
+  GreensTensorVacuum(const std::string& input_file);
 
   // calculate the tensor in frequency and momentum space
   void calculate_tensor(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
@@ -23,7 +23,9 @@ public:
   // integrand for integration over one-dimensional k space
   static double integrand_k(double k, void *opts);
   double omega_ch();
-  double get_relerr() { return this->relerr; };
+  double get_relerr() const { return this->relerr; };
+
+  void print_info(std::ofstream &file);
 };
 
 #endif // GREENSTENSORVACUUM_H

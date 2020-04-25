@@ -10,9 +10,9 @@ namespace pt = boost::property_tree;
 #include "PermittivityLorentz.h"
 
 // permittivity factory
-Permittivity *PermittivityFactory::create(std::string input_file) {
-  // set return pointer to NULL
-  Permittivity *permittivity = NULL;
+Permittivity *PermittivityFactory::create(const std::string& input_file) {
+  // return pointer
+  Permittivity *permittivity;
 
   // Create a root
   pt::ptree root;
@@ -32,8 +32,8 @@ Permittivity *PermittivityFactory::create(std::string input_file) {
     std::cerr << "Error: Unknown Permittivity type (" << type << ")!"
               << std::endl;
     exit(0);
-  };
+  }
 
   // return permittivity pointer
   return permittivity;
-};
+}

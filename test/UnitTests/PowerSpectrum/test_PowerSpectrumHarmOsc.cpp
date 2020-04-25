@@ -1,6 +1,5 @@
 #include "Quaca.h"
 #include "catch.hpp"
-#include <iomanip>
 #include <iostream>
 
 TEST_CASE("PowerSpectrumHarmOsc constructors work as expected",
@@ -25,8 +24,8 @@ TEST_CASE("PowerSpectrumHarmOsc constructors work as expected",
                 .epsilon(1e-6) == omega_a);
     REQUIRE(Approx(powerspectrum.get_polarizability()->get_alpha_zero())
                 .epsilon(1e-6) == alpha_zero);
-    REQUIRE(powerspectrum.has_bath == false);
-  };
+    REQUIRE(!powerspectrum.has_bath);
+  }
 
   SECTION("json file constructor") {
     double omega_a = 1.3;
@@ -47,8 +46,8 @@ TEST_CASE("PowerSpectrumHarmOsc constructors work as expected",
                 .epsilon(1e-6) == omega_a);
     REQUIRE(Approx(powerspectrum.get_polarizability()->get_alpha_zero())
                 .epsilon(1e-6) == alpha_zero);
-    REQUIRE(powerspectrum.has_bath == true);
-  };
+    REQUIRE(powerspectrum.has_bath);
+  }
 }
 
 TEST_CASE("Power spectrum without bath is hermitian",

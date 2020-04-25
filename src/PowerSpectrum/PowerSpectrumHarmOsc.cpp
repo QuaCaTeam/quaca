@@ -12,7 +12,7 @@ using namespace arma;
 namespace pt = boost::property_tree;
 
 // Constructor with json-file
-PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(std::string input_file)
+PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(const std::string &input_file)
     : PowerSpectrum(input_file) {
 
   // Create a root
@@ -23,19 +23,16 @@ PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(std::string input_file)
 
   // check if type is right
   std::string type = root.get<std::string>("PowerSpectrum.type");
+
   // read the type of the polarizability and set the bool to indicate,
   // whether the polarizablity has an interal bath
   std::string polarizability_type =
       root.get<std::string>("Polarizability.type");
-  if (polarizability_type.compare("bath") == 0) {
-    has_bath = true;
-  } else {
-    has_bath = false;
-  };
+  has_bath = (polarizability_type.compare("bath") == 0);
 
   // Ensure that correct type has been chosen
   assert(type == "harmonic oscillator");
-};
+}
 
 // Constructor with initialization list
 PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(GreensTensor *greens_tensor,
@@ -46,12 +43,8 @@ PowerSpectrumHarmOsc::PowerSpectrumHarmOsc(GreensTensor *greens_tensor,
   // whether the polarizablity has an interal bath
   PolarizabilityBath *pt =
       dynamic_cast<PolarizabilityBath *>(this->polarizability);
-  if (pt == NULL) {
-    has_bath = false;
-  } else {
-    has_bath = true;
-  }
-};
+  has_bath = (pt != nullptr);
+}
 
 // Compute the power spectrum for a given frequency \omega
 void PowerSpectrumHarmOsc::calculate(cx_mat::fixed<3, 3> &powerspectrum,
@@ -135,4 +128,4 @@ void PowerSpectrumHarmOsc::calculate(cx_mat::fixed<3, 3> &powerspectrum,
     // Marty's PhD thesis
     powerspectrum = alpha * green * trans(alpha);
   }
-};
+}

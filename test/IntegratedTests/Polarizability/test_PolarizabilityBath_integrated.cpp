@@ -59,13 +59,13 @@ TEST_CASE("Integrated PolarizabilityBath fulfills the omega_cut much smaller "
                       (1.0 + v * v) / (3 * pow((1.0 - v * v), 3)) +
                   alpha_zero * gamma * fact * fact / (2.0);
           REQUIRE(Approx(result).margin(toterr) == asymp);
-        };
+        }
       } else {
         REQUIRE(result == 0); // off-diagonals are zero
-      };
-    };
-  };
-};
+      }
+    }
+  }
+}
 
 TEST_CASE("Integrated PolarizabilityBath fulfills the omega_cut much larger "
           "than omega_a asymptote",
@@ -125,7 +125,7 @@ TEST_CASE("Integrated PolarizabilityBath fulfills the omega_cut much larger "
         REQUIRE(Approx(result).margin(toterr) == asymp);
       } else {
         REQUIRE(result == 0); // off-diagonals are zero
-      };
-    };
-  };
-};
+      }
+    }
+  }
+}

@@ -10,7 +10,7 @@ public:
    * Function returning a reflection coefficients pointer of the right type.
    * @param type Type of the reflection coefficients.
    */
-  static ReflectionCoefficients *create(std::string type);
+  static ReflectionCoefficients *create(const std::string &type);
 };
 
 #endif // REFLECTIONCOEFFICIENTSFACTORY_H

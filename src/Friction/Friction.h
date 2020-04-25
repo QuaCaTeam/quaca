@@ -17,14 +17,14 @@ struct Options_Friction;
 
 class Friction {
 protected:
-  double relerr_omega;
-
   GreensTensor *greens_tensor;
   Polarizability *polarizability;
   PowerSpectrum *powerspectrum;
 
+  double relerr_omega;
+
 public:
-  Friction(std::string input_file);
+  Friction(const std::string &input_file);
   Friction(GreensTensor *greens_tensor, Polarizability *polarizability,
            PowerSpectrum *powerspectrum, double relerr_omega);
   double calculate(Options_Friction opts);

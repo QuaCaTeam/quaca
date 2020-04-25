@@ -13,14 +13,14 @@ private:
 public:
   // constructors
   OhmicMemoryKernel(double gamma);
-  OhmicMemoryKernel(std::string input_file, std::string section);
-  OhmicMemoryKernel(std::string input_file);
+  OhmicMemoryKernel(const std::string& input_file, const std::string& section);
+  OhmicMemoryKernel(const std::string& input_file);
 
   // calculate function
   std::complex<double> mu(double omega);
 
   // getter functions
-  double get_gamma() { return this->gamma; };
+  double get_gamma() const { return this->gamma; };
 };
 
 #endif // OHMICMEMORYKERNEL_H

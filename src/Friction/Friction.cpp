@@ -14,7 +14,7 @@ namespace pt = boost::property_tree;
 #include "../PowerSpectrum/PowerSpectrumFactory.h"
 #include "Friction.h"
 
-Friction::Friction(std::string input_file) {
+Friction::Friction(const std::string &input_file) {
   // Create a root
   pt::ptree root;
 
@@ -25,12 +25,12 @@ Friction::Friction(std::string input_file) {
   this->greens_tensor = GreensTensorFactory::create(input_file);
   this->polarizability = PolarizabilityFactory::create(input_file);
   this->powerspectrum = PowerSpectrumFactory::create(input_file);
-};
+}
 
 Friction::Friction(GreensTensor *greens_tensor, Polarizability *polarizability,
                    PowerSpectrum *powerspectrum, double relerr_omega)
     : greens_tensor(greens_tensor), polarizability(polarizability),
-      powerspectrum(powerspectrum), relerr_omega(relerr_omega){};
+      powerspectrum(powerspectrum), relerr_omega(relerr_omega) {}
 
 double Friction::calculate(Options_Friction opts) {
   double result;
@@ -46,20 +46,20 @@ double Friction::calculate(Options_Friction opts) {
   // Start integration
   result = 0.;
 
-  for (int i = 0; i < lim.size() - 1; i++) {
+  for (int i = 0; i < (int) lim.size() - 1; i++) {
     result += cquad(&friction_integrand, &opts, lim[i], lim[i + 1],
                     relerr_omega, std::abs(result) * relerr_omega);
-  };
+  }
   // Perform last integration from the last significant point to infinity
   result += qagiu(&friction_integrand, &opts, lim[lim.size() - 1], relerr_omega,
                   std::abs(result) * relerr_omega);
   return result;
-};
+}
 
 double Friction::friction_integrand(double omega, void *opts) {
   // Implementation of the integrand of eq. (4.3) in Marty's PhD thesis
   // Units: c=1, 4 pi epsilon_0 = 1, hbar = 1
-  Options_Friction *opts_pt = static_cast<Options_Friction *>(opts);
+  auto *opts_pt = static_cast<Options_Friction *>(opts);
 
   // Compute the full spectrum of the power spectrum
   if (opts_pt->spectrum == FULL) {
@@ -146,6 +146,4 @@ double Friction::friction_integrand(double omega, void *opts) {
               << std::endl;
     exit(0);
   }
-  // Default return value to prevent annoying warnings when compiling QuaCa
-  return 0;
-};
+}

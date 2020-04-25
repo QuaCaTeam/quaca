@@ -15,7 +15,7 @@ public:
    * Function returning a memory kernel pointer of the right type.
    * @param type Type of the memory kernel.
    */
-  static PowerSpectrum *create(std::string type);
+  static PowerSpectrum *create(const std::string &input_file);
 };
 
 #endif // POWERSPECTRUMFACTORY_H

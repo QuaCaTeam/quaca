@@ -1,6 +1,5 @@
 #include "Quaca.h"
 #include "catch.hpp"
-#include <iomanip>
 #include <iostream>
 
 TEST_CASE("Analytical results with vacuum Green's tensor gets reproduced",
@@ -16,7 +15,6 @@ TEST_CASE("Analytical results with vacuum Green's tensor gets reproduced",
   // double analytical_result = (3./2.)*alpha_zero*pow(omega_a,2)/beta;
 
   double relerr_omega = 1e-6;
-  double epsabs = 0;
 
   double relerr_k = 1E-9;
   GreensTensorVacuum greens(v, beta, relerr_k);
@@ -30,7 +28,7 @@ TEST_CASE("Analytical results with vacuum Green's tensor gets reproduced",
   // opts.full_spectrum = true;
   double num_result = quant_fric.calculate(opts);
   REQUIRE(Approx(num_result).epsilon(1e-4) == analytical_result);
-};
+}
 
 TEST_CASE("Analytical results with scattered Green's tensor gets reproduced",
           "[Friction]") {
@@ -52,11 +50,10 @@ TEST_CASE("Analytical results with scattered Green's tensor gets reproduced",
 
   vec::fixed<2> rel_err = {1E-6, 1E-4};
   double relerr_omega = 1e-2;
-  double epsabs = 0;
 
   PermittivityDrude perm(omega_p, gamma);
   ReflectionCoefficientsLocBulk refl(&perm);
-  GreensTensorPlate greens(v, za, beta, &refl, delta_cut, rel_err);
+  GreensTensorPlate greens(v, beta, za, &refl, delta_cut, rel_err);
   PolarizabilityNoBath alpha(omega_a, alpha_zero, &greens);
   PowerSpectrumHarmOsc powerspectrum(&greens, &alpha);
   Friction quant_fric(&greens, &alpha, &powerspectrum, relerr_omega);
@@ -70,4 +67,4 @@ TEST_CASE("Analytical results with scattered Green's tensor gets reproduced",
   std::cout << "num=" << num_result << std::endl;
   std::cout << "num/ana=" << num_result / analytical_result << std::endl;
   REQUIRE(Approx(num_result).epsilon(1e-2) == analytical_result);
-};
+}

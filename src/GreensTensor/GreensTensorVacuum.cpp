@@ -1,4 +1,4 @@
-#include <assert.h>
+#include <cassert>
 
 // json parser
 #include <boost/property_tree/json_parser.hpp>
@@ -9,11 +9,9 @@ namespace pt = boost::property_tree;
 #include "GreensTensorVacuum.h"
 
 GreensTensorVacuum::GreensTensorVacuum(double v, double beta, double relerr)
-    : GreensTensor(v, beta) {
-  this->relerr = relerr;
-};
+    : GreensTensor(v, beta), relerr(relerr) {}
 
-GreensTensorVacuum::GreensTensorVacuum(std::string input_file)
+GreensTensorVacuum::GreensTensorVacuum(const std::string &input_file)
     : GreensTensor(input_file) {
 
   // Create a root
@@ -28,24 +26,21 @@ GreensTensorVacuum::GreensTensorVacuum(std::string input_file)
   // check if type is right
   std::string type = root.get<std::string>("GreensTensor.type");
   assert(type == "vacuum");
-};
+}
 
 // Compute the full Green's tensor for a given frequency \omega and a given
 // momentum vector k For the definition see notes/VacuumGreen.pdf eq. (2)
 void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3, 3> &GT,
                                           Options_GreensTensor opts) {
   if (opts.fancy_complex == IM) {
-    // calculating solely the imaginary part of the free Green tensor
-    double pre, k_x, k_y, k_quad, omega, omega_quad;
-
-    // Read out the k-vector and the frequency \omega
-    k_x = opts.kvec(0);
-    k_y = opts.kvec(1);
-    omega = opts.omega;
+    // Read out the k-vector and the frequency omega
+    double k_x = opts.kvec(0);
+    double k_y = opts.kvec(1);
+    double omega = opts.omega;
 
     // Define useful variables
-    k_quad = k_x * k_x + k_y * k_y;
-    omega_quad = omega * omega;
+    double k_quad = k_x * k_x + k_y * k_y;
+    double omega_quad = omega * omega;
 
     // Reset tensor in which the final result is stored
     GT.zeros();
@@ -54,7 +49,7 @@ void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3, 3> &GT,
     if (omega_quad - k_quad > 0) {
       // Compute the diagonal components of the tensor. The off-diagonal
       // elements are all zero
-      pre = 1.0 / (2 * M_PI * sqrt(omega_quad - k_quad));
+      double pre = 1.0 / (2 * M_PI * sqrt(omega_quad - k_quad));
       GT(0, 0) = pre * (omega_quad - k_x * k_x);
       GT(1, 1) = pre * (omega_quad - k_y * k_y);
       GT(2, 2) = pre * k_quad;
@@ -65,7 +60,7 @@ void GreensTensorVacuum::calculate_tensor(cx_mat::fixed<3, 3> &GT,
               << std::endl;
     exit(0);
   }
-};
+}
 
 // Compute the integration with respect to the 2-d k vector
 // Ref: notes/VacuumFriction.pdf eq. (10)
@@ -114,29 +109,26 @@ void GreensTensorVacuum::integrate_k(cx_mat::fixed<3, 3> &GT,
       GT(2, 2) = GT(1, 1);
     }
   }
-};
+}
 
 // Implementation of the different integrands for the integration
 // of the 2-d k-vector
 // Ref: notes/VacuumFriction eq. (10) and (11)
 double GreensTensorVacuum::integrand_k(double kv, void *opts) {
   // Casting the class-pointer to the correct pointer-type
-  Options_GreensTensor *opts_pt = static_cast<Options_GreensTensor *>(opts);
-  GreensTensorVacuum *pt = static_cast<GreensTensorVacuum *>(opts_pt->class_pt);
+  auto *opts_pt = static_cast<Options_GreensTensor *>(opts);
+  auto *pt = dynamic_cast<GreensTensorVacuum *>(opts_pt->class_pt);
 
   // Read out the relevant parameters
   double omega = opts_pt->omega;
   double beta = pt->beta;
 
-  // Define useful variables
-  double result, xi_quad, omega_pl, omega_pl_quad;
-
-  omega_pl = (omega + kv * pt->v);
-  omega_pl_quad = omega_pl * omega_pl;
-  xi_quad = omega_pl_quad - kv * kv;
+  double omega_pl = (omega + kv * pt->v);
+  double omega_pl_quad = omega_pl * omega_pl;
+  double xi_quad = omega_pl_quad - kv * kv;
 
   // Variable to store the final result
-  result = 0;
+  double result = 0;
 
   // Only the imaginary part is implemented
   if (opts_pt->fancy_complex == IM) {
@@ -167,9 +159,18 @@ double GreensTensorVacuum::integrand_k(double kv, void *opts) {
   }
 
   return result;
-};
+}
 
 double GreensTensorVacuum::omega_ch() {
   double result = 0;
   return result;
-};
+}
+
+void GreensTensorVacuum::print_info(std::ofstream &file) {
+  file << "# GreensTensorVacuum "
+       << "\n"
+       << "# v = " << v << "\n"
+       << "# beta = " << beta << "\n"
+       << "# rel_err_1 = " << relerr << "\n"
+       << "\n";
+}

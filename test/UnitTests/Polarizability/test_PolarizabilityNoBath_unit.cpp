@@ -11,14 +11,14 @@ TEST_CASE("PolarizabilityNoBath constructors work as expected",
     PolarizabilityNoBath pol(1.3, 6E-9, NULL);
     REQUIRE(pol.get_omega_a() == 1.3);
     REQUIRE(pol.get_alpha_zero() == 6E-9);
-  };
+  }
 
   SECTION("json file constructor") {
     PolarizabilityNoBath pol("../data/test_files/PolarizabilityNoBath.json");
     REQUIRE(pol.get_omega_a() == 1.3);
     REQUIRE(pol.get_alpha_zero() == 6E-9);
-  };
-};
+  }
+}
 
 TEST_CASE("PolarizabilityNoBath integrand works as expected",
           "[PolarizabilityNoBath]") {
@@ -60,4 +60,4 @@ TEST_CASE("PolarizabilityNoBath integrand works as expected",
               alpha(opts.indices(0), opts.indices(1)));
     }
   }
-};
+}

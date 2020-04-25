@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
   Looper *looper = LooperFactory::create(parameters);
 
   // array to store all the computed values of the loop
-  double friction_data[looper->get_steps_total()];
+  double *friction_data = new double[looper->get_steps_total()];
 
   // define progressbar
   ProgressBar progbar(looper->get_steps_total(), 70);
@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
     // the maximal value
     opts.set_num_threads(omp_get_max_threads());
   }
-  // Create a paralle region given threads given by the --threads flag
+  // Create a parallel region given threads given by the --threads flag
   // we have to create the parallel region already here to ensure,
   // that any thread creates their own instance of quantum_friction
   std::cout << "Starting parallel region with " << opts.get_num_threads()
@@ -94,4 +94,4 @@ int main(int argc, char *argv[]) {
   progbar.done();
 
   return 0;
-};
+}

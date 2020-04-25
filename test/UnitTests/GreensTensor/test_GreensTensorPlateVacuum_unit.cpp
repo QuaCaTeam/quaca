@@ -20,7 +20,7 @@ TEST_CASE("Construction of Green's tensor plate vacuum works properly",
     double delta_cut = 20;
     vec::fixed<2> rel_err = {1E-8, 1E-6};
 
-    GreensTensorPlateVacuum Greens(v, za, beta, &refl, delta_cut, rel_err);
+    GreensTensorPlateVacuum Greens(v, beta, za, &refl, delta_cut, rel_err);
 
     REQUIRE(Greens.get_v() == v);
     REQUIRE(Greens.get_beta() == beta);
@@ -31,8 +31,8 @@ TEST_CASE("Construction of Green's tensor plate vacuum works properly",
 
     REQUIRE(Greens.get_vacuums_greens_tensor()->get_v() == v);
     REQUIRE(Greens.get_vacuums_greens_tensor()->get_beta() == beta);
-  };
-};
+  }
+}
 
 TEST_CASE("GreensTensorPlateVacuum calculate_tensor function returns the sum "
           "of plate and vacuum Green's tensor",
@@ -49,8 +49,8 @@ TEST_CASE("GreensTensorPlateVacuum calculate_tensor function returns the sum "
   double delta_cut = 20;
   vec::fixed<2> rel_err = {1E-8, 1E-6};
 
-  GreensTensorPlateVacuum GTPlateVacuum(v, za, beta, &refl, delta_cut, rel_err);
-  GreensTensorPlate GTPlate(v, za, beta, &refl, delta_cut, rel_err);
+  GreensTensorPlateVacuum GTPlateVacuum(v, beta, za, &refl, delta_cut, rel_err);
+  GreensTensorPlate GTPlate(v, beta, za, &refl, delta_cut, rel_err);
   GreensTensorVacuum GTVacuum(v, beta, rel_err(0));
 
   auto k_x = GENERATE(take(1, random(-1e3, 1e3)));
@@ -80,9 +80,9 @@ TEST_CASE("GreensTensorPlateVacuum calculate_tensor function returns the sum "
     for (int j = 0; j < 3; j++) {
       REQUIRE(TensorPlateVacuum(i, j) ==
               TensorVacuum(i, j) + TensorPlate(i, j));
-    };
-  };
-};
+    }
+  }
+}
 
 TEST_CASE("GreensTensorPlateVacuum integrate_k function returns the sum "
           "of plate and vacuum Green's tensor",
@@ -99,12 +99,10 @@ TEST_CASE("GreensTensorPlateVacuum integrate_k function returns the sum "
   double delta_cut = 20;
   vec::fixed<2> rel_err = {1E-8, 1E-6};
 
-  GreensTensorPlateVacuum GTPlateVacuum(v, za, beta, &refl, delta_cut, rel_err);
-  GreensTensorPlate GTPlate(v, za, beta, &refl, delta_cut, rel_err);
+  GreensTensorPlateVacuum GTPlateVacuum(v, beta, za, &refl, delta_cut, rel_err);
+  GreensTensorPlate GTPlate(v, beta, za, &refl, delta_cut, rel_err);
   GreensTensorVacuum GTVacuum(v, beta, rel_err(0));
 
-  auto k_x = GENERATE(take(1, random(-1e3, 1e3)));
-  auto k_y = GENERATE(take(1, random(-1e3, 1e3)));
   auto omega = GENERATE(take(1, random(1., 1e3)));
 
   Options_GreensTensor opts_pv;
@@ -128,6 +126,6 @@ TEST_CASE("GreensTensorPlateVacuum integrate_k function returns the sum "
     for (int j = 0; j < 3; j++) {
       REQUIRE(TensorPlateVacuum(i, j) ==
               TensorVacuum(i, j) + TensorPlate(i, j));
-    };
-  };
-};
+    }
+  }
+}

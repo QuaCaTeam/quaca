@@ -23,15 +23,16 @@ public:
    * Constructor for reflection coefficients of a local bulk medium.
    */
   ReflectionCoefficientsLocBulk(Permittivity *permittivity);
-  ReflectionCoefficientsLocBulk(std::string input_file);
+  ReflectionCoefficientsLocBulk(const std::string &input_file);
 
   /*!
    * Returns the p- and s-polarized reflection coefficient.
    */
   void ref(std::complex<double> &r_p, std::complex<double> &r_s, double omega,
            std::complex<double> kappa);
+
   // getter functions
-  std::complex<double> get_epsilon(double omega) {
+  std::complex<double> get_epsilon(double omega) const {
     return this->permittivity->epsilon(omega);
   };
 };

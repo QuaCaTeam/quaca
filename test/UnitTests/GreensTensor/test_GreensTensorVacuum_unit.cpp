@@ -16,7 +16,7 @@ TEST_CASE("Vacuum Green's tensor constructors work as expected",
     REQUIRE(Greens.get_v() == v);
     REQUIRE(Greens.get_beta() == beta);
     REQUIRE(Greens.get_relerr() == relerr);
-  };
+  }
 
   SECTION("json file constructor") {
     double v = 0.1;
@@ -28,8 +28,8 @@ TEST_CASE("Vacuum Green's tensor constructors work as expected",
     REQUIRE(Approx(Greens.get_v()).epsilon(1E-6) == v);
     REQUIRE(Approx(Greens.get_beta()).epsilon(1E-6) == beta);
     REQUIRE(Greens.get_relerr() == relerr);
-  };
-};
+  }
+}
 
 TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
   // Generate a Green's tensor with random attributes v and beta
@@ -74,7 +74,7 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
     opts.indices = {2, 2};
     REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
-  };
+  }
 
   SECTION("Option: IM, KV") {
     opts.fancy_complex = IM;
@@ -89,7 +89,7 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
     opts.indices = {2, 2};
     REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
-  };
+  }
 
   SECTION("Option: IM, TEMP") {
     opts.fancy_complex = IM;
@@ -104,7 +104,7 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
     opts.indices = {2, 2};
     REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
-  };
+  }
 
   SECTION("Option: IM, KV_TEMP") {
     opts.fancy_complex = IM;
@@ -119,7 +119,7 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
     opts.indices = {2, 2};
     REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
-  };
+  }
 
   SECTION("Option: IM, NON_LTE") {
     opts.fancy_complex = IM;
@@ -135,8 +135,8 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
     opts.indices = {2, 2};
     REQUIRE(Approx(Greens.integrand_k(k_v, &opts)).epsilon(1E-7) ==
             result_yz * factor);
-  };
-};
+  }
+}
 
 /*!
  * Some basic relations any Green's tensor should fulfill which can
@@ -178,7 +178,7 @@ TEST_CASE("Crossing relation in frequency domain see eq. [1]",
   Greens.calculate_tensor(Greens_rhs, opts);
 
   REQUIRE(approx_equal(Greens_lhs, trans(conj(Greens_rhs)), "reldiff", 10E-5));
-};
+}
 
 TEST_CASE("Reciprocity, see eq. [6]", "[GreensTensorVacuum]") {
   // Generate a Green's tensor with random attributes v and beta
@@ -214,7 +214,7 @@ TEST_CASE("Reciprocity, see eq. [6]", "[GreensTensorVacuum]") {
   Greens.calculate_tensor(Greens_rhs, opts);
 
   REQUIRE(approx_equal(Greens_lhs, trans(Greens_rhs), "reldiff", 10E-5));
-};
+}
 
 TEST_CASE("Reality, see eq. [7]", "[GreensTensorVacuum]") {
   // Generate a Green's tensor with random attributes v and beta
@@ -240,7 +240,7 @@ TEST_CASE("Reality, see eq. [7]", "[GreensTensorVacuum]") {
   Greens.integrate_k(Greens_rhs, opts);
 
   REQUIRE(approx_equal(Greens_lhs, -Greens_rhs, "reldiff", 10E-5));
-};
+}
 
 TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
 
@@ -275,7 +275,7 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     ana_result(2, 2) = ana_pref * (1 + pow(v, 2)) / (1 - pow(v, 2));
 
     REQUIRE(approx_equal(num_result, ana_result, "reldiff", 10E-5));
-  };
+  }
 
   SECTION("Option: IM, KV") {
 
@@ -386,5 +386,5 @@ TEST_CASE("Test the integration routine", "[GreensTensorVacuum]") {
     ana_result(2, 2) = ana_result(1, 1);
 
     REQUIRE(approx_equal(num_result, ana_result, "reldiff", 10E-5));
-  };
-};
+  }
+}

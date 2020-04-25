@@ -5,7 +5,7 @@
 
 class LooperFactory {
 public:
-  static Looper *create(std::string type);
+  static Looper *create(const std::string& type);
 };
 
 #endif // LOOPERFACTORY_H

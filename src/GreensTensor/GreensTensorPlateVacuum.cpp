@@ -8,15 +8,15 @@ namespace pt = boost::property_tree;
 #include "GreensTensorPlateVacuum.h"
 
 GreensTensorPlateVacuum::GreensTensorPlateVacuum(
-    double v, double za, double beta,
+    double v, double beta, double za,
     ReflectionCoefficients *reflection_coefficients, double delta_cut,
     vec::fixed<2> rel_err)
-    : GreensTensorPlate(v, za, beta, reflection_coefficients, delta_cut,
+    : GreensTensorPlate(v, beta, za, reflection_coefficients, delta_cut,
                         rel_err) {
   this->vacuum_greens_tensor = new GreensTensorVacuum(v, beta, rel_err(0));
-};
+}
 
-GreensTensorPlateVacuum::GreensTensorPlateVacuum(std::string input_file)
+GreensTensorPlateVacuum::GreensTensorPlateVacuum(const std::string &input_file)
     : GreensTensorPlate(input_file) {
   // Create a root
   pt::ptree root;
@@ -29,7 +29,7 @@ GreensTensorPlateVacuum::GreensTensorPlateVacuum(std::string input_file)
 
   this->vacuum_greens_tensor =
       new GreensTensorVacuum(v, beta, this->rel_err(0));
-};
+}
 
 void GreensTensorPlateVacuum::integrate_k(cx_mat::fixed<3, 3> &GT,
                                           Options_GreensTensor opts) {
@@ -38,12 +38,11 @@ void GreensTensorPlateVacuum::integrate_k(cx_mat::fixed<3, 3> &GT,
 
   GreensTensorPlate::integrate_k(GT, opts);
 
-  opts_vacuum = opts;
   opts.class_pt = vacuum_greens_tensor;
   vacuum_greens_tensor->integrate_k(vac, opts);
 
   GT += vac;
-};
+}
 
 void GreensTensorPlateVacuum::calculate_tensor(cx_mat::fixed<3, 3> &GT,
                                                Options_GreensTensor opts) {
@@ -52,9 +51,21 @@ void GreensTensorPlateVacuum::calculate_tensor(cx_mat::fixed<3, 3> &GT,
 
   GreensTensorPlate::calculate_tensor(GT, opts);
 
-  opts_vacuum = opts;
   opts.class_pt = vacuum_greens_tensor;
   vacuum_greens_tensor->calculate_tensor(vac, opts);
 
   GT += vac;
-};
+}
+
+void GreensTensorPlateVacuum::print_info(std::ofstream &file) {
+  file << "# GreensTensorPlateVacuum"
+       << "\n"
+       << "# v = " << v << "\n"
+       << "# beta = " << beta << "\n"
+       << "# z_a = " << za << "\n"
+       << "# delta_cut = " << delta_cut << "\n"
+       << "# rel_err = " << rel_err(0) << " " << rel_err(1) << "\n"
+       << "\n";
+
+  reflection_coefficients->print_info(file);
+}

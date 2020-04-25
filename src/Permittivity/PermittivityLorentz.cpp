@@ -10,10 +10,10 @@ PermittivityLorentz::PermittivityLorentz(double eps_inf, double omega_p,
                                          double omega_0,
                                          MemoryKernel *memory_kernel)
     : eps_inf(eps_inf), omega_p(omega_p), omega_0(omega_0),
-      memory_kernel(memory_kernel){};
+      memory_kernel(memory_kernel){}
 
 // constructor for drude model from .json file
-PermittivityLorentz::PermittivityLorentz(std::string input_file) {
+PermittivityLorentz::PermittivityLorentz(const std::string& input_file) {
 
   // Create a root
   pt::ptree root;
@@ -32,7 +32,7 @@ PermittivityLorentz::PermittivityLorentz(std::string input_file) {
 
   this->memory_kernel =
       MemoryKernelFactory::create(input_file, "Permittivity.MemoryKernel");
-};
+}
 
 // calculate the permittivity
 std::complex<double> PermittivityLorentz::epsilon(double omega) {
@@ -46,7 +46,7 @@ std::complex<double> PermittivityLorentz::epsilon(double omega) {
                           I * omega * memory_kernel->mu(omega));
 
   return result;
-};
+}
 
 // calculate the permittivity scaled by omega
 std::complex<double> PermittivityLorentz::epsilon_omega(double omega) {
@@ -60,4 +60,4 @@ std::complex<double> PermittivityLorentz::epsilon_omega(double omega) {
                                   I * omega * memory_kernel->mu(omega));
 
   return result;
-};
+}

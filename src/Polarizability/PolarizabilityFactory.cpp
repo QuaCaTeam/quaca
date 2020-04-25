@@ -10,9 +10,9 @@ namespace pt = boost::property_tree;
 #include "PolarizabilityNoBath.h"
 
 // Green's tensor factory
-Polarizability *PolarizabilityFactory::create(std::string input_file) {
-  // set return pointer to NULL
-  Polarizability *polarizability = NULL;
+Polarizability *PolarizabilityFactory::create(const std::string &input_file) {
+  // return pointer
+  Polarizability *polarizability;
 
   // Create a root
   pt::ptree root;
@@ -32,8 +32,8 @@ Polarizability *PolarizabilityFactory::create(std::string input_file) {
     std::cerr << "Error: Unknown Polarizability type (" << type << ")!"
               << std::endl;
     exit(0);
-  };
+  }
 
   // return memory kernel pointer
   return polarizability;
-};
+}

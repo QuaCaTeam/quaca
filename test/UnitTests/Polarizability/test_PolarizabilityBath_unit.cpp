@@ -15,7 +15,7 @@ TEST_CASE("PolarizabilityBath constructors work as expected",
 
     std::complex<double> test = pol.get_mu(3.0);
     REQUIRE(test.real() == 0.69420);
-  };
+  }
 
   SECTION("json file constructor") {
     PolarizabilityBath pol("../data/test_files/PolarizabilityBath.json");
@@ -25,8 +25,8 @@ TEST_CASE("PolarizabilityBath constructors work as expected",
     // test if we read memory kernel correctly
     std::complex<double> test = pol.get_mu(3.0);
     REQUIRE(test.real() == 0.69420);
-  };
-};
+  }
+}
 
 TEST_CASE("PolarizabilityBath integrand works as expected",
           "[PolarizabilityBath]") {
@@ -70,4 +70,4 @@ TEST_CASE("PolarizabilityBath integrand works as expected",
               alpha(opts.indices(0), opts.indices(1)));
     }
   }
-};
+}

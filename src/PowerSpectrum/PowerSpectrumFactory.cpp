@@ -9,9 +9,9 @@ namespace pt = boost::property_tree;
 #include "PowerSpectrumHarmOsc.h"
 
 // Green's tensor factory
-PowerSpectrum *PowerSpectrumFactory::create(std::string input_file) {
-  // set return pointer to NULL
-  PowerSpectrum *powerspectrum = NULL;
+PowerSpectrum *PowerSpectrumFactory::create(const std::string &input_file) {
+  // return pointer
+  PowerSpectrum *powerspectrum;
 
   // Create a root
   pt::ptree root;
@@ -26,13 +26,12 @@ PowerSpectrum *PowerSpectrumFactory::create(std::string input_file) {
   if (type == "harmonic oscillator") {
     powerspectrum = new PowerSpectrumHarmOsc(input_file);
   }
-
   else {
     std::cerr << "Error: Unknown power spectrum type (" << type << ")!"
               << std::endl;
     exit(0);
-  };
+  }
 
   // return powerspectrum pointer
   return powerspectrum;
-};
+}

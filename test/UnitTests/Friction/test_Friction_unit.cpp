@@ -36,7 +36,7 @@ TEST_CASE("Friction constructors work as expected", "[Friction]") {
                        ->get_polarizability()
                        ->get_alpha_zero())
                 .epsilon(1e-6) == alpha_zero);
-  };
+  }
 
   SECTION("json file constructor") {
     double omega_a = 1.3;
@@ -68,5 +68,5 @@ TEST_CASE("Friction constructors work as expected", "[Friction]") {
                        ->get_polarizability()
                        ->get_alpha_zero())
                 .epsilon(1e-6) == alpha_zero);
-  };
-};
+  }
+}

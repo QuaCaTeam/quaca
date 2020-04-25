@@ -7,7 +7,7 @@
 class PermittivityFactory {
 public:
   // Returns a permittivity pointer of the right type.
-  static Permittivity *create(std::string type);
+  static Permittivity *create(const std::string& type);
 };
 
 #endif // PERMITTIVITYFACTORY_H

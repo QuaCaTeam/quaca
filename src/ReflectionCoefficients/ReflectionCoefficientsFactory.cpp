@@ -1,4 +1,3 @@
-#include <armadillo>
 #include <iostream>
 
 // json parser
@@ -12,9 +11,9 @@ namespace pt = boost::property_tree;
 
 // reflection coefficients factory
 ReflectionCoefficients *
-ReflectionCoefficientsFactory::create(std::string input_file) {
-  // set return pointer to NULL
-  ReflectionCoefficients *refcoef = NULL;
+ReflectionCoefficientsFactory::create(const std::string &input_file) {
+  // return pointer
+  ReflectionCoefficients *refcoef;
 
   // Create a root
   pt::ptree root;
@@ -34,8 +33,8 @@ ReflectionCoefficientsFactory::create(std::string input_file) {
     std::cerr << "Error: Unknown Permittivity type (" << type << ")!"
               << std::endl;
     exit(0);
-  };
+  }
 
   // return reflection coefficient pointer
   return refcoef;
-};
+}

@@ -9,9 +9,9 @@ namespace pt = boost::property_tree;
 #include "LooperV.h"
 #include "LooperZa.h"
 
-Looper *LooperFactory::create(std::string input_file) {
-  // set return pointer to NULL
-  Looper *looper = NULL;
+Looper *LooperFactory::create(const std::string& input_file) {
+  // return pointer
+  Looper *looper;
 
   // Create a root
   pt::ptree root;
@@ -30,8 +30,8 @@ Looper *LooperFactory::create(std::string input_file) {
   } else {
     std::cerr << "Error: Unknown Looper type (" << type << ")!" << std::endl;
     exit(0);
-  };
+  }
 
   // return looper pointer
   return looper;
-};
+}

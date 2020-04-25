@@ -24,21 +24,21 @@ public:
   // constructors
   Polarizability(double omega_a, double alpha_zero,
                  GreensTensor *greens_tensor);
-  Polarizability(std::string input_file);
+  Polarizability(const std::string& input_file);
 
   // calculate the polarizability tensor
   virtual void calculate_tensor(cx_mat::fixed<3, 3> &alpha,
                                 Options_Polarizability opts) = 0;
 
   // integration over omega
-  double integrate_omega(Options_Polarizability opts, double omega_min,
+  static double integrate_omega(Options_Polarizability opts, double omega_min,
                          double omega_max, double relerr, double abserr);
   static double integrand_omega(double omega, void *opts);
 
   // getter functions
-  double get_omega_a() { return omega_a; };
-  double get_alpha_zero() { return alpha_zero; };
-  GreensTensor *get_greens_tensor() { return greens_tensor; };
+  double get_omega_a() const { return omega_a; };
+  double get_alpha_zero() const { return alpha_zero; };
+  GreensTensor *get_greens_tensor() const { return greens_tensor; };
 };
 
 // A struct for integration options

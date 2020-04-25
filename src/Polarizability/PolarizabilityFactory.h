@@ -15,7 +15,7 @@ public:
    * Function returning a memory kernel pointer of the right type.
    * @param type Type of the memory kernel.
    */
-  static Polarizability *create(std::string type);
+  static Polarizability *create(const std::string &input_file);
 };
 
 #endif // GREENSTENSORFACTORY_H

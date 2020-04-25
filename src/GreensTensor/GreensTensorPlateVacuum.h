@@ -7,14 +7,13 @@
 class GreensTensorPlateVacuum : public GreensTensorPlate {
 private:
   GreensTensorVacuum *vacuum_greens_tensor;
-  Options_GreensTensor opts_vacuum;
 
 public:
   // constructors
-  GreensTensorPlateVacuum(double v, double za, double beta,
+  GreensTensorPlateVacuum(double v, double beta, double za,
                           ReflectionCoefficients *reflection_coefficients,
                           double delta_cut, vec::fixed<2> rel_err);
-  GreensTensorPlateVacuum(std::string input_file);
+  GreensTensorPlateVacuum(const std::string& input_file);
 
   // calculate the tensor in frequency and momentum space
   void calculate_tensor(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
@@ -32,6 +31,8 @@ public:
     this->v = v;
     this->vacuum_greens_tensor->set_v(v);
   };
+
+  void print_info(std::ofstream &file);
 };
 
 #endif // GREENSTENSORPLATEVACUUM_H

@@ -8,10 +8,10 @@
 namespace pt = boost::property_tree;
 
 // memory kernel factory
-MemoryKernel *MemoryKernelFactory::create(std::string input_file,
-                                          std::string section) {
-  // set return pointer to NULL
-  MemoryKernel *memorykernel = NULL;
+MemoryKernel *MemoryKernelFactory::create(const std::string& input_file,
+                                          const std::string& section) {
+  // return pointer
+  MemoryKernel *memorykernel;
 
   // Create a root
   pt::ptree root;
@@ -29,8 +29,8 @@ MemoryKernel *MemoryKernelFactory::create(std::string input_file,
     std::cerr << "Error: Unknown Memory Kernel type (" << type << ")!"
               << std::endl;
     exit(0);
-  };
+  }
 
   // return memory kernel pointer
   return memorykernel;
-};
+}

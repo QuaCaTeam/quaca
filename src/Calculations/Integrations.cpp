@@ -16,15 +16,16 @@ double cquad(double my_f(double, void *), void *params, double a, double b,
   /* Initialize the workspace. */
   gsl_integration_cquad_workspace *ws =
       gsl_integration_cquad_workspace_alloc(100);
-  if (ws == NULL) {
+  if (ws == nullptr) {
     printf("call to gsl_integration_cquad_workspace_alloc failed.\n");
     abort();
   }
 
   /* Call the integrator. */
-  /* set nevals and abserr pointer to NULL, we are only interested in result */
-  int success =
-      gsl_integration_cquad(&f, a, b, epsabs, relerr, ws, &res, NULL, NULL);
+  /* set nevals and abserr pointer to nullptr, we are only interested in result
+   */
+  int success = gsl_integration_cquad(&f, a, b, epsabs, relerr, ws, &res,
+                                      nullptr, nullptr);
   if (success != 0) {
     printf("cquad error: %s\n", gsl_strerror(success));
     abort();
@@ -34,7 +35,7 @@ double cquad(double my_f(double, void *), void *params, double a, double b,
   gsl_integration_cquad_workspace_free(ws);
 
   return res;
-};
+}
 
 // wrapper to qags routine
 double qags(double my_f(double, void *), void *params, double a, double b,
@@ -49,13 +50,14 @@ double qags(double my_f(double, void *), void *params, double a, double b,
 
   /* Initialize the workspace. */
   gsl_integration_workspace *ws = gsl_integration_workspace_alloc(1000);
-  if (ws == NULL) {
+  if (ws == nullptr) {
     printf("call to gsl_integration_workspace_alloc failed.\n");
     abort();
   }
 
   /* Call the integrator. */
-  /* set nevals and abserr pointer to NULL, we are only interested in result */
+  /* set nevals and abserr pointer to nullptr, we are only interested in result
+   */
   int success =
       gsl_integration_qags(&f, a, b, epsabs, relerr, 1000, ws, &res, &abserr);
   if (success != 0) {
@@ -67,7 +69,7 @@ double qags(double my_f(double, void *), void *params, double a, double b,
   gsl_integration_workspace_free(ws);
 
   return res;
-};
+}
 
 // wrapper to qagiu routine
 double qagiu(double my_f(double, void *), void *params, double a, double relerr,
@@ -82,13 +84,14 @@ double qagiu(double my_f(double, void *), void *params, double a, double relerr,
 
   /* Initialize the workspace. */
   gsl_integration_workspace *ws = gsl_integration_workspace_alloc(1000);
-  if (ws == NULL) {
+  if (ws == nullptr) {
     printf("call to gsl_integration_workspace_alloc failed.\n");
     abort();
   }
 
   /* Call the integrator. */
-  /* set nevals and abserr pointer to NULL, we are only interested in result */
+  /* set nevals and abserr pointer to nullptr, we are only interested in result
+   */
   int success =
       gsl_integration_qagiu(&f, a, epsabs, relerr, 1000, ws, &res, &abserr);
   if (success != 0) {
@@ -97,7 +100,4 @@ double qagiu(double my_f(double, void *), void *params, double a, double relerr,
   }
 
   return res;
-
-  /* Free the workspace. */
-  gsl_integration_workspace_free(ws);
-};
+}
