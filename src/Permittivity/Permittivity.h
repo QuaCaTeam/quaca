@@ -7,10 +7,10 @@
 class Permittivity {
 public:
   // calculate the permittivity
-  virtual std::complex<double> epsilon(double omega) = 0;
+  virtual std::complex<double> calculate(double omega) const = 0;
 
   // calculate the permittivity times omega
-  virtual std::complex<double> epsilon_omega(double omega) = 0;
+  virtual std::complex<double> calculate_times_omega(double omega) const = 0;
 };
 
 #endif // PERMITTIVITY_H

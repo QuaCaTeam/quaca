@@ -8,9 +8,9 @@ namespace pt = boost::property_tree;
 GreensTensor::GreensTensor(double v, double beta) : v(v), beta(beta) {
   assert(v >= 0 && v < 1);
   assert(beta > 0);
-};
+}
 
-GreensTensor::GreensTensor(std::string input_file) {
+GreensTensor::GreensTensor(const std::string& input_file) {
   // Create a root
   pt::ptree root;
 
@@ -22,4 +22,4 @@ GreensTensor::GreensTensor(std::string input_file) {
   assert(v >= 0 && v < 1);
   this->beta = root.get<double>("GreensTensor.beta");
   assert(beta > 0);
-};
+}

@@ -2,11 +2,9 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="QuaCa" targetName="Friction" />
-      <config projectName="QuaCa" targetName="test_quaca_integrated" />
-      <config projectName="QuaCa" targetName="Tutorial" />
       <config projectName="QuaCa" targetName="quaca" />
       <config projectName="QuaCa" targetName="test_quaca_unit" />
+      <config projectName="QuaCa" targetName="test_quaca_integrated" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -16,17 +14,76 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddb7b759-02db-4107-ba31-9c5642378a44" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test/Quick_Test/quick_test.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateMagnetic.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateMagnetic.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateMagnetic.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateMagnetic.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/Quaca.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/Quaca.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Calculations/Integrations.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Calculations/Integrations.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Calculations/Integrations.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Calculations/Integrations.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Friction/Friction.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Friction/Friction.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Friction/Friction.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Friction/Friction.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensor.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorFactory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorFactory.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorFactory.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorFactory.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlate.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlate.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlate.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlate.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateVacuum.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateVacuum.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateVacuum.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateVacuum.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorVacuum.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorVacuum.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorVacuum.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorVacuum.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MemoryKernel/MemoryKernel.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/MemoryKernel/MemoryKernel.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MemoryKernel/MemoryKernelFactory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/MemoryKernel/MemoryKernelFactory.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MemoryKernel/MemoryKernelFactory.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/MemoryKernel/MemoryKernelFactory.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MemoryKernel/OhmicMemoryKernel.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/MemoryKernel/OhmicMemoryKernel.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MemoryKernel/OhmicMemoryKernel.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/MemoryKernel/OhmicMemoryKernel.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Permittivity/Permittivity.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/Permittivity.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Permittivity/PermittivityDrude.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/PermittivityDrude.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Permittivity/PermittivityDrude.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/PermittivityDrude.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Permittivity/PermittivityFactory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/PermittivityFactory.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Permittivity/PermittivityFactory.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/PermittivityFactory.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Permittivity/PermittivityLorentz.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/PermittivityLorentz.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Permittivity/PermittivityLorentz.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/PermittivityLorentz.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Polarizability/Polarizability.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/Polarizability.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Polarizability/Polarizability.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/Polarizability.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityBath.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/PolarizabilityBath.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityBath.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/PolarizabilityBath.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityFactory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/PolarizabilityFactory.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityFactory.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/PolarizabilityFactory.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityNoBath.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/PolarizabilityNoBath.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityNoBathMagnetic.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/PolarizabilityNoBathMagnetic.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityNoBathMagnetic.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/PolarizabilityNoBathMagnetic.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumHarmOscMagnetic.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumHarmOscMagnetic.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumHarmOscMagnetic.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumHarmOscMagnetic.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/UnitTests/GreensTensor/test_GreensTensorPlateMagnetic_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/GreensTensor/test_GreensTensorPlateMagnetic_unit.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/UnitTests/Polarizability/test_PolarizabilityNoBathMagnetic_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Polarizability/test_PolarizabilityNoBathMagnetic_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityNoBath.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/PolarizabilityNoBath.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrum.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrum.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrum.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrum.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumFactory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumFactory.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumFactory.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumFactory.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumHarmOsc.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumHarmOsc.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumHarmOsc.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumHarmOsc.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficients.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficients.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsFactory.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsFactory.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocBulk.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocBulk.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocSlab.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocSlab.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/IntegratedTests/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/IntegratedTests/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/IntegratedTests/Friction/test_Friction_integrated.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/IntegratedTests/Friction/test_Friction_integrated.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/IntegratedTests/Polarizability/test_PolarizabilityBath_integrated.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/IntegratedTests/Polarizability/test_PolarizabilityBath_integrated.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/IntegratedTests/Polarizability/test_PolarizabilityNoBath_integrated.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/IntegratedTests/Polarizability/test_PolarizabilityNoBath_integrated.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/Calculations/test_Integrations_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Calculations/test_Integrations_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/Friction/test_Friction_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Friction/test_Friction_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/GreensTensor/test_GreensTensorPlateVacuum_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/GreensTensor/test_GreensTensorPlateVacuum_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/GreensTensor/test_GreensTensorPlate_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/GreensTensor/test_GreensTensorPlate_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/GreensTensor/test_GreensTensorVacuum_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/GreensTensor/test_GreensTensorVacuum_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/MemoryKernel/test_OhmicMemoryKernel_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/MemoryKernel/test_OhmicMemoryKernel_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/Permittivity/test_PermittivityDrude_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Permittivity/test_PermittivityDrude_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/Permittivity/test_PermittivityLorentz_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Permittivity/test_PermittivityLorentz_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/Polarizability/test_PolarizabilityBath_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Polarizability/test_PolarizabilityBath_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/Polarizability/test_PolarizabilityNoBath_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Polarizability/test_PolarizabilityNoBath_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/PowerSpectrum/test_PowerSpectrumHarmOsc.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/PowerSpectrum/test_PowerSpectrumHarmOsc.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab_unit.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,9 +91,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
-  <component name="FavoritesManager">
-    <favorites_list name="QuaCa" />
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -45,12 +99,16 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1YcYofXCHFsn3F2Zx06FVQ2QB4t" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -64,56 +122,45 @@
       <recent name="$PROJECT_DIR$/test/Quick_Test" />
     </key>
   </component>
-  <component name="RunManager" selected="CMake Application.test_quaca_unit">
-    <configuration name="Make project" type="CLionExternalRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true">
+  <component name="RunManager" selected="Catch.Unit tests">
+    <configuration name="Make project" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Unit tests" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QuaCa" TARGET_NAME="test_quaca_unit" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QuaCa" RUN_TARGET_NAME="test_quaca_unit" TEST_MODE="SUITE_TEST">
+    <configuration name="Unit tests" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QuaCa" TARGET_NAME="test_quaca_integrated" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QuaCa" RUN_TARGET_NAME="test_quaca_integrated" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Cmake" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QuaCa" TARGET_NAME="Tutorial" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QuaCa" RUN_TARGET_NAME="Tutorial">
+    <configuration name="test_quaca_integrated" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QuaCa" TARGET_NAME="test_quaca_integrated" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QuaCa" RUN_TARGET_NAME="test_quaca_integrated" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Cmake" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QuaCa" TARGET_NAME="Tutorial" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QuaCa" RUN_TARGET_NAME="Tutorial">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Friction" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QuaCa" TARGET_NAME="Friction" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QuaCa" RUN_TARGET_NAME="Friction">
+    <configuration name="Tutorial" type="CMakeRunConfiguration" factoryName="Application" nameIsGenerated="true" REDIRECT_INPUT="false" WORKING_DIR="file://$PROJECT_DIR$/build" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QuaCa" RUN_TARGET_NAME="Friction" EXPLICIT_BUILD_TARGET_NAME="all">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Tutorial" type="CMakeRunConfiguration" factoryName="Application" nameIsGenerated="true" WORKING_DIR="file://$PROJECT_DIR$/build" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QuaCa" RUN_TARGET_NAME="Friction" EXPLICIT_BUILD_TARGET_NAME="all">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="quaca" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QuaCa" TARGET_NAME="quaca" CONFIG_NAME="Debug">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="test_quaca_integrated" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QuaCa" TARGET_NAME="test_quaca_integrated" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QuaCa" RUN_TARGET_NAME="test_quaca_integrated">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="test_quaca_unit" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QuaCa" TARGET_NAME="test_quaca_unit" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QuaCa" RUN_TARGET_NAME="test_quaca_unit">
+    <configuration name="quaca" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QuaCa" TARGET_NAME="quaca" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <list>
       <item itemvalue="Catch.Unit tests" />
+      <item itemvalue="Catch.test_quaca_integrated" />
       <item itemvalue="CMake Application.Cmake" />
-      <item itemvalue="CMake Application.Friction" />
       <item itemvalue="CMake Application.Tutorial" />
       <item itemvalue="CMake Application.quaca" />
-      <item itemvalue="CMake Application.test_quaca_integrated" />
-      <item itemvalue="CMake Application.test_quaca_unit" />
       <item itemvalue="Custom Build Application.Make project" />
     </list>
   </component>
@@ -142,9 +189,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="506" y="146" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583749372118">
-      <screen x="0" y="0" width="1920" height="1200" />
+    <state x="2422" y="95" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587917151203">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state x="2422" y="95" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587917151203" />
     <state x="506" y="146" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583749372118" />
     <state x="1920" y="596" width="1920" height="604" key="CommitChangelistDialog2" timestamp="1583763089709">
       <screen x="1920" y="0" width="1920" height="1200" />
@@ -155,26 +203,50 @@
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
     <state x="830" y="246" key="FileChooserDialogImpl/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583749362496" />
-    <state width="1920" height="1125" key="GridCell.Tab.0.bottom" timestamp="1583931559041">
-      <screen x="0" y="0" width="1920" height="1200" />
+    <state width="1870" height="290" key="GridCell.Tab.0.bottom" timestamp="1587917180584">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state width="1870" height="290" key="GridCell.Tab.0.bottom/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587917180584" />
     <state width="1920" height="1143" key="GridCell.Tab.0.bottom/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583768470973" />
     <state width="1920" height="1125" key="GridCell.Tab.0.bottom/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583931559041" />
-    <state width="1920" height="1125" key="GridCell.Tab.0.center" timestamp="1583931559041">
-      <screen x="0" y="0" width="1920" height="1200" />
+    <state width="1870" height="290" key="GridCell.Tab.0.center" timestamp="1587917180584">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state width="1870" height="290" key="GridCell.Tab.0.center/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587917180584" />
     <state width="1920" height="1143" key="GridCell.Tab.0.center/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583768470973" />
     <state width="1920" height="1125" key="GridCell.Tab.0.center/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583931559041" />
-    <state width="1920" height="1125" key="GridCell.Tab.0.left" timestamp="1583931559040">
-      <screen x="0" y="0" width="1920" height="1200" />
+    <state width="1870" height="290" key="GridCell.Tab.0.left" timestamp="1587917180584">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state width="1870" height="290" key="GridCell.Tab.0.left/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587917180584" />
     <state width="1920" height="1143" key="GridCell.Tab.0.left/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583768470973" />
     <state width="1920" height="1125" key="GridCell.Tab.0.left/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583931559040" />
-    <state width="1920" height="1125" key="GridCell.Tab.0.right" timestamp="1583931559041">
-      <screen x="0" y="0" width="1920" height="1200" />
+    <state width="1870" height="290" key="GridCell.Tab.0.right" timestamp="1587917180584">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state width="1870" height="290" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587917180584" />
     <state width="1920" height="1143" key="GridCell.Tab.0.right/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583768470973" />
     <state width="1920" height="1125" key="GridCell.Tab.0.right/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583931559041" />
+    <state width="1870" height="428" key="GridCell.Tab.1.bottom" timestamp="1587891672133">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1870" height="428" key="GridCell.Tab.1.bottom/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587891672133" />
+    <state width="1870" height="428" key="GridCell.Tab.1.center" timestamp="1587891672133">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1870" height="428" key="GridCell.Tab.1.center/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587891672133" />
+    <state width="1870" height="428" key="GridCell.Tab.1.left" timestamp="1587891672133">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1870" height="428" key="GridCell.Tab.1.left/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587891672133" />
+    <state width="1870" height="428" key="GridCell.Tab.1.right" timestamp="1587891672133">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1870" height="428" key="GridCell.Tab.1.right/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587891672133" />
+    <state x="2628" y="202" width="494" height="645" key="RollbackChangesDialog" timestamp="1587890927419">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2628" y="202" width="494" height="645" key="RollbackChangesDialog/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587890927419" />
     <state x="536" y="117" width="1022" height="733" key="SettingsEditor" timestamp="1583771274484">
       <screen x="0" y="0" width="1920" height="1146" />
     </state>

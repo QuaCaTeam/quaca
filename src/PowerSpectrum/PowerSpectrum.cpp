@@ -9,7 +9,7 @@
 namespace pt = boost::property_tree;
 
 // Constructor using a json-file
-PowerSpectrum::PowerSpectrum(std::string input_file) {
+PowerSpectrum::PowerSpectrum(const std::string &input_file) {
   // Create a root
   pt::ptree root;
 
@@ -20,9 +20,9 @@ PowerSpectrum::PowerSpectrum(std::string input_file) {
   this->greens_tensor = GreensTensorFactory::create(input_file);
   // initialize polarizability by an input file
   this->polarizability = PolarizabilityFactory::create(input_file);
-};
+}
 
 // Constructor with initialization list
-PowerSpectrum::PowerSpectrum(GreensTensor *greens_tensor,
-                             Polarizability *polarizability)
-    : greens_tensor(greens_tensor), polarizability(polarizability){};
+PowerSpectrum::PowerSpectrum(std::shared_ptr<GreensTensor> greens_tensor,
+                             std::shared_ptr<Polarizability> polarizability)
+    : greens_tensor(greens_tensor), polarizability(polarizability){}

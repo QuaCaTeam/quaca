@@ -1,19 +1,20 @@
 // json parser
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
+#include <utility>
 namespace pt = boost::property_tree;
 
 #include "../MemoryKernel/MemoryKernelFactory.h"
 #include "PermittivityLorentz.h"
 
-PermittivityLorentz::PermittivityLorentz(double eps_inf, double omega_p,
-                                         double omega_0,
-                                         MemoryKernel *memory_kernel)
+PermittivityLorentz::PermittivityLorentz(
+    double eps_inf, double omega_p, double omega_0,
+    std::shared_ptr<MemoryKernel> memory_kernel)
     : eps_inf(eps_inf), omega_p(omega_p), omega_0(omega_0),
-      memory_kernel(memory_kernel){};
+      memory_kernel(std::move(memory_kernel)) {}
 
 // constructor for drude model from .json file
-PermittivityLorentz::PermittivityLorentz(std::string input_file) {
+PermittivityLorentz::PermittivityLorentz(const std::string &input_file) {
 
   // Create a root
   pt::ptree root;
@@ -32,10 +33,10 @@ PermittivityLorentz::PermittivityLorentz(std::string input_file) {
 
   this->memory_kernel =
       MemoryKernelFactory::create(input_file, "Permittivity.MemoryKernel");
-};
+}
 
 // calculate the permittivity
-std::complex<double> PermittivityLorentz::epsilon(double omega) {
+std::complex<double> PermittivityLorentz::calculate(double omega) const {
   // dummies for result and complex unit
   std::complex<double> result;
   std::complex<double> I(0.0, 1.0);
@@ -43,13 +44,14 @@ std::complex<double> PermittivityLorentz::epsilon(double omega) {
   // calculate the result
   result = eps_inf - omega_p * omega_p /
                          (omega_0 * omega_0 - omega * omega -
-                          I * omega * memory_kernel->mu(omega));
+                          I * omega * memory_kernel->calculate(omega));
 
   return result;
-};
+}
 
 // calculate the permittivity scaled by omega
-std::complex<double> PermittivityLorentz::epsilon_omega(double omega) {
+std::complex<double>
+PermittivityLorentz::calculate_times_omega(double omega) const {
   // dummies for result and complex unit
   std::complex<double> result;
   std::complex<double> I(0.0, 1.0);
@@ -57,7 +59,7 @@ std::complex<double> PermittivityLorentz::epsilon_omega(double omega) {
   // calculate the result
   result = eps_inf * omega - omega_p * omega_p * omega /
                                  (omega_0 * omega_0 - omega * omega -
-                                  I * omega * memory_kernel->mu(omega));
+                                  I * omega * memory_kernel->calculate(omega));
 
   return result;
-};
+}

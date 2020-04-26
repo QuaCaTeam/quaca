@@ -1,5 +1,23 @@
 # add sources to test
-file(GLOB_RECURSE test_sources ${CMAKE_CURRENT_SOURCE_DIR} "*.cpp")
+set(test_sources
+        test_main.cpp
+        Calculations/test_Integrations_unit.cpp
+        Friction/test_Friction_unit.cpp
+        GreensTensor/test_GreensTensorPlate_unit.cpp
+        GreensTensor/test_GreensTensorPlateVacuum_unit.cpp
+        GreensTensor/test_GreensTensorVacuum_unit.cpp
+#        Looper/test_LooperV_unit.cpp
+#        Looper/test_LooperZa_unit.cpp
+        MemoryKernel/test_OhmicMemoryKernel_unit.cpp
+#        Options/test_Options_unit.cpp
+        Permittivity/test_PermittivityDrude_unit.cpp
+        Permittivity/test_PermittivityLorentz_unit.cpp
+        Polarizability/test_PolarizabilityBath_unit.cpp
+        Polarizability/test_PolarizabilityNoBath_unit.cpp
+        PowerSpectrum/test_PowerSpectrumHarmOsc.cpp
+        ReflectionCoefficients/test_ReflectionCoefficientsLocBulk_unit.cpp
+        ReflectionCoefficients/test_ReflectionCoefficientsLocSlab_unit.cpp
+        )
 
 # Executable
 add_executable(test_quaca_unit

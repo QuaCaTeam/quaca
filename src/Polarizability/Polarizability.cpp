@@ -1,16 +1,18 @@
 // json parser
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
+#include <utility>
 namespace pt = boost::property_tree;
 
 #include "../GreensTensor/GreensTensorFactory.h"
 #include "Polarizability.h"
 
 Polarizability::Polarizability(double omega_a, double alpha_zero,
-                               GreensTensor *greens_tensor)
-    : omega_a(omega_a), alpha_zero(alpha_zero), greens_tensor(greens_tensor){};
+                               std::shared_ptr<GreensTensor> greens_tensor)
+    : omega_a(omega_a), alpha_zero(alpha_zero),
+      greens_tensor(std::move(greens_tensor)) {}
 
-Polarizability::Polarizability(std::string input_file) {
+Polarizability::Polarizability(const std::string &input_file) {
   // Create a root
   pt::ptree root;
 
@@ -23,23 +25,25 @@ Polarizability::Polarizability(std::string input_file) {
 
   // read greens tensor
   this->greens_tensor = GreensTensorFactory::create(input_file);
-};
+}
 
-double Polarizability::integrand_omega(double omega, void *opts) {
-  Options_Polarizability *opts_pt = static_cast<Options_Polarizability *>(opts);
+double Polarizability::integrand_omega(double omega,
+                                       const vec::fixed<2> &indices,
+                                       Tensor_Options fancy_complex) const {
   cx_mat::fixed<3, 3> alpha;
+  calculate_tensor(omega, alpha, fancy_complex);
 
-  opts_pt->omega = omega;
-  opts_pt->class_pt->calculate_tensor(alpha, *opts_pt);
-
-  assert(imag(alpha(opts_pt->indices(0), opts_pt->indices(1))) == 0);
-  double result = real(alpha(opts_pt->indices(0), opts_pt->indices(1)));
+  assert(imag(alpha(indices(0), indices(1))) == 0);
+  double result = real(alpha(indices(0), indices(1)));
 
   return result;
-};
+}
 
-double Polarizability::integrate_omega(Options_Polarizability opts,
-                                       double omega_min, double omega_max,
-                                       double relerr, double abserr) {
-  return cquad(&integrand_omega, &opts, omega_min, omega_max, relerr, abserr);
+double Polarizability::integrate_omega(const vec::fixed<2> &indices, Tensor_Options fancy_complex, double omega_min,
+                                       double omega_max, double relerr,
+                                       double abserr) const {
+  auto F = [=](double x) -> double {
+    return this->integrand_omega(x, indices, fancy_complex);
+  };
+  return cquad(F, omega_min, omega_max, relerr, abserr);
 }
