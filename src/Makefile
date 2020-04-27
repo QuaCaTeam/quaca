@@ -368,6 +368,33 @@ Looper/LooperFactory.cpp.s:
 	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperFactory.cpp.s
 .PHONY : Looper/LooperFactory.cpp.s
 
+Looper/LooperOmega.o: Looper/LooperOmega.cpp.o
+
+.PHONY : Looper/LooperOmega.o
+
+# target to build an object file
+Looper/LooperOmega.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperOmega.cpp.o
+.PHONY : Looper/LooperOmega.cpp.o
+
+Looper/LooperOmega.i: Looper/LooperOmega.cpp.i
+
+.PHONY : Looper/LooperOmega.i
+
+# target to preprocess a source file
+Looper/LooperOmega.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperOmega.cpp.i
+.PHONY : Looper/LooperOmega.cpp.i
+
+Looper/LooperOmega.s: Looper/LooperOmega.cpp.s
+
+.PHONY : Looper/LooperOmega.s
+
+# target to generate assembly for a file
+Looper/LooperOmega.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperOmega.cpp.s
+.PHONY : Looper/LooperOmega.cpp.s
+
 Looper/LooperV.o: Looper/LooperV.cpp.o
 
 .PHONY : Looper/LooperV.o
@@ -890,6 +917,9 @@ help:
 	@echo "... Looper/LooperFactory.o"
 	@echo "... Looper/LooperFactory.i"
 	@echo "... Looper/LooperFactory.s"
+	@echo "... Looper/LooperOmega.o"
+	@echo "... Looper/LooperOmega.i"
+	@echo "... Looper/LooperOmega.s"
 	@echo "... Looper/LooperV.o"
 	@echo "... Looper/LooperV.i"
 	@echo "... Looper/LooperV.s"

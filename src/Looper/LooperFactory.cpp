@@ -8,6 +8,7 @@ namespace pt = boost::property_tree;
 #include "LooperFactory.h"
 #include "LooperV.h"
 #include "LooperZa.h"
+#include "LooperOmega.h"
 
 Looper *LooperFactory::create(std::string input_file) {
   // set return pointer to NULL
