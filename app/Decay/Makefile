@@ -80,14 +80,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/coelschl/PhD/code/cpp/quaca/CMakeFiles /home/coelschl/PhD/code/cpp/quaca/CMakeFiles/progress.marks
-	$(MAKE) -f CMakeFiles/Makefile2 all
+	cd /home/coelschl/PhD/code/cpp/quaca && $(CMAKE_COMMAND) -E cmake_progress_start /home/coelschl/PhD/code/cpp/quaca/CMakeFiles /home/coelschl/PhD/code/cpp/quaca/app/Decay/CMakeFiles/progress.marks
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f CMakeFiles/Makefile2 app/Decay/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/coelschl/PhD/code/cpp/quaca/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) -f CMakeFiles/Makefile2 clean
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f CMakeFiles/Makefile2 app/Decay/clean
 .PHONY : clean
 
 # The main clean target
@@ -97,96 +97,60 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) -f CMakeFiles/Makefile2 preinstall
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f CMakeFiles/Makefile2 app/Decay/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) -f CMakeFiles/Makefile2 preinstall
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f CMakeFiles/Makefile2 app/Decay/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/coelschl/PhD/code/cpp/quaca && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named quaca
+# Convenience name for target.
+app/Decay/CMakeFiles/Decay.dir/rule:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f CMakeFiles/Makefile2 app/Decay/CMakeFiles/Decay.dir/rule
+.PHONY : app/Decay/CMakeFiles/Decay.dir/rule
 
-# Build rule for target.
-quaca: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 quaca
-.PHONY : quaca
+# Convenience name for target.
+Decay: app/Decay/CMakeFiles/Decay.dir/rule
 
-# fast build rule for target.
-quaca/fast:
-	$(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/build
-.PHONY : quaca/fast
-
-#=============================================================================
-# Target rules for targets named Friction
-
-# Build rule for target.
-Friction: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Friction
-.PHONY : Friction
-
-# fast build rule for target.
-Friction/fast:
-	$(MAKE) -f app/Friction/CMakeFiles/Friction.dir/build.make app/Friction/CMakeFiles/Friction.dir/build
-.PHONY : Friction/fast
-
-#=============================================================================
-# Target rules for targets named Decay
-
-# Build rule for target.
-Decay: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Decay
 .PHONY : Decay
 
 # fast build rule for target.
 Decay/fast:
-	$(MAKE) -f app/Decay/CMakeFiles/Decay.dir/build.make app/Decay/CMakeFiles/Decay.dir/build
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f app/Decay/CMakeFiles/Decay.dir/build.make app/Decay/CMakeFiles/Decay.dir/build
 .PHONY : Decay/fast
 
-#=============================================================================
-# Target rules for targets named Tutorial
+decay.o: decay.cpp.o
 
-# Build rule for target.
-Tutorial: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Tutorial
-.PHONY : Tutorial
+.PHONY : decay.o
 
-# fast build rule for target.
-Tutorial/fast:
-	$(MAKE) -f app/.Tutorial/CMakeFiles/Tutorial.dir/build.make app/.Tutorial/CMakeFiles/Tutorial.dir/build
-.PHONY : Tutorial/fast
+# target to build an object file
+decay.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f app/Decay/CMakeFiles/Decay.dir/build.make app/Decay/CMakeFiles/Decay.dir/decay.cpp.o
+.PHONY : decay.cpp.o
 
-#=============================================================================
-# Target rules for targets named test_quaca_unit
+decay.i: decay.cpp.i
 
-# Build rule for target.
-test_quaca_unit: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_quaca_unit
-.PHONY : test_quaca_unit
+.PHONY : decay.i
 
-# fast build rule for target.
-test_quaca_unit/fast:
-	$(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/build
-.PHONY : test_quaca_unit/fast
+# target to preprocess a source file
+decay.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f app/Decay/CMakeFiles/Decay.dir/build.make app/Decay/CMakeFiles/Decay.dir/decay.cpp.i
+.PHONY : decay.cpp.i
 
-#=============================================================================
-# Target rules for targets named test_quaca_integrated
+decay.s: decay.cpp.s
 
-# Build rule for target.
-test_quaca_integrated: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_quaca_integrated
-.PHONY : test_quaca_integrated
+.PHONY : decay.s
 
-# fast build rule for target.
-test_quaca_integrated/fast:
-	$(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build
-.PHONY : test_quaca_integrated/fast
+# target to generate assembly for a file
+decay.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f app/Decay/CMakeFiles/Decay.dir/build.make app/Decay/CMakeFiles/Decay.dir/decay.cpp.s
+.PHONY : decay.cpp.s
 
 # Help Target
 help:
@@ -195,13 +159,11 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... edit_cache"
-	@echo "... quaca"
-	@echo "... Friction"
 	@echo "... Decay"
-	@echo "... Tutorial"
-	@echo "... test_quaca_unit"
-	@echo "... test_quaca_integrated"
+	@echo "... edit_cache"
+	@echo "... decay.o"
+	@echo "... decay.i"
+	@echo "... decay.s"
 .PHONY : help
 
 
@@ -213,6 +175,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/coelschl/PhD/code/cpp/quaca && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

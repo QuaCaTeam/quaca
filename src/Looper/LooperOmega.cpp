@@ -19,7 +19,7 @@ LooperOmega::LooperOmega(std::string input_file) : Looper(input_file) {
 
   // check if type is right
   std::string type = root.get<std::string>("Looper.type");
-  assert(type == "v");
+  assert(type == "omega");
 };
 
 double LooperOmega::calculate_value(int step, void *quantity) {
@@ -54,6 +54,6 @@ double LooperOmega::calculate_value(int step, void *quantity) {
   // calculate the trace
 
 
-  return real(trace(inv_alpha*alphaI*inv_alpha_dag))/3e0;
+  return real(trace(inv_alpha*alphaI*inv_alpha_dag))/(opts.omega*3);
 };
 
