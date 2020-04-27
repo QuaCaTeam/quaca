@@ -4,6 +4,7 @@
 namespace pt = boost::property_tree;
 
 #include "LooperV.h"
+#include "../Friction/Friction.h"
 
 LooperV::LooperV(double start, double end, int number_of_steps,
                  std::string scale)
@@ -21,7 +22,10 @@ LooperV::LooperV(std::string input_file) : Looper(input_file) {
   assert(type == "v");
 };
 
-double LooperV::calculate_value(int step, Friction *quantum_friction) {
+double LooperV::calculate_value(int step, void *quantity) {
+
+  Friction *quantum_friction = static_cast<Friction *>(quantity);
+
   Options_Friction opts;
   opts.spectrum = NON_LTE_ONLY;
   // opts.full_spectrum = true;

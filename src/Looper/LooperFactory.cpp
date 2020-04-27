@@ -27,6 +27,8 @@ Looper *LooperFactory::create(std::string input_file) {
     looper = new LooperV(input_file);
   } else if (type == "za") {
     looper = new LooperZa(input_file);
+  } else if (type == "omega") {
+    looper = new LooperOmega(input_file);
   } else {
     std::cerr << "Error: Unknown Looper type (" << type << ")!" << std::endl;
     exit(0);

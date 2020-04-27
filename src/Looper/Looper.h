@@ -22,7 +22,7 @@ public:
   Looper(std::string input_file);
 
   // calculate the the value of quantum friction
-  virtual double calculate_value(int step, Friction* quantum_friction) = 0;
+  virtual double calculate_value(int step, void *quantity) = 0;
 
   // getter functions
   int get_steps_total() { return this->number_of_steps; };

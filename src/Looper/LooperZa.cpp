@@ -22,7 +22,8 @@ LooperZa::LooperZa(std::string input_file) : Looper(input_file) {
   assert(type == "za");
 };
 
-double LooperZa::calculate_value(int step, Friction *quantum_friction) {
+double LooperZa::calculate_value(int step, void *quantity) {
+  Friction *quantum_friction = static_cast<Friction *>(quantity);
   Options_Friction opts;
   opts.spectrum = NON_LTE_ONLY;
   opts.class_pt = quantum_friction;

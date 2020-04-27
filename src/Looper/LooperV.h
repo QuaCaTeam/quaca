@@ -12,7 +12,7 @@ public:
   LooperV(std::string input_file);
 
   // calculate the the value of quantum friction
-  double calculate_value(int step, Friction* quantum_friction);
+  double calculate_value(int step, void* quantity);
 };
 
 #endif // LOOPERV_H
