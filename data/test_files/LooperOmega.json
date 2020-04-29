@@ -1,6 +1,6 @@
 {
     "Looper": {
-        "type": "v",
+        "type": "omega",
         "start": 10.2,
         "end": 35.5,
         "steps": 20,
