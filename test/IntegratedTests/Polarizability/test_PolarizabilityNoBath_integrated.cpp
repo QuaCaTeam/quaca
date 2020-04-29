@@ -8,14 +8,14 @@ TEST_CASE("Integrated PolarizabilityNoBath fulfills the omega_cut much smaller "
           "than omega_a asymptote",
           "[PolarizabilityNoBath]") {
   // define greens tensor
-  auto v = GENERATE(take(3, random(0.0, 1.0)));
-  auto beta = GENERATE(take(3, random(0.0, 1e4)));
+  auto v = GENERATE(1e-4,1e-8);
+  auto beta = GENERATE(1e-3,1.,1e2);
   double relerr_k = 1E-9;
   GreensTensorVacuum greens(v, beta, relerr_k);
 
   // define polarizability
-  auto omega_a = GENERATE(take(3, random(1e-1, 1e1)));
-  auto alpha_zero = GENERATE(take(3, random(0.0, 0.1)));
+  auto omega_a = GENERATE(0.21,1.7);
+  auto alpha_zero = GENERATE(1e-8,1e-9);
   PolarizabilityNoBath pol(omega_a, alpha_zero, &greens);
 
   Options_Polarizability opts;
@@ -27,52 +27,46 @@ TEST_CASE("Integrated PolarizabilityNoBath fulfills the omega_cut much smaller "
   double relerr = 1e-13;
   double abserr = 0;
 
-  double result, asymp; // double for result and asymptotic value
-  double toterr;
+  cx_mat::fixed<3,3> result(fill::zeros);
+  cx_mat::fixed<3,3> asymp(fill::zeros);
+  asymp(0,0) = alpha_zero * alpha_zero * pow(omega_max, 4) / 2.0 * 1.0 /
+                  (3 * (1.0 - v * v) * (1.0 - v * v));
+  asymp(1,1) =  alpha_zero * alpha_zero * pow(omega_max, 4) / 2.0 *
+                  (1.0 + v * v) / (3 * pow((1.0 - v * v), 3));
+  asymp(2,2) = asymp(1,1);
+
+
+
 
   // loop over indices
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
       opts.indices(0) = i;
       opts.indices(1) = j;
-      result = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
+      result(i,j) = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
+    }
+  }
 
-      /*
-       * error tolerance includes absolute error from integration, which is
-       * result*relerr and error from series expansion in omega_a. we roughly
-       * estimate the series error with (omega_max)^2
-       */
-      toterr = result * relerr + omega_max * omega_max;
+  //Ensure non-trivial result
+  REQUIRE(!result.is_zero());
+  REQUIRE(!asymp.is_zero());
 
-      // check diagonal entries
-      if (i == j) {
-        if (i == 0) {
-          asymp = alpha_zero * alpha_zero * pow(omega_max, 4) / 2.0 * 1.0 /
-                  (3 * (1.0 - v * v) * (1.0 - v * v));
-          REQUIRE(Approx(result).margin(toterr) == asymp);
-        } else {
-          asymp = alpha_zero * alpha_zero * pow(omega_max, 4) / 2.0 *
-                  (1.0 + v * v) / (3 * pow((1.0 - v * v), 3));
-          REQUIRE(Approx(result).margin(toterr) == asymp);
-        };
-      } else {
-        REQUIRE(result == 0); // off-diagonals are zero
-      };
-    };
-  };
-};
+  REQUIRE(approx_equal(result,asymp, "reldiff", 1e-4));
+  //Ensure that the total error is above the error due to the series expansio
+  REQUIRE(approx_equal(result,asymp, "absdiff", pow(omega_max,2)));
+}
 
 TEST_CASE("Integrated PolarizabilityNoBath fulfills the omega_cut much larger "
           "than omega_a asymptote",
           "[PolarizabilityNoBath]") {
   // define greens tensor
-  auto v = GENERATE(take(3, random(0.0, 1.0)));
+  auto v = GENERATE(1e-4,1e-8);
   double beta = 1e5;
   double relerr_k = 1E-9;
   GreensTensorVacuum greens(v, beta, relerr_k);
 
   // define polarizability
-  auto omega_a = GENERATE(take(3, random(1e-1, 1e1)));
+  auto omega_a = GENERATE(0.21,1.5);
   double alpha_zero = 1e-10;
   PolarizabilityNoBath pol(omega_a, alpha_zero, &greens);
 
@@ -85,35 +79,32 @@ TEST_CASE("Integrated PolarizabilityNoBath fulfills the omega_cut much larger "
   double relerr = 1e-13;
   double abserr = 0.;
 
-  double result;
   double asymp = alpha_zero * omega_a * M_PI / 2.0;
+  cx_mat::fixed<3,3> result(fill::zeros);
+  //create unitary matrix
+  cx_mat::fixed<3,3> asymp_mat(fill::eye);
+  asymp_mat *= asymp;
 
-  double toterr;
 
   // loop over indices
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
       opts.indices(0) = i;
       opts.indices(1) = j;
-      result =
+      result(i,j) =
           pol.integrate_omega(opts, omega_min, omega_a - 1e-3, relerr, abserr);
-      result += pol.integrate_omega(opts, omega_a - 1e-3, omega_a + 1e-3,
+      result(i,j) += pol.integrate_omega(opts, omega_a - 1e-3, omega_a + 1e-3,
                                     relerr, abserr);
-      result +=
+      result(i,j) +=
           pol.integrate_omega(opts, omega_a + 1e-3, omega_max, relerr, abserr);
+    }
+  }
 
-      /*
-       * error tolerance includes absolute error from integration, which is
-       * result*relerr we estimate the truncation error to sqrt(alpha_zero)
-       */
-      toterr = result * relerr + sqrt(alpha_zero);
+  //Ensure non-trivial results
+  REQUIRE(!result.is_zero());
+  REQUIRE(!asymp_mat.is_zero());
 
-      // check diagonal entries
-      if (i == j) {
-        REQUIRE(Approx(result).margin(toterr) == asymp);
-      } else {
-        REQUIRE(result == 0); // off-diagonals are zero
-      };
-    };
-  };
-};
+  REQUIRE(approx_equal(result,asymp_mat,"reldiff", 1e-4));
+  //Ensure that the error is above the error due to the series expansin
+  REQUIRE(approx_equal(result,asymp_mat,"absdiff",sqrt(alpha_zero)));
+}

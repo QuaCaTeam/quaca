@@ -9,8 +9,8 @@ TEST_CASE("Drude permittivity constructors work as expected",
     REQUIRE(perm.get_omega_p() == 3.2);
   };
   SECTION("json file constructor") {
-    auto omega_p = GENERATE(take(5, random(0.0, 1e3)));
-    auto gamma = GENERATE(take(5, random(0.0, 1e3)));
+    auto omega_p = GENERATE(0.12,3.21,43.12,103.2);
+    auto gamma = GENERATE(1.21,32.12,143.21);
 
     PermittivityDrude perm(omega_p, gamma);
     REQUIRE(perm.get_gamma() == gamma);
@@ -21,6 +21,6 @@ TEST_CASE("Drude permittivity constructors work as expected",
 TEST_CASE("Drude permittivity obeys crossing relation", "[PermittivityDrude]") {
   PermittivityDrude perm(3.5E-2, 3.2);
 
-  auto omega = GENERATE(take(10, random(-150.4, 150.4)));
+  auto omega = GENERATE(-213.21,-65.34,-2.32,0.021,9.87,89.32);
   REQUIRE(perm.epsilon(omega) == std::conj(perm.epsilon(-omega)));
 };
