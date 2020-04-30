@@ -1,4 +1,3 @@
-#include <armadillo>
 #include <complex>
 
 #include "Quaca.h"
@@ -11,18 +10,14 @@ TEST_CASE("Integrated PolarizabilityBath fulfills the omega_cut much smaller "
   auto v = GENERATE(1e-4,1e-8);
   auto beta = GENERATE(1e-4, 1e4);
   double relerr_k = 1e-9;
-  GreensTensorVacuum greens(v, beta, relerr_k);
+  auto greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr_k);
 
   // define polarizability
   auto omega_a = GENERATE(1.6);
   auto alpha_zero = GENERATE(1e-8);
   auto gamma = GENERATE(0.32,12.43);
-  OhmicMemoryKernel mu(gamma);
-  PolarizabilityBath pol(omega_a, alpha_zero, &mu, &greens);
-
-  Options_Polarizability opts;
-  opts.fancy_complex = IM;
-  opts.class_pt = &pol;
+  auto mu = std::make_shared<OhmicMemoryKernel>(gamma);
+  PolarizabilityBath pol(omega_a, alpha_zero, mu, greens);
 
   double omega_min = 0.0;
   double fact = 1e-3;
@@ -36,9 +31,8 @@ TEST_CASE("Integrated PolarizabilityBath fulfills the omega_cut much smaller "
   // loop over indices
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
-      opts.indices(0) = i;
-      opts.indices(1) = j;
-      result(i,j) = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
+      result(i,j) = pol.integrate_omega({(double) i, (double) j}, IM,
+              omega_min, omega_max, relerr, abserr);
     }
   }
 
@@ -67,18 +61,14 @@ TEST_CASE("Integrated PolarizabilityBath fulfills the omega_cut much larger "
   double v = 1e-1;
   double beta = 1e3;
   double relerr_k = 1E-12;
-  GreensTensorVacuum greens(v, beta, relerr_k);
+  auto greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr_k);
 
   // define polarizability
   double omega_a = 4.0;
   double alpha_zero = 1e-8;
   double gamma = 1.0;
-  OhmicMemoryKernel mu(gamma);
-  PolarizabilityBath pol(omega_a, alpha_zero, &mu, &greens);
-
-  Options_Polarizability opts;
-  opts.fancy_complex = IM;
-  opts.class_pt = &pol;
+  auto mu = std::make_shared<OhmicMemoryKernel>(gamma);
+  PolarizabilityBath pol(omega_a, alpha_zero, mu, greens);
 
   double omega_min = 0.0;
   double omega_max = omega_a * 1e4;
@@ -99,14 +89,12 @@ TEST_CASE("Integrated PolarizabilityBath fulfills the omega_cut much larger "
   // loop over indices
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
-      opts.indices(0) = i;
-      opts.indices(1) = j;
-      result(i,j) =
-          pol.integrate_omega(opts, omega_min, omega_a - 1e-3, relerr, abserr);
-      result(i,j) += pol.integrate_omega(opts, omega_a - 1e-3, omega_a + 1e-3,
-                                    relerr, abserr);
-      result(i,j) +=
-          pol.integrate_omega(opts, omega_a + 1e-3, omega_max, relerr, abserr);
+        result(i,j) = pol.integrate_omega({(double)i, (double)j}, IM, omega_min,
+                                     omega_a - 1e-3, relerr, abserr);
+        result(i,j) += pol.integrate_omega({(double)i, (double)j}, IM, omega_a - 1e-3,
+        omega_a + 1e-3, relerr, abserr);
+        result(i,j) += pol.integrate_omega({(double)i, (double)j}, IM, omega_a + 1e-3,
+        omega_max, relerr, abserr);
     }
   }
   //Ensure non-trivial result
@@ -120,5 +108,5 @@ TEST_CASE("Integrated PolarizabilityBath fulfills the omega_cut much larger "
   REQUIRE(approx_equal(result,asymp_mat,"reldiff", 1e-4));
   //Ensure that the error is below is error-bound due to the series expansion
   REQUIRE(approx_equal(result,asymp_mat, "absdiff" , sqrt(alpha_zero)));
- 
+
 };

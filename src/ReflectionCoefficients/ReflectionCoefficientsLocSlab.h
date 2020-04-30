@@ -16,28 +16,30 @@
 class ReflectionCoefficientsLocSlab : public ReflectionCoefficients {
 private:
   // permittivity is needed to describe the surface's response
-  Permittivity *permittivity;
+  std::shared_ptr<Permittivity> permittivity;
   double thickness;
 
 public:
   /*!
    * Constructor for reflection coefficients of a local bulk medium.
    */
-  ReflectionCoefficientsLocSlab(Permittivity *permittivity, double thickness);
+  ReflectionCoefficientsLocSlab(std::shared_ptr<Permittivity> permittivity,
+                                double thickness);
 
-  ReflectionCoefficientsLocSlab(std::string input_file);
+  ReflectionCoefficientsLocSlab(const std::string &input_file);
 
   /*!
    * Returns the p- and s-polarized reflection coefficient.
    */
-  void ref(std::complex<double> &r_p, std::complex<double> &r_s, double omega, std::complex<double> kappa);
+  void calculate(double omega, std::complex<double> kappa,
+                 std::complex<double> &r_p, std::complex<double> &r_s) const;
+
   // getter functions
-  std::complex<double> get_epsilon(double omega) {
-    return this->permittivity->epsilon(omega);
+  std::complex<double> get_epsilon(double omega) const {
+    return permittivity->calculate(omega);
   };
-  double get_thickness(){
-   return this->thickness;
-  };
-  };
+
+  double get_thickness() const { return thickness; };
+};
 
 #endif // REFLECTIONCOEFFICIENTSLOCSLAB_H

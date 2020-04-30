@@ -1,4 +1,3 @@
-#include <armadillo>
 #include <iostream>
 
 // json parser
@@ -11,11 +10,8 @@ namespace pt = boost::property_tree;
 #include "ReflectionCoefficientsLocSlab.h"
 
 // reflection coefficients factory
-ReflectionCoefficients *
-ReflectionCoefficientsFactory::create(std::string input_file) {
-  // set return pointer to NULL
-  ReflectionCoefficients *refcoef = NULL;
-
+std::shared_ptr<ReflectionCoefficients>
+ReflectionCoefficientsFactory::create(const std::string& input_file) {
   // Create a root
   pt::ptree root;
 
@@ -27,15 +23,12 @@ ReflectionCoefficientsFactory::create(std::string input_file) {
 
   // set the right pointer, show error if type is unknown
   if (type == "local bulk") {
-    refcoef = new ReflectionCoefficientsLocBulk(input_file);
+    return std::make_shared<ReflectionCoefficientsLocBulk>(input_file);
   } else if (type == "local slab") {
-    refcoef = new ReflectionCoefficientsLocSlab(input_file);
+    return std::make_shared<ReflectionCoefficientsLocSlab>(input_file);
   } else {
     std::cerr << "Error: Unknown Permittivity type (" << type << ")!"
               << std::endl;
     exit(0);
-  };
-
-  // return reflection coefficient pointer
-  return refcoef;
-};
+  }
+}

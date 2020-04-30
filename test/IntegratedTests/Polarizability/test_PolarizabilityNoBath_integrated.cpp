@@ -7,25 +7,23 @@
 TEST_CASE("Integrated PolarizabilityNoBath fulfills the omega_cut much smaller "
           "than omega_a asymptote",
           "[PolarizabilityNoBath]") {
+
   // define greens tensor
   auto v = GENERATE(1e-4,1e-8);
   auto beta = GENERATE(1e-3,1.,1e2);
   double relerr_k = 1E-9;
-  GreensTensorVacuum greens(v, beta, relerr_k);
+  auto greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr_k);
 
   // define polarizability
   auto omega_a = GENERATE(0.21,1.7);
   auto alpha_zero = GENERATE(1e-8,1e-9);
-  PolarizabilityNoBath pol(omega_a, alpha_zero, &greens);
 
-  Options_Polarizability opts;
-  opts.fancy_complex = IM;
-  opts.class_pt = &pol;
+  PolarizabilityNoBath pol(omega_a, alpha_zero, greens);
 
   double omega_min = 0.0;
   double omega_max = 1e-3 * omega_a; // omega_max much smaller than omega_a
   double relerr = 1e-13;
-  double abserr = 0;
+  double abserr = 0.;
 
   cx_mat::fixed<3,3> result(fill::zeros);
   cx_mat::fixed<3,3> asymp(fill::zeros);
@@ -41,9 +39,8 @@ TEST_CASE("Integrated PolarizabilityNoBath fulfills the omega_cut much smaller "
   // loop over indices
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
-      opts.indices(0) = i;
-      opts.indices(1) = j;
-      result(i,j) = pol.integrate_omega(opts, omega_min, omega_max, relerr, abserr);
+    result(i,j) = pol.integrate_omega({(double)i, (double)j}, IM, omega_min,
+                             omega_max, relerr, abserr);
     }
   }
 
@@ -63,16 +60,12 @@ TEST_CASE("Integrated PolarizabilityNoBath fulfills the omega_cut much larger "
   auto v = GENERATE(1e-4,1e-8);
   double beta = 1e5;
   double relerr_k = 1E-9;
-  GreensTensorVacuum greens(v, beta, relerr_k);
+  auto greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr_k);
 
   // define polarizability
   auto omega_a = GENERATE(0.21,1.5);
   double alpha_zero = 1e-10;
-  PolarizabilityNoBath pol(omega_a, alpha_zero, &greens);
-
-  Options_Polarizability opts;
-  opts.fancy_complex = IM;
-  opts.class_pt = &pol;
+  PolarizabilityNoBath pol(omega_a, alpha_zero, greens);
 
   double omega_min = 0.0;
   double omega_max = omega_a * 1e5;
@@ -89,16 +82,14 @@ TEST_CASE("Integrated PolarizabilityNoBath fulfills the omega_cut much larger "
   // loop over indices
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
-      opts.indices(0) = i;
-      opts.indices(1) = j;
-      result(i,j) =
-          pol.integrate_omega(opts, omega_min, omega_a - 1e-3, relerr, abserr);
-      result(i,j) += pol.integrate_omega(opts, omega_a - 1e-3, omega_a + 1e-3,
-                                    relerr, abserr);
-      result(i,j) +=
-          pol.integrate_omega(opts, omega_a + 1e-3, omega_max, relerr, abserr);
-    }
-  }
+      result(i,j) = pol.integrate_omega({(double)i, (double)j}, IM, omega_min,
+                                   omega_a - 1e-3, relerr, abserr);
+      result(i,j) += pol.integrate_omega({(double)i, (double)j}, IM, omega_a - 1e-3,
+                                    omega_a + 1e-3, relerr, abserr);
+      result(i,j) += pol.integrate_omega({(double)i, (double)j}, IM, omega_a + 1e-3,
+                                    omega_max, relerr, abserr);
+	}
+      }
 
   //Ensure non-trivial results
   REQUIRE(!result.is_zero());

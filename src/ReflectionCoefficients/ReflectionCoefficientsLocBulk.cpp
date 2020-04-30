@@ -1,33 +1,32 @@
 #include "ReflectionCoefficientsLocBulk.h"
 #include <armadillo>
+#include <utility>
 // direct constructor
 ReflectionCoefficientsLocBulk::ReflectionCoefficientsLocBulk(
-    Permittivity *permittivity) {
-  // set permittivity
-  // set parameters
-  this->permittivity = permittivity;
-};
+    std::shared_ptr<Permittivity> permittivity)
+    : permittivity(std::move(permittivity)) {}
+
 // constructor from .json file
 ReflectionCoefficientsLocBulk::ReflectionCoefficientsLocBulk(
-    std::string input_file) {
+    const std::string &input_file) {
   // set permittivity
-  // set parameters
   this->permittivity = PermittivityFactory::create(input_file);
-};
+}
 
 // calculate the p-polarized reflection coefficient
-void ReflectionCoefficientsLocBulk::ref(std::complex<double> &r_p,
-                                        std::complex<double> &r_s, double omega,
-                                        std::complex<double> kappa) {
+void ReflectionCoefficientsLocBulk::calculate(double omega,
+                                              std::complex<double> kappa,
+                                              std::complex<double> &r_p,
+                                              std::complex<double> &r_s) const {
   // absolute value of omega. r_p is always calculated for positive omega and if
   // needed complex conjugated after the calculation
   double omega_abs = std::abs(omega);
-  std::complex<double> eps = this->permittivity->epsilon(omega_abs);
-  std::complex<double> kappa_epsilon;
+  std::complex<double> eps = this->permittivity->calculate(omega_abs);
 
   // kapppa as well as kappa_epsilon are defined to have either a purely
   // positive real part or purely negatively imaginary part
-  kappa_epsilon = sqrt(kappa * kappa - (eps - 1.) * omega_abs * omega_abs);
+  std::complex<double> kappa_epsilon =
+      sqrt(kappa * kappa - (eps - 1.) * omega_abs * omega_abs);
   kappa_epsilon = std::complex<double>(std::abs(kappa_epsilon.real()),
                                        -std::abs(kappa_epsilon.imag()));
   // Defining the reflection coefficients in transverse magnetice polarization
@@ -38,5 +37,5 @@ void ReflectionCoefficientsLocBulk::ref(std::complex<double> &r_p,
   if (omega < 0.) {
     r_p = conj(r_p);
     r_s = conj(r_s);
-  };
-};
+  }
+}

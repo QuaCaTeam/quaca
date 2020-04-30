@@ -9,8 +9,9 @@
 class ReflectionCoefficients {
 public:
   // returns the reflection coefficients
-  virtual void ref(std::complex<double> &r_p, std::complex<double> &r_s,
-                   double omega, std::complex<double> kappa) = 0;
+  virtual void calculate(double omega, std::complex<double> kappa,
+                         std::complex<double> &r_p,
+                         std::complex<double> &r_s) const = 0;
 };
 
 #endif // REFLECTIONCOEFFICIENTS_H

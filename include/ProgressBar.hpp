@@ -32,7 +32,7 @@ public:
 
         std::cout << "[";
 
-        for (int i = 0; i < bar_width; ++i) {
+        for (int i = 0; i < (int) bar_width; ++i) {
             if (i < pos) std::cout << complete_char;
             else if (i == pos) std::cout << ">";
             else std::cout << incomplete_char;

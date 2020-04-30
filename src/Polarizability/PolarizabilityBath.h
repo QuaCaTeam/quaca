@@ -9,18 +9,21 @@
 class PolarizabilityBath : public Polarizability {
 private:
   // memory kernel needed to calculate alpha
-  MemoryKernel *mu;
+  std::shared_ptr<MemoryKernel> mu;
 
 public:
-  PolarizabilityBath(double omega_a, double alpha_zero, MemoryKernel *mu,
-                     GreensTensor *greens_tensor);
-  PolarizabilityBath(std::string input_file);
+  PolarizabilityBath(double omega_a, double alpha_zero,
+                     std::shared_ptr<MemoryKernel> mu,
+                     std::shared_ptr<GreensTensor> greens_tensor);
+  PolarizabilityBath(const std::string &input_file);
 
-  void calculate_tensor(cx_mat::fixed<3, 3> &alpha,
-                        Options_Polarizability opts);
+  void calculate_tensor(double omega, cx_mat::fixed<3, 3> &alpha,
+                        Tensor_Options fancy_complex) const;
 
   // getter function for memory kernel
-  std::complex<double> get_mu(double omega) { return this->mu->mu(omega); };
+  std::complex<double> get_mu(double omega) const {
+    return mu->calculate(omega);
+  };
 };
 
 #endif // POLARIZABILITYBATH_H
