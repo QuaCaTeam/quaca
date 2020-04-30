@@ -15,10 +15,11 @@ int main(int argc, char *argv[]) {
   std::string parameters = opts.get_parameter_file();
 
   // define looper
-  Looper *looper = LooperFactory::create(parameters);
+  auto looper = LooperFactory::create(parameters);
 
   // array to store all the computed values of the loop
-  double friction_data[looper->get_steps_total()];
+  std::vector<double> friction_data;
+  friction_data.resize(looper->get_steps_total());
 
   // define progressbar
   ProgressBar progbar(looper->get_steps_total(), 70);
@@ -53,12 +54,12 @@ int main(int argc, char *argv[]) {
     double relerr_omega = root.get<double>("Friction.relerr_omega");
 
     // define needed quantities
-    Polarizability *polarizability = PolarizabilityFactory::create(parameters);
-    PowerSpectrumHarmOsc *powerspectrum = new PowerSpectrumHarmOsc(
+    auto polarizability = PolarizabilityFactory::create(parameters);
+    auto powerspectrum = std::make_shared<PowerSpectrumHarmOsc>(
         polarizability->get_greens_tensor(), polarizability);
-    Friction *quant_friction =
-        new Friction(polarizability->get_greens_tensor(), polarizability,
-                     powerspectrum, relerr_omega);
+    auto quant_friction =
+        std::make_shared<Friction>(polarizability->get_greens_tensor(),
+                                   polarizability, powerspectrum, relerr_omega);
 
     // Parallelize the for-loop of the given looper
     progbar.display();
@@ -94,4 +95,4 @@ int main(int argc, char *argv[]) {
   progbar.done();
 
   return 0;
-};
+}
