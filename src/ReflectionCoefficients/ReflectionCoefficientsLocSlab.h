@@ -36,10 +36,10 @@ public:
 
   // getter functions
   std::complex<double> get_epsilon(double omega) const {
-    return this->permittivity->calculate(omega);
+    return permittivity->calculate(omega);
   };
 
-  double get_thickness() const { return this->thickness; };
+  double get_thickness() const { return thickness; };
 };
 
 #endif // REFLECTIONCOEFFICIENTSLOCSLAB_H

@@ -103,40 +103,35 @@ void GreensTensorPlate::integrate_k(double omega, cx_mat::fixed<3, 3> &GT,
 
   // the xx element
   auto F_xx = [=](double x) -> double {
-    return this->integrand_1d_k(x, omega, {0,0}, fancy_complex,
+    return this->integrand_1d_k(x, omega, {0, 0}, fancy_complex,
                                 weight_function);
   };
   GT(0, 0) = cquad(F_xx, 0, 0.5 * M_PI, rel_err(1), 0) / M_PI;
-  GT(0, 0) +=
-      cquad(F_xx, 0.5 * M_PI, M_PI, rel_err(1), 0) / M_PI;
+  GT(0, 0) += cquad(F_xx, 0.5 * M_PI, M_PI, rel_err(1), 0) / M_PI;
 
   // the yy element
   auto F_yy = [=](double x) -> double {
-    return this->integrand_1d_k(x, omega, {1,1}, fancy_complex,
+    return this->integrand_1d_k(x, omega, {1, 1}, fancy_complex,
                                 weight_function);
   };
   GT(1, 1) = cquad(F_yy, 0, 0.5 * M_PI, rel_err(1), 0) / M_PI;
-  GT(1, 1) +=
-      cquad(F_yy, 0.5 * M_PI, M_PI, rel_err(1), 0) / M_PI;
+  GT(1, 1) += cquad(F_yy, 0.5 * M_PI, M_PI, rel_err(1), 0) / M_PI;
 
   // the zz element
   auto F_zz = [=](double x) -> double {
-    return this->integrand_1d_k(x, omega, {2,2}, fancy_complex,
+    return this->integrand_1d_k(x, omega, {2, 2}, fancy_complex,
                                 weight_function);
   };
   GT(2, 2) = cquad(F_zz, 0, 0.5 * M_PI, rel_err(1), 0) / M_PI;
-  GT(2, 2) +=
-      cquad(F_zz, 0.5 * M_PI, M_PI, rel_err(1), 0) / M_PI;
+  GT(2, 2) += cquad(F_zz, 0.5 * M_PI, M_PI, rel_err(1), 0) / M_PI;
 
   // the zx element
   auto F_zx = [=](double x) -> double {
-    return this->integrand_1d_k(x, omega, {2,0}, fancy_complex,
+    return this->integrand_1d_k(x, omega, {2, 0}, fancy_complex,
                                 weight_function);
   };
-  GT(2, 0) =
-      I * cquad(F_zx, 0, 0.5 * M_PI, rel_err(1), 0) / M_PI;
-  GT(2, 0) +=
-      I * cquad(F_zx, 0.5 * M_PI, M_PI, rel_err(1), 0) / M_PI;
+  GT(2, 0) = I * cquad(F_zx, 0, 0.5 * M_PI, rel_err(1), 0) / M_PI;
+  GT(2, 0) += I * cquad(F_zx, 0.5 * M_PI, M_PI, rel_err(1), 0) / M_PI;
 
   // the xz element
   GT(0, 2) = -GT(2, 0);
@@ -166,13 +161,11 @@ double GreensTensorPlate::integrand_1d_k(double phi, double omega,
   // split at the edge, if the edged lies below the cut-off kappa_cut.
   if (kappa_cut > std::abs(omega / (v * cos_phi))) {
     result = cquad(F, -std::abs(omega), 0, rel_err(0), 0);
-    result += cquad(F, 0, std::abs(omega / (v * cos_phi)),
-                    rel_err(0), 0);
-    result += cquad(F, std::abs(omega / (v * cos_phi)),
-                    kappa_cut, rel_err(0), 0);
+    result += cquad(F, 0, std::abs(omega / (v * cos_phi)), rel_err(0), 0);
+    result +=
+        cquad(F, std::abs(omega / (v * cos_phi)), kappa_cut, rel_err(0), 0);
   } else {
-    result = cquad(F, -std::abs(omega), kappa_cut,
-                   rel_err(0), 0);
+    result = cquad(F, -std::abs(omega), kappa_cut, rel_err(0), 0);
   }
 
   return result;

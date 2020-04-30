@@ -7,13 +7,13 @@ set(quaca_sources
         GreensTensor/GreensTensorPlate.cpp
         GreensTensor/GreensTensorPlateVacuum.cpp
         GreensTensor/GreensTensorVacuum.cpp
-#        Looper/Looper.cpp
-#        Looper/LooperFactory.cpp
-#        Looper/LooperV.cpp
-#        Looper/LooperZa.cpp
+        Looper/Looper.cpp
+        Looper/LooperFactory.cpp
+        Looper/LooperV.cpp
+        Looper/LooperZa.cpp
         MemoryKernel/MemoryKernelFactory.cpp
         MemoryKernel/OhmicMemoryKernel.cpp
-#        Options/Options.cpp
+        Options/Options.cpp
         Permittivity/PermittivityDrude.cpp
         Permittivity/PermittivityFactory.cpp
         Permittivity/PermittivityLorentz.cpp

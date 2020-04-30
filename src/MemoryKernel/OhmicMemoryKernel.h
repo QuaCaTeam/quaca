@@ -17,7 +17,7 @@ public:
   explicit OhmicMemoryKernel(const std::string &input_file);
 
   // calculate function
-  std::complex<double> calculate(double omega) override;
+  std::complex<double> calculate(double omega) const override;
 
   // getter functions
   double get_gamma() const { return this->gamma; };

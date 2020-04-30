@@ -29,7 +29,9 @@ public:
                                 cx_mat::fixed<3, 3> &GT) const = 0;
 
   // integrate over a two-dimensional k space
-  virtual void integrate_k(double omega, cx_mat::fixed<3, 3> &GT, Tensor_Options fancy_complex, Weight_Options weight_function) const = 0;
+  virtual void integrate_k(double omega, cx_mat::fixed<3, 3> &GT,
+                           Tensor_Options fancy_complex,
+                           Weight_Options weight_function) const = 0;
 
   // getter functions
   double get_v() const { return this->v; };

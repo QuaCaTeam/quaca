@@ -10,7 +10,6 @@ ReflectionCoefficientsLocBulk::ReflectionCoefficientsLocBulk(
 ReflectionCoefficientsLocBulk::ReflectionCoefficientsLocBulk(
     const std::string &input_file) {
   // set permittivity
-  // set parameters
   this->permittivity = PermittivityFactory::create(input_file);
 }
 
@@ -26,7 +25,8 @@ void ReflectionCoefficientsLocBulk::calculate(double omega,
 
   // kapppa as well as kappa_epsilon are defined to have either a purely
   // positive real part or purely negatively imaginary part
-  std::complex<double> kappa_epsilon = sqrt(kappa * kappa - (eps - 1.) * omega_abs * omega_abs);
+  std::complex<double> kappa_epsilon =
+      sqrt(kappa * kappa - (eps - 1.) * omega_abs * omega_abs);
   kappa_epsilon = std::complex<double>(std::abs(kappa_epsilon.real()),
                                        -std::abs(kappa_epsilon.imag()));
   // Defining the reflection coefficients in transverse magnetice polarization

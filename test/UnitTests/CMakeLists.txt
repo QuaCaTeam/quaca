@@ -6,10 +6,10 @@ set(test_sources
         GreensTensor/test_GreensTensorPlate_unit.cpp
         GreensTensor/test_GreensTensorPlateVacuum_unit.cpp
         GreensTensor/test_GreensTensorVacuum_unit.cpp
-#        Looper/test_LooperV_unit.cpp
-#        Looper/test_LooperZa_unit.cpp
+        Looper/test_LooperV_unit.cpp
+        Looper/test_LooperZa_unit.cpp
         MemoryKernel/test_OhmicMemoryKernel_unit.cpp
-#        Options/test_Options_unit.cpp
+        Options/test_Options_unit.cpp
         Permittivity/test_PermittivityDrude_unit.cpp
         Permittivity/test_PermittivityLorentz_unit.cpp
         Polarizability/test_PolarizabilityBath_unit.cpp

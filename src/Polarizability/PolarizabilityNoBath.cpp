@@ -8,9 +8,9 @@ PolarizabilityNoBath::PolarizabilityNoBath(
 PolarizabilityNoBath::PolarizabilityNoBath(const std::string &input_file)
     : Polarizability(input_file) {}
 
-void PolarizabilityNoBath::calculate_tensor(double omega,
-                                            cx_mat::fixed<3, 3> &alpha,
-                                            Tensor_Options fancy_complex) const {
+void PolarizabilityNoBath::calculate_tensor(
+    double omega, cx_mat::fixed<3, 3> &alpha,
+    Tensor_Options fancy_complex) const {
   // imaginary unit
   std::complex<double> I(0.0, 1.0);
 

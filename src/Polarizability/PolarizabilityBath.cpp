@@ -1,9 +1,12 @@
 #include "PolarizabilityBath.h"
 
+#include <utility>
+
 PolarizabilityBath::PolarizabilityBath(
     double omega_a, double alpha_zero, std::shared_ptr<MemoryKernel> mu,
     std::shared_ptr<GreensTensor> greens_tensor)
-    : Polarizability(omega_a, alpha_zero, greens_tensor), mu(mu) {}
+    : Polarizability(omega_a, alpha_zero, std::move(greens_tensor)),
+      mu(std::move(mu)) {}
 
 PolarizabilityBath::PolarizabilityBath(const std::string &input_file)
     : Polarizability(input_file) {

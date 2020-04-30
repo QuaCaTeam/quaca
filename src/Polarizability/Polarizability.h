@@ -29,16 +29,18 @@ public:
                                 Tensor_Options fancy_complex) const = 0;
 
   // integration over omega
-  double integrate_omega(const vec::fixed<2> &indices, Tensor_Options fancy_complex,
-                         double omega_min, double omega_max, double relerr,
-                         double abserr) const;
+  double integrate_omega(const vec::fixed<2> &indices,
+                         Tensor_Options fancy_complex, double omega_min,
+                         double omega_max, double relerr, double abserr) const;
   double integrand_omega(double omega, const vec::fixed<2> &indices,
                          Tensor_Options fancy_complex) const;
 
   // getter functions
   double get_omega_a() const { return omega_a; };
   double get_alpha_zero() const { return alpha_zero; };
-  std::shared_ptr<GreensTensor> &get_greens_tensor() { return greens_tensor; };
+  const std::shared_ptr<GreensTensor> &get_greens_tensor() const {
+    return greens_tensor;
+  };
 };
 
 #endif // POLARIZABILITY_H

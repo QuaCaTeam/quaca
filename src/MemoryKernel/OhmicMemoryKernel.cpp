@@ -39,7 +39,7 @@ OhmicMemoryKernel::OhmicMemoryKernel(const std::string &input_file) {
 }
 
 // return mu(omega) for defined memory kernel
-std::complex<double> OhmicMemoryKernel::calculate(double omega) {
+std::complex<double> OhmicMemoryKernel::calculate(double omega) const {
   const std::complex<double> gammac(this->gamma, 0E0);
   return gammac;
 }

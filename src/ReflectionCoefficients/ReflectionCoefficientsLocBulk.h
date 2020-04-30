@@ -33,7 +33,7 @@ public:
 
   // getter functions
   std::complex<double> get_epsilon(double omega) const {
-    return this->permittivity->calculate(omega);
+    return permittivity->calculate(omega);
   };
 };
 
