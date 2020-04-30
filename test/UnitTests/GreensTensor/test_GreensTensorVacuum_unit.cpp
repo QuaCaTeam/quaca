@@ -64,8 +64,6 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
     double factor = 1.;
     for(int i = 0; i < 3; ++i) {
       for(int j = 0; j < 3; ++j) {
-	opts.indices(0) = i;
-	opts.indices(1) = j;
 	RHS(i,j) = Greens.integrand_k(k_v, omega, {i, j}, IM, UNIT);
       }
     }
@@ -79,8 +77,6 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
     double factor = k_v;
     for(int i = 0; i < 3; ++i) {
       for(int j = 0; j < 3; ++j) {
-	opts.indices(0) = i;
-	opts.indices(1) = j;
 	RHS(i,j) = Greens.integrand_k(k_v, omega, {i, j}, IM, KV);
       }
     }
@@ -94,8 +90,6 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
     double factor = 1. / (1. - exp(-beta * omega_kv));
     for(int i = 0; i < 3; ++i) {
       for(int j = 0; j < 3; ++j) {
-	opts.indices(0) = i;
-	opts.indices(1) = j;
 	RHS(i,j) = Greens.integrand_k(k_v, omega, {i,j}, IM, TEMP);
       }
     }
@@ -109,8 +103,6 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
     double factor = k_v / (1. - exp(-beta * omega_kv));
     for(int i = 0; i < 3; ++i) {
       for(int j = 0; j < 3; ++j) {
-	opts.indices(0) = i;
-	opts.indices(1) = j;
 	RHS(i,j) = Greens.integrand_k(k_v, omega, {i,j}, IM, KV_TEMP);
       }
     }
@@ -125,8 +117,6 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
         1. / (1. - exp(-beta * (omega_kv))) - 1. / (1. - exp(-beta * omega));
     for(int i = 0; i < 3; ++i) {
       for(int j = 0; j < 3; ++j) {
-	opts.indices(0) = i;
-	opts.indices(1) = j;
 	RHS(i,j) = Greens.integrand_k(k_v, omega, {i,j}, IM, NON_LTE);
       }
     }

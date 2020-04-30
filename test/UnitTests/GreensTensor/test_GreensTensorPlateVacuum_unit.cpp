@@ -66,7 +66,6 @@ TEST_CASE("GreensTensorPlateVacuum calculate_tensor function returns the sum "
 
   cx_mat::fixed<3, 3> TensorPlate(fill::zeros);
   GTPlate.calculate_tensor(omega, {-k_x, -k_y}, TensorPlate);
-  GTPlate.calculate_tensor(TensorPlate, opts);
 
   //Ensure non-trivial results
   REQUIRE(!TensorPlateVacuum.is_zero());

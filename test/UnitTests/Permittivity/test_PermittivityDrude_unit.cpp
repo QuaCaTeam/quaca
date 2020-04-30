@@ -22,5 +22,5 @@ TEST_CASE("Drude permittivity obeys crossing relation", "[PermittivityDrude]") {
   PermittivityDrude perm(3.5E-2, 3.2);
 
   auto omega = GENERATE(-213.21,-65.34,-2.32,0.021,9.87,89.32);
-  REQUIRE(perm.calculate(omega) == std::conj(perm.epsilon(-omega)));
+  REQUIRE(perm.calculate(omega) == std::conj(perm.calculate(-omega)));
 };

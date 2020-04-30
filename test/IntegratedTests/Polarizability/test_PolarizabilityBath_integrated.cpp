@@ -17,12 +17,7 @@ TEST_CASE("Integrated PolarizabilityBath fulfills the omega_cut much smaller "
   auto alpha_zero = GENERATE(1e-8);
   auto gamma = GENERATE(0.32,12.43);
   auto mu = std::make_shared<OhmicMemoryKernel>(gamma);
-  OhmicMemoryKernel mu(gamma);
-  PolarizabilityBath pol(omega_a, alpha_zero, &mu, &greens);
-
-  Options_Polarizability opts;
-  opts.fancy_complex = IM;
-  opts.class_pt = &pol;
+  PolarizabilityBath pol(omega_a, alpha_zero, mu, greens);
 
   double omega_min = 0.0;
   double fact = 1e-3;
@@ -36,7 +31,7 @@ TEST_CASE("Integrated PolarizabilityBath fulfills the omega_cut much smaller "
   // loop over indices
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
-      result(i,j) = pol.integrate_omega({(double) i, (double) j}, IM, opts,
+      result(i,j) = pol.integrate_omega({(double) i, (double) j}, IM,
               omega_min, omega_max, relerr, abserr);
     }
   }

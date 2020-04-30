@@ -88,6 +88,8 @@ TEST_CASE("Integrated PolarizabilityNoBath fulfills the omega_cut much larger "
                                     omega_a + 1e-3, relerr, abserr);
       result(i,j) += pol.integrate_omega({(double)i, (double)j}, IM, omega_a + 1e-3,
                                     omega_max, relerr, abserr);
+	}
+      }
 
   //Ensure non-trivial results
   REQUIRE(!result.is_zero());

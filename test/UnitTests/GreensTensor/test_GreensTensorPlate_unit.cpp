@@ -74,20 +74,21 @@ TEST_CASE("Plate Green's tensor constructors work as expected",
 TEST_CASE("The operations calculate_tensor and the integrand_2d_k coincide",
           "[GreensTensorPlate]") {
   // Here we considered also the volume element from the integration.
-  std::complex<double> I(0.0, 1.0);
+  const std::complex<double> I(0.0, 1.0);
   auto omega = GENERATE(-201,21,-1.2,3.2,103.12);
   auto k_x = GENERATE(-321.46,-3.54,1.21,32.1);
   auto k_y = GENERATE(-123.12,-0.0132,3.87,67.21);
-  double omega_p = 9;
-  double gamma = 0.1;
-  double v = 1e-2;
-  double za = 0.1;
-  double delta_cut = 30;
+  const double omega_p = 9;
+  const double gamma = 0.1;
+  const double v = 1e-2;
+  const double za = 0.1;
+  const double beta = 0.1;
+  const double delta_cut = 30;
   vec::fixed<2> rel_err = {1E-8, 1E-6};
 
   auto perm = std::make_shared<PermittivityDrude>(omega_p, gamma);
   auto refl = std::make_shared<ReflectionCoefficientsLocBulk>(perm);
-  GreensTensorPlate Greens(v, za, 0.1, refl, delta_cut, rel_err);
+  GreensTensorPlate Greens(v, za, beta, refl, delta_cut, rel_err);
 
   // First, the calculate_tensor operation is used to generate the
   // Green's tensor with fancy_I
@@ -97,15 +98,15 @@ TEST_CASE("The operations calculate_tensor and the integrand_2d_k coincide",
   vec::fixed<2> kvec;
   kvec(0) = k_x;
   kvec(1) = k_y;
-  omega = omega + k_x * v;
+  double omega_dp = omega + k_x * v;
   double k = sqrt(k_x * k_x + k_y * k_y);
   double cos_phi = k_x / k;
   std::complex<double> kappa =
-      sqrt(std::complex<double>(k * k - omega * omega, 0.));
+      sqrt(std::complex<double>(k * k - omega_dp * omega_dp, 0.));
   kappa = std::complex<double>(std::abs(kappa.real()), -std::abs(kappa.imag()));
-  double volume_element = std::abs(kappa) * k / (k - cos_phi * v * omega);
+  double volume_element = std::abs(kappa) * k / (k - cos_phi * v * omega_dp);
 
-  Greens.calculate_tensor(omega, kvec, Green);
+  Greens.calculate_tensor(omega_dp, kvec, Green);
 
   Green *= volume_element;
   Green_fancy_I_ct = (Green - trans(Green)) / (2. * I);
@@ -120,7 +121,6 @@ TEST_CASE("The operations calculate_tensor and the integrand_2d_k coincide",
   }
 
   kvec(0) = acos(k_x / k);
-  omega = omega - k_x * v;
 
   // loop over all indices
   for (int i = 0; i < 3; i++) {
@@ -138,7 +138,11 @@ TEST_CASE("The operations calculate_tensor and the integrand_2d_k coincide",
   //Ensure that the results are non trivial
   REQUIRE(!Green_fancy_I_ct.is_zero());
   REQUIRE(!Green_fancy_I_ik2d.is_zero());
-
+  
+  if(!approx_equal(Green_fancy_I_ct, Green_fancy_I_ik2d, "reldiff", 10E-4))
+  {
+    std::cout << Green_fancy_I_ct << Green_fancy_I_ik2d << std::endl;
+  }
   REQUIRE(approx_equal(Green_fancy_I_ct, Green_fancy_I_ik2d, "reldiff", 10E-4));
 }
 
@@ -230,9 +234,6 @@ TEST_CASE("Integrated Green's tensor works properly", "[GreensTensorPlate]") {
     Greens.integrate_k(omega, Greens_lhs, IM, KV);
     Greens.integrate_k(-omega, Greens_rhs, IM, KV);
 
-    opts.omega = -omega;
-    Greens.integrate_k(Greens_rhs, opts);
-
     //Ensure that the results are non trivial
     REQUIRE(!Greens_lhs.is_zero());
     REQUIRE(!Greens_rhs.is_zero());
@@ -307,17 +308,13 @@ TEST_CASE("Integrated Green's tensor matches asymptotes",
     GT_Ana(2, 2) = 2. * GT_Ana(0, 0);
     GT_Ana(0, 2) = (2 * 3 * v * gamma / (pow(omega_p, 2) * pow(2 * za, 4))) / I;
     GT_Ana(2, 0) = -GT_Ana(0, 2);
-    opts.fancy_complex = IM;
-    opts.omega = omega;
-    Greens.integrate_k(GT_Num, opts);
+
+    cx_mat::fixed<3, 3> GT_Num(fill::zeros);
+    Greens.integrate_k(omega, GT_Num, IM, UNIT);
 
     //Ensure that the results are non trivial
     REQUIRE(!GT_Ana.is_zero());
     REQUIRE(!GT_Num.is_zero());
-
-
-    cx_mat::fixed<3, 3> GT_Num(fill::zeros);
-    Greens.integrate_k(omega, GT_Num, IM, UNIT);
 
     REQUIRE(approx_equal(GT_Ana, GT_Num, "reldiff", 10E-4));
   }

@@ -57,8 +57,6 @@ TEST_CASE("PolarizabilityBath integrand works as expected",
   // loop over all indices
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
-      opts.indices(0) = i;
-      opts.indices(1) = j;
       alpha_int(i,j) = pol.integrand_omega(omega, {(double) i, (double) j}, IM);
     }
   }
