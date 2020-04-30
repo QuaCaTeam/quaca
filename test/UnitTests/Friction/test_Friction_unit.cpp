@@ -3,10 +3,10 @@
 
 TEST_CASE("Friction constructors work as expected", "[Friction]") {
   SECTION("Direct constructor") {
-    auto v = GENERATE(take(1, random(0., 1.)));
-    double beta = GENERATE(take(1, random(1e-5, 1e3)));
-    double omega_a = GENERATE(take(1, random(0., 1e3)));
-    double alpha_zero = GENERATE(take(1, random(1e-5, 1.)));
+    auto v = GENERATE(1e-4);
+    double beta = GENERATE(1e-3,1e2);
+    double omega_a = GENERATE(1.6);
+    double alpha_zero = GENERATE(1e-9);
     double relerr_omega = 1E-1;
 
     double relerr_k = 1E-9;

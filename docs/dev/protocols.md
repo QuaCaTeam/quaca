@@ -256,3 +256,49 @@ Simon: Test cases: rewrite GENERATE and pointer to smart pointer
      - Christoph:
 
       - shared pointer with new integration
+
+
+## Meeting 30.04.2020: Christoph, Simon and Marty
+
+- Update:
+    * Simon: Test are refactored, Armadillo was updated
+    * Christoph: New path via modern pointer
+    * Marty: Looper void
+
+- Organization:
+    * Communication is key
+
+- Experimental:
+    * Lambda expression as integrand wrapper
+    * ready to join
+
+- Redesign:
+    * Polarizability
+    * PowerSpectrum
+    * Additional Memory Kernel
+
+- Code Critique:
+    * Use initialization lists; always declare and initialize
+    * define variables close to use
+    * first input then output argument
+    * const correctness
+
+- Timeline:
+    * Finish Code to next week
+    * move to github next Thursday
+
+- Tasks:
+    * Simon:
+        - merge experimental into master
+        - documentation (Communication is key)
+
+    * Christoph:
+        - mpi
+        - tutorial
+
+    * Marty:
+        - defactor Polarizability & PowerSpectrum
+        - new MemoryKernel
+        - Check magnitudes in test
+
+

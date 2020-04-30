@@ -53,11 +53,11 @@ TEST_CASE("PowerSpectrumHarmOsc constructors work as expected",
 
 TEST_CASE("Power spectrum without bath is hermitian",
           "[PowerSpectrumHarmOsc]") {
-  // Generate randomnized power spectrum
-  auto v = GENERATE(take(1, random(0., 1.)));
-  double beta = GENERATE(take(1, random(1., 1e2)));
-  double omega_a = GENERATE(take(1, random(0.1, 1e1)));
-  double alpha_zero = GENERATE(take(1, random(1e-9, 1e-7)));
+  // Generate power spectrum
+  auto v = GENERATE(1e-4);
+  auto beta = GENERATE(10.);
+  auto omega_a = GENERATE(1.6);
+  auto alpha_zero = GENERATE(1e-9);
 
   double relerr_k = 1E-9;
   auto greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr_k);
@@ -69,10 +69,14 @@ TEST_CASE("Power spectrum without bath is hermitian",
   cx_mat::fixed<3, 3> lhs(fill::zeros);
   cx_mat::fixed<3, 3> rhs(fill::zeros);
 
-  auto omega = GENERATE(take(5, random(-1e1, 1e1)));
+  auto omega = GENERATE(-21.65,-5.34,1.32,65.32);
 
   powerspectrum.calculate(omega, lhs, FULL);
   powerspectrum.calculate(omega, rhs, FULL);
+
+  //Ensure non-trivial results
+  REQUIRE(!lhs.is_zero());
+  REQUIRE(!rhs.is_zero());
 
   REQUIRE(approx_equal(lhs, trans(rhs), "reldiff", 1e-8));
 }
@@ -80,10 +84,10 @@ TEST_CASE("Power spectrum without bath is hermitian",
 TEST_CASE(
     "Power spectrum without bath reduces to polarizability in the static case",
     "[PowerSpectrumHarmOsc]") {
-  // Generate randomnized power spectrum
-  double beta = GENERATE(take(3, random(1e-5, 1e5)));
-  double omega_a = GENERATE(take(3, random(0., 1e1)));
-  double alpha_zero = GENERATE(take(3, random(1e-9, 1e-7)));
+  // Generate power spectrum
+  auto beta = GENERATE(10.);
+  auto omega_a = GENERATE(1.6);
+  auto alpha_zero = GENERATE(1e-9);
   // Ensure equilibrium result
   double v = 1e-11;
 
@@ -97,23 +101,28 @@ TEST_CASE(
   cx_mat::fixed<3, 3> lhs(fill::zeros);
   cx_mat::fixed<3, 3> rhs(fill::zeros);
 
-  auto omega = GENERATE(take(5, random(0., 1e2)));
+  auto omega = GENERATE(0.321,1.65,56.21);
+  // Compute the powerspectrum
   powerspectrum.calculate(omega, lhs, FULL);
 
   // Set integration options for the polarizability
   alpha->calculate_tensor(omega, rhs, IM);
   rhs *= 1. / (M_PI * (1. - exp(-beta * omega)));
 
+  //Ensure non-trivial result
+  REQUIRE(!lhs.is_zero());
+  REQUIRE(!rhs.is_zero());
+
   REQUIRE(approx_equal(lhs, rhs, "reldiff", 10e-8));
 }
 
 TEST_CASE("Power spectrum with bath is hermitian", "[PowerSpectrumHarmOsc]") {
-  // Generate randomnized power spectrum
-  auto v = GENERATE(take(1, random(0., 1.)));
-  double beta = GENERATE(take(1, random(1., 1e2)));
-  double omega_a = GENERATE(take(1, random(0.1, 1e1)));
-  double alpha_zero = GENERATE(take(1, random(1e-9, 1e-7)));
-  double gamma = GENERATE(take(1, random(0., 1e1)));
+  // Generate power spectrum
+  auto v = GENERATE(1e-4);
+  auto beta = GENERATE(10.);
+  auto omega_a = GENERATE(1.6);
+  auto alpha_zero = GENERATE(1e-9);
+  double gamma = GENERATE(0.21);
 
   double relerr_k = 1E-9;
   auto greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr_k);
@@ -126,22 +135,25 @@ TEST_CASE("Power spectrum with bath is hermitian", "[PowerSpectrumHarmOsc]") {
   cx_mat::fixed<3, 3> lhs(fill::zeros);
   cx_mat::fixed<3, 3> rhs(fill::zeros);
 
-  auto omega = GENERATE(take(5, random(-1e1, 1e1)));
+  auto omega = GENERATE(-.97,-1e-3,0.43,.9);
 
   powerspectrum.calculate(omega, lhs, FULL);
   powerspectrum.calculate(omega, rhs, FULL);
 
+  //Ensure non-trivial results
+  REQUIRE(!lhs.is_zero());
+  REQUIRE(!rhs.is_zero());
   REQUIRE(approx_equal(lhs, trans(rhs), "reldiff", 1e-8));
 }
 
 TEST_CASE(
     "Power spectrum with bath reduces to polarizability in the static case",
     "[PowerSpectrumHarmOsc]") {
-  // Generate randomnized power spectrum
-  double beta = GENERATE(take(1, random(1e-5, 1e5)));
-  double omega_a = GENERATE(take(1, random(0., 1e1)));
-  double alpha_zero = GENERATE(take(1, random(1e-9, 1e-7)));
-  double gamma = GENERATE(take(1, random(0., 1.)));
+  // Generate power spectrum
+  auto beta = GENERATE(10.);
+  auto omega_a = GENERATE(1.6);
+  auto alpha_zero = GENERATE(1e-9);
+  double gamma = GENERATE(0.21);
   // Ensure equilibrium result
   double v = 1e-14;
 
@@ -163,5 +175,10 @@ TEST_CASE(
   // Set integration options for the polarizability
   alpha->calculate_tensor(omega, rhs, IM);
   rhs *= 1. / (M_PI * (1. - exp(-beta * omega)));
+
+  //Ensure non-trivial result
+  REQUIRE(!lhs.is_zero());
+  REQUIRE(!rhs.is_zero());
+
   REQUIRE(approx_equal(lhs, rhs, "reldiff", 10e-8));
 }
