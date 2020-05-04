@@ -18,12 +18,7 @@ set(quaca_sources
         Permittivity/PermittivityFactory.cpp
         Permittivity/PermittivityLorentz.cpp
         Polarizability/Polarizability.cpp
-        Polarizability/PolarizabilityBath.cpp
-        Polarizability/PolarizabilityFactory.cpp
-        Polarizability/PolarizabilityNoBath.cpp
         PowerSpectrum/PowerSpectrum.cpp
-        PowerSpectrum/PowerSpectrumFactory.cpp
-        PowerSpectrum/PowerSpectrumHarmOsc.cpp
         ReflectionCoefficients/ReflectionCoefficientsFactory.cpp
         ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp
         ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp

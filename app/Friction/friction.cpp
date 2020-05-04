@@ -54,8 +54,8 @@ int main(int argc, char *argv[]) {
     double relerr_omega = root.get<double>("Friction.relerr_omega");
 
     // define needed quantities
-    auto polarizability = PolarizabilityFactory::create(parameters);
-    auto powerspectrum = std::make_shared<PowerSpectrumHarmOsc>(
+    auto polarizability = std::make_shared<Polarizability>(parameters);
+    auto powerspectrum = std::make_shared<PowerSpectrum>(
         polarizability->get_greens_tensor(), polarizability);
     auto quant_friction =
         std::make_shared<Friction>(polarizability->get_greens_tensor(),

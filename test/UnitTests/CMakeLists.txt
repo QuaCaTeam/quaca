@@ -14,7 +14,7 @@ set(test_sources
         Permittivity/test_PermittivityLorentz_unit.cpp
         Polarizability/test_PolarizabilityBath_unit.cpp
         Polarizability/test_PolarizabilityNoBath_unit.cpp
-        PowerSpectrum/test_PowerSpectrumHarmOsc.cpp
+        PowerSpectrum/test_PowerSpectrum.cpp
         ReflectionCoefficients/test_ReflectionCoefficientsLocBulk_unit.cpp
         ReflectionCoefficients/test_ReflectionCoefficientsLocSlab_unit.cpp
         )

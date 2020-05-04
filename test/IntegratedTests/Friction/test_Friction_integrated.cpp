@@ -18,9 +18,8 @@ TEST_CASE("Analytical results with vacuum Green's tensor gets reproduced",
 
   double relerr_k = 1E-9;
   auto greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr_k);
-  auto alpha =
-      std::make_shared<PolarizabilityNoBath>(omega_a, alpha_zero, greens);
-  auto powerspectrum = std::make_shared<PowerSpectrumHarmOsc>(greens, alpha);
+  auto alpha = std::make_shared<Polarizability>(omega_a, alpha_zero, greens);
+  auto powerspectrum = std::make_shared<PowerSpectrum>(greens, alpha);
   Friction quant_fric(greens, alpha, powerspectrum, relerr_omega);
 
   double num_result = quant_fric.calculate(NON_LTE_ONLY);
@@ -52,9 +51,8 @@ TEST_CASE("Analytical results with scattered Green's tensor gets reproduced",
   auto refl = std::make_shared<ReflectionCoefficientsLocBulk>(perm);
   auto greens = std::make_shared<GreensTensorPlate>(v, beta, za, refl,
                                                     delta_cut, rel_err);
-  auto alpha =
-      std::make_shared<PolarizabilityNoBath>(omega_a, alpha_zero, greens);
-  auto powerspectrum = std::make_shared<PowerSpectrumHarmOsc>(greens, alpha);
+  auto alpha = std::make_shared<Polarizability>(omega_a, alpha_zero, greens);
+  auto powerspectrum = std::make_shared<PowerSpectrum>(greens, alpha);
   Friction quant_fric(greens, alpha, powerspectrum, relerr_omega);
 
   double num_result = quant_fric.calculate(NON_LTE_ONLY);

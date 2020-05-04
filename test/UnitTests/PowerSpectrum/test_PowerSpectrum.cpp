@@ -2,8 +2,7 @@
 #include "catch.hpp"
 #include <iostream>
 
-TEST_CASE("PowerSpectrumHarmOsc constructors work as expected",
-          "[PowerSpectrumHarmOsc]") {
+TEST_CASE("PowerSpectrum constructors work as expected", "[PowerSpectrum]") {
   SECTION("Direct constructor") {
     auto v = GENERATE(take(1, random(0., 1.)));
     double beta = GENERATE(take(1, random(1e-5, 1e3)));
@@ -12,9 +11,8 @@ TEST_CASE("PowerSpectrumHarmOsc constructors work as expected",
 
     double relerr_k = 1E-9;
     auto greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr_k);
-    auto alpha =
-        std::make_shared<PolarizabilityNoBath>(omega_a, alpha_zero, greens);
-    PowerSpectrumHarmOsc powerspectrum(greens, alpha);
+    auto alpha = std::make_shared<Polarizability>(omega_a, alpha_zero, greens);
+    PowerSpectrum powerspectrum(greens, alpha);
 
     REQUIRE(Approx(powerspectrum.get_greens_tensor()->get_v()).epsilon(1e-6) ==
             v);
@@ -25,7 +23,6 @@ TEST_CASE("PowerSpectrumHarmOsc constructors work as expected",
                 .epsilon(1e-6) == omega_a);
     REQUIRE(Approx(powerspectrum.get_polarizability()->get_alpha_zero())
                 .epsilon(1e-6) == alpha_zero);
-    REQUIRE(!powerspectrum.has_bath);
   }
 
   SECTION("json file constructor") {
@@ -35,8 +32,7 @@ TEST_CASE("PowerSpectrumHarmOsc constructors work as expected",
     double beta = 5.;
     double v = 0.01;
 
-    PowerSpectrumHarmOsc powerspectrum(
-        "../data/test_files/PowerSpectrumHarmOsc.json");
+    PowerSpectrum powerspectrum("../data/test_files/PowerSpectrum.json");
 
     REQUIRE(Approx(powerspectrum.get_greens_tensor()->get_v()).epsilon(1e-6) ==
             v);
@@ -47,12 +43,10 @@ TEST_CASE("PowerSpectrumHarmOsc constructors work as expected",
                 .epsilon(1e-6) == omega_a);
     REQUIRE(Approx(powerspectrum.get_polarizability()->get_alpha_zero())
                 .epsilon(1e-6) == alpha_zero);
-    REQUIRE(powerspectrum.has_bath);
   }
 }
 
-TEST_CASE("Power spectrum without bath is hermitian",
-          "[PowerSpectrumHarmOsc]") {
+TEST_CASE("Power spectrum without bath is hermitian", "[PowerSpectrum]") {
   // Generate power spectrum
   auto v = GENERATE(1e-4);
   auto beta = GENERATE(10.);
@@ -61,20 +55,19 @@ TEST_CASE("Power spectrum without bath is hermitian",
 
   double relerr_k = 1E-9;
   auto greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr_k);
-  auto alpha =
-      std::make_shared<PolarizabilityNoBath>(omega_a, alpha_zero, greens);
-  PowerSpectrumHarmOsc powerspectrum(greens, alpha);
+  auto alpha = std::make_shared<Polarizability>(omega_a, alpha_zero, greens);
+  PowerSpectrum powerspectrum(greens, alpha);
 
   // Matrices to store results
   cx_mat::fixed<3, 3> lhs(fill::zeros);
   cx_mat::fixed<3, 3> rhs(fill::zeros);
 
-  auto omega = GENERATE(-21.65,-5.34,1.32,65.32);
+  auto omega = GENERATE(-21.65, -5.34, 1.32, 65.32);
 
   powerspectrum.calculate(omega, lhs, FULL);
   powerspectrum.calculate(omega, rhs, FULL);
 
-  //Ensure non-trivial results
+  // Ensure non-trivial results
   REQUIRE(!lhs.is_zero());
   REQUIRE(!rhs.is_zero());
 
@@ -83,7 +76,7 @@ TEST_CASE("Power spectrum without bath is hermitian",
 
 TEST_CASE(
     "Power spectrum without bath reduces to polarizability in the static case",
-    "[PowerSpectrumHarmOsc]") {
+    "[PowerSpectrum]") {
   // Generate power spectrum
   auto beta = GENERATE(10.);
   auto omega_a = GENERATE(1.6);
@@ -93,15 +86,14 @@ TEST_CASE(
 
   double relerr_k = 1E-9;
   auto greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr_k);
-  auto alpha =
-      std::make_shared<PolarizabilityNoBath>(omega_a, alpha_zero, greens);
-  PowerSpectrumHarmOsc powerspectrum(greens, alpha);
+  auto alpha = std::make_shared<Polarizability>(omega_a, alpha_zero, greens);
+  PowerSpectrum powerspectrum(greens, alpha);
 
   // Matrices to store results
   cx_mat::fixed<3, 3> lhs(fill::zeros);
   cx_mat::fixed<3, 3> rhs(fill::zeros);
 
-  auto omega = GENERATE(0.321,1.65,56.21);
+  auto omega = GENERATE(0.321, 1.65, 56.21);
   // Compute the powerspectrum
   powerspectrum.calculate(omega, lhs, FULL);
 
@@ -109,14 +101,14 @@ TEST_CASE(
   alpha->calculate_tensor(omega, rhs, IM);
   rhs *= 1. / (M_PI * (1. - exp(-beta * omega)));
 
-  //Ensure non-trivial result
+  // Ensure non-trivial result
   REQUIRE(!lhs.is_zero());
   REQUIRE(!rhs.is_zero());
 
   REQUIRE(approx_equal(lhs, rhs, "reldiff", 10e-8));
 }
 
-TEST_CASE("Power spectrum with bath is hermitian", "[PowerSpectrumHarmOsc]") {
+TEST_CASE("Power spectrum with bath is hermitian", "[PowerSpectrum]") {
   // Generate power spectrum
   auto v = GENERATE(1e-4);
   auto beta = GENERATE(10.);
@@ -127,20 +119,20 @@ TEST_CASE("Power spectrum with bath is hermitian", "[PowerSpectrumHarmOsc]") {
   double relerr_k = 1E-9;
   auto greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr_k);
   auto ohmic_kernel = std::make_shared<OhmicMemoryKernel>(gamma);
-  auto alpha = std::make_shared<PolarizabilityBath>(omega_a, alpha_zero,
-                                                    ohmic_kernel, greens);
-  PowerSpectrumHarmOsc powerspectrum(greens, alpha);
+  auto alpha = std::make_shared<Polarizability>(omega_a, alpha_zero,
+                                                ohmic_kernel, greens);
+  PowerSpectrum powerspectrum(greens, alpha);
 
   // Matrices to store results
   cx_mat::fixed<3, 3> lhs(fill::zeros);
   cx_mat::fixed<3, 3> rhs(fill::zeros);
 
-  auto omega = GENERATE(-.97,-1e-3,0.43,.9);
+  auto omega = GENERATE(-.97, -1e-3, 0.43, .9);
 
   powerspectrum.calculate(omega, lhs, FULL);
   powerspectrum.calculate(omega, rhs, FULL);
 
-  //Ensure non-trivial results
+  // Ensure non-trivial results
   REQUIRE(!lhs.is_zero());
   REQUIRE(!rhs.is_zero());
   REQUIRE(approx_equal(lhs, trans(rhs), "reldiff", 1e-8));
@@ -148,7 +140,7 @@ TEST_CASE("Power spectrum with bath is hermitian", "[PowerSpectrumHarmOsc]") {
 
 TEST_CASE(
     "Power spectrum with bath reduces to polarizability in the static case",
-    "[PowerSpectrumHarmOsc]") {
+    "[PowerSpectrum]") {
   // Generate power spectrum
   auto beta = GENERATE(10.);
   auto omega_a = GENERATE(1.6);
@@ -160,9 +152,9 @@ TEST_CASE(
   double relerr_k = 1E-9;
   auto greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr_k);
   auto ohmic_kernel = std::make_shared<OhmicMemoryKernel>(gamma);
-  auto alpha = std::make_shared<PolarizabilityBath>(omega_a, alpha_zero,
-                                                    ohmic_kernel, greens);
-  PowerSpectrumHarmOsc powerspectrum(greens, alpha);
+  auto alpha = std::make_shared<Polarizability>(omega_a, alpha_zero,
+                                                ohmic_kernel, greens);
+  PowerSpectrum powerspectrum(greens, alpha);
 
   // Matrices to store results
   cx_mat::fixed<3, 3> lhs(fill::zeros);
@@ -176,7 +168,7 @@ TEST_CASE(
   alpha->calculate_tensor(omega, rhs, IM);
   rhs *= 1. / (M_PI * (1. - exp(-beta * omega)));
 
-  //Ensure non-trivial result
+  // Ensure non-trivial result
   REQUIRE(!lhs.is_zero());
   REQUIRE(!rhs.is_zero());
 

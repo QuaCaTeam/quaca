@@ -27,8 +27,8 @@ public:
                 std::shared_ptr<Polarizability> polarizability);
 
   // Calculate the power spectrum for a fixed value of the frequency \omega
-  virtual void calculate(double omega, cx_mat::fixed<3, 3> &powerspectrum,
-                         Spectrum_Options spectrum) const = 0;
+  void calculate(double omega, cx_mat::fixed<3, 3> &powerspectrum,
+                 Spectrum_Options spectrum) const;
 
   // getter functions
   std::shared_ptr<GreensTensor> &get_greens_tensor() { return greens_tensor; };
