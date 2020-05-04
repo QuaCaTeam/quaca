@@ -1,10 +1,10 @@
 {
     "GreensTensor": {
         "type": "plate",
-        "v": 1e-4,
+        "v": 1e-5,
         "beta": 1e6,
         "za": 0.01,
-        "delta_cut": 20,
+        "delta_cut": 30,
         "rel_err_0": 1e-4,
         "rel_err_1": 1e-2
     },
@@ -24,8 +24,8 @@
     "Looper": {
         "type": "omega",
         "scale": "log",
-        "start": 1e-4,
-        "end": 1e0,
-        "steps": 100
+        "start": 1e-10,
+        "end": 1e2,
+        "steps": 1000
     }
 }

@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
   }
   // Create a paralle region given threads given by the --threads flag
   // we have to create the parallel region already here to ensure,
-  // that any thread creates their own instance of quantum_friction
+  // that any thread creates their own instance of polarizability
   std::cout << "Starting parallel region with " << opts.get_num_threads()
             << " threads." << std::endl;
   if (opts.get_num_threads() > omp_get_max_threads()) {
@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
       decay_data[i] = looper->calculate_value(i, polarizability);
 
       // std::cout << "Thread: " << omp_get_thread_num() << " Step: " << i
-      //           << " Friction force: " << friction_data[i] << endl;
+      //           << " Decay rate: " << decay_data[i] << endl;
       ++progbar;
       progbar.display();
     }
