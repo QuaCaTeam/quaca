@@ -11,7 +11,6 @@ namespace pt = boost::property_tree;
 
 #include "../GreensTensor/GreensTensorFactory.h"
 #include "../Polarizability/PolarizabilityFactory.h"
-#include "../PowerSpectrum/PowerSpectrumFactory.h"
 #include "Friction.h"
 
 Friction::Friction(const std::string &input_file) {
@@ -24,7 +23,8 @@ Friction::Friction(const std::string &input_file) {
   // read greens tensor
   this->greens_tensor = GreensTensorFactory::create(input_file);
   this->polarizability = PolarizabilityFactory::create(input_file);
-  this->powerspectrum = PowerSpectrumFactory::create(input_file);
+  this->powerspectrum = std::make_shared<PowerSpectrum>(input_file);
+  // PowerSpectrumFactory::create(input_file);
 }
 
 Friction::Friction(std::shared_ptr<GreensTensor> greens_tensor,
@@ -47,11 +47,11 @@ double Friction::calculate(Spectrum_Options spectrum) const {
 
   // Start integration
   result = 0.;
-  auto F = [=](double x) -> double {return friction_integrand(x, spectrum);};
+  auto F = [=](double x) -> double { return friction_integrand(x, spectrum); };
 
-  for (int i = 0; i < (int) lim.size() - 1; i++) {
-    result += cquad(F, lim[i], lim[i + 1],
-                    relerr_omega, std::abs(result) * relerr_omega);
+  for (int i = 0; i < (int)lim.size() - 1; i++) {
+    result += cquad(F, lim[i], lim[i + 1], relerr_omega,
+                    std::abs(result) * relerr_omega);
   }
   // Perform last integration from the last significant point to infinity
   result += qagiu(F, lim[lim.size() - 1], relerr_omega,

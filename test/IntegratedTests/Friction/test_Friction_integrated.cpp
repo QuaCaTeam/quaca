@@ -20,7 +20,7 @@ TEST_CASE("Analytical results with vacuum Green's tensor gets reproduced",
   auto greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr_k);
   auto alpha =
       std::make_shared<PolarizabilityNoBath>(omega_a, alpha_zero, greens);
-  auto powerspectrum = std::make_shared<PowerSpectrumHarmOsc>(greens, alpha);
+  auto powerspectrum = std::make_shared<PowerSpectrum>(greens, alpha);
   Friction quant_fric(greens, alpha, powerspectrum, relerr_omega);
 
   double num_result = quant_fric.calculate(NON_LTE_ONLY);
@@ -54,7 +54,7 @@ TEST_CASE("Analytical results with scattered Green's tensor gets reproduced",
                                                     delta_cut, rel_err);
   auto alpha =
       std::make_shared<PolarizabilityNoBath>(omega_a, alpha_zero, greens);
-  auto powerspectrum = std::make_shared<PowerSpectrumHarmOsc>(greens, alpha);
+  auto powerspectrum = std::make_shared<PowerSpectrum>(greens, alpha);
   Friction quant_fric(greens, alpha, powerspectrum, relerr_omega);
 
   double num_result = quant_fric.calculate(NON_LTE_ONLY);

@@ -55,7 +55,7 @@ int main(int argc, char *argv[]) {
 
     // define needed quantities
     auto polarizability = PolarizabilityFactory::create(parameters);
-    auto powerspectrum = std::make_shared<PowerSpectrumHarmOsc>(
+    auto powerspectrum = std::make_shared<PowerSpectrum>(
         polarizability->get_greens_tensor(), polarizability);
     auto quant_friction =
         std::make_shared<Friction>(polarizability->get_greens_tensor(),

@@ -30,8 +30,6 @@
 #include "../src/Polarizability/PolarizabilityNoBath.h"
 
 #include "../src/PowerSpectrum/PowerSpectrum.h"
-#include "../src/PowerSpectrum/PowerSpectrumHarmOsc.h"
-#include "../src/PowerSpectrum/PowerSpectrumFactory.h"
 
 #include "../src/Friction/Friction.h"
 
