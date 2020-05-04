@@ -1,4 +1,9 @@
 #include "PolarizabilityBath.h"
+// json parser
+#include <boost/optional/optional.hpp>
+#include <boost/property_tree/json_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
+namespace pt = boost::property_tree;
 
 #include <utility>
 
@@ -8,10 +13,31 @@ PolarizabilityBath::PolarizabilityBath(
     : Polarizability(omega_a, alpha_zero, std::move(greens_tensor)),
       mu(std::move(mu)) {}
 
+PolarizabilityBath::PolarizabilityBath(
+    double omega_a, double alpha_zero,
+    std::shared_ptr<GreensTensor> greens_tensor)
+    : Polarizability(omega_a, alpha_zero, std::move(greens_tensor)) {
+  this->mu = nullptr;
+}
+
 PolarizabilityBath::PolarizabilityBath(const std::string &input_file)
     : Polarizability(input_file) {
-  this->mu =
-      MemoryKernelFactory::create(input_file, "Polarizability.MemoryKernel");
+  // Create a root
+  pt::ptree root;
+
+  // Load the json file in this ptree
+  pt::read_json(input_file, root);
+
+  // Check if the category Polarizability.MemoryKernel exists
+  boost::optional<pt::ptree &> child =
+      root.get_child_optional("Polarizability.MemoryKernel");
+
+  if (child) {
+    this->mu =
+        MemoryKernelFactory::create(input_file, "Polarizability.MemoryKernel");
+  } else {
+    this->mu = nullptr;
+  };
 }
 
 void PolarizabilityBath::calculate_tensor(double omega,
@@ -23,9 +49,12 @@ void PolarizabilityBath::calculate_tensor(double omega,
   // calculate diagonal entries
   cx_mat::fixed<3, 3> diag;
   diag.zeros();
-  diag(0, 0) = diag(1, 1) = diag(2, 2) =
-      omega_a * omega_a - omega * omega - I * omega * mu->calculate(omega);
-
+  if (mu != nullptr) {
+    diag(0, 0) = diag(1, 1) = diag(2, 2) =
+        omega_a * omega_a - omega * omega - I * omega * mu->calculate(omega);
+  } else {
+    diag(0, 0) = diag(1, 1) = diag(2, 2) = omega_a * omega_a - omega * omega;
+  };
   // calculate integral over green's tensor with fancy R
   cx_mat::fixed<3, 3> greens_R;
   this->greens_tensor->integrate_k(omega, greens_R, RE, UNIT);

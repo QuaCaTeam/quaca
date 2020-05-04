@@ -12,9 +12,15 @@ private:
   std::shared_ptr<MemoryKernel> mu;
 
 public:
+  // Direct constructor without internal bath
+  PolarizabilityBath(double omega_a, double alpha_zero,
+                     std::shared_ptr<GreensTensor> greens_tensor);
+
+  // Direct constructor with internal bath mu
   PolarizabilityBath(double omega_a, double alpha_zero,
                      std::shared_ptr<MemoryKernel> mu,
                      std::shared_ptr<GreensTensor> greens_tensor);
+
   PolarizabilityBath(const std::string &input_file);
 
   void calculate_tensor(double omega, cx_mat::fixed<3, 3> &alpha,
@@ -22,7 +28,11 @@ public:
 
   // getter function for memory kernel
   std::complex<double> get_mu(double omega) const {
-    return mu->calculate(omega);
+    if (mu != nullptr) {
+      return mu->calculate(omega);
+    } else {
+      return std::complex<double>(0.0, 0.0);
+    }
   };
 };
 
