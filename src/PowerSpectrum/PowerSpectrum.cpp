@@ -1,6 +1,5 @@
 #include "PowerSpectrum.h"
 #include "../GreensTensor/GreensTensorFactory.h"
-#include "../Polarizability/PolarizabilityFactory.h"
 #include <string>
 
 // json parser
@@ -19,7 +18,7 @@ PowerSpectrum::PowerSpectrum(const std::string &input_file) {
   // initialize Green's tensor by an input file
   this->greens_tensor = GreensTensorFactory::create(input_file);
   // initialize polarizability by an input file
-  this->polarizability = PolarizabilityFactory::create(input_file);
+  this->polarizability = std::make_shared<Polarizability>(input_file);
 }
 
 // Constructor with initialization list

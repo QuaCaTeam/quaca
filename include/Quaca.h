@@ -25,9 +25,6 @@
 #include "../src/Permittivity/PermittivityLorentz.h"
 
 #include "../src/Polarizability/Polarizability.h"
-#include "../src/Polarizability/PolarizabilityFactory.h"
-#include "../src/Polarizability/PolarizabilityBath.h"
-#include "../src/Polarizability/PolarizabilityNoBath.h"
 
 #include "../src/PowerSpectrum/PowerSpectrum.h"
 

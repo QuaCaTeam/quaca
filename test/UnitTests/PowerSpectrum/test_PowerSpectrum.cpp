@@ -11,8 +11,7 @@ TEST_CASE("PowerSpectrum constructors work as expected", "[PowerSpectrum]") {
 
     double relerr_k = 1E-9;
     auto greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr_k);
-    auto alpha =
-        std::make_shared<PolarizabilityNoBath>(omega_a, alpha_zero, greens);
+    auto alpha = std::make_shared<Polarizability>(omega_a, alpha_zero, greens);
     PowerSpectrum powerspectrum(greens, alpha);
 
     REQUIRE(Approx(powerspectrum.get_greens_tensor()->get_v()).epsilon(1e-6) ==
@@ -56,8 +55,7 @@ TEST_CASE("Power spectrum without bath is hermitian", "[PowerSpectrum]") {
 
   double relerr_k = 1E-9;
   auto greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr_k);
-  auto alpha =
-      std::make_shared<PolarizabilityNoBath>(omega_a, alpha_zero, greens);
+  auto alpha = std::make_shared<Polarizability>(omega_a, alpha_zero, greens);
   PowerSpectrum powerspectrum(greens, alpha);
 
   // Matrices to store results
@@ -88,8 +86,7 @@ TEST_CASE(
 
   double relerr_k = 1E-9;
   auto greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr_k);
-  auto alpha =
-      std::make_shared<PolarizabilityNoBath>(omega_a, alpha_zero, greens);
+  auto alpha = std::make_shared<Polarizability>(omega_a, alpha_zero, greens);
   PowerSpectrum powerspectrum(greens, alpha);
 
   // Matrices to store results
@@ -122,8 +119,8 @@ TEST_CASE("Power spectrum with bath is hermitian", "[PowerSpectrum]") {
   double relerr_k = 1E-9;
   auto greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr_k);
   auto ohmic_kernel = std::make_shared<OhmicMemoryKernel>(gamma);
-  auto alpha = std::make_shared<PolarizabilityBath>(omega_a, alpha_zero,
-                                                    ohmic_kernel, greens);
+  auto alpha = std::make_shared<Polarizability>(omega_a, alpha_zero,
+                                                ohmic_kernel, greens);
   PowerSpectrum powerspectrum(greens, alpha);
 
   // Matrices to store results
@@ -155,8 +152,8 @@ TEST_CASE(
   double relerr_k = 1E-9;
   auto greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr_k);
   auto ohmic_kernel = std::make_shared<OhmicMemoryKernel>(gamma);
-  auto alpha = std::make_shared<PolarizabilityBath>(omega_a, alpha_zero,
-                                                    ohmic_kernel, greens);
+  auto alpha = std::make_shared<Polarizability>(omega_a, alpha_zero,
+                                                ohmic_kernel, greens);
   PowerSpectrum powerspectrum(greens, alpha);
 
   // Matrices to store results

@@ -8,7 +8,7 @@ TEST_CASE("PolarizabilityNoBath constructors work as expected",
           "[PolarizabilityNoBath]") {
 
   SECTION("Direct constructor") {
-    PolarizabilityBath pol(1.3, 6E-9, nullptr);
+    Polarizability pol(1.3, 6E-9, nullptr);
     REQUIRE(pol.get_omega_a() == 1.3);
     REQUIRE(pol.get_alpha_zero() == 6E-9);
     // Since no internal bath is implemented the get_mu should return 0
@@ -18,7 +18,7 @@ TEST_CASE("PolarizabilityNoBath constructors work as expected",
   }
 
   SECTION("json file constructor") {
-    PolarizabilityBath pol("../data/test_files/PolarizabilityNoBath.json");
+    Polarizability pol("../data/test_files/PolarizabilityNoBath.json");
     REQUIRE(pol.get_omega_a() == 1.3);
     REQUIRE(pol.get_alpha_zero() == 6E-9);
     // Since no internal bath is implemented the get_mu should return 0
@@ -39,7 +39,7 @@ TEST_CASE("PolarizabilityNoBath integrand works as expected",
   // define polarizability
   double omega_a = 3.0;
   double alpha_zero = 2.4;
-  PolarizabilityBath pol(omega_a, alpha_zero, greens);
+  Polarizability pol(omega_a, alpha_zero, greens);
 
   // frequency to evaluate
   double omega = 3.0;
