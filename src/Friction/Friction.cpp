@@ -10,11 +10,9 @@ using namespace arma;
 namespace pt = boost::property_tree;
 
 #include "../GreensTensor/GreensTensorFactory.h"
-#include "../Polarizability/PolarizabilityFactory.h"
-#include "../PowerSpectrum/PowerSpectrumFactory.h"
 #include "Friction.h"
 
-Friction::Friction(std::string input_file) {
+Friction::Friction(const std::string &input_file) {
   // Create a root
   pt::ptree root;
 
@@ -23,16 +21,19 @@ Friction::Friction(std::string input_file) {
   this->relerr_omega = root.get<double>("Friction.relerr_omega");
   // read greens tensor
   this->greens_tensor = GreensTensorFactory::create(input_file);
-  this->polarizability = PolarizabilityFactory::create(input_file);
-  this->powerspectrum = PowerSpectrumFactory::create(input_file);
-};
+  this->polarizability = std::make_shared<Polarizability>(input_file);
+  this->powerspectrum = std::make_shared<PowerSpectrum>(input_file);
+  // PowerSpectrumFactory::create(input_file);
+}
 
-Friction::Friction(GreensTensor *greens_tensor, Polarizability *polarizability,
-                   PowerSpectrum *powerspectrum, double relerr_omega)
+Friction::Friction(std::shared_ptr<GreensTensor> greens_tensor,
+                   std::shared_ptr<Polarizability> polarizability,
+                   std::shared_ptr<PowerSpectrum> powerspectrum,
+                   double relerr_omega)
     : greens_tensor(greens_tensor), polarizability(polarizability),
-      powerspectrum(powerspectrum), relerr_omega(relerr_omega){};
+      powerspectrum(powerspectrum), relerr_omega(relerr_omega) {}
 
-double Friction::calculate(Options_Friction opts) {
+double Friction::calculate(Spectrum_Options spectrum) const {
   double result;
   double omega_a = this->polarizability->get_omega_a();
   // Collect all specifically relevant point within the integration
@@ -45,61 +46,47 @@ double Friction::calculate(Options_Friction opts) {
 
   // Start integration
   result = 0.;
+  auto F = [=](double x) -> double { return friction_integrand(x, spectrum); };
 
-  for (int i = 0; i < lim.size() - 1; i++) {
-    result += cquad(&friction_integrand, &opts, lim[i], lim[i + 1],
-                    relerr_omega, std::abs(result) * relerr_omega);
-  };
+  for (int i = 0; i < (int)lim.size() - 1; i++) {
+    result += cquad(F, lim[i], lim[i + 1], relerr_omega,
+                    std::abs(result) * relerr_omega);
+  }
   // Perform last integration from the last significant point to infinity
-  result += qagiu(&friction_integrand, &opts, lim[lim.size() - 1], relerr_omega,
+  result += qagiu(F, lim[lim.size() - 1], relerr_omega,
                   std::abs(result) * relerr_omega);
   return result;
-};
+}
 
-double Friction::friction_integrand(double omega, void *opts) {
-  // Implementation of the integrand of eq. (4.3) in Marty's PhD thesis
-  // Units: c=1, 4 pi epsilon_0 = 1, hbar = 1
-  Options_Friction *opts_pt = static_cast<Options_Friction *>(opts);
-
+double Friction::friction_integrand(double omega,
+                                    Spectrum_Options spectrum) const {
   // Compute the full spectrum of the power spectrum
-  if (opts_pt->spectrum == FULL) {
+  if (spectrum == FULL) {
 
     // Initialize all tensors
     cx_mat::fixed<3, 3> green_kv(fill::zeros);
     cx_mat::fixed<3, 3> green_temp_kv(fill::zeros);
     cx_mat::fixed<3, 3> alpha_I(fill::zeros);
-    cx_mat::fixed<3, 3> powerspectrum(fill::zeros);
+    cx_mat::fixed<3, 3> powerspec(fill::zeros);
 
     // computation of the Green's tensor in the first term of eq. (4.3)
-    Options_GreensTensor opts_g;
-    opts_g.omega = omega;
-    opts_g.class_pt = opts_pt->class_pt->greens_tensor;
-
-    opts_g.fancy_complex = IM;
-    opts_g.weight_function = KV;
-    opts_pt->class_pt->greens_tensor->integrate_k(green_kv, opts_g);
+    greens_tensor->integrate_k(omega, green_kv, IM, KV);
 
     // computation of the Green's tensor in the second term of eq. (4.3)
-    opts_g.weight_function = KV_TEMP;
-    opts_pt->class_pt->greens_tensor->integrate_k(green_temp_kv, opts_g);
+    greens_tensor->integrate_k(omega, green_temp_kv, IM, KV_TEMP);
 
     // computation of the imaginary part of the polarizability appearing in the
     // second term of eq. (4.3)
-    Options_Polarizability opts_alpha;
-    opts_alpha.omega = omega;
-    opts_alpha.fancy_complex = IM;
-    opts_pt->class_pt->polarizability->calculate_tensor(alpha_I, opts_alpha);
+    polarizability->calculate_tensor(omega, alpha_I, IM);
 
     // computation of the powerspectrum apperaing in the first term of eq. (4.3)
-    Options_PowerSpectrum opts_S;
-    opts_S.omega = omega;
-    opts_S.spectrum = FULL;
-    opts_pt->class_pt->powerspectrum->calculate(powerspectrum, opts_S);
-    return real(2. * trace(-powerspectrum * green_kv +
+    powerspectrum->calculate(omega, powerspec, FULL);
+
+    return real(2. * trace(-powerspec * green_kv +
                            1. / M_PI * alpha_I * green_temp_kv));
   }
   // Compute onyl the non-LTE contribution of the power-spectrum
-  else if (opts_pt->spectrum == NON_LTE_ONLY) {
+  else if (spectrum == NON_LTE_ONLY) {
     // Initialize all tensors
     cx_mat::fixed<3, 3> J(fill::zeros);
     cx_mat::fixed<3, 3> green_kv(fill::zeros);
@@ -107,32 +94,17 @@ double Friction::friction_integrand(double omega, void *opts) {
     cx_mat::fixed<3, 3> green_fancy_I_kv_non_LTE(fill::zeros);
 
     // Compute the Green's tensor in the first term of eq. (4.5)
-    Options_GreensTensor opts_g;
-    opts_g.omega = omega;
-    opts_g.class_pt = opts_pt->class_pt->greens_tensor;
-
-    opts_g.fancy_complex = IM;
-    opts_g.weight_function = KV;
-    opts_pt->class_pt->greens_tensor->integrate_k(green_kv, opts_g);
+    greens_tensor->integrate_k(omega, green_kv, IM, KV);
 
     // Compute the Green's tensor in the second term of eq. (4.5)
     // the \Sigma distribution is already included here
-    opts_g.weight_function = KV_NON_LTE;
-    opts_pt->class_pt->greens_tensor->integrate_k(green_fancy_I_kv_non_LTE,
-                                                  opts_g);
+    greens_tensor->integrate_k(omega, green_fancy_I_kv_non_LTE, IM, KV_NON_LTE);
 
     // Compute the power spectrum for the first term of eq. (4.5)
-    Options_PowerSpectrum opts_J;
-    opts_J.spectrum = NON_LTE_ONLY;
-    opts_J.omega = omega;
-    opts_pt->class_pt->powerspectrum->calculate(J, opts_J);
+    powerspectrum->calculate(omega, J, NON_LTE_ONLY);
 
     // Compute the polarizability for the second term of eq. (4.5)
-    Options_Polarizability opts_alpha;
-    opts_alpha.fancy_complex = IM;
-    opts_alpha.omega = omega;
-    opts_pt->class_pt->polarizability->calculate_tensor(alpha_fancy_I,
-                                                        opts_alpha);
+    polarizability->calculate_tensor(omega, alpha_fancy_I, IM);
 
     // Put everything together
     return real(
@@ -146,6 +118,4 @@ double Friction::friction_integrand(double omega, void *opts) {
               << std::endl;
     exit(0);
   }
-  // Default return value to prevent annoying warnings when compiling QuaCa
-  return 0;
-};
+}

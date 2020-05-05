@@ -10,10 +10,8 @@ namespace pt = boost::property_tree;
 #include "PermittivityLorentz.h"
 
 // permittivity factory
-Permittivity *PermittivityFactory::create(std::string input_file) {
-  // set return pointer to NULL
-  Permittivity *permittivity = NULL;
-
+std::shared_ptr<Permittivity>
+PermittivityFactory::create(const std::string &input_file) {
   // Create a root
   pt::ptree root;
 
@@ -25,15 +23,12 @@ Permittivity *PermittivityFactory::create(std::string input_file) {
 
   // set the right pointer, show error if type is unknown
   if (type == "drude") {
-    permittivity = new PermittivityDrude(input_file);
+    return std::make_shared<PermittivityDrude>(input_file);
   } else if (type == "lorentz") {
-    permittivity = new PermittivityLorentz(input_file);
+    return std::make_shared<PermittivityLorentz>(input_file);
   } else {
     std::cerr << "Error: Unknown Permittivity type (" << type << ")!"
               << std::endl;
     exit(0);
-  };
-
-  // return permittivity pointer
-  return permittivity;
-};
+  }
+}

@@ -137,19 +137,6 @@ Friction/fast:
 .PHONY : Friction/fast
 
 #=============================================================================
-# Target rules for targets named Tutorial
-
-# Build rule for target.
-Tutorial: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Tutorial
-.PHONY : Tutorial
-
-# fast build rule for target.
-Tutorial/fast:
-	$(MAKE) -f app/.Tutorial/CMakeFiles/Tutorial.dir/build.make app/.Tutorial/CMakeFiles/Tutorial.dir/build
-.PHONY : Tutorial/fast
-
-#=============================================================================
 # Target rules for targets named test_quaca_unit
 
 # Build rule for target.
@@ -185,7 +172,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... quaca"
 	@echo "... Friction"
-	@echo "... Tutorial"
 	@echo "... test_quaca_unit"
 	@echo "... test_quaca_integrated"
 .PHONY : help

@@ -8,11 +8,9 @@
 namespace pt = boost::property_tree;
 
 // memory kernel factory
-MemoryKernel *MemoryKernelFactory::create(std::string input_file,
-                                          std::string section) {
-  // set return pointer to NULL
-  MemoryKernel *memorykernel = NULL;
-
+std::shared_ptr<MemoryKernel>
+MemoryKernelFactory::create(const std::string &input_file,
+                            const std::string &section) {
   // Create a root
   pt::ptree root;
 
@@ -24,13 +22,10 @@ MemoryKernel *MemoryKernelFactory::create(std::string input_file,
 
   // set the right pointer, show error if type is unknown
   if (type == "ohmic") {
-    memorykernel = new OhmicMemoryKernel(input_file, section);
+    return std::make_shared<OhmicMemoryKernel>(input_file, section);
   } else {
     std::cerr << "Error: Unknown Memory Kernel type (" << type << ")!"
               << std::endl;
     exit(0);
-  };
-
-  // return memory kernel pointer
-  return memorykernel;
-};
+  }
+}

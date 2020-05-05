@@ -1,8 +1,12 @@
 cmake_minimum_required(VERSION 3.7.2)
 project(QuaCa VERSION 1.0.0 LANGUAGES CXX)
 
-# compile flags
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z -Ofast")
+# set c++ standard
+set(CMAKE_CXX_STANDARD 14)
+
+# set general compiler flags
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Werror -Wpedantic")
 
 # define output directories for library files and binaries
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
@@ -21,7 +25,7 @@ include_directories(${GSL_INCLUDE_DIRS})
 # find lapack and use armadillo without runtimelibrary, wrap blas and lapack
 find_package(LAPACK REQUIRED)
 find_package(BLAS REQUIRED)
-include_directories("${PROJECT_SOURCE_DIR}/lib/armadillo-9.800.2/include")
+include_directories("${PROJECT_SOURCE_DIR}/lib/armadillo-9.870.2/include")
 
 #find OpenMP library
 find_package(OpenMP REQUIRED)
