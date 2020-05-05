@@ -314,6 +314,33 @@ Looper/test_LooperZa_unit.cpp.s:
 	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/Looper/test_LooperZa_unit.cpp.s
 .PHONY : Looper/test_LooperZa_unit.cpp.s
 
+MemoryKernel/test_LorentzMemoryKernel_unit.o: MemoryKernel/test_LorentzMemoryKernel_unit.cpp.o
+
+.PHONY : MemoryKernel/test_LorentzMemoryKernel_unit.o
+
+# target to build an object file
+MemoryKernel/test_LorentzMemoryKernel_unit.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/MemoryKernel/test_LorentzMemoryKernel_unit.cpp.o
+.PHONY : MemoryKernel/test_LorentzMemoryKernel_unit.cpp.o
+
+MemoryKernel/test_LorentzMemoryKernel_unit.i: MemoryKernel/test_LorentzMemoryKernel_unit.cpp.i
+
+.PHONY : MemoryKernel/test_LorentzMemoryKernel_unit.i
+
+# target to preprocess a source file
+MemoryKernel/test_LorentzMemoryKernel_unit.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/MemoryKernel/test_LorentzMemoryKernel_unit.cpp.i
+.PHONY : MemoryKernel/test_LorentzMemoryKernel_unit.cpp.i
+
+MemoryKernel/test_LorentzMemoryKernel_unit.s: MemoryKernel/test_LorentzMemoryKernel_unit.cpp.s
+
+.PHONY : MemoryKernel/test_LorentzMemoryKernel_unit.s
+
+# target to generate assembly for a file
+MemoryKernel/test_LorentzMemoryKernel_unit.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/MemoryKernel/test_LorentzMemoryKernel_unit.cpp.s
+.PHONY : MemoryKernel/test_LorentzMemoryKernel_unit.cpp.s
+
 MemoryKernel/test_OhmicMemoryKernel_unit.o: MemoryKernel/test_OhmicMemoryKernel_unit.cpp.o
 
 .PHONY : MemoryKernel/test_OhmicMemoryKernel_unit.o
@@ -476,32 +503,32 @@ Polarizability/test_PolarizabilityNoBath_unit.cpp.s:
 	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/Polarizability/test_PolarizabilityNoBath_unit.cpp.s
 .PHONY : Polarizability/test_PolarizabilityNoBath_unit.cpp.s
 
-PowerSpectrum/test_PowerSpectrumHarmOsc.o: PowerSpectrum/test_PowerSpectrumHarmOsc.cpp.o
+PowerSpectrum/test_PowerSpectrum.o: PowerSpectrum/test_PowerSpectrum.cpp.o
 
-.PHONY : PowerSpectrum/test_PowerSpectrumHarmOsc.o
+.PHONY : PowerSpectrum/test_PowerSpectrum.o
 
 # target to build an object file
-PowerSpectrum/test_PowerSpectrumHarmOsc.cpp.o:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/PowerSpectrum/test_PowerSpectrumHarmOsc.cpp.o
-.PHONY : PowerSpectrum/test_PowerSpectrumHarmOsc.cpp.o
+PowerSpectrum/test_PowerSpectrum.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/PowerSpectrum/test_PowerSpectrum.cpp.o
+.PHONY : PowerSpectrum/test_PowerSpectrum.cpp.o
 
-PowerSpectrum/test_PowerSpectrumHarmOsc.i: PowerSpectrum/test_PowerSpectrumHarmOsc.cpp.i
+PowerSpectrum/test_PowerSpectrum.i: PowerSpectrum/test_PowerSpectrum.cpp.i
 
-.PHONY : PowerSpectrum/test_PowerSpectrumHarmOsc.i
+.PHONY : PowerSpectrum/test_PowerSpectrum.i
 
 # target to preprocess a source file
-PowerSpectrum/test_PowerSpectrumHarmOsc.cpp.i:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/PowerSpectrum/test_PowerSpectrumHarmOsc.cpp.i
-.PHONY : PowerSpectrum/test_PowerSpectrumHarmOsc.cpp.i
+PowerSpectrum/test_PowerSpectrum.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/PowerSpectrum/test_PowerSpectrum.cpp.i
+.PHONY : PowerSpectrum/test_PowerSpectrum.cpp.i
 
-PowerSpectrum/test_PowerSpectrumHarmOsc.s: PowerSpectrum/test_PowerSpectrumHarmOsc.cpp.s
+PowerSpectrum/test_PowerSpectrum.s: PowerSpectrum/test_PowerSpectrum.cpp.s
 
-.PHONY : PowerSpectrum/test_PowerSpectrumHarmOsc.s
+.PHONY : PowerSpectrum/test_PowerSpectrum.s
 
 # target to generate assembly for a file
-PowerSpectrum/test_PowerSpectrumHarmOsc.cpp.s:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/PowerSpectrum/test_PowerSpectrumHarmOsc.cpp.s
-.PHONY : PowerSpectrum/test_PowerSpectrumHarmOsc.cpp.s
+PowerSpectrum/test_PowerSpectrum.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/PowerSpectrum/test_PowerSpectrum.cpp.s
+.PHONY : PowerSpectrum/test_PowerSpectrum.cpp.s
 
 ReflectionCoefficients/test_ReflectionCoefficientsLocBulk_unit.o: ReflectionCoefficients/test_ReflectionCoefficientsLocBulk_unit.cpp.o
 
@@ -614,6 +641,9 @@ help:
 	@echo "... Looper/test_LooperZa_unit.o"
 	@echo "... Looper/test_LooperZa_unit.i"
 	@echo "... Looper/test_LooperZa_unit.s"
+	@echo "... MemoryKernel/test_LorentzMemoryKernel_unit.o"
+	@echo "... MemoryKernel/test_LorentzMemoryKernel_unit.i"
+	@echo "... MemoryKernel/test_LorentzMemoryKernel_unit.s"
 	@echo "... MemoryKernel/test_OhmicMemoryKernel_unit.o"
 	@echo "... MemoryKernel/test_OhmicMemoryKernel_unit.i"
 	@echo "... MemoryKernel/test_OhmicMemoryKernel_unit.s"
@@ -632,9 +662,9 @@ help:
 	@echo "... Polarizability/test_PolarizabilityNoBath_unit.o"
 	@echo "... Polarizability/test_PolarizabilityNoBath_unit.i"
 	@echo "... Polarizability/test_PolarizabilityNoBath_unit.s"
-	@echo "... PowerSpectrum/test_PowerSpectrumHarmOsc.o"
-	@echo "... PowerSpectrum/test_PowerSpectrumHarmOsc.i"
-	@echo "... PowerSpectrum/test_PowerSpectrumHarmOsc.s"
+	@echo "... PowerSpectrum/test_PowerSpectrum.o"
+	@echo "... PowerSpectrum/test_PowerSpectrum.i"
+	@echo "... PowerSpectrum/test_PowerSpectrum.s"
 	@echo "... ReflectionCoefficients/test_ReflectionCoefficientsLocBulk_unit.o"
 	@echo "... ReflectionCoefficients/test_ReflectionCoefficientsLocBulk_unit.i"
 	@echo "... ReflectionCoefficients/test_ReflectionCoefficientsLocBulk_unit.s"

@@ -16,6 +16,7 @@
 
 #include "../src/MemoryKernel/MemoryKernel.h"
 #include "../src/MemoryKernel/OhmicMemoryKernel.h"
+#include "../src/MemoryKernel/LorentzMemoryKernel.h"
 
 #include "../src/Options/Options.h"
 

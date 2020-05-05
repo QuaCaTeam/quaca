@@ -9,6 +9,7 @@ set(test_sources
         Looper/test_LooperV_unit.cpp
         Looper/test_LooperZa_unit.cpp
         MemoryKernel/test_OhmicMemoryKernel_unit.cpp
+	MemoryKernel/test_LorentzMemoryKernel_unit.cpp
         Options/test_Options_unit.cpp
         Permittivity/test_PermittivityDrude_unit.cpp
         Permittivity/test_PermittivityLorentz_unit.cpp
