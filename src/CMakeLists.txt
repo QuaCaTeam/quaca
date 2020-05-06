@@ -13,7 +13,7 @@ set(quaca_sources
         Looper/LooperZa.cpp
         MemoryKernel/MemoryKernelFactory.cpp
         MemoryKernel/OhmicMemoryKernel.cpp
-	MemoryKernel/LorentzMemoryKernel.cpp
+	MemoryKernel/SinglePhononMemoryKernel.cpp
         Options/Options.cpp
         Permittivity/PermittivityDrude.cpp
         Permittivity/PermittivityFactory.cpp

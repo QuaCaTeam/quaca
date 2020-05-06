@@ -422,33 +422,6 @@ Looper/LooperZa.cpp.s:
 	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperZa.cpp.s
 .PHONY : Looper/LooperZa.cpp.s
 
-MemoryKernel/LorentzMemoryKernel.o: MemoryKernel/LorentzMemoryKernel.cpp.o
-
-.PHONY : MemoryKernel/LorentzMemoryKernel.o
-
-# target to build an object file
-MemoryKernel/LorentzMemoryKernel.cpp.o:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/LorentzMemoryKernel.cpp.o
-.PHONY : MemoryKernel/LorentzMemoryKernel.cpp.o
-
-MemoryKernel/LorentzMemoryKernel.i: MemoryKernel/LorentzMemoryKernel.cpp.i
-
-.PHONY : MemoryKernel/LorentzMemoryKernel.i
-
-# target to preprocess a source file
-MemoryKernel/LorentzMemoryKernel.cpp.i:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/LorentzMemoryKernel.cpp.i
-.PHONY : MemoryKernel/LorentzMemoryKernel.cpp.i
-
-MemoryKernel/LorentzMemoryKernel.s: MemoryKernel/LorentzMemoryKernel.cpp.s
-
-.PHONY : MemoryKernel/LorentzMemoryKernel.s
-
-# target to generate assembly for a file
-MemoryKernel/LorentzMemoryKernel.cpp.s:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/LorentzMemoryKernel.cpp.s
-.PHONY : MemoryKernel/LorentzMemoryKernel.cpp.s
-
 MemoryKernel/MemoryKernelFactory.o: MemoryKernel/MemoryKernelFactory.cpp.o
 
 .PHONY : MemoryKernel/MemoryKernelFactory.o
@@ -502,6 +475,33 @@ MemoryKernel/OhmicMemoryKernel.s: MemoryKernel/OhmicMemoryKernel.cpp.s
 MemoryKernel/OhmicMemoryKernel.cpp.s:
 	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/OhmicMemoryKernel.cpp.s
 .PHONY : MemoryKernel/OhmicMemoryKernel.cpp.s
+
+MemoryKernel/SinglePhononMemoryKernel.o: MemoryKernel/SinglePhononMemoryKernel.cpp.o
+
+.PHONY : MemoryKernel/SinglePhononMemoryKernel.o
+
+# target to build an object file
+MemoryKernel/SinglePhononMemoryKernel.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/SinglePhononMemoryKernel.cpp.o
+.PHONY : MemoryKernel/SinglePhononMemoryKernel.cpp.o
+
+MemoryKernel/SinglePhononMemoryKernel.i: MemoryKernel/SinglePhononMemoryKernel.cpp.i
+
+.PHONY : MemoryKernel/SinglePhononMemoryKernel.i
+
+# target to preprocess a source file
+MemoryKernel/SinglePhononMemoryKernel.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/SinglePhononMemoryKernel.cpp.i
+.PHONY : MemoryKernel/SinglePhononMemoryKernel.cpp.i
+
+MemoryKernel/SinglePhononMemoryKernel.s: MemoryKernel/SinglePhononMemoryKernel.cpp.s
+
+.PHONY : MemoryKernel/SinglePhononMemoryKernel.s
+
+# target to generate assembly for a file
+MemoryKernel/SinglePhononMemoryKernel.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/SinglePhononMemoryKernel.cpp.s
+.PHONY : MemoryKernel/SinglePhononMemoryKernel.cpp.s
 
 Options/Options.o: Options/Options.cpp.o
 
@@ -788,15 +788,15 @@ help:
 	@echo "... Looper/LooperZa.o"
 	@echo "... Looper/LooperZa.i"
 	@echo "... Looper/LooperZa.s"
-	@echo "... MemoryKernel/LorentzMemoryKernel.o"
-	@echo "... MemoryKernel/LorentzMemoryKernel.i"
-	@echo "... MemoryKernel/LorentzMemoryKernel.s"
 	@echo "... MemoryKernel/MemoryKernelFactory.o"
 	@echo "... MemoryKernel/MemoryKernelFactory.i"
 	@echo "... MemoryKernel/MemoryKernelFactory.s"
 	@echo "... MemoryKernel/OhmicMemoryKernel.o"
 	@echo "... MemoryKernel/OhmicMemoryKernel.i"
 	@echo "... MemoryKernel/OhmicMemoryKernel.s"
+	@echo "... MemoryKernel/SinglePhononMemoryKernel.o"
+	@echo "... MemoryKernel/SinglePhononMemoryKernel.i"
+	@echo "... MemoryKernel/SinglePhononMemoryKernel.s"
 	@echo "... Options/Options.o"
 	@echo "... Options/Options.i"
 	@echo "... Options/Options.s"

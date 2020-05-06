@@ -314,33 +314,6 @@ Looper/test_LooperZa_unit.cpp.s:
 	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/Looper/test_LooperZa_unit.cpp.s
 .PHONY : Looper/test_LooperZa_unit.cpp.s
 
-MemoryKernel/test_LorentzMemoryKernel_unit.o: MemoryKernel/test_LorentzMemoryKernel_unit.cpp.o
-
-.PHONY : MemoryKernel/test_LorentzMemoryKernel_unit.o
-
-# target to build an object file
-MemoryKernel/test_LorentzMemoryKernel_unit.cpp.o:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/MemoryKernel/test_LorentzMemoryKernel_unit.cpp.o
-.PHONY : MemoryKernel/test_LorentzMemoryKernel_unit.cpp.o
-
-MemoryKernel/test_LorentzMemoryKernel_unit.i: MemoryKernel/test_LorentzMemoryKernel_unit.cpp.i
-
-.PHONY : MemoryKernel/test_LorentzMemoryKernel_unit.i
-
-# target to preprocess a source file
-MemoryKernel/test_LorentzMemoryKernel_unit.cpp.i:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/MemoryKernel/test_LorentzMemoryKernel_unit.cpp.i
-.PHONY : MemoryKernel/test_LorentzMemoryKernel_unit.cpp.i
-
-MemoryKernel/test_LorentzMemoryKernel_unit.s: MemoryKernel/test_LorentzMemoryKernel_unit.cpp.s
-
-.PHONY : MemoryKernel/test_LorentzMemoryKernel_unit.s
-
-# target to generate assembly for a file
-MemoryKernel/test_LorentzMemoryKernel_unit.cpp.s:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/MemoryKernel/test_LorentzMemoryKernel_unit.cpp.s
-.PHONY : MemoryKernel/test_LorentzMemoryKernel_unit.cpp.s
-
 MemoryKernel/test_OhmicMemoryKernel_unit.o: MemoryKernel/test_OhmicMemoryKernel_unit.cpp.o
 
 .PHONY : MemoryKernel/test_OhmicMemoryKernel_unit.o
@@ -367,6 +340,33 @@ MemoryKernel/test_OhmicMemoryKernel_unit.s: MemoryKernel/test_OhmicMemoryKernel_
 MemoryKernel/test_OhmicMemoryKernel_unit.cpp.s:
 	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/MemoryKernel/test_OhmicMemoryKernel_unit.cpp.s
 .PHONY : MemoryKernel/test_OhmicMemoryKernel_unit.cpp.s
+
+MemoryKernel/test_SinglePhononMemoryKernel_unit.o: MemoryKernel/test_SinglePhononMemoryKernel_unit.cpp.o
+
+.PHONY : MemoryKernel/test_SinglePhononMemoryKernel_unit.o
+
+# target to build an object file
+MemoryKernel/test_SinglePhononMemoryKernel_unit.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/MemoryKernel/test_SinglePhononMemoryKernel_unit.cpp.o
+.PHONY : MemoryKernel/test_SinglePhononMemoryKernel_unit.cpp.o
+
+MemoryKernel/test_SinglePhononMemoryKernel_unit.i: MemoryKernel/test_SinglePhononMemoryKernel_unit.cpp.i
+
+.PHONY : MemoryKernel/test_SinglePhononMemoryKernel_unit.i
+
+# target to preprocess a source file
+MemoryKernel/test_SinglePhononMemoryKernel_unit.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/MemoryKernel/test_SinglePhononMemoryKernel_unit.cpp.i
+.PHONY : MemoryKernel/test_SinglePhononMemoryKernel_unit.cpp.i
+
+MemoryKernel/test_SinglePhononMemoryKernel_unit.s: MemoryKernel/test_SinglePhononMemoryKernel_unit.cpp.s
+
+.PHONY : MemoryKernel/test_SinglePhononMemoryKernel_unit.s
+
+# target to generate assembly for a file
+MemoryKernel/test_SinglePhononMemoryKernel_unit.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f test/UnitTests/CMakeFiles/test_quaca_unit.dir/build.make test/UnitTests/CMakeFiles/test_quaca_unit.dir/MemoryKernel/test_SinglePhononMemoryKernel_unit.cpp.s
+.PHONY : MemoryKernel/test_SinglePhononMemoryKernel_unit.cpp.s
 
 Options/test_Options_unit.o: Options/test_Options_unit.cpp.o
 
@@ -641,12 +641,12 @@ help:
 	@echo "... Looper/test_LooperZa_unit.o"
 	@echo "... Looper/test_LooperZa_unit.i"
 	@echo "... Looper/test_LooperZa_unit.s"
-	@echo "... MemoryKernel/test_LorentzMemoryKernel_unit.o"
-	@echo "... MemoryKernel/test_LorentzMemoryKernel_unit.i"
-	@echo "... MemoryKernel/test_LorentzMemoryKernel_unit.s"
 	@echo "... MemoryKernel/test_OhmicMemoryKernel_unit.o"
 	@echo "... MemoryKernel/test_OhmicMemoryKernel_unit.i"
 	@echo "... MemoryKernel/test_OhmicMemoryKernel_unit.s"
+	@echo "... MemoryKernel/test_SinglePhononMemoryKernel_unit.o"
+	@echo "... MemoryKernel/test_SinglePhononMemoryKernel_unit.i"
+	@echo "... MemoryKernel/test_SinglePhononMemoryKernel_unit.s"
 	@echo "... Options/test_Options_unit.o"
 	@echo "... Options/test_Options_unit.i"
 	@echo "... Options/test_Options_unit.s"

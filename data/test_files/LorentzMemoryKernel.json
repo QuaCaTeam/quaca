@@ -1,9 +1,0 @@
-{
-    "MemoryKernel": {
-        "type": "lorentz",
-        "gamma": 1e-5,
-        "omega_0": 4.34,
-        "omega_p": 14.28,
-        "eps_inf": 1.035
-    }
-}
