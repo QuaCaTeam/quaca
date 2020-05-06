@@ -16,6 +16,7 @@
 
 #include "../src/MemoryKernel/MemoryKernel.h"
 #include "../src/MemoryKernel/OhmicMemoryKernel.h"
+#include "../src/MemoryKernel/SinglePhononMemoryKernel.h"
 
 #include "../src/Options/Options.h"
 

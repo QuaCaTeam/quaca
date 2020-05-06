@@ -476,6 +476,33 @@ MemoryKernel/OhmicMemoryKernel.cpp.s:
 	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/OhmicMemoryKernel.cpp.s
 .PHONY : MemoryKernel/OhmicMemoryKernel.cpp.s
 
+MemoryKernel/SinglePhononMemoryKernel.o: MemoryKernel/SinglePhononMemoryKernel.cpp.o
+
+.PHONY : MemoryKernel/SinglePhononMemoryKernel.o
+
+# target to build an object file
+MemoryKernel/SinglePhononMemoryKernel.cpp.o:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/SinglePhononMemoryKernel.cpp.o
+.PHONY : MemoryKernel/SinglePhononMemoryKernel.cpp.o
+
+MemoryKernel/SinglePhononMemoryKernel.i: MemoryKernel/SinglePhononMemoryKernel.cpp.i
+
+.PHONY : MemoryKernel/SinglePhononMemoryKernel.i
+
+# target to preprocess a source file
+MemoryKernel/SinglePhononMemoryKernel.cpp.i:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/SinglePhononMemoryKernel.cpp.i
+.PHONY : MemoryKernel/SinglePhononMemoryKernel.cpp.i
+
+MemoryKernel/SinglePhononMemoryKernel.s: MemoryKernel/SinglePhononMemoryKernel.cpp.s
+
+.PHONY : MemoryKernel/SinglePhononMemoryKernel.s
+
+# target to generate assembly for a file
+MemoryKernel/SinglePhononMemoryKernel.cpp.s:
+	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/SinglePhononMemoryKernel.cpp.s
+.PHONY : MemoryKernel/SinglePhononMemoryKernel.cpp.s
+
 Options/Options.o: Options/Options.cpp.o
 
 .PHONY : Options/Options.o
@@ -611,87 +638,6 @@ Polarizability/Polarizability.cpp.s:
 	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/Polarizability.cpp.s
 .PHONY : Polarizability/Polarizability.cpp.s
 
-Polarizability/PolarizabilityBath.o: Polarizability/PolarizabilityBath.cpp.o
-
-.PHONY : Polarizability/PolarizabilityBath.o
-
-# target to build an object file
-Polarizability/PolarizabilityBath.cpp.o:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/PolarizabilityBath.cpp.o
-.PHONY : Polarizability/PolarizabilityBath.cpp.o
-
-Polarizability/PolarizabilityBath.i: Polarizability/PolarizabilityBath.cpp.i
-
-.PHONY : Polarizability/PolarizabilityBath.i
-
-# target to preprocess a source file
-Polarizability/PolarizabilityBath.cpp.i:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/PolarizabilityBath.cpp.i
-.PHONY : Polarizability/PolarizabilityBath.cpp.i
-
-Polarizability/PolarizabilityBath.s: Polarizability/PolarizabilityBath.cpp.s
-
-.PHONY : Polarizability/PolarizabilityBath.s
-
-# target to generate assembly for a file
-Polarizability/PolarizabilityBath.cpp.s:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/PolarizabilityBath.cpp.s
-.PHONY : Polarizability/PolarizabilityBath.cpp.s
-
-Polarizability/PolarizabilityFactory.o: Polarizability/PolarizabilityFactory.cpp.o
-
-.PHONY : Polarizability/PolarizabilityFactory.o
-
-# target to build an object file
-Polarizability/PolarizabilityFactory.cpp.o:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/PolarizabilityFactory.cpp.o
-.PHONY : Polarizability/PolarizabilityFactory.cpp.o
-
-Polarizability/PolarizabilityFactory.i: Polarizability/PolarizabilityFactory.cpp.i
-
-.PHONY : Polarizability/PolarizabilityFactory.i
-
-# target to preprocess a source file
-Polarizability/PolarizabilityFactory.cpp.i:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/PolarizabilityFactory.cpp.i
-.PHONY : Polarizability/PolarizabilityFactory.cpp.i
-
-Polarizability/PolarizabilityFactory.s: Polarizability/PolarizabilityFactory.cpp.s
-
-.PHONY : Polarizability/PolarizabilityFactory.s
-
-# target to generate assembly for a file
-Polarizability/PolarizabilityFactory.cpp.s:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/PolarizabilityFactory.cpp.s
-.PHONY : Polarizability/PolarizabilityFactory.cpp.s
-
-Polarizability/PolarizabilityNoBath.o: Polarizability/PolarizabilityNoBath.cpp.o
-
-.PHONY : Polarizability/PolarizabilityNoBath.o
-
-# target to build an object file
-Polarizability/PolarizabilityNoBath.cpp.o:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/PolarizabilityNoBath.cpp.o
-.PHONY : Polarizability/PolarizabilityNoBath.cpp.o
-
-Polarizability/PolarizabilityNoBath.i: Polarizability/PolarizabilityNoBath.cpp.i
-
-.PHONY : Polarizability/PolarizabilityNoBath.i
-
-# target to preprocess a source file
-Polarizability/PolarizabilityNoBath.cpp.i:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/PolarizabilityNoBath.cpp.i
-.PHONY : Polarizability/PolarizabilityNoBath.cpp.i
-
-Polarizability/PolarizabilityNoBath.s: Polarizability/PolarizabilityNoBath.cpp.s
-
-.PHONY : Polarizability/PolarizabilityNoBath.s
-
-# target to generate assembly for a file
-Polarizability/PolarizabilityNoBath.cpp.s:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/PolarizabilityNoBath.cpp.s
-.PHONY : Polarizability/PolarizabilityNoBath.cpp.s
-
 PowerSpectrum/PowerSpectrum.o: PowerSpectrum/PowerSpectrum.cpp.o
 
 .PHONY : PowerSpectrum/PowerSpectrum.o
@@ -718,60 +664,6 @@ PowerSpectrum/PowerSpectrum.s: PowerSpectrum/PowerSpectrum.cpp.s
 PowerSpectrum/PowerSpectrum.cpp.s:
 	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/PowerSpectrum/PowerSpectrum.cpp.s
 .PHONY : PowerSpectrum/PowerSpectrum.cpp.s
-
-PowerSpectrum/PowerSpectrumFactory.o: PowerSpectrum/PowerSpectrumFactory.cpp.o
-
-.PHONY : PowerSpectrum/PowerSpectrumFactory.o
-
-# target to build an object file
-PowerSpectrum/PowerSpectrumFactory.cpp.o:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/PowerSpectrum/PowerSpectrumFactory.cpp.o
-.PHONY : PowerSpectrum/PowerSpectrumFactory.cpp.o
-
-PowerSpectrum/PowerSpectrumFactory.i: PowerSpectrum/PowerSpectrumFactory.cpp.i
-
-.PHONY : PowerSpectrum/PowerSpectrumFactory.i
-
-# target to preprocess a source file
-PowerSpectrum/PowerSpectrumFactory.cpp.i:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/PowerSpectrum/PowerSpectrumFactory.cpp.i
-.PHONY : PowerSpectrum/PowerSpectrumFactory.cpp.i
-
-PowerSpectrum/PowerSpectrumFactory.s: PowerSpectrum/PowerSpectrumFactory.cpp.s
-
-.PHONY : PowerSpectrum/PowerSpectrumFactory.s
-
-# target to generate assembly for a file
-PowerSpectrum/PowerSpectrumFactory.cpp.s:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/PowerSpectrum/PowerSpectrumFactory.cpp.s
-.PHONY : PowerSpectrum/PowerSpectrumFactory.cpp.s
-
-PowerSpectrum/PowerSpectrumHarmOsc.o: PowerSpectrum/PowerSpectrumHarmOsc.cpp.o
-
-.PHONY : PowerSpectrum/PowerSpectrumHarmOsc.o
-
-# target to build an object file
-PowerSpectrum/PowerSpectrumHarmOsc.cpp.o:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/PowerSpectrum/PowerSpectrumHarmOsc.cpp.o
-.PHONY : PowerSpectrum/PowerSpectrumHarmOsc.cpp.o
-
-PowerSpectrum/PowerSpectrumHarmOsc.i: PowerSpectrum/PowerSpectrumHarmOsc.cpp.i
-
-.PHONY : PowerSpectrum/PowerSpectrumHarmOsc.i
-
-# target to preprocess a source file
-PowerSpectrum/PowerSpectrumHarmOsc.cpp.i:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/PowerSpectrum/PowerSpectrumHarmOsc.cpp.i
-.PHONY : PowerSpectrum/PowerSpectrumHarmOsc.cpp.i
-
-PowerSpectrum/PowerSpectrumHarmOsc.s: PowerSpectrum/PowerSpectrumHarmOsc.cpp.s
-
-.PHONY : PowerSpectrum/PowerSpectrumHarmOsc.s
-
-# target to generate assembly for a file
-PowerSpectrum/PowerSpectrumHarmOsc.cpp.s:
-	cd /home/coelschl/PhD/code/cpp/quaca && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/PowerSpectrum/PowerSpectrumHarmOsc.cpp.s
-.PHONY : PowerSpectrum/PowerSpectrumHarmOsc.cpp.s
 
 ReflectionCoefficients/ReflectionCoefficientsFactory.o: ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.o
 
@@ -902,6 +794,9 @@ help:
 	@echo "... MemoryKernel/OhmicMemoryKernel.o"
 	@echo "... MemoryKernel/OhmicMemoryKernel.i"
 	@echo "... MemoryKernel/OhmicMemoryKernel.s"
+	@echo "... MemoryKernel/SinglePhononMemoryKernel.o"
+	@echo "... MemoryKernel/SinglePhononMemoryKernel.i"
+	@echo "... MemoryKernel/SinglePhononMemoryKernel.s"
 	@echo "... Options/Options.o"
 	@echo "... Options/Options.i"
 	@echo "... Options/Options.s"
@@ -917,24 +812,9 @@ help:
 	@echo "... Polarizability/Polarizability.o"
 	@echo "... Polarizability/Polarizability.i"
 	@echo "... Polarizability/Polarizability.s"
-	@echo "... Polarizability/PolarizabilityBath.o"
-	@echo "... Polarizability/PolarizabilityBath.i"
-	@echo "... Polarizability/PolarizabilityBath.s"
-	@echo "... Polarizability/PolarizabilityFactory.o"
-	@echo "... Polarizability/PolarizabilityFactory.i"
-	@echo "... Polarizability/PolarizabilityFactory.s"
-	@echo "... Polarizability/PolarizabilityNoBath.o"
-	@echo "... Polarizability/PolarizabilityNoBath.i"
-	@echo "... Polarizability/PolarizabilityNoBath.s"
 	@echo "... PowerSpectrum/PowerSpectrum.o"
 	@echo "... PowerSpectrum/PowerSpectrum.i"
 	@echo "... PowerSpectrum/PowerSpectrum.s"
-	@echo "... PowerSpectrum/PowerSpectrumFactory.o"
-	@echo "... PowerSpectrum/PowerSpectrumFactory.i"
-	@echo "... PowerSpectrum/PowerSpectrumFactory.s"
-	@echo "... PowerSpectrum/PowerSpectrumHarmOsc.o"
-	@echo "... PowerSpectrum/PowerSpectrumHarmOsc.i"
-	@echo "... PowerSpectrum/PowerSpectrumHarmOsc.s"
 	@echo "... ReflectionCoefficients/ReflectionCoefficientsFactory.o"
 	@echo "... ReflectionCoefficients/ReflectionCoefficientsFactory.i"
 	@echo "... ReflectionCoefficients/ReflectionCoefficientsFactory.s"

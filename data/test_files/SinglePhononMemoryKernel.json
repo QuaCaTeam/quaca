@@ -1,0 +1,9 @@
+{
+    "MemoryKernel": {
+        "type": "single_phonon",
+        "gamma": 1e-1,
+        "gamma_phon": 1e-5,
+        "omega_phon": 4.34,
+        "coupling": 1E-5
+    }
+}

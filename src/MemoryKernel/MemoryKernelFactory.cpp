@@ -1,5 +1,6 @@
 #include "MemoryKernelFactory.h"
 #include "OhmicMemoryKernel.h"
+#include "SinglePhononMemoryKernel.h"
 #include <iostream>
 
 // json parser
@@ -23,6 +24,8 @@ MemoryKernelFactory::create(const std::string &input_file,
   // set the right pointer, show error if type is unknown
   if (type == "ohmic") {
     return std::make_shared<OhmicMemoryKernel>(input_file, section);
+  } else if (type == "single_phonon"){
+    return std::make_shared<SinglePhononMemoryKernel>(input_file, section);
   } else {
     std::cerr << "Error: Unknown Memory Kernel type (" << type << ")!"
               << std::endl;
