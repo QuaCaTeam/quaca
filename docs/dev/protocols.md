@@ -302,3 +302,43 @@ Simon: Test cases: rewrite GENERATE and pointer to smart pointer
         - Check magnitudes in test
 
 
+## Meeting 07.05.2020: Christoph, Simon and Marty
+
+- Update:
+    * Simon: merged (maybe check code again for ghost lines)
+    * Marty: Rewrote Polarizability and PowerSpectrum, SinglePhononMemory
+
+- Timeline:
+    * Finnish docs to next meeting
+
+- Paper:
+    * describe as usefull library
+    * show equation and calculate (similar to Hartmann's paper)
+    * mention license
+
+- Meetings:
+    * Preferred are more short than few long meeting (keep current style)
+
+- Licenses:
+    * Use MIT or GNU GPL license?
+
+Tasks:
+    - write paper (Marty)
+    - improve documentation
+
+        * Christoph:
+
+    - tutorials, calculations (explain new integration scheme)
+
+     * Simon:
+
+    - green's tensor, reflection coefficients
+
+     * Marty:
+
+    - polarizability, power spectrum, friction (1/M_PI?), memory kernel, permittivity
+
+
+Dreams:
+    - Doxygen style documentation
+    - mpi parallelisation in friction app
