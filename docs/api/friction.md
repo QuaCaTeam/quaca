@@ -8,31 +8,41 @@ $$ \Theta_T(\omega+k_xv,\omega)=\frac{1}{1-e^{-\beta\hbar[\omega+k_xv]}}-\frac{1
 Both expression are equally valid for the calculation, however, the second is computational-wise more stable. The power spectrum $\underline{S}$ and the nonequilibrium contribution $\underline{J}$ are described in [PowerSpectrum](api/powerspectrum), the Green's tensor $\underline{G}$ is described in [GreensTensor](api/greenstensor), and the polarizability $\underline{\alpha}$ is described in [Polarizability](api/polarizability).
 ```cpp
 class Friction {
-public:
-  // defining the demanded relative accuracy of the omega integration
+protected:
+  // the Green's tensor class
+  std::shared_ptr<GreensTensor> greens_tensor;
+  
+  // the polarizability class
+  std::shared_ptr<Polarizability> polarizability;
+  
+  // the power spectrum class
+  std::shared_ptr<PowerSpectrum> powerspectrum;
+
+  // relative accuracy of the omega integration
   double relerr_omega;
 
-  // the Green's tensor class
-  GreensTensor *greens_tensor;
-
-  // the polarizability class
-  Polarizability *polarizability;
-
-  // the power spectrum class
-  PowerSpectrum *powerspectrum;
+public:
   
-  // contructor from a input file
-  Friction(std::string input_file);
+  // constructor from an input file
+  Friction(const std::string &input_file);
 
-  // contructor from the direct input
-  Friction(GreensTensor *greens_tensor, Polarizability *polarizability,
-                  PowerSpectrum *powerspectrum, double relerr_omega);
-
+  // constructor from a direct input
+  Friction(std::shared_ptr<GreensTensor> greens_tensor,
+           std::shared_ptr<Polarizability> polarizability,
+           std::shared_ptr<PowerSpectrum> powerspectrum, double relerr_omega);
+  
   // calculation of the noncontact friction
-  double calculate(Options_Friction opts);
+  double calculate(Spectrum_Options spectrum) const;
 
   // the integrand of the noncontact friction
-  static double friction_integrand(double omega, void *opts);
+  double friction_integrand(double omega, Spectrum_Options spectrum) const;
+
+  // getter functions
+  std::shared_ptr<GreensTensor> &get_greens_tensor() { return greens_tensor; };
+  std::shared_ptr<Polarizability> &get_polarizability() {
+    return polarizability;
+  };
+  std::shared_ptr<PowerSpectrum> &get_powerspectrum() { return powerspectrum; };
 };
 ```
 

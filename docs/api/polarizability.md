@@ -1,129 +1,80 @@
-!> TODO: Correct the examples. Add an example to show integration.
-
-?> We try to use the same variable names for the same physical quantities, which resemble the LaTeX writing. Please have a look at the [reference table](documentation/units)
-
 # Polarizability {docsify-ignore-all}
-This abstract class serves as a container for two different polarizabilities: one of a particle with an internal heat bath and one without such a bath.
-We expect the polarizability to be of the form
+This abstract class serves as a container for the  polarizability, with or without an internal heat bath.
+As a physical quantity the polarizability reads as follows
 $$  \underline{\alpha}(\omega) = \alpha_0 \omega_a^2 \left( \omega_a^2 - \omega^2 - \mathrm{i} \omega \mu(\omega) - \alpha_0 \omega_a^2 \int \frac{\mathrm{d}^2 \mathbf{k}}{(2 \pi)^2} \underline{G}(\mathbf{k}, \omega + \mathbf{k}^\intercal\mathbf{v}) \right)^{-1}, $$
-where we set $\mu(\omega) = 0$ for the particle without an internal heat bath.
-
+with $\mu(\omega)$ being the [memory kernel](api/memorykernel) of the internal heat bath, $\underline{G}(\mathbf{k},\omega)$ the Green's tensor, $\alpha_0$ the static polarizability, and $\omega_a$ the resonance frequency of the microscopic object's dipole moment.
+The header file of the polarizability reads
 ```cpp
 class Polarizability {
-protected:
-  double omega_a;              // resonance frequency
-  double alpha_zero;           // vacuum polarizability
-  GreensTensor *greens_tensor; // Green's tensor
-  std::string type;            // type of polarizability
+private:
+  double omega_a;                              // resonance frequency
+  double alpha_zero;                           // vacuum polarizability
+  std::shared_ptr<GreensTensor> greens_tensor; // Green's tensor
+  std::shared_ptr<MemoryKernel> mu;            // internal bath
 
 public:
-  // constructors
+  // Direct constructor without internal bath
   Polarizability(double omega_a, double alpha_zero,
-                 GreensTensor *greens_tensor);
-  Polarizability(std::string input_file);
+                 std::shared_ptr<GreensTensor> greens_tensor);
+
+  // Direct constructor with internal bath mu
+  Polarizability(double omega_a, double alpha_zero,
+                 std::shared_ptr<MemoryKernel> mu,
+                 std::shared_ptr<GreensTensor> greens_tensor);
+
+  // Constructor from a given json file
+  explicit Polarizability(const std::string &input_file);
 
   // calculate the polarizability tensor
-  virtual void calculate_tensor(cx_mat::fixed<3, 3> &alpha,
-                                Options_Polarizability opts) = 0;
+  void calculate_tensor(double omega, cx_mat::fixed<3, 3> &alpha,
+                        Tensor_Options fancy_complex) const;
 
   // integration over omega
-  double integrate_omega(Options_Polarizability opts, double omega_min,
-                         double omega_max, double relerr, double abserr);
-  static double integrand_omega(double omega, void *opts);
+  double integrate_omega(const vec::fixed<2> &indices,
+                         Tensor_Options fancy_complex, double omega_min,
+                         double omega_max, double relerr, double abserr) const;
+
+  // integrand for the omega integration
+  double integrand_omega(double omega, const vec::fixed<2> &indices,
+                         Tensor_Options fancy_complex) const;
 
   // getter functions
-  double get_omega_a() { return this->omega_a; };
-  double get_alpha_zero() { return this->alpha_zero; };
+  double get_omega_a() const { return omega_a; };
+  double get_alpha_zero() const { return alpha_zero; };
+  const std::shared_ptr<GreensTensor> &get_greens_tensor() const {
+    return greens_tensor;
+  };
+  // getter function for memory kernel
+  std::complex<double> get_mu(double omega) const {
+    if (mu != nullptr) {
+      return mu->calculate(omega);
+    } else {
+      return std::complex<double>(0.0, 0.0);
+    }
+  };
 };
 ```
+and contains following objects:
 
-### `# Polarizability(double omega_a, double alpha_zero, GreensTensor *greens_tensor)`
-Direct constructor for the class.
+### `# Polarizability(double omega_a, double alpha_zero, std::shared_ptr<GreensTensor> greens_tensor);`
+Direct constructor for the class without an internal bath.
 
-### `# Polarizability(std::string input_file)`
+### `# Polarizability(double omega_a, double alpha_zero, std::shared_ptr<MemoryKernel> mu, std::shared_ptr<GreensTensor> greens_tensor);`
+Direct constructor for the class with an internal bath.
+
+### `# Polarizability(const std::string &input_file)`
 Input file constructor for the class.
 
-### `# void calculate_tensor(cx_mat::fixed<3, 3> &alpha, Options_Polarizability opts)`
-This function evaluates the tensor according to its formula for $\underline{\alpha}(\omega)$ and puts the result into the matrix `alpha`.
-The options struct `opts` contains the frequency argument at which the tensor shall be evaluated and further option flags for $\underline{\alpha}_{\Im}$ or $\underline{\alpha}_{\Re}$. See also the [Examples](#Examples).
+### `# void calculate_tensor(double omega, cx_mat::fixed<3, 3> &alpha, Tensor_Options fancy_complex) const;`
 
-### `# double integrate_omega(Options_Polarizability opts, double omega_min, double omega_max, double relerr, double abserr)`
-Integrates the polarizability from `omega_min` to `omega_max` with relative error `relerr` and absolute error `abserr` with the cquad integration routine.
-The options struct `opts` is given to determine whether to integrate $\underline{\alpha}_{\Im}$ or $\underline{\alpha}_{\Re}$, since the integrand needs to be a real function. See also Example 2 in [Examples](#Examples).
+This function evaluates the tensor according to its formula for $\underline{\alpha}(\omega)$ for a specific `omega` and puts the result into the matrix `alpha`. If `fancy_complex = IM` then $\underline{\alpha}_{\Im}= (\underline{\alpha} -\underline{\alpha}^\dagger)/(2\mathrm{i})$ and for `fancy_complex = RE`  $\underline{\alpha}_{\Re} = (\underline{\alpha} +\underline{\alpha}^\dagger)/2$ is calculated. See also the [Examples](#Examples).
 
-## Options_Polarizability
-This struct is given to several functions in the `Polarizability` class to specify what is being calculated.
+### `# double integrate_omega(const vec::fixed<2> &indices, Tensor_Options fancy_complex, double omega_min, double omega_max, double relerr, double abserr) const;`
+Integrates the polarizability element $\alpha_{ij}$ with the `indices` $i$ and $j$ from `omega_min` to `omega_max` with a relative error `relerr` and absolute error `abserr` with the [CQUAD](https://www.gnu.org/software/gsl/doc/html/integration.html) integration routine.
+If `fancy_complex = IM` then $\underline{\alpha}_{\Im}= (\underline{\alpha} -\underline{\alpha}^\dagger)/(2\mathrm{i})$ and for `fancy_complex = RE`  $\underline{\alpha}_{\Re} = (\underline{\alpha} +\underline{\alpha}^\dagger)/2$ is calculated. See also Example 2 in [Examples](#Examples).
 
-```cpp
-struct Options_Polarizability {
-  // Different options for the integrand
-  bool fancy_R = false;
-  bool fancy_I = false;
-
-  double omega = NAN;
-
-  // Indices of the 3x3 polarizability tensor
-  vec::fixed<2> indices = {NAN, NAN};
-
-  // Pointer to the Polarizability to be able to access the attributes of the
-  // class eventhough the integrand is static
-  Polarizability *class_pt;
-};
-```
-
-### `# bool fancy_R`
-If true, the calculation will use $\underline{\alpha}_{\Re} = \left(\underline{\alpha} + \underline{\alpha}^{\dagger}\right)/2$.
-
-### `# bool fancy_I`
-If true, the calculation will use $\underline{\alpha}_{\Im} = \left(\underline{\alpha} - \underline{\alpha}^{\dagger}\right)/(2 \mathrm{i})$.
-
-## PolarizabilityBath
-Implements a polarizability with an internal bath.
-Obeys the equation
-$  \underline{\alpha}(\omega) = \alpha_0 \omega_a^2 \left( \omega_a^2 - \omega^2 - \mathrm{i} \omega \mu(\omega) - \alpha_0 \omega_a^2 \int \frac{\mathrm{d}^2 \mathbf{k}}{(2 \pi)^2} \underline{G}(\mathbf{k}, \omega + \mathbf{k}^\intercal\mathbf{v}) \right)^{-1}$,
-where $\alpha_0$ is the vacuum polarizability, $\omega_a$ is the dipole resonance frequency, $\mu(\omega)$ is the memory kernel in Fourier space and $\underline{G}$ is the Green's tensor.
-
-```cpp
-class PolarizabilityBath : public Polarizability {
-private:
-  MemoryKernel *mu; // memory kernel needed to calculate alpha
-
-public:
-  // constructors
-  PolarizabilityBath(double omega_a, double alpha_zero, MemoryKernel *mu,
-                     GreensTensor *greens_tensor);
-  PolarizabilityBath(std::string input_file);
-
-  // calculate the polarizability tensor
-  void calculate_tensor(cx_mat::fixed<3, 3> &alpha,
-                        Options_Polarizability opts);
-
-  // getter function for memory kernel
-  std::complex<double> get_mu(double omega) { return this->mu->mu(omega); };
-};
-```
-Further information on the member function can be found in [Polarizability](#Polarizability).
-
-## PolarizabilityNoBath
-Implements a polarizability with no internal bath.
-Obeys the equation
-$  \underline{\alpha}(\omega) = \alpha_0 \omega_a^2 \left( \omega_a^2 - \omega^2 - \alpha_0 \omega_a^2 \int \frac{\mathrm{d}^2 \mathbf{k}}{(2 \pi)^2} \underline{G}(\mathbf{k}, \omega + \mathbf{k}^\intercal\mathbf{v}) \right)^{-1}$,
-where $\alpha_0$ is the vacuum polarizability, $\omega_a$ is the dipole resonance frequency and $\underline{G}$ is the Green's tensor.
-```cpp
-class PolarizabilityNoBath : public Polarizability {
-public:
-  // constructors
-  PolarizabilityNoBath(double omega_a, double alpha_zero,
-                       GreensTensor *greens_tensor);
-  PolarizabilityNoBath(std::string input_file);
-
-  // calculate the polarizability tensor
-  void calculate_tensor(cx_mat::fixed<3, 3> &alpha,
-                        Options_Polarizability opts);
-};
-```
-Further information on the member function can be found in [Polarizability](#Polarizability).
-
+### `# get_...`
+These are the getter functions of the respective quantity (`omega_a`, `alpha_zero`, `greens_tensor` or `mu`).
 
 ## Input file
 The input file sections for the polarizabilities look like the following.
@@ -133,7 +84,6 @@ Do not forget that for all polarizabilities you need to define a [GreensTensor](
 ```json
 {
     "Polarizability": {
-        "type": "nobath",
         "omega_a": ,
         "alpha_zero": 
     }
@@ -145,7 +95,6 @@ Do not forget that for all polarizabilities you need to define a [GreensTensor](
 ```json
 {
     "Polarizability": {
-        "type": "bath",
         "omega_a": ,
         "alpha_zero": ,
         "MemoryKernel": {
@@ -160,44 +109,52 @@ For the bath you also need to define a [MemoryKernel](api/memorykernel)!
 ## Examples
 <!-- tabs:start -->
 
-#### ** Example 1 **
+#### ** Example **
 
-We want to calculate the polarizability of a particle with an ohmic internal bath, above a plate with distance $z_a = 10\,\mathrm{eV}^{-1}$ and at frequency $3\,\mathrm{eV}$.
+We want to calculate the polarizability of a particle with an ohmic internal bath, above a plate with distance $z_a = 10\,\mathrm{eV}^{-1}$, velocity $v=0.1\,c$ and at frequency $3\,\mathrm{eV}$.
 First let's define the ohmic memory kernel
 ```cpp
 double gamma = 3.0;
 OhmicMemoryKernel mu(gamma);
 ```
-Now let's define the Green's tensor
+Furthermore, we need to generate a [permittivity](api/permittivity) and the [reflection coefficients](api/reflection), which represent characteristic properties of the surface, where we chose $\omega_p=9\,\mathrm{eV}$ and $\gamma=0.1\,\mathrm{eV}$
+```cpp
+    double omega_p = 9;
+    double gamma = 0.1;
+    auto perm = std::make_shared<PermittivityDrude>(omega_p, gamma);
+    auto refl = std::make_shared<ReflectionCoefficientsLocBulk>(perm);
+```
+Now we can define the [Green's tensor](api/greenstensor) (including the vacuum as well as the scattered contribution) 
 ```cpp
 double v = 0.1;
 double z_a = 10;
-double beta = 1e4;
-GreensTensorPlate greens_tensor(v, z_a, beta);
+double delta_cut = 30;
+vec::fixed<2> rel_err = {1E-8, 1E-6};
+
+auto greens = std::make_shared<GreensTensorPlateVacuum>(v, beta, z_a, refl, delta_cut, relerr_k);
 ```
+Here, we introduced further the inverse temperature $\beta$ (which is, however, irrelevant for the current calculation), the relative accuracy `rel_err` of the integration over the Green's tensor, and the $\delta_\mathrm{cut}$, which defines a numerical cut-off of the aformentioned integration.
 Finally we can put all together and define the polarizability
 ```cpp
 double omega_a = 1.3;
 double alpha_zero = 4.0;
-PolarizabilityBath pol(omega_a, alpha_zero, &mu, &greens_tensor);
+Polarizability pol(omega_a, alpha_zero, mu, greens_tensor);
 ```
 To calculate $\underline{\alpha}(3.0\,\mathrm{eV})$ we then do
 ```cpp
 cx_mat::fixed<3,3> alpha(fill::zeros);
-Options_Polarizability opts;
-opts.omega = 3.0;
-pol.calculate_tensor(alpha, opts);
+double omega = 3.0;
+pol.calculate_tensor(omega, alpha, IM);
 ```
-The matrix `alpha` now contains the correctly calculated polarizability tensor.
+The matrix `alpha` now contains the correctly calculated imaginary part of the polarizability tensor $\alpha_\Im(\omega)$.
 
 
-#### ** Example 1 (easier) **
+#### ** Example (.json) **
 Since we have to define a lot of parameters, QuaCa offers a shortcut to the long task before.
 We simply define all parameters in a file called `parameters.json` which looks like this
 ```json
 {
     "Polarizability": {
-        "type": "bath",
         "omega_a": 1.3,
         "alpha_zero": 4.0,
         "MemoryKernel": {
@@ -213,12 +170,12 @@ We simply define all parameters in a file called `parameters.json` which looks l
     }
 }
 ```
-Now we can easily define and calculate the polarizability as such
+Now we can easily define and calculate the imaginary part of the polarizability as such
 ```cpp
 PolarizabilityBath pol("parameters.json");
 
 cx_mat::fixed<3,3> alpha(fill::zeros);
-pol.calculate_tensor(alpha, 3.0);
+pol.calculate_tensor(3.0, alpha, IM);
 ```
 
 

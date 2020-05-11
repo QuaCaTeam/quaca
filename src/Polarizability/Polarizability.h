@@ -29,6 +29,7 @@ public:
                  std::shared_ptr<MemoryKernel> mu,
                  std::shared_ptr<GreensTensor> greens_tensor);
 
+  // Constructor from a given json file
   explicit Polarizability(const std::string &input_file);
 
   // calculate the polarizability tensor
@@ -39,6 +40,8 @@ public:
   double integrate_omega(const vec::fixed<2> &indices,
                          Tensor_Options fancy_complex, double omega_min,
                          double omega_max, double relerr, double abserr) const;
+
+  // integrand for the omega integration
   double integrand_omega(double omega, const vec::fixed<2> &indices,
                          Tensor_Options fancy_complex) const;
 

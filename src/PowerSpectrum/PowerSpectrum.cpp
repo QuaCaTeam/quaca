@@ -71,6 +71,6 @@ void PowerSpectrum::calculate(double omega, cx_mat::fixed<3, 3> &powerspectrum,
 
     // Combine the Green's tensor and the polarizability, see eq. [3.9] in
     // Marty's PhD thesis
-    powerspectrum = alpha * green * trans(alpha);
+    powerspectrum = 1. / M_PI * alpha * green * trans(alpha);
   }
 }

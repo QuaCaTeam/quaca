@@ -108,7 +108,7 @@ double Friction::friction_integrand(double omega,
 
     // Put everything together
     return real(
-        trace(2. / M_PI *
+        trace(2. *
               (-J * green_kv + alpha_fancy_I * green_fancy_I_kv_non_LTE)));
   }
   // Ensure that a valid integration argument has been passed
