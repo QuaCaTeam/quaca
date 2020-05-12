@@ -1,6 +1,5 @@
 {
     "Polarizability": {
-        "type": "bath",
         "omega_a": 1.3,
         "alpha_zero": 6E-9,
         "MemoryKernel": {
