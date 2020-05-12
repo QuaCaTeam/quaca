@@ -49,6 +49,6 @@ std::complex<double> SinglePhononMemoryKernel::calculate(double omega) const {
   // complex unit
   const std::complex<double> I(0E0, 1E0);
 
-  return this->gamma + this->coupling*this->coupling
+  return this->gamma + this->coupling*this->coupling*pow(this->omega_phon,4)
     /(I*omega*(this->omega_phon*this->omega_phon - omega*omega - I*this->gamma_phon*omega ));
 }

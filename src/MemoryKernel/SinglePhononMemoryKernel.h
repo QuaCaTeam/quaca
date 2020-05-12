@@ -11,7 +11,7 @@ private:
   double gamma;        // ohmic damping coefficient
   double gamma_phon;   // phononic damping coefficient
   double omega_phon;   // phononic frequency
-  double coupling;     // coupling coefficient to the dipole moment
+  double coupling;     // dimensionless coupling coefficient to the dipole moment
 
 public:
   // direct constructor
