@@ -1,0 +1,1067 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="QuaCa" targetName="test_quaca_integrated" />
+      <config projectName="QuaCa" targetName="quaca" />
+      <config projectName="QuaCa" targetName="test_quaca_unit" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7249a095-135c-49e8-9da6-b3a03e68cb0f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/.Tutorial/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/test_files/SinglePhononMemoryKernel.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/therm.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/therm.ini" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/_coverpage.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/node_modules/docsify-pdf-embed-plugin/.github/stale.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/node_modules/docsify-pdf-embed-plugin/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/node_modules/docsify-pdf-embed-plugin/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/node_modules/docsify-pdf-embed-plugin/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/node_modules/docsify-pdf-embed-plugin/resources/docsify-pdf-embed-plugin-demo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/node_modules/docsify-pdf-embed-plugin/src/docsify-pdf-embed.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/notes/Relations_and_Tests.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/notes/Relations_and_Tests.tex" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/notes/VacuumGreen.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/armadillo_lncs_2018.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/examples/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/csv_name.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_log_normpdf.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_powmat.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_quantile.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_trimat_ind.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_quantile_bones.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_quantile_meat.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/hdf5_name.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_diagmat_meat.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_diagvec_bones.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_diagvec_meat.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_powmat_bones.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_powmat_meat.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_strans_meat.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MemoryKernel/SinglePhononMemoryKernel.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MemoryKernel/SinglePhononMemoryKernel.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/IntegratedTests/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/UnitTests/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/UnitTests/MemoryKernel/test_SinglePhononMemoryKernel_unit.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/UnitTests/PowerSpectrum/test_PowerSpectrum.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/quaca.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/quaca.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Friction/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/app/Friction/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Friction/friction.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/app/Friction/friction.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/app/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/test_files/FrictionVacuum.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/test_files/FrictionVacuum.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/test_files/MemoryKernel.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/test_files/OhmicMemoryKernel.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/test_files/PermittivityLorentz.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/test_files/PermittivityLorentz.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/test_files/PolarizabilityBath.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/test_files/PolarizabilityBath.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/test_files/PolarizabilityNoBath.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/test_files/PolarizabilityNoBath.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/test_files/PowerSpectrumHarmOsc.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/test_files/PowerSpectrum.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/CONTRIBUTING.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/CONTRIBUTING.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_scripts/converter.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_scripts/converter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_sidebar.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_sidebar.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/api/friction.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/api/friction.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/api/greenstensor.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/api/greenstensor.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/api/memorykernel.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/api/memorykernel.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/api/permittivity.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/api/permittivity.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/api/polarizability.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/api/polarizability.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/api/powerspectrum.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/api/powerspectrum.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/api/reflection.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/api/reflection.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/dev/integration.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/dev/integration.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/dev/organization.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/dev/organization.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/dev/parallelization.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/dev/parallelization.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/dev/protocols.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/dev/protocols.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/dev/testing.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/dev/testing.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/documentation/inputfileapi.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/documentation/inputfileapi.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/documentation/units.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/documentation/units.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/gettingstarted.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/gettingstarted.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tutorials/automate.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tutorials/automate.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tutorials/first_calculation.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tutorials/first_calculation.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tutorials/mainfile.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tutorials/mainfile.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tutorials/newfeature.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tutorials/newfeature.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ProgressBar.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ProgressBar.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/Quaca.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/Quaca.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/LICENSE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/LICENSE.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/NOTICE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/NOTICE.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/armadillo_icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/armadillo_icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/armadillo_joss_2016.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/armadillo_joss_2016.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/armadillo_mca_2019.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/armadillo_nicta_2010.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/armadillo_nicta_2010.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/armadillo_spcs_2017.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/armadillo_spcs_2017.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/cmake_aux/InstallFiles/ArmadilloConfig.cmake.in" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/cmake_aux/InstallFiles/ArmadilloConfig.cmake.in" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/cmake_aux/InstallFiles/ArmadilloConfigVersion.cmake.in" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/cmake_aux/InstallFiles/ArmadilloConfigVersion.cmake.in" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/cmake_aux/Modules/ARMA_FindACML.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/cmake_aux/Modules/ARMA_FindACML.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/cmake_aux/Modules/ARMA_FindACMLMP.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/cmake_aux/Modules/ARMA_FindACMLMP.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/cmake_aux/Modules/ARMA_FindARPACK.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/cmake_aux/Modules/ARMA_FindARPACK.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/cmake_aux/Modules/ARMA_FindATLAS.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/cmake_aux/Modules/ARMA_FindATLAS.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/cmake_aux/Modules/ARMA_FindBLAS.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/cmake_aux/Modules/ARMA_FindBLAS.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/cmake_aux/Modules/ARMA_FindLAPACK.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/cmake_aux/Modules/ARMA_FindLAPACK.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/cmake_aux/Modules/ARMA_FindMKL.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/cmake_aux/Modules/ARMA_FindMKL.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/cmake_aux/Modules/ARMA_FindOpenBLAS.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/cmake_aux/Modules/ARMA_FindOpenBLAS.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/cmake_aux/Modules/ARMA_FindSuperLU5.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/cmake_aux/Modules/ARMA_FindSuperLU5.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/configure" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/configure" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/docs.html" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/docs.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/examples/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/examples/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/examples/example1.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/examples/example1.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/examples/example1_win64.README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/examples/example1_win64.README.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/examples/example1_win64.sln" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/examples/example1_win64.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/examples/example1_win64.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/examples/example1_win64.vcxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/examples/lib_win64/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/examples/lib_win64/README.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/examples/lib_win64/blas_win64_MT.dll" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/examples/lib_win64/blas_win64_MT.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/examples/lib_win64/blas_win64_MT.lib" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/examples/lib_win64/blas_win64_MT.lib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/examples/lib_win64/lapack_win64_MT.dll" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/examples/lib_win64/lapack_win64_MT.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/examples/lib_win64/lapack_win64_MT.lib" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/examples/lib_win64/lapack_win64_MT.lib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/BaseCube_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/BaseCube_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/BaseCube_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/BaseCube_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/Base_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/Base_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/Base_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/Base_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/Col_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/Col_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/Col_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/Col_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/CubeToMatOp_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/CubeToMatOp_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/CubeToMatOp_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/CubeToMatOp_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/Cube_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/Cube_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/Cube_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/Cube_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/GenCube_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/GenCube_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/GenCube_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/GenCube_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/GenSpecialiser.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/GenSpecialiser.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/Gen_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/Gen_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/Gen_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/Gen_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/GlueCube_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/GlueCube_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/GlueCube_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/GlueCube_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/Glue_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/Glue_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/Glue_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/Glue_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/MapMat_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/MapMat_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/MapMat_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/MapMat_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/Mat_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/Mat_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/Mat_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/Mat_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/OpCube_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/OpCube_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/OpCube_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/OpCube_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/Op_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/Op_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/Op_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/Op_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/Proxy.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/Proxy.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/ProxyCube.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/ProxyCube.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/Row_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/Row_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/Row_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/Row_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SizeCube_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SizeCube_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SizeCube_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SizeCube_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SizeMat_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SizeMat_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SizeMat_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SizeMat_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SpBase_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SpBase_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SpBase_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SpBase_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SpCol_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SpCol_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SpCol_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SpCol_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SpGlue_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SpGlue_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SpGlue_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SpGlue_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SpMat_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SpMat_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SpMat_iterators_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SpMat_iterators_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SpMat_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SpMat_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SpOp_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SpOp_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SpOp_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SpOp_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SpProxy.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SpProxy.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SpRow_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SpRow_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SpRow_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SpRow_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SpSubview_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SpSubview_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SpSubview_iterators_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SpSubview_iterators_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SpSubview_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SpSubview_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SpToDOp_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SpToDOp_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SpToDOp_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SpToDOp_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SpValProxy_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SpValProxy_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/SpValProxy_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/SpValProxy_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/access.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/access.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/arma_cmath.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/arma_cmath.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/arma_config.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/arma_config.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/arma_forward.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/arma_forward.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/arma_ostream_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/arma_ostream_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/arma_ostream_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/arma_ostream_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/arma_rel_comparators.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/arma_rel_comparators.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/arma_rng.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/arma_rng.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/arma_rng_cxx11.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/arma_rng_cxx11.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/arma_rng_cxx98.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/arma_rng_cxx98.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/arma_static_check.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/arma_static_check.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/arma_str.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/arma_str.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/arma_version.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/arma_version.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/arrayops_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/arrayops_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/arrayops_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/arrayops_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/auxlib_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/auxlib_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/auxlib_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/auxlib_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/band_helper.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/band_helper.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/compiler_extra.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/compiler_extra.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/compiler_setup.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/compiler_setup.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/compiler_setup_post.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/compiler_setup_post.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/cond_rel_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/cond_rel_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/cond_rel_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/cond_rel_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/config.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/config.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/config.hpp.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/config.hpp.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/constants.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/constants.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/constants_old.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/constants_old.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/debug.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/debug.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/def_arpack.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/def_arpack.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/def_atlas.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/def_atlas.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/def_blas.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/def_blas.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/def_hdf5.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/def_hdf5.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/def_lapack.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/def_lapack.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/def_superlu.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/def_superlu.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/diagmat_proxy.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/diagmat_proxy.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/diagview_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/diagview_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/diagview_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/diagview_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/diskio_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/diskio_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/diskio_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/diskio_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/distr_param.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/distr_param.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/eGlueCube_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/eGlueCube_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/eGlueCube_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/eGlueCube_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/eGlue_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/eGlue_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/eGlue_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/eGlue_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/eOpCube_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/eOpCube_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/eOpCube_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/eOpCube_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/eOp_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/eOp_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/eOp_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/eOp_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/eglue_core_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/eglue_core_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/eglue_core_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/eglue_core_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/eop_aux.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/eop_aux.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/eop_core_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/eop_core_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/eop_core_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/eop_core_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fft_engine.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fft_engine.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/field_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/field_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/field_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/field_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_accu.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_accu.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_all.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_all.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_any.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_any.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_approx_equal.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_approx_equal.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_as_scalar.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_as_scalar.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_chi2rnd.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_chi2rnd.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_chol.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_chol.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_clamp.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_clamp.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_cond.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_cond.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_conv.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_conv.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_conv_to.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_conv_to.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_cor.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_cor.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_cov.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_cov.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_cross.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_cross.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_cumprod.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_cumprod.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_cumsum.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_cumsum.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_det.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_det.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_diagmat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_diagmat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_diagvec.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_diagvec.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_diff.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_diff.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_dot.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_dot.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_eig_gen.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_eig_gen.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_eig_pair.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_eig_pair.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_eig_sym.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_eig_sym.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_eigs_gen.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_eigs_gen.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_eigs_sym.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_eigs_sym.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_elem.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_elem.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_eps.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_eps.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_expmat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_expmat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_eye.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_eye.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_fft.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_fft.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_fft2.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_fft2.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_find.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_find.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_find_unique.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_find_unique.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_flip.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_flip.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_hess.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_hess.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_hist.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_hist.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_histc.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_histc.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_index_max.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_index_max.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_index_min.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_index_min.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_inplace_strans.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_inplace_strans.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_inplace_trans.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_inplace_trans.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_interp1.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_interp1.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_interp2.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_interp2.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_intersect.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_intersect.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_inv.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_inv.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_join.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_join.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_kmeans.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_kmeans.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_kron.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_kron.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_log_det.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_log_det.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_logmat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_logmat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_lu.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_lu.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_max.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_max.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_mean.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_mean.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_median.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_median.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_min.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_min.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_misc.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_misc.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_mvnrnd.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_mvnrnd.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_n_unique.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_n_unique.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_nonzeros.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_nonzeros.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_norm.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_norm.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_normalise.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_normalise.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_normcdf.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_normcdf.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_normpdf.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_normpdf.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_numel.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_numel.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_ones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_ones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_orth_null.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_orth_null.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_pinv.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_pinv.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_polyfit.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_polyfit.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_polyval.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_polyval.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_princomp.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_princomp.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_prod.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_prod.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_qr.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_qr.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_qz.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_qz.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_randg.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_randg.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_randi.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_randi.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_randn.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_randn.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_randperm.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_randperm.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_randu.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_randu.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_range.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_range.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_rank.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_rank.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_regspace.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_regspace.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_repelem.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_repelem.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_repmat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_repmat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_reshape.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_reshape.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_resize.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_resize.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_reverse.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_reverse.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_roots.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_roots.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_schur.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_schur.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_shift.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_shift.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_shuffle.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_shuffle.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_size.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_size.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_solve.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_solve.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_sort.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_sort.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_sort_index.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_sort_index.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_speye.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_speye.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_spones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_spones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_sprandn.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_sprandn.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_sprandu.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_sprandu.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_spsolve.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_spsolve.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_sqrtmat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_sqrtmat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_stddev.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_stddev.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_strans.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_strans.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_sum.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_sum.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_svd.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_svd.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_svds.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_svds.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_syl_lyap.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_syl_lyap.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_symmat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_symmat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_toeplitz.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_toeplitz.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_trace.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_trace.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_trans.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_trans.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_trapz.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_trapz.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_trig.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_trig.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_trimat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_trimat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_trunc_exp.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_trunc_exp.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_trunc_log.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_trunc_log.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_unique.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_unique.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_var.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_var.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_vectorise.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_vectorise.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_wishrnd.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_wishrnd.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/fn_zeros.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/fn_zeros.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_affmul_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_affmul_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_affmul_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_affmul_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_atan2_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_atan2_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_atan2_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_atan2_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_conv_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_conv_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_conv_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_conv_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_cor_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_cor_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_cor_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_cor_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_cov_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_cov_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_cov_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_cov_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_cross_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_cross_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_cross_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_cross_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_hist_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_hist_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_hist_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_hist_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_histc_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_histc_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_histc_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_histc_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_hypot_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_hypot_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_hypot_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_hypot_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_intersect_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_intersect_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_intersect_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_intersect_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_join_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_join_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_join_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_join_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_kron_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_kron_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_kron_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_kron_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_max_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_max_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_max_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_max_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_min_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_min_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_min_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_min_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_mixed_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_mixed_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_mixed_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_mixed_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_mvnrnd_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_mvnrnd_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_mvnrnd_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_mvnrnd_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_polyfit_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_polyfit_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_polyfit_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_polyfit_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_polyval_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_polyval_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_polyval_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_polyval_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_relational_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_relational_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_relational_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_relational_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_solve_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_solve_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_solve_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_solve_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_times_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_times_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_times_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_times_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_toeplitz_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_toeplitz_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_toeplitz_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_toeplitz_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_trapz_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_trapz_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/glue_trapz_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/glue_trapz_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/gmm_diag_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/gmm_diag_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/gmm_diag_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/gmm_diag_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/gmm_full_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/gmm_full_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/gmm_full_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/gmm_full_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/gmm_misc_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/gmm_misc_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/gmm_misc_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/gmm_misc_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/hdf5_misc.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/hdf5_misc.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/include_atlas.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/include_atlas.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/include_hdf5.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/include_hdf5.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/include_superlu.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/include_superlu.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/injector_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/injector_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/injector_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/injector_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/memory.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/memory.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/mp_misc.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/mp_misc.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/mtGlueCube_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/mtGlueCube_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/mtGlueCube_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/mtGlueCube_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/mtGlue_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/mtGlue_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/mtGlue_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/mtGlue_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/mtOpCube_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/mtOpCube_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/mtOpCube_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/mtOpCube_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/mtOp_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/mtOp_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/mtOp_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/mtOp_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/mtSpGlue_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/mtSpGlue_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/mtSpGlue_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/mtSpGlue_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/mtSpOp_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/mtSpOp_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/mtSpOp_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/mtSpOp_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/mul_gemm.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/mul_gemm.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/mul_gemm_mixed.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/mul_gemm_mixed.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/mul_gemv.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/mul_gemv.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/mul_herk.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/mul_herk.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/mul_syrk.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/mul_syrk.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/newarp_DenseGenMatProd_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/newarp_DenseGenMatProd_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/newarp_DenseGenMatProd_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/newarp_DenseGenMatProd_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/newarp_DoubleShiftQR_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/newarp_DoubleShiftQR_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/newarp_DoubleShiftQR_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/newarp_DoubleShiftQR_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/newarp_EigsSelect.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/newarp_EigsSelect.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/newarp_GenEigsSolver_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/newarp_GenEigsSolver_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/newarp_GenEigsSolver_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/newarp_GenEigsSolver_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/newarp_SortEigenvalue.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/newarp_SortEigenvalue.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/newarp_SparseGenMatProd_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/newarp_SparseGenMatProd_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/newarp_SparseGenMatProd_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/newarp_SparseGenMatProd_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/newarp_SymEigsSolver_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/newarp_SymEigsSolver_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/newarp_SymEigsSolver_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/newarp_SymEigsSolver_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/newarp_TridiagEigen_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/newarp_TridiagEigen_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/newarp_TridiagEigen_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/newarp_TridiagEigen_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/newarp_UpperHessenbergEigen_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/newarp_UpperHessenbergEigen_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/newarp_UpperHessenbergEigen_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/newarp_UpperHessenbergEigen_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/newarp_UpperHessenbergQR_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/newarp_UpperHessenbergQR_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/newarp_UpperHessenbergQR_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/newarp_UpperHessenbergQR_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/newarp_cx_attrib.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/newarp_cx_attrib.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_all_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_all_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_all_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_all_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_any_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_any_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_any_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_any_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_chi2rnd_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_chi2rnd_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_chi2rnd_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_chi2rnd_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_chol_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_chol_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_chol_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_chol_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_clamp_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_clamp_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_clamp_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_clamp_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_cond_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_cond_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_cond_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_cond_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_cor_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_cor_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_cor_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_cor_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_cov_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_cov_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_cov_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_cov_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_cumprod_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_cumprod_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_cumprod_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_cumprod_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_cumsum_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_cumsum_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_cumsum_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_cumsum_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_cx_scalar_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_cx_scalar_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_cx_scalar_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_cx_scalar_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_diagmat_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_diagmat_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_diagmat_meat.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_diagvec_bones.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_diagvec_meat.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_diff_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_diff_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_diff_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_diff_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_dot_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_dot_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_dot_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_dot_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_dotext_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_dotext_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_dotext_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_dotext_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_expmat_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_expmat_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_expmat_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_expmat_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_fft_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_fft_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_fft_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_fft_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_find_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_find_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_find_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_find_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_find_unique_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_find_unique_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_find_unique_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_find_unique_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_flip_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_flip_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_flip_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_flip_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_hist_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_hist_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_hist_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_hist_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_htrans_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_htrans_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_htrans_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_htrans_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_index_max_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_index_max_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_index_max_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_index_max_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_index_min_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_index_min_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_index_min_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_index_min_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_inv_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_inv_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_inv_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_inv_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_logmat_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_logmat_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_logmat_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_logmat_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_max_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_max_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_max_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_max_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_mean_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_mean_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_mean_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_mean_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_median_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_median_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_median_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_median_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_min_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_min_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_min_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_min_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_misc_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_misc_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_misc_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_misc_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_nonzeros_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_nonzeros_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_nonzeros_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_nonzeros_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_norm_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_norm_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_norm_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_norm_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_normalise_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_normalise_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_normalise_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_normalise_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_orth_null_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_orth_null_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_orth_null_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_orth_null_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_pinv_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_pinv_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_pinv_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_pinv_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_princomp_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_princomp_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_princomp_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_princomp_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_prod_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_prod_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_prod_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_prod_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_range_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_range_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_range_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_range_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_relational_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_relational_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_relational_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_relational_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_repelem_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_repelem_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_repelem_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_repelem_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_repmat_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_repmat_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_repmat_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_repmat_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_reshape_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_reshape_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_reshape_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_reshape_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_resize_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_resize_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_resize_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_resize_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_reverse_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_reverse_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_reverse_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_reverse_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_roots_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_roots_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_roots_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_roots_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_shift_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_shift_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_shift_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_shift_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_shuffle_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_shuffle_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_shuffle_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_shuffle_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_sort_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_sort_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_sort_index_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_sort_index_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_sort_index_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_sort_index_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_sort_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_sort_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_sp_minus_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_sp_minus_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_sp_minus_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_sp_minus_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_sp_plus_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_sp_plus_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_sp_plus_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_sp_plus_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_sqrtmat_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_sqrtmat_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_sqrtmat_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_sqrtmat_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_stddev_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_stddev_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_stddev_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_stddev_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_strans_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_strans_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_strans_meat.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_sum_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_sum_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_sum_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_sum_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_symmat_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_symmat_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_symmat_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_symmat_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_toeplitz_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_toeplitz_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_toeplitz_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_toeplitz_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_trimat_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_trimat_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_trimat_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_trimat_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_unique_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_unique_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_unique_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_unique_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_var_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_var_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_var_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_var_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_vectorise_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_vectorise_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_vectorise_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_vectorise_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_wishrnd_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_wishrnd_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/op_wishrnd_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/op_wishrnd_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/operator_cube_div.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/operator_cube_div.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/operator_cube_minus.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/operator_cube_minus.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/operator_cube_plus.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/operator_cube_plus.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/operator_cube_relational.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/operator_cube_relational.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/operator_cube_schur.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/operator_cube_schur.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/operator_cube_times.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/operator_cube_times.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/operator_div.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/operator_div.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/operator_minus.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/operator_minus.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/operator_ostream.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/operator_ostream.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/operator_plus.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/operator_plus.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/operator_relational.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/operator_relational.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/operator_schur.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/operator_schur.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/operator_times.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/operator_times.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/podarray_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/podarray_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/podarray_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/podarray_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/promote_type.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/promote_type.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/restrictors.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/restrictors.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/running_stat_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/running_stat_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/running_stat_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/running_stat_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/running_stat_vec_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/running_stat_vec_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/running_stat_vec_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/running_stat_vec_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/sp_auxlib_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/sp_auxlib_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/sp_auxlib_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/sp_auxlib_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/span.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/span.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spdiagview_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spdiagview_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spdiagview_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spdiagview_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spglue_elem_helper_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spglue_elem_helper_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spglue_elem_helper_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spglue_elem_helper_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spglue_join_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spglue_join_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spglue_join_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spglue_join_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spglue_kron_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spglue_kron_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spglue_kron_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spglue_kron_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spglue_max_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spglue_max_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spglue_max_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spglue_max_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spglue_merge_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spglue_merge_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spglue_merge_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spglue_merge_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spglue_min_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spglue_min_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spglue_min_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spglue_min_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spglue_minus_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spglue_minus_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spglue_minus_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spglue_minus_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spglue_plus_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spglue_plus_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spglue_plus_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spglue_plus_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spglue_relational_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spglue_relational_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spglue_relational_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spglue_relational_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spglue_schur_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spglue_schur_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spglue_schur_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spglue_schur_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spglue_times_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spglue_times_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spglue_times_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spglue_times_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_diagmat_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_diagmat_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_diagmat_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_diagmat_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_htrans_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_htrans_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_htrans_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_htrans_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_max_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_max_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_max_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_max_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_mean_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_mean_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_mean_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_mean_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_min_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_min_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_min_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_min_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_misc_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_misc_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_misc_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_misc_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_normalise_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_normalise_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_normalise_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_normalise_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_repmat_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_repmat_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_repmat_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_repmat_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_reverse_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_reverse_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_reverse_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_reverse_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_strans_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_strans_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_strans_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_strans_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_sum_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_sum_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_sum_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_sum_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_symmat_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_symmat_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_symmat_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_symmat_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_trimat_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_trimat_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_trimat_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_trimat_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_var_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_var_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_var_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_var_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_vectorise_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_vectorise_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/spop_vectorise_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/spop_vectorise_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/strip.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/strip.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/subview_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/subview_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/subview_cube_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/subview_cube_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/subview_cube_each_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/subview_cube_each_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/subview_cube_each_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/subview_cube_each_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/subview_cube_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/subview_cube_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/subview_cube_slices_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/subview_cube_slices_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/subview_cube_slices_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/subview_cube_slices_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/subview_each_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/subview_each_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/subview_each_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/subview_each_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/subview_elem1_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/subview_elem1_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/subview_elem1_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/subview_elem1_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/subview_elem2_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/subview_elem2_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/subview_elem2_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/subview_elem2_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/subview_field_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/subview_field_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/subview_field_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/subview_field_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/subview_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/subview_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/sympd_helper.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/sympd_helper.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/traits.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/traits.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/translate_arpack.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/translate_arpack.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/translate_atlas.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/translate_atlas.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/translate_blas.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/translate_blas.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/translate_lapack.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/translate_lapack.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/translate_superlu.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/translate_superlu.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/trimat_helper.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/trimat_helper.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/typedef_elem.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/typedef_elem.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/typedef_elem_check.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/typedef_elem_check.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/typedef_mat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/typedef_mat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/typedef_mat_fixed.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/typedef_mat_fixed.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/unwrap.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/unwrap.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/unwrap_cube.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/unwrap_cube.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/unwrap_spmat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/unwrap_spmat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/upgrade_val.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/upgrade_val.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/wall_clock_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/wall_clock_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/wall_clock_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/wall_clock_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/xtrans_mat_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/xtrans_mat_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/xtrans_mat_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/xtrans_mat_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/xvec_htrans_bones.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/xvec_htrans_bones.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/include/armadillo_bits/xvec_htrans_meat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/include/armadillo_bits/xvec_htrans_meat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/mex_interface/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/mex_interface/README.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/mex_interface/armaMex.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/mex_interface/armaMex.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/mex_interface/armaMex_demo.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/mex_interface/armaMex_demo.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/mex_interface/armaMex_documentation.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/mex_interface/armaMex_documentation.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/mex_interface/inData.mat" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/mex_interface/inData.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/mex_interface/readMatTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/mex_interface/readMatTest.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/mex_interface/run_demo.m" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/mex_interface/run_demo.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/misc/armadillo.pc.in" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/misc/armadillo.pc.in" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/misc/armadillo.spec" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/misc/armadillo.spec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/misc/blank_footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/misc/blank_footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/misc/doxygen.config" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/misc/doxygen.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/misc/main.doxy" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/misc/main.doxy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/rcpp_armadillo_csda_2014.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/rcpp_armadillo_csda_2014.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/src/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/src/README.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/src/wrapper1.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/src/wrapper1.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/src/wrapper2.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/src/wrapper2.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/README.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/attributes.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/attributes.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/bounds.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/bounds.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/catch.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/catch.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/decomp_eig_gen.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/decomp_eig_gen.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/decomp_eig_sym.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/decomp_eig_sym.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/expr_elem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/expr_elem.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/expr_misc.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/expr_misc.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_abs.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_abs.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_accu.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_accu.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_all.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_all.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_any.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_any.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_as_scalar.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_as_scalar.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_clamp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_clamp.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_cond.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_cond.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_conj.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_conj.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_conv.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_conv.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_conv_to.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_conv_to.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_cor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_cor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_cov.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_cov.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_cross.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_cross.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_cumprod.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_cumprod.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_cumsum.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_cumsum.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_det.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_det.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_diagmat.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_diagmat.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_diagvec.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_diagvec.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_diff.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_diff.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_dot.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_dot.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_eigs_gen.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_eigs_gen.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_eigs_sym.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_eigs_sym.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_eps.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_eps.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_expmat.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_expmat.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_find.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_find.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_find_finite.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_find_finite.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_find_nonfinite.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_find_nonfinite.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_find_unique.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_find_unique.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_flip.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_flip.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_hess.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_hess.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_interp1.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_interp1.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_intersect.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_intersect.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_is_finite.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_is_finite.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_max.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_max.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_mean.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_mean.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_min.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_min.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_princomp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_princomp.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_spsolve.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_spsolve.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_sum.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_sum.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_symmat.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_symmat.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_trace.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_trace.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_trans.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_trans.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_var.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_var.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/fn_vectorise.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/fn_vectorise.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/gen_linspace.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/gen_linspace.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/gen_ones.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/gen_ones.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/gen_randu.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/gen_randu.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/gen_zeros.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/gen_zeros.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/gmm.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/gmm.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/hdf5.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/hdf5.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/init_auxmem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/init_auxmem.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/init_fill.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/init_fill.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/init_misc.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/init_misc.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/instantiation.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/instantiation.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/mat_minus.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/mat_minus.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/mat_mul_cx.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/mat_mul_cx.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/mat_mul_real.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/mat_mul_real.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/mat_neg.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/mat_neg.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/mat_plus.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/mat_plus.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/spcol.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/spcol.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/spmat.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/spmat.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/sprow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/sprow.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/armadillo-9.800.2/tests/spsubview.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lib/armadillo-9.870.2/tests/spsubview.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notes/Relations_and_Tests.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/notes/Relations_and_Tests.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/notes/VacuumGreen.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/notes/VacuumGreen.tex" beforeDir="false" afterPath="$PROJECT_DIR$/docs/notes/VacuumGreen.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notes/lib.bib" beforeDir="false" afterPath="$PROJECT_DIR$/docs/notes/lib.bib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Calculations/Integrations.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Calculations/Integrations.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Calculations/Integrations.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Calculations/Integrations.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Friction/Friction.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Friction/Friction.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Friction/Friction.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Friction/Friction.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensor.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorFactory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorFactory.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorFactory.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorFactory.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlate.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlate.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlate.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlate.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateVacuum.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateVacuum.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateVacuum.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorPlateVacuum.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorVacuum.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorVacuum.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GreensTensor/GreensTensorVacuum.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GreensTensor/GreensTensorVacuum.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Looper/Looper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Looper/Looper.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Looper/Looper.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Looper/Looper.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Looper/LooperFactory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Looper/LooperFactory.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Looper/LooperFactory.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Looper/LooperFactory.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Looper/LooperV.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Looper/LooperV.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Looper/LooperV.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Looper/LooperV.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Looper/LooperZa.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Looper/LooperZa.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Looper/LooperZa.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Looper/LooperZa.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/src/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MemoryKernel/MemoryKernel.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/MemoryKernel/MemoryKernel.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MemoryKernel/MemoryKernelFactory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/MemoryKernel/MemoryKernelFactory.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MemoryKernel/MemoryKernelFactory.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/MemoryKernel/MemoryKernelFactory.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MemoryKernel/OhmicMemoryKernel.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/MemoryKernel/OhmicMemoryKernel.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MemoryKernel/OhmicMemoryKernel.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/MemoryKernel/OhmicMemoryKernel.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Options/Options.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Options/Options.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Permittivity/Permittivity.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/Permittivity.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Permittivity/PermittivityDrude.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/PermittivityDrude.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Permittivity/PermittivityDrude.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/PermittivityDrude.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Permittivity/PermittivityFactory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/PermittivityFactory.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Permittivity/PermittivityFactory.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/PermittivityFactory.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Permittivity/PermittivityLorentz.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/PermittivityLorentz.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Permittivity/PermittivityLorentz.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Permittivity/PermittivityLorentz.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Polarizability/Polarizability.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/Polarizability.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Polarizability/Polarizability.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Polarizability/Polarizability.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityBath.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityBath.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityFactory.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityFactory.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityNoBath.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Polarizability/PolarizabilityNoBath.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrum.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrum.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrum.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrum.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumFactory.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumFactory.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumHarmOsc.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PowerSpectrum/PowerSpectrumHarmOsc.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficients.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficients.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsFactory.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsFactory.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocBulk.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocBulk.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocSlab.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReflectionCoefficients/ReflectionCoefficientsLocSlab.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/IntegratedTests/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/IntegratedTests/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/IntegratedTests/Friction/test_Friction_integrated.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/IntegratedTests/Friction/test_Friction_integrated.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/IntegratedTests/Polarizability/test_PolarizabilityBath_integrated.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/IntegratedTests/Polarizability/test_PolarizabilityBath_integrated.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/IntegratedTests/Polarizability/test_PolarizabilityNoBath_integrated.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/IntegratedTests/Polarizability/test_PolarizabilityNoBath_integrated.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/test/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/Calculations/test_Integrations_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Calculations/test_Integrations_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/Friction/test_Friction_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Friction/test_Friction_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/GreensTensor/test_GreensTensorPlateVacuum_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/GreensTensor/test_GreensTensorPlateVacuum_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/GreensTensor/test_GreensTensorPlate_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/GreensTensor/test_GreensTensorPlate_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/GreensTensor/test_GreensTensorVacuum_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/GreensTensor/test_GreensTensorVacuum_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/Looper/test_LooperV_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Looper/test_LooperV_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/Looper/test_LooperZa_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Looper/test_LooperZa_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/MemoryKernel/test_OhmicMemoryKernel_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/MemoryKernel/test_OhmicMemoryKernel_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/Options/test_Options_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Options/test_Options_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/Permittivity/test_PermittivityDrude_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Permittivity/test_PermittivityDrude_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/Permittivity/test_PermittivityLorentz_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Permittivity/test_PermittivityLorentz_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/Polarizability/test_PolarizabilityBath_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Polarizability/test_PolarizabilityBath_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/Polarizability/test_PolarizabilityNoBath_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/Polarizability/test_PolarizabilityNoBath_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/PowerSpectrum/test_PowerSpectrumHarmOsc.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/ReflectionCoefficients/test_ReflectionCoefficientsLocBulk_unit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnitTests/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab_unit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnitTests/ReflectionCoefficients/test_ReflectionCoefficientsLocSlab_unit.cpp" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CMakeLists.txt" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1YcYofXCHFsn3F2Zx06FVQ2QB4t" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.advertisement.text.overridden" value="true" />
+    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/test/Quick_Test" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Catch.Unit tests">
+    <configuration name="Make project" type="CLionExternalRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Unit tests" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QuaCa" TARGET_NAME="test_quaca_integrated" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QuaCa" RUN_TARGET_NAME="test_quaca_integrated" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test_quaca_integrated" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QuaCa" TARGET_NAME="test_quaca_integrated" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QuaCa" RUN_TARGET_NAME="test_quaca_integrated" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Cmake" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QuaCa" TARGET_NAME="Tutorial" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QuaCa" RUN_TARGET_NAME="Tutorial">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tutorial" type="CMakeRunConfiguration" factoryName="Application" nameIsGenerated="true" WORKING_DIR="file://$PROJECT_DIR$/build" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QuaCa" RUN_TARGET_NAME="Friction" EXPLICIT_BUILD_TARGET_NAME="all">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="quaca" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QuaCa" TARGET_NAME="quaca" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Catch.Unit tests" />
+      <item itemvalue="Catch.test_quaca_integrated" />
+      <item itemvalue="CMake Application.Cmake" />
+      <item itemvalue="CMake Application.Tutorial" />
+      <item itemvalue="CMake Application.quaca" />
+      <item itemvalue="Custom Build Application.Make project" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ddb7b759-02db-4107-ba31-9c5642378a44" name="Default Changelist" comment="" />
+      <created>1583243526095</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1583243526095</updated>
+      <workItem from="1583243530893" duration="9891000" />
+      <workItem from="1583324626308" duration="1328000" />
+      <workItem from="1583748579242" duration="7372000" />
+      <workItem from="1583763029461" duration="5847000" />
+      <workItem from="1583769798556" duration="280000" />
+      <workItem from="1583770139985" duration="1634000" />
+      <workItem from="1583834691463" duration="12153000" />
+      <workItem from="1583920183145" duration="14654000" />
+      <workItem from="1588252939042" duration="1896000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2422" y="95" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587917151203">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2422" y="95" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587917151203" />
+    <state x="506" y="146" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583749372118" />
+    <state x="1920" y="596" width="1920" height="604" key="CommitChangelistDialog2" timestamp="1583763089709">
+      <screen x="1920" y="0" width="1920" height="1200" />
+    </state>
+    <state x="1920" y="596" width="1920" height="604" key="CommitChangelistDialog2/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583763089709" />
+    <state x="532" y="159" key="CommitChangelistDialog2/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583762864519" />
+    <state x="830" y="246" key="FileChooserDialogImpl" timestamp="1583749362496">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state x="830" y="246" key="FileChooserDialogImpl/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583749362496" />
+    <state width="1870" height="290" key="GridCell.Tab.0.bottom" timestamp="1587917180584">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1870" height="290" key="GridCell.Tab.0.bottom/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587917180584" />
+    <state width="1920" height="1143" key="GridCell.Tab.0.bottom/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583768470973" />
+    <state width="1920" height="1125" key="GridCell.Tab.0.bottom/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583931559041" />
+    <state width="1870" height="290" key="GridCell.Tab.0.center" timestamp="1587917180584">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1870" height="290" key="GridCell.Tab.0.center/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587917180584" />
+    <state width="1920" height="1143" key="GridCell.Tab.0.center/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583768470973" />
+    <state width="1920" height="1125" key="GridCell.Tab.0.center/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583931559041" />
+    <state width="1870" height="290" key="GridCell.Tab.0.left" timestamp="1587917180584">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1870" height="290" key="GridCell.Tab.0.left/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587917180584" />
+    <state width="1920" height="1143" key="GridCell.Tab.0.left/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583768470973" />
+    <state width="1920" height="1125" key="GridCell.Tab.0.left/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583931559040" />
+    <state width="1870" height="290" key="GridCell.Tab.0.right" timestamp="1587917180584">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1870" height="290" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587917180584" />
+    <state width="1920" height="1143" key="GridCell.Tab.0.right/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583768470973" />
+    <state width="1920" height="1125" key="GridCell.Tab.0.right/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583931559041" />
+    <state width="1870" height="428" key="GridCell.Tab.1.bottom" timestamp="1587891672133">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1870" height="428" key="GridCell.Tab.1.bottom/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587891672133" />
+    <state width="1870" height="428" key="GridCell.Tab.1.center" timestamp="1587891672133">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1870" height="428" key="GridCell.Tab.1.center/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587891672133" />
+    <state width="1870" height="428" key="GridCell.Tab.1.left" timestamp="1587891672133">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1870" height="428" key="GridCell.Tab.1.left/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587891672133" />
+    <state width="1870" height="428" key="GridCell.Tab.1.right" timestamp="1587891672133">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1870" height="428" key="GridCell.Tab.1.right/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587891672133" />
+    <state x="0" y="23" width="1280" height="777" key="MergeDialog" timestamp="1588254826866">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state x="0" y="23" width="1280" height="777" key="MergeDialog/0.23.1280.777@0.23.1280.777" timestamp="1588254826866" />
+    <state x="1810" y="-106" key="MultipleFileMergeDialog" timestamp="1589381356948">
+      <screen x="1280" y="-257" width="1920" height="1057" />
+    </state>
+    <state x="353" y="134" key="MultipleFileMergeDialog/0.23.1280.777@0.23.1280.777" timestamp="1588254826908" />
+    <state x="1810" y="-106" key="MultipleFileMergeDialog/1280.-257.1920.1057/0.23.1280.777@1280.-257.1920.1057" timestamp="1589381356948" />
+    <state x="2628" y="202" width="494" height="645" key="RollbackChangesDialog" timestamp="1587890927419">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2628" y="202" width="494" height="645" key="RollbackChangesDialog/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587890927419" />
+    <state x="536" y="117" width="1022" height="733" key="SettingsEditor" timestamp="1583771274484">
+      <screen x="0" y="0" width="1920" height="1146" />
+    </state>
+    <state x="536" y="117" width="1022" height="733" key="SettingsEditor/0.0.1920.1146/1920.0.1920.1200@0.0.1920.1146" timestamp="1583771274484" />
+    <state x="536" y="123" key="SettingsEditor/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583758972006" />
+    <state x="934" y="216" key="com.intellij.tools.ToolSelectDialog.dimensionServiceKey" timestamp="1583749266563">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state x="934" y="216" key="com.intellij.tools.ToolSelectDialog.dimensionServiceKey/0.0.1920.1200/1920.12.1920.1200@0.0.1920.1200" timestamp="1583749266563" />
+    <state x="390" y="210" key="git4idea.merge.GitMergeDialog" timestamp="1588252972856">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state x="390" y="210" key="git4idea.merge.GitMergeDialog/0.23.1280.777@0.23.1280.777" timestamp="1588252972856" />
+  </component>
+</project>

@@ -1,6 +1,5 @@
 #include "Quaca.h"
 #include "catch.hpp"
-#include <iomanip>
 #include <iostream>
 
 TEST_CASE("Analytical results with vacuum Green's tensor gets reproduced",
@@ -11,26 +10,21 @@ TEST_CASE("Analytical results with vacuum Green's tensor gets reproduced",
 
   double beta = 1e-1;
   double v = 1e-5;
-  double analytical_result = -2. / 12. * v * alpha_zero * pow(omega_a, 6) *
-                             beta / pow(sinh(omega_a * beta / 2.), 2);
-  // double analytical_result = (3./2.)*alpha_zero*pow(omega_a,2)/beta;
+   double analytical_result = (-v*M_PI*alpha_zero*2./(3.*beta)) * pow(omega_a,4);
 
   double relerr_omega = 1e-6;
-  double epsabs = 0;
 
   double relerr_k = 1E-9;
-  GreensTensorVacuum greens(v, beta, relerr_k);
-  PolarizabilityNoBath alpha(omega_a, alpha_zero, &greens);
-  PowerSpectrumHarmOsc powerspectrum(&greens, &alpha);
-  Friction quant_fric(&greens, &alpha, &powerspectrum, relerr_omega);
+  auto greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr_k);
+  auto alpha = std::make_shared<Polarizability>(omega_a, alpha_zero, greens);
+  auto powerspectrum = std::make_shared<PowerSpectrum>(greens, alpha);
+  Friction quant_fric(greens, alpha, powerspectrum, relerr_omega);
 
-  Options_Friction opts;
-  opts.class_pt = &quant_fric;
-  opts.spectrum = NON_LTE_ONLY;
-  // opts.full_spectrum = true;
-  double num_result = quant_fric.calculate(opts);
+  double num_result = quant_fric.calculate(NON_LTE_ONLY);
+  std::cout << "Num=" << num_result << std::endl;
+  std::cout << "Ana=" << analytical_result << std::endl;
   REQUIRE(Approx(num_result).epsilon(1e-4) == analytical_result);
-};
+}
 
 TEST_CASE("Analytical results with scattered Green's tensor gets reproduced",
           "[Friction]") {
@@ -52,22 +46,18 @@ TEST_CASE("Analytical results with scattered Green's tensor gets reproduced",
 
   vec::fixed<2> rel_err = {1E-6, 1E-4};
   double relerr_omega = 1e-2;
-  double epsabs = 0;
 
-  PermittivityDrude perm(omega_p, gamma);
-  ReflectionCoefficientsLocBulk refl(&perm);
-  GreensTensorPlate greens(v, za, beta, &refl, delta_cut, rel_err);
-  PolarizabilityNoBath alpha(omega_a, alpha_zero, &greens);
-  PowerSpectrumHarmOsc powerspectrum(&greens, &alpha);
-  Friction quant_fric(&greens, &alpha, &powerspectrum, relerr_omega);
+  auto perm = std::make_shared<PermittivityDrude>(omega_p, gamma);
+  auto refl = std::make_shared<ReflectionCoefficientsLocBulk>(perm);
+  auto greens = std::make_shared<GreensTensorPlate>(v, beta, za, refl,
+                                                    delta_cut, rel_err);
+  auto alpha = std::make_shared<Polarizability>(omega_a, alpha_zero, greens);
+  auto powerspectrum = std::make_shared<PowerSpectrum>(greens, alpha);
+  Friction quant_fric(greens, alpha, powerspectrum, relerr_omega);
 
-  Options_Friction opts;
-  opts.class_pt = &quant_fric;
-  opts.spectrum = NON_LTE_ONLY;
-  // opts.full_spectrum = true;
-  double num_result = quant_fric.calculate(opts);
+  double num_result = quant_fric.calculate(NON_LTE_ONLY);
   std::cout << "ana=" << analytical_result << std::endl;
   std::cout << "num=" << num_result << std::endl;
   std::cout << "num/ana=" << num_result / analytical_result << std::endl;
   REQUIRE(Approx(num_result).epsilon(1e-2) == analytical_result);
-};
+}

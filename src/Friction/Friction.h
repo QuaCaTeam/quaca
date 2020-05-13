@@ -11,35 +11,29 @@
  * tensor and polarizibility with a certain set of parameters
  */
 
-// declaration of struct containing all options for the calculation of the
-// quantum friction force, definition can be found below
-struct Options_Friction;
-
 class Friction {
 protected:
+  std::shared_ptr<GreensTensor> greens_tensor;
+  std::shared_ptr<Polarizability> polarizability;
+  std::shared_ptr<PowerSpectrum> powerspectrum;
+
   double relerr_omega;
 
-  GreensTensor *greens_tensor;
-  Polarizability *polarizability;
-  PowerSpectrum *powerspectrum;
-
 public:
-  Friction(std::string input_file);
-  Friction(GreensTensor *greens_tensor, Polarizability *polarizability,
-           PowerSpectrum *powerspectrum, double relerr_omega);
-  double calculate(Options_Friction opts);
-  static double friction_integrand(double omega, void *opts);
+  Friction(const std::string &input_file);
+  Friction(std::shared_ptr<GreensTensor> greens_tensor,
+           std::shared_ptr<Polarizability> polarizability,
+           std::shared_ptr<PowerSpectrum> powerspectrum, double relerr_omega);
+
+  double calculate(Spectrum_Options spectrum) const;
+  double friction_integrand(double omega, Spectrum_Options spectrum) const;
 
   // getter functions
-  GreensTensor *get_greens_tensor() { return greens_tensor; };
-  Polarizability *get_polarizability() { return polarizability; };
-  PowerSpectrum *get_powerspectrum() { return powerspectrum; };
-};
-
-// Integration options for the quantum friction calculation
-struct Options_Friction {
-  Friction *class_pt;
-  Spectrum_Options spectrum = FULL;
+  std::shared_ptr<GreensTensor> &get_greens_tensor() { return greens_tensor; };
+  std::shared_ptr<Polarizability> &get_polarizability() {
+    return polarizability;
+  };
+  std::shared_ptr<PowerSpectrum> &get_powerspectrum() { return powerspectrum; };
 };
 
 #endif // QUANTUMFRICTION_H

@@ -53,3 +53,292 @@ Protocols
 - marty keeps working on the reflection coefficients
 - quantum friction with plate setup works and will soon be pushed into the master
 - optimization and code profiling should be made a standing issue
+
+### Meeting 4: Christoph, Simon and Marty (09.04.2020)
+ - Stand der Dinge + Kapazität
+    * Simon uebergibt lead development an bettina
+    * kapazitaet ist da
+
+ - Was wollen wir noch umsetzen?
+    * Umstrukturierung der Test Cases (kein random testing, lieber konkrete parameter)
+    * Mehr Groessen bestimmen (Power spectrum, Drehmoment, ...)
+    * Dokumentation polieren
+
+
+  - Wo veroeffentlichen wir?
+    * Marty fragt Kurt bzgl JOSS
+
+
+  - Was ist fuer eine Veroeffentlichung zu tun?
+   * Code auf guten Stand bringen
+   * Porten auf GitHub
+
+
+  - Anderes Paper
+   * Konkrete Aufgaben kommunizieren
+   * Marty und Daniel kümmern sich um Inhalte
+   * Christoph und Simon helfen beim debugging von QuaCa
+
+
+  - Vorgehensweise
+    * Wöchentliche "Treffen" (Donnerstag 10 Uhr)
+    * _Marty_: Dokumentation, Kommunikation mit Kurt
+    * _Simon_: Refactoring von Test cases
+    * _Christoph_: CMake und Memory Check, Profiling, Coverage
+
+ - Timeline
+   * Ende April: Code auf GitLab fertig
+   * Ende Mai: fertig
+   * 
+   
+
+
+
+Quaca Meeting 16.04.2020
+
+1) Current state 
+Christoph
+
+    - from old to new school C++ (introduced shared_ptr in order to stop memory leaks)
+
+    - openmp -> mpi
+
+
+Marty (Documentation)
+
+    - we now have a cover page
+
+    - sections are clickable (link to first subsection)
+
+    - sections and subsections were renamed
+
+    - overall clean up
+
+    - for permittivity and polarizability: classes with bath and nobath shall be unified by overloading the constructor
+
+    - implementation of a unit conversion script
+
+    - list of test cases were added to the documentation
+
+
+Simon (Test cases)
+
+    - for each relevant variable one test in each relevant magnitude
+
+
+2) Paper & Choice of Journal
+
+    - Marty prepares a mail for Kurt
+
+
+3) Integration
+
+    - Christoph is looking into another solution for the numerical integration (using templates)
+
+
+4) App vs. Library
+
+    - Options class will be moved to the executable
+
+
+5) weitere executables?
+
+    - would be nice
+
+    - Marty: investigate potential executables (Casimir Polder, Angular Momentum, Free Energy ?)
+
+
+-) TODO: 
+Marty: - more Documentation
+       - find executables
+       - mail to Kurt
+       - log lin ?
+Christoph: - print_info() function
+
+     - MPI
+
+           - (delete options class and implement logger)
+Simon: Test cases: rewrite GENERATE and pointer to smart pointer
+        Example input files, Tutorials, print_info() function with comments in .csv file, Logger
+        
+        
+# Quaca Meeting 24.04.2020
+
+## Update
+
+ - Simon Testcases: Test if tensors are different from zero
+
+ - is_zero() function of the armadillo library is not working
+
+    * We need to update armadillo library (to >= 9.850)
+
+
+ - Christoph explains pointer problems in integrations:
+
+    * Shared pointer cause massive overhead (with the current integration solution)
+
+    * Integration could be adapted, but seems to be challenging
+
+
+   - Simon is in favour of reimplementing, since it would improve the code's extensibility
+
+ - Casimir-Polder and other features:
+
+    * either we should spend some time on Casimir-Polder or leave it out
+
+    * also Bettina plans to work on Casimir-Polder either way as a starting point of here PhD Thesis
+
+    * alternatively we can implement the decay rate, well established quantity in the community and easy to implement
+
+    (everything is already there)
+
+    * rather implement angular momentum (good for presenting numerical efficiency of the integrations)
+
+
+## Perspectives
+
+    - Currently Bettina will not join the project
+
+    - Paula want to do her thesis with QuaCa (September - December)
+
+    - Daniel wants to learn the code
+
+    - Is Francesco ready to hand over the code to another student?
+
+    - Huddle with Francesco?
+
+
+## Open Source Paper 
+
+    - Kurt agrees to publish in JOSS
+
+    - the developers are happy
+
+
+## Tasks
+
+    - __Current__:
+
+     - Marty:
+
+      - finish the docs
+
+      - implement decay rate
+
+
+     - Simon: 
+
+      - finish tests
+
+
+     - Christoph:
+
+      - move options struct
+
+      - openmp to mpi
+
+
+    - __Coming up next__:
+
+
+     - Marty:
+
+      - Test private gitHub with Travis CI
+
+      - Mail to Francesco
+
+
+     - Simon: 
+
+      - finish tests
+
+
+     - Christoph:
+
+      - shared pointer with new integration
+
+
+## Meeting 30.04.2020: Christoph, Simon and Marty
+
+- Update:
+    * Simon: Test are refactored, Armadillo was updated
+    * Christoph: New path via modern pointer
+    * Marty: Looper void
+
+- Organization:
+    * Communication is key
+
+- Experimental:
+    * Lambda expression as integrand wrapper
+    * ready to join
+
+- Redesign:
+    * Polarizability
+    * PowerSpectrum
+    * Additional Memory Kernel
+
+- Code Critique:
+    * Use initialization lists; always declare and initialize
+    * define variables close to use
+    * first input then output argument
+    * const correctness
+
+- Timeline:
+    * Finish Code to next week
+    * move to github next Thursday
+
+- Tasks:
+    * Simon:
+        - merge experimental into master
+        - documentation (Communication is key)
+
+    * Christoph:
+        - mpi
+        - tutorial
+
+    * Marty:
+        - defactor Polarizability & PowerSpectrum
+        - new MemoryKernel
+        - Check magnitudes in test
+
+
+## Meeting 07.05.2020: Christoph, Simon and Marty
+
+- Update:
+    * Simon: merged (maybe check code again for ghost lines)
+    * Marty: Rewrote Polarizability and PowerSpectrum, SinglePhononMemory
+
+- Timeline:
+    * Finnish docs to next meeting
+
+- Paper:
+    * describe as usefull library
+    * show equation and calculate (similar to Hartmann's paper)
+    * mention license
+
+- Meetings:
+    * Preferred are more short than few long meeting (keep current style)
+
+- Licenses:
+    * Use MIT or GNU GPL license?
+
+Tasks:
+    - write paper (Marty)
+    - improve documentation
+
+        * Christoph:
+
+    - tutorials, calculations (explain new integration scheme)
+
+     * Simon:
+
+    - green's tensor, reflection coefficients
+
+     * Marty:
+
+    - polarizability, power spectrum, friction (1/M_PI?), memory kernel, permittivity
+
+
+Dreams:
+    - Doxygen style documentation
+    - mpi parallelisation in friction app

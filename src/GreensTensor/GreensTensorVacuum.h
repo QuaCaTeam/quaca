@@ -7,7 +7,7 @@
 
 class GreensTensorVacuum : public GreensTensor {
 private:
-  double relerr;
+  double relerr; //integration error along the k_v direction
 
 public:
   // constructors
@@ -15,15 +15,21 @@ public:
   GreensTensorVacuum(std::string input_file);
 
   // calculate the tensor in frequency and momentum space
-  void calculate_tensor(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
+  void calculate_tensor(double omega, vec::fixed<2> k,
+                        cx_mat::fixed<3, 3> &GT) const;
 
   // integrate over a two-dimensional k space
-  void integrate_k(cx_mat::fixed<3, 3> &GT, Options_GreensTensor opts);
+  void integrate_k(double omega, cx_mat::fixed<3, 3> &GT,
+                   Tensor_Options fancy_complex,
+                   Weight_Options weight_function) const;
 
   // integrand for integration over one-dimensional k space
-  static double integrand_k(double k, void *opts);
-  double omega_ch();
-  double get_relerr() { return this->relerr; };
+  double integrand_k(double kv, double omega, const vec::fixed<2> &indices,
+                                         Tensor_Options fancy_complex,
+                                         Weight_Options weight_function) const;
+
+  double omega_ch() const;
+  double get_relerr() const { return this->relerr; };
 };
 
 #endif // GREENSTENSORVACUUM_H

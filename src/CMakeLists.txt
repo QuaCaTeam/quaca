@@ -1,5 +1,29 @@
 # add QuaCa library
-file(GLOB_RECURSE quaca_sources ${CMAKE_CURRENT_SOURCE_DIR} "*.cpp")
+set(quaca_sources
+        Calculations/Integrations.cpp
+        Friction/Friction.cpp
+        GreensTensor/GreensTensor.cpp
+        GreensTensor/GreensTensorFactory.cpp
+        GreensTensor/GreensTensorPlate.cpp
+        GreensTensor/GreensTensorPlateVacuum.cpp
+        GreensTensor/GreensTensorVacuum.cpp
+        Looper/Looper.cpp
+        Looper/LooperFactory.cpp
+        Looper/LooperV.cpp
+        Looper/LooperZa.cpp
+        MemoryKernel/MemoryKernelFactory.cpp
+        MemoryKernel/OhmicMemoryKernel.cpp
+	MemoryKernel/SinglePhononMemoryKernel.cpp
+        Options/Options.cpp
+        Permittivity/PermittivityDrude.cpp
+        Permittivity/PermittivityFactory.cpp
+        Permittivity/PermittivityLorentz.cpp
+        Polarizability/Polarizability.cpp
+        PowerSpectrum/PowerSpectrum.cpp
+        ReflectionCoefficients/ReflectionCoefficientsFactory.cpp
+        ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp
+        ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp
+        )
 add_library(quaca SHARED ${quaca_sources})
 
 # link libraries

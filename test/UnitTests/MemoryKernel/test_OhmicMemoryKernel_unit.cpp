@@ -7,16 +7,16 @@ TEST_CASE("Ohmic memory kernel constructors work as expected",
   SECTION("Direct constructor") {
     OhmicMemoryKernel memorykernel(7.8);
     REQUIRE(memorykernel.get_gamma() == 7.8);
-  };
+  }
 
   SECTION("json file constructor") {
-    OhmicMemoryKernel memorykernel("../data/test_files/MemoryKernel.json");
+    OhmicMemoryKernel memorykernel("../data/test_files/OhmicMemoryKernel.json");
     REQUIRE(memorykernel.get_gamma() == 0.69420);
-  };
-};
+  }
+}
 
 TEST_CASE("Ohmic memory kernel obeys crossing relation",
           "[OhmicMemoryKernel]") {
   OhmicMemoryKernel mk(30.0);
-  REQUIRE(mk.mu(1.0) == std::conj(mk.mu(-1.0)));
-};
+  REQUIRE(mk.calculate(1.0) == std::conj(mk.calculate(-1.0)));
+}

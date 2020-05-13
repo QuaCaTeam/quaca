@@ -10,10 +10,8 @@ namespace pt = boost::property_tree;
 #include "GreensTensorVacuum.h"
 
 // Green's tensor factory
-GreensTensor *GreensTensorFactory::create(std::string input_file) {
-  // set return pointer to NULL
-  GreensTensor *greenstensor = NULL;
-
+std::shared_ptr<GreensTensor>
+GreensTensorFactory::create(const std::string &input_file) {
   // Create a root
   pt::ptree root;
 
@@ -25,15 +23,12 @@ GreensTensor *GreensTensorFactory::create(std::string input_file) {
 
   // set the right pointer, show error if type is unknown
   if (type == "vacuum") {
-    greenstensor = new GreensTensorVacuum(input_file);
+    return std::make_shared<GreensTensorVacuum>(input_file);
   } else if (type == "plate") {
-    greenstensor = new GreensTensorPlate(input_file);
+    return std::make_shared<GreensTensorPlate>(input_file);
   } else {
     std::cerr << "Error: Unknown Green's tensor type (" << type << ")!"
               << std::endl;
     exit(0);
-  };
-
-  // return memory kernel pointer
-  return greenstensor;
-};
+  }
+}

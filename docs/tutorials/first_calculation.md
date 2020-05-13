@@ -1,4 +1,4 @@
-# First QuaCa calculation
+# First QuaCa calculation {docsify-ignore-all}
 
 We assume that you have QuaCa installed and are ready to go.
 In this tutorial we will show you how to setup your system and how QuaCa generally works.

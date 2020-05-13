@@ -6,7 +6,6 @@
 #include "../src/GreensTensor/GreensTensor.h"
 #include "../src/GreensTensor/GreensTensorFactory.h"
 #include "../src/GreensTensor/GreensTensorPlate.h"
-#include "../src/GreensTensor/GreensTensorPlateMagnetic.h"
 #include "../src/GreensTensor/GreensTensorPlateVacuum.h"
 #include "../src/GreensTensor/GreensTensorVacuum.h"
 
@@ -17,6 +16,7 @@
 
 #include "../src/MemoryKernel/MemoryKernel.h"
 #include "../src/MemoryKernel/OhmicMemoryKernel.h"
+#include "../src/MemoryKernel/SinglePhononMemoryKernel.h"
 
 #include "../src/Options/Options.h"
 
@@ -26,15 +26,8 @@
 #include "../src/Permittivity/PermittivityLorentz.h"
 
 #include "../src/Polarizability/Polarizability.h"
-#include "../src/Polarizability/PolarizabilityFactory.h"
-#include "../src/Polarizability/PolarizabilityBath.h"
-#include "../src/Polarizability/PolarizabilityNoBath.h"
-#include "../src/Polarizability/PolarizabilityNoBathMagnetic.h"
 
 #include "../src/PowerSpectrum/PowerSpectrum.h"
-#include "../src/PowerSpectrum/PowerSpectrumHarmOsc.h"
-#include "../src/PowerSpectrum/PowerSpectrumHarmOscMagnetic.h"
-#include "../src/PowerSpectrum/PowerSpectrumFactory.h"
 
 #include "../src/Friction/Friction.h"
 

@@ -1,5 +1,10 @@
 # add sources to test
-file(GLOB_RECURSE test_sources ${CMAKE_CURRENT_SOURCE_DIR} "*.cpp")
+set(test_sources
+        test_main.cpp
+        Friction/test_Friction_integrated.cpp
+        Polarizability/test_PolarizabilityNoBath_integrated.cpp
+        Polarizability/test_PolarizabilityBath_integrated.cpp
+        )
 
 # Executable
 add_executable(test_quaca_integrated

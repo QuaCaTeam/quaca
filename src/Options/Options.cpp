@@ -1,5 +1,4 @@
 #include <iostream>
-#include <sstream>
 #include <sys/stat.h>
 
 // program options
@@ -21,7 +20,7 @@ Options::Options(std::string parameter_file, int num_threads)
 
   /* check the given options */
   this->check();
-};
+}
 
 Options::Options(int argc, char *argv[]) {
   /* Read command line options */
@@ -41,7 +40,7 @@ Options::Options(int argc, char *argv[]) {
     if (vm.count("help")) {
       std::cout << desc << std::endl;
       exit(0);
-    };
+    }
 
   } catch (std::exception &e) {
     std::cerr << "error: " << e.what() << std::endl;
@@ -54,7 +53,7 @@ Options::Options(int argc, char *argv[]) {
 
   /* check the given options */
   this->check();
-};
+}
 
 // check the command line options
 void Options::check() {
@@ -73,9 +72,9 @@ void Options::check() {
 
     if (input == 'n') {
       exit(0);
-    };
-  };
-};
+    }
+  }
+}
 
 // Get File extension from File path or File Name
 std::string getFileExtension(std::string filePath) {
@@ -88,10 +87,10 @@ std::string getFileExtension(std::string filePath) {
   }
   // In case of no extension return empty string
   return "";
-};
+}
 
 // check if given file exists
 bool exists(const std::string &path) {
   struct stat buffer;
   return (stat(path.c_str(), &buffer) == 0);
-};
+}

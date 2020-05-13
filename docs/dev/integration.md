@@ -1,4 +1,4 @@
-# On numerical integration in C++
+# On numerical integration in C++ {docsify-ignore-all}
 
 ## The issue
 The GSL routine needs to get passed a pointer on a function of the form
