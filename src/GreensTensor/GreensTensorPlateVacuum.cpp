@@ -6,6 +6,7 @@ namespace pt = boost::property_tree;
 
 #include "../ReflectionCoefficients/ReflectionCoefficientsFactory.h"
 #include "GreensTensorPlate.h"
+#include "GreensTensorVacuum.h"
 #include "GreensTensorPlateVacuum.h"
 
 GreensTensorPlateVacuum::GreensTensorPlateVacuum(
@@ -34,11 +35,13 @@ GreensTensorPlateVacuum::GreensTensorPlateVacuum(const std::string &input_file)
 }
 
 void GreensTensorPlateVacuum::integrate_k(
-    double omega, cx_mat::fixed<3, 3> &GT, Tensor_Options fancy_complex,
-    Weight_Options weight_function) const {
+    double omega, cx_mat::fixed<3, 3> &GT, 
+    Tensor_Options fancy_complex, Weight_Options weight_function) const {
 
+  //compute the contributions from the planar surface
   GreensTensorPlate::integrate_k(omega, GT, fancy_complex, weight_function);
 
+  //compute the contributions from the vacuum
   cx_mat::fixed<3, 3> vac;
   vacuum_greens_tensor->integrate_k(omega, vac, fancy_complex, weight_function);
 
@@ -48,8 +51,10 @@ void GreensTensorPlateVacuum::integrate_k(
 void GreensTensorPlateVacuum::calculate_tensor(double omega, vec::fixed<2> k,
                                                cx_mat::fixed<3, 3> &GT) const {
 
+  //compute the contributions from the planar surface
   GreensTensorPlate::calculate_tensor(omega, k, GT);
 
+  //compute the contributions from the vacuum
   cx_mat::fixed<3, 3> vac;
   vacuum_greens_tensor->calculate_tensor(omega, k, vac);
 

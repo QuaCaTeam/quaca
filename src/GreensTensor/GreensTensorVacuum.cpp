@@ -9,7 +9,9 @@ namespace pt = boost::property_tree;
 #include "GreensTensorVacuum.h"
 
 GreensTensorVacuum::GreensTensorVacuum(double v, double beta, double relerr)
-    : GreensTensor(v, beta), relerr(relerr) {}
+    : GreensTensor(v, beta), relerr(relerr) {
+    assert(relerr >= 0);
+    }
 
 GreensTensorVacuum::GreensTensorVacuum(std::string input_file)
     : GreensTensor(input_file) {
@@ -22,6 +24,8 @@ GreensTensorVacuum::GreensTensorVacuum(std::string input_file)
 
   // Load relative accuracy
   this->relerr = root.get<double>("GreensTensor.rel_err_1");
+
+  assert(relerr >= 0);
 
   // check if type is right
   std::string type = root.get<std::string>("GreensTensor.type");

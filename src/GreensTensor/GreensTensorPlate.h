@@ -13,6 +13,7 @@
 //! The class of the Green's tensor above a flat macroscopic surface
 class GreensTensorPlate : public GreensTensor {
 protected:
+  //distance between microscopic object and macroscopic surface
   double za;
 
   // kappa_cut defines the numerical cut-off of the kappa integration
@@ -44,7 +45,7 @@ public:
                         Tensor_Options fancy_complex,
                         Weight_Options weight_function) const;
 
-  double integrand_2d_k(double kappa_double, double omega, double kx,
+  double integrand_2d_k(double kappa_double, double omega, double phi,
                         const vec::fixed<2> &indices,
                         Tensor_Options fancy_complex,
                         Weight_Options weight_function) const;
