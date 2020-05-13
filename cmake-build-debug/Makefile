@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /users/stud/hermasim/Documents/Programs/clion-2019.3.4/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /users/stud/hermasim/Documents/Programs/clion-2019.3.4/bin/cmake/linux/bin/cmake -E remove -f
+RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /users/stud/hermasim/Documents/cpp/quaca
+CMAKE_SOURCE_DIR = /Users/simon/Documents/Studium/Coding/quaca
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/users/stud/hermasim/Documents/Programs/clion-2019.3.4/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/users/stud/hermasim/Documents/Programs/clion-2019.3.4/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/CMakeFiles /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug/CMakeFiles /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -137,19 +137,6 @@ Friction/fast:
 .PHONY : Friction/fast
 
 #=============================================================================
-# Target rules for targets named Tutorial
-
-# Build rule for target.
-Tutorial: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Tutorial
-.PHONY : Tutorial
-
-# fast build rule for target.
-Tutorial/fast:
-	$(MAKE) -f app/.Tutorial/CMakeFiles/Tutorial.dir/build.make app/.Tutorial/CMakeFiles/Tutorial.dir/build
-.PHONY : Tutorial/fast
-
-#=============================================================================
 # Target rules for targets named test_quaca_unit
 
 # Build rule for target.
@@ -175,6 +162,19 @@ test_quaca_integrated/fast:
 	$(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build
 .PHONY : test_quaca_integrated/fast
 
+#=============================================================================
+# Target rules for targets named quick_test
+
+# Build rule for target.
+quick_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 quick_test
+.PHONY : quick_test
+
+# fast build rule for target.
+quick_test/fast:
+	$(MAKE) -f test/Quick_Test/CMakeFiles/quick_test.dir/build.make test/Quick_Test/CMakeFiles/quick_test.dir/build
+.PHONY : quick_test/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -185,9 +185,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... quaca"
 	@echo "... Friction"
-	@echo "... Tutorial"
 	@echo "... test_quaca_unit"
 	@echo "... test_quaca_integrated"
+	@echo "... quick_test"
 .PHONY : help
 
 

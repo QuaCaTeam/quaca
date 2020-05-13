@@ -6,7 +6,7 @@
 using namespace arma;
 
 // Enum variables for the different integration options
-enum Tensor_Options { COMPLEX, IM, RE };
+enum Tensor_Options { IGNORE, IM, RE };
 enum Weight_Options { UNIT, KV, TEMP, KV_TEMP, NON_LTE, KV_NON_LTE };
 
 //! A Greens tensor class

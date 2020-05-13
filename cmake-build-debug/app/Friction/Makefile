@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /users/stud/hermasim/Documents/Programs/clion-2019.3.4/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /users/stud/hermasim/Documents/Programs/clion-2019.3.4/bin/cmake/linux/bin/cmake -E remove -f
+RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /users/stud/hermasim/Documents/cpp/quaca
+CMAKE_SOURCE_DIR = /Users/simon/Documents/Studium/Coding/quaca
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/users/stud/hermasim/Documents/Programs/clion-2019.3.4/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/users/stud/hermasim/Documents/Programs/clion-2019.3.4/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,14 +80,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_progress_start /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/CMakeFiles /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/app/Friction/CMakeFiles/progress.marks
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 app/Friction/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/CMakeFiles 0
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_progress_start /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug/CMakeFiles /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug/app/Friction/CMakeFiles/progress.marks
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 app/Friction/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 app/Friction/clean
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 app/Friction/clean
 .PHONY : clean
 
 # The main clean target
@@ -97,22 +97,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 app/Friction/preinstall
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 app/Friction/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 app/Friction/preinstall
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 app/Friction/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 app/Friction/CMakeFiles/Friction.dir/rule:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 app/Friction/CMakeFiles/Friction.dir/rule
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 app/Friction/CMakeFiles/Friction.dir/rule
 .PHONY : app/Friction/CMakeFiles/Friction.dir/rule
 
 # Convenience name for target.
@@ -122,7 +122,7 @@ Friction: app/Friction/CMakeFiles/Friction.dir/rule
 
 # fast build rule for target.
 Friction/fast:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f app/Friction/CMakeFiles/Friction.dir/build.make app/Friction/CMakeFiles/Friction.dir/build
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f app/Friction/CMakeFiles/Friction.dir/build.make app/Friction/CMakeFiles/Friction.dir/build
 .PHONY : Friction/fast
 
 friction.o: friction.cpp.o
@@ -131,7 +131,7 @@ friction.o: friction.cpp.o
 
 # target to build an object file
 friction.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f app/Friction/CMakeFiles/Friction.dir/build.make app/Friction/CMakeFiles/Friction.dir/friction.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f app/Friction/CMakeFiles/Friction.dir/build.make app/Friction/CMakeFiles/Friction.dir/friction.cpp.o
 .PHONY : friction.cpp.o
 
 friction.i: friction.cpp.i
@@ -140,7 +140,7 @@ friction.i: friction.cpp.i
 
 # target to preprocess a source file
 friction.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f app/Friction/CMakeFiles/Friction.dir/build.make app/Friction/CMakeFiles/Friction.dir/friction.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f app/Friction/CMakeFiles/Friction.dir/build.make app/Friction/CMakeFiles/Friction.dir/friction.cpp.i
 .PHONY : friction.cpp.i
 
 friction.s: friction.cpp.s
@@ -149,7 +149,7 @@ friction.s: friction.cpp.s
 
 # target to generate assembly for a file
 friction.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f app/Friction/CMakeFiles/Friction.dir/build.make app/Friction/CMakeFiles/Friction.dir/friction.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f app/Friction/CMakeFiles/Friction.dir/build.make app/Friction/CMakeFiles/Friction.dir/friction.cpp.s
 .PHONY : friction.cpp.s
 
 # Help Target
@@ -159,8 +159,8 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... Friction"
 	@echo "... edit_cache"
+	@echo "... Friction"
 	@echo "... friction.o"
 	@echo "... friction.i"
 	@echo "... friction.s"
@@ -175,6 +175,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

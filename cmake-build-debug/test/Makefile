@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /users/stud/hermasim/Documents/Programs/clion-2019.3.4/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /users/stud/hermasim/Documents/Programs/clion-2019.3.4/bin/cmake/linux/bin/cmake -E remove -f
+RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /users/stud/hermasim/Documents/cpp/quaca
+CMAKE_SOURCE_DIR = /Users/simon/Documents/Studium/Coding/quaca
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/users/stud/hermasim/Documents/Programs/clion-2019.3.4/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/users/stud/hermasim/Documents/Programs/clion-2019.3.4/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,14 +80,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_progress_start /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/CMakeFiles /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/test/CMakeFiles/progress.marks
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 test/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/CMakeFiles 0
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_progress_start /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug/CMakeFiles /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug/test/CMakeFiles/progress.marks
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 test/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 test/clean
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 test/clean
 .PHONY : clean
 
 # The main clean target
@@ -97,17 +97,17 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 test/preinstall
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 test/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 test/preinstall
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 test/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Help Target
@@ -129,6 +129,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /users/stud/hermasim/Documents/Programs/clion-2019.3.4/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /users/stud/hermasim/Documents/Programs/clion-2019.3.4/bin/cmake/linux/bin/cmake -E remove -f
+RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /users/stud/hermasim/Documents/cpp/quaca
+CMAKE_SOURCE_DIR = /Users/simon/Documents/Studium/Coding/quaca
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/users/stud/hermasim/Documents/Programs/clion-2019.3.4/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/users/stud/hermasim/Documents/Programs/clion-2019.3.4/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,14 +80,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_progress_start /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/CMakeFiles /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/test/IntegratedTests/CMakeFiles/progress.marks
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 test/IntegratedTests/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/CMakeFiles 0
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_progress_start /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug/CMakeFiles /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug/test/IntegratedTests/CMakeFiles/progress.marks
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 test/IntegratedTests/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 test/IntegratedTests/clean
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 test/IntegratedTests/clean
 .PHONY : clean
 
 # The main clean target
@@ -97,22 +97,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 test/IntegratedTests/preinstall
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 test/IntegratedTests/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 test/IntegratedTests/preinstall
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 test/IntegratedTests/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/rule:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/rule
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/rule
 .PHONY : test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/rule
 
 # Convenience name for target.
@@ -122,7 +122,7 @@ test_quaca_integrated: test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir
 
 # fast build rule for target.
 test_quaca_integrated/fast:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build
 .PHONY : test_quaca_integrated/fast
 
 Friction/test_Friction_integrated.o: Friction/test_Friction_integrated.cpp.o
@@ -131,7 +131,7 @@ Friction/test_Friction_integrated.o: Friction/test_Friction_integrated.cpp.o
 
 # target to build an object file
 Friction/test_Friction_integrated.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/Friction/test_Friction_integrated.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/Friction/test_Friction_integrated.cpp.o
 .PHONY : Friction/test_Friction_integrated.cpp.o
 
 Friction/test_Friction_integrated.i: Friction/test_Friction_integrated.cpp.i
@@ -140,7 +140,7 @@ Friction/test_Friction_integrated.i: Friction/test_Friction_integrated.cpp.i
 
 # target to preprocess a source file
 Friction/test_Friction_integrated.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/Friction/test_Friction_integrated.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/Friction/test_Friction_integrated.cpp.i
 .PHONY : Friction/test_Friction_integrated.cpp.i
 
 Friction/test_Friction_integrated.s: Friction/test_Friction_integrated.cpp.s
@@ -149,7 +149,7 @@ Friction/test_Friction_integrated.s: Friction/test_Friction_integrated.cpp.s
 
 # target to generate assembly for a file
 Friction/test_Friction_integrated.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/Friction/test_Friction_integrated.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/Friction/test_Friction_integrated.cpp.s
 .PHONY : Friction/test_Friction_integrated.cpp.s
 
 Polarizability/test_PolarizabilityBath_integrated.o: Polarizability/test_PolarizabilityBath_integrated.cpp.o
@@ -158,7 +158,7 @@ Polarizability/test_PolarizabilityBath_integrated.o: Polarizability/test_Polariz
 
 # target to build an object file
 Polarizability/test_PolarizabilityBath_integrated.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/Polarizability/test_PolarizabilityBath_integrated.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/Polarizability/test_PolarizabilityBath_integrated.cpp.o
 .PHONY : Polarizability/test_PolarizabilityBath_integrated.cpp.o
 
 Polarizability/test_PolarizabilityBath_integrated.i: Polarizability/test_PolarizabilityBath_integrated.cpp.i
@@ -167,7 +167,7 @@ Polarizability/test_PolarizabilityBath_integrated.i: Polarizability/test_Polariz
 
 # target to preprocess a source file
 Polarizability/test_PolarizabilityBath_integrated.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/Polarizability/test_PolarizabilityBath_integrated.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/Polarizability/test_PolarizabilityBath_integrated.cpp.i
 .PHONY : Polarizability/test_PolarizabilityBath_integrated.cpp.i
 
 Polarizability/test_PolarizabilityBath_integrated.s: Polarizability/test_PolarizabilityBath_integrated.cpp.s
@@ -176,7 +176,7 @@ Polarizability/test_PolarizabilityBath_integrated.s: Polarizability/test_Polariz
 
 # target to generate assembly for a file
 Polarizability/test_PolarizabilityBath_integrated.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/Polarizability/test_PolarizabilityBath_integrated.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/Polarizability/test_PolarizabilityBath_integrated.cpp.s
 .PHONY : Polarizability/test_PolarizabilityBath_integrated.cpp.s
 
 Polarizability/test_PolarizabilityNoBath_integrated.o: Polarizability/test_PolarizabilityNoBath_integrated.cpp.o
@@ -185,7 +185,7 @@ Polarizability/test_PolarizabilityNoBath_integrated.o: Polarizability/test_Polar
 
 # target to build an object file
 Polarizability/test_PolarizabilityNoBath_integrated.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/Polarizability/test_PolarizabilityNoBath_integrated.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/Polarizability/test_PolarizabilityNoBath_integrated.cpp.o
 .PHONY : Polarizability/test_PolarizabilityNoBath_integrated.cpp.o
 
 Polarizability/test_PolarizabilityNoBath_integrated.i: Polarizability/test_PolarizabilityNoBath_integrated.cpp.i
@@ -194,7 +194,7 @@ Polarizability/test_PolarizabilityNoBath_integrated.i: Polarizability/test_Polar
 
 # target to preprocess a source file
 Polarizability/test_PolarizabilityNoBath_integrated.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/Polarizability/test_PolarizabilityNoBath_integrated.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/Polarizability/test_PolarizabilityNoBath_integrated.cpp.i
 .PHONY : Polarizability/test_PolarizabilityNoBath_integrated.cpp.i
 
 Polarizability/test_PolarizabilityNoBath_integrated.s: Polarizability/test_PolarizabilityNoBath_integrated.cpp.s
@@ -203,7 +203,7 @@ Polarizability/test_PolarizabilityNoBath_integrated.s: Polarizability/test_Polar
 
 # target to generate assembly for a file
 Polarizability/test_PolarizabilityNoBath_integrated.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/Polarizability/test_PolarizabilityNoBath_integrated.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/Polarizability/test_PolarizabilityNoBath_integrated.cpp.s
 .PHONY : Polarizability/test_PolarizabilityNoBath_integrated.cpp.s
 
 test_main.o: test_main.cpp.o
@@ -212,7 +212,7 @@ test_main.o: test_main.cpp.o
 
 # target to build an object file
 test_main.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/test_main.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/test_main.cpp.o
 .PHONY : test_main.cpp.o
 
 test_main.i: test_main.cpp.i
@@ -221,7 +221,7 @@ test_main.i: test_main.cpp.i
 
 # target to preprocess a source file
 test_main.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/test_main.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/test_main.cpp.i
 .PHONY : test_main.cpp.i
 
 test_main.s: test_main.cpp.s
@@ -230,7 +230,7 @@ test_main.s: test_main.cpp.s
 
 # target to generate assembly for a file
 test_main.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/test_main.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/build.make test/IntegratedTests/CMakeFiles/test_quaca_integrated.dir/test_main.cpp.s
 .PHONY : test_main.cpp.s
 
 # Help Target
@@ -240,8 +240,8 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... test_quaca_integrated"
 	@echo "... edit_cache"
+	@echo "... test_quaca_integrated"
 	@echo "... Friction/test_Friction_integrated.o"
 	@echo "... Friction/test_Friction_integrated.i"
 	@echo "... Friction/test_Friction_integrated.s"
@@ -265,6 +265,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

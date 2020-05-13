@@ -5,6 +5,7 @@ set(quaca_sources
         GreensTensor/GreensTensor.cpp
         GreensTensor/GreensTensorFactory.cpp
         GreensTensor/GreensTensorPlate.cpp
+		GreensTensor/GreensTensorPlateMagnetic.cpp
         GreensTensor/GreensTensorPlateVacuum.cpp
         GreensTensor/GreensTensorVacuum.cpp
         Looper/Looper.cpp

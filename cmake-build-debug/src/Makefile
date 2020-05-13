@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /users/stud/hermasim/Documents/Programs/clion-2019.3.4/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /users/stud/hermasim/Documents/Programs/clion-2019.3.4/bin/cmake/linux/bin/cmake -E remove -f
+RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /users/stud/hermasim/Documents/cpp/quaca
+CMAKE_SOURCE_DIR = /Users/simon/Documents/Studium/Coding/quaca
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/users/stud/hermasim/Documents/Programs/clion-2019.3.4/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/users/stud/hermasim/Documents/Programs/clion-2019.3.4/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,14 +80,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_progress_start /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/CMakeFiles /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/src/CMakeFiles/progress.marks
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 src/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug/CMakeFiles 0
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_progress_start /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug/CMakeFiles /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug/src/CMakeFiles/progress.marks
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 src/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 src/clean
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 src/clean
 .PHONY : clean
 
 # The main clean target
@@ -97,22 +97,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 src/CMakeFiles/quaca.dir/rule:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/quaca.dir/rule
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/quaca.dir/rule
 .PHONY : src/CMakeFiles/quaca.dir/rule
 
 # Convenience name for target.
@@ -122,7 +122,7 @@ quaca: src/CMakeFiles/quaca.dir/rule
 
 # fast build rule for target.
 quaca/fast:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/build
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/build
 .PHONY : quaca/fast
 
 Calculations/Integrations.o: Calculations/Integrations.cpp.o
@@ -131,7 +131,7 @@ Calculations/Integrations.o: Calculations/Integrations.cpp.o
 
 # target to build an object file
 Calculations/Integrations.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Calculations/Integrations.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Calculations/Integrations.cpp.o
 .PHONY : Calculations/Integrations.cpp.o
 
 Calculations/Integrations.i: Calculations/Integrations.cpp.i
@@ -140,7 +140,7 @@ Calculations/Integrations.i: Calculations/Integrations.cpp.i
 
 # target to preprocess a source file
 Calculations/Integrations.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Calculations/Integrations.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Calculations/Integrations.cpp.i
 .PHONY : Calculations/Integrations.cpp.i
 
 Calculations/Integrations.s: Calculations/Integrations.cpp.s
@@ -149,7 +149,7 @@ Calculations/Integrations.s: Calculations/Integrations.cpp.s
 
 # target to generate assembly for a file
 Calculations/Integrations.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Calculations/Integrations.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Calculations/Integrations.cpp.s
 .PHONY : Calculations/Integrations.cpp.s
 
 Friction/Friction.o: Friction/Friction.cpp.o
@@ -158,7 +158,7 @@ Friction/Friction.o: Friction/Friction.cpp.o
 
 # target to build an object file
 Friction/Friction.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Friction/Friction.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Friction/Friction.cpp.o
 .PHONY : Friction/Friction.cpp.o
 
 Friction/Friction.i: Friction/Friction.cpp.i
@@ -167,7 +167,7 @@ Friction/Friction.i: Friction/Friction.cpp.i
 
 # target to preprocess a source file
 Friction/Friction.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Friction/Friction.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Friction/Friction.cpp.i
 .PHONY : Friction/Friction.cpp.i
 
 Friction/Friction.s: Friction/Friction.cpp.s
@@ -176,7 +176,7 @@ Friction/Friction.s: Friction/Friction.cpp.s
 
 # target to generate assembly for a file
 Friction/Friction.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Friction/Friction.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Friction/Friction.cpp.s
 .PHONY : Friction/Friction.cpp.s
 
 GreensTensor/GreensTensor.o: GreensTensor/GreensTensor.cpp.o
@@ -185,7 +185,7 @@ GreensTensor/GreensTensor.o: GreensTensor/GreensTensor.cpp.o
 
 # target to build an object file
 GreensTensor/GreensTensor.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensor.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensor.cpp.o
 .PHONY : GreensTensor/GreensTensor.cpp.o
 
 GreensTensor/GreensTensor.i: GreensTensor/GreensTensor.cpp.i
@@ -194,7 +194,7 @@ GreensTensor/GreensTensor.i: GreensTensor/GreensTensor.cpp.i
 
 # target to preprocess a source file
 GreensTensor/GreensTensor.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensor.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensor.cpp.i
 .PHONY : GreensTensor/GreensTensor.cpp.i
 
 GreensTensor/GreensTensor.s: GreensTensor/GreensTensor.cpp.s
@@ -203,7 +203,7 @@ GreensTensor/GreensTensor.s: GreensTensor/GreensTensor.cpp.s
 
 # target to generate assembly for a file
 GreensTensor/GreensTensor.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensor.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensor.cpp.s
 .PHONY : GreensTensor/GreensTensor.cpp.s
 
 GreensTensor/GreensTensorFactory.o: GreensTensor/GreensTensorFactory.cpp.o
@@ -212,7 +212,7 @@ GreensTensor/GreensTensorFactory.o: GreensTensor/GreensTensorFactory.cpp.o
 
 # target to build an object file
 GreensTensor/GreensTensorFactory.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorFactory.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorFactory.cpp.o
 .PHONY : GreensTensor/GreensTensorFactory.cpp.o
 
 GreensTensor/GreensTensorFactory.i: GreensTensor/GreensTensorFactory.cpp.i
@@ -221,7 +221,7 @@ GreensTensor/GreensTensorFactory.i: GreensTensor/GreensTensorFactory.cpp.i
 
 # target to preprocess a source file
 GreensTensor/GreensTensorFactory.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorFactory.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorFactory.cpp.i
 .PHONY : GreensTensor/GreensTensorFactory.cpp.i
 
 GreensTensor/GreensTensorFactory.s: GreensTensor/GreensTensorFactory.cpp.s
@@ -230,7 +230,7 @@ GreensTensor/GreensTensorFactory.s: GreensTensor/GreensTensorFactory.cpp.s
 
 # target to generate assembly for a file
 GreensTensor/GreensTensorFactory.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorFactory.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorFactory.cpp.s
 .PHONY : GreensTensor/GreensTensorFactory.cpp.s
 
 GreensTensor/GreensTensorPlate.o: GreensTensor/GreensTensorPlate.cpp.o
@@ -239,7 +239,7 @@ GreensTensor/GreensTensorPlate.o: GreensTensor/GreensTensorPlate.cpp.o
 
 # target to build an object file
 GreensTensor/GreensTensorPlate.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlate.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlate.cpp.o
 .PHONY : GreensTensor/GreensTensorPlate.cpp.o
 
 GreensTensor/GreensTensorPlate.i: GreensTensor/GreensTensorPlate.cpp.i
@@ -248,7 +248,7 @@ GreensTensor/GreensTensorPlate.i: GreensTensor/GreensTensorPlate.cpp.i
 
 # target to preprocess a source file
 GreensTensor/GreensTensorPlate.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlate.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlate.cpp.i
 .PHONY : GreensTensor/GreensTensorPlate.cpp.i
 
 GreensTensor/GreensTensorPlate.s: GreensTensor/GreensTensorPlate.cpp.s
@@ -257,7 +257,7 @@ GreensTensor/GreensTensorPlate.s: GreensTensor/GreensTensorPlate.cpp.s
 
 # target to generate assembly for a file
 GreensTensor/GreensTensorPlate.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlate.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlate.cpp.s
 .PHONY : GreensTensor/GreensTensorPlate.cpp.s
 
 GreensTensor/GreensTensorPlateMagnetic.o: GreensTensor/GreensTensorPlateMagnetic.cpp.o
@@ -266,7 +266,7 @@ GreensTensor/GreensTensorPlateMagnetic.o: GreensTensor/GreensTensorPlateMagnetic
 
 # target to build an object file
 GreensTensor/GreensTensorPlateMagnetic.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlateMagnetic.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlateMagnetic.cpp.o
 .PHONY : GreensTensor/GreensTensorPlateMagnetic.cpp.o
 
 GreensTensor/GreensTensorPlateMagnetic.i: GreensTensor/GreensTensorPlateMagnetic.cpp.i
@@ -275,7 +275,7 @@ GreensTensor/GreensTensorPlateMagnetic.i: GreensTensor/GreensTensorPlateMagnetic
 
 # target to preprocess a source file
 GreensTensor/GreensTensorPlateMagnetic.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlateMagnetic.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlateMagnetic.cpp.i
 .PHONY : GreensTensor/GreensTensorPlateMagnetic.cpp.i
 
 GreensTensor/GreensTensorPlateMagnetic.s: GreensTensor/GreensTensorPlateMagnetic.cpp.s
@@ -284,7 +284,7 @@ GreensTensor/GreensTensorPlateMagnetic.s: GreensTensor/GreensTensorPlateMagnetic
 
 # target to generate assembly for a file
 GreensTensor/GreensTensorPlateMagnetic.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlateMagnetic.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlateMagnetic.cpp.s
 .PHONY : GreensTensor/GreensTensorPlateMagnetic.cpp.s
 
 GreensTensor/GreensTensorPlateVacuum.o: GreensTensor/GreensTensorPlateVacuum.cpp.o
@@ -293,7 +293,7 @@ GreensTensor/GreensTensorPlateVacuum.o: GreensTensor/GreensTensorPlateVacuum.cpp
 
 # target to build an object file
 GreensTensor/GreensTensorPlateVacuum.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlateVacuum.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlateVacuum.cpp.o
 .PHONY : GreensTensor/GreensTensorPlateVacuum.cpp.o
 
 GreensTensor/GreensTensorPlateVacuum.i: GreensTensor/GreensTensorPlateVacuum.cpp.i
@@ -302,7 +302,7 @@ GreensTensor/GreensTensorPlateVacuum.i: GreensTensor/GreensTensorPlateVacuum.cpp
 
 # target to preprocess a source file
 GreensTensor/GreensTensorPlateVacuum.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlateVacuum.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlateVacuum.cpp.i
 .PHONY : GreensTensor/GreensTensorPlateVacuum.cpp.i
 
 GreensTensor/GreensTensorPlateVacuum.s: GreensTensor/GreensTensorPlateVacuum.cpp.s
@@ -311,7 +311,7 @@ GreensTensor/GreensTensorPlateVacuum.s: GreensTensor/GreensTensorPlateVacuum.cpp
 
 # target to generate assembly for a file
 GreensTensor/GreensTensorPlateVacuum.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlateVacuum.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorPlateVacuum.cpp.s
 .PHONY : GreensTensor/GreensTensorPlateVacuum.cpp.s
 
 GreensTensor/GreensTensorVacuum.o: GreensTensor/GreensTensorVacuum.cpp.o
@@ -320,7 +320,7 @@ GreensTensor/GreensTensorVacuum.o: GreensTensor/GreensTensorVacuum.cpp.o
 
 # target to build an object file
 GreensTensor/GreensTensorVacuum.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorVacuum.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorVacuum.cpp.o
 .PHONY : GreensTensor/GreensTensorVacuum.cpp.o
 
 GreensTensor/GreensTensorVacuum.i: GreensTensor/GreensTensorVacuum.cpp.i
@@ -329,7 +329,7 @@ GreensTensor/GreensTensorVacuum.i: GreensTensor/GreensTensorVacuum.cpp.i
 
 # target to preprocess a source file
 GreensTensor/GreensTensorVacuum.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorVacuum.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorVacuum.cpp.i
 .PHONY : GreensTensor/GreensTensorVacuum.cpp.i
 
 GreensTensor/GreensTensorVacuum.s: GreensTensor/GreensTensorVacuum.cpp.s
@@ -338,7 +338,7 @@ GreensTensor/GreensTensorVacuum.s: GreensTensor/GreensTensorVacuum.cpp.s
 
 # target to generate assembly for a file
 GreensTensor/GreensTensorVacuum.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorVacuum.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/GreensTensor/GreensTensorVacuum.cpp.s
 .PHONY : GreensTensor/GreensTensorVacuum.cpp.s
 
 Looper/Looper.o: Looper/Looper.cpp.o
@@ -347,7 +347,7 @@ Looper/Looper.o: Looper/Looper.cpp.o
 
 # target to build an object file
 Looper/Looper.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/Looper.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/Looper.cpp.o
 .PHONY : Looper/Looper.cpp.o
 
 Looper/Looper.i: Looper/Looper.cpp.i
@@ -356,7 +356,7 @@ Looper/Looper.i: Looper/Looper.cpp.i
 
 # target to preprocess a source file
 Looper/Looper.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/Looper.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/Looper.cpp.i
 .PHONY : Looper/Looper.cpp.i
 
 Looper/Looper.s: Looper/Looper.cpp.s
@@ -365,7 +365,7 @@ Looper/Looper.s: Looper/Looper.cpp.s
 
 # target to generate assembly for a file
 Looper/Looper.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/Looper.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/Looper.cpp.s
 .PHONY : Looper/Looper.cpp.s
 
 Looper/LooperFactory.o: Looper/LooperFactory.cpp.o
@@ -374,7 +374,7 @@ Looper/LooperFactory.o: Looper/LooperFactory.cpp.o
 
 # target to build an object file
 Looper/LooperFactory.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperFactory.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperFactory.cpp.o
 .PHONY : Looper/LooperFactory.cpp.o
 
 Looper/LooperFactory.i: Looper/LooperFactory.cpp.i
@@ -383,7 +383,7 @@ Looper/LooperFactory.i: Looper/LooperFactory.cpp.i
 
 # target to preprocess a source file
 Looper/LooperFactory.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperFactory.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperFactory.cpp.i
 .PHONY : Looper/LooperFactory.cpp.i
 
 Looper/LooperFactory.s: Looper/LooperFactory.cpp.s
@@ -392,7 +392,7 @@ Looper/LooperFactory.s: Looper/LooperFactory.cpp.s
 
 # target to generate assembly for a file
 Looper/LooperFactory.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperFactory.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperFactory.cpp.s
 .PHONY : Looper/LooperFactory.cpp.s
 
 Looper/LooperV.o: Looper/LooperV.cpp.o
@@ -401,7 +401,7 @@ Looper/LooperV.o: Looper/LooperV.cpp.o
 
 # target to build an object file
 Looper/LooperV.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperV.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperV.cpp.o
 .PHONY : Looper/LooperV.cpp.o
 
 Looper/LooperV.i: Looper/LooperV.cpp.i
@@ -410,7 +410,7 @@ Looper/LooperV.i: Looper/LooperV.cpp.i
 
 # target to preprocess a source file
 Looper/LooperV.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperV.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperV.cpp.i
 .PHONY : Looper/LooperV.cpp.i
 
 Looper/LooperV.s: Looper/LooperV.cpp.s
@@ -419,7 +419,7 @@ Looper/LooperV.s: Looper/LooperV.cpp.s
 
 # target to generate assembly for a file
 Looper/LooperV.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperV.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperV.cpp.s
 .PHONY : Looper/LooperV.cpp.s
 
 Looper/LooperZa.o: Looper/LooperZa.cpp.o
@@ -428,7 +428,7 @@ Looper/LooperZa.o: Looper/LooperZa.cpp.o
 
 # target to build an object file
 Looper/LooperZa.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperZa.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperZa.cpp.o
 .PHONY : Looper/LooperZa.cpp.o
 
 Looper/LooperZa.i: Looper/LooperZa.cpp.i
@@ -437,7 +437,7 @@ Looper/LooperZa.i: Looper/LooperZa.cpp.i
 
 # target to preprocess a source file
 Looper/LooperZa.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperZa.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperZa.cpp.i
 .PHONY : Looper/LooperZa.cpp.i
 
 Looper/LooperZa.s: Looper/LooperZa.cpp.s
@@ -446,7 +446,7 @@ Looper/LooperZa.s: Looper/LooperZa.cpp.s
 
 # target to generate assembly for a file
 Looper/LooperZa.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperZa.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Looper/LooperZa.cpp.s
 .PHONY : Looper/LooperZa.cpp.s
 
 MemoryKernel/MemoryKernelFactory.o: MemoryKernel/MemoryKernelFactory.cpp.o
@@ -455,7 +455,7 @@ MemoryKernel/MemoryKernelFactory.o: MemoryKernel/MemoryKernelFactory.cpp.o
 
 # target to build an object file
 MemoryKernel/MemoryKernelFactory.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/MemoryKernelFactory.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/MemoryKernelFactory.cpp.o
 .PHONY : MemoryKernel/MemoryKernelFactory.cpp.o
 
 MemoryKernel/MemoryKernelFactory.i: MemoryKernel/MemoryKernelFactory.cpp.i
@@ -464,7 +464,7 @@ MemoryKernel/MemoryKernelFactory.i: MemoryKernel/MemoryKernelFactory.cpp.i
 
 # target to preprocess a source file
 MemoryKernel/MemoryKernelFactory.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/MemoryKernelFactory.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/MemoryKernelFactory.cpp.i
 .PHONY : MemoryKernel/MemoryKernelFactory.cpp.i
 
 MemoryKernel/MemoryKernelFactory.s: MemoryKernel/MemoryKernelFactory.cpp.s
@@ -473,7 +473,7 @@ MemoryKernel/MemoryKernelFactory.s: MemoryKernel/MemoryKernelFactory.cpp.s
 
 # target to generate assembly for a file
 MemoryKernel/MemoryKernelFactory.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/MemoryKernelFactory.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/MemoryKernelFactory.cpp.s
 .PHONY : MemoryKernel/MemoryKernelFactory.cpp.s
 
 MemoryKernel/OhmicMemoryKernel.o: MemoryKernel/OhmicMemoryKernel.cpp.o
@@ -482,7 +482,7 @@ MemoryKernel/OhmicMemoryKernel.o: MemoryKernel/OhmicMemoryKernel.cpp.o
 
 # target to build an object file
 MemoryKernel/OhmicMemoryKernel.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/OhmicMemoryKernel.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/OhmicMemoryKernel.cpp.o
 .PHONY : MemoryKernel/OhmicMemoryKernel.cpp.o
 
 MemoryKernel/OhmicMemoryKernel.i: MemoryKernel/OhmicMemoryKernel.cpp.i
@@ -491,7 +491,7 @@ MemoryKernel/OhmicMemoryKernel.i: MemoryKernel/OhmicMemoryKernel.cpp.i
 
 # target to preprocess a source file
 MemoryKernel/OhmicMemoryKernel.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/OhmicMemoryKernel.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/OhmicMemoryKernel.cpp.i
 .PHONY : MemoryKernel/OhmicMemoryKernel.cpp.i
 
 MemoryKernel/OhmicMemoryKernel.s: MemoryKernel/OhmicMemoryKernel.cpp.s
@@ -500,8 +500,35 @@ MemoryKernel/OhmicMemoryKernel.s: MemoryKernel/OhmicMemoryKernel.cpp.s
 
 # target to generate assembly for a file
 MemoryKernel/OhmicMemoryKernel.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/OhmicMemoryKernel.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/OhmicMemoryKernel.cpp.s
 .PHONY : MemoryKernel/OhmicMemoryKernel.cpp.s
+
+MemoryKernel/SinglePhononMemoryKernel.o: MemoryKernel/SinglePhononMemoryKernel.cpp.o
+
+.PHONY : MemoryKernel/SinglePhononMemoryKernel.o
+
+# target to build an object file
+MemoryKernel/SinglePhononMemoryKernel.cpp.o:
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/SinglePhononMemoryKernel.cpp.o
+.PHONY : MemoryKernel/SinglePhononMemoryKernel.cpp.o
+
+MemoryKernel/SinglePhononMemoryKernel.i: MemoryKernel/SinglePhononMemoryKernel.cpp.i
+
+.PHONY : MemoryKernel/SinglePhononMemoryKernel.i
+
+# target to preprocess a source file
+MemoryKernel/SinglePhononMemoryKernel.cpp.i:
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/SinglePhononMemoryKernel.cpp.i
+.PHONY : MemoryKernel/SinglePhononMemoryKernel.cpp.i
+
+MemoryKernel/SinglePhononMemoryKernel.s: MemoryKernel/SinglePhononMemoryKernel.cpp.s
+
+.PHONY : MemoryKernel/SinglePhononMemoryKernel.s
+
+# target to generate assembly for a file
+MemoryKernel/SinglePhononMemoryKernel.cpp.s:
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/MemoryKernel/SinglePhononMemoryKernel.cpp.s
+.PHONY : MemoryKernel/SinglePhononMemoryKernel.cpp.s
 
 Options/Options.o: Options/Options.cpp.o
 
@@ -509,7 +536,7 @@ Options/Options.o: Options/Options.cpp.o
 
 # target to build an object file
 Options/Options.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Options/Options.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Options/Options.cpp.o
 .PHONY : Options/Options.cpp.o
 
 Options/Options.i: Options/Options.cpp.i
@@ -518,7 +545,7 @@ Options/Options.i: Options/Options.cpp.i
 
 # target to preprocess a source file
 Options/Options.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Options/Options.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Options/Options.cpp.i
 .PHONY : Options/Options.cpp.i
 
 Options/Options.s: Options/Options.cpp.s
@@ -527,7 +554,7 @@ Options/Options.s: Options/Options.cpp.s
 
 # target to generate assembly for a file
 Options/Options.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Options/Options.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Options/Options.cpp.s
 .PHONY : Options/Options.cpp.s
 
 Permittivity/PermittivityDrude.o: Permittivity/PermittivityDrude.cpp.o
@@ -536,7 +563,7 @@ Permittivity/PermittivityDrude.o: Permittivity/PermittivityDrude.cpp.o
 
 # target to build an object file
 Permittivity/PermittivityDrude.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Permittivity/PermittivityDrude.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Permittivity/PermittivityDrude.cpp.o
 .PHONY : Permittivity/PermittivityDrude.cpp.o
 
 Permittivity/PermittivityDrude.i: Permittivity/PermittivityDrude.cpp.i
@@ -545,7 +572,7 @@ Permittivity/PermittivityDrude.i: Permittivity/PermittivityDrude.cpp.i
 
 # target to preprocess a source file
 Permittivity/PermittivityDrude.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Permittivity/PermittivityDrude.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Permittivity/PermittivityDrude.cpp.i
 .PHONY : Permittivity/PermittivityDrude.cpp.i
 
 Permittivity/PermittivityDrude.s: Permittivity/PermittivityDrude.cpp.s
@@ -554,7 +581,7 @@ Permittivity/PermittivityDrude.s: Permittivity/PermittivityDrude.cpp.s
 
 # target to generate assembly for a file
 Permittivity/PermittivityDrude.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Permittivity/PermittivityDrude.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Permittivity/PermittivityDrude.cpp.s
 .PHONY : Permittivity/PermittivityDrude.cpp.s
 
 Permittivity/PermittivityFactory.o: Permittivity/PermittivityFactory.cpp.o
@@ -563,7 +590,7 @@ Permittivity/PermittivityFactory.o: Permittivity/PermittivityFactory.cpp.o
 
 # target to build an object file
 Permittivity/PermittivityFactory.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Permittivity/PermittivityFactory.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Permittivity/PermittivityFactory.cpp.o
 .PHONY : Permittivity/PermittivityFactory.cpp.o
 
 Permittivity/PermittivityFactory.i: Permittivity/PermittivityFactory.cpp.i
@@ -572,7 +599,7 @@ Permittivity/PermittivityFactory.i: Permittivity/PermittivityFactory.cpp.i
 
 # target to preprocess a source file
 Permittivity/PermittivityFactory.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Permittivity/PermittivityFactory.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Permittivity/PermittivityFactory.cpp.i
 .PHONY : Permittivity/PermittivityFactory.cpp.i
 
 Permittivity/PermittivityFactory.s: Permittivity/PermittivityFactory.cpp.s
@@ -581,8 +608,35 @@ Permittivity/PermittivityFactory.s: Permittivity/PermittivityFactory.cpp.s
 
 # target to generate assembly for a file
 Permittivity/PermittivityFactory.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Permittivity/PermittivityFactory.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Permittivity/PermittivityFactory.cpp.s
 .PHONY : Permittivity/PermittivityFactory.cpp.s
+
+Permittivity/PermittivityLorentz.o: Permittivity/PermittivityLorentz.cpp.o
+
+.PHONY : Permittivity/PermittivityLorentz.o
+
+# target to build an object file
+Permittivity/PermittivityLorentz.cpp.o:
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Permittivity/PermittivityLorentz.cpp.o
+.PHONY : Permittivity/PermittivityLorentz.cpp.o
+
+Permittivity/PermittivityLorentz.i: Permittivity/PermittivityLorentz.cpp.i
+
+.PHONY : Permittivity/PermittivityLorentz.i
+
+# target to preprocess a source file
+Permittivity/PermittivityLorentz.cpp.i:
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Permittivity/PermittivityLorentz.cpp.i
+.PHONY : Permittivity/PermittivityLorentz.cpp.i
+
+Permittivity/PermittivityLorentz.s: Permittivity/PermittivityLorentz.cpp.s
+
+.PHONY : Permittivity/PermittivityLorentz.s
+
+# target to generate assembly for a file
+Permittivity/PermittivityLorentz.cpp.s:
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Permittivity/PermittivityLorentz.cpp.s
+.PHONY : Permittivity/PermittivityLorentz.cpp.s
 
 Polarizability/Polarizability.o: Polarizability/Polarizability.cpp.o
 
@@ -590,7 +644,7 @@ Polarizability/Polarizability.o: Polarizability/Polarizability.cpp.o
 
 # target to build an object file
 Polarizability/Polarizability.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/Polarizability.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/Polarizability.cpp.o
 .PHONY : Polarizability/Polarizability.cpp.o
 
 Polarizability/Polarizability.i: Polarizability/Polarizability.cpp.i
@@ -599,7 +653,7 @@ Polarizability/Polarizability.i: Polarizability/Polarizability.cpp.i
 
 # target to preprocess a source file
 Polarizability/Polarizability.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/Polarizability.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/Polarizability.cpp.i
 .PHONY : Polarizability/Polarizability.cpp.i
 
 Polarizability/Polarizability.s: Polarizability/Polarizability.cpp.s
@@ -608,89 +662,8 @@ Polarizability/Polarizability.s: Polarizability/Polarizability.cpp.s
 
 # target to generate assembly for a file
 Polarizability/Polarizability.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/Polarizability.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/Polarizability.cpp.s
 .PHONY : Polarizability/Polarizability.cpp.s
-
-Polarizability/PolarizabilityBath.o: Polarizability/PolarizabilityBath.cpp.o
-
-.PHONY : Polarizability/PolarizabilityBath.o
-
-# target to build an object file
-Polarizability/PolarizabilityBath.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/PolarizabilityBath.cpp.o
-.PHONY : Polarizability/PolarizabilityBath.cpp.o
-
-Polarizability/PolarizabilityBath.i: Polarizability/PolarizabilityBath.cpp.i
-
-.PHONY : Polarizability/PolarizabilityBath.i
-
-# target to preprocess a source file
-Polarizability/PolarizabilityBath.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/PolarizabilityBath.cpp.i
-.PHONY : Polarizability/PolarizabilityBath.cpp.i
-
-Polarizability/PolarizabilityBath.s: Polarizability/PolarizabilityBath.cpp.s
-
-.PHONY : Polarizability/PolarizabilityBath.s
-
-# target to generate assembly for a file
-Polarizability/PolarizabilityBath.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/PolarizabilityBath.cpp.s
-.PHONY : Polarizability/PolarizabilityBath.cpp.s
-
-Polarizability/PolarizabilityFactory.o: Polarizability/PolarizabilityFactory.cpp.o
-
-.PHONY : Polarizability/PolarizabilityFactory.o
-
-# target to build an object file
-Polarizability/PolarizabilityFactory.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/PolarizabilityFactory.cpp.o
-.PHONY : Polarizability/PolarizabilityFactory.cpp.o
-
-Polarizability/PolarizabilityFactory.i: Polarizability/PolarizabilityFactory.cpp.i
-
-.PHONY : Polarizability/PolarizabilityFactory.i
-
-# target to preprocess a source file
-Polarizability/PolarizabilityFactory.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/PolarizabilityFactory.cpp.i
-.PHONY : Polarizability/PolarizabilityFactory.cpp.i
-
-Polarizability/PolarizabilityFactory.s: Polarizability/PolarizabilityFactory.cpp.s
-
-.PHONY : Polarizability/PolarizabilityFactory.s
-
-# target to generate assembly for a file
-Polarizability/PolarizabilityFactory.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/PolarizabilityFactory.cpp.s
-.PHONY : Polarizability/PolarizabilityFactory.cpp.s
-
-Polarizability/PolarizabilityNoBath.o: Polarizability/PolarizabilityNoBath.cpp.o
-
-.PHONY : Polarizability/PolarizabilityNoBath.o
-
-# target to build an object file
-Polarizability/PolarizabilityNoBath.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/PolarizabilityNoBath.cpp.o
-.PHONY : Polarizability/PolarizabilityNoBath.cpp.o
-
-Polarizability/PolarizabilityNoBath.i: Polarizability/PolarizabilityNoBath.cpp.i
-
-.PHONY : Polarizability/PolarizabilityNoBath.i
-
-# target to preprocess a source file
-Polarizability/PolarizabilityNoBath.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/PolarizabilityNoBath.cpp.i
-.PHONY : Polarizability/PolarizabilityNoBath.cpp.i
-
-Polarizability/PolarizabilityNoBath.s: Polarizability/PolarizabilityNoBath.cpp.s
-
-.PHONY : Polarizability/PolarizabilityNoBath.s
-
-# target to generate assembly for a file
-Polarizability/PolarizabilityNoBath.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/Polarizability/PolarizabilityNoBath.cpp.s
-.PHONY : Polarizability/PolarizabilityNoBath.cpp.s
 
 PowerSpectrum/PowerSpectrum.o: PowerSpectrum/PowerSpectrum.cpp.o
 
@@ -698,7 +671,7 @@ PowerSpectrum/PowerSpectrum.o: PowerSpectrum/PowerSpectrum.cpp.o
 
 # target to build an object file
 PowerSpectrum/PowerSpectrum.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/PowerSpectrum/PowerSpectrum.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/PowerSpectrum/PowerSpectrum.cpp.o
 .PHONY : PowerSpectrum/PowerSpectrum.cpp.o
 
 PowerSpectrum/PowerSpectrum.i: PowerSpectrum/PowerSpectrum.cpp.i
@@ -707,7 +680,7 @@ PowerSpectrum/PowerSpectrum.i: PowerSpectrum/PowerSpectrum.cpp.i
 
 # target to preprocess a source file
 PowerSpectrum/PowerSpectrum.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/PowerSpectrum/PowerSpectrum.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/PowerSpectrum/PowerSpectrum.cpp.i
 .PHONY : PowerSpectrum/PowerSpectrum.cpp.i
 
 PowerSpectrum/PowerSpectrum.s: PowerSpectrum/PowerSpectrum.cpp.s
@@ -716,62 +689,8 @@ PowerSpectrum/PowerSpectrum.s: PowerSpectrum/PowerSpectrum.cpp.s
 
 # target to generate assembly for a file
 PowerSpectrum/PowerSpectrum.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/PowerSpectrum/PowerSpectrum.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/PowerSpectrum/PowerSpectrum.cpp.s
 .PHONY : PowerSpectrum/PowerSpectrum.cpp.s
-
-PowerSpectrum/PowerSpectrumFactory.o: PowerSpectrum/PowerSpectrumFactory.cpp.o
-
-.PHONY : PowerSpectrum/PowerSpectrumFactory.o
-
-# target to build an object file
-PowerSpectrum/PowerSpectrumFactory.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/PowerSpectrum/PowerSpectrumFactory.cpp.o
-.PHONY : PowerSpectrum/PowerSpectrumFactory.cpp.o
-
-PowerSpectrum/PowerSpectrumFactory.i: PowerSpectrum/PowerSpectrumFactory.cpp.i
-
-.PHONY : PowerSpectrum/PowerSpectrumFactory.i
-
-# target to preprocess a source file
-PowerSpectrum/PowerSpectrumFactory.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/PowerSpectrum/PowerSpectrumFactory.cpp.i
-.PHONY : PowerSpectrum/PowerSpectrumFactory.cpp.i
-
-PowerSpectrum/PowerSpectrumFactory.s: PowerSpectrum/PowerSpectrumFactory.cpp.s
-
-.PHONY : PowerSpectrum/PowerSpectrumFactory.s
-
-# target to generate assembly for a file
-PowerSpectrum/PowerSpectrumFactory.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/PowerSpectrum/PowerSpectrumFactory.cpp.s
-.PHONY : PowerSpectrum/PowerSpectrumFactory.cpp.s
-
-PowerSpectrum/PowerSpectrumHarmOsc.o: PowerSpectrum/PowerSpectrumHarmOsc.cpp.o
-
-.PHONY : PowerSpectrum/PowerSpectrumHarmOsc.o
-
-# target to build an object file
-PowerSpectrum/PowerSpectrumHarmOsc.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/PowerSpectrum/PowerSpectrumHarmOsc.cpp.o
-.PHONY : PowerSpectrum/PowerSpectrumHarmOsc.cpp.o
-
-PowerSpectrum/PowerSpectrumHarmOsc.i: PowerSpectrum/PowerSpectrumHarmOsc.cpp.i
-
-.PHONY : PowerSpectrum/PowerSpectrumHarmOsc.i
-
-# target to preprocess a source file
-PowerSpectrum/PowerSpectrumHarmOsc.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/PowerSpectrum/PowerSpectrumHarmOsc.cpp.i
-.PHONY : PowerSpectrum/PowerSpectrumHarmOsc.cpp.i
-
-PowerSpectrum/PowerSpectrumHarmOsc.s: PowerSpectrum/PowerSpectrumHarmOsc.cpp.s
-
-.PHONY : PowerSpectrum/PowerSpectrumHarmOsc.s
-
-# target to generate assembly for a file
-PowerSpectrum/PowerSpectrumHarmOsc.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/PowerSpectrum/PowerSpectrumHarmOsc.cpp.s
-.PHONY : PowerSpectrum/PowerSpectrumHarmOsc.cpp.s
 
 ReflectionCoefficients/ReflectionCoefficientsFactory.o: ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.o
 
@@ -779,7 +698,7 @@ ReflectionCoefficients/ReflectionCoefficientsFactory.o: ReflectionCoefficients/R
 
 # target to build an object file
 ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.o
 .PHONY : ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.o
 
 ReflectionCoefficients/ReflectionCoefficientsFactory.i: ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.i
@@ -788,7 +707,7 @@ ReflectionCoefficients/ReflectionCoefficientsFactory.i: ReflectionCoefficients/R
 
 # target to preprocess a source file
 ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.i
 .PHONY : ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.i
 
 ReflectionCoefficients/ReflectionCoefficientsFactory.s: ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.s
@@ -797,7 +716,7 @@ ReflectionCoefficients/ReflectionCoefficientsFactory.s: ReflectionCoefficients/R
 
 # target to generate assembly for a file
 ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.s
 .PHONY : ReflectionCoefficients/ReflectionCoefficientsFactory.cpp.s
 
 ReflectionCoefficients/ReflectionCoefficientsLocBulk.o: ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.o
@@ -806,7 +725,7 @@ ReflectionCoefficients/ReflectionCoefficientsLocBulk.o: ReflectionCoefficients/R
 
 # target to build an object file
 ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.o
 .PHONY : ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.o
 
 ReflectionCoefficients/ReflectionCoefficientsLocBulk.i: ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.i
@@ -815,7 +734,7 @@ ReflectionCoefficients/ReflectionCoefficientsLocBulk.i: ReflectionCoefficients/R
 
 # target to preprocess a source file
 ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.i
 .PHONY : ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.i
 
 ReflectionCoefficients/ReflectionCoefficientsLocBulk.s: ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.s
@@ -824,7 +743,7 @@ ReflectionCoefficients/ReflectionCoefficientsLocBulk.s: ReflectionCoefficients/R
 
 # target to generate assembly for a file
 ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.s
 .PHONY : ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp.s
 
 ReflectionCoefficients/ReflectionCoefficientsLocSlab.o: ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.o
@@ -833,7 +752,7 @@ ReflectionCoefficients/ReflectionCoefficientsLocSlab.o: ReflectionCoefficients/R
 
 # target to build an object file
 ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.o:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.o
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.o
 .PHONY : ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.o
 
 ReflectionCoefficients/ReflectionCoefficientsLocSlab.i: ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.i
@@ -842,7 +761,7 @@ ReflectionCoefficients/ReflectionCoefficientsLocSlab.i: ReflectionCoefficients/R
 
 # target to preprocess a source file
 ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.i:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.i
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.i
 .PHONY : ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.i
 
 ReflectionCoefficients/ReflectionCoefficientsLocSlab.s: ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.s
@@ -851,7 +770,7 @@ ReflectionCoefficients/ReflectionCoefficientsLocSlab.s: ReflectionCoefficients/R
 
 # target to generate assembly for a file
 ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.s:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.s
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(MAKE) -f src/CMakeFiles/quaca.dir/build.make src/CMakeFiles/quaca.dir/ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.s
 .PHONY : ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp.s
 
 # Help Target
@@ -861,8 +780,8 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... quaca"
 	@echo "... edit_cache"
+	@echo "... quaca"
 	@echo "... Calculations/Integrations.o"
 	@echo "... Calculations/Integrations.i"
 	@echo "... Calculations/Integrations.s"
@@ -905,6 +824,9 @@ help:
 	@echo "... MemoryKernel/OhmicMemoryKernel.o"
 	@echo "... MemoryKernel/OhmicMemoryKernel.i"
 	@echo "... MemoryKernel/OhmicMemoryKernel.s"
+	@echo "... MemoryKernel/SinglePhononMemoryKernel.o"
+	@echo "... MemoryKernel/SinglePhononMemoryKernel.i"
+	@echo "... MemoryKernel/SinglePhononMemoryKernel.s"
 	@echo "... Options/Options.o"
 	@echo "... Options/Options.i"
 	@echo "... Options/Options.s"
@@ -914,27 +836,15 @@ help:
 	@echo "... Permittivity/PermittivityFactory.o"
 	@echo "... Permittivity/PermittivityFactory.i"
 	@echo "... Permittivity/PermittivityFactory.s"
+	@echo "... Permittivity/PermittivityLorentz.o"
+	@echo "... Permittivity/PermittivityLorentz.i"
+	@echo "... Permittivity/PermittivityLorentz.s"
 	@echo "... Polarizability/Polarizability.o"
 	@echo "... Polarizability/Polarizability.i"
 	@echo "... Polarizability/Polarizability.s"
-	@echo "... Polarizability/PolarizabilityBath.o"
-	@echo "... Polarizability/PolarizabilityBath.i"
-	@echo "... Polarizability/PolarizabilityBath.s"
-	@echo "... Polarizability/PolarizabilityFactory.o"
-	@echo "... Polarizability/PolarizabilityFactory.i"
-	@echo "... Polarizability/PolarizabilityFactory.s"
-	@echo "... Polarizability/PolarizabilityNoBath.o"
-	@echo "... Polarizability/PolarizabilityNoBath.i"
-	@echo "... Polarizability/PolarizabilityNoBath.s"
 	@echo "... PowerSpectrum/PowerSpectrum.o"
 	@echo "... PowerSpectrum/PowerSpectrum.i"
 	@echo "... PowerSpectrum/PowerSpectrum.s"
-	@echo "... PowerSpectrum/PowerSpectrumFactory.o"
-	@echo "... PowerSpectrum/PowerSpectrumFactory.i"
-	@echo "... PowerSpectrum/PowerSpectrumFactory.s"
-	@echo "... PowerSpectrum/PowerSpectrumHarmOsc.o"
-	@echo "... PowerSpectrum/PowerSpectrumHarmOsc.i"
-	@echo "... PowerSpectrum/PowerSpectrumHarmOsc.s"
 	@echo "... ReflectionCoefficients/ReflectionCoefficientsFactory.o"
 	@echo "... ReflectionCoefficients/ReflectionCoefficientsFactory.i"
 	@echo "... ReflectionCoefficients/ReflectionCoefficientsFactory.s"
@@ -955,6 +865,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /users/stud/hermasim/Documents/cpp/quaca/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/simon/Documents/Studium/Coding/quaca/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

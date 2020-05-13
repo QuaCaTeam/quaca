@@ -5,33 +5,32 @@
 #include <armadillo>
 #include <assert.h>
 
-struct Options_GreensTensorMagnetic : Options_GreensTensor {
-  Tensor_Options EB = IGNORE;
-  Tensor_Options BE = IGNORE;
-  Tensor_Options BB = IGNORE;
-};
-
 class GreensTensorPlateMagnetic : public GreensTensorPlate {
 public:
   // constructors
   GreensTensorPlateMagnetic(std::string input_file);
-  GreensTensorPlateMagnetic(double v, double za, double beta,
-                            ReflectionCoefficients *reflection_coefficients,
+  GreensTensorPlateMagnetic(double v, double beta, double za,
+                            std::shared_ptr<ReflectionCoefficients> reflection_coefficients,
                             double delta_cut, vec::fixed<2> rel_err);
 
-  void calculate_tensor(cx_mat::fixed<3, 3> &GT,
-                        Options_GreensTensor opts);
+  void calculate_tensor(double omega, vec::fixed<2> k, cx_mat::fixed<3, 3> &GT);
 
-  void integrate_k(cx_mat::fixed<3, 3> &GT,
-                                            Options_GreensTensorMagnetic opts); 
-  void integrate_k(cx_mat::fixed<3, 3> &GT,
-                                            Options_GreensTensor opts); 
+  void integrate_k(double omega, cx_mat::fixed<3, 3> &GT, Tensor_Options EE, Tensor_Options BE, Tensor_Options EB,
+                   Tensor_Options BB, Weight_Options weight_function);
 
   // integrands
-  static double integrand_2d_k_magnetic_R(double kappa_double, void *opts);
-  static double integrand_2d_k_magnetic_I(double kappa_double, void *opts);
-  static double integrand_1d_k_magnetic_R(double phi, void *opts);
-  static double integrand_1d_k_magnetic_I(double phi, void *opts);
+  double integrand_2d_k_R(double kappa_double, double omega, double phi, const vec::fixed<2> &indices,
+                                 Tensor_Options EE, Tensor_Options EB, Tensor_Options BE, Tensor_Options BB,
+                                 Weight_Options weight_function);
+  double integrand_2d_k_I(double kappa_double, double omega, double phi, const vec::fixed<2> &indices,
+                                 Tensor_Options EE, Tensor_Options EB, Tensor_Options BE, Tensor_Options BB,
+                                 Weight_Options weight_function);
+  double integrand_1d_k_R(double phi, double omega, const vec::fixed<2> &indices, Tensor_Options EE,
+                                 Tensor_Options EB,
+                                 Tensor_Options BE, Tensor_Options BB, Weight_Options weight_function);
+  double integrand_1d_k_I(double phi, double omega, const vec::fixed<2> &indices, Tensor_Options EE,
+                                 Tensor_Options EB,
+                                 Tensor_Options BE, Tensor_Options BB, Weight_Options weight_function);
 };
 
 #endif
