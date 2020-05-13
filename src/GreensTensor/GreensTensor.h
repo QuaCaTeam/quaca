@@ -16,8 +16,8 @@ enum Weight_Options { UNIT, KV, TEMP, KV_TEMP, NON_LTE, KV_NON_LTE };
  */
 class GreensTensor {
 protected:
-  double v;
-  double beta;
+  double v; //velocity of the particle 
+  double beta; // inverse temperature
 
 public:
   // constructor
