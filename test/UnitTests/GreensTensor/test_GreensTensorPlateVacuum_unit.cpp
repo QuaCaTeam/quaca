@@ -112,10 +112,6 @@ TEST_CASE("GreensTensorPlateVacuum integrate_k function returns the sum "
   REQUIRE(!TensorVacuum.is_zero());
   REQUIRE(!TensorPlate.is_zero());
 
-  for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < 3; j++) {
-      REQUIRE(TensorPlateVacuum(i, j) ==
-              TensorVacuum(i, j) + TensorPlate(i, j));
-    }
-  }
+  REQUIRE(approx_equal(TensorPlateVacuum,TensorVacuum + TensorPlate, "reldiff", 1e-10));
+
 }

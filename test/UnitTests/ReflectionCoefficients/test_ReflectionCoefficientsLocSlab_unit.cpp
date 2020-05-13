@@ -57,9 +57,9 @@ TEST_CASE("For slab thickness*kappa >> 1, the bulk coefficient is retrieved",
 
 TEST_CASE("r_p and r_s of the slab configuration obey the crossing relation",
           "[ReflectionCoefficientsLocSlab]") {
-  auto omega = GENERATE(take(5, random(-1e2, 1e2)));
+  auto omega = GENERATE(-5.32,-0.12,1.1,8.6);
 
-  auto kappa_double = GENERATE(take(5, random(-1e2, 1e2)));
+  auto kappa_double = GENERATE(-9.54,-1.32,3.2,8.9);
   std::complex<double> kappa;
   if (kappa_double < 0.) {
     kappa = std::complex<double>(0., -std::abs(kappa_double));

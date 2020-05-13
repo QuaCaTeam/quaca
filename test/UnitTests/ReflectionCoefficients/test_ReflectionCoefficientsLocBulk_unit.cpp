@@ -48,10 +48,7 @@ TEST_CASE("ReflectionCoefficientsLocBulk reproduces evanescent limit",
       (perm->calculate(omega) - 1.) * omega * omega / (4 * k_quad);
   rs_app += (pow(perm->calculate(omega), 2) - 1.) * pow(omega, 4) /
             (8 * k_quad * k_quad);
-  if(!(Approx(rp.real()).epsilon(1E-4) == rp_app.real()))
-  {
-    std::cout << omega << std::endl;
-  }
+
   REQUIRE(Approx(rp.real()).epsilon(1E-4) == rp_app.real());
   REQUIRE(Approx(rp.imag()).epsilon(1E-4) == rp_app.imag());
   REQUIRE(Approx(rs.real()).epsilon(1E-4) == rs_app.real());
@@ -70,9 +67,10 @@ TEST_CASE("ReflectionCoefficientsLocBulk reproduces propagation limit",
 
   std::complex<double> eps = perm->calculate(omega);
 
-  std::complex<double> rp, rs;
   std::complex<double> kappa =
       std::complex<double>(0., -sqrt(omega * omega - k * k));
+
+  std::complex<double> rp, rs;
   RefC.calculate(omega, kappa, rp, rs);
 
   std::complex<double> rs_app = (1. - sqrt(eps)) / (1. + sqrt(eps));

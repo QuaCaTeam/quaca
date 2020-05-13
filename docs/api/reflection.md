@@ -1,16 +1,15 @@
 # ReflectionCoefficients {docsify-ignore-all}
-This is an abstract class that defines the reflection coefficients $r^{s/p}(\omega, \kappa)$ as a function of the frequency $\omega$ and $\kappa=\sqrt{k^2-\omega^2/c^2}$ (the following definition of the square root is used, $\mathrm{Re}\{\kappa\}\geq 0$ and $\mathrm{Im}\{\kappa\}<0$), where $k$ is the modulus of the two-dimensional wavevector $\mathbf{k}$. The specific reflection coefficients with respect to diffirent systems are defined in the corresponding child of this class.
+This is an abstract class that defines the reflection coefficients $r^{s/p}(\omega, \kappa)$ as a function of the frequency $\omega$ and $\kappa=\sqrt{k^2-\omega^2/c^2}$ (the following definition of the square root is used, $\mathrm{Re}\{\kappa\}\geq 0$ and $\mathrm{Im}\{\kappa\}<0$), where $k$ is the modulus of the two-dimensional wavevector $\mathbf{k}$. The specific reflection coefficients with respect to different systems are defined in the corresponding child of this class.
 ```cpp
 class ReflectionCoefficients {
 public:
   // returns the reflection coefficients
-  virtual void ref(std::complex<double> &r_p, std::complex<double> &r_s,
-                   double omega, std::complex<double> kappa) = 0;
+  virtual void calculate  (double omega, std::complex<double> kappa, std::complex<double> &r_p, std::complex<double> &r_s) = 0;
 };
 
 ```
 
-### `# void ref(std::complex<double> &r_p, std::complex<double> &r_s, double omega, std::complex<double> kappa);`
+### `# virtual void calculate  (double omega, std::complex<double> kappa, std::complex<double> &r_p, std::complex<double> &r_s) = 0;`
 Writes the complex reflection coefficients $r^{s/p}$ in the give variable.
 
 ## ReflectionCoefficientsLocBulk
@@ -26,26 +25,26 @@ where $\epsilon(\omega)$ is the local permittivity of the bulk material and $\ka
 class ReflectionCoefficientsLocBulk : public ReflectionCoefficients {
 private:
   // permittivity is needed to describe the surface's response
-  Permittivity *permittivity;
+  std::shared_ptr<Permittivity> permittivity;
 
 public:
   /*!
    * Constructor for reflection coefficients of a local bulk medium.
    */
-  ReflectionCoefficientsLocBulk(Permittivity *permittivity);
-  ReflectionCoefficientsLocBulk(std::string input_file);
+  ReflectionCoefficientsLocBulk(std::shared_ptr<Permittivity> permittivity);
+  ReflectionCoefficientsLocBulk(const std::string &input_file);
 
   /*!
    * Returns the p- and s-polarized reflection coefficient.
    */
-  void ref(std::complex<double> &r_p, std::complex<double> &r_s, double omega,
-           std::complex<double> kappa);
+  void calculate(double omega, std::complex<double> kappa,
+                 std::complex<double> &r_p, std::complex<double> &r_s) const;
+
   // getter functions
-  std::complex<double> get_epsilon(double omega) {
-    return this->permittivity->epsilon(omega);
+  std::complex<double> get_epsilon(double omega) const {
+    return permittivity->calculate(omega);
   };
 };
-
 ```
 
 
@@ -55,7 +54,7 @@ Direct constructor for the class.
 ### `# ReflectionCoefficientsLocBulk(std::string input_file)`
 Input file constructor for the class.
 
-### `# void ref(std::complex<double> &r_p, std::complex<double> &r_s, double omega, std::complex<double> kappa)`
+###  `#void calculate(double omega, std::complex<double> kappa,std::complex<double> &r_p, std::complex<double> &r_s) const;`
 See [ReflectionCoefficients](#ReflectionCoefficients).
 
 ## ReflectionCoefficientsLocSlab
@@ -68,29 +67,31 @@ where $r^{s/p}_\mathrm{bulk}$ refers to the corresponding bulk refelction coeffi
 class ReflectionCoefficientsLocSlab : public ReflectionCoefficients {
 private:
   // permittivity is needed to describe the surface's response
-  Permittivity *permittivity;
+  std::shared_ptr<Permittivity> permittivity;
   double thickness;
 
 public:
   /*!
    * Constructor for reflection coefficients of a local bulk medium.
    */
-  ReflectionCoefficientsLocSlab(Permittivity *permittivity, double thickness);
+  ReflectionCoefficientsLocSlab(std::shared_ptr<Permittivity> permittivity,
+                                double thickness);
 
-  ReflectionCoefficientsLocSlab(std::string input_file);
+  ReflectionCoefficientsLocSlab(const std::string &input_file);
 
   /*!
    * Returns the p- and s-polarized reflection coefficient.
    */
-  void ref(std::complex<double> &r_p, std::complex<double> &r_s, double omega, std::complex<double> kappa);
+  void calculate(double omega, std::complex<double> kappa,
+                 std::complex<double> &r_p, std::complex<double> &r_s) const;
+
   // getter functions
-  std::complex<double> get_epsilon(double omega) {
-    return this->permittivity->epsilon(omega);
+  std::complex<double> get_epsilon(double omega) const {
+    return permittivity->calculate(omega);
   };
-  double get_thickness(){
-   return this->thickness;
-  };
-  };
+
+  double get_thickness() const { return thickness; };
+};
 ```
 
 
@@ -100,7 +101,7 @@ Direct constructor for the class.
 ### `# ReflectionCoefficientsLocSlab(std::string input_file)`
 Input file constructor for the class.
 
-### `# void ref(std::complex<double> &r_p, std::complex<double> &r_s, double omega, std::complex<double> kappa)`
+###  `#void calculate(double omega, std::complex<double> kappa,std::complex<double> &r_p, std::complex<double> &r_s) const;`
 See [ReflectionCoefficients](#ReflectionCoefficients).
 ## Input file
 The input file sections for the permittivities look like this

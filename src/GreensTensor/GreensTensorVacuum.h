@@ -7,7 +7,7 @@
 
 class GreensTensorVacuum : public GreensTensor {
 private:
-  double relerr;
+  double relerr; //integration error along the k_v direction
 
 public:
   // constructors

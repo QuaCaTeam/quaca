@@ -95,9 +95,7 @@ TEST_CASE("The operations calculate_tensor and the integrand_2d_k coincide",
   cx_mat::fixed<3, 3> Green(fill::zeros);
   cx_mat::fixed<3, 3> Green_fancy_I_ct(fill::zeros);
 
-  vec::fixed<2> kvec;
-  kvec(0) = k_x;
-  kvec(1) = k_y;
+  vec::fixed<2> kvec = { k_x, k_y };
   double omega_dp = omega + k_x * v;
   double k = sqrt(k_x * k_x + k_y * k_y);
   double cos_phi = k_x / k;
@@ -139,10 +137,6 @@ TEST_CASE("The operations calculate_tensor and the integrand_2d_k coincide",
   REQUIRE(!Green_fancy_I_ct.is_zero());
   REQUIRE(!Green_fancy_I_ik2d.is_zero());
   
-  if(!approx_equal(Green_fancy_I_ct, Green_fancy_I_ik2d, "reldiff", 10E-4))
-  {
-    std::cout << Green_fancy_I_ct << Green_fancy_I_ik2d << std::endl;
-  }
   REQUIRE(approx_equal(Green_fancy_I_ct, Green_fancy_I_ik2d, "reldiff", 10E-4));
 }
 

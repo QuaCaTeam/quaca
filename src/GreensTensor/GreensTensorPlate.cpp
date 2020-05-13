@@ -6,6 +6,7 @@ namespace pt = boost::property_tree;
 
 // integration routine
 #include "../Calculations/Integrations.h"
+
 #include "../Permittivity/PermittivityFactory.h"
 #include "../ReflectionCoefficients/ReflectionCoefficientsFactory.h"
 #include "GreensTensorPlate.h"
@@ -15,7 +16,13 @@ GreensTensorPlate::GreensTensorPlate(
     std::shared_ptr<ReflectionCoefficients> reflection_coefficients,
     double delta_cut, const vec::fixed<2> &rel_err)
     : GreensTensor(v, beta), za(za), delta_cut(delta_cut), rel_err(rel_err),
-      reflection_coefficients(std::move(reflection_coefficients)) {}
+      reflection_coefficients(std::move(reflection_coefficients)) {
+
+      //assertions
+      assert(this->za >= 0);
+      assert(this->delta_cut >= 0);
+      assert(this->rel_err(0) >= 0 && this->rel_err(1) >= 0);
+      }
 
 GreensTensorPlate::GreensTensorPlate(const std::string &input_file)
     : GreensTensor(input_file) {
@@ -37,6 +44,11 @@ GreensTensorPlate::GreensTensorPlate(const std::string &input_file)
   this->delta_cut = root.get<double>("GreensTensor.delta_cut");
   this->rel_err(0) = root.get<double>("GreensTensor.rel_err_0");
   this->rel_err(1) = root.get<double>("GreensTensor.rel_err_1");
+
+  //assertions
+  assert(this->za >= 0);
+  assert(this->delta_cut >= 0);
+  assert(this->rel_err(0) >= 0 && this->rel_err(1) >= 0);
 }
 
 void GreensTensorPlate::calculate_tensor(double omega, vec::fixed<2> k,
@@ -172,14 +184,14 @@ double GreensTensorPlate::integrand_1d_k(double phi, double omega,
 }
 
 double GreensTensorPlate::integrand_2d_k(double kappa_double, double omega,
-                                         double kx,
+                                         double phi,
                                          const vec::fixed<2> &indices,
                                          Tensor_Options fancy_complex,
                                          Weight_Options weight_function) const {
 
   double v_quad = v * v;
   double omega_quad = omega * omega;
-  double cos_phi = cos(kx);
+  double cos_phi = cos(phi);
   double cos_phi_quad = cos_phi * cos_phi;
   double sin_phi_quad = 1.0 - cos_phi_quad;
 
