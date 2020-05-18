@@ -1,4 +1,5 @@
 dist: bionic
+language: cpp
 
 before_script:
    - apt-get update
