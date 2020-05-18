@@ -13,15 +13,11 @@ addons:
 
 jobs:
   include:
-    - stage: build
+    - stage: build and test
       script:
       - mkdir -p build
       - cd build
       - cmake ..
       - make
-    - stage: test
-      script:
-      - mkdir -p build
-      - cd build
       - ./../bin/test_quaca_unit
       - ./../bin/test_quaca_integrated
