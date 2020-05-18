@@ -1,0 +1,20 @@
+dist: bionic
+
+before_script:
+   - apt-get update
+   - apt-get -y install cmake make g++ libboost-filesystem-dev libgsl-dev liblapack-dev libboost-program-options-dev
+
+jobs:
+  include:
+    - stage: build
+      script:
+      - mkdir -p build
+      - cd build
+      - cmake ..
+      - make
+    - stage: test
+      script:
+      - mkdir -p build
+      - cd build
+      - ./../bin/test_quaca_unit
+      - ./../bin/test_quaca_integrated
