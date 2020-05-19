@@ -33,12 +33,12 @@ public:
 
   // calculate the tensor in frequency and momentum space
   void calculate_tensor(double omega, vec::fixed<2> k,
-                        cx_mat::fixed<3, 3> &GT) const;
+                        cx_mat::fixed<3, 3> &GT) const override;
 
   // integrate over a two-dimensional k space
   void integrate_k(double omega, cx_mat::fixed<3, 3> &GT,
                    Tensor_Options fancy_complex,
-                   Weight_Options weight_function) const;
+                   Weight_Options weight_function) const override;
 
   // integrands
   double integrand_1d_k(double phi, double omega, const vec::fixed<2> &indices,
@@ -58,10 +58,13 @@ public:
   double get_delta_cut() const { return this->delta_cut; };
   double get_rel_err_0() const { return this->rel_err(0); };
   double get_rel_err_1() const { return this->rel_err(1); };
-  double omega_ch() const;
+  double omega_ch() const override;
 
   // setter function
   void set_za(double za_new) { this->za = za_new; };
+
+  // print info
+  void print_info(std::ostream &stream) const override;
 };
 
 #endif // GREENSTENSORPLATE_H

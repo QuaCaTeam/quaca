@@ -60,3 +60,12 @@ void GreensTensorPlateVacuum::calculate_tensor(double omega, vec::fixed<2> k,
 
   GT += vac;
 }
+
+void GreensTensorPlateVacuum::print_info(std::ostream &stream) const {
+  stream << "# GreensTensorPlateVacuum\n#\n"
+         << "# v = " << v << "\n"
+         << "# beta = " << beta << "\n"
+         << "# za = " << za << "\n"
+         << "# delta_cut = " << delta_cut << "\n"
+         << "# rel_err = " << rel_err(0) << "," << rel_err(1) << "\n";
+}

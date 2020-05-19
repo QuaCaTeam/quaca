@@ -36,6 +36,8 @@ public:
     this->vacuum_greens_tensor->set_v(v);
   };
 
+  // print info
+  void print_info(std::ostream &stream) const override;
 };
 
 #endif // GREENSTENSORPLATEVACUUM_H

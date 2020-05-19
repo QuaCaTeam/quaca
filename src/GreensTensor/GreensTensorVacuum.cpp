@@ -1,4 +1,4 @@
-#include <assert.h>
+#include <cassert>
 
 // json parser
 #include <boost/property_tree/json_parser.hpp>
@@ -13,7 +13,7 @@ GreensTensorVacuum::GreensTensorVacuum(double v, double beta, double relerr)
     assert(relerr >= 0);
     }
 
-GreensTensorVacuum::GreensTensorVacuum(std::string input_file)
+GreensTensorVacuum::GreensTensorVacuum(const std::string& input_file)
     : GreensTensor(input_file) {
 
   // Create a root
@@ -166,3 +166,10 @@ double GreensTensorVacuum::integrand_k(double kv, double omega,
 }
 
 double GreensTensorVacuum::omega_ch() const { return 0; }
+
+void GreensTensorVacuum::print_info(std::ostream &stream) const {
+  stream << "# GreensTensorPlateVacuum\n#\n"
+         << "# v = " << v << "\n"
+         << "# beta = " << beta << "\n"
+         << "# relerr = " << relerr << "\n";
+}

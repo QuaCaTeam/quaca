@@ -18,11 +18,11 @@ GreensTensorPlate::GreensTensorPlate(
     : GreensTensor(v, beta), za(za), delta_cut(delta_cut), rel_err(rel_err),
       reflection_coefficients(std::move(reflection_coefficients)) {
 
-      //assertions
-      assert(this->za >= 0);
-      assert(this->delta_cut >= 0);
-      assert(this->rel_err(0) >= 0 && this->rel_err(1) >= 0);
-      }
+  // assertions
+  assert(this->za >= 0);
+  assert(this->delta_cut >= 0);
+  assert(this->rel_err(0) >= 0 && this->rel_err(1) >= 0);
+}
 
 GreensTensorPlate::GreensTensorPlate(const std::string &input_file)
     : GreensTensor(input_file) {
@@ -45,7 +45,7 @@ GreensTensorPlate::GreensTensorPlate(const std::string &input_file)
   this->rel_err(0) = root.get<double>("GreensTensor.rel_err_0");
   this->rel_err(1) = root.get<double>("GreensTensor.rel_err_1");
 
-  //assertions
+  // assertions
   assert(this->za >= 0);
   assert(this->delta_cut >= 0);
   assert(this->rel_err(0) >= 0 && this->rel_err(1) >= 0);
@@ -345,4 +345,13 @@ std::complex<double> GreensTensorPlate::get_r_s(double omega, double k) const {
 double GreensTensorPlate::omega_ch() const {
   // Calculate omega_cut (reasonable for every plate setup)
   return this->delta_cut * this->v / this->za;
+}
+
+void GreensTensorPlate::print_info(std::ostream &stream) const {
+  stream << "# GreensTensorPlate\n#\n"
+         << "# v = " << v << "\n"
+         << "# beta = " << beta << "\n"
+         << "# za = " << za << "\n"
+         << "# delta_cut = " << delta_cut << "\n"
+         << "# rel_err = " << rel_err(0) << "," << rel_err(1) << "\n";
 }
