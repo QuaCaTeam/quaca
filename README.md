@@ -32,7 +32,7 @@ quaca/build $ make quaca
 An executable called `quaca` should now have been build and can be found in the `quaca/bin` directory.
 
 ### Documentation
-For now we do not upload the documentation anywhere, so it can only be viewed locally using the following command from the command line
+The documentation can either be seen [here](https://myoelmy.github.io/quaca) or be viewed locally using the following command from the command line
 ```
 quaca $ cd docs && python -m SimpleHTTPServer 3000
 ```
