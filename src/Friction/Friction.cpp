@@ -119,3 +119,11 @@ double Friction::friction_integrand(double omega,
     exit(0);
   }
 }
+
+void Friction::print_info(std::ostream &stream) const {
+  stream << "# Friction\n#\n"
+  << "# relerr_omega = " << relerr_omega << "\n";
+ greens_tensor->print_info(stream);
+ polarizability->print_info(stream);
+ powerspectrum->print_info(stream);
+}
