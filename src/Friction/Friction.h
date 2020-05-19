@@ -29,11 +29,14 @@ public:
   double friction_integrand(double omega, Spectrum_Options spectrum) const;
 
   // getter functions
-  std::shared_ptr<GreensTensor> &get_greens_tensor() { return greens_tensor; };
-  std::shared_ptr<Polarizability> &get_polarizability() {
+  std::shared_ptr<GreensTensor> get_greens_tensor() { return greens_tensor; };
+  std::shared_ptr<Polarizability> get_polarizability() {
     return polarizability;
   };
-  std::shared_ptr<PowerSpectrum> &get_powerspectrum() { return powerspectrum; };
+  std::shared_ptr<PowerSpectrum> get_powerspectrum() { return powerspectrum; };
+
+  // print info
+  void print_info(std::ostream &stream) const;
 };
 
 #endif // QUANTUMFRICTION_H

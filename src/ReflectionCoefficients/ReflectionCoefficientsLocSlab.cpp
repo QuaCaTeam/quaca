@@ -64,3 +64,8 @@ void ReflectionCoefficientsLocSlab::calculate(double omega,
     r_s = conj(r_s);
   }
 }
+void ReflectionCoefficientsLocSlab::print_info(std::ostream &stream) const {
+  stream << "# ReflectionCoefficientsLocSlab\n#\n"
+         << "# thickness = " << thickness << "\n";
+  permittivity->print_info(stream);
+}

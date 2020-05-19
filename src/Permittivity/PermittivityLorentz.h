@@ -31,9 +31,12 @@ public:
   double get_eps_inf() const { return this->eps_inf; };
   double get_omega_p() const { return this->omega_p; };
   double get_omega_0() const { return this->omega_0; };
-  std::shared_ptr<MemoryKernel> &get_memory_kernel() {
+  std::shared_ptr<MemoryKernel> get_memory_kernel() {
     return this->memory_kernel;
   };
+
+  // print info
+  void print_info(std::ostream &stream) const override;
 };
 
 #endif // PERMITTIVITYLORENTZ_H

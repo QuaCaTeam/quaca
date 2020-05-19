@@ -50,3 +50,9 @@ PermittivityDrude::calculate_times_omega(double omega) const {
 
   return result;
 }
+
+void PermittivityDrude::print_info(std::ostream &stream) const {
+  stream << "# PermittivityDrude\n#\n"
+         << "# omega_p = " << omega_p << "\n"
+         << "# gamma = " << gamma << "\n";
+}

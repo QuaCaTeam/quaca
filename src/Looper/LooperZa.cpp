@@ -23,7 +23,7 @@ LooperZa::LooperZa(const std::string &input_file) : Looper(input_file) {
 }
 
 double LooperZa::calculate_value(int step,
-                                 std::shared_ptr<Friction> quantum_friction) {
+                                 std::shared_ptr<Friction> quantum_friction) const {
 
   // change za
   auto pt = std::dynamic_pointer_cast<GreensTensorPlate>(
@@ -39,4 +39,12 @@ double LooperZa::calculate_value(int step,
   pt->set_za(this->steps[step]);
 
   return quantum_friction->calculate(NON_LTE_ONLY);
+}
+
+void LooperZa::print_info(std::ostream &stream) const {
+  stream << "# LooperZa\n#\n"
+         << "# start = " << start << "\n"
+         << "# end = " << end << "\n"
+         << "# number_of_steps = " << number_of_steps << "\n"
+         << "# scale = " << scale << "\n";
 }

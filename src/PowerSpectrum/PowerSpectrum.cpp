@@ -1,6 +1,5 @@
 #include "PowerSpectrum.h"
 #include "../GreensTensor/GreensTensorFactory.h"
-#include <string>
 
 // json parser
 #include <boost/property_tree/json_parser.hpp>
@@ -73,4 +72,10 @@ void PowerSpectrum::calculate(double omega, cx_mat::fixed<3, 3> &powerspectrum,
     // Marty's PhD thesis
     powerspectrum = 1. / M_PI * alpha * green * trans(alpha);
   }
+}
+
+void PowerSpectrum::print_info(std::ostream &stream) const {
+  stream << "# PowerSpectrum\n#\n";
+  greens_tensor->print_info(stream);
+  polarizability->print_info(stream);
 }

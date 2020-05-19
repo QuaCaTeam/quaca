@@ -43,3 +43,8 @@ std::complex<double> OhmicMemoryKernel::calculate(double omega) const {
   const std::complex<double> gammac(this->gamma, 0E0);
   return gammac;
 }
+
+void OhmicMemoryKernel::print_info(std::ostream &stream) const {
+  stream << "# OhmicMemoryKernel\n#\n"
+         << "# gamma = " << gamma << "\n";
+}

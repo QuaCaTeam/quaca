@@ -37,15 +37,15 @@ Polarizability::Polarizability(const std::string &input_file) {
   this->greens_tensor = GreensTensorFactory::create(input_file);
 
   // Check if the category Polarizability.MemoryKernel exists
-  boost::optional<pt::ptree &> child =
+  boost::optional<pt::ptree &> kernel_given =
       root.get_child_optional("Polarizability.MemoryKernel");
 
-  if (child) {
+  if (kernel_given) {
     this->mu =
         MemoryKernelFactory::create(input_file, "Polarizability.MemoryKernel");
   } else {
     this->mu = nullptr;
-  };
+  }
 }
 
 void Polarizability::calculate_tensor(double omega, cx_mat::fixed<3, 3> &alpha,
@@ -61,7 +61,7 @@ void Polarizability::calculate_tensor(double omega, cx_mat::fixed<3, 3> &alpha,
         omega_a * omega_a - omega * omega - I * omega * mu->calculate(omega);
   } else {
     diag(0, 0) = diag(1, 1) = diag(2, 2) = omega_a * omega_a - omega * omega;
-  };
+  }
   // calculate integral over green's tensor with fancy R
   cx_mat::fixed<3, 3> greens_R;
   this->greens_tensor->integrate_k(omega, greens_R, RE, UNIT);
@@ -104,4 +104,14 @@ double Polarizability::integrate_omega(const vec::fixed<2> &indices,
     return this->integrand_omega(x, indices, fancy_complex);
   };
   return cquad(F, omega_min, omega_max, relerr, abserr);
+}
+
+void Polarizability::print_info(std::ostream &stream) const {
+  stream << "# Polarizability\n#\n"
+         << "# omega_a = " << omega_a << "\n"
+         << "# alpha_zero = " << alpha_zero << "\n";
+  if (mu != nullptr) {
+    mu->print_info(stream);
+  }
+  greens_tensor->print_info(stream);
 }

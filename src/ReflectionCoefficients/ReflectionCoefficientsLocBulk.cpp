@@ -39,3 +39,8 @@ void ReflectionCoefficientsLocBulk::calculate(double omega,
     r_s = conj(r_s);
   }
 }
+
+void ReflectionCoefficientsLocBulk::print_info(std::ostream &stream) const {
+  stream << "# ReflectionCoefficientsLocBulk\n#\n";
+  permittivity->print_info(stream);
+}

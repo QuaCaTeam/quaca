@@ -12,6 +12,9 @@ public:
   virtual void calculate(double omega, std::complex<double> kappa,
                          std::complex<double> &r_p,
                          std::complex<double> &r_s) const = 0;
+
+  // print info
+  virtual void print_info(std::ostream &stream) const =0;
 };
 
 #endif // REFLECTIONCOEFFICIENTS_H
