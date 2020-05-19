@@ -69,5 +69,5 @@ void PermittivityLorentz::print_info(std::ostream &stream) const {
          << "# eps_inf = " << eps_inf << "\n"
          << "# omega_p = " << omega_p << "\n"
          << "# omega_0 = " << omega_0 << "\n";
-  memory_kernel->print_info();
+  memory_kernel->print_info(stream);
 }
