@@ -63,3 +63,11 @@ PermittivityLorentz::calculate_times_omega(double omega) const {
 
   return result;
 }
+
+void PermittivityLorentz::print_info(std::ostream &stream) const {
+  stream << "# PermittivityLorentz\n#\n"
+         << "# eps_inf = " << eps_inf << "\n"
+         << "# omega_p = " << omega_p << "\n"
+         << "# omega_0 = " << omega_0 << "\n";
+  memory_kernel->print_info();
+}
