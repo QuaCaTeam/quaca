@@ -29,12 +29,16 @@ public:
    * Returns the p- and s-polarized reflection coefficient.
    */
   void calculate(double omega, std::complex<double> kappa,
-                 std::complex<double> &r_p, std::complex<double> &r_s) const;
+                 std::complex<double> &r_p,
+                 std::complex<double> &r_s) const override;
 
   // getter functions
   std::complex<double> get_epsilon(double omega) const {
     return permittivity->calculate(omega);
   };
+
+  // print info
+  void print_info(std::ostream &stream) const override;
 };
 
 #endif // REFLECTIONCOEFFICIENTSLOCBULK_H

@@ -35,6 +35,9 @@ public:
   std::shared_ptr<Polarizability> &get_polarizability() {
     return polarizability;
   };
+
+  // print info
+  void print_info(std::ostream &stream) const;
 };
 
 #endif // POWERSPECTRUM_H
