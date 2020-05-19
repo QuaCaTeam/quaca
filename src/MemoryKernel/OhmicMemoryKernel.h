@@ -8,7 +8,7 @@
 //! An ohmic memory kernel
 class OhmicMemoryKernel : public MemoryKernel {
 private:
-  double gamma; // damping coefficient
+  double gamma; ///< damping coefficient
 
 public:
   // constructors
@@ -21,6 +21,9 @@ public:
 
   // getter functions
   double get_gamma() const { return this->gamma; };
+
+  // print info
+  void print_info(std::ostream &stream) const override;
 };
 
 #endif // OHMICMEMORYKERNEL_H

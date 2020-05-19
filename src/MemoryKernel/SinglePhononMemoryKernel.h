@@ -8,10 +8,10 @@
 //! An SinglePhonon-shape memory kernel
 class SinglePhononMemoryKernel : public MemoryKernel {
 private:
-  double gamma;        // ohmic damping coefficient
-  double gamma_phon;   // phononic damping coefficient
-  double omega_phon;   // phononic frequency
-  double coupling;     // dimensionless coupling coefficient to the dipole moment
+  double gamma;        ///< ohmic damping coefficient
+  double gamma_phon;   ///< phononic damping coefficient
+  double omega_phon;   ///< phononic frequency
+  double coupling;     ///< dimensionless coupling coefficient to the dipole moment
 
 public:
   // direct constructor
@@ -23,7 +23,6 @@ public:
   // constructor from .json file of a specific section
   SinglePhononMemoryKernel(const std::string &input_file, const std::string &section);
 
-
   // calculate function
   std::complex<double> calculate(double omega) const override;
 
@@ -32,6 +31,9 @@ public:
   double get_gamma_phon() const { return this->gamma_phon; };
   double get_omega_phon() const { return this->omega_phon; };
   double get_coupling() const { return this->coupling; };
+
+  // print info
+  void print_info(std::ostream &stream) const override;
 };
 
 #endif // SINGLEPHONONMEMORYKERNEL_H

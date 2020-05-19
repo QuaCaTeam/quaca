@@ -52,3 +52,11 @@ std::complex<double> SinglePhononMemoryKernel::calculate(double omega) const {
   return this->gamma + this->coupling*this->coupling*pow(this->omega_phon,4)
     /(I*omega*(this->omega_phon*this->omega_phon - omega*omega - I*this->gamma_phon*omega ));
 }
+
+void SinglePhononMemoryKernel::print_info(std::ostream &stream) const {
+  stream << "# SinglePhonenMemoryKernel\n#\n"
+      << "# gamma = " << gamma << "\n"
+      << "# gamma_phon = " << gamma_phon << "\n"
+      << "# omega_phon = " << omega_phon << "\n"
+      << "# coupling = " << coupling << "\n";
+}
