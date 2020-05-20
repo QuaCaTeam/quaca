@@ -126,3 +126,21 @@ The input file sections for the permittivities look like this
 }
 ```
 <!-- tabs:end -->
+
+## Examples
+
+<!-- tabs:start -->
+### **Example: Local Bulk**
+In order to construct and calculate the permittivity of a Drude material with $\omega_p=9\,\mathrm{eV}$ and $\gamma=0.1\,\mathrm{eV}$ at $\omega=1\,\mathrm{eV}$, we can employ direct constructor as follows
+```cpp
+double gamma = 0.1;
+double omega_p = 9;
+
+// Define permittivity class
+PermittivityDrude perm(omega_p, gamma);
+
+// Calculate permittivity
+double omega = 1;
+std::complex<double> eps = perm.calculate(omega) 
+```
+<!-- tabs:end -->
