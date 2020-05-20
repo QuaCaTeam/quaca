@@ -99,6 +99,7 @@ int main(int argc, char *argv[]) {
                                    polarizability, powerspectrum, relerr_omega);
 
     // Parallelize the for-loop of the given looper
+#pragma omp critical
     progbar.display();
 
 #pragma omp for schedule(dynamic)
@@ -107,7 +108,10 @@ int main(int argc, char *argv[]) {
 
       // std::cout << "Thread: " << omp_get_thread_num() << " Step: " << i
       //           << " Friction force: " << friction_data[i] << endl;
+
+#pragma omp critical
       ++progbar;
+#pragma omp critical
       progbar.display();
     }
   }
