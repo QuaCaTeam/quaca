@@ -342,3 +342,28 @@ Tasks:
 Dreams:
     - Doxygen style documentation
     - mpi parallelisation in friction app
+    
+    
+### Meeting 14.05.2020
+
+- Update
+*  Marty: Powerspectrum, Polarizabilty, Permittivity, MemoryKernel and Friction are updated and documented
+* Simon: Green's tensor and reflection coefficient are updated and documented
+* Christoph: Tutorials are almost finished, documentation of the integration routine is also implemented
+
+- To Do:
+* Friction class: rewrite json-file constructor
+* write print-info functions for all classes
+
+- Tasks:
+
+- Marty:
+* Generate GitHub and Travis
+* check docs of Green's tensor and reflection coefficient
+
+- Simon:
+* rewrite Friction json-constructor
+* check docs of Powerspectrum, Polarizabilty, Permittivity, MemoryKernel and Friction 
+
+- Christoph:
+* print info, finish tutorial
