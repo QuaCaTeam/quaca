@@ -13,10 +13,13 @@ namespace pt = boost::property_tree;
 #include "ProgressBar.hpp"
 #include "Quaca.h"
 
+// parameters that are parsed from the command line
 std::string parameter_file;
 std::string output_file;
 int num_threads = 1;
 
+// reads the input file and number of threads from the command line
+// uses boost program options
 void read_command_line(int argc, char *argv[]) {
   /* Read command line options */
   try {
@@ -48,7 +51,7 @@ void read_command_line(int argc, char *argv[]) {
 }
 
 int main(int argc, char *argv[]) {
-  // get file from command line
+  // get command line options
   read_command_line(argc, argv);
 
   // define looper
@@ -61,13 +64,14 @@ int main(int argc, char *argv[]) {
   // define progressbar
   ProgressBar progbar(looper->get_steps_total(), 70);
 
-  // Check wether the number of threads have been set by the --threads flag
+  // Check whether the number of threads have been set by the --threads flag
   if (num_threads == -1) {
     // If the --threads flag has not been set, set the number of flags to
     // the maximal value
     num_threads = omp_get_max_threads();
   }
-  // Create a paralle region given threads given by the --threads flag
+
+  // Create a parallel region given threads given by the --threads flag
   // we have to create the parallel region already here to ensure,
   // that any thread creates their own instance of quantum_friction
   std::cout << "Starting parallel region with " << num_threads
@@ -106,17 +110,12 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < looper->get_steps_total(); i++) {
       friction_data[i] = looper->calculate_value(i, quant_friction);
 
-      // std::cout << "Thread: " << omp_get_thread_num() << " Step: " << i
-      //           << " Friction force: " << friction_data[i] << endl;
-
 #pragma omp critical
       ++progbar;
 #pragma omp critical
       progbar.display();
     }
   }
-
-  // Store calculated data
 
   // define output file
   std::ofstream file;
