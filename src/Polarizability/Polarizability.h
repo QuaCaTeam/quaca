@@ -37,12 +37,12 @@ public:
                         Tensor_Options fancy_complex) const;
 
   // integration over omega
-  double integrate_omega(const vec::fixed<2> &indices,
+  double integrate_omega(const uvec::fixed<2> &indices,
                          Tensor_Options fancy_complex, double omega_min,
                          double omega_max, double relerr, double abserr) const;
 
   // integrand for the omega integration
-  double integrand_omega(double omega, const vec::fixed<2> &indices,
+  double integrand_omega(double omega, const uvec::fixed<2> &indices,
                          Tensor_Options fancy_complex) const;
 
   // getter functions

@@ -85,7 +85,7 @@ void Polarizability::calculate_tensor(double omega, cx_mat::fixed<3, 3> &alpha,
 }
 
 double Polarizability::integrand_omega(double omega,
-                                       const vec::fixed<2> &indices,
+                                       const uvec::fixed<2> &indices,
                                        Tensor_Options fancy_complex) const {
   cx_mat::fixed<3, 3> alpha;
   calculate_tensor(omega, alpha, fancy_complex);
@@ -96,7 +96,7 @@ double Polarizability::integrand_omega(double omega,
   return result;
 }
 
-double Polarizability::integrate_omega(const vec::fixed<2> &indices,
+double Polarizability::integrate_omega(const uvec::fixed<2> &indices,
                                        Tensor_Options fancy_complex,
                                        double omega_min, double omega_max,
                                        double relerr, double abserr) const {
