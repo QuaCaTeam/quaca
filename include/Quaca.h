@@ -18,8 +18,6 @@
 #include "../src/MemoryKernel/OhmicMemoryKernel.h"
 #include "../src/MemoryKernel/SinglePhononMemoryKernel.h"
 
-#include "../src/Options/Options.h"
-
 #include "../src/Permittivity/Permittivity.h"
 #include "../src/Permittivity/PermittivityDrude.h"
 #include "../src/Permittivity/PermittivityFactory.h"
