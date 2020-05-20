@@ -4,7 +4,6 @@
 - [__Tutorials__](tutorials/first_calculation)
   - [First QuaCa calculation](tutorials/first_calculation)
   - [Write your own main](tutorials/mainfile)
-  - [Automate your calculation](tutorials/automate)
   - [Implement a new feature](tutorials/newfeature)
 
 - [__Documentation__](api/greenstensor)

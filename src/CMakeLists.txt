@@ -13,7 +13,7 @@ set(quaca_sources
         Looper/LooperZa.cpp
         MemoryKernel/MemoryKernelFactory.cpp
         MemoryKernel/OhmicMemoryKernel.cpp
-	MemoryKernel/SinglePhononMemoryKernel.cpp
+        MemoryKernel/SinglePhononMemoryKernel.cpp
         Options/Options.cpp
         Permittivity/PermittivityDrude.cpp
         Permittivity/PermittivityFactory.cpp
@@ -28,14 +28,14 @@ add_library(quaca SHARED ${quaca_sources})
 
 # link libraries
 target_link_libraries(quaca
-    ${GSL_LIBRARY}
-    ${GSL_CBLAS_LIBRARY}
-    ${BLAS_LIBRARIES}
-    ${LAPACK_LIBRARIES}
-    ${Boost_FILESYSTEM_LIBRARY}
-    ${Boost_SYSTEM_LIBRARY}
-    ${Boost_PROGRAM_OPTIONS_LIBRARY}
-)
+        ${GSL_LIBRARY}
+        ${GSL_CBLAS_LIBRARY}
+        ${BLAS_LIBRARIES}
+        ${LAPACK_LIBRARIES}
+        ${Boost_FILESYSTEM_LIBRARY}
+        ${Boost_SYSTEM_LIBRARY}
+        ${Boost_PROGRAM_OPTIONS_LIBRARY}
+        )
 
 # set global header
 set_target_properties(quaca PROPERTIES PUBLIC_HEADER include/Quaca.h)

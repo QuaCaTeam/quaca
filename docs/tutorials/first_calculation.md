@@ -1,4 +1,4 @@
-# First QuaCa calculation {docsify-ignore-all}
+# First QuaCa calculation
 
 We assume that you have QuaCa installed and are ready to go.
 In this tutorial we will show you how to setup your system and how QuaCa generally works.
@@ -30,102 +30,12 @@ There are lots of things we could change in the above setup without changing the
 Because of this inherent modularity QuaCa reads an input file that contains all these parameters, so that the program does not have to be recompiled on each change.
 
 The parameters are written in  a `.json` file.
-It consists of sections, which are named after the classes (e.g. GreensTensor, Polarizability) and keys which are named after the properties they represent (e.g. the velocity v, the inverse temperature beta, etc.).
+It consists of sections, which are named after the classes (e.g. `GreensTensor`, `Polarizability`) and keys which are named after the properties they represent (e.g. the velocity v, the inverse temperature beta, etc.).
 Classes are abstract units that resemble a larger term in the formula for quantum friction such as the polarizability, the power spectrum or the Green's tensor.
-For our situation the section for the Green's tensor would look like this:
+Let us now create an input file in the `data/` directory and call it `tutorial.json`:
 ```json
 {
-    "GreensTensor":
-    {
-        "type": "plate",
-        "v" : 5e-4,
-        "beta": 1e-4
-    }
-}
-```
-
-?> To see which keys are available in a certain section, look into the [API documentation](api) of the relevant class.
-
-Let us now create an input file in the `data/` directory and call it `tutorial.json`.
-Let us now list all classes that we have to define in the input file.
-We need a Green's tensor for which we in turn need reflection coefficients and a permittivity.
-```json
-{
-    "GreensTensor":{
-        ...
-    },
-    "ReflectionCoefficients":{
-        ...
-    },
-    "Permittivity":{
-        ...
-    }
-}
-```
-
-We also need a polarizability and a power spectrum, so our input file looks like this
-```json
-{
-    "GreensTensor":{
-        ...
-    },
-    "ReflectionCoefficients":{
-        ...
-    },
-    "Permittivity":{
-        ...
-    },
-    "Polarizability":{
-
-    },
-    "PowerSpectrum":{
-
-    }
-}
-```
-Let us now specify each class according to our description above and add the keys (i.e. the variable names) to the appropriate section
-```json
-{
-    "GreensTensor":{
-        "type" : "plate",
-        "v" : ,
-        "beta" : ,
-        "za" : ,
-        "delta_cut" : ,
-        "rel_err_0" : ,
-        "rel_err_1" : 
-    },
-    "ReflectionCoefficients":{
-        "type": "local bulk"
-    },
-    "Permittivity":{
-        "type": "drude",
-        "omega_p" : ,
-        "gamma" : 
-    },
-    "Polarizability":{
-        "type" : "nobath",
-        "omega_a" : ,
-        "alpha_zero" :
-    },
-    "PowerSpectrum":{
-        "type" : "harmonic oscillator"
-    }
-}
-```
-
-You might notice some parameters that have nothing to do with the physical system we described above.
-The parameters `delta_cut`, `rel_err_0` and `rel_err_1` are numerical parameters that specify the cutoff for the integrations up to infinity and the relative errors of the integration respectively.
-For more information have a look at the documentation of the [GreensTensor class](api/greenstensor).
-
-We are now ready to enter some values into our input file, but wait.
-What are the units that QuaCa requires?
-QuaCa works with a system of measurement called natural units.
-For more information and for a unit converter applet see the [units page](documentation/units).
-If we convert the units for our system appropriately the input file `tutorial.json` should now look like this
-```json
-{
-    "GreensTensor":{
+    "GreensTensor": {
         "type" : "plate",
         "v" : 1e-4,
         "beta" : 1e6,
@@ -134,60 +44,22 @@ If we convert the units for our system appropriately the input file `tutorial.js
         "rel_err_0" : 1e-4,
         "rel_err_1" : 1e-2
     },
-    "ReflectionCoefficients":{
+    "ReflectionCoefficients": {
         "type": "local bulk"
     },
-    "Permittivity":{
+    "Permittivity": {
         "type": "drude",
         "omega_p" : 9.0,
         "gamma" : 0.1
     },
-    "Polarizability":{
-        "type" : "nobath",
+    "Polarizability": {
         "omega_a" : 1.3,
         "alpha_zero" : 6e-9
     },
-    "PowerSpectrum":{
-        "type" : "harmonic oscillator"
-    }
-}
-```
-
-Now that we have entered all values into our input file we are almost ready to start our first calculation.
-The only thing left to specify is that we want to calculate the quantum friction over a range of velocities.
-This can be specified by defining a *Looper* at the end of the input file.
-Let us define the Looper at the end of our input file, so our final version looks like this
-```json
-{
-    "GreensTensor":{
-        "type" : "plate",
-        "v" : 1e-4,
-        "beta" : 1e6,
-        "za" : 0.01,
-        "delta_cut" : 20,
-        "rel_err_0" : 1e-4,
-        "rel_err_1" : 1e-2
-    },
-    "ReflectionCoefficients":{
-        "type": "local bulk"
-    },
-    "Permittivity":{
-        "type": "drude",
-        "omega_p" : 9.0,
-        "gamma" : 0.1
-    },
-    "Polarizability":{
-        "type" : "nobath",
-        "omega_a" : 1.3,
-        "alpha_zero" : 6e-9
-    },
-    "PowerSpectrum":{
-        "type" : "harmonic oscillator"
-    },
-    "Friction":{
+    "Friction": {
         "relerr_omega" : 1e-1
     },
-    "Looper":{
+    "Looper": {
         "type" : "v",
         "scale" : "log",
         "start" : 1e-4,
@@ -196,7 +68,24 @@ Let us define the Looper at the end of our input file, so our final version look
     }
 }
 ```
-With our input file filled we can now finally start the calculation.
+
+First of all a note on units. QuaCa works with a system of measurement called natural units, so all parameters that we enter in the input file have to be converted into natural units.
+
+?> For more information and for a unit converter applet see the [units page](documentation/units).
+
+Now let us dissect the input file.
+
+The first section is dedicated to the Green's tensor and contains first the type, which in our case is `plate`, the value for the physical parameters of velocity `v`, inverse temperature `beta` and the distance from the plate `za`. Furthermore we specify numerical parameters that are needed for the integration of the Green's tensor. You can read more about them in the [API documentation of the Green's tensor](api/greenstensor).
+
+The next section is dedicated to the reflection coefficients of the surface and simply state that we want to use the reflection coefficients of a local bulk. After that we specify the permittivity of the bulk to be of type `drude`, i.e. we employ the Drude model, and specify its parameters. 
+
+The next section defines the polarizability of the particle, which has the type `nobath` (that means the particle has no internal bath),  its parameters and the power spectrum. To calculate the quantum friction we need to perform an integral over frequencies, the desired relative error of which is specified in the section `Friction`.
+
+Last but not least we want to tell QuaCa to calculate the frictional force for several velocities. For this we specify in the `Looper` category the type `v`together with a scale type, start/end points and number of steps.
+
+?> For a more comprehensive explanation of all keys in a particular section, have a look the documentation of the class, e.g. for the keys in the polarizability have a look at [Polarizability](api/polarizability).
+
+With our input file filled we can now start the calculation.
 
 ## 3. Run QuaCa
 After installing and building QuaCa you should find an executable called `Friction` in the `bin/` directory.
@@ -209,8 +98,6 @@ We will chose here the input file that we have populated above.
 Notice that since we are in the `bin/` directory we first had to go one directory up and then to `data/tutorial.json`.
 QuaCa now produces an output file in the same directory as the input file and with the same name, but of the file type `.csv`.
 It contains in the first column the variable that we have looped over (which in this case is the velocity v) and in the second column the calculated value of the quantum friction.
-
-The calculation might take a while, with the above paramters and depending on your computer around 10-25sec per value (on the PCs of the developers this calculation ran in 10-14min). If you do not want to wait that long, reduce the number of steps in the input file.
 
 ## 4. Check the results
 Let us now plot the data we obtained from our calculation and compare it to the yellowish line in [this publication](https://link.aps.org/doi/10.1103/PhysRevLett.123.120401).
