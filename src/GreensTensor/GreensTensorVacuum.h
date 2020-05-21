@@ -24,7 +24,7 @@ public:
                    Weight_Options weight_function) const override;
 
   // integrand for integration over one-dimensional k space
-  double integrand_k(double kv, double omega, const vec::fixed<2> &indices,
+  double integrand_k(double kv, double omega, const uvec::fixed<2> &indices,
                                          Tensor_Options fancy_complex,
                                          Weight_Options weight_function) const;
 
