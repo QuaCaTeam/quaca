@@ -33,11 +33,12 @@ public:
                            Tensor_Options fancy_complex,
                            Weight_Options weight_function) const = 0;
 
+  // calculates and returns a characteristic frequency
+  virtual double omega_ch() const = 0;
+
   // getter functions
   double get_v() const { return this->v; };
   double get_beta() const { return this->beta; };
-
-  virtual double omega_ch() const = 0;
 
   // setter function
   virtual void set_v(double v_new) { this->v = v_new; };

@@ -19,9 +19,9 @@ TEST_CASE("ReflectionCoefficientsLocBulk constructors work as expected",
   SECTION("Constructor with json file works") {
     double omega = 1;
     ReflectionCoefficientsLocBulk RefC(
-        "../data/test_files/GreensTensorPlate.json");
+        "../data/test_files/ReflectionLocalBulk.json");
     auto perm = std::make_shared<PermittivityDrude>(
-        "../data/test_files/GreensTensorPlate.json");
+        "../data/test_files/ReflectionLocalBulk.json");
 
     REQUIRE(Approx(RefC.get_epsilon(omega).real()).epsilon(1E-6) ==
             perm->calculate(omega).real());
@@ -33,9 +33,9 @@ TEST_CASE("ReflectionCoefficientsLocBulk reproduces evanescent limit",
   auto omega = GENERATE(-8.21e-3,-1.32e-3,1.2e-3,4.32e-3);
   std::complex<double> kappa = 100.;
   ReflectionCoefficientsLocBulk RefC(
-      "../data/test_files/GreensTensorPlate.json");
+      "../data/test_files/ReflectionLocalBulk.json");
   auto perm = std::make_shared<PermittivityDrude>(
-      "../data/test_files/GreensTensorPlate.json");
+      "../data/test_files/ReflectionLocalBulk.json");
 
   double k_quad = std::real(kappa * kappa) + omega * omega;
 
@@ -61,9 +61,9 @@ TEST_CASE("ReflectionCoefficientsLocBulk reproduces propagation limit",
   double k = 0.1;
 
   ReflectionCoefficientsLocBulk RefC(
-      "../data/test_files/GreensTensorPlate.json");
+      "../data/test_files/ReflectionLocalBulk.json");
   auto perm = std::make_shared<PermittivityDrude>(
-      "../data/test_files/GreensTensorPlate.json");
+      "../data/test_files/ReflectionLocalBulk.json");
 
   std::complex<double> eps = perm->calculate(omega);
 
@@ -94,9 +94,9 @@ TEST_CASE("r_p and r_s of bulk obey the crossing relation",
   }
 
   ReflectionCoefficientsLocBulk RefC(
-      "../data/test_files/GreensTensorPlate.json");
+      "../data/test_files/ReflectionLocalBulk.json");
   auto perm = std::make_shared<PermittivityDrude>(
-      "../data/test_files/GreensTensorPlate.json");
+      "../data/test_files/ReflectionLocalBulk.json");
 
   std::complex<double> rp_lhs, rs_lhs;
   RefC.calculate(omega, kappa, rp_lhs, rs_lhs);

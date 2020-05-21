@@ -1,6 +1,6 @@
 <!-- docs/_sidebar.md -->
 
-- [__Getting Started__](gettingstarted)
+- [__Getting Started__](../README)
 - [__Tutorials__](tutorials/first_calculation)
   - [First QuaCa calculation](tutorials/first_calculation)
   - [Write your own main](tutorials/mainfile)

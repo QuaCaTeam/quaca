@@ -20,9 +20,9 @@ TEST_CASE("ReflectionCoefficientsLocSlab constructors work as expected",
   SECTION("json file constructor") {
     double omega = 1;
     ReflectionCoefficientsLocSlab RefC(
-        "../data/test_files/GreensTensorSlab.json");
+        "../data/test_files/ReflectionLocalSlab.json");
     auto perm = std::make_shared<PermittivityDrude>(
-        "../data/test_files/GreensTensorSlab.json");
+        "../data/test_files/ReflectionLocalSlab.json");
 
     REQUIRE(RefC.get_epsilon(omega).real() == perm->calculate(omega).real());
     REQUIRE(RefC.get_thickness() == 0.05);
@@ -68,7 +68,7 @@ TEST_CASE("r_p and r_s of the slab configuration obey the crossing relation",
   }
 
   ReflectionCoefficientsLocSlab RefC(
-      "../data/test_files/GreensTensorSlab.json");
+      "../data/test_files/ReflectionLocalSlab.json");
 
   std::complex<double> rp_lhs, rs_lhs;
   RefC.calculate(omega, kappa, rp_lhs, rs_lhs);
