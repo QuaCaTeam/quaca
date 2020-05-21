@@ -1,0 +1,11 @@
+{
+    "ReflectionCoefficients": {
+        "type": "local slab",
+	"thickness": 0.05
+    },
+    "Permittivity": {
+        "type": "drude",
+        "gamma": 3.5e-2,
+        "omega_p": 9
+    }
+}
