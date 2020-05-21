@@ -1,6 +1,6 @@
 {
     "ReflectionCoefficients": {
-        "type": "local bulk",
+        "type": "local bulk"
     },
     "Permittivity": {
         "type": "drude",
