@@ -9,8 +9,7 @@ set(test_sources
         Looper/test_LooperV_unit.cpp
         Looper/test_LooperZa_unit.cpp
         MemoryKernel/test_OhmicMemoryKernel_unit.cpp
-	MemoryKernel/test_SinglePhononMemoryKernel_unit.cpp
-        Options/test_Options_unit.cpp
+        MemoryKernel/test_SinglePhononMemoryKernel_unit.cpp
         Permittivity/test_PermittivityDrude_unit.cpp
         Permittivity/test_PermittivityLorentz_unit.cpp
         Polarizability/test_PolarizabilityBath_unit.cpp
@@ -22,19 +21,19 @@ set(test_sources
 
 # Executable
 add_executable(test_quaca_unit
-  ${test_sources}
-  )
+        ${test_sources}
+        )
 
 target_include_directories(test_quaca_unit PRIVATE ../include)
 
 target_link_libraries(test_quaca_unit PRIVATE
-  catch2
-  quaca
-  ${GSL_LIBRARY}
-  ${GSL_CBALS_LIBRARY}
-  ${BLAS_LIBRARIES}
-  ${LAPACK_LIBRARIES}
-  ${Boost_PROGRAM_OPTIONS_LIBRARY}
-  ${Boost_FILESYSTEM_LIBRARY}
-  ${Boost_SYSTEM_LIBRARY}
-)
+        catch2
+        quaca
+        ${GSL_LIBRARY}
+        ${GSL_CBALS_LIBRARY}
+        ${BLAS_LIBRARIES}
+        ${LAPACK_LIBRARIES}
+        ${Boost_PROGRAM_OPTIONS_LIBRARY}
+        ${Boost_FILESYSTEM_LIBRARY}
+        ${Boost_SYSTEM_LIBRARY}
+        )
