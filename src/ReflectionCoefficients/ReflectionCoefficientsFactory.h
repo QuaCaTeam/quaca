@@ -1,8 +1,8 @@
 #ifndef REFLECTIONCOEFFICIENTSFACTORY_H
 #define REFLECTIONCOEFFICIENTSFACTORY_H
 
-#include <memory>
 #include "ReflectionCoefficients.h"
+#include <memory>
 
 //! A factory for the reflection coefficients
 class ReflectionCoefficientsFactory {
