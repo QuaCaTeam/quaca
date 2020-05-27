@@ -14,16 +14,16 @@ PowerSpectrum::PowerSpectrum(const std::string &input_file) {
   // Load the json file in this ptree
   pt::read_json(input_file, root);
 
-  // initialize Green's tensor by an input file
-  this->greens_tensor = GreensTensorFactory::create(input_file);
   // initialize polarizability by an input file
   this->polarizability = std::make_shared<Polarizability>(input_file);
+  // initialize Green's tensor by an input file
+  this->greens_tensor = polarizability->get_greens_tensor(); 
 }
 
 // Constructor with initialization list
 PowerSpectrum::PowerSpectrum(std::shared_ptr<GreensTensor> greens_tensor,
                              std::shared_ptr<Polarizability> polarizability)
-    : greens_tensor(greens_tensor), polarizability(polarizability) {}
+    : greens_tensor(std::move(greens_tensor)), polarizability(std::move(polarizability)) {}
 
 // Compute the power spectrum for a given frequency \omega
 void PowerSpectrum::calculate(double omega, cx_mat::fixed<3, 3> &powerspectrum,
