@@ -1,6 +1,6 @@
 # PowerSpectrum {docsify-ignore-all}
 
-This abstract class serves as a container for the power spectrum of the harmonic dipole autocorrelator $\underline{S}$ as a functional of the [Green's tensor](api/greenstensor) $\underline{G}$, the [polarizability](api/polarizability) $\underline{\alpha}$ and the [memory kernel](api/memorykernel) $\mu$. The power spectrum of a harmonic oscillator can be defined with or without an internal bath. Without an internal bath, the power spectrum reads
+This abstract class serves as a container for the power spectrum of the harmonic dipole autocorrelator $\underline{S}$ as a functional of the [Green's tensor](api/greenstensor) $\underline{G}$, the [polarizability](api/polarizability) $\underline{\alpha}$ and the [memory kernel](api/memorykernel) $\mu$. The power spectrum of a harmonic oscillator can be defined with or without an internal bath. With an internal bath, the power spectrum reads
 $$  \underline{S}(\omega) =\underline{\alpha}(\omega)\left\{ \int \frac{\mathrm{d}^2 \mathbf{k}}{(2 \pi)^2}\frac{ \underline{G}_\Im(\mathbf{k}, \omega + \mathbf{k}^\intercal\mathbf{v})}{1-\exp(-\hbar\omega(\omega+\mathbf{k}^\intercal\mathbf{v}))} + \frac{1}{\alpha_0\omega_a^2}\frac{\omega\mathrm{Re}\{\mu(\omega)\}}{1-\exp(-\hbar\beta\omega)}  \right\} \underline{\alpha}^\dagger(\omega), $$
 and without an internal bath
 $$  \underline{S}(\omega) =\underline{\alpha}(\omega)\int \frac{\mathrm{d}^2 \mathbf{k}}{(2 \pi)^2}\frac{ \underline{G}_\Im(\mathbf{k}, \omega + \mathbf{k}^\intercal\mathbf{v})}{1-\exp(-\hbar\omega(\omega+\mathbf{k}^\intercal\mathbf{v}))} \underline{\alpha}^\dagger(\omega), $$
@@ -12,14 +12,14 @@ class PowerSpectrum {
 protected:
 
   std::shared_ptr<GreensTensor>
-      greens_tensor; // Green's tensor of describing the geometry of
-  // the system
+      greens_tensor; // Green's tensor describing the geometry of
+                     // the system
   std::shared_ptr<Polarizability>
       polarizability; // Polarizability describing the linear
+                      // response of the microscopic particle
 
 public:
 
-  // response of the microscopic particle
   // Constructors
   PowerSpectrum(const std::string &input_file);
 
@@ -85,7 +85,7 @@ Now, we can construct and calculate the power spectrum as follows
  powerspectrum.calculate(omega, PS, FULL);
 ```
 #### **Example (.json): Calculate power spectrum**
-To construct the very same power spectrum of the previous tab via a input file we define ```parameters.json```
+To construct the very same power spectrum of the previous tab via an input file we define ```parameters.json```
 ```json
 {
     "Polarizability": {

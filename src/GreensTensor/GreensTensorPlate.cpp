@@ -150,7 +150,7 @@ void GreensTensorPlate::integrate_k(double omega, cx_mat::fixed<3, 3> &GT,
 }
 
 double GreensTensorPlate::integrand_1d_k(double phi, double omega,
-                                         const vec::fixed<2> &indices,
+                                         const uvec::fixed<2> &indices,
                                          Tensor_Options fancy_complex,
                                          Weight_Options weight_function) const {
 
@@ -185,7 +185,7 @@ double GreensTensorPlate::integrand_1d_k(double phi, double omega,
 
 double GreensTensorPlate::integrand_2d_k(double kappa_double, double omega,
                                          double phi,
-                                         const vec::fixed<2> &indices,
+                                         const uvec::fixed<2> &indices,
                                          Tensor_Options fancy_complex,
                                          Weight_Options weight_function) const {
 

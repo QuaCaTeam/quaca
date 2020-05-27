@@ -62,8 +62,8 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
 
   SECTION("Option: IM") {
     double factor = 1.;
-    for(int i = 0; i < 3; ++i) {
-      for(int j = 0; j < 3; ++j) {
+    for(size_t i = 0; i < 3; ++i) {
+      for(size_t j = 0; j < 3; ++j) {
 	RHS(i,j) = Greens.integrand_k(k_v, omega, {i, j}, IM, UNIT);
       }
     }
@@ -75,8 +75,8 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
 
   SECTION("Option: IM, KV") {
     double factor = k_v;
-    for(int i = 0; i < 3; ++i) {
-      for(int j = 0; j < 3; ++j) {
+    for(size_t i = 0; i < 3; ++i) {
+      for(size_t j = 0; j < 3; ++j) {
 	RHS(i,j) = Greens.integrand_k(k_v, omega, {i, j}, IM, KV);
       }
     }
@@ -88,8 +88,8 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
 
   SECTION("Option: IM, TEMP") {
     double factor = 1. / (1. - exp(-beta * omega_kv));
-    for(int i = 0; i < 3; ++i) {
-      for(int j = 0; j < 3; ++j) {
+    for(size_t i = 0; i < 3; ++i) {
+      for(size_t j = 0; j < 3; ++j) {
 	RHS(i,j) = Greens.integrand_k(k_v, omega, {i,j}, IM, TEMP);
       }
     }
@@ -101,8 +101,8 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
 
   SECTION("Option: IM, KV_TEMP") {
     double factor = k_v / (1. - exp(-beta * omega_kv));
-    for(int i = 0; i < 3; ++i) {
-      for(int j = 0; j < 3; ++j) {
+    for(size_t i = 0; i < 3; ++i) {
+      for(size_t j = 0; j < 3; ++j) {
 	RHS(i,j) = Greens.integrand_k(k_v, omega, {i,j}, IM, KV_TEMP);
       }
     }
@@ -115,8 +115,8 @@ TEST_CASE("Integrand 1d k is correctly implemented", "[GreensTensorVacuum]") {
   SECTION("Option: IM, NON_LTE") {
     double factor =
         1. / (1. - exp(-beta * (omega_kv))) - 1. / (1. - exp(-beta * omega));
-    for(int i = 0; i < 3; ++i) {
-      for(int j = 0; j < 3; ++j) {
+    for(size_t i = 0; i < 3; ++i) {
+      for(size_t j = 0; j < 3; ++j) {
 	RHS(i,j) = Greens.integrand_k(k_v, omega, {i,j}, IM, NON_LTE);
       }
     }

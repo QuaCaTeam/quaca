@@ -34,9 +34,9 @@ TEST_CASE("Integrated PolarizabilityNoBath fulfills the omega_cut much smaller "
   asymp(2, 2) = asymp(1, 1);
 
   // loop over indices
-  for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < 3; j++) {
-      result(i, j) = pol.integrate_omega({(double)i, (double)j}, IM, omega_min,
+  for (size_t i = 0; i < 3; i++) {
+    for (size_t j = 0; j < 3; j++) {
+      result(i, j) = pol.integrate_omega({i, j}, IM, omega_min,
                                          omega_max, relerr, abserr);
     }
   }
@@ -76,15 +76,15 @@ TEST_CASE("Integrated PolarizabilityNoBath fulfills the omega_cut much larger "
   asymp_mat *= asymp;
 
   // loop over indices
-  for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < 3; j++) {
-      result(i, j) = pol.integrate_omega({(double)i, (double)j}, IM, omega_min,
+  for (size_t i = 0; i < 3; i++) {
+    for (size_t j = 0; j < 3; j++) {
+      result(i, j) = pol.integrate_omega({i, j}, IM, omega_min,
                                          omega_a - 1e-3, relerr, abserr);
       result(i, j) +=
-          pol.integrate_omega({(double)i, (double)j}, IM, omega_a - 1e-3,
+          pol.integrate_omega({i, j}, IM, omega_a - 1e-3,
                               omega_a + 1e-3, relerr, abserr);
       result(i, j) +=
-          pol.integrate_omega({(double)i, (double)j}, IM, omega_a + 1e-3,
+          pol.integrate_omega({i, j}, IM, omega_a + 1e-3,
                               omega_max, relerr, abserr);
     }
   }

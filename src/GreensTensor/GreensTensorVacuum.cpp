@@ -124,7 +124,7 @@ void GreensTensorVacuum::integrate_k(double omega, cx_mat::fixed<3, 3> &GT,
 // of the 2-d k-vector
 // Ref: notes/VacuumFriction eq. (10) and (11)
 double GreensTensorVacuum::integrand_k(double kv, double omega,
-                                       const vec::fixed<2> &indices,
+                                       const uvec::fixed<2> &indices,
                                        Tensor_Options fancy_complex,
                                        Weight_Options weight_function) const {
   double omega_pl = (omega + kv * v);

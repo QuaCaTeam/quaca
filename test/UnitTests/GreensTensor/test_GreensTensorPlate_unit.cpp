@@ -121,11 +121,11 @@ TEST_CASE("The operations calculate_tensor and the integrand_2d_k coincide",
   kvec(0) = acos(k_x / k);
 
   // loop over all indices
-  for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < 3; j++) {
+  for (size_t i = 0; i < 3; i++) {
+    for (size_t j = 0; j < 3; j++) {
       Green_fancy_I_ik2d(i, j) =
           (2 * M_PI) * Greens.integrand_2d_k(kappa_double, omega, kvec(0),
-                                             {(double)i, (double)j}, IM, UNIT);
+                                             {i, j}, IM, UNIT);
       if (i != j) {
         // As the prefactor I can not be evaluated in a purely real integration
         // routine, it was dropped in integrate_2d_k and has to be inserted here

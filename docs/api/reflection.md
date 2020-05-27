@@ -126,3 +126,107 @@ The input file sections for the permittivities look like this
 }
 ```
 <!-- tabs:end -->
+
+## Examples
+
+<!-- tabs:start -->
+### **Example: Local Bulk**
+In order to construct and calculate $s$ and $p$ polarized reflection coefficient above a local Drude material at $\omega=1\,\mathrm{eV}$ and $\kappa = 10^{-3}\,\mathrm{eV}$, we first construct a permittivity with the chose parameters $\omega_p=9\,\mathrm{eV}$ and $\gamma=0.1\,\mathrm{eV}$.
+```cpp
+double gamma = 0.1;
+double omega_p = 9;
+
+// Define permittivity class
+auto perm std::shared_ptr<PermittivityDrude>(omega_p,gamma);
+```
+Now we can construct and calculate the reflection coefficients at the desired $\omega$ and $\kappa$
+```cpp
+// Define reflection coefficient class
+ReflectionCoefficientsLocBulk refl(perm); 
+
+double omega =1e0;
+std::complex<double> kappa = 1e-3;
+std::complex<double> rp, rs;
+
+
+refl.calculate(omega, kappa, rp, rs);
+```
+
+### **Example (.json): Local Bulk**
+In order to construct and calculate $s$ and $p$ polarized reflection coefficient above a local Drude material at $\omega=1\,\mathrm{eV}$ and $\kappa = 10^{-3}\,\mathrm{eV}$, with a permittivity of the chose parameters $\omega_p=9\,\mathrm{eV}$ and $\gamma=0.1\,\mathrm{eV}$, we employ the following `parameter.json` file.
+```json
+{
+    "ReflectionCoefficients": {
+        "type": "local bulk",
+    },
+    "Permittivity": {
+        "type": "drude",
+        "gamma": 3.5e-2,
+        "omega_p": 9
+    }
+}
+```
+Now we can construct and calculate the reflection coefficients at the desired $\omega$ and $\kappa$
+```cpp
+// Define reflection coefficient class
+ReflectionCoefficientsLocBulk refl("parameter.json"); 
+
+double omega =1e0;
+std::complex<double> kappa = 1e-3;
+std::complex<double> rp, rs;
+
+
+refl.calculate(omega, kappa, rp, rs);
+```
+### **Example: Local Slab**
+In order to construct and calculate $s$ and $p$ polarized reflection coefficient above a finite local Drude slab with a thickness of $d=10\,\mathrm{nm}=0.05\,\mathrm{eV}$ at $\omega=1\,\mathrm{eV}$ and $\kappa = 10^{-3}\,\mathrm{eV}$, we first construct a permittivity with the chosen parameters $\omega_p=9\,\mathrm{eV}$ and $\gamma=0.1\,\mathrm{eV}$.
+```cpp
+double gamma = 0.1;
+double omega_p = 9;
+
+// Define permittivity class
+auto perm std::shared_ptr<PermittivityDrude>(omega_p,gamma);
+```
+Now we can construct and calculate the reflection coefficients at the desired $\omega$ and $\kappa$
+```cpp
+// Define reflection coefficient class
+double thickness = 0.05;
+
+ReflectionCoefficientsLocSlab refl(perm,thickness); 
+
+double omega =1e0;
+std::complex<double> kappa = 1e-3;
+std::complex<double> rp, rs;
+
+
+refl.calculate(omega, kappa, rp, rs);
+```
+
+### **Example (.json): Local Slab**
+In order to construct and calculate $s$ and $p$ polarized reflection coefficient above a finite local Drude slab with a thickness of $d=10\,\mathrm{nm}=0.05\,\mathrm{eV}$ at $\omega=1\,\mathrm{eV}$ and $\kappa = 10^{-3}\,\mathrm{eV}$, with a permittivity of the chosen parameters $\omega_p=9\,\mathrm{eV}$ and $\gamma=0.1\,\mathrm{eV}$, we employ the following `parameter.json` file.
+```json
+{
+    "ReflectionCoefficients": {
+        "type": "local slab",
+	"thickess": 0.05
+    },
+    "Permittivity": {
+        "type": "drude",
+        "gamma": 3.5e-2,
+        "omega_p": 9
+    }
+}
+```
+Now we can construct and calculate the reflection coefficients at the desired $\omega$ and $\kappa$
+```cpp
+// Define reflection coefficient class
+ReflectionCoefficientsLocSlab refl("parameter.json"); 
+
+double omega =1e0;
+std::complex<double> kappa = 1e-3;
+std::complex<double> rp, rs;
+
+
+refl.calculate(omega, kappa, rp, rs);
+```
+<!-- tabs:end -->

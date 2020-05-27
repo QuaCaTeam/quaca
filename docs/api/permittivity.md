@@ -173,8 +173,8 @@ If we want to construct and calculate the same Drude permittivity as in the prev
 {
     "Permittivity": {
         "type": "drude",
-        "gamma": ,
-        "omega_p": 
+        "gamma": 0.1 ,
+        "omega_p": 9.
     }
 }
 ```

@@ -5,11 +5,11 @@ A specific model for this will be a child of this class.
 class MemoryKernel {
 public:
   // Returns the memory kernel given a frequency omega.
-  virtual std::complex<double> mu(double omega) = 0;
+  virtual std::complex<double> calculate(double omega) = 0;
 };
 ```
 
-### `# std::complex<double> mu(double omega)`
+### `# std::complex<double> calculate(double omega)`
 Returns the value $\mu(\omega)$ which in general is a complex number.
 
 ## OhmicMemoryKernel
@@ -30,7 +30,7 @@ public:
   OhmicMemoryKernel(std::string input_file);
 
   // calculate function
-  std::complex<double> mu(double omega);
+  std::complex<double> calculate(double omega);
 
   // getter functions
   double get_gamma() { return this->gamma; };
@@ -43,7 +43,7 @@ Direct constructor for the class.
 ### `# OhmicMemoryKernel(std::string input_file)`
 Input file constructor for the class.
 
-### `# std::complex<double> mu(double omega)`
+### `# std::complex<double> calculate(double omega)`
 See [MemoryKernel](#MemoryKernel).
 
 ### `# double get_gamma()`
@@ -133,12 +133,12 @@ If we want to construct an Ohmic memory kernel with $\gamma=0.1\,\mathrm{eV}$, w
 ```cpp
     double gamma = 0.1;
     OhmicMemoryKernel memorykernel(gamma);
-    std::cout << memorykernel.get_gamma();
+    std::cout << memorykernel.get_gamma() << std::endl;
 ```
 where we use the ```get_gamma()``` function to access the attribut of the class.
 
 #### **Example (.json): Ohmice Memory Kernel**
-Again, we can easy define a memory kernel with e.g. $\gamma=0.1\,\mathrm{eV}$ by employing a parameter file ```parameters.json```
+Again, we can easily define a memory kernel with e.g. $\gamma=0.1\,\mathrm{eV}$ by employing a parameter file ```parameters.json```
 ```json
 {
   "MemoryKernel" : {
@@ -150,7 +150,7 @@ Again, we can easy define a memory kernel with e.g. $\gamma=0.1\,\mathrm{eV}$ by
 If we want access the memory kernel, we can use the ```get_gamma()``` function as follows
 ```cpp
     OhmicMemoryKernel memorykernel("parameters.json");
-    std::cout << memorykernel.get_gamma();
+    std::cout << memorykernel.get_gamma() << std::endl;
 ```
 #### **Example: Single Phonon Memory Kernel**
 If we want to construct an single phonon memory kernel with $\gamma=0.1\,\mathrm{eV}$, $\gamma_\mathrm{phon}=10^{-5}\,\mathrm{eV}$, $\omega_\mathrm{phon}=4.34\,\mathrm{eV}$, and $g=10^{-5}$, we can employ the direct constructor in following form
@@ -160,6 +160,7 @@ If we want to construct an single phonon memory kernel with $\gamma=0.1\,\mathrm
     double omega_phon = 4.34;
     double coupling = 1e-5;
     SinglePhononMemoryKernel memorykernel(gamma, gamma_phon, omega_phon, coupling);
+    std::cout << memorykernel.get_gamma() << std::endl;
 ```
 where we use the ```get_gamma()``` function to access the attribut of the class.
 
