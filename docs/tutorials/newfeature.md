@@ -11,7 +11,7 @@ For this we need to:
 1. Write tests for the permittivity
 2. Implement the permittivity
 3. Check if the tests succeed
-(4. Document our code)
+(4. Document your code)
 
 Let us first look at how a generic permittivity looks like in QuaCa.
 For this head over to the directory `src/Permittivity/` and open the file `Permittivity.h`.
@@ -294,7 +294,7 @@ build/ $ ./../bin/test_quaca_unit
 
 If you followed the above steps, there should be no error, showing us that our tests indeed succeded.
 
-# (4. Document our code)
+# (4. Document your code)
 To keep matters short we did not include any comments in the above code examples.
 You should, however, include documentation on what you have coded in the form of comments inside the header files
 as well as in the source files.
