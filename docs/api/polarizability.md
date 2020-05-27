@@ -1,8 +1,8 @@
 # Polarizability {docsify-ignore-all}
 This abstract class serves as a container for the  polarizability, with or without an internal heat bath.
 As a physical quantity the polarizability reads as follows
-$$  \underline{\alpha}(\omega) = \alpha_0 \omega_a^2 \left( \omega_a^2 - \omega^2 - \mathrm{i} \omega \mu(\omega) - \alpha_0 \omega_a^2 \int \frac{\mathrm{d}^2 \mathbf{k}}{(2 \pi)^2} \underline{G}(\mathbf{k}, \omega + \mathbf{k}^\intercal\mathbf{v}) \right)^{-1}, $$
-with $\mu(\omega)$ being the [memory kernel](api/memorykernel) of the internal heat bath, $\underline{G}(\mathbf{k},\omega)$ the Green's tensor, $\alpha_0$ the static polarizability, and $\omega_a$ the resonance frequency of the microscopic object's dipole moment.
+$$  \underline{\alpha}(\omega) = \alpha_0 \omega_a^2 \left( \omega_a^2 - \omega^2 - \mathrm{i} \omega \mu(\omega) - \alpha_0 \omega_a^2 \int \frac{\mathrm{d}^2 \mathbf{k}}{(2 \pi)^2} \underline{G}(\mathbf{k},z,z', \omega + \mathbf{k}^\intercal\mathbf{v}) \right)^{-1}, $$
+with $\mu(\omega)$ being the [memory kernel](api/memorykernel) of the internal heat bath, $\underline{G}(\mathbf{k},z,z',\omega)$ the Green's tensor, $\alpha_0$ the static polarizability, and $\omega_a$ the resonance frequency of the microscopic object's dipole moment.
 The header file of the polarizability reads
 ```cpp
 class Polarizability {

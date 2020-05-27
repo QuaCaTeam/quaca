@@ -22,11 +22,12 @@ public:
                            Tensor_Options fancy_complex,
                            Weight_Options weight_function) const = 0;
 
+  // calculates and returns a characteristic frequency
+  virtual double omega_ch() const = 0;
+
   // getter functions
   double get_v() const { return this->v; };
   double get_beta() const { return this->beta; };
-
-  virtual double omega_ch() const = 0;
 
   // setter function
   virtual void set_v(double v_new) { this->v = v_new; };
@@ -40,21 +41,36 @@ Input file constructor of the class.
 Direct constructor of the class.
 
 ### `# virtual void calculate_tensor(double omega, vec::fixed<2> k,cx_mat::fixed<3, 3> &GT) const = 0;`
-Calculates the Green's tensor, i.e. $\underline{G}(\mathbf{k}, \omega + k_x v)$, where $x$ is the axis along the motion with velocity $v$, and puts the result into the matrix `GT`.
+Calculates the Green's tensor, i.e. $\underline{G}(\mathbf{k},z,z', \omega + k_x v)$, where $x$ is the axis along the motion with velocity $v$, and puts the result into the matrix `GT`. Here, the $x$ and $y$ coordinate are calculated in reciprocal space $(x-x',y-y') \to (k_x,k_y)$, while the $z$ or $z'$ component remain in the space domain. The $z$ components are defined in the respective child class. For more physical details, see [this publication](https://journals.aps.org/pra/abstract/10.1103/PhysRevA.94.042114). 
 
 ###  `# virtual void integrate_k(double omega, cx_mat::fixed<3, 3> &GT, Tensor_Options fancy_complex, Weight_Options weight_function) const = 0;`
-Compute the integral over the momentum space of the Green's tensor i.e. $\int_{-\infty}^{\infty} \frac{\mathrm{d} \mathbf{k}}{(2 \pi)^2} \; f(\mathbf{k},\omega) \underline{G}(\mathbf{k}, \omega + k_x v)$, where $f(\mathbf{k},\omega)$ is some weight function.  The result is stored in `GT`.
+Compute the integral over the momentum space of the Green's tensor i.e. $\int_{-\infty}^{\infty} \frac{\mathrm{d}^2 \mathbf{k}}{(2 \pi)^2} \; f(\mathbf{k},\omega) \underline{G}(\mathbf{k},z,z', \omega + k_x v)$, where $f(\mathbf{k},\omega)$ is some weight function.  The result is stored in `GT`.
 The different options for the two variables `fancy_complex` and `weight_function` are
 
-| Flag                | Math       |
+| fancy_complex                | Math       |
 |---------------------|------------|
-| `fancy_R`           | $\underline{G}_\Re = (\underline{G}+\underline{G}^\dagger)/2$ |
-| `fancy_I`           | $\underline{G}_\Im = (\underline{G}-\underline{G}^\dagger)/(2\mathrm{i})$ |
-| `fancy_I_kv`           | $k_x \, \underline{G}_\Im $ |
-| `fancy_I_temp`           | $ \frac{\underline{G}_\Im}{1-\exp(-\hbar\beta(\omega+k_xv))} $ |
-| `fancy_I_non_LTE`           | $ \underline{G}_\Im \left(\frac{1}{1-\exp(-\hbar\beta(\omega+k_xv))} - \frac{1}{1-\exp(-\hbar\beta\omega)}\right) $ |
-| `fancy_I_temp`           | $ \frac{k_x\,\underline{G}_\Im}{1-\exp(-\hbar\beta(\omega+k_xv))} $ |
-| `fancy_I_non_LTE`           | $ k_x\,\underline{G}_\Im \left(\frac{1}{1-\exp(-\hbar\beta(\omega+k_xv))} - \frac{1}{1-\exp(-\hbar\beta\omega)}\right) $ |
+| `RE`           | $\underline{G}_\Re = (\underline{G}+\underline{G}^\dagger)/2$ |
+| `IM`           | $\underline{G}_\Im = (\underline{G}-\underline{G}^\dagger)/(2\mathrm{i})$ |
+
+and
+
+| weight_function                | Math       |
+|---------------------|------------|
+| `UNIT` | $\times \mathbb{1}$ | 
+| `KV`           | $\times \, k_x $ |
+| `TEMP`           | $\times\left[1-\exp(-\hbar\beta(\omega+k_xv))\right]^{-1} $ |
+| `KV_TEMP`           | $\times k_x\left[1-\exp(-\hbar\beta(\omega+k_xv))\right]^{-1} $ |
+| `NON_LTE`           | $\times \left( \left[1-\exp(-\hbar\beta(\omega+k_xv))\right] - \left[1-\exp(-\hbar\beta\omega) \right]  \right) $ |
+| `NON_LTE`           | $\times k_x \left( \left[1-\exp(-\hbar\beta(\omega+k_xv))\right] - \left[1-\exp(-\hbar\beta\omega) \right]  \right) $ |
+
+### `# virtual double omega_ch() const = 0;`
+Calculates and returns a characteristic frequency $\omega_\mathrm{ch}$ of the respective Green's tensor
+
+### `# double get_...`
+Are getter functions that return the respective quantity (here, for example, `v` or `beta`)
+
+### `# virtual void set_...`
+Are setter functions which enable to set the respective attribute of the class (here `v`) to a desired value.
 
 ## GreensTensorVacuum
 Implements the imaginary part of the vacuum Green's tensor given by
@@ -71,7 +87,7 @@ $$
   \right)
   ,
 $$
-where $\omega$ is the frequency, $\mathbf{k}=(k_x,\,k_y)^\intercal$ is the corresponding wavevector to the two-dimensional $xy$ plane (with $|\mathbf{k}|=k$, and $z$ is the remaining (not Fourier-transformed) spatial coordinate. The $z- z'\to 0$ indicates, that the Green's tensor is evaluated twice at the same point with respect to the $z$ coordinate. The introduced Heaviside function $\theta(\omega^2/c^2-k^2)$ ensures, that solely imaginary values are considered. The real part of the vacuum Green's tensor is implicitly contained in the $\omega_a$. A clear derivation of the vacuum Green's tensor can be found for instance in [this paper](https://www.mdpi.com/2076-3417/7/11/1158).
+where $\omega$ is the frequency, $\mathbf{k}=(k_x,\,k_y)^\intercal$ (with $|\mathbf{k}|=k$) is the corresponding wavevector to the two-dimensional $(x-x')\wedge (y-y')$ plane, and $z-z'$ is the remaining (not Fourier-transformed) spatial coordinate. The $z- z'\to 0$ indicates, that the Green's tensor is evaluated twice at the same point with respect to the $z$ coordinate. The introduced Heaviside function $\theta(\omega^2/c^2-k^2)$ ensures, that solely imaginary values are considered. The real part of the vacuum Green's tensor is implicitly contained in the $\omega_a$. A clear derivation of the vacuum Green's tensor can be found for instance in [this paper](https://www.mdpi.com/2076-3417/7/11/1158).
 ```cpp
 
 class GreensTensorVacuum : public GreensTensor {
@@ -93,7 +109,7 @@ public:
                    Weight_Options weight_function) const;
 
   // integrand for integration over one-dimensional k space
-  double integrand_k(double kv, double omega, const vec::fixed<2> &indices,
+  double integrand_k(double kv, double omega, const uvec::fixed<2> &indices,
                                          Tensor_Options fancy_complex,
                                          Weight_Options weight_function) const;
 
@@ -102,14 +118,14 @@ public:
 };
 
 ```
-### `# double integrand_k(double kv, double omega, const vec::fixed<2> &indices,Tensor_Options fancy_complex,Weight_Options weight_function) const;`
+### `# double integrand_k(double kv, double omega, const uvec::fixed<2> &indices,Tensor_Options fancy_complex,Weight_Options weight_function) const;`
                                          
 Implements the integrand in momentum space along the direction of motion of the microscopic particle.
                                          
 
 
 ## GreensTensorPlate
-Implements the scattered part of the Green's tensor of a flat surface beneath vaccuum and is given by
+Implements the scattered part of the Green's tensor of a flat surface beneath vacuum and is given by
 $$
   \underline{g}(\mathbf{k},z_a, z_a,\omega) =
   \frac{\omega^2}{c^2}
@@ -117,7 +133,7 @@ $$
   r^s(\mathbf{k},\omega) \, \mathbf{ e}_s \otimes {\mathbf{ e}_s}
   +
   r^p(\mathbf{k},\omega) \,\cdot \mathbf{ e}_{+p} \otimes {\mathbf{ e}_{-p}}
-\big)\frac{e^{-2\kappa z_a}}{2\epsilon_0\kappa}
+\big)\frac{e^{-\kappa (z_a+z_a)}}{2\epsilon_0\kappa}
 ,
 $$
 where $r^s$ and $r^p$ are the reflection coefficients of the $s$ (transverse electric) and $p$ (transverse magnetic) polarization. The corresponding unit vector are
@@ -163,12 +179,12 @@ public:
                    Weight_Options weight_function) const;
 
   // integrands
-  double integrand_1d_k(double phi, double omega, const vec::fixed<2> &indices,
+  double integrand_1d_k(double phi, double omega, const uvec::fixed<2> &indices,
                         Tensor_Options fancy_complex,
                         Weight_Options weight_function) const;
 
   double integrand_2d_k(double kappa_double, double omega, double phi,
-                        const vec::fixed<2> &indices,
+                        const uvec::fixed<2> &indices,
                         Tensor_Options fancy_complex,
                         Weight_Options weight_function) const;
 
@@ -187,21 +203,21 @@ public:
 };
 ```
 ### Integrands
-The integrands in the `GreensTensorPlate` are represented in polar coordinates such that $\mathbf{k} = (k cos(\phi), k sin(\phi))^\top$. Furthermore, the integration w.r.t $k$ was substituted with a integratio along $\kappa$. The integrand takes therefore the form
+The integrands in the `GreensTensorPlate` are represented in polar coordinates such that $\mathbf{k} = (k \cos\phi, k \sin\phi)^\top$. Furthermore, the integration with respect to $k$ was substituted with a integration along $\kappa$. The integrand takes therefore the form
 $$
-\int \frac{\mathrm{d} \mathbf{k}}{2 \pi} \underline{g}(\kappa,\phi, z_a,z_a,\omega) = \frac{1}{4 \pi^2 \varepsilon_0} \int_0^\pi \mathrm{d} \phi \Big( \int_{- i \omega/c}^{-i0} + \int_0^\infty \Big) \mathrm{d} \kappa e^{-2 z_a \kappa} \Big( 1 - \frac{\cos(\phi) v \omega}{kc^2} \Big)^2 \\
- \Big\{ \kappa^2 r^p(\omega,k) \mathrm{diag} \left[ \begin{matrix} cos^2(\phi) \\ sin^2(\phi) \\ k^2/\kappa^2 \end{matrix} \right] + \frac{\omega^2}{c^2} r^s(\omega,k) \mathrm{diag} \left[ \begin{matrix} sin^2(\phi) \\ cos^2(\phi) \\ 0 \end{matrix} \right] \Big\} \;, 
+\int \frac{\mathrm{d}^2 \mathbf{k}}{(2 \pi)^2} \underline{g}(\kappa,\phi, z_a,z_a,\omega) = \frac{1}{4 \pi^2 \varepsilon_0} \int_0^\pi \mathrm{d} \phi \Big( \int_{- \mathrm{i} \omega/c}^{-\mathrm{i}0} + \int_0^\infty \Big) \mathrm{d} \kappa e^{-2 z_a \kappa} \Big( 1 - \frac{v \omega\cos\phi }{kc^2} \Big)^2 \\
+ \Big\{ \kappa^2 r^p(\omega,k) \mathrm{diag} \left[ \begin{matrix} \cos^2\phi \\ \sin^2\phi \\ k^2/\kappa^2 \end{matrix} \right] + \frac{\omega^2}{c^2} r^s(\omega,k) \mathrm{diag} \left[ \begin{matrix} \sin^2\phi \\ \cos^2\phi \\ 0 \end{matrix} \right] \Big\} \;, 
 \\
 $$
 where terms linear in $k_y$ where already neglected.
-###  `# double integrand_1d_k(double phi, double omega, const vec::fixed<2> &indices,Tensor_Options fancy_complex,Weight_Options weight_function) const;`
-Implements the integrand w.r.t $\phi$.
+###  `# double integrand_1d_k(double phi, double omega, const uvec::fixed<2> &indices,Tensor_Options fancy_complex,Weight_Options weight_function) const;`
+Implements the integrand with respect to $\phi$.
 
-### `#double integrand_2d_k(double kappa_double, double omega, double phi,const vec::fixed<2> &indices,Tensor_Options fancy_complex,Weight_Options weight_function) const;`
-Implements the integrand w.r.t $\kappa$.
+### `#double integrand_2d_k(double kappa_double, double omega, double phi,const uvec::fixed<2> &indices,Tensor_Options fancy_complex,Weight_Options weight_function) const;`
+Implements the integrand with respect to $\kappa$.
                         
 ### `#double omega_ch();`
-Returns the characteristic frequency of the macroscopic surface given by $\omega_{ch} = \frac{\delta_{cut} v}{z_a}$ with $\delta_{cut}$ being the cut of value for the $\kappa$ integration.
+Returns the characteristic frequency of the macroscopic surface given by $\omega_\mathrm{ch} = \frac{\delta_\mathrm{cut} v}{z_a}$ with $\delta_\mathrm{cut}$ being the cut of value for the $\kappa$ integration.
                         
                         
 
@@ -297,6 +313,24 @@ For the plate-and-vacuum Green's tensor you also need to define the [Reflection 
 <!-- tabs:start -->
 
 #### ** Example : Vacuum **
+We want to calculate the twofold integrated imaginary part of the vacuum Green's tensor at frequency $\omega=3\,\mathrm{eV}$ in the static case $(v=0)$, and at $\beta=0.1\,\mathrm{eV}^{-1}$. Moreover, we need to define the accuracy of the numerical integration. Since the first integration of the vacuum Green's tensor is implemented analytically, we solely need to provide the demanded relative accuracy for the second integration $\delta_\mathrm{err}=10^{-9}$.
+We define all needed parameters, define the vacuum Green's tensor class and calculate the desired part of the integrated Green's tensor
+```cpp
+// Set parameters
+double v = 0;
+double beta = 1e-1;
+double relerr = 1e-9;
+double omega = 3e0;
+
+// Create Green's tensor class
+GreensTensorVacuum greens_tensor(v, beta, relerr);
+
+// Calculate desired Green's tensor
+cx_mat::fixed<3,3> GT(fill::zeros);
+greens_tensor.integrate_k(omega, GT, IM, UNIT);
+```
+
+#### ** Example (.json) : Vacuum **
 We want to calculate the twofold integrated imaginary part of the vaccuum Green's tensor at frequency $\omega=3\,\mathrm{eV}$ in the static case $(v=0)$, and at $\beta=0.1\,\mathrm{eV}^{-1}$. Moreover, we need to define the accuracy of the numerical integration. Since the first integration of the vacuum Green's tensor is implemented analytically, we solely need to provide the demanded relative accuracy for the second integration $\delta_\mathrm{err}=10^{-9}$.
 Since we have to define a lot of parameters, QuaCa offers a shortcut to the long task before.
 We simply define all parameters in a file called `parameters.json` which looks like this
@@ -312,13 +346,48 @@ We simply define all parameters in a file called `parameters.json` which looks l
 ```
 Now we can easily define the vacuum Green's tensor class and calculate the desired part of the integrated Green's tensor
 ```cpp
+// Create Green's tensor class
 GreensTensorVacuum greens_tensor("parameters.json");
 
+// Calculate desired Green's tensor
 cx_mat::fixed<3,3> GT(fill::zeros);
-greens_tensor(3.,GT, IM, UNIT);
+greens_tensor.integrate_k(omega, GT, IM, UNIT);
 ```
 
 #### ** Example : Plate **
+
+We want to calculate the twofold integrated imaginary part of the scattered Green's tensor at frequency $\omega=3\,\mathrm{eV}$ in the static case $(v=0)$, at a distance of $z_a=10\,\mathrm{nm}=0.05\,\mathrm{eV}^{-1}$ (for a quick conversion between the systems of units you can use [our converter](documentation/units), and at $\beta=0.1\,\mathrm{eV}^{-1}$.
+
+Additionally, we need to specify the geometry and material of the surface. Here, we assume a semi-infinite bulk of gold with $\omega_p=9\,\mathrm{eV}$ and $\gamma=0.1\,\mathrm{eV}$, from which we can construct the [permittivity](api/permittivity) and the [reflection coefficients](api/reflection).
+
+ Moreover, we need to define the accuracy of the numerical integration. If we demand the relative accuracy for the second integration to be $\delta_\mathrm{rel}^1=10^{-9}$, we ought to choose a more precise relative accuracy of the integration below, as e.g. $\delta_\mathrm{rel}^0=10^{-12}$. Furthermore, in order to perform a efficient integration we provide a cut-off value for the $\kappa$ integration, since --- as shown above --- the scattered Green's tensor decays for real $\kappa$ with $\propto\exp(-2z_a\kappa)$. Since we defined the cut-off as $\kappa_\mathrm{cut}=\delta_\mathrm{cut}/(2z_a)$, a $\delta_\mathrm{cut}=30$ yields a prefactor of $\exp(-30)\approx 10^{-13}$, which should be a reasonable choice.
+
+First, we define all parameters and construct the permittivity and the reflection coefficients.
+```cpp
+// Define parameters and generate permittivity
+// and reflection coefficient class
+double gamma = 0.1;
+double omega_p = 9;
+auto perm = std::make_shared<PermittivityDrude>(omega_p, gamma);
+auto refl = std::make_shared<ReflectionCoefficientsLocBulk>(perm);       
+``` 
+Now we can use the remaining parameters and the generated classes to create a Green's tensor class of the plate configuration and calculate the desired part
+```cpp
+// Set parameters
+double v = 0e0;
+double za = 0.05;
+double omega = 3e0;
+double beta= 1e-1;
+double delta_cut 30;
+vec::fixed <2> rel_err = {1e-12, 1e-9};
+
+GreensTensorPlate greens_tensor(v, beta, za, refl, delta_cut, rel_err);
+
+cx_mat::fixed<3,3> GT(fill::zeros);
+greens_tensor.integrate_k( omega, GT, IM, UNIT);
+```
+
+#### ** Example (.json): Plate **
 
 We want to calculate the twofold integrated imaginary part of the scattered Green's tensor at frequency $\omega=3\,\mathrm{eV}$ in the static case $(v=0)$, at a distance of $z_a=10\,\mathrm{nm}=0.05\,\mathrm{eV}^{-1}$ (for a quick conversion between the systems of units you can use [our converter](documentation/units), and at $\beta=0.1\,\mathrm{eV}^{-1}$.
 
@@ -359,7 +428,35 @@ greens_tensor.integrate_k( 3., GT, IM, UNIT);
 ```
 
 #### ** Example : Plate + Vacuum **
-At last we would like to create a Green's tensor with both the vacuum and the scattered contribution form the plate and again integrate the imaginary part w.r.t $\mathbf{k}$ for a frequency of $\omega = 3$. For this we simply have to add another argument to the input file we already created for the `GreensTensorPlate` which is called `addvacuum` and which we set to `true`.
+At last we would like to create a Green's tensor with both the vacuum and the scattered contribution form the plate and again integrate the imaginary part with respect to $\mathbf{k}$ for a frequency of $\omega = 3\,\mathrm{eV}$. For this we simply repeat the same initialization as for the `GreensTensorPlate` and solely alter the child class. 
+First, we define all parameters and construct the permittivity and the reflection coefficients.
+```cpp
+// Define parameters and generate permittivity
+// and reflection coefficient class
+double gamma = 0.1;
+double omega_p = 9;
+auto perm = std::make_shared<PermittivityDrude>(omega_p, gamma);
+auto refl = std::make_shared<ReflectionCoefficientsLocBulk>(perm);       
+``` 
+Now we can use the remaining parameters and the generated classes to create a Green's tensor class of the plate configuration and calculate the desired part
+```cpp
+// Set parameters
+double v = 0e0;
+double za = 0.05;
+double omega = 3e0;
+double beta= 1e-1;
+double delta_cut 30;
+vec::fixed <2> rel_err = {1e-12, 1e-9};
+
+GreensTensorPlateVacuum greens_tensor(v, beta, za, refl, delta_cut, rel_err);
+
+cx_mat::fixed<3,3> GT(fill::zeros);
+greens_tensor.integrate_k( omega, GT, IM, UNIT);
+```
+
+
+#### ** Example (.json) : Plate + Vacuum **
+At last we would like to create a Green's tensor with both the vacuum and the scattered contribution form the plate and again integrate the imaginary part with respect to$\mathbf{k}$ for a frequency of $\omega = 3\,\mathrm{eV}$. For this we simply have to add another argument to the input file we already created for the `GreensTensorPlate` which is called `addvacuum` and which we set to `true`.
 ```json
 
 {
@@ -383,7 +480,7 @@ At last we would like to create a Green's tensor with both the vacuum and the sc
     }
 }
 ```
-Storing the above arguments in a file called `parameter.json` we can now easily compute the twofold integration w.r.t. $\mathbf{k}$ for the imaginary part of the full Green's tensor. We just have to create an instance of `GreensTensorPlateVacuum` instead of `GreensTensorPlate`.
+Storing the above arguments in a file called `parameter.json` we can now easily compute the twofold integration with respect to $\mathbf{k}$ for the imaginary part of the full Green's tensor. We just have to create an instance of `GreensTensorPlateVacuum` instead of `GreensTensorPlate`.
 ```cpp
   GreensTensorPlateVacuum greens_tensor("parameter.json");
   

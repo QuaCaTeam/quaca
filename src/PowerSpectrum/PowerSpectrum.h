@@ -14,11 +14,11 @@ class PowerSpectrum {
 protected:
   std::shared_ptr<GreensTensor>
       greens_tensor; // Green's tensor of describing the geometry of
-  // the system
+                     // the system
   std::shared_ptr<Polarizability>
       polarizability; // Polarizability describing the linear
+                      // response of the microscopic particle
 public:
-  // response of the microscopic particle
   // Constructors
   PowerSpectrum(const std::string &input_file);
 

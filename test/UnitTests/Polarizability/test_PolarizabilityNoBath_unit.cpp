@@ -53,9 +53,9 @@ TEST_CASE("PolarizabilityNoBath integrand works as expected",
   cx_mat::fixed<3, 3> alpha_int(fill::zeros);
 
   // loop over all indices
-  for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < 3; j++) {
-      alpha_int(i, j) = pol.integrand_omega(omega, {(double)i, (double)j}, IM);
+  for (size_t i = 0; i < 3; i++) {
+    for (size_t j = 0; j < 3; j++) {
+      alpha_int(i, j) = pol.integrand_omega(omega, {i, j}, IM);
     }
   }
 

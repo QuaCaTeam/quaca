@@ -41,12 +41,12 @@ public:
                    Weight_Options weight_function) const override;
 
   // integrands
-  double integrand_1d_k(double phi, double omega, const vec::fixed<2> &indices,
+  double integrand_1d_k(double phi, double omega, const uvec::fixed<2> &indices,
                         Tensor_Options fancy_complex,
                         Weight_Options weight_function) const;
 
   double integrand_2d_k(double kappa_double, double omega, double phi,
-                        const vec::fixed<2> &indices,
+                        const uvec::fixed<2> &indices,
                         Tensor_Options fancy_complex,
                         Weight_Options weight_function) const;
 

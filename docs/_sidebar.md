@@ -19,6 +19,10 @@
   - [Units / Unit Converter](documentation/units)
   - [Input file API](documentation/inputfileapi)
 
+- [__Apps__](apps/friction)
+  - [Friction](apps/friction)
+  - [Decay rate](apps/decay)
+
 - [__Development__](dev/testing)
   - [Project Organization](dev/organization)
   - [Testing](dev/testing)

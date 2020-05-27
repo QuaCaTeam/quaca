@@ -54,15 +54,46 @@ int main(int argc, char *argv[]) {
   // get command line options
   read_command_line(argc, argv);
 
-  // define looper
-  auto looper = LooperFactory::create(parameter_file);
+  // read parameters (No Looper class used for omega, since it is no attribute of the class)
+  
+  pt::ptree root;
+  pt::read_json(parameter_file, root);
+  
+  double start;              // starting value
+  double end;                // end value
+  int number_of_steps;       // number of steps
+  std::string scale;         // scale type
+
+  start = root.get<double>("Looper.start");
+  end = root.get<double>("Looper.end");
+  number_of_steps = root.get<double>("Looper.steps");
+  scale = root.get<std::string>("Looper.scale");
+  
+  // Calculate steps
+  std::vector<double> steps; // array containing the steps
+  if (scale == "linear") {
+    double spacing = (end - start) / ((double)number_of_steps - 1);
+    for (int i = 0; i < number_of_steps; i++) {
+      steps.push_back(start + i * spacing);
+    }
+  } else if (scale == "log") {
+    double spacing = pow(end / start, 1. / ((double)number_of_steps - 1.0));
+    for (int i = 0; i < number_of_steps; i++) {
+      steps.push_back(start * pow(spacing, i));
+    }
+
+  } else {
+    std::cerr << "Unknown scale: " << scale << std::endl;
+    exit(-1);
+  }
+
 
   // array to store all the computed values of the loop
-  std::vector<double> friction_data;
-  friction_data.resize(looper->get_steps_total());
+  std::vector<double> decay_data;
+  decay_data.resize(number_of_steps);
 
   // define progressbar
-  ProgressBar progbar(looper->get_steps_total(), 70);
+  ProgressBar progbar(number_of_steps, 70);
 
   // Check whether the number of threads have been set by the --threads flag
   if (num_threads == -1) {
@@ -86,34 +117,38 @@ int main(int argc, char *argv[]) {
 #pragma omp parallel num_threads(num_threads)
   {
 
-    // Create a root
-    pt::ptree root;
-
-    // Load the json file in this ptree
-    pt::read_json(parameter_file, root);
-
-    double relerr_omega = root.get<double>("Friction.relerr_omega");
-
     // define needed quantities
     auto polarizability = std::make_shared<Polarizability>(parameter_file);
-    auto powerspectrum = std::make_shared<PowerSpectrum>(
-        polarizability->get_greens_tensor(), polarizability);
-    auto quant_friction =
-        std::make_shared<Friction>(polarizability->get_greens_tensor(),
-                                   polarizability, powerspectrum, relerr_omega);
-
+    double omega_a = polarizability->get_omega_a();
+    double alpha_zero = polarizability->get_alpha_zero();
     // Parallelize the for-loop of the given looper
 #pragma omp critical
     progbar.display();
 
 #pragma omp for schedule(dynamic)
-    for (int i = 0; i < looper->get_steps_total(); i++) {
-      friction_data[i] = looper->calculate_value(i, quant_friction);
+    for (int i = 0; i < number_of_steps; i++) {
+
+	    // Calculate decay rate   
+	    // define different alphas
+	    std::complex<double> I(0e0, 1e0);
+	    cx_mat::fixed<3, 3> alphaI;
+	    cx_mat::fixed<3, 3> alphaR;
+	    cx_mat::fixed<3, 3> inv_alpha;
+	    cx_mat::fixed<3, 3> inv_alpha_dag;
+
+	    // calculate alpha
+	    polarizability->calculate_tensor(steps[i], alphaI, IM);
+	    polarizability->calculate_tensor(steps[i], alphaR, RE);
+
+	    inv_alpha     = inv(alphaR + I * alphaI);
+	    inv_alpha_dag = inv(alphaR - I * alphaI);
+
+	    decay_data[i] = alpha_zero*omega_a*omega_a*real(trace(inv_alpha*alphaI*inv_alpha_dag))/steps[i];
 
 #pragma omp critical
-      ++progbar;
+	    ++progbar;
 #pragma omp critical
-      progbar.display();
+	    progbar.display();
     }
   }
 
@@ -123,9 +158,9 @@ int main(int argc, char *argv[]) {
 
   // write the data to the file
   double step;
-  for (int i = 0; i < looper->get_steps_total(); i++) {
-    step = looper->get_step(i);
-    file << step << "," << friction_data[i] << "\n";
+  for (int i = 0; i < number_of_steps; i++) {
+    step = steps[i];
+    file << step << "," << decay_data[i] << "\n";
   }
 
   // close file
