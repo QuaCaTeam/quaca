@@ -1,10 +1,9 @@
 <!-- docs/_sidebar.md -->
 
-- [__Getting Started__](../README)
+- [__Getting Started__](gettingstarted)
 - [__Tutorials__](tutorials/first_calculation)
   - [First QuaCa calculation](tutorials/first_calculation)
   - [Write your own main](tutorials/mainfile)
-  - [Automate your calculation](tutorials/automate)
   - [Implement a new feature](tutorials/newfeature)
 
 - [__Documentation__](api/greenstensor)
@@ -19,6 +18,10 @@
 - [__Input__](documentation/units)
   - [Units / Unit Converter](documentation/units)
   - [Input file API](documentation/inputfileapi)
+
+- [__Apps__](apps/friction)
+  - [Friction](apps/friction)
+  - [Decay rate](apps/decay)
 
 - [__Development__](dev/testing)
   - [Project Organization](dev/organization)
