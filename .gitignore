@@ -249,3 +249,6 @@ tags
 .vim
 
 # End of https://www.gitignore.io/api/c,vim,c++,linux,macos,cmake,clion
+
+# directories
+bin/*
