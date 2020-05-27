@@ -1,5 +1,8 @@
 dist: bionic
 language: cpp
+branches:
+  only:
+    - master
 addons:
   apt:
     packages:

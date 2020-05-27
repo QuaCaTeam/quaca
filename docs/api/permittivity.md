@@ -6,17 +6,11 @@ class Permittivity {
 public:
   // calculate the permittivity
   virtual std::complex<double> calculate(double omega) const = 0;
-
-  // calculate the permittivity times omega
-  virtual std::complex<double> calculate_times_omega(double omega) const = 0;
 };
 ```
 
 ### `# std::complex<double> calculate(double omega)`
 Returns the value of $\varepsilon(\omega)$ which is a complex number.
-
-### `# std::complex<double> calculate_times_omega(double omega)`
-Returns the value of $\omega\varepsilon(\omega)$ which is a complex number.
 
 ## PermittivityDrude
 Implements a Drude model according to the formula
@@ -39,9 +33,6 @@ public:
   // calculate the permittivity
   std::complex<double> calculate(double omega) const override;
 
-  // Returns the numerical value of the permittivity scaled by omega.
-  std::complex<double> calculate_times_omega(double omega) const override;
-
   // getter methods
   double get_gamma() const { return this->gamma; };
   double get_omega_p() const { return this->omega_p; };
@@ -56,9 +47,6 @@ Direct constructor for the class.
 Input file constructor for the class.
 
 ### `# std::complex<double> calculate(double omega)`
-See [Permittivity](#Permittivity).
-
-### `# std::complex<double> calculate_times_omega(double omega)`
 See [Permittivity](#Permittivity).
 
 ### `# double get_...`
@@ -89,9 +77,6 @@ public:
   // calculate the permittivity
   std::complex<double> calculate(double omega) const override;
 
-  // Returns the numerical value of the permittivity scaled by omega.
-  std::complex<double> calculate_times_omega(double omega) const override;
-
   // getter methods
   double get_eps_inf() const { return this->eps_inf; };
   double get_omega_p() const { return this->omega_p; };
@@ -110,9 +95,6 @@ Direct input constructor for the class.
 Input file constructor for the class.
 
 ### `# std::complex<double> calculate(double omega)`
-See [Permittivity](#Permittivity).
-
-### `# std::complex<double> calculate_times_omega(double omega)`
 See [Permittivity](#Permittivity).
 
 ### `# get_...`

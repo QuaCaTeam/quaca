@@ -38,19 +38,6 @@ std::complex<double> PermittivityDrude::calculate(double omega) const {
   return result;
 }
 
-// calculate the permittivity scaled by omega
-std::complex<double>
-PermittivityDrude::calculate_times_omega(double omega) const {
-  // dummies for result and complex unit
-  std::complex<double> result;
-  std::complex<double> I(0.0, 1.0);
-
-  // calculate the result
-  result = omega - omega_p * omega_p / (omega + I * gamma);
-
-  return result;
-}
-
 void PermittivityDrude::print_info(std::ostream &stream) const {
   stream << "# PermittivityDrude\n#\n"
          << "# omega_p = " << omega_p << "\n"

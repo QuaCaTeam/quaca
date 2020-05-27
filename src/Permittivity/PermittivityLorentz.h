@@ -24,9 +24,6 @@ public:
   // calculate the permittivity
   std::complex<double> calculate(double omega) const override;
 
-  // Returns the numerical value of the permittivity scaled by omega.
-  std::complex<double> calculate_times_omega(double omega) const override;
-
   // getter methods
   double get_eps_inf() const { return this->eps_inf; };
   double get_omega_p() const { return this->omega_p; };

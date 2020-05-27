@@ -49,21 +49,6 @@ std::complex<double> PermittivityLorentz::calculate(double omega) const {
   return result;
 }
 
-// calculate the permittivity scaled by omega
-std::complex<double>
-PermittivityLorentz::calculate_times_omega(double omega) const {
-  // dummies for result and complex unit
-  std::complex<double> result;
-  std::complex<double> I(0.0, 1.0);
-
-  // calculate the result
-  result = eps_inf * omega - omega_p * omega_p * omega /
-                                 (omega_0 * omega_0 - omega * omega -
-                                  I * omega * memory_kernel->calculate(omega));
-
-  return result;
-}
-
 void PermittivityLorentz::print_info(std::ostream &stream) const {
   stream << "# PermittivityLorentz\n#\n"
          << "# eps_inf = " << eps_inf << "\n"
