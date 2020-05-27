@@ -8,7 +8,7 @@
 </br>
 For more information scroll down or immediately jump to the sections
 
- * [__Getting Started__](../README.md)
+ * [__Getting Started__](gettingstarted.md)
  * [__Tutorials__](tutorials/first_calculation)
  * [__Documentation__](api/polarizability.md)
  * [__Input__](documentation/units.md)
