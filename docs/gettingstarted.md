@@ -34,14 +34,18 @@ quaca/build $ make quaca
 An executable called `quaca` should now have been build and can be found in the `quaca/bin` directory.
 
 ### Documentation
-The documentation can either be seen [here](https://myoelmy.github.io/quaca) or be viewed locally using the following command from the command line
+The documentation can either be seen [here](https://myoelmy.github.io/quaca) or be viewed locally using [Python 3](https://www.python.org/download/releases/3.0/) by
+```
+quaca $ cd docs && python3 -m http.server 3000
+```
+or [Python 2.7](https://www.python.org/download/releases/2.7/) by
 ```
 quaca $ cd docs && python -m SimpleHTTPServer 3000
 ```
 You can then see the documentation in your browser at the adress `http://localhost:3000/`.
 
 ### Testing
-The follow a test-driven development style and are currently use [Catch2] for our unit testing.
+The follow a test-driven development style and are currently use [Catch2](https://github.com/catchorg/Catch2) for our unit testing.
 To run all unit tests, build the tests first with
 ```
 quaca/build $ make test_quaca
