@@ -22,22 +22,20 @@ include_directories(${Boost_INCLUDE_DIRS})
 find_package(GSL REQUIRED)
 include_directories(${GSL_INCLUDE_DIRS})
 
-# find lapack and use armadillo without runtimelibrary, wrap blas and lapack
+# find lapack and use armadillo without runtimelibrary, so that it wraps blas and lapack
 find_package(LAPACK REQUIRED)
 find_package(BLAS REQUIRED)
-include_directories("${PROJECT_SOURCE_DIR}/lib/armadillo-9.870.2/include")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DARMA_DONT_USE_WRAPPER")
 
 #find OpenMP library
 find_package(OpenMP REQUIRED)
 #add -fopenmp to the cxx_flags
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DARMA_DONT_USE_WRAPPER")
-
 # set include directories
 include_directories(
   ${PROJECT_SOURCE_DIR}/include
-  ${PROJECT_BINARY_DIR}/include
+  ${PROJECT_SOURCE_DIR}/include/armadillo-9.870.2/include
   )
 
 # catch2

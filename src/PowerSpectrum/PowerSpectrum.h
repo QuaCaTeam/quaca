@@ -12,9 +12,8 @@ enum Spectrum_Options { FULL, NON_LTE_ONLY };
  */
 class PowerSpectrum {
 protected:
-  std::shared_ptr<GreensTensor>
-      greens_tensor; // Green's tensor of describing the geometry of
-                     // the system
+  std::shared_ptr<GreensTensor> greens_tensor; // Green's tensor of describing
+                                               // the geometry of the system
   std::shared_ptr<Polarizability>
       polarizability; // Polarizability describing the linear
                       // response of the microscopic particle
@@ -31,8 +30,8 @@ public:
                  Spectrum_Options spectrum) const;
 
   // getter functions
-  std::shared_ptr<GreensTensor> &get_greens_tensor() { return greens_tensor; };
-  std::shared_ptr<Polarizability> &get_polarizability() {
+  std::shared_ptr<GreensTensor> get_greens_tensor() { return greens_tensor; };
+  std::shared_ptr<Polarizability> get_polarizability() {
     return polarizability;
   };
 

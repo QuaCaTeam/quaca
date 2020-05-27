@@ -19,11 +19,11 @@ Friction::Friction(const std::string &input_file) {
   // Load the json file in this ptree
   pt::read_json(input_file, root);
   this->relerr_omega = root.get<double>("Friction.relerr_omega");
+
   // read greens tensor
   this->greens_tensor = GreensTensorFactory::create(input_file);
   this->polarizability = std::make_shared<Polarizability>(input_file);
   this->powerspectrum = std::make_shared<PowerSpectrum>(input_file);
-  // PowerSpectrumFactory::create(input_file);
 }
 
 Friction::Friction(std::shared_ptr<GreensTensor> greens_tensor,

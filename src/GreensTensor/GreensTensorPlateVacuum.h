@@ -26,7 +26,7 @@ public:
                    Weight_Options weight_function) const override;
 
   // getters
-  std::shared_ptr<GreensTensorVacuum> &get_vacuums_greens_tensor() {
+  std::shared_ptr<GreensTensorVacuum> get_vacuums_greens_tensor() {
     return vacuum_greens_tensor;
   };
 
