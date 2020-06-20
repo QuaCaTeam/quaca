@@ -14,6 +14,8 @@ TEST_CASE("ReflectionCoefficientsLocBulk constructors work as expected",
 
     REQUIRE(Approx(RefC.get_epsilon(omega).real()).epsilon(1E-6) ==
             perm->calculate(omega).real());
+    REQUIRE(Approx(RefC.get_epsilon_omega(omega).real()).epsilon(1E-6) ==
+            perm->calculate_times_omega(omega).real());
   }
 
   SECTION("Constructor with json file works") {
@@ -25,6 +27,8 @@ TEST_CASE("ReflectionCoefficientsLocBulk constructors work as expected",
 
     REQUIRE(Approx(RefC.get_epsilon(omega).real()).epsilon(1E-6) ==
             perm->calculate(omega).real());
+    REQUIRE(Approx(RefC.get_epsilon_omega(omega).real()).epsilon(1E-6) ==
+            perm->calculate_times_omega(omega).real());
   }
 }
 
