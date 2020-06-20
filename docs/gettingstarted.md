@@ -34,7 +34,7 @@ quaca/build $ make quaca
 An executable called `quaca` should now have been build and can be found in the `quaca/bin` directory.
 
 ### Documentation
-The documentation can either be seen [here](https://myoelmy.github.io/quaca) or be viewed locally using [Python 3](https://www.python.org/download/releases/3.0/) by
+The documentation can either be seen [here](https://quacateam.github.io/quaca/) or be viewed locally using [Python 3](https://www.python.org/download/releases/3.0/) by
 ```
 quaca $ cd docs && python3 -m http.server 3000
 ```
