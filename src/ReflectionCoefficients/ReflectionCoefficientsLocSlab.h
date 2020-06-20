@@ -40,6 +40,10 @@ public:
     return permittivity->calculate(omega);
   };
 
+  std::complex<double> get_epsilon_omega(double omega) const {
+    return permittivity->calculate_times_omega(omega);
+  };
+
   double get_thickness() const { return thickness; };
 
   // print info

@@ -37,6 +37,10 @@ public:
     return permittivity->calculate(omega);
   };
 
+  std::complex<double> get_epsilon_omega(double omega) const {
+    return permittivity->calculate_times_omega(omega);
+  };
+
   // print info
   void print_info(std::ostream &stream) const override;
 };
