@@ -36,5 +36,5 @@ TEST_CASE("Lorentz permittivity obeys crossing relation",
 
   auto omega = GENERATE(take(10, random(-150.4, 150.4)));
   REQUIRE(perm.calculate(omega) == std::conj(perm.calculate(-omega)));
-  REQUIRE(perm.calculate_times_omega(omega) == std::conj(perm.calculate_times_omega(-omega)));
+  REQUIRE(perm.calculate_times_omega(omega) == -std::conj(perm.calculate_times_omega(-omega)));
 }
