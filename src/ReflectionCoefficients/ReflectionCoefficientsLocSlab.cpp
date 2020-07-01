@@ -38,6 +38,7 @@ void ReflectionCoefficientsLocSlab::calculate(double omega,
   // needed complex conjugated after the calculation
   double omega_abs = std::abs(omega);
   std::complex<double> eps = this->permittivity->calculate(omega_abs);
+  std::complex<double> eps_omega = this->permittivity->calculate_times_omega(omega_abs);
   std::complex<double> I(0., 1.);
 
   // kapppa as well as kappa_epsilon are defined to have either a purely
@@ -49,7 +50,7 @@ void ReflectionCoefficientsLocSlab::calculate(double omega,
   // Defining the reflection coefficients in transverse magnetice polarization
   // (p) and in transverse electric polarization (s)
   std::complex<double> r_p_bulk =
-      (kappa * eps - kappa_epsilon) / (kappa * eps + kappa_epsilon);
+      (kappa * eps_omega - kappa_epsilon * omega_abs) / (kappa * eps_omega + kappa_epsilon * omega_abs);
   std::complex<double> r_s_bulk =
       (kappa - kappa_epsilon) / (kappa + kappa_epsilon);
 

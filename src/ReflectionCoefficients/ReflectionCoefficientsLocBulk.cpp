@@ -22,6 +22,7 @@ void ReflectionCoefficientsLocBulk::calculate(double omega,
   // needed complex conjugated after the calculation
   double omega_abs = std::abs(omega);
   std::complex<double> eps = this->permittivity->calculate(omega_abs);
+  std::complex<double> eps_omega = this->permittivity->calculate_times_omega(omega_abs);
 
   // kapppa as well as kappa_epsilon are defined to have either a purely
   // positive real part or purely negatively imaginary part
@@ -31,7 +32,7 @@ void ReflectionCoefficientsLocBulk::calculate(double omega,
                                        -std::abs(kappa_epsilon.imag()));
   // Defining the reflection coefficients in transverse magnetice polarization
   // (p) and in transverse electric polarization (s)
-  r_p = (kappa * eps - kappa_epsilon) / (kappa * eps + kappa_epsilon);
+  r_p = (kappa * eps_omega - kappa_epsilon*omega_abs) / (kappa * eps_omega + kappa_epsilon*omega_abs);
   r_s = (kappa - kappa_epsilon) / (kappa + kappa_epsilon);
   // Imposing crossing relation
   if (omega < 0.) {
