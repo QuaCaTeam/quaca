@@ -22,8 +22,8 @@ Friction::Friction(const std::string &input_file) {
 
   // read greens tensor
   this->powerspectrum = std::make_shared<PowerSpectrum>(input_file);
-  this->polarizability = powerspectrum.get_polarizability();
-  this->greens_tensor = powerspectrum.get_greens_tensor();
+  this->polarizability = powerspectrum->get_polarizability();
+  this->greens_tensor = powerspectrum->get_greens_tensor();
 }
 
 Friction::Friction(std::shared_ptr<GreensTensor> greens_tensor,
