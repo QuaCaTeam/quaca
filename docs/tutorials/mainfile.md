@@ -29,10 +29,10 @@ You will see amongst them a folder called `app/` and a folder called `src/`.
 The folder `src/` contains all the code for the Green's tensors, polarizabilities and all other quantities that are needed for the calculation of quantum friction.
 This folder does, however, *not* contain a main function, which is needed to build an executable (i.e. a program we can actually execute).
 These main functions are inside the `app/` directory.
-Look inside the `app/` folder and you will find a subfolder called `QuaCa` and a file called `CMakeLists.txt`.
+Look inside the `app/` folder and you will find e.g. a subfolder called `Friction` and a file called `CMakeLists.txt`.
 
 Each folder inside the `app/` folder should contain a `.cpp` file containing a main file, so each folder corresponds to an executable program.
-In the last tutorial you have already worked with the executable `QuaCa`, so let us now create a new one.
+In the last tutorial you have already worked with the executable `Friction`, so let us now create a new one.
 
 First create a new folder inside the `app/` folder and call it `Tutorial`.
 Next go to the file `CMakeLists.txt` inside the `app/` directory and add the following line to the end of the file
@@ -106,7 +106,7 @@ int main(int argc, char *argv[])
 };
 ```
 You have now created an object of the type PermittivityDrude called `permittivity` with the appropriate parameters.
-This object can be used to calculate stuff (like the numerical value of the permittivity) and can be put into other objects as we will now do.
+This object can be used for the calculation of e.g. the numerical value of the permittivity and can also be put into other objects as we will now do.
 Define the reflection coefficients and put the permittivity inside it by adding to our code
 ```cpp
 // define reflection coefficients

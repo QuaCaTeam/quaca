@@ -45,14 +45,17 @@ quaca $ cd docs && python -m SimpleHTTPServer 3000
 You can then see the documentation in your browser at the adress `http://localhost:3000/`.
 
 ### Testing
-The follow a test-driven development style and are currently use [Catch2](https://github.com/catchorg/Catch2) for our unit testing.
-To run all unit tests, build the tests first with
+The follow a test-driven development style and are currently use [Catch2](https://github.com/catchorg/Catch2) for our testing.
+We split our tests into unit tests, which test the consistency of individual classes and functions, and integrated tests
+which test the interplay of classes and functions.
+To run tests, build the tests first with
 ```
-quaca/build $ make test_quaca
+quaca/build $ make test_quaca_unit test_quaca_integrated
 ```
 then run the tests from the `bin/` directory
 ```
-quaca/bin $ ./test_quaca
+quaca/bin $ ./test_quaca_unit
+quaca/bin $ ./test_quaca_integrated
 ```
 
 ### Contributing
