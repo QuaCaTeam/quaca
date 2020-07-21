@@ -58,7 +58,7 @@ void Polarizability::calculate_tensor(double omega, cx_mat::fixed<3, 3> &alpha,
   diag.zeros();
   if (mu != nullptr) {
     diag(0, 0) = diag(1, 1) = diag(2, 2) =
-        omega_a * omega_a - omega * omega - I * omega * mu->calculate(omega);
+        (omega_a * omega_a - omega * omega) - I * omega * mu->calculate(omega);
   } else {
     diag(0, 0) = diag(1, 1) = diag(2, 2) = omega_a * omega_a - omega * omega;
   }

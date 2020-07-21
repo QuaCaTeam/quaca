@@ -81,7 +81,7 @@ double qagiu(const std::function<double(double)> &f, double a, double relerr,
   double abserr;
 
   /* Initialize the workspace. */
-  gsl_integration_workspace *ws = gsl_integration_workspace_alloc(1000);
+  gsl_integration_workspace *ws = gsl_integration_workspace_alloc(10000);
   if (ws == nullptr) {
     printf("call to gsl_integration_workspace_alloc failed.\n");
     abort();
@@ -91,7 +91,7 @@ double qagiu(const std::function<double(double)> &f, double a, double relerr,
   /* set nevals and abserr pointer to nullptr, we are only interested in result
    */
   int success =
-      gsl_integration_qagiu(F, a, epsabs, relerr, 1000, ws, &res, &abserr);
+      gsl_integration_qagiu(F, a, epsabs, relerr, 10000, ws, &res, &abserr);
   if (success != 0) {
     printf("qagiu error: %s\n", gsl_strerror(success));
     abort();
