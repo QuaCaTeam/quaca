@@ -125,7 +125,7 @@ double delta_cut = 20;
 vec::fixed<2> rel_err = {1E-4, 1E-2};
 
 // define the Green's tensor
-auto greens_tensor = std::make_shared<GreensTensorPlate>(v, beta, z_a refl_coefficients, delta_cut, rel_err);
+auto greens_tensor = std::make_shared<GreensTensorPlate>(v, beta, z_a, refl_coefficients, delta_cut, rel_err);
 ```
 We have now defined our Green's tensor so let us proceed by defining the polarizability.
 ```cpp
@@ -173,7 +173,7 @@ double step, value;
 for (int i = 0; i < number_of_steps; i++) {
   step = start * pow(spacing, i);
   friction.get_greens_tensor()->set_v(step);
-  value = friction.calculate(NON_LTE_ONLY);
+  value = friction->calculate(NON_LTE_ONLY);
 
   file << step << "," << value << "\n";
 };
@@ -207,7 +207,7 @@ int main(int argc, char *argv[]) {
   vec::fixed<2> rel_err = {1E-4, 1E-2};
 
   // define the Green's tensor
-  auto greens_tensor = std::make_shared<GreensTensorPlate>(v, beta, z_a refl_coefficients, delta_cut, rel_err);
+  auto greens_tensor = std::make_shared<GreensTensorPlate>(v, beta, z_a, refl_coefficients, delta_cut, rel_err);
 
   // parameters for polarizability
   double omega_a = 1.3;
@@ -239,7 +239,7 @@ int main(int argc, char *argv[]) {
   for (int i = 0; i < number_of_steps; i++) {
     step = start * pow(spacing, i);
     friction->get_greens_tensor()->set_v(step);
-    value = friction.calculate(NON_LTE_ONLY);
+    value = friction->calculate(NON_LTE_ONLY);
 
     file << step << "," << value << "\n";
   };
