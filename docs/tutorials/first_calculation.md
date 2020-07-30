@@ -2,18 +2,19 @@
 
 We assume that you have QuaCa installed and are ready to go.
 In this tutorial we will show you how to setup your system and how QuaCa generally works.
-A calculation always consists of the following steps:
+A calculation with QuaCa always consists of the following steps:
 
 1. Plan the physical system
-2. Populate the input file
+2. Create the input file
 3. Run QuaCa
 4. Check the results
 
 Let us adhere to this outline and start by planing our setup.
 
 ## 1. Plan the physical system
-In this tutorial we want to calculate the non-contact friction of an atom above the surface of a Drude bulk material, which has already been done in [this publication](https://link.aps.org/doi/10.1103/PhysRevLett.123.120401).
-So essentially we want to reproduce the results of the yellowish line in FIG.2 of the aforementioned publication.
+In this tutorial we want to calculate the noncontact friction of an atom above the surface of a Drude bulk material (this 
+has already been done in [this publication](https://link.aps.org/doi/10.1103/PhysRevLett.123.120401)).
+Essentially we want to reproduce the results of the yellow line in FIG.2 of the aforementioned publication.
 
 <div style="text-align:center">
 <img class="plain" src="_media/setup.svg" class="center" width="40%">
@@ -24,8 +25,8 @@ Our setup consists of:
 * a surface, described by the reflection coefficients $r^s(\omega,k)$ and $r^p(\omega,k)$
 * where the object moves with constant velocity $v$ and constant distance to the surface $z_a$, and the system is evaluated at temperature $T=\frac{1}{\beta k_\mathrm{B}}$.
 
-Further physical assumptions and subtilities are explained in [this paper](http://link.aps.org/doi/10.1103/PhysRevLett.117.100402).
-## 2. Populate the input file
+Further physical assumptions and details are explained in [this paper](http://link.aps.org/doi/10.1103/PhysRevLett.117.100402).
+## 2. Create the input file
 There are lots of things we could change in the above setup without changing the formula we have to use.
 Because of this inherent modularity QuaCa reads an input file that contains all these parameters, so that the program does not have to be recompiled on each change.
 
@@ -94,7 +95,7 @@ Change into this directory and type into the command line
 quaca/bin> ./Friction --file ../data/tutorial.json
 ```
 The flag `--file` specifies the input file, whose path is specified behind it.
-We will chose here the input file that we have populated above.
+We will chose here the input file that we have created above.
 Notice that since we are in the `bin/` directory we first had to go one directory up and then to `data/tutorial.json`.
 QuaCa now produces an output file in the same directory as the input file and with the same name, but of the file type `.csv`.
 It contains in the first column the variable that we have looped over (which in this case is the velocity v) and in the second column the calculated value of the quantum friction.
