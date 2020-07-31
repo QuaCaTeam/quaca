@@ -11,7 +11,7 @@ For this we need to:
 1. Write tests for the permittivity
 2. Implement the permittivity
 3. Check if the tests succeed
-(4. Document your code)
+4. (Document your code)
 
 Let us first look at how a generic permittivity looks like in QuaCa.
 For this head over to the directory `src/Permittivity/` and open the file `Permittivity.h`.
@@ -71,7 +71,7 @@ And the other one takes a path to an input file and reads the parameters from th
 PermittivityLorentzOhmic(std::string input_file);
 ```
 How would we tests if this actually works?
-Well, we simply define the quantities and check if they are the want we defined.
+Well, we simply define the quantities and check if the corresponding quantities of the permittivity have the values we defined.
 Let us create a section for the direct constructor and define our permittivity
 ```cpp
 #include "Quaca.h"
@@ -145,12 +145,12 @@ TEST_CASE("LorentzOhmic permittivity obeys crossing relation",
 
   PermittivityLorentzOhmic perm(eps_inf, alpha_0, omega_0, gamma);
 
-  auto omega = GENERATE(take(10, random(-150.4, 150.4)));
+  auto omega = GENERATE(-1.2,0.1);
   REQUIRE(perm.epsilon(omega) == std::conj(perm.epsilon(-omega)));
 };
 ```
 And done!
-This test will generate ten randomly drawn frequencies and check whether the crossing relation is fulfilled for them.
+This will test the crossing relation for the set of frequencies defined between the brackets after the `GENERATE` command. You can add additional values if you like, but take care, to always include tests in all the relevant regimes of the function, you would like to test. In our case, we want to ensure, that the crossing relation is fulfilled for positive and negative frequencies.
 As a last step we have to register this test to QuaCa. 
 Head over to the `test/UnitTests` directory and open `CMakeLists.txt`.
 You will see a bunch of files that are added to target `test_sources`.
