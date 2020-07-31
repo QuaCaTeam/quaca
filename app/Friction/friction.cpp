@@ -118,7 +118,7 @@ int main(int argc, char *argv[]) {
 
           // write results in output file
           for(int j = 0; j < looper->get_steps_total(); j++) {
-            step = looper->get_step(j);
+            double step = looper->get_step(j);
             file << step << "," << friction_data[j] << "\n";
           }
           // close file
@@ -130,8 +130,6 @@ int main(int argc, char *argv[]) {
 #pragma omp critical
       progbar.display();
     }
-  }
-
   }
 
 
