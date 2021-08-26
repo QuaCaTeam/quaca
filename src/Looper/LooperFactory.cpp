@@ -8,6 +8,7 @@ namespace pt = boost::property_tree;
 #include "LooperFactory.h"
 #include "LooperV.h"
 #include "LooperZa.h"
+#include "LooperBeta.h"
 
 std::shared_ptr<Looper> LooperFactory::create(const std::string &input_file) {
   // Create a root
@@ -24,6 +25,8 @@ std::shared_ptr<Looper> LooperFactory::create(const std::string &input_file) {
     return std::make_shared<LooperV>(input_file);
   } else if (type == "za") {
     return std::make_shared<LooperZa>(input_file);
+  } else if (type == "beta") {
+    return std::make_shared<LooperBeta>(input_file);
   } else {
     std::cerr << "Error: Unknown Looper type (" << type << ")!" << std::endl;
     exit(0);

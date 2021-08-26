@@ -42,6 +42,7 @@ public:
 
   // setter function
   virtual void set_v(double v_new) { this->v = v_new; };
+  virtual void set_beta(double beta_new) { this->beta = beta_new; };
 
   // print info
   virtual void print_info(std::ostream &stream) const =0;

@@ -35,6 +35,10 @@ public:
     this->v = v;
     this->vacuum_greens_tensor->set_v(v);
   };
+  void set_beta(double beta) override {
+    this->beta = beta;
+    this->vacuum_greens_tensor->set_beta(beta);
+  };
 
   // print info
   void print_info(std::ostream &stream) const override;

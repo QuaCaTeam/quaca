@@ -38,7 +38,7 @@ double LooperZa::calculate_value(int step,
 
   pt->set_za(this->steps[step]);
 
-  return quantum_friction->calculate(NON_LTE_ONLY);
+  return quantum_friction->calculate(NON_LTE_ONLY, "test");
 }
 
 void LooperZa::print_info(std::ostream &stream) const {

@@ -11,6 +11,7 @@ set(quaca_sources
         Looper/LooperFactory.cpp
         Looper/LooperV.cpp
         Looper/LooperZa.cpp
+        Looper/LooperBeta.cpp
         MemoryKernel/MemoryKernelFactory.cpp
         MemoryKernel/OhmicMemoryKernel.cpp
 		MemoryKernel/SinglePhononMemoryKernel.cpp

@@ -8,6 +8,7 @@ set(test_sources
         GreensTensor/test_GreensTensorVacuum_unit.cpp
         Looper/test_LooperV_unit.cpp
         Looper/test_LooperZa_unit.cpp
+        Looper/test_LooperBeta_unit.cpp
         MemoryKernel/test_OhmicMemoryKernel_unit.cpp
         MemoryKernel/test_SinglePhononMemoryKernel_unit.cpp
         Permittivity/test_PermittivityDrude_unit.cpp

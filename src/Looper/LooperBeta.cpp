@@ -3,13 +3,13 @@
 #include <boost/property_tree/ptree.hpp>
 namespace pt = boost::property_tree;
 
-#include "LooperV.h"
+#include "LooperBeta.h"
 
-LooperV::LooperV(double start, double end, int number_of_steps,
+LooperBeta::LooperBeta(double start, double end, int number_of_steps,
                  const std::string &scale)
     : Looper(start, end, number_of_steps, scale) {}
 
-LooperV::LooperV(const std::string &input_file) : Looper(input_file) {
+LooperBeta::LooperBeta(const std::string &input_file) : Looper(input_file) {
   // Create a root
   pt::ptree root;
 
@@ -18,20 +18,21 @@ LooperV::LooperV(const std::string &input_file) : Looper(input_file) {
 
   // check if type is right
   std::string type = root.get<std::string>("Looper.type");
-  assert(type == "v");
+  assert(type == "beta");
 }
 
 double
-LooperV::calculate_value(int step,
+LooperBeta::calculate_value(int step,
                          std::shared_ptr<Friction> quantum_friction) const {
-  // change v
-  quantum_friction->get_greens_tensor()->set_v(this->steps[step]);
+  // change beta
+  // TODO: set temperature everywhere, where it is needed
+  quantum_friction->get_greens_tensor()->set_beta(this->steps[step]);
 
-  return quantum_friction->calculate(NON_LTE_ONLY, "test");
+  return quantum_friction->calculate(NON_LTE_ONLY,"test");
 }
 
-void LooperV::print_info(std::ostream &stream) const {
-  stream << "# LooperV\n#\n"
+void LooperBeta::print_info(std::ostream &stream) const {
+  stream << "# LooperBeta\n#\n"
          << "# start = " << start << "\n"
          << "# end = " << end << "\n"
          << "# number_of_steps = " << number_of_steps << "\n"

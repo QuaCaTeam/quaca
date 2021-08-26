@@ -13,6 +13,7 @@
 #include "../src/Looper/LooperFactory.h"
 #include "../src/Looper/LooperV.h"
 #include "../src/Looper/LooperZa.h"
+#include "../src/Looper/LooperBeta.h"
 
 #include "../src/MemoryKernel/MemoryKernel.h"
 #include "../src/MemoryKernel/OhmicMemoryKernel.h"

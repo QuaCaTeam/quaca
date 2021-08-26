@@ -20,7 +20,7 @@ TEST_CASE("Analytical results with vacuum Green's tensor gets reproduced",
   auto powerspectrum = std::make_shared<PowerSpectrum>(greens, alpha);
   Friction quant_fric(greens, alpha, powerspectrum, relerr_omega);
 
-  double num_result = quant_fric.calculate(NON_LTE_ONLY);
+  double num_result = quant_fric.calculate(NON_LTE_ONLY, "test");
   std::cout << "Num=" << num_result << std::endl;
   std::cout << "Ana=" << analytical_result << std::endl;
   REQUIRE(Approx(num_result).epsilon(1e-4) == analytical_result);
@@ -36,12 +36,12 @@ TEST_CASE("Analytical results with scattered Green's tensor gets reproduced",
   double gamma = 0.1;
   double rho;
   rho = gamma * M_PI * 4. / pow(omega_p, 2);
-  double beta = 1e6;
+  double beta = 5e5;
   double v = 1e-4;
   double delta_cut = 30;
   double analytical_result = -(63. - 45.) * pow(alpha_zero * rho, 2) *
                              pow(v / M_PI, 3) / pow(2 * za, 10);
-  analytical_result += -(6. - 3.) * pow(alpha_zero * rho / beta, 2) *
+  analytical_result += -(6. - 3.) * 6 * pow(alpha_zero * rho / beta, 2) *
                        (v / M_PI) / pow(2 * za, 8);
 
   vec::fixed<2> rel_err = {1E-6, 1E-4};
@@ -55,7 +55,7 @@ TEST_CASE("Analytical results with scattered Green's tensor gets reproduced",
   auto powerspectrum = std::make_shared<PowerSpectrum>(greens, alpha);
   Friction quant_fric(greens, alpha, powerspectrum, relerr_omega);
 
-  double num_result = quant_fric.calculate(NON_LTE_ONLY);
+  double num_result = quant_fric.calculate(NON_LTE_ONLY, "test");
   std::cout << "ana=" << analytical_result << std::endl;
   std::cout << "num=" << num_result << std::endl;
   std::cout << "num/ana=" << num_result / analytical_result << std::endl;

@@ -25,8 +25,8 @@ public:
            std::shared_ptr<Polarizability> polarizability,
            std::shared_ptr<PowerSpectrum> powerspectrum, double relerr_omega);
 
-  double calculate(Spectrum_Options spectrum) const;
-  double friction_integrand(double omega, Spectrum_Options spectrum) const;
+  double calculate(Spectrum_Options spectrum, std::string sym_filter) const;
+  double friction_integrand(double omega, Spectrum_Options spectrum, std::string sym_filter) const;
 
   // getter functions
   std::shared_ptr<GreensTensor> get_greens_tensor() { return greens_tensor; };

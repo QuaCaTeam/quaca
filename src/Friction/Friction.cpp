@@ -33,7 +33,8 @@ Friction::Friction(std::shared_ptr<GreensTensor> greens_tensor,
     : greens_tensor(greens_tensor), polarizability(polarizability),
       powerspectrum(powerspectrum), relerr_omega(relerr_omega) {}
 
-double Friction::calculate(Spectrum_Options spectrum) const {
+double Friction::calculate(Spectrum_Options spectrum,
+		std::string sym_filter) const {
   double result;
   double omega_a = this->polarizability->get_omega_a();
   // Collect all specifically relevant point within the integration
@@ -46,7 +47,7 @@ double Friction::calculate(Spectrum_Options spectrum) const {
 
   // Start integration
   result = 0.;
-  auto F = [=](double x) -> double { return friction_integrand(x, spectrum); };
+  auto F = [=](double x) -> double { return friction_integrand(x, spectrum, sym_filter); };
 
   for (int i = 0; i < (int)lim.size() - 1; i++) {
     result += cquad(F, lim[i], lim[i + 1], relerr_omega,
@@ -59,7 +60,8 @@ double Friction::calculate(Spectrum_Options spectrum) const {
 }
 
 double Friction::friction_integrand(double omega,
-                                    Spectrum_Options spectrum) const {
+                                    Spectrum_Options spectrum,
+				    std::string sym_filter) const {
   // Compute the full spectrum of the power spectrum
   if (spectrum == FULL) {
 
@@ -105,6 +107,25 @@ double Friction::friction_integrand(double omega,
 
     // Compute the polarizability for the second term of eq. (4.5)
     polarizability->calculate_tensor(omega, alpha_fancy_I, IM);
+
+    // Optionally, apply filter with respect to matrix symmetries
+    if (sym_filter == "symmetric") {
+	    J(2, 0) = 0;
+	    J(0, 2) = 0;
+	    alpha_fancy_I(2, 0) = 0;
+	    alpha_fancy_I(0, 2) = 0;
+    }
+    else if (sym_filter == "antisymmetric") {
+	    J(0, 0) = 0;
+	    J(1, 1) = 0;
+	    J(2, 2) = 0;
+	    alpha_fancy_I(0, 0) = 0;
+	    alpha_fancy_I(1, 1) = 0;
+	    alpha_fancy_I(2, 2) = 0;
+    }
+    else {
+	    std::cout << "No symmetry filter is applied." << std::endl;
+    }
 
     // Put everything together
     return real(
