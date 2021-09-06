@@ -93,6 +93,7 @@ int main(int argc, char *argv[]) {
     pt::read_json(parameter_file, root);
 
     double relerr_omega = root.get<double>("Friction.relerr_omega");
+    std::string sym_filter = root.get<std::string>("Friction.sym_filter");
 
     // define needed quantities
     auto polarizability = std::make_shared<Polarizability>(parameter_file);
@@ -100,7 +101,8 @@ int main(int argc, char *argv[]) {
         polarizability->get_greens_tensor(), polarizability);
     auto quant_friction =
         std::make_shared<Friction>(polarizability->get_greens_tensor(),
-                                   polarizability, powerspectrum, relerr_omega);
+                                   polarizability, powerspectrum, relerr_omega,
+				   sym_filter);
 
     // Parallelize the for-loop of the given looper
 #pragma omp critical

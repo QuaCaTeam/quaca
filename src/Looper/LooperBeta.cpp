@@ -28,7 +28,7 @@ LooperBeta::calculate_value(int step,
   // TODO: set temperature everywhere, where it is needed
   quantum_friction->get_greens_tensor()->set_beta(this->steps[step]);
 
-  return quantum_friction->calculate(NON_LTE_ONLY,"test");
+  return quantum_friction->calculate(NON_LTE_ONLY);
 }
 
 void LooperBeta::print_info(std::ostream &stream) const {

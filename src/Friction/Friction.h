@@ -18,15 +18,17 @@ protected:
   std::shared_ptr<PowerSpectrum> powerspectrum;
 
   double relerr_omega;
+  std::string sym_filter;
 
 public:
   Friction(const std::string &input_file);
   Friction(std::shared_ptr<GreensTensor> greens_tensor,
            std::shared_ptr<Polarizability> polarizability,
-           std::shared_ptr<PowerSpectrum> powerspectrum, double relerr_omega);
+           std::shared_ptr<PowerSpectrum> powerspectrum, double relerr_omega,
+	   std::string sym_filter);
 
-  double calculate(Spectrum_Options spectrum, std::string sym_filter) const;
-  double friction_integrand(double omega, Spectrum_Options spectrum, std::string sym_filter) const;
+  double calculate(Spectrum_Options spectrum) const;
+  double friction_integrand(double omega, Spectrum_Options spectrum) const;
 
   // getter functions
   std::shared_ptr<GreensTensor> get_greens_tensor() { return greens_tensor; };

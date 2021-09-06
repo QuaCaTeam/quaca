@@ -15,12 +15,14 @@ TEST_CASE("Analytical results with vacuum Green's tensor gets reproduced",
   double relerr_omega = 1e-6;
 
   double relerr_k = 1E-9;
+  std::string sym_filter="none";
+
   auto greens = std::make_shared<GreensTensorVacuum>(v, beta, relerr_k);
   auto alpha = std::make_shared<Polarizability>(omega_a, alpha_zero, greens);
   auto powerspectrum = std::make_shared<PowerSpectrum>(greens, alpha);
-  Friction quant_fric(greens, alpha, powerspectrum, relerr_omega);
+  Friction quant_fric(greens, alpha, powerspectrum, relerr_omega, sym_filter);
 
-  double num_result = quant_fric.calculate(NON_LTE_ONLY, "test");
+  double num_result = quant_fric.calculate(NON_LTE_ONLY);
   std::cout << "Num=" << num_result << std::endl;
   std::cout << "Ana=" << analytical_result << std::endl;
   REQUIRE(Approx(num_result).epsilon(1e-4) == analytical_result);
@@ -46,6 +48,7 @@ TEST_CASE("Analytical results with scattered Green's tensor gets reproduced",
 
   vec::fixed<2> rel_err = {1E-6, 1E-4};
   double relerr_omega = 1e-2;
+  std::string sym_filter="none";
 
   auto perm = std::make_shared<PermittivityDrude>(omega_p, gamma);
   auto refl = std::make_shared<ReflectionCoefficientsLocBulk>(perm);
@@ -53,9 +56,9 @@ TEST_CASE("Analytical results with scattered Green's tensor gets reproduced",
                                                     delta_cut, rel_err);
   auto alpha = std::make_shared<Polarizability>(omega_a, alpha_zero, greens);
   auto powerspectrum = std::make_shared<PowerSpectrum>(greens, alpha);
-  Friction quant_fric(greens, alpha, powerspectrum, relerr_omega);
+  Friction quant_fric(greens, alpha, powerspectrum, relerr_omega, sym_filter);
 
-  double num_result = quant_fric.calculate(NON_LTE_ONLY, "test");
+  double num_result = quant_fric.calculate(NON_LTE_ONLY);
   std::cout << "ana=" << analytical_result << std::endl;
   std::cout << "num=" << num_result << std::endl;
   std::cout << "num/ana=" << num_result / analytical_result << std::endl;

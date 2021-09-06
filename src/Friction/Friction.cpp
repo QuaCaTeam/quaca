@@ -19,6 +19,7 @@ Friction::Friction(const std::string &input_file) {
   // Load the json file in this ptree
   pt::read_json(input_file, root);
   this->relerr_omega = root.get<double>("Friction.relerr_omega");
+  this->sym_filter = root.get<std::string>("Friction.sym_filter");
 
   // read greens tensor
   this->powerspectrum = std::make_shared<PowerSpectrum>(input_file);
@@ -29,12 +30,12 @@ Friction::Friction(const std::string &input_file) {
 Friction::Friction(std::shared_ptr<GreensTensor> greens_tensor,
                    std::shared_ptr<Polarizability> polarizability,
                    std::shared_ptr<PowerSpectrum> powerspectrum,
-                   double relerr_omega)
+                   double relerr_omega, std::string sym_filter)
     : greens_tensor(greens_tensor), polarizability(polarizability),
-      powerspectrum(powerspectrum), relerr_omega(relerr_omega) {}
+      powerspectrum(powerspectrum), relerr_omega(relerr_omega),
+	sym_filter(sym_filter) {}
 
-double Friction::calculate(Spectrum_Options spectrum,
-		std::string sym_filter) const {
+double Friction::calculate(Spectrum_Options spectrum) const {
   double result;
   double omega_a = this->polarizability->get_omega_a();
   // Collect all specifically relevant point within the integration
@@ -47,7 +48,7 @@ double Friction::calculate(Spectrum_Options spectrum,
 
   // Start integration
   result = 0.;
-  auto F = [=](double x) -> double { return friction_integrand(x, spectrum, sym_filter); };
+  auto F = [=](double x) -> double { return friction_integrand(x, spectrum); };
 
   for (int i = 0; i < (int)lim.size() - 1; i++) {
     result += cquad(F, lim[i], lim[i + 1], relerr_omega,
@@ -60,8 +61,7 @@ double Friction::calculate(Spectrum_Options spectrum,
 }
 
 double Friction::friction_integrand(double omega,
-                                    Spectrum_Options spectrum,
-				    std::string sym_filter) const {
+                                    Spectrum_Options spectrum) const {
   // Compute the full spectrum of the power spectrum
   if (spectrum == FULL) {
 
@@ -109,22 +109,19 @@ double Friction::friction_integrand(double omega,
     polarizability->calculate_tensor(omega, alpha_fancy_I, IM);
 
     // Optionally, apply filter with respect to matrix symmetries
-    if (sym_filter == "symmetric") {
+    if (this->sym_filter == "symmetric") {
 	    J(2, 0) = 0;
 	    J(0, 2) = 0;
 	    alpha_fancy_I(2, 0) = 0;
 	    alpha_fancy_I(0, 2) = 0;
     }
-    else if (sym_filter == "antisymmetric") {
+    else if (this->sym_filter == "antisymmetric") {
 	    J(0, 0) = 0;
 	    J(1, 1) = 0;
 	    J(2, 2) = 0;
 	    alpha_fancy_I(0, 0) = 0;
 	    alpha_fancy_I(1, 1) = 0;
 	    alpha_fancy_I(2, 2) = 0;
-    }
-    else {
-	    std::cout << "No symmetry filter is applied." << std::endl;
     }
 
     // Put everything together

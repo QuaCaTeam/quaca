@@ -13,6 +13,7 @@
     },
     "Friction" :
     {
-        "relerr_omega" : 1e-1
+        "relerr_omega" : 1e-1,
+	"sym_filter" : "none"
     }
 }

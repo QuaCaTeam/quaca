@@ -16,7 +16,7 @@ TEST_CASE("LooperV constructors work as expected", "[LooperV]") {
   }
 
   SECTION("json file constructor") {
-    Friction quant(NULL, NULL, NULL, 0.);
+    Friction quant(NULL, NULL, NULL, 0., "none");
     LooperV looper("../data/test_files/LooperV.json");
 
     REQUIRE(looper.get_steps_total() == 20);
@@ -45,7 +45,7 @@ TEST_CASE("LooperV Steps are calculated correctly", "[LooperV]") {
     double end = 1e-1;
     int number_of_steps = 4;
     std::string scale = "log";
-    Friction quant(NULL, NULL, NULL, 0.);
+    Friction quant(NULL, NULL, NULL, 0., "none");
 
     LooperV looper(start, end, number_of_steps, scale);
 

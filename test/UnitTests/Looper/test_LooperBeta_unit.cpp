@@ -16,7 +16,7 @@ TEST_CASE("LooperBeta constructors work as expected", "[LooperBeta]") {
   }
 
   SECTION("json file constructor") {
-    Friction quant(NULL, NULL, NULL, 0.);
+    Friction quant(NULL, NULL, NULL, 0., "none");
     LooperBeta looper("../data/test_files/LooperBeta.json");
 
     REQUIRE(looper.get_steps_total() == 20);
@@ -45,7 +45,7 @@ TEST_CASE("LooperBeta Steps are calculated correctly", "[LooperBeta]") {
     double end = 1e-1;
     int number_of_steps = 4;
     std::string scale = "log";
-    Friction quant(NULL, NULL, NULL, 0.);
+    Friction quant(NULL, NULL, NULL, 0., "none");
 
     LooperBeta looper(start, end, number_of_steps, scale);
 
