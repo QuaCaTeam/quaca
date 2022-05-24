@@ -20,5 +20,9 @@ jobs:
       - name: "build project"
         run: cmake --build build --target all --config Release -- -j4 
       - name: "unit tests"
-        run: bin/test_quaca_unit
-        working-directory: .
+        run: |
+          ls
+          ls ..
+          ls ../data
+          test_quaca_unit
+        working-directory: ./bin
