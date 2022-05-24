@@ -20,6 +20,6 @@ jobs:
       - name: "build project"
         run: cmake --build build --target all --config Release -- -j4 
       - name: "unit tests"
-        run: ./bin/test_quaca_unit
+        run: bin/test_quaca_unit
       - name: "integration tests"
-        run: ./bin/test_quaca_integrated
+        run: bin/test_quaca_integrated
