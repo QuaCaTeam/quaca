@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.com/myoelmy/quaca.svg?branch=master)](https://travis-ci.com/myoelmy/quaca)
-
 # QuaCa
 **QuaCa** stands for Quantum / Casimir Friction and is a numerical framework to calculate just that.
 
