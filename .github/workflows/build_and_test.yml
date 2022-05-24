@@ -20,6 +20,5 @@ jobs:
       - name: "build project"
         run: cmake --build build --target all --config Release -- -j4 
       - name: "unit tests"
-        run: |
-          cd ${{github.workspace}}
-          bin/test_quaca_unit
+        run: bin/test_quaca_unit
+        working-directory: .
