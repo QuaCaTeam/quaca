@@ -14,10 +14,12 @@ jobs:
       - name: install dependencies
         run: sudo apt-get update && sudo apt-get install libblas-dev liblapack-dev cmake make g++ libboost-filesystem-dev libboost-program-options-dev
       - name: cmake
-        run: mkdir -p build && cd build && cmake ..
-      - name: make
-        run: make
-      - name: unit tests
+        run: |
+          mkdir -p build 
+          cmake -B ${{github.workspace}}/build
+      - name: "build project"
+        run: cmake --build build --target all --config Release -- -j4 
+      - name: "unit tests"
         run: ./bin/test_quaca_unit
-      - name: integration tests
+      - name: "integration tests"
         run: ./bin/test_quaca_integrated
