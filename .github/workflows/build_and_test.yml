@@ -1,0 +1,23 @@
+name: build and test
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: install dependencies
+        run: sudo apt-get update && sudo apt-get install libblas-dev liblapack-dev cmake make g++ libboost-filesystem-dev libboost-program-options-dev
+      - name: cmake
+        run: mkdir -p build && cd build && cmake ..
+      - name: make
+        run: make
+      - name: unit tests
+        run: ./bin/test_quaca_unit
+      - name: integration tests
+        run: ./bin/test_quaca_integrated
