@@ -22,7 +22,6 @@ set(quaca_sources
         ReflectionCoefficients/ReflectionCoefficientsFactory.cpp
         ReflectionCoefficients/ReflectionCoefficientsLocBulk.cpp
         ReflectionCoefficients/ReflectionCoefficientsLocSlab.cpp
-        Permittivity/PermittivityLorentzOhmic.cpp #This is the file to add
         )
 add_library(quaca SHARED ${quaca_sources})
 
