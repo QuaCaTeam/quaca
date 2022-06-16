@@ -17,6 +17,7 @@ set(test_sources
         PowerSpectrum/test_PowerSpectrum.cpp
         ReflectionCoefficients/test_ReflectionCoefficientsLocBulk_unit.cpp
         ReflectionCoefficients/test_ReflectionCoefficientsLocSlab_unit.cpp
+        Permittivity/test_PermittivityLorentzOhmic_unit.cpp
         )
 
 # Executable

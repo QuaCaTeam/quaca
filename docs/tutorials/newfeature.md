@@ -161,7 +161,7 @@ set(test_sources
         ...
         Permittivity/test_PermittivityDrude_unit.cpp
         Permittivity/test_PermittivityLorentz_unit.cpp
-        Permittivity/test_PermittivityLorentzOhmic_unit.cpp // This is the line you have to add
+        Permittivity/test_PermittivityLorentzOhmic_unit.cpp # This is the line you have to add
         ...
         )
 ```
@@ -259,7 +259,7 @@ set(quaca_sources
         Permittivity/PermittivityDrude.cpp
         Permittivity/PermittivityFactory.cpp
         Permittivity/PermittivityLorentz.cpp
-        Permittivity/PermittivityLorentzOhmic.cpp // This is the line you have to add
+        Permittivity/PermittivityLorentzOhmic.cpp # This is the line you have to add
         ...
         )
 ```

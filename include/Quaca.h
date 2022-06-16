@@ -34,4 +34,6 @@
 #include "../src/ReflectionCoefficients/ReflectionCoefficientsLocBulk.h"
 #include "../src/ReflectionCoefficients/ReflectionCoefficientsLocSlab.h"
 
+#include "../src/Permittivity/PermittivityLorentzOhmic.h"
+
 #endif //QUACA_H
