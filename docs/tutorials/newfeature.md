@@ -35,7 +35,7 @@ public:
 #endif // PERMITTIVITY_H
 ```
 This is a so called abstract class, it is abstract because in front of all functions that are defined within the class you find the word `virtual` and at the end you find `=0`.
-This means that we do not know that the function in general actually does, which makes sense because we simply do not know what the specific permittivity is for now (i.e. how we model the permittivity).
+This means that we do not know what the function in general actually does, which makes sense because we simply do not know what the specific permittivity is for now (i.e. how we model the permittivity).
 All permittivities are children of this class, so they inherit from it and they have to implement the two functions `epsilon (double omega)` and `epsilon_omega (double omega)`.
 
 Every class also needs a so called constructor that basically defines the parameters of the class (in our case e.g. $\varepsilon_{\infty}$).
@@ -43,14 +43,14 @@ Every class also needs a so called constructor that basically defines the parame
 Let us now start by writing tests for our new permittivity.
 
 ## 1. Write tests for the permittivity
-In the QuaCa project we are practicing so called [test driven development](testing).
+In the QuaCa project we are practicing so called [test driven development](dev/testing).
 This means that before we implement a new feature we will write tests that this feature has to fulfill.
 Seeing that we want to implement a permittivity, we might want to check whether we construct it correctly and whether it really obeys the crossing relation
 $$
 \varepsilon(\omega) = \varepsilon^{*}(-\omega).
 $$
 
-Let us start by heading over to the directory `test/UnitTests` and creating a new file called `test_PermittivityLorentzOhmic_unit.cpp` (PermittivityLorentzOhmic will be the name of the class we create later).
+Let us start by heading over to the directory `test/UnitTests/Permittivity` and creating a new file called `test_PermittivityLorentzOhmic_unit.cpp` (PermittivityLorentzOhmic will be the name of the class we create later).
 Fill this file with the following code
 ```cpp
 #include "Quaca.h"
@@ -161,7 +161,7 @@ set(test_sources
         ...
         Permittivity/test_PermittivityDrude_unit.cpp
         Permittivity/test_PermittivityLorentz_unit.cpp
-        Permittivity/test_PermittivityLorentzOhmic_unit.cpp
+        Permittivity/test_PermittivityLorentzOhmic_unit.cpp // This is the line you have to add
         ...
         )
 ```
@@ -259,7 +259,7 @@ set(quaca_sources
         Permittivity/PermittivityDrude.cpp
         Permittivity/PermittivityFactory.cpp
         Permittivity/PermittivityLorentz.cpp
-        Permittivity/PermittivityLorentzOhmic.cpp
+        Permittivity/PermittivityLorentzOhmic.cpp // This is the line you have to add
         ...
         )
 ```
@@ -274,7 +274,7 @@ You also need to include the header file `PermittivityLorentzOhmic.h` in the pub
 #include "../src/Permittivity/PermittivityDrude.h"
 #include "../src/Permittivity/PermittivityFactory.h"
 #include "../src/Permittivity/PermittivityLorentz.h"
-#include "../src/Permittivity/PermittivityLorentzOhmic.h"
+#include "../src/Permittivity/PermittivityLorentzOhmic.h" // This is the line you have to add
 
 ...
 
@@ -282,7 +282,7 @@ You also need to include the header file `PermittivityLorentzOhmic.h` in the pub
 ```
 
 # 3. Check if the tests succeed
-Build the project by typing in the build directory
+Build the project by typing in the `build/` directory
 ```bash
 build/ $ cmake ..
 build/ $ make
