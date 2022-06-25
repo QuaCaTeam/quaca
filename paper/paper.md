@@ -47,12 +47,12 @@ In the regime of linear coupling between system and environment and in accordanc
 $$
   F_\mathrm{fric} =
 -2
-\int_{0}^{\infty} \mathrm{d}\omega\, \int\frac{\mathrm{d}h}{2\pi)} \, h\,
+\int_{0}^{\infty} \mathrm{d}\omega\, \int\frac{\mathrm{d}h}{2\pi} \, h\,
 \mathrm{Tr}\left[
 \underline{S}^\intercal(hv-\omega)\underline{G}_\Im(h, \mathbf{R}_a, \omega)
 \right],
 $$
-where $\underline{S}(\omega)$ is the power spectrum of the particle's dipole moment, $\underline{G}(h,\mathbf{R}_a,\omega)$ is the electric Green tensor specifying the (material-)properties of the environment, $h$ is the wavevector along the direction of motion, $\mathbf{R}_a$ gives the position of the particle in the plane perpendicular to the direction of motion (usually connected to the particle-surface distance) and $\omega$ is the frequency.
+where $\underline{S}(\omega)$ is the power spectrum of the particle's dipole moment, $\underline{G}(h,\mathbf{R}_a,\omega)$ is the electric Green tensor specifying the (material-)properties of the environment, $h$ is the wavevector along the direction of motion, $\mathbf{R}_a$ gives the position of the particle in the plane perpendicular to the direction of motion (usually connected to the particle-surface distance), $\omega$ is the frequency, the superscript $\intercal$ denotes the transpose of a matrix and $\underline{G}_{\Im}=(\underline{G}-\underline{G}^{\dagger})/(2i)$.
 The power spectrum encodes the temperature-dependence of the force as well as the polarizability $\underline{\alpha}(\omega)$ of the microscopic particle.
 The latter, due to the self-consistency of our approach [@intravaia2016;@reiche2020a], is dressed by the electromagnetic environment -- again given by the electric Green tensor.
 This approach is fully respects backaction from the environment onto the system (exact in all orders coupling) and includes spin-momentum locking of confined light, which can lead, e.g., to a net transfer of spin angular momentum [@intravaia2019], as well as finite temperatures [@oelschlager2019;@oelschlaeger2021].
