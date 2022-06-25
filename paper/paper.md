@@ -57,8 +57,9 @@ The power spectrum encodes the temperature-dependence of the force as well as th
 The latter, due to the self-consistency of our approach [@intravaia2016;@reiche2020a], is dressed by the electromagnetic environment -- again given by the electric Green tensor.
 This approach is fully respects backaction from the environment onto the system (exact in all orders coupling) and includes spin-momentum locking of confined light, which can lead, e.g., to a net transfer of spin angular momentum [@intravaia2019], as well as finite temperatures [@oelschlager2019;@oelschlaeger2021].
 
+<div style="width:60px ; height:60px">
 ![Sketch of the setup. A microscopic object, say, an atom, moves with constant velocity and height above a flat macroscopic surface. At constant velocity $v$, the particle is attracted by the surface ($F_{\rm CP}$, Casimir-Polder force) and experiences a moderating force ($F_{\rm fric}$, quantum friction).. \label{fig:setup}](images/setup.svg)
-
+<div>
 
 The QuaCa package (i) allows for a fast computation of $F_{\mathrm{fric}}$ on any regular personal computer and (ii) facilitates efficient extensibility due to its modular code structure.
 
