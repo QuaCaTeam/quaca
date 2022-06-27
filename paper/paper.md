@@ -25,7 +25,7 @@ affiliations:
    index: 2
  - name: Humboldt-Universität zu Berlin, Institut für Physik, 12489 Berlin, Germany
    index: 3
-date: 23 June 2022
+date: 27 June 2022
 bibliography: paper.bib
 ---
 
@@ -37,10 +37,14 @@ The frictional interaction between the moving system of interest and its environ
 At finite temperatures, thermal fluctuations can modify the interaction and quantum friction can be connected to the Einstein-Hopf effect [@einstein1910;@milonni1981;@ford1985;@mkrtchian2003;@oelschlaeger2021].
 For a comprehensive review of quantum friction in various contexts as well as related effects in dynamical nonequilibrium, we refer, for example, to the reviews in Refs. [@volokitin2007;@dedkov2017;@reiche2022] and the references therein.
 
-Due to the relative weakness of quantum friction with respect to comparable fluctuation-induced effects in equilibrium, such as the Casimir(-Polder) or the van der Waals effect [@dalvit2011], quantum friction has, to the best of our knowledge, yet evaded experimental confirmation.
-This has instigated a surge of interest in exploring potentially useful designs [@volokitin2011;@milton2016;@farias2020;@lombardo2021] (see also [@reiche2022] and references therein) and a sophisticated (numerical) optimization of the experimental setup appears necessary in order to promote the effect to the measurable realm [@oelschlager2019;@reiche2021].
+# Statement of need
 
+Due to the relative weakness of quantum friction with respect to comparable fluctuation-induced effects in equilibrium, such as the Casimir(-Polder) or the van der Waals effect [@dalvit2011], quantum friction has, to the best of our knowledge, yet evaded experimental confirmation.
+This has instigated a surge of interest in exploring potentially useful designs [@volokitin2011;@milton2016;@farias2020;@lombardo2021] (see also [@reiche2022] and references therein) and a sophisticated (numerical) optimization of the experimental setup appears necessary in order to promote the effect to the measurable realm [@oelschlager2019;@reiche2021]. 
 That is where QuaCa can come into use.
+
+# Physics of quantum friction
+
 QuaCa computes the quantum frictional force experienced by a microscopic particle (e.g. atom or nano-particle) moving along the invariant direction of an ensemble of macroscopic bodies.
 We focus on the late-time regime where all the transitional dynamics has settled and the particle can be assumed to be in a nonequilibrium steady-state moving with constant non-relativistic velocity $v$.
 In the regime of linear coupling between system and environment and in accordance with Refs. [@intravaia2014;@intravaia2016;@intravaia2016a;@intravaia2019], the frictional force connected to the electric interaction reads
@@ -59,6 +63,8 @@ This approach fully respects backaction from the environment onto the system (ex
 
 
 ![Sketch of the setup. A microscopic object, say, an atom, moves with constant velocity and height above a flat macroscopic surface. At constant velocity $v$, the particle is attracted by the surface ($F_{\rm CP}$, Casimir-Polder force) and experiences a moderating force ($F_{\rm fric}$, quantum friction). \label{fig:setup}](images/setup.svg){ width="800" height="600" style="display: block; margin: 0 auto" }
+
+# Numerical approach and code structure
 
 The QuaCa package (i) allows for a fast computation of $F_{\mathrm{fric}}$ on any regular personal computer and (ii) facilitates efficient extensibility due to its modular code structure.
 
