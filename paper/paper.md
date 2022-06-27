@@ -1,5 +1,5 @@
 ---
-title: 'QuaCa: an open-source library for fast calculations of long-time atom-surface interactions'
+title: 'QuaCa: an open-source library for fast calculations of steady-state quantum friction'
 tags:
   - C
   - C++
@@ -37,13 +37,13 @@ The frictional interaction between the moving system of interest and its environ
 At finite temperatures, thermal fluctuations can modify the interaction and quantum friction can be connected to the Einstein-Hopf effect [@einstein1910;@milonni1981;@ford1985;@mkrtchian2003;@oelschlaeger2021].
 For a comprehensive review of quantum friction in various contexts as well as related effects in dynamical nonequilibrium, we refer, for example, to the reviews in Refs. [@volokitin2007;@dedkov2017;@reiche2022] and the references therein.
 
-Due to the relative weakness of quantum friction with respect to comparable equilibrium effects, such as the Casimir(-Polder) or the van der Waals effect [@dalvit2011], quantum friction has, to the best of our knowledge, yet evaded experimental confirmation.
+Due to the relative weakness of quantum friction with respect to comparable fluctuation-induced effects in equilibrium, such as the Casimir(-Polder) or the van der Waals effect [@dalvit2011], quantum friction has, to the best of our knowledge, yet evaded experimental confirmation.
 This has instigated a surge of interest in exploring potentially useful designs [@volokitin2011;@milton2016;@farias2020;@lombardo2021] (see also [@reiche2022] and references therein) and a sophisticated (numerical) optimization of the experimental setup appears necessary in order to promote the effect to the measurable realm [@oelschlager2019;@reiche2021].
 
 That is where QuaCa can come into use.
 QuaCa computes the quantum frictional force experienced by a microscopic particle (e.g. atom or nano-particle) moving along the invariant direction of an ensemble of macroscopic bodies.
 We focus on the late-time regime where all the transitional dynamics has settled and the particle can be assumed to be in a nonequilibrium steady-state moving with constant non-relativistic velocity $v$.
-In the regime of linear coupling between system and environment and in accordance with Refs. Intravaia et al. [@intravaia2014;@intravaia2016;@intravaia2016a;@intravaia2019], the frictional force connected to the electric interaction reads
+In the regime of linear coupling between system and environment and in accordance with Refs. [@intravaia2014;@intravaia2016;@intravaia2016a;@intravaia2019], the frictional force connected to the electric interaction reads
 $$
   F_\mathrm{fric} =
 -2
@@ -55,10 +55,10 @@ $$
 where $\underline{S}(\omega)$ is the power spectrum of the particle's dipole moment, $\underline{G}(h,\mathbf{R}_a,\omega)$ is the electric Green tensor specifying the (material-)properties of the environment, $h$ is the wavevector along the direction of motion, $\mathbf{R}_a$ gives the position of the particle in the plane perpendicular to the direction of motion (usually connected to the particle-surface distance), $\omega$ is the frequency, the superscript $\intercal$ denotes the transpose of a matrix and $\underline{G}_{\Im}=(\underline{G}-\underline{G}^{\dagger})/(2i)$.
 The power spectrum encodes the temperature-dependence of the force as well as the polarizability $\underline{\alpha}(\omega)$ of the microscopic particle.
 The latter, due to the self-consistency of our approach [@intravaia2016;@reiche2020a], is dressed by the electromagnetic environment -- again given by the electric Green tensor.
-This approach is fully respects backaction from the environment onto the system (exact in all orders coupling) and includes spin-momentum locking of confined light, which can lead, e.g., to a net transfer of spin angular momentum [@intravaia2019], as well as finite temperatures [@oelschlager2019;@oelschlaeger2021].
+This approach fully respects backaction from the environment onto the system (exact in all orders coupling) and includes spin-momentum locking of confined light, which can lead, e.g., to a net transfer of spin angular momentum [@intravaia2019], as well as finite temperatures [@oelschlager2019;@oelschlaeger2021].
 
 
-![Sketch of the setup. A microscopic object, say, an atom, moves with constant velocity and height above a flat macroscopic surface. At constant velocity $v$, the particle is attracted by the surface ($F_{\rm CP}$, Casimir-Polder force) and experiences a moderating force ($F_{\rm fric}$, quantum friction).. \label{fig:setup}](images/setup.svg){ width="800" height="600" style="display: block; margin: 0 auto" }
+![Sketch of the setup. A microscopic object, say, an atom, moves with constant velocity and height above a flat macroscopic surface. At constant velocity $v$, the particle is attracted by the surface ($F_{\rm CP}$, Casimir-Polder force) and experiences a moderating force ($F_{\rm fric}$, quantum friction). \label{fig:setup}](images/setup.svg){ width="800" height="600" style="display: block; margin: 0 auto" }
 
 The QuaCa package (i) allows for a fast computation of $F_{\mathrm{fric}}$ on any regular personal computer and (ii) facilitates efficient extensibility due to its modular code structure.
 
@@ -66,7 +66,7 @@ On the one hand (i), computing the quantum friction force in the form presented 
 The nesting arises from the self-consistency of the approach and the Doppler-shift of the radiation.
 Further, since our formalism takes realistic (dispersive and dissipative) materials into account, both the polarizability and the Green tensor feature a number of (physical) poles that can lead to fastly oscillating integrands, especially in the regime where retardation due to the finite speed of light comes into play.
 The application of a Wick rotation that transforms the oscillations into exponential decays, as it became common in the numerical treatment of equilibrium fluctuation-induced effects [@oskooi2010;@johnson2011;@reid2015;@hartmann2020], is non-viable due to the Doppler-shift of the frequency.
-Here, QuaCa uses an numerically optimized version of $F_{\mathrm{fric}}$, where some of the nested integrals decouple, puts particular care on the occurring poles, and hence allows for a fast and efficient computation of the force.
+Here, QuaCa uses a numerically optimized version of $F_{\mathrm{fric}}$, where some of the nested integrals decouple, puts particular care on the occurring poles, and hence allows for a fast and efficient computation of the force.
 For details of the procedure, we refer to Ref. [@oelschlager2019].
 
 On the other hand (ii), we have chosen an implementation strategy where any of the physical quantities, such as the permittivity, the polarizability, the Green tensor or the power spectrum, are assigned to individual objects in the package. These can be tested, replaced, computed or used independently.
@@ -79,9 +79,9 @@ QuaCa contains the following main features and characteristics:
 
 - A library implementing several important quantities used in light-matter interaction
 - Two ready-to-use executables:
-  1) calculation of the noncontact friction
+  1) calculation of the friction force
   2) calculation of the decay rate
-- Use of the integration routine cquad [@galassi2019] to handle the integrals
+- Use of the integration routine cquad [@galassi2019] 
 - Support for parallelization with OpenMP
 - Extensive unit and integration tests
 - Use of modern C++
@@ -95,7 +95,7 @@ QuaCa currently supports the following geometries, and material models:
 When used as a library the following quantities are separately accessible:
 
  - the dressed polarizability
- - the Green's tensors for the above described geometries
+ - the Green tensors for the above described geometries
  - the power spectrum of the particle's dipole moment
  - the reflection coefficients of a planar interface, permittivity, and memory kernel for possible internal degrees of freedom
 
