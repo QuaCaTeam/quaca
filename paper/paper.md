@@ -25,13 +25,14 @@ affiliations:
    index: 2
  - name: Humboldt-Universität zu Berlin, Institut für Physik, 12489 Berlin, Germany
    index: 3
-date: 27 June 2022
+date: 28 June 2022
 bibliography: paper.bib
 ---
 
 # Summary
 
 QuaCa is an extensible library facilitating fast computation of steady-state atom-surface quantum friction.
+Due to its modular domain-driven structure, QuaCa can be of further use to calculate relevant quantities that are often needed in the context of electromagnetic dispersion forces.
 Quantum (or Casimir) friction is a quantum-optical fluctuation-induced force that occurs in dynamical nonequilibrium, i.e. when a number of bodies are moving relatively to one another [@pendry1997;@scheel2009].
 The frictional interaction between the moving system of interest and its environment is mediated by the (material-modified) quantum vacuum and persists even at zero temperature.
 At finite temperatures, thermal fluctuations can modify the interaction and quantum friction can be connected to the Einstein-Hopf effect [@einstein1910;@milonni1981;@ford1985;@mkrtchian2003;@oelschlaeger2021].
