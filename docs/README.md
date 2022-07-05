@@ -13,6 +13,18 @@ Furthermore we use:
 * [Catch2](https://github.com/catchorg/Catch2): unit testing
 * [docsify](https://docsify.js.org): documentation
 
+Those prerequisites can easily be installed via `apt install` or `conda`.
+
+For `conda` you can directly use the following command
+```bash
+conda env create --file environment.yml
+```
+Now if you apply
+```bash
+conda activate quaca-env
+```
+you are in the correct environment with all needed packages.
+
 ## Installing
 To obtain the source code type
 ```bash
@@ -24,12 +36,12 @@ git clone https://github.com/QuaCaTeam/quaca.git
 ```
 into the console
 
-Then to build the code type inside the project directory
+Then to build the code type inside the project directory (if you use `conda` please activate `quaca-env`)
 ```bash
 $ cd quaca
 quaca $ mkdir -p build
 quaca $ cd build
-quaca/build $ cmake ..
+quaca/build $ cmake .. -DCMAKE_PREFIX_PATH=$CONDA_PREFIX #or just cmake .. if you don't use conda
 quaca/build $ make quaca
 ```
 
