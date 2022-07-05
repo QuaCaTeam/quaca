@@ -14,13 +14,19 @@ Furthermore we use:
 * [docsify](https://docsify.js.org): documentation
 
 ## Installing
-To obtain the source code type into the console
+To obtain the source code type
 ```bash
 git clone git@git.physik.hu-berlin.de:top/codeprojects/quaca.git
 ```
+or
+```bash
+git clone https://github.com/QuaCaTeam/quaca.git
+```
+into the console
 
 Then to build the code type inside the project directory
 ```bash
+$ cd quaca
 quaca $ mkdir -p build
 quaca $ cd build
 quaca/build $ cmake ..
