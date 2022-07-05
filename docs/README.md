@@ -13,7 +13,7 @@ Furthermore we use:
 * [Catch2](https://github.com/catchorg/Catch2): unit testing
 * [docsify](https://docsify.js.org): documentation
 
-Those prerequisites can easily be installed via `apt install` or `conda`.
+Those prerequisites can easily be installed via `apt install` or [conda](https://docs.conda.io/en/latest/).
 
 For `conda` you can directly use the following command
 ```bash
