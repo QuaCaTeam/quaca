@@ -64,11 +64,13 @@ You can then see the documentation in your browser at the address `http://localh
 Employing test-driven development, we are using [Catch2](https://github.com/catchorg/Catch2) for our unit and integrated testing.
 To build and run all implemented test use
 ```bash
-quaca/build $ make test_quaca
+quaca/build $ make test_quaca_unit
+quaca/build $ make test_quaca_integrated
 ```
 and afterwards run the tests from the `bin/` directory
 ```bash
-quaca/bin $ ./test_quaca
+quaca/bin $ ./test_quaca_unit
+quaca/bin $ ./test_quaca_integrated
 ```
 More detailled information is given in the section [Testing](dev/testing.md).
 ## Contributing
