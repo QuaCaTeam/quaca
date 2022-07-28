@@ -64,6 +64,7 @@ int main(int argc, char *argv[]) {
   // define progressbar
   ProgressBar progbar(looper->get_steps_total(), 70);
 
+
   // Check whether the number of threads have been set by the --threads flag
   if (num_threads == -1) {
     // If the --threads flag has not been set, set the number of flags to
@@ -109,6 +110,20 @@ int main(int argc, char *argv[]) {
 #pragma omp for schedule(dynamic)
     for (int i = 0; i < looper->get_steps_total(); i++) {
       friction_data[i] = looper->calculate_value(i, quant_friction);
+#pragma omp critical
+      {
+          // define output file
+          std::ofstream file;
+          file.open(output_file);
+
+          // write results in output file
+          for(int j = 0; j < looper->get_steps_total(); j++) {
+            double step = looper->get_step(j);
+            file << step << "," << friction_data[j] << "\n";
+          }
+          // close file
+          file.close();
+      }
 
 #pragma omp critical
       ++progbar;
@@ -117,19 +132,6 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  // define output file
-  std::ofstream file;
-  file.open(output_file);
-
-  // write the data to the file
-  double step;
-  for (int i = 0; i < looper->get_steps_total(); i++) {
-    step = looper->get_step(i);
-    file << step << "," << friction_data[i] << "\n";
-  }
-
-  // close file
-  file.close();
 
   // close progress bar
   progbar.done();
