@@ -40,7 +40,7 @@ Let us now create an input file in the `data/` directory and call it `tutorial.j
         "type" : "plate",
         "v" : 1e-4,
         "beta" : 1e6,
-        "za" : 0.01,
+        "za" : 0.025,
         "delta_cut" : 20,
         "rel_err_0" : 1e-4,
         "rel_err_1" : 1e-2
@@ -51,7 +51,7 @@ Let us now create an input file in the `data/` directory and call it `tutorial.j
     "Permittivity": {
         "type": "drude",
         "omega_p" : 9.0,
-        "gamma" : 0.1
+        "gamma" : 0.035
     },
     "Polarizability": {
         "omega_a" : 1.3,

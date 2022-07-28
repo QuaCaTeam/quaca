@@ -13,21 +13,39 @@ Furthermore we use:
 * [Catch2](https://github.com/catchorg/Catch2): unit testing
 * [docsify](https://docsify.js.org): documentation
 
+Those prerequisites can easily be installed via `apt install` or [conda](https://docs.conda.io/en/latest/).
+
+For `conda` you can directly use the following command
+```bash
+conda env create --file environment.yml
+```
+Now if you apply
+```bash
+conda activate quaca-env
+```
+you are in the correct environment with all needed packages.
+
 ## Installing
-To obtain the source code type into the console
+To obtain the source code type
 ```bash
 git clone git@git.physik.hu-berlin.de:top/codeprojects/quaca.git
 ```
-
-Then to build the code type inside the project directory
+or
 ```bash
+git clone https://github.com/QuaCaTeam/quaca.git
+```
+into the console
+
+Then to build the code type inside the project directory (if you use `conda` please activate `quaca-env`)
+```bash
+$ cd quaca
 quaca $ mkdir -p build
 quaca $ cd build
-quaca/build $ cmake ..
-quaca/build $ make quaca
+quaca/build $ cmake .. -DCMAKE_PREFIX_PATH=$CONDA_PREFIX #or just cmake .. if you don't use conda
+quaca/build $ make
 ```
 
-An executable called `quaca` should now have been build and can be found in the `quaca/bin` directory.
+Two executables called `Friction` and `Decay` should now have been build and can be found in the `quaca/bin` directory.
 
 ## Documentation
 For now we do not upload the documentation anywhere, so it can only be viewed locally using the following command from the command line
@@ -46,11 +64,13 @@ You can then see the documentation in your browser at the address `http://localh
 Employing test-driven development, we are using [Catch2](https://github.com/catchorg/Catch2) for our unit and integrated testing.
 To build and run all implemented test use
 ```bash
-quaca/build $ make test_quaca
+quaca/build $ make test_quaca_unit
+quaca/build $ make test_quaca_integrated
 ```
 and afterwards run the tests from the `bin/` directory
 ```bash
-quaca/bin $ ./test_quaca
+quaca/bin $ ./test_quaca_unit
+quaca/bin $ ./test_quaca_integrated
 ```
 More detailled information is given in the section [Testing](dev/testing.md).
 ## Contributing
