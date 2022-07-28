@@ -265,7 +265,7 @@ quaca/build> ./../bin/Tutorial
 Notice that because of the way we have written our main function, the output file `tutorial_mainfile.csv` will be placed wherever the executable is run, so in this case it will be placed in the `build/` directory.
 
 ## 4. Check the results
-Plot the data again by using our prepared plot script
+Plot the data again by going to the `quaca/plots` directory and using our prepared plot script
 ```bash
 quaca/plots> python plot.py ../build/tutorial_mainfile.csv
 ```

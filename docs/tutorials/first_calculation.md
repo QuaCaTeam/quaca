@@ -89,7 +89,7 @@ Last but not least we want to tell QuaCa to calculate the frictional force for s
 With our input file filled we can now start the calculation.
 
 ## 3. Run QuaCa
-After installing and building QuaCa you should find an executable called `Friction` in the `bin/` directory.
+After [installing and building QuaCa](gettingstarted.md) you should find an executable called `Friction` in the `bin/` directory.
 Change into this directory and type into the command line
 ```bash
 quaca/bin> ./Friction --file ../data/tutorial.json

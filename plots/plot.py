@@ -36,6 +36,8 @@ def main():
     matplotlib.rcParams["text.usetex"] = True;
     matplotlib.rcParams["font.size"] = 24;
     plt.figure(figsize=(10, 3))
+    plt.xlabel("$v / c$")
+    plt.ylabel("$F$")
     plt.loglog(x,-y * prefactor_force / mass_rb)
     plt.show()
 
