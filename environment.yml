@@ -1,0 +1,11 @@
+name: quaca-env
+channels:
+  - conda-forge
+  - default
+dependencies:
+  - gsl
+  - boost-cpp
+  - armadillo
+  - catch2
+  - lapack
+  - blas
