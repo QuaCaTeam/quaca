@@ -24,10 +24,10 @@ Then to build the code type inside the project directory
 quaca $ mkdir -p build
 quaca $ cd build
 quaca/build $ cmake ..
-quaca/build $ make quaca
+quaca/build $ make
 ```
 
-An executable called `quaca` should now have been build and can be found in the `quaca/bin` directory.
+Two executables called `Friction` and `Decay` should now have been build and can be found in the `quaca/bin` directory.
 
 ## Documentation
 For now we do not upload the documentation anywhere, so it can only be viewed locally using the following command from the command line
