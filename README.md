@@ -1,4 +1,4 @@
-# QuaCa {docsify-ignore-all}
+# QuaCa <!-- {docsify-ignore-all} -->
 **QuaCa** stands for Quantum / Casimir Friction and is a numerical framework to calculate just that.
 
 ## Dependencies
@@ -27,10 +27,6 @@ you are in the correct environment with all needed packages.
 
 ## Installing
 To obtain the source code type
-```bash
-git clone git@git.physik.hu-berlin.de:top/codeprojects/quaca.git
-```
-or
 ```bash
 git clone https://github.com/QuaCaTeam/quaca.git
 ```
@@ -81,3 +77,4 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on how you can become
 - [Marty Oelschläger](mailto:myoel@posteo.de)
 - Simon Hermann
 - Christoph Egerland
+- Daniel Reiche
