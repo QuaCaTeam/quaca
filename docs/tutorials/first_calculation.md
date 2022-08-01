@@ -12,20 +12,19 @@ A calculation with QuaCa always consists of the following steps:
 Let us adhere to this outline and start by planing our setup.
 
 ## 1. Plan the physical system
-In this tutorial we want to calculate the noncontact friction of an atom above the surface of a Drude bulk material (this 
-has already been done in [this publication](https://link.aps.org/doi/10.1103/PhysRevLett.123.120401)).
-Essentially we want to reproduce the results of the yellow line in FIG.2 of the aforementioned publication.
+In this tutorial we want to compute the quantum friction force experienced by an atom moving at constant velocity $v$ and height $z_a$ above the planar surface of a semi-infinite bulk material comprosed of a simple Drude metal (as was, e.g., been done in [this publication](https://link.aps.org/doi/10.1103/PhysRevLett.123.120401)).
+The computation is performed at temperature $T=\frac{1}{\beta k_\mathrm{B}}$ (see also [this publication](https://arxiv.org/abs/2110.13635) for details on the temperature-dependence of quantum friction). 
+Further physical assumptions and details are explained in [this paper](http://link.aps.org/doi/10.1103/PhysRevLett.117.100402).
+
 
 <div style="text-align:center">
 <img class="plain" src="_media/setup.svg" class="center" width="40%">
 </div>
 Our setup consists of:
 
-* an object (for example an atom), described by its polarizability $\underline{\alpha}(\omega)$
-* a surface, described by the reflection coefficients $r^s(\omega,k)$ and $r^p(\omega,k)$
-* where the object moves with constant velocity $v$ and constant distance to the surface $z_a$, and the system is evaluated at temperature $T=\frac{1}{\beta k_\mathrm{B}}$.
+* a microscopic object (for example an atom), described by its polarizability $\underline{\alpha}(\omega)$
+* and a vacuum-metal interface, described by the reflection coefficients $r^s(\omega,k)$ and $r^p(\omega,k)$ which are functions of the Drude permittivity and depend on the frequency $\omega$ and the wavevector $k$ of the electromagnetic field excitations.
 
-Further physical assumptions and details are explained in [this paper](http://link.aps.org/doi/10.1103/PhysRevLett.117.100402).
 ## 2. Create the input file
 There are lots of things we could change in the above setup without changing the formula we have to use.
 Because of this inherent modularity QuaCa reads an input file that contains all these parameters, so that the program does not have to be recompiled on each change.
