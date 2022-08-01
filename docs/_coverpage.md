@@ -3,10 +3,10 @@
 
 <img src="_media/logo.png" alt="drawing" width="200"/>
 
- __QuaCa__ is an open-source library which provides fast calculations of nonequilibrium atom-surface interactions.
+ __QuaCa__ is an open-source library for fast calculations of steady-state quantum friction.
 </br>
 </br>
-For more information scroll down or immediately jump to the sections
+For more information scroll down or jump to the sections
 
  * [__Getting Started__](gettingstarted.md)
  * [__Tutorials__](tutorials/first_calculation.md)
