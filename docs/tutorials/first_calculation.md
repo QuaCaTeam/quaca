@@ -110,4 +110,4 @@ Simply type
 ```bash
 quaca/plots> python plot.py ../data/tutorial.csv
 ```
-The result can be compared to the orange line in Fig. of [this reference](https://link.aps.org/doi/10.1103/PhysRevLett.123.120401), since we have used the same parameters and worked at negligible temperatures (see input file).
+The result can be compared to the orange line in Fig. 2 of [this reference](https://link.aps.org/doi/10.1103/PhysRevLett.123.120401), since we have used the same parameters and worked at negligible temperatures (see input file).
