@@ -92,21 +92,22 @@ With our completed input file we can now start the calculation.
 
 ## 3. Run QuaCa
 After [installing and building QuaCa](gettingstarted.md) you should find an executable called `Friction` in the `bin/` directory.
-Change into this directory and type into the command line
+Change into this directory and type into the command
 ```bash
 quaca/bin> ./Friction --file ../data/tutorial.json
 ```
-The flag `--file` specifies the input file, whose path is specified behind it.
-We will chose here the input file that we have created above.
-Notice that since we are in the `bin/` directory we first had to go one directory up and then to `data/tutorial.json`.
+The flag `--file` specifies the input file, where the desired path is given directly afterwards.
+We choose the input file that we have created above.
+Note that, since we are in the `bin/` directory, we first had to go one directory up and then to `data/tutorial.json`.
 QuaCa now produces an output file in the same directory as the input file and with the same name, but of the file type `.csv`.
-It contains in the first column the variable that we have looped over (which in this case is the velocity v) and in the second column the calculated value of the quantum friction.
+It contains in the first column the variable that we have looped over (which in this case is the velocity `v`) and in the second column the calculated value of the force.
 
 ## 4. Check the results
-Let us now plot the data we obtained from our calculation and compare it to the yellowish line in [this publication](https://link.aps.org/doi/10.1103/PhysRevLett.123.120401).
-We have a plot script prepared for in the `plots/` directory.
+Let us now plot the data we obtained from our calculation.
+We have a plot script prepared for in the `plots/` directory. 
+The script reinstalls SI units and gives the frictional acceleration (force divided by mass) for a Rubidium atom as a function of velocity measured in multiples of the speed of light `c`.
 Simply type
 ```bash
 quaca/plots> python plot.py ../data/tutorial.csv
 ```
-and compare the plot with figure 2 of [the publication](https://link.aps.org/doi/10.1103/PhysRevLett.123.120401).
+The result can be compared to the orange line in Fig. of [this reference](https://link.aps.org/doi/10.1103/PhysRevLett.123.120401), since we have used the same parameters and worked at negligible temperatures (see input file).
