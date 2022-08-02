@@ -1,7 +1,6 @@
 # Implement a new feature
-For now we have played around with the main functions and executables.
 In this tutorial we will add a new feature to QuaCa, more specifically a new permittivity.
-We want to implement a simple Lorentz model of the form
+We want to implement a Lorentz model of the form
 $$
 \varepsilon(\omega) = \varepsilon_{\infty} - \frac{\alpha_0 \omega_0^2}{\omega_0^2 - \omega^2 - i \omega \gamma}.
 $$
@@ -14,7 +13,7 @@ For this we need to:
 4. (Document your code)
 
 Let us first look at how a generic permittivity looks like in QuaCa.
-For this head over to the directory `src/Permittivity/` and open the file `Permittivity.h`.
+Move to the directory `src/Permittivity/` and open the file `Permittivity.h`.
 You will see the following code
 ```cpp
 #ifndef PERMITTIVITY_H
@@ -37,23 +36,24 @@ public:
 
 #endif // PERMITTIVITY_H
 ```
-This is a so called abstract class, it is abstract because in front of all functions that are defined within the class you find the word `virtual` and at the end you find `=0`.
-This means that we do not know what the function in general actually does, which makes sense because we simply do not know what the specific permittivity is for now (i.e. how we model the permittivity).
+This is a so-called abstract class. It is abstract, because in front of all functions that are defined within the class you find the word `virtual` and at the end you find `=0`.
+This means that we do not know yet what the function actually does and allows for a certain level of generality as no specific model is needed at the moment.
 All permittivities are children of this class, so they inherit from it and they have to implement the three functions `calculate (double omega)`, `calculate_times_omega (double omega)` and `print_info(std:ostream &stream)`
 
-Every class also needs a so called constructor that basically defines the parameters of the class (in our case e.g. $\varepsilon_{\infty}$).
+Every class also needs a so-called constructor that defines the parameters of the class (in our case, e.g., $\varepsilon_{\infty}$).
 
 Let us now start by writing tests for our new permittivity.
 
 ## 1. Write tests for the permittivity
 In the QuaCa project we are practicing so called [test driven development](dev/testing).
-This means that before we implement a new feature we will write tests that this feature has to fulfill.
-Seeing that we want to implement a permittivity, we might want to check whether we construct it correctly and whether it really obeys the crossing relation
+This means that, before we implement a new feature, we will write (physically motivated) tests that this feature has to pass.
+Given a permittivity, for instance, we might want to check whether it obeys the crossing relation
 $$
 \varepsilon(\omega) = \varepsilon^{*}(-\omega).
 $$
 
-Let us start by heading over to the directory `test/UnitTests/Permittivity` and creating a new file called `test_PermittivityLorentzOhmic_unit.cpp` (PermittivityLorentzOhmic will be the name of the class we create later).
+We now work our way through the general procedure of implementing tests.
+Move to the directory `test/UnitTests/Permittivity` and create a new file called `test_PermittivityLorentzOhmic_unit.cpp` (PermittivityLorentzOhmic will be the name of the class we create later).
 Fill this file with the following code
 ```cpp
 #include "Quaca.h"
@@ -63,9 +63,9 @@ TEST_CASE("LorentzOhmic permittivity constructors work as expected",
           "[PermittivityLorentzOhmic]") {
 };
 ```
-In this test case we want to test the constructors of our class.
+We simply test the constructors of our class.
 In the last two tutorials you have seen that QuaCa works in two ways: either you give it an input file or you define your own main function.
-Therefore we want to implement two constructors that look like this: one takes all the arguments directly
+Therefore we want to implement two constructors to check both of these features. One takes all the arguments directly
 ```cpp
 PermittivityLorentzOhmic(double eps_inf, double alpha_0, double omega_0, double gamma);
 ```
@@ -73,9 +73,9 @@ And the other one takes a path to an input file and reads the parameters from th
 ```cpp
 PermittivityLorentzOhmic(std::string input_file);
 ```
-How would we tests if this actually works?
-Well, we simply define the quantities and check if the corresponding quantities of the permittivity have the values we defined.
-Let us create a section for the direct constructor and define our permittivity
+The question is now how to test the functionality of these two constructors.
+To this end, we define the quantities and check if we obtain the desired output.
+Create a section for the direct constructor and define our permittivity
 ```cpp
 #include "Quaca.h"
 #include "catch.hpp"
@@ -115,7 +115,7 @@ TEST_CASE("LorentzOhmic permittivity constructors work as expected",
 };
 ```
 And you are done with this test!
-When we have implemented our permittivity correctly, i.e. we have implemented the constructors and the getter functions correctly this test will succeed and we can be sure that our new feature is constructed correctly.
+When we have implemented the constructors and the getter functions correctly, this test will succeed and we can be sure that our new feature is constructed properly.
 
 Let us now check whether our permittivity obeys the crossing relation in a new test case below the constructor test
 ```cpp
@@ -152,12 +152,12 @@ TEST_CASE("LorentzOhmic permittivity obeys crossing relation",
   REQUIRE(perm.calculate(omega) == std::conj(perm.calculate(-omega)));
 };
 ```
-And done!
-This will test the crossing relation for the set of frequencies defined between the brackets after the `GENERATE` command. You can add additional values if you like, but take care, to always include tests in all the relevant regimes of the function, you would like to test. In our case, we want to ensure, that the crossing relation is fulfilled for positive and negative frequencies.
-As a last step we have to register this test to QuaCa. 
-Head over to the `test/UnitTests` directory and open `CMakeLists.txt`.
-You will see a bunch of files that are added to target `test_sources`.
-Go ahead and add our test to the end of this list
+This will test the crossing relation for the set of frequencies defined between the brackets after the `GENERATE` command. 
+In practice, be sure to include tests in all the relevant regimes of the function. In our case, e.g., we want to ensure that the crossing relation is fulfilled for positive and negative frequencies.
+As a last step, we have to add this test to the QuaCa functionalities. 
+Move to the `test/UnitTests` directory and open `CMakeLists.txt`.
+You will see a number of files that are added to the target `test_sources`.
+Add our test to the end of this list
 ```cmake
 # add sources to test
 set(test_sources
@@ -172,8 +172,8 @@ The next time we compile, CMake will know about this test and weave it into our 
 With the tests ready to run let us now actually implement the new feature.
 
 ## 2. Implement the permittivity
-Head over to the `src/Permittivity/` directory and create a new file called `PermittivityLorentzOhmic.h`.
-Fill it with the following code
+Move the `src/Permittivity/` directory and create a new file called `PermittivityLorentzOhmic.h`.
+Add the following code
 ```cpp
 #ifndef PERMITTIVITYLORENTZOHMIC_H
 #define PERMITTIVITYLORENTZOHMIC_H
@@ -212,8 +212,8 @@ public:
 #endif
 ```
 
-As with the test we still have to tell QuaCa to compile this target.
-Head over to the `src/` directory and open the `CMakeLists.txt`.
+Again, we have to tell QuaCa to compile this target.
+Move to the `src/` directory and open the `CMakeLists.txt`.
 Add the source file `PermittivityLorentzOhmic.cpp` to the other source files
 ```cmake
 # add QuaCa library
@@ -258,7 +258,7 @@ build/ $ ./../bin/test_quaca_unit
 If you followed the above steps, there should be no error, showing us that our tests indeed succeded.
 
 # (4. Document your code)
-To keep matters short we did not include any comments in the above code examples.
+To keep matters short, we did not include any comments in the above code examples.
 You should, however, include documentation on what you have coded in the form of comments inside the header files
 as well as in the source files.
-Idealy you should also write a corresponding `.md` file in the documentation folder `docs/`.
+Ideally, you should also write a corresponding `.md` file in the documentation folder `docs/`.
