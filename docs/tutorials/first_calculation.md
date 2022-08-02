@@ -26,13 +26,15 @@ Our setup consists of:
 * and a vacuum-metal interface, described by the reflection coefficients $r^s(\omega,k)$ and $r^p(\omega,k)$ which are functions of the Drude permittivity and depend on the frequency $\omega$ and the wavevector $k$ of the electromagnetic field excitations.
 
 ## 2. Create the input file
-There are lots of things we could change in the above setup without changing the formula we have to use.
-Because of this inherent modularity QuaCa reads an input file that contains all these parameters, so that the program does not have to be recompiled on each change.
+Once the particle's properties - by means of the polarizability - and the material properties - by means of the permittivity, the reflection coefficients and the electric Green tensor - are defined, the friction force can be calculated. 
+QuaCa exploits the inherent modularity of the friction's mathematical structure by defining a separate class for each of the input functions. 
+Classes are abstract units that resemble a larger term in the formula for quantum friction such as the polarizability, the power spectrum or the Green's tensor.
+Parameters for each of the keys in the class are then taken by an input file.
+In this way, the program does not have to be recompiled for each calculation.
 
 The parameters are written in  a `.json` file.
 It consists of sections, which are named after the classes (e.g. `GreensTensor`, `Polarizability`) and keys which are named after the properties they represent (e.g. the velocity v, the inverse temperature beta, etc.).
-Classes are abstract units that resemble a larger term in the formula for quantum friction such as the polarizability, the power spectrum or the Green's tensor.
-Let us now create an input file in the `data/` directory and call it `tutorial.json`:
+Let us create an input file in the `data/` directory and call it `tutorial.json`:
 ```json
 {
     "GreensTensor": {
@@ -69,23 +71,24 @@ Let us now create an input file in the `data/` directory and call it `tutorial.j
 }
 ```
 
-First of all a note on units. QuaCa works with a system of measurement called natural units, so all parameters that we enter in the input file have to be converted into natural units.
+QuaCa works with natural units, so all parameters that we enter into the input file have to be converted into natural units.
 
 ?> For more information and for a unit converter applet see the [units page](documentation/units).
 
 Now let us dissect the input file.
 
-The first section is dedicated to the Green's tensor and contains first the type, which in our case is `plate`, the value for the physical parameters of velocity `v`, inverse temperature `beta` and the distance from the plate `za`. Furthermore we specify numerical parameters that are needed for the integration of the Green's tensor. You can read more about them in the [API documentation of the Green's tensor](api/greenstensor).
+First, we set the parameters for the Green's tensor, where the `type` decides on the overall geometry. In our case, this is a semi-infinite half-space given by the abbreviation `plate`.
+Subsequently, we set the physical parameters of this type of Green tensor: The velocity `v`, the inverse temperature `beta` and the distance from the plate `za`. We lastly specify numerical parameters that are needed for the integration routine. You can read more about them in the [API documentation of the Green's tensor](api/greenstensor).
 
-The next section is dedicated to the reflection coefficients of the surface and simply state that we want to use the reflection coefficients of a local bulk. After that we specify the permittivity of the bulk to be of type `drude`, i.e. we employ the Drude model, and specify its parameters. 
+The next three sections specify the details of the reflection coefficients, the material's permittivity and the polarizability. In our case, we use a spatially local and homogeneous bulk material (`local bulk`), choose the Drude model (`drude`) for describing a metallic plasma with plasma frequency `omega_p` and dissipation rate `gamma`, and intend wo work with a two-level atom with resonance frequency `omega_a` and static polarizability `alpha_zero`.
 
-The next section defines the polarizability of the particle, which has the type `nobath` (that means the particle has no internal bath),  its parameters and the power spectrum. To calculate the quantum friction we need to perform an integral over frequencies, the desired relative error of which is specified in the section `Friction`.
+In order to calculate quantum friction, we need to perform an integral over frequencies. The desired relative error of the numerical integration routine is specified in the section `Friction`.
 
-Last but not least we want to tell QuaCa to calculate the frictional force for several velocities. For this we specify in the `Looper` category the type `v`together with a scale type, start/end points and number of steps.
+Lastly, we tell QuaCa to calculate the frictional force for several parameters, in our case velocities. For this, we specify in the `Looper` category the type `v` together with a scale type, start/end points and number of steps.
 
-?> For a more comprehensive explanation of all keys in a particular section, have a look the documentation of the class, e.g. for the keys in the polarizability have a look at [Polarizability](api/polarizability).
+?> For a more comprehensive explanation of all keys in a particular section, have a look at the documentation of the class, e.g. for the keys in the polarizability see [Polarizability](api/polarizability).
 
-With our input file filled we can now start the calculation.
+With our completed input file we can now start the calculation.
 
 ## 3. Run QuaCa
 After [installing and building QuaCa](gettingstarted.md) you should find an executable called `Friction` in the `bin/` directory.
