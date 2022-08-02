@@ -1,7 +1,7 @@
 # Write your own main
 In the first tutorial you calculated the non-contact friction of an atom above the surface of a Drude bulk material using an input file and the executable `Friction`.
 QuaCa can, however, also be used like a library and you can write your own executables!
-In this tutorial we will redo the last tutorial, but this time we will implement everything in our own main file.
+In this tutorial, we will redo the last tutorial, but this time we will implement everything in our own main file.
 You will learn how to:
 
 1. Register a new executable.
@@ -10,7 +10,7 @@ You will learn how to:
 4. Check the results.
 
 ## 1. Register a new executable
-Let us look at the subfolders of `quaca/`.
+Let us have a look at the subfolders of `quaca/`:
 ```
     quaca/
     ├── app
@@ -25,14 +25,16 @@ Let us look at the subfolders of `quaca/`.
     └── test
 ```
 
-You will see amongst them a folder called `app/` and a folder called `src/`.
+You will see a folder called `app/` and a folder called `src/` amongst them.
 The folder `src/` contains all the code for the Green's tensors, polarizabilities and all other quantities that are needed for the calculation of quantum friction.
 This folder does, however, *not* contain a main function, which is needed to build an executable (i.e. a program we can actually execute).
 These main functions are inside the `app/` directory.
 Look inside the `app/` folder and you will find e.g. a subfolder called `Friction` and a file called `CMakeLists.txt`.
 
-Each folder inside the `app/` folder should contain a `.cpp` file containing a main file, so each folder corresponds to an executable program.
-In the last tutorial you have already worked with the executable `Friction`, so let us now create a new one.
+Each folder inside the `app/` folder should contain a `.cpp`-file containing representing main file. 
+Hence, each folder corresponds to an executable program.
+In the last tutorial you have already worked with the executable `Friction`. 
+Let us now create a new one.
 
 First create a new folder inside the `app/` folder and call it `Tutorial`.
 Next go to the file `CMakeLists.txt` inside the `app/` directory and add the following line to the end of the file
@@ -40,7 +42,7 @@ Next go to the file `CMakeLists.txt` inside the `app/` directory and add the fol
 add_subdirectory("Tutorial")
 ```
 This tells CMake to consider this folder when building the executables.
-Next create a file inside the `Tutorial/` folder called `tutorial.cpp` and write the following inside it.
+Next create a file inside the `Tutorial/` folder called `tutorial.cpp` containing the following lines of code:
 ```cpp
 #include "Quaca.h"
 #include <iostream>
@@ -52,7 +54,7 @@ int main(int argc, char *argv[])
 };
 ```
 Now we need to tell CMake how to build this executable.
-Create a file called `CMakeLists.txt` inside the `Tutorial/` folder and write the following in it
+Create a file called `CMakeLists.txt` inside the `Tutorial/` folder containing the following lines of code:
 ```cmake
 # add executable
 add_executable(Tutorial
@@ -67,7 +69,7 @@ target_link_libraries(Tutorial
 ```
 This tells CMake to add an executable called `Tutorial`, that the file containing the main function is called `tutorial.cpp` and that this executable should be linked to the library `quaca`.
 
-With this setup ready we should test whether our tutorial works.
+With this setup, we are ready to test whether our tutorial executable works.
 Go to the `quaca/build/` directory and type into the command line
 ```bash
 quaca/build> cmake ..
@@ -77,7 +79,7 @@ Then build the project by typing
 ```bash
 quaca/build> make
 ```
-You should now see your executable in the `quaca/bin/` directory, so let us execute it and we see
+You should now see your executable in the `quaca/bin/` directory, so let us execute it:
 ```bash
 quaca/bin> ./Tutorial
 The tutorial executable works!
@@ -97,7 +99,7 @@ int main(int argc, char *argv[])
 {
   // parameters for permittivity
   double omega_p = 9.0;
-  double gamma = 0.1;
+  double gamma = 0.035;
 
   // define permittivity
   auto permittivity = std::make_shared<PermittivityDrude>(omega_p, gamma);
@@ -106,19 +108,19 @@ int main(int argc, char *argv[])
 };
 ```
 You have now created an object of the type PermittivityDrude called `permittivity` with the appropriate parameters.
-This object can be used for the calculation of e.g. the numerical value of the permittivity and can also be put into other objects as we will now do.
-Define the reflection coefficients and put the permittivity inside it by adding to our code
+This object can be used for the calculation of, e.g., the numerical value of the permittivity and can also be put into other objects as we will now do.
+Define the reflection coefficients and use the permittivity as an argument by adding to our code
 ```cpp
 // define reflection coefficients
 auto refl_coefficients = std::make_shared<ReflectionCoefficientsLocBulk>(permittivity);
 ```
 We hereby defined reflection coefficients and told them to use the permittivity from above.
-Let us proceed by defining our Green's tensor and put the reflection coefficients inside it.
+Let us proceed by defining our Green tensor using the reflection coefficients as an argument.
 ```cpp
 // parameters for green's tensor
 double v = 1e-4;
 double beta = 1e6;
-double z_a = 0.01;
+double z_a = 0.025;
 
 // numerical error for green's tensor
 double delta_cut = 20;
@@ -127,7 +129,7 @@ vec::fixed<2> rel_err = {1E-4, 1E-2};
 // define the Green's tensor
 auto greens_tensor = std::make_shared<GreensTensorPlate>(v, beta, z_a, refl_coefficients, delta_cut, rel_err);
 ```
-We have now defined our Green's tensor so let us proceed by defining the polarizability.
+Let us proceed by defining the polarizability.
 ```cpp
 // parameters for polarizability
 double omega_a = 1.3;
@@ -148,8 +150,8 @@ double rel_err_omega = 1e-1;
 auto friction = std::make_shared<Friction>(greens_tensor, polarizability, power_spectrum, rel_err_omega);
 ```
 Perfect!
-We have defined every object there is to calculate quantum friction and have set all parameters.
-All that is left to do is calculate the quantum friction and print out the result.
+We have now defined every object that is needed to compute quantum friction and have fixed all parameters.
+All there is left to do is to calculate the friction force and print the result.
 
 For the calculation we still need to define our scale.
 We want to calculate the friction for velocities ranging from `1e-4` to `1e-2` on a logarithmic scale.
@@ -189,7 +191,7 @@ int main(int argc, char *argv[]) {
 
   // parameters for permittivity
   double omega_p = 9.0;
-  double gamma = 0.1;
+  double gamma = 0.035;
 
   // define permittivity
   auto permittivity = std::make_shared<PermittivityDrude>(omega_p, gamma);
@@ -200,7 +202,7 @@ int main(int argc, char *argv[]) {
   // parameters for green's tensor
   double v = 1e-4;
   double beta = 1e6;
-  double z_a = 0.01;
+  double z_a = 0.025;
 
   // numerical error for green's tensor
   double delta_cut = 20;
@@ -262,11 +264,11 @@ Run the executable by typing into the console
 ```bash
 quaca/build> ./../bin/Tutorial
 ```
-Notice that because of the way we have written our main function, the output file `tutorial_mainfile.csv` will be placed wherever the executable is run, so in this case it will be placed in the `build/` directory.
+Notice that, because of the way we have written our main function, the output file `tutorial_mainfile.csv` will be placed wherever the executable is run, so in this case it will be placed in the `build/` directory.
 
 ## 4. Check the results
 Plot the data again by going to the `quaca/plots` directory and using our prepared plot script
 ```bash
 quaca/plots> python plot.py ../build/tutorial_mainfile.csv
 ```
-You should obtain a plot that looks exactly like the one we have got in the [first Tutorial](tutorials/first_calculation).
+You should obtain a plot that looks exactly like the one we have gotten in the [first Tutorial](tutorials/first_calculation).
