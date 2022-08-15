@@ -1,4 +1,4 @@
-# QuaCa {docsify-ignore-all}
+# QuaCa <!-- {docsify-ignore-all} -->
 **QuaCa** stands for Quantum / Casimir Friction and is a numerical framework to calculate just that.
 
 ## Dependencies
