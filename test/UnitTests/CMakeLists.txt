@@ -12,7 +12,6 @@ set(test_sources
         MemoryKernel/test_SinglePhononMemoryKernel_unit.cpp
         Permittivity/test_PermittivityDrude_unit.cpp
         Permittivity/test_PermittivityLorentz_unit.cpp
-        Permittivity/test_PermittivityLorentzOhmic_unit.cpp
         Polarizability/test_PolarizabilityBath_unit.cpp
         Polarizability/test_PolarizabilityNoBath_unit.cpp
         PowerSpectrum/test_PowerSpectrum.cpp

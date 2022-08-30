@@ -17,7 +17,6 @@ set(quaca_sources
         Permittivity/PermittivityDrude.cpp
         Permittivity/PermittivityFactory.cpp
         Permittivity/PermittivityLorentz.cpp
-        Permittivity/PermittivityLorentzOhmic.cpp
         Polarizability/Polarizability.cpp
         PowerSpectrum/PowerSpectrum.cpp
         ReflectionCoefficients/ReflectionCoefficientsFactory.cpp

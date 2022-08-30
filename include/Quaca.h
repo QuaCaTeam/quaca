@@ -22,7 +22,6 @@
 #include "../src/Permittivity/PermittivityDrude.h"
 #include "../src/Permittivity/PermittivityFactory.h"
 #include "../src/Permittivity/PermittivityLorentz.h"
-#include "../src/Permittivity/PermittivityLorentzOhmic.h"
 
 #include "../src/Polarizability/Polarizability.h"
 
