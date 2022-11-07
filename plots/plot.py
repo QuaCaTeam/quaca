@@ -14,7 +14,7 @@ def main():
     x = plotdata[:, 0]
     y = plotdata[:, 1]
 
-    # print force in units of micro meters / seconds^2
+    # print force in units of micrometers / seconds^2
     hbar = 1.054571817e-34 # Joules / seconds
     c = 299792458.0 # meter / seconds
     eV = 1.602176634e-19 # Joules * seconds
@@ -37,7 +37,7 @@ def main():
     matplotlib.rcParams["font.size"] = 24;
     plt.figure(figsize=(10, 3))
     plt.xlabel("$v / c$")
-    plt.ylabel("$F$")
+    plt.ylabel("$a$ $[\mu$m$/$s$^2]$")
     plt.loglog(x,-y * prefactor_force / mass_rb)
     plt.show()
 
