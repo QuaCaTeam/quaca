@@ -31,7 +31,7 @@ bibliography: paper.bib
 
 # Summary
 
-QuaCa is an extensible library facilitating fast computation of steady-state atom-surface quantum friction.
+QuaCa is an extensible library facilitating the fast computation of steady-state atom-surface quantum friction.
 Due to its modular domain-driven structure, QuaCa can be of further use to calculate relevant quantities that are often needed in the context of electromagnetic dispersion forces.
 Quantum (or Casimir) friction is a quantum-optical fluctuation-induced force that occurs in dynamical nonequilibrium, i.e. when a number of bodies are moving relatively to one another [@pendry1997;@scheel2009].
 The frictional interaction between the moving system of interest and its environment is mediated by the (material-modified) quantum vacuum and persists even at zero temperature.
@@ -63,7 +63,8 @@ The latter, due to the self-consistency of our approach [@intravaia2016;@reiche2
 This approach fully respects backaction from the environment onto the system (exact in all orders coupling) and includes spin-momentum locking of confined light, which can lead, e.g., to a net transfer of spin angular momentum [@intravaia2019], as well as finite temperatures [@oelschlager2019;@oelschlaeger2021].
 
 
-![Sketch of the setup. A microscopic object, say, an atom, moves with constant velocity and height above a flat macroscopic surface. At constant velocity $v$, the particle is attracted by the surface ($F_{\rm CP}$, Casimir-Polder force) and experiences a moderating force ($F_{\rm fric}$, quantum friction). \label{fig:setup}](images/setup.svg){ width="800" height="600" style="display: block; margin: 0 auto" }
+![Sketch of the setup. A microscopic object, say, an atom, moves with constant velocity and height above a flat macroscopic surface. 
+The particle is attracted by the surface ($F_{\rm CP}$, Casimir-Polder force) and experiences a moderating force ($F_{\rm fric}$, quantum friction). \label{fig:setup}](images/setup.svg){ width="800" height="600" style="display: block; margin: 0 auto" }
 
 # Numerical approach and code structure
 
@@ -73,11 +74,12 @@ On the one hand (i), computing the quantum friction force in the form presented 
 The nesting arises from the self-consistency of the approach and the Doppler-shift of the radiation.
 Further, since our formalism takes realistic (dispersive and dissipative) materials into account, both the polarizability and the Green tensor feature a number of (physical) poles that can lead to fastly oscillating integrands, especially in the regime where retardation due to the finite speed of light comes into play.
 The application of a Wick rotation that transforms the oscillations into exponential decays, as it became common in the numerical treatment of equilibrium fluctuation-induced effects [@oskooi2010;@johnson2011;@reid2015;@hartmann2020], is non-viable due to the Doppler-shift of the frequency.
-Here, QuaCa uses a numerically optimized version of $F_{\mathrm{fric}}$, where some of the nested integrals decouple, puts particular care on the occurring poles, and hence allows for a fast and efficient computation of the force.
-For details of the procedure, we refer to Ref. [@oelschlager2019].
+Here, QuaCa uses an analytically equivalent version of $F_{\mathrm{fric}}$, which is particularly suited for numerical computations. We decouple nested integrals and take explicit care of the occurring poles. This allows for an efficient and reliable computation of the force. For details of the procedure, we refer to Ref. [@oelschlager2019].
 
-On the other hand (ii), we have chosen an implementation strategy where any of the physical quantities, such as the permittivity, the polarizability, the Green tensor or the power spectrum, are assigned to individual objects in the package. These can be tested, replaced, computed or used independently.
-By virtue of this modular structure, the QuaCa package can be easily adapted to different geometries and materials, parts of the code can be used as a library performing a subroutine in a larger project, or it can even be extended to compute other observables of fluctuation-induced light-matter interactions.
+On the other hand (ii), we have chosen a modular implementation strategy guided by physical principles. 
+We assigned each meaningful physical observable in the setup to individual objects in the package which can be tested, replaced, computed or used independently. 
+Irrespective of the particular intricacies that come with the calculation of quantum friction (see (i)), the code structure reflects the individual building blocks of the physical setup, i.e. the atom (polarizability), the electromagnetic vacuum field in the presence of the given geometry (Green tensor) as well as the respective material properties (permittivity).
+By virtue of this modular structure, the QuaCa package can be easily adapted to different geometries and materials in the calculation of quantum friction, (physically relevant) objects of the code can be used as a library performing a subroutine in a larger project, or they can be used to compute other observables of fluctuation-induced light-matter interactions.
 In the current version, we intended to demonstrate this versatility by including a routine for computing the atomic decay rate.
 Numerical optimizations in the context of design and inverse-design [@molesky2018;@bennett2020] using appropriate Maxwell solvers [@busch2011] can be one future application of the modular code package.
 
