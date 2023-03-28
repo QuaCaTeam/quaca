@@ -69,7 +69,7 @@ and afterwards run the tests from the `bin/` directory
 quaca/bin $ ./test_quaca_unit
 quaca/bin $ ./test_quaca_integrated
 ```
-More detailled information is given in the section [Testing](dev/testing.md).
+More detailled information is given in the section [Testing](https://quacateam.github.io/quaca/#/dev/testing).
 ## Contributing
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on how you can become a part of this project.
 

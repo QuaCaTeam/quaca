@@ -11,21 +11,11 @@ In order to ensure a solid quality of QuaCa we thoroughly implemented unit test 
    * For the [vacuum Green's tensor](api/greenstensor?id=greenstensorvacuum) in the limit of $v\ll c$ we find
     - $\int\frac{\mathrm{d}^2\mathbf{ k}}{(2\pi)^2}  \mathrm{Im}\left\{\underline{G}_0(\mathbf{ k}, z\to z',\omega+\mathbf{k}^\intercal\mathbf{v})\right\} \sim   \mathrm{diag}[1,1,1]\frac{\omega^3}{6\pi \epsilon_0 c^3}$
 
-    - $\int\frac{\mathrm{d}^2\mathbf{ k}}{(2\pi)^2}  \mathrm{Im}\left\{\underline{G}_0(\mathbf{ k}, z\to z',\omega+\mathbf{k}^\intercal\mathbf{v})\right\}k_x \sim \frac{v/c }{6\pi\epsilon_0} 
- \frac{ \omega^4 }{c^4}   
-\mathrm{diag}\left[
-    1,\,
-    2
-    ,\,
-     2\right]$
+    - $\int\frac{\mathrm{d}^2\mathbf{ k}}{(2\pi)^2} \mathrm{Im}\left\{\underline{G}_0(\mathbf{ k}, z\to z',\omega+\mathbf{k}^\intercal\mathbf{v})\right\} k_x \sim \frac{v/c}{6\pi\epsilon_0}  \frac{ \omega^4 }{c^4} \mathrm{diag}\left[ 1,\, 2 ,\, 2\right]$
 
-    - $\int\frac{\mathrm{d}^2\mathbf{ k}}{(2\pi)^2}  \mathrm{Im}\left\{\underline{G}_0(\mathbf{ k}, z\to z',\omega+\mathbf{k}^\intercal\mathbf{v})\right\}\left[1-\exp(\hbar\beta(\omega+\mathbf{k}^\intercal\mathbf{v}))\right]^{-1} \stackrel{\hbar\beta\omega\gg 1}\sim  -
-\frac{2\mathrm{diag}[1,2,2]}{15 \pi\epsilon_0 }\frac{v^2}{c^2}
-\frac{\omega^3}{c^3}\frac{1}{\hbar\beta\omega } $
+    - $\int\frac{\mathrm{d}^2\mathbf{ k}}{(2\pi)^2}  \mathrm{Im}\left\{\underline{G}_0(\mathbf{ k}, z\to z',\omega+\mathbf{k}^\intercal\mathbf{v})\right\}\left[1-\exp(\hbar\beta(\omega+\mathbf{k}^\intercal\mathbf{v}))\right]^{-1} \stackrel{\hbar\beta\omega\gg 1}\sim - \frac{2\mathrm{diag}[1,2,2]}{15 \pi\epsilon_0 }\frac{v^2}{c^2} \frac{\omega^3}{c^3}\frac{1}{\hbar\beta\omega } $
 
-    - $\int\frac{\mathrm{d}^2\mathbf{ k}}{(2\pi)^2}  \mathrm{Im}\left\{\underline{G}_0(\mathbf{ k}, z\to z',\omega+\mathbf{k}^\intercal\mathbf{v})\right\}\left[1-\exp(\hbar\beta(\omega+\mathbf{k}^\intercal\mathbf{v}))\right]^{-1}k_x \stackrel{\hbar\beta\omega\gg 1}\sim  -
- \frac{\mathrm{diag}\left[1,2,2\right]}{30\pi\epsilon_0}\frac{v}{c}\frac{\omega^4}{c^4}
- \frac{1}{\hbar\beta\omega} $
+    - $\int\frac{\mathrm{d}^2\mathbf{ k}}{(2\pi)^2}  \mathrm{Im}\left\{\underline{G}_0(\mathbf{ k}, z\to z',\omega+\mathbf{k}^\intercal\mathbf{v})\right\}\left[1-\exp(\hbar\beta(\omega+\mathbf{k}^\intercal\mathbf{v}))\right]^{-1}k_x \stackrel{\hbar\beta\omega\gg 1}\sim - \frac{\mathrm{diag}\left[1,2,2\right]}{30\pi\epsilon_0}\frac{v}{c}\frac{\omega^4}{c^4} \frac{1}{\hbar\beta\omega} $
 
    * For the [plate Green's tensor](api/greenstensor?id=greenstensorplate) we find in the near-field limit ($|\mathbf{k}|^2\ll \omega_\mathrm{ch}^2/c^2 \ll \omega^2/c^2$, where $\omega_\mathrm{ch}$ is the characteristic frequency, e.g. a resonance, of the material)
 
@@ -33,14 +23,11 @@ In order to ensure a solid quality of QuaCa we thoroughly implemented unit test 
 
     - in the below  equations we will assume that $\mathrm{Im}\{r(\omega)\}\approx 2\epsilon_0\rho \omega$, with $\rho$ being a constant resistivity, and introduce $\eta = 2z_a\omega/v$ 
 
-    - $\int\frac{\mathrm{d}^2\mathbf{ k}}{(2\pi)^2}\underline{g}_\Im(\mathbf{k},z_a,\omega+\mathbf{k}^\intercal\mathbf{v})\left[1-\exp(\hbar\beta(\omega+\mathbf{k}^\intercal\mathbf{v}))\right]^{-1} \stackrel{\hbar\beta\omega\ll 1}\sim \frac{2 v \rho}{(2z_a)^4\pi }\left(
-\mathrm{diag}[\frac{\pi}{2} \eta + 4, \frac{\pi}{2} \eta + 2], \pi\eta + 6] -\underline{L}_y(\frac{3\pi}{2} + 2\eta) \right)$
+    - $\int\frac{\mathrm{d}^2\mathbf{ k}}{(2\pi)^2}\underline{g}_\Im(\mathbf{k},z_a,\omega+\mathbf{k}^\intercal\mathbf{v})\left[1-\exp(\hbar\beta(\omega+\mathbf{k}^\intercal\mathbf{v}))\right]^{-1} \stackrel{\hbar\beta\omega\ll 1}\sim \frac{2 v \rho}{(2z_a)^4\pi }\left( \mathrm{diag}[\frac{\pi}{2} \eta + 4, \frac{\pi}{2} \eta + 2], \pi\eta + 6] -\underline{L}_y(\frac{3\pi}{2} + 2\eta) \right)$
 
-    - $\int\frac{\mathrm{d}^2\mathbf{ k}}{(2\pi)^2}\underline{g}_\Im(\mathbf{k},z_a,\omega+\mathbf{k}^\intercal\mathbf{v})\frac{k_x}{1-\exp(\hbar\beta(\omega+\mathbf{k}^\intercal\mathbf{v}))} \stackrel{\hbar\beta\omega\ll 1}\sim \frac{2 v \rho}{(2z_a)^5\pi }\left(
-\mathrm{diag}[\frac{9\pi}{2} + 4\eta, \frac{3\pi}{2} + 2\eta], 6\pi + 6\eta] -\underline{L}_y(\frac{3\pi}{2}\eta + 16) \right)$
+    - $\int\frac{\mathrm{d}^2\mathbf{ k}}{(2\pi)^2}\underline{g}_\Im(\mathbf{k},z_a,\omega+\mathbf{k}^\intercal\mathbf{v})\frac{k_x}{1-\exp(\hbar\beta(\omega+\mathbf{k}^\intercal\mathbf{v}))} \stackrel{\hbar\beta\omega\ll 1}\sim \frac{2 v \rho}{(2z_a)^5\pi }\left( \mathrm{diag}[\frac{9\pi}{2} + 4\eta, \frac{3\pi}{2} + 2\eta], 6\pi + 6\eta] -\underline{L}_y(\frac{3\pi}{2}\eta + 16) \right)$
 
-    - $\int\frac{\mathrm{d}^2\mathbf{ k}}{(2\pi)^2}\underline{g}_\Im(\mathbf{k},z_a,\omega+\mathbf{k}^\intercal\mathbf{v})\left[1-\exp(\hbar\beta(\omega+\mathbf{k}^\intercal\mathbf{v}))\right]^{-1} \stackrel{\hbar\beta\omega\gg 1}\sim \frac{2 \rho}{(2z_a)^3\hbar\beta }\left(
-\mathrm{diag}[1, 1, 2] -\underline{L}_y\frac{3v}{4 z_a} \right)$
+    - $\int\frac{\mathrm{d}^2\mathbf{ k}}{(2\pi)^2}\underline{g}_\Im(\mathbf{k},z_a,\omega+\mathbf{k}^\intercal\mathbf{v})\left[1-\exp(\hbar\beta(\omega+\mathbf{k}^\intercal\mathbf{v}))\right]^{-1} \stackrel{\hbar\beta\omega\gg 1}\sim \frac{2 \rho}{(2z_a)^3\hbar\beta }\left( \mathrm{diag}[1, 1, 2] -\underline{L}_y\frac{3v}{4 z_a} \right)$
 
 ## Reflection Coefficients
 
