@@ -13,17 +13,19 @@ Furthermore we use:
 * [Catch2](https://github.com/catchorg/Catch2): unit testing
 * [docsify](https://docsify.js.org): documentation
 
-Those prerequisites can easily be installed via `apt install` or [conda](https://docs.conda.io/en/latest/).
+Those prerequisites can easily be installed via `apt install` via the following command
+```bash
+sudo apt-get update && sudo apt-get install libblas-dev liblapack-dev cmake make g++ libboost-filesystem-dev libboost-program-options-dev
+```
 
-For `conda` you can directly use the following command
+or with [conda](https://docs.conda.io/en/latest/):
+
 ```bash
 conda env create --file environment.yml
-```
-Now if you apply
-```bash
 conda activate quaca-env
 ```
-you are in the correct environment with all needed packages.
+
+We currently do not support installation on Mac or Windows.
 
 ## Installing
 To obtain the source code type
