@@ -74,6 +74,7 @@ More detailled information is given in the section [Testing](dev/testing.md).
 
 ## Benchmark
 For a small benchmark we used a Intel(R) Core(TM) i7-7500U CPU @ 2.70GHz and Intel(R) Core(TM) i9-10900K CPU @ 3.70GHz and ran the tutorial configuration with 
+
 ```bash
 quaca/bin $ ./Friction --file ../data/.tutorial.json --threads {threads}
 ```
