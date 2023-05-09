@@ -69,7 +69,23 @@ and afterwards run the tests from the `bin/` directory
 quaca/bin $ ./test_quaca_unit
 quaca/bin $ ./test_quaca_integrated
 ```
+
 More detailled information is given in the section [Testing](dev/testing.md).
+
+## Benchmark
+For a small benchmark we used a Intel(R) Core(TM) i7-7500U CPU @ 2.70GHz and Intel(R) Core(TM) i9-10900K CPU @ 3.70GHz and ran the tutorial configuration with 
+```bash
+quaca/bin $ ./Friction --file ../data/.tutorial.json --threads {threads}
+```
+and obtain following results
+
+|Threads|max. 2.7GHz|max. 3.7GHz|
+|---|---|---|---|---|
+|  1|  1477 s | 623 s  |
+|  2|  995 s |  319 s  |
+|  3|  703 s |  222 s  |
+|  4|  555 s  |  170 s |
+
 ## Contributing
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on how you can become a part of this project.
 
