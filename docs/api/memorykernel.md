@@ -1,100 +1,72 @@
 # MemoryKernel {docsify-ignore-all}
 This is an abstract class that defines the Fourier transform of the memory kernel, i.e. $\mu(\omega)$.
 A specific model for this will be a child of this class.
-```cpp
-class MemoryKernel {
-public:
-  // Returns the memory kernel given a frequency omega.
-  virtual std::complex<double> calculate(double omega) = 0;
-};
-```
 
-### `# std::complex<double> calculate(double omega)`
+
+## Member functions
+### `std::complex<double> calculate(double omega)`
 Returns the value $\mu(\omega)$ which in general is a complex number.
+* Input parameters:
+    * `double omega`: frequency, at which the memory kernel is evaluated.
+* Return value:
+    * `std::complex<double>`: complex number, representing the real and imaginary part of the memory kernel at the given frequency.
 
-## OhmicMemoryKernel
+# OhmicMemoryKernel
 Implements an ohmic bath memory kernel of the form
 $$
 \mu(\omega) = \gamma,
 $$
 where $\gamma$ is the damping coefficient of the bath.
 
-```cpp
-class OhmicMemoryKernel : public MemoryKernel {
-private:
-  double gamma; // damping coefficient
-
-public:
-  // constructors
-  OhmicMemoryKernel(double gamma);
-  OhmicMemoryKernel(std::string input_file);
-
-  // calculate function
-  std::complex<double> calculate(double omega);
-
-  // getter functions
-  double get_gamma() { return this->gamma; };
-};
-```
-
-### `# OhmicMemoryKernel(double gamma)`
+## Member functions
+### `OhmicMemoryKernel(double gamma)`
 Direct constructor for the class.
+* Input parameters:
+    * `double gamma`: damping coefficent $\gamma$.
+* Return value:
+    * `OhmicMemoryKernel`: class instance.
 
-### `# OhmicMemoryKernel(std::string input_file)`
+### `OhmicMemoryKernel(std::string input_file)`
 Input file constructor for the class.
+* Input parameters:
+    * `std::string input_file`: json-formatted file with all relevant quantities. See the final section of this page for an example.
+* Return value:
+    * `OhmicMemoryKernel`: class instance.
 
-### `# std::complex<double> calculate(double omega)`
+### `std::complex<double> calculate(double omega)`
 See [MemoryKernel](#MemoryKernel).
 
-### `# double get_gamma()`
+### `double get_gamma()`
 Getter function, which returns the constant $\gamma$
 
-## SinglePhononMemoryKernel
+# SinglePhononMemoryKernel
 Represents a memory kernel of an heat bath with one distinct (phonon) mode, as for example introduced in [this publication](https://journals.aps.org/prb/abstract/10.1103/PhysRevB.98.155405). The memory kernel reads
 $$
 \mu(\omega) = \gamma +  \frac{g^2\omega_\mathrm{phon}^4}{\mathrm{i}\omega(\omega^2_\mathrm{phon} - \omega^2 - \mathrm{i}\gamma_\mathrm{phon} \omega)} ,
 $$
 where $\gamma$ is the ohmic damping, $g$ is the coupling constant of the distinct (phonon) mode to the dipole oscillation, $\omega_\mathrm{phon}$ is the frequency and $\gamma_\mathrm{phon}$ the damping of the distinct (phonon) mode. The respective header of this child class reads
-```cpp
-class SinglePhononMemoryKernel : public MemoryKernel {
-private:
-  double gamma;        // ohmic damping coefficient
-  double gamma_phon;   // phononic damping coefficient
-  double omega_phon;   // phononic frequency
-  double coupling;     // dimensionless coupling coefficient to the dipole moment
-
-public:
-  // direct constructor
-  explicit SinglePhononMemoryKernel(double gamma, double gamma_phon, double omega_phon, double coupling);
-
-  // constructor from .json file
-  explicit SinglePhononMemoryKernel(const std::string &input_file);
-
-  // constructor from .json file of a specific section
-  SinglePhononMemoryKernel(const std::string &input_file, const std::string &section);
-
-
-  // calculate function
-  std::complex<double> calculate(double omega) const override;
-
-  // getter functions
-  double get_gamma() const { return this->gamma; };
-  double get_gamma_phon() const { return this->gamma_phon; };
-  double get_omega_phon() const { return this->omega_phon; };
-  double get_coupling() const { return this->coupling; };
-};
-```
-
-### `# SinglePhononMemoryKernel(double gamma, double gamma_phon, double omega_phon, double coupling);`
+## Member functions
+### `SinglePhononMemoryKernel(double gamma, double gamma_phon, double omega_phon, double coupling);`
 Direct constructor for the class.
+* Input parameters:
+    * `double gamma`: ohmic damping coefficent $\gamma$.
+    * `double gamma_phon`: damping coefficent of the distinct mode $\gamma_{phon}$.
+    * `double omega_phon`: frequency of the distinct mode $\omega_{phon}$.
+    * `double coupling`: coupling constant $g$, which couples the distinct mode to the dipole oscialltion.
+* Return value:
+    * `SinglePhononMemoryKernel`: class instance.
 
-### `# SinglePhononKernel(std::string input_file)`
+### `SinglePhononKernel(std::string input_file)`
 Input file constructor for the class.
+* Input parameters:
+    * `std::string input_file`: json-formatted file with all relevant quantities. See the final section of this page for an example.
+* Return value:
+    * `SinglePhononMemoryKernel`: class instance.
 
-### `# std::complex<double> mu(double omega)`
+### `std::complex<double> mu(double omega)`
 See [MemoryKernel](#MemoryKernel).
 
-### `# double get_...`
+### `double get_...`
 Getter functions, which return the respective quantity (`gamma`, `gamma_phon`, `omega_phon` or `coupling`)
 
 ## Input file

@@ -1,67 +1,52 @@
 # Permittivity {docsify-ignore-all}
 This is an abstract class that defines the permittivity as a function of the frequency, i.e. $\varepsilon(\omega)$.
 A specific model for the permittivity will be a child of this class.
-```cpp
-class Permittivity {
-public:
-  // calculate the permittivity
-  virtual std::complex<double> calculate(double omega) const = 0;
 
-  // calculate the permittivity times omega
-  virtual std::complex<double> calculate_times_omega(double omega) const = 0;
-};
-```
-
-### `# std::complex<double> calculate(double omega)`
+## Member functions
+### `std::complex<double> calculate(double omega)`
 Returns the value of $\varepsilon(\omega)$ which is a complex number.
+* Input parameters:
+    * `double omega`: Frequency, at which the permittivity is evaluated
+* Return value:
+    * `std::complex<double>`: value of the permittivity, at the given frequency
 
-### `# std::complex<double> calculate_times_omega(double omega)`
+### `std::complex<double> calculate_times_omega(double omega)`
 Returns the value of $\omega\varepsilon(\omega)$ which is a complex number.
+* Input parameters:
+    * `double omega`: Frequency, at which the permittivity is evaluated
+* Return value:
+    * `std::complex<double>`: value of the permittivity, at the given frequency, time the frequency itself e.g. $\omega\epsilon(\omega)$
 
-## PermittivityDrude
+# PermittivityDrude
 Implements a Drude model according to the formula
 $$
 \varepsilon(\omega) = 1 - \frac{\omega_p^2}{\omega(\omega + \mathrm{i}\gamma)},
 $$
 where $\omega_p$ is the plasma frequency and $\gamma$ is the damping coefficient.
 
-```cpp
-class PermittivityDrude : public Permittivity {
-private:
-  double omega_p; // plasma frequency
-  double gamma;   // damping coefficient
-
-public:
-  // constructors
-  PermittivityDrude(double omega_p, double gamma);
-  explicit PermittivityDrude(const std::string &input_file);
-
-  // calculate the permittivity
-  std::complex<double> calculate(double omega) const override;
-
-  // Returns the numerical value of the permittivity scaled by omega.
-  std::complex<double> calculate_times_omega(double omega) const override;
-
-  // getter methods
-  double get_gamma() const { return this->gamma; };
-  double get_omega_p() const { return this->omega_p; };
-};
-```
-
-
-### `# PermittivityDrude(double omega_p, double gamma)`
+## Member functions
+### `PermittivityDrude(double omega_p, double gamma)`
 Direct constructor for the class.
+* Input paramters:
+    * `double omega_p`: plasma frequency $\omega_p$ of the permittivity.
+    * `double gamma`: damping coefficient $\gamma$.
+* Return value:
+    * `PermittivityDrude`: class instance
 
-### `# PermittivityDrude(std::string input_file)`
+### `PermittivityDrude(std::string input_file)`
 Input file constructor for the class.
+* Input parameters:
+    * `std::string input_file`: json-formatted file with all relevant quantities. See the final section of this page for an example.
+* Return value:
+    * `PermittivityDrude`: class instance.
 
-### `# std::complex<double> calculate(double omega)`
+### `std::complex<double> calculate(double omega)`
 See [Permittivity](#Permittivity).
 
-### `# std::complex<double> calculate_times_omega(double omega)`
+### `std::complex<double> calculate_times_omega(double omega)`
 See [Permittivity](#Permittivity).
 
-### `# double get_...`
+### `double get_...`
 Getter functions of the respective quantity (`gamma` or `omega_p`)
 
 ## PermittivityLorentz
@@ -71,51 +56,33 @@ $$
 $$
 where $\omega_0$ is the central frequency, $\varepsilon_{\infty}$ is high-frequency permittivity limit, $\omega_p$ is the plasma frequency and $\mu(\omega)$ is the memory kernel.
 
-```cpp
-class PermittivityLorentz : public Permittivity {
-private:
-  double eps_inf;
-  double omega_p;
-  double omega_0;
 
-  std::shared_ptr<MemoryKernel> memory_kernel;
-
-public:
-  // constructors
-  PermittivityLorentz(double eps_inf, double omega_p, double omega_0,
-                      std::shared_ptr<MemoryKernel> memory_kernel);
-  explicit PermittivityLorentz(const std::string &input_file);
-
-  // calculate the permittivity
-  std::complex<double> calculate(double omega) const override;
-
-  // Returns the numerical value of the permittivity scaled by omega.
-  std::complex<double> calculate_times_omega(double omega) const override;
-
-  // getter methods
-  double get_eps_inf() const { return this->eps_inf; };
-  double get_omega_p() const { return this->omega_p; };
-  double get_omega_0() const { return this->omega_0; };
-  std::shared_ptr<MemoryKernel> &get_memory_kernel() {
-    return this->memory_kernel;
-  };
-};
-```
-
-
-### `# PermittivityLorentz(double eps_inf, double omega_p, double omega_0, std::shared_ptr<MemoryKernel> memory_kernel)`
+## Member functions
+### `PermittivityLorentz(double eps_inf, double omega_p, double omega_0, std::shared_ptr<MemoryKernel> memory_kernel)`
 Direct input constructor for the class.
+* Input paramters:
+    * `double esp_inf`: high-frequency permittivity limit $\epsilon_\inf$.
+    * `double omega_p`: plasma frequency $\omega_p$.
+    * `double omega_0`: central frequency $\omega_0$.
+    * `std::shared_ptr<MemoryKernel> memory_kernel`: Memory kernel. See [MemoryKernel](api/memorykernel) for more details.
+* Return value:
+    * `PermittivityLorentz`: class instance
 
-### `# PermittivityLorentz(std::string input_file)`
+
+### `PermittivityLorentz(std::string input_file)`
 Input file constructor for the class.
+* Input parameters:
+    * `std::string input_file`: json-formatted file with all relevant quantities. See the final section of this page for an example.
+* Return value:
+    * `PermittivityLorentz`: class instance.
 
-### `# std::complex<double> calculate(double omega)`
+### `std::complex<double> calculate(double omega)`
 See [Permittivity](#Permittivity).
 
-### `# std::complex<double> calculate_times_omega(double omega)`
+### `std::complex<double> calculate_times_omega(double omega)`
 See [Permittivity](#Permittivity).
 
-### `# get_...`
+### `get_...`
 Getter functions of the respective quantity (`gamma`, `omega_p`, `eps_inf` or `memory_kernel`)
 
 

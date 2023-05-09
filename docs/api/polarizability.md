@@ -3,77 +3,57 @@ This abstract class serves as a container for the  polarizability, with or witho
 As a physical quantity the polarizability reads as follows
 $$  \underline{\alpha}(\omega) = \alpha_0 \omega_a^2 \left( \omega_a^2 - \omega^2 - \mathrm{i} \omega \mu(\omega) - \alpha_0 \omega_a^2 \int \frac{\mathrm{d}^2 \mathbf{k}}{(2 \pi)^2} \underline{G}(\mathbf{k},z,z', \omega + \mathbf{k}^\intercal\mathbf{v}) \right)^{-1}, $$
 with $\mu(\omega)$ being the [memory kernel](api/memorykernel) of the internal heat bath, $\underline{G}(\mathbf{k},z,z',\omega)$ the Green's tensor, $\alpha_0$ the static polarizability, and $\omega_a$ the resonance frequency of the microscopic object's dipole moment.
-The header file of the polarizability reads
-```cpp
-class Polarizability {
-private:
-  double omega_a;                              // resonance frequency
-  double alpha_zero;                           // vacuum polarizability
-  std::shared_ptr<GreensTensor> greens_tensor; // Green's tensor
-  std::shared_ptr<MemoryKernel> mu;            // internal bath
 
-public:
-  // Direct constructor without internal bath
-  Polarizability(double omega_a, double alpha_zero,
-                 std::shared_ptr<GreensTensor> greens_tensor);
-
-  // Direct constructor with internal bath mu
-  Polarizability(double omega_a, double alpha_zero,
-                 std::shared_ptr<MemoryKernel> mu,
-                 std::shared_ptr<GreensTensor> greens_tensor);
-
-  // Constructor from a given json file
-  explicit Polarizability(const std::string &input_file);
-
-  // calculate the polarizability tensor
-  void calculate_tensor(double omega, cx_mat::fixed<3, 3> &alpha,
-                        Tensor_Options fancy_complex) const;
-
-  // integration over omega
-  double integrate_omega(const vec::fixed<2> &indices,
-                         Tensor_Options fancy_complex, double omega_min,
-                         double omega_max, double relerr, double abserr) const;
-
-  // integrand for the omega integration
-  double integrand_omega(double omega, const vec::fixed<2> &indices,
-                         Tensor_Options fancy_complex) const;
-
-  // getter functions
-  double get_omega_a() const { return omega_a; };
-  double get_alpha_zero() const { return alpha_zero; };
-  const std::shared_ptr<GreensTensor> &get_greens_tensor() const {
-    return greens_tensor;
-  };
-  // getter function for memory kernel
-  std::complex<double> get_mu(double omega) const {
-    if (mu != nullptr) {
-      return mu->calculate(omega);
-    } else {
-      return std::complex<double>(0.0, 0.0);
-    }
-  };
-};
-```
-and contains following objects:
-
-### `# Polarizability(double omega_a, double alpha_zero, std::shared_ptr<GreensTensor> greens_tensor);`
+## Member functions
+### `Polarizability(double omega_a, double alpha_zero, std::shared_ptr<GreensTensor> greens_tensor);`
 Direct constructor for the class without an internal bath.
+* Input parameters:
+    * `double omega_a`: resonance frequency $\omega_a$.
+    * `double alpha_zero`: static polarizability $\alpha_0$.
+    * `std::shared_ptr<GreensTensor> greens_tensor`: pointer to the Green's tensor class instance.
+* Return value:
+    * `Polarizability`: class instance.
 
-### `# Polarizability(double omega_a, double alpha_zero, std::shared_ptr<MemoryKernel> mu, std::shared_ptr<GreensTensor> greens_tensor);`
+### `Polarizability(double omega_a, double alpha_zero, std::shared_ptr<MemoryKernel> mu, std::shared_ptr<GreensTensor> greens_tensor);`
 Direct constructor for the class with an internal bath.
+* Input parameters:
+    * `double omega_a`: resonance frequency $\omega_a$.
+    * `double alpha_zero`: static polarizability $\alpha_0$.
+    * `std:shared_ptr<MemoryKernel> mu`: pointer to the memory kernel class instance. See [Memory Kernel](api/memorykernel.md) for details.
+    * `std::shared_ptr<GreensTensor> greens_tensor`: pointer to the Green's tensor class instance. See [GreensTensor](api/greenstensor.md) for details.
+* Return value:
+    * `Polarizability`: class instance.
 
-### `# Polarizability(const std::string &input_file)`
+### `Polarizability(const std::string &input_file)`
 Input file constructor for the class.
+* Input parameters:
+    * `std::string input_file`: json-formatted file with all relevant quantities. See the final section of this page for an example.
+* Return value:
+    * `Polarizability`: class instance.
 
-### `# void calculate_tensor(double omega, cx_mat::fixed<3, 3> &alpha, Tensor_Options fancy_complex) const;`
-
+### `void calculate_tensor(double omega, cx_mat::fixed<3, 3> &alpha, Tensor_Options fancy_complex) const;`
 This function evaluates the tensor according to its formula for $\underline{\alpha}(\omega)$ for a specific `omega` and puts the result into the matrix `alpha`. If `fancy_complex = IM` then $\underline{\alpha}_{\Im}= (\underline{\alpha} -\underline{\alpha}^\dagger)/(2\mathrm{i})$ and for `fancy_complex = RE`  $\underline{\alpha}_{\Re} = (\underline{\alpha} +\underline{\alpha}^\dagger)/2$ is calculated. See also the [Examples](#Examples).
+* Input parameters:
+    * `double omega`: Frequency, at which the polarizability is evaluated
+    * `cx_mat::fixed<3, 3> &alpha`: reference to a 3x3 matrix, where the resulting polarizability is stored
+    * `Tensor_Options fancy_complex`: set of options for the computation of the polarizability. See [GreensTensor](api/greenstensor.md) for details.
+* Return value: `void`
 
-### `# double integrate_omega(const vec::fixed<2> &indices, Tensor_Options fancy_complex, double omega_min, double omega_max, double relerr, double abserr) const;`
+
+### `double integrate_omega(const vec::fixed<2> &indices, Tensor_Options fancy_complex, double omega_min, double omega_max, double relerr, double abserr) const;`
 Integrates the polarizability element $\alpha_{ij}$ with the `indices` $i$ and $j$ from `omega_min` to `omega_max` with a relative error `relerr` and absolute error `abserr` with the [CQUAD](https://www.gnu.org/software/gsl/doc/html/integration.html) integration routine.
 If `fancy_complex = IM` then $\underline{\alpha}_{\Im}= (\underline{\alpha} -\underline{\alpha}^\dagger)/(2\mathrm{i})$ and for `fancy_complex = RE`  $\underline{\alpha}_{\Re} = (\underline{\alpha} +\underline{\alpha}^\dagger)/2$ is calculated. See also Example 2 in [Examples](#Examples).
+* Input parameters:
+    * `const vec::fixed<2> &indices`: indices of the 3x3 matrix, which should be computed
+    * `Tensor_Options fancy_complex`: set of options for the computation of the polarizability. See [GreensTensor](api/greenstensor.md) for details.
+    * `double omega_min`: lower boundary of the integrand $\omega$.
+    * `double omega_max`: upper boundary of the integrand $\omega$.
+    * `double relerr`: maximal relative error of the integration routine.
+    * `double abserr`: maximal absolute error of the integration routine.
+* Return value:
+    * `double`: value of the integral.
 
-### `# get_...`
+### `get_...`
 These are the getter functions of the respective quantity (`omega_a`, `alpha_zero`, `greens_tensor` or `mu`).
 
 ## Input file
