@@ -80,7 +80,7 @@ quaca/bin $ ./Friction --file ../data/.tutorial.json --threads {threads}
 and obtain following results
 
 |Threads|max. 2.7GHz|max. 3.7GHz|
-|---|---|---|---|---|
+|---|---|---|
 |  1|  1477 s | 623 s  |
 |  2|  995 s |  319 s  |
 |  3|  703 s |  222 s  |
