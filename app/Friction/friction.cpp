@@ -27,7 +27,7 @@ void read_command_line(int argc, char *argv[]) {
     po::options_description desc("Allowed options");
     desc.add_options()("help,h", "Help screen")(
         "file", po::value<std::string>(&(parameter_file)), "Input File")(
-        "threads", po::value<int>(&(num_threads))->default_value(-1),
+        "threads", po::value<int>(&(num_threads))->default_value(1),
         "Number of parallel threads");
 
     po::variables_map vm;
