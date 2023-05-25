@@ -43,7 +43,7 @@ For a comprehensive review of quantum friction in various contexts as well as re
 Due to the relative weakness of quantum friction with respect to related fluctuation-induced effects in equilibrium, such as the Casimir(-Polder) or the van der Waals effect [@dalvit2011], quantum friction has yet evaded experimental confirmation.
 This has instigated a surge of interest in exploring potentially useful designs [@volokitin2011;@milton2016;@farias2020;@lombardo2021] (see also [@reiche2022] and references therein) and a sophisticated (numerical) optimization of the experimental setup appears necessary in order to promote the effect to the measurable realm [@oelschlager2019;@reiche2021]. 
 This gap can be closed using QuaCa. 
-QuaCa pioneers the numerical simulation of quantum friction and, to the best of our knowledge, is the only ready-to-use and openly available package for exploring experimental designs that can be utilized to measure quantum friction to date.
+QuaCa, to the best of our knowledge, pioneers the numerical simulation of quantum friction and, to date, is the only ready-to-use and openly available package for exploring experimental designs that can be utilized to measure quantum friction.
 
 
 # Physics of quantum friction
