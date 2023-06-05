@@ -6,50 +6,33 @@ and without an internal bath
 $$  \underline{S}(\omega) =\underline{\alpha}(\omega)\int \frac{\mathrm{d}^2 \mathbf{k}}{(2 \pi)^2}\frac{ \underline{G}_\Im(\mathbf{k}, \omega + \mathbf{k}^\intercal\mathbf{v})}{1-\exp(-\hbar\omega(\omega+\mathbf{k}^\intercal\mathbf{v}))} \underline{\alpha}^\dagger(\omega), $$
 where $\underline{G}$ is the Green's tensor described in [GreensTensor](api/greenstensor), $\underline{\alpha}$ the polarizability described in [Polarizability](api/polarizability), and $\mu$ the memory kernel described in [MemoryKernel](api/memorykernel).
 
-```cpp
-class PowerSpectrum {
-
-protected:
-
-  std::shared_ptr<GreensTensor>
-      greens_tensor; // Green's tensor describing the geometry of
-                     // the system
-  std::shared_ptr<Polarizability>
-      polarizability; // Polarizability describing the linear
-                      // response of the microscopic particle
-
-public:
-
-  // Constructors
-  PowerSpectrum(const std::string &input_file);
-
-  // Constructor with initialization list
-  PowerSpectrum(std::shared_ptr<GreensTensor> greens_tensor,
-                std::shared_ptr<Polarizability> polarizability);
-
-  // Calculate the power spectrum for a fixed value of the frequency \omega
-  void calculate(double omega, cx_mat::fixed<3, 3> &powerspectrum,
-                 Spectrum_Options spectrum) const;
-
-  // getter functions
-  std::shared_ptr<GreensTensor> &get_greens_tensor() { return greens_tensor; };
-  std::shared_ptr<Polarizability> &get_polarizability() {
-    return polarizability;
-  };
-};
-
-```
+## Member functions
 ### `PowerSpectrum(std::string input_file)`
 Constructor with json-file
+* Input parameters:
+    * `std::string input_file`: json-formatted file with all relevant quantities. See the final section of this page for an example.
+* Return value:
+    * `PowerSpectrum`: class instance.
+
 
 ### `PowerSpectrum(GreensTensor *greens_tensor, Polarizability *polarizability)`
 Direct constructor with initiatilization list
+* Input parameters:
+    * `GreensTensor *greens_tensor`: Reference to the Green's tensor object. See [GreensTensor](api/greenstensor.md) for details.
+    * `Polarizability *polarizability`: Reference to the polarizability object. See [Polarizability](api/polarizability.md) for details.
+* Return value:
+    * `PowerSpectrum`: class instance.
 
 ### `void calculate(double omega ,cx_mat::fixed<3, 3> &powerspectrum, Spectrum_Options spectrum) const`
 Computes the power spectrum for a given frequency $\omega$. Here, the `Spectrum_Options spectrum` has two valid options. Either one calculates the full power spectrum with `spectrum = FULL`, as given in the equation above, or only the nonequilibrium part (for details see [this publication](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.117.100402)) with `spectrum = NON_LTE_ONLY`, which can be expressed mathemically as
 $$  \frac{\hbar}{\pi}\underline{J}(\omega) = \underline{S}(\omega) - \frac{\hbar}{\pi}\frac{\underline{\alpha}_\Im(\omega)}{1-\exp(-\hbar\beta\omega)} $$
+* Input paramters
+    * `double omega`: Frequency, at which the power spectrum is evaluated.
+    * `cx_mat::fixed<3, 3> &powerspectrum`: Complex 3x3 matrix, where the resulting imaginary part and real part of the power spectrum are stored.
+    * `Spectrum_Options spectrum`: option for calculating the power spectrum. Valid values are `FULL` and `NON_LTE_ONLY`.
+* Return value: `void`
 
-### `# get_...`
+### `get_...`
 These are the getter functions of the respective quantity (`greens_tensor` or `polarizability`).
 
 ## Examples

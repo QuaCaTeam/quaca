@@ -1,6 +1,9 @@
 # Input File {docsify-ignore-all}
 
-As already indicated in [Documentation](api/greenstensor), we have to provide proper input files for the calculations of QuaCa. In the following, we present some useful input files which yield already published data.
+The provided ready to use application to compute either the friction force or the decay rate require to provide a json formated input file. Furthermore, all the individual classes can be instantiated with a given input field.
+
+The general structure of the input file is such, that any class instantiated within any of the application, gets a section in the input file, where all the relevant parameters are defined. The avaiable parameters for each class can be seen in the [API documentation](../api/greenstensor.md) under the section input file.
+In the following, we present an example input file, which yields already published data.
 
 ## Atom above a Drude Bulk
 This configuration yields the numerical results given in [this publication](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.123.120401)

@@ -6,58 +6,42 @@ $$\begin{aligned} F_\mathrm{fric}=& -2\frac{\hbar}{\pi} \int_{0}^{\infty}\hspace
 where
 $$ \Theta_T(\omega+k_xv,\omega)=\frac{1}{1-e^{-\beta\hbar[\omega+k_xv]}}-\frac{1}{1-e^{-\beta\hbar\omega}}. $$
 Both expression yield analytically the same result, however, the second is computational-wise more stable. The power spectrum $\underline{S}$ and the nonequilibrium contribution $\underline{J}$ are described in [PowerSpectrum](api/powerspectrum), the Green's tensor $\underline{G}$ is described in [GreensTensor](api/greenstensor), and the polarizability $\underline{\alpha}$ is described in [Polarizability](api/polarizability). The header of the friction class reads
-```cpp
-class Friction {
-protected:
-  // the Green's tensor class
-  std::shared_ptr<GreensTensor> greens_tensor;
-  
-  // the polarizability class
-  std::shared_ptr<Polarizability> polarizability;
-  
-  // the power spectrum class
-  std::shared_ptr<PowerSpectrum> powerspectrum;
-
-  // relative accuracy of the omega integration
-  double relerr_omega;
-
-public:
-  
-  // constructor from an input file
-  Friction(const std::string &input_file);
-
-  // constructor from a direct input
-  Friction(std::shared_ptr<GreensTensor> greens_tensor,
-           std::shared_ptr<Polarizability> polarizability,
-           std::shared_ptr<PowerSpectrum> powerspectrum, double relerr_omega);
-  
-  // calculation of the noncontact friction
-  double calculate(Spectrum_Options spectrum) const;
-
-  // the integrand of the noncontact friction
-  double friction_integrand(double omega, Spectrum_Options spectrum) const;
-
-  // getter functions
-  std::shared_ptr<GreensTensor> &get_greens_tensor() { return greens_tensor; };
-  std::shared_ptr<Polarizability> &get_polarizability() {
-    return polarizability;
-  };
-  std::shared_ptr<PowerSpectrum> &get_powerspectrum() { return powerspectrum; };
-};
-```
+## Member function
 ### `Friction(const std::string &input_file);`
 Constructor from a given `.json` file.
+* Input parameters:
+    * `std::string input_file`: json-formatted file with all relevant quantities. See the final section of this page for an example.
+* Return value:
+    * `Friction`: class instance.
 
 ### `Friction(std::shared_ptr<GreensTensor> greens_tensor, std::shared_ptr<Polarizability> polarizability, std::shared_ptr<PowerSpectrum> powerspectrum, double relerr_omega);`
 Direct constructor with initialization list,
+* Input parameters:
+    * `std::shared_ptr<GreensTensor> greens_tensor`: reference to the Green's tensor object. See [GreensTensor](api/greenstensor.md) for details.
+    * `std::shared_ptr<Polarizability> polarizability`: reference to the polarizability object. See [Polarizability](api/polarizability.md) for details.
+    * `std::shared_ptr<PowerSpectrum> powerspectrum`: reference to the power spectrum object. See [PowerSpectrum](api/powerspectrum.md) for details.
+    * `double relerr_omega`: relative error for the integrand with respect to $\omega$.
+* Return value:
+    * `Friction`: class instance.
+ub
 
 ### `double calculate(Spectrum_Options spectrum) const;`
 Computes the noncontact friction. If `spectrum = FULL`, the full power spectrum is used, which tantamounts with the first equation in this section. If `spectrum = NON_LTE_ONLY`, solely the nonequilibrium part of the power spectrum is used, which represents the second equation. However, both expressions are analytically equal and solely differ in numerical efficiency/accuracy.
+* Input parameters:
+    * `Spectrum_Options spectrum`: Options for the computation of the power spectrum. Details can be found in the description.
+* Return value:
+    * `double` value of the friction for the given parameters.
 
 ### `double friction_integrand(double omega, Spectrum_Options spectrum) const;`
 The integrand wrapper for the $\omega$ integration.
+* Input parameter:
+    * `double omega`: frequency, for which the integrand should be computed.
+    * `Spectrum_Options spectrum`: Options for the computation of the power spectrum. Details can be found in the description of `double calculate`.
+* Return value:
+    * `double`: value of the integrand at the given frequency.
 
-### `# get_...`
+
+### `get_...`
 These are the getter functions of the respective quantity (`greens_tensor`, `polarizability` or `powerspectrum`).
 
 ## Examples

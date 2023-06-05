@@ -71,8 +71,7 @@ and afterwards run the tests from the `bin/` directory
 quaca/bin $ ./test_quaca_unit
 quaca/bin $ ./test_quaca_integrated
 ```
-
-More detailled information is given in the section [Testing](dev/testing.md).
+More detailled information is given in the section [Testing](https://quacateam.github.io/quaca/#/dev/testing).
 
 ## Benchmark
 For a benchmark we used a Intel(R) Core(TM) i7-7500U CPU @ 2.70GHz and Intel(R) Core(TM) i9-10900K CPU @ 3.70GHz and ran the tutorial configuration with 
