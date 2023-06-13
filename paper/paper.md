@@ -33,7 +33,7 @@ bibliography: paper.bib
 
 QuaCa is an extensible library facilitating the computation of steady-state atom-surface quantum friction.
 Due to its modular domain-driven structure, QuaCa can be of further use to calculate relevant quantities that are often needed in the context of electromagnetic dispersion forces.
-Quantum (or Casimir) friction is a quantum-optical fluctuation-induced force that occurs in dynamical nonequilibrium, i.e. when a number of bodies are moving relatively to one another [@pendry1997;@scheel2009].
+Quantum (or Casimir) friction is a quantum-optical fluctuation-induced force that occurs in dynamical nonequilibrium, i.e. when a number of bodies are moving relative to one another [@pendry1997;@scheel2009].
 The frictional interaction between the moving system of interest and its environment is mediated by the (material-modified) quantum vacuum and persists even at zero temperature.
 At finite temperatures, thermal fluctuations can modify the interaction and quantum friction can be connected to the Einstein-Hopf effect [@einstein1910;@milonni1981;@ford1985;@mkrtchian2003;@oelschlaeger2021].
 For a comprehensive review of quantum friction in various contexts as well as related effects in dynamical nonequilibrium, we refer, for example, to the reviews in Refs. [@volokitin2007;@dedkov2017;@reiche2022] and the references therein.
@@ -41,8 +41,8 @@ For a comprehensive review of quantum friction in various contexts as well as re
 # Statement of need
 
 Due to the relative weakness of quantum friction with respect to related fluctuation-induced effects in equilibrium, such as the Casimir(-Polder) or the van der Waals effect [@dalvit2011], quantum friction has yet evaded experimental confirmation.
-This has instigated a surge of interest in exploring potentially useful designs [@volokitin2011;@milton2016;@farias2020;@lombardo2021] (see also [@reiche2022] and references therein) and a sophisticated (numerical) optimization of the experimental setup appears necessary in order to promote the effect to the measurable realm [@oelschlager2019;@reiche2021]. 
-This gap can be closed using QuaCa. 
+This has instigated a surge of interest in exploring potentially useful experimental designs [@volokitin2011;@milton2016;@farias2020;@lombardo2021;@reiche2022]. To promote the effect to the measurable realm a sophisticated (numerical) optimization of the experimental setup appears necessary [@oelschlager2019;@reiche2021]. 
+This need can be met using QuaCa. 
 QuaCa, to the best of our knowledge, pioneers the numerical simulation of quantum friction and, to date, is the only ready-to-use and openly available package for exploring experimental designs that can be utilized to measure quantum friction.
 
 
@@ -64,7 +64,7 @@ The latter is dressed by the electromagnetic environment -- again given by the e
 This approach respects backaction from the environment onto the system [@intravaia2016;@reiche2020a] and includes finite temperatures [@oelschlager2019;@oelschlaeger2021] as well as any net transfer of spin angular momentum [@intravaia2019].
 
 
-![Sketch of the setup. A microscopic object, say, an atom, moves with constant velocity and height above a flat macroscopic surface. 
+![Schematic of the physical model. A microscopic object, for example, an atom, moves with constant velocity and height above a flat macroscopic surface. 
 The particle is attracted by the surface ($F_{\rm CP}$, Casimir-Polder force) and experiences a moderating force ($F_{\rm fric}$, quantum friction). \label{fig:setup}](images/setup.svg){ width="800" height="600" style="display: block; margin: 0 auto" }
 
 # Numerical approach and code structure
@@ -74,8 +74,7 @@ QuaCa (i) allows for a computation of $F_{\mathrm{fric}}$ on any regular persona
 (i) Computing quantum friction in the form presented above, the biggest challenge arises from the evaluation of nested frequency- and wavevector integrals.
 Further, both the polarizability and the Green tensor feature a number of poles that can lead to fastly oscillating integrands.
 The application of a Wick rotation that transforms the oscillations into exponential decays, as it became common in the numerical treatment of equilibrium fluctuation-induced effects [@oskooi2010;@johnson2011;@reid2015;@hartmann2020], is non-viable due to the Doppler-shift of the frequency.
-Here, QuaCa uses an analytically equivalent version of $F_{\mathrm{fric}}$, which is particularly suited for numerical computations. We decouple nested integrals and take explicit care of the occurring poles.  
-For details of the procedure, we refer to Ref. [@oelschlager2019].
+Here, QuaCa uses an analytically equivalent version of $F_{\mathrm{fric}}$, which is particularly suited for numerical computations. We decouple nested integrals and take explicit care of the occurring poles. For details of the procedure, we refer to Ref. [@oelschlager2019].
 
 (ii) We have chosen a modular implementation strategy guided by physical principles. 
 We assigned each meaningful physical observable in the setup to individual objects in the package which can be tested, replaced, computed or used independently. 
@@ -99,7 +98,7 @@ QuaCa currently supports the following geometries, and material models:
 
  - Semi-infinite bulk and finite slab geometry
  - Drude and Drude-Lorentz permittivity model
- - Ohmic and single-phonon [see [@lopez2018;@oelschlager2019]] memory kernel for possible internal degrees of freedom of the moving particle
+ - Ohmic and single-phonon [@lopez2018;@oelschlager2019] memory kernel for possible internal degrees of freedom of the moving particle
 
 When used as a library the following quantities are separately accessible:
 
