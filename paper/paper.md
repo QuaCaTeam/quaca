@@ -37,7 +37,7 @@ Due to its modular domain-driven structure, QuaCa can be of further use to calcu
 Quantum (or Casimir) friction is a quantum-optical fluctuation-induced force that occurs in dynamical nonequilibrium, i.e. when a number of bodies are moving relative to one another [@pendry1997;@scheel2009].
 The frictional interaction between the moving system of interest and its environment is mediated by the (material-modified) quantum vacuum and persists even at zero temperature.
 At finite temperatures, thermal fluctuations can modify the interaction and quantum friction can be connected to the Einstein-Hopf effect [@einstein1910;@milonni1981;@ford1985;@mkrtchian2003;@oelschlaeger2021].
-For a comprehensive review of quantum friction in various contexts as well as related effects in dynamical nonequilibrium, we refer, for example, to the reviews in Refs. [@volokitin2007;@dedkov2017;@reiche2022] and the references therein.
+For a comprehensive review of quantum friction in various contexts as well as related effects in dynamical nonequilibrium, we refer, for example, to the reviews by @volokitin2007, @dedkov2017, @reiche2022 and the references therein.
 
 # Statement of need
 
@@ -66,7 +66,7 @@ This approach respects backaction from the environment onto the system [@intrava
 
 
 ![Schematic of the physical model. A microscopic object, for example, an atom, moves with constant velocity and height above a flat macroscopic surface. 
-The particle is attracted by the surface ($F_{\rm CP}$, Casimir-Polder force) and experiences a moderating force ($F_{\rm fric}$, quantum friction). \label{fig:setup}](images/setup.svg){ width="800" height="600" style="display: block; margin: 0 auto" }
+The particle is attracted by the surface ($F_{\mathrm{CP}}$, Casimir-Polder force) and experiences a moderating force ($F_{\mathrm{fric}}$, quantum friction). \label{fig:setup}](images/setup.svg){ width="800" height="600" style="display: block; margin: 0 auto" }
 
 # Numerical approach and code structure
 
@@ -75,7 +75,7 @@ QuaCa (i) allows for a computation of $F_{\mathrm{fric}}$ on any regular persona
 (i) Computing quantum friction in the form presented above, the biggest challenge arises from the evaluation of nested frequency- and wavevector integrals.
 Further, both the polarizability and the Green tensor feature a number of poles that can lead to fastly oscillating integrands.
 The application of a Wick rotation that transforms the oscillations into exponential decays, as it became common in the numerical treatment of equilibrium fluctuation-induced effects [@oskooi2010;@johnson2011;@reid2015;@hartmann2020], is non-viable due to the Doppler-shift of the frequency.
-Here, QuaCa uses an analytically equivalent version of $F_{\mathrm{fric}}$, which is particularly suited for numerical computations. We decouple nested integrals and take explicit care of the occurring poles. For details of the procedure, we refer to Ref. [@oelschlager2019].
+Here, QuaCa uses an analytically equivalent version of $F_{\mathrm{fric}}$, which is particularly suited for numerical computations. We decouple nested integrals and take explicit care of the occurring poles. For details of the procedure, we refer to @oelschlager2019.
 
 (ii) We have chosen a modular implementation strategy guided by physical principles. 
 We assigned each meaningful physical observable in the setup to individual objects in the package which can be tested, replaced, computed or used independently. 
